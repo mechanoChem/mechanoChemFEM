@@ -13,12 +13,6 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX","output/HTML-CSS"],
-});
-</script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -91,23 +85,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Introduction</h1>
 <p>We solve two diffusion reaction equations: </p>
 <p class="formulaDsp">
-\[ \frac{\partial C_\text{1}}{\partial t}+\nabla\cdot\boldsymbol{j}_1=r_1 \\ \frac{\partial C_\text{2}}{\partial t}+\nabla\cdot\boldsymbol{j}_2=r_2 \]
+<img class="formulaDsp" alt="\[ \frac{\partial C_\text{1}}{\partial t}+\nabla\cdot\boldsymbol{j}_1=r_1 \\ \frac{\partial C_\text{2}}{\partial t}+\nabla\cdot\boldsymbol{j}_2=r_2 \]" src="form_110.png"/>
 </p>
-<p> where \(\boldsymbol{j}_1 \) and \(\boldsymbol{j}_2 \) are flux terms: </p>
+<p> where <img class="formulaInl" alt="$\boldsymbol{j}_1 $" src="form_111.png"/> and <img class="formulaInl" alt="$\boldsymbol{j}_2 $" src="form_112.png"/> are flux terms: </p>
 <p class="formulaDsp">
-\[ \boldsymbol{j}_1^{diff}=-M_1\nabla C_\text{1}; \quad \boldsymbol{j}_2^{diff}=-M_2\nabla C_\text{2}\\ \]
+<img class="formulaDsp" alt="\[ \boldsymbol{j}_1^{diff}=-M_1\nabla C_\text{1}; \quad \boldsymbol{j}_2^{diff}=-M_2\nabla C_\text{2}\\ \]" src="form_113.png"/>
 </p>
-<p> \(r_1\) and \(r_2\) are reaction terms, in this example they are </p>
+<p> <img class="formulaInl" alt="$r_1$" src="form_114.png"/> and <img class="formulaInl" alt="$r_2$" src="form_115.png"/> are reaction terms, in this example they are </p>
 <p class="formulaDsp">
-\[ r_1= reac_{10}; \quad r_1= reac_{20} \]
+<img class="formulaDsp" alt="\[ r_1= reac_{10}; \quad r_1= reac_{20} \]" src="form_116.png"/>
 </p>
 <p>Besides chemistry, we also solve elasticity problem at finite strain: </p>
 <p class="formulaDsp">
-\[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0}\\ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^{\text{e}}}}\frac{\partial W}{\partial \boldsymbol{F}^{\text{e}}}\boldsymbol{F}^{\text{e}} \]
+<img class="formulaDsp" alt="\[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0}\\ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^{\text{e}}}}\frac{\partial W}{\partial \boldsymbol{F}^{\text{e}}}\boldsymbol{F}^{\text{e}} \]" src="form_117.png"/>
 </p>
 <p> To make it more interesting, we have mechanical deformation due to species intecalation. </p>
 <p class="formulaDsp">
-\[ \boldsymbol{F}=\boldsymbol{F}^{\text{e}}\boldsymbol{F}^{\text{g}}\\ \boldsymbol{F}^{\text{g}}=\left(\frac{C_\text{1}}{C_\text{10}}\right)^{\frac{1}{3}}\mathbb{1} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{F}=\boldsymbol{F}^{\text{e}}\boldsymbol{F}^{\text{g}}\\ \boldsymbol{F}^{\text{g}}=\left(\frac{C_\text{1}}{C_\text{10}}\right)^{\frac{1}{3}}\mathbb{1} \]" src="form_118.png"/>
 </p>
 <p> For deomstraion we use a very simple mesh with three different domains. We will solve the abolve equations on domain 1 and 2.  <style>div.image img[src="domain.png"]{width:500px;}</style>  <div class="image">
 <img src="domain.png" alt="domain.png"/>
@@ -156,12 +150,12 @@ Output and restart</h2>
 <div class="line">* </div>
 </div><!-- fragment --> <h2><a class="anchor" id="assemble"></a>
 Assemble rsesidual functions of two diffuction reactions equations and elasticity at finite strain</h2>
-<p>In FEM modeling, we need to provide system_matrix (Jacobin matrix) \(\frac{\partial \boldsymbol{R}}{\partial \boldsymbol{x}} \), and right hand side vector \(-\boldsymbol{R}\). They are usually achieved by assemble <code>local_matrix</code> and <code>local_rhs</code> over elements. We first need to overload abstract function <code>updateLinearSystem</code>. In this exmaple we need to solve two diffusion-reaction equations and one finite strain mechanics problem. </p>
+<p>In FEM modeling, we need to provide system_matrix (Jacobin matrix) <img class="formulaInl" alt="$\frac{\partial \boldsymbol{R}}{\partial \boldsymbol{x}} $" src="form_119.png"/>, and right hand side vector <img class="formulaInl" alt="$-\boldsymbol{R}$" src="form_120.png"/>. They are usually achieved by assemble <code>local_matrix</code> and <code>local_rhs</code> over elements. We first need to overload abstract function <code>updateLinearSystem</code>. In this exmaple we need to solve two diffusion-reaction equations and one finite strain mechanics problem. </p>
 <h3><a class="anchor" id="DRq"></a>
 diffusion-reaction equations</h3>
 <p>For diffusion-reaction problems we need to provide the flux and reaction term, and in this example we also have advection and few extra terms for stablization. All the term will be combined into <code>flux</code> and <code>reaction</code> terms. </p>
 <p class="formulaDsp">
-\[ \boldsymbol{j}_1^{diff}=-M_1\nabla C_\text{1}; \quad \boldsymbol{j}_2^{diff}=-M_2\nabla C_\text{2}\\ \]
+<img class="formulaDsp" alt="\[ \boldsymbol{j}_1^{diff}=-M_1\nabla C_\text{1}; \quad \boldsymbol{j}_2^{diff}=-M_2\nabla C_\text{2}\\ \]" src="form_113.png"/>
 </p>
 <p> The following code basically evaluates the terms shown above. </p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span>(<span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> q=0; q&lt;n_q_points;q++){</div>
@@ -191,9 +185,9 @@ diffusion-reaction equations</h3>
 <div class="line">*</div>
 </div><!-- fragment --><p> The weak form of diffution-reaction equations can be written as </p>
 <p class="formulaDsp">
-\[ \mathscr{R}=\int_{\Omega_{\text{e}}}w\frac{\partial C}{\partial t}\text{d}v-\int_{\Omega_{\text{e}}} \nabla w \boldsymbol{j} \text{d}v+\int_{s}w\boldsymbol{j}\cdot\boldsymbol{n} \text{d}s=\int_{\Omega_{\text{e}}}w r \text{d}v \]
+<img class="formulaDsp" alt="\[ \mathscr{R}=\int_{\Omega_{\text{e}}}w\frac{\partial C}{\partial t}\text{d}v-\int_{\Omega_{\text{e}}} \nabla w \boldsymbol{j} \text{d}v+\int_{s}w\boldsymbol{j}\cdot\boldsymbol{n} \text{d}s=\int_{\Omega_{\text{e}}}w r \text{d}v \]" src="form_121.png"/>
 </p>
-<p> After we have all fluxes and reaction terms we can simply call the corresponding residual function to evaluate the residual for \(C_\text{1}\) and \(C_\text{2}\) . </p>
+<p> After we have all fluxes and reaction terms we can simply call the corresponding residual function to evaluate the residual for <img class="formulaInl" alt="$C_\text{1}$" src="form_122.png"/> and <img class="formulaInl" alt="$C_\text{2}$" src="form_123.png"/> . </p>
 <div class="fragment"><div class="line">            <a class="code" href="class_residual.html#a144663fb81fc60d4db0c5a8e45176e61">Residual&lt;vectorType,dim&gt;::residualForDiff_ReacEq</a>(fe_values, primary_variables_dof[1], R, defMap, c_1, c_1_conv, c_1_flux, c_1_reaction);</div>
 <div class="line">            <a class="code" href="class_residual.html#a144663fb81fc60d4db0c5a8e45176e61">Residual&lt;vectorType,dim&gt;::residualForDiff_ReacEq</a>(fe_values, primary_variables_dof[2], R, defMap, c_2, c_2_conv, c_2_flux, c_2_reaction);</div>
 <div class="line">*</div>
@@ -241,22 +235,22 @@ Finite strain mechanics using NeoHookean model</h3>
 <div class="line">*</div>
 </div><!-- fragment --><p> After all this we can evaluate stress. For Neohookean model </p>
 <p class="formulaDsp">
-\[ \boldsymbol{P}=\boldsymbol{F}^e\boldsymbol{S}\\ \boldsymbol{S}=0.5\lambda\det(\boldsymbol{C})\boldsymbol{C}^{-1}-(0.5\lambda+\mu)\boldsymbol{C}^{-1}+\mu\boldsymbol{1} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{P}=\boldsymbol{F}^e\boldsymbol{S}\\ \boldsymbol{S}=0.5\lambda\det(\boldsymbol{C})\boldsymbol{C}^{-1}-(0.5\lambda+\mu)\boldsymbol{C}^{-1}+\mu\boldsymbol{1} \]" src="form_124.png"/>
 </p>
-<p> where \(\boldsymbol{C}=\boldsymbol{F}^e(\boldsymbol{F}^e)^{T}\). If young's modulus and Possion ratio are provided, we need to set the Lame parameters first and evaluate the stress </p>
+<p> where <img class="formulaInl" alt="$\boldsymbol{C}=\boldsymbol{F}^e(\boldsymbol{F}^e)^{T}$" src="form_125.png"/>. If young's modulus and Possion ratio are provided, we need to set the Lame parameters first and evaluate the stress </p>
 <div class="fragment"><div class="line"><a class="code" href="class_residual.html#a74a86942f009e483e946ac0a0036bd71">Residual&lt;vectorType,dim&gt;::setLameParametersByYoungsModulusPoissonRatio</a>(youngsModulus, poissonRatio);</div>
 <div class="line"><a class="code" href="class_residual.html#a0f9ff6a237d377803ce368b26ca39652">Residual&lt;vectorType,dim&gt;::evaluateNeoHookeanStress</a>(P, Fe);</div>
 <div class="line">*</div>
 </div><!-- fragment --><p> The weak form of elasticity problem is </p>
 <p class="formulaDsp">
-\[ \mathscr{R}_u=\int_{\Omega_{\text{e}}}\nabla \boldsymbol{w}\boldsymbol{T} \text{d}v- \int_{s}\boldsymbol{w} \boldsymbol{f} \cdot \boldsymbol{n} \text{d}s = \boldsymbol{0} \]
+<img class="formulaDsp" alt="\[ \mathscr{R}_u=\int_{\Omega_{\text{e}}}\nabla \boldsymbol{w}\boldsymbol{T} \text{d}v- \int_{s}\boldsymbol{w} \boldsymbol{f} \cdot \boldsymbol{n} \text{d}s = \boldsymbol{0} \]" src="form_126.png"/>
 </p>
-<p> Again we just simply call the corresponding function to evalue the residual function for \(\boldsymbol{u}\). </p>
+<p> Again we just simply call the corresponding function to evalue the residual function for <img class="formulaInl" alt="$\boldsymbol{u}$" src="form_86.png"/>. </p>
 <div class="fragment"><div class="line"><a class="code" href="class_residual.html#a432fe02216f182fd241f09775131f854">Residual&lt;vectorType,dim&gt;::residualForMechanics</a>(fe_values, primary_variables_dof[0], R, P);</div>
 <div class="line">*</div>
 </div><!-- fragment --><h2><a class="anchor" id="solve"></a>
 Solving nonlinear residual functions</h2>
-<p>when we have assembled the system_matrix \(\frac{\partial \boldsymbol{R}}{\partial \boldsymbol{x}} \), and right hand side vector \(-\boldsymbol{R}\), we can solve the Nonlinear residual functions using Newton family method. For dynamics problem we just need to specify the initial and total time, and then call <code>nonlinearSolve</code> </p>
+<p>when we have assembled the system_matrix <img class="formulaInl" alt="$\frac{\partial \boldsymbol{R}}{\partial \boldsymbol{x}} $" src="form_119.png"/>, and right hand side vector <img class="formulaInl" alt="$-\boldsymbol{R}$" src="form_120.png"/>, we can solve the Nonlinear residual functions using Newton family method. For dynamics problem we just need to specify the initial and total time, and then call <code>nonlinearSolve</code> </p>
 <div class="fragment"><div class="line">  <span class="keywordflow">for</span> (current_time=initial_time; current_time&lt;=total_time; current_time+=dt){</div>
 <div class="line">    current_increment++;</div>
 <div class="line">    t_solve = clock();</div>
@@ -271,10 +265,10 @@ Solving nonlinear residual functions</h2>
 Parameterhandler</h2>
 <p>Recall that </p>
 <p class="formulaDsp">
-\[ \boldsymbol{j}_1^{diff}=-M_1\nabla C_\text{1}; \quad \boldsymbol{j}_2^{diff}=-M_2\nabla C_\text{2}\\ \]
+<img class="formulaDsp" alt="\[ \boldsymbol{j}_1^{diff}=-M_1\nabla C_\text{1}; \quad \boldsymbol{j}_2^{diff}=-M_2\nabla C_\text{2}\\ \]" src="form_113.png"/>
 </p>
  <p class="formulaDsp">
-\[ r_1= reac_{10} \\ r_1= reac_{20} \]
+<img class="formulaDsp" alt="\[ r_1= reac_{10} \\ r_1= reac_{20} \]" src="form_127.png"/>
 </p>
 <p> In this example (and almost all real applications), there are many parameters. DealShell code use <code>Parameterhandler</code> to manager all parameters, and <code>Parameterhandler</code> is also used in this example to manager the parameters. <code>Parameterhandler</code> allows us to modify parameters at runtime without re-compiling the code. To use <code>Parameterhandler</code> we first need to declare all parameters we will use. Please note parameters used in dealShell are already declared so we only need to declare parameters as we need. In this example we nee </p>
 <div class="fragment"><div class="line">    params-&gt;declare_entry(<span class="stringliteral">&quot;dt&quot;</span>,<span class="stringliteral">&quot;0&quot;</span>,Patterns::Double() );</div>

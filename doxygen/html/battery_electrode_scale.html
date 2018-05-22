@@ -13,12 +13,6 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX","output/HTML-CSS"],
-});
-</script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -101,66 +95,66 @@ Electro-chemo-thermal equations</h3>
 <p><b>The electrochemical equations for finitely deforming electrodes</b><br/>
  The ordinary differential equation for mass balance of lithium: </p>
 <p class="formulaDsp">
-\[ \frac{\partial}{\partial t}({\epsilon_\text{s}C_\text{Li}})+\epsilon_\text{s}{a_\text{p}}j_n=0 \]
+<img class="formulaDsp" alt="\[ \frac{\partial}{\partial t}({\epsilon_\text{s}C_\text{Li}})+\epsilon_\text{s}{a_\text{p}}j_n=0 \]" src="form_0.png"/>
 </p>
-<p> where \(C_\text{Li}\) is the concentration of lithium in the deformed configuration, \(\epsilon_\text{s}\) is the volume fraction of solid particles, and \(a_\text{p}\) is related to the inverse radius. For spherical particles of radius \(R_\text{p}\), it is defined as \(a_\text{p} = 3/R_\text{p}\). Finally, \(j_n\) is the normal flux of lithium on the particle's surface.</p>
-<p>The partial differential equation for mass balance of lithium ions, \(C_{\text{Li}^+}\): </p>
+<p> where <img class="formulaInl" alt="$C_\text{Li}$" src="form_1.png"/> is the concentration of lithium in the deformed configuration, <img class="formulaInl" alt="$\epsilon_\text{s}$" src="form_2.png"/> is the volume fraction of solid particles, and <img class="formulaInl" alt="$a_\text{p}$" src="form_3.png"/> is related to the inverse radius. For spherical particles of radius <img class="formulaInl" alt="$R_\text{p}$" src="form_4.png"/>, it is defined as <img class="formulaInl" alt="$a_\text{p} = 3/R_\text{p}$" src="form_5.png"/>. Finally, <img class="formulaInl" alt="$j_n$" src="form_6.png"/> is the normal flux of lithium on the particle's surface.</p>
+<p>The partial differential equation for mass balance of lithium ions, <img class="formulaInl" alt="$C_{\text{Li}^+}$" src="form_7.png"/>: </p>
 <p class="formulaDsp">
-\[ \frac{\partial }{\partial t}(\epsilon_\text{l}C_{\text{Li}^+})=\nabla\cdot (\epsilon_\text{l}D_\text{eff}\nabla C_{\text{Li}^+})+(1-t^0_+)\epsilon_\text{s}{a_\text{p}}j_n. \]
+<img class="formulaDsp" alt="\[ \frac{\partial }{\partial t}(\epsilon_\text{l}C_{\text{Li}^+})=\nabla\cdot (\epsilon_\text{l}D_\text{eff}\nabla C_{\text{Li}^+})+(1-t^0_+)\epsilon_\text{s}{a_\text{p}}j_n. \]" src="form_8.png"/>
 </p>
-<p> where \(\epsilon_\text{l}\) is the volume fraction of pores in the electrode, \(t^0_+\) is the lithium ion transference number, and $D_{eff}$ is the effective diffusivity.</p>
+<p> where <img class="formulaInl" alt="$\epsilon_\text{l}$" src="form_9.png"/> is the volume fraction of pores in the electrode, <img class="formulaInl" alt="$t^0_+$" src="form_10.png"/> is the lithium ion transference number, and $D_{eff}$ is the effective diffusivity.</p>
 <p>The equations for the electric fields are, </p>
 <p class="formulaDsp">
-\[ \nabla\cdot\left(\gamma_\text{eff}(-\nabla\phi_\text{E})+\gamma_\text{eff}\frac{2R\theta}{F}(1-t^{0}_{+})\nabla\ln C_{2}\right)=a_\text{p}Fj_{n} \]
+<img class="formulaDsp" alt="\[ \nabla\cdot\left(\gamma_\text{eff}(-\nabla\phi_\text{E})+\gamma_\text{eff}\frac{2R\theta}{F}(1-t^{0}_{+})\nabla\ln C_{2}\right)=a_\text{p}Fj_{n} \]" src="form_11.png"/>
 </p>
  <p class="formulaDsp">
-\[ \nabla\cdot\left(\sigma_\text{eff}(-\nabla\phi_\text{S})\right)=-a_\text{p}Fj_{n} \]
+<img class="formulaDsp" alt="\[ \nabla\cdot\left(\sigma_\text{eff}(-\nabla\phi_\text{S})\right)=-a_\text{p}Fj_{n} \]" src="form_12.png"/>
 </p>
-<p> where \(\phi_\text{E}\) and \(\phi_\text{S}\) are, respectively, the electric potential fields in the electrolyte and solid, \(\gamma_\text{eff}\) and \(\sigma_\text{eff}\) are the corresponding effective conductivities which depend on the porosity, \(R\) is the universal gas constant and \(\theta\) is the temperature.</p>
-<p>The electrochemical equations are completed with specification of the Butler-Volmer model for the flux of lithium, \(j_n\): </p>
+<p> where <img class="formulaInl" alt="$\phi_\text{E}$" src="form_13.png"/> and <img class="formulaInl" alt="$\phi_\text{S}$" src="form_14.png"/> are, respectively, the electric potential fields in the electrolyte and solid, <img class="formulaInl" alt="$\gamma_\text{eff}$" src="form_15.png"/> and <img class="formulaInl" alt="$\sigma_\text{eff}$" src="form_16.png"/> are the corresponding effective conductivities which depend on the porosity, <img class="formulaInl" alt="$R$" src="form_17.png"/> is the universal gas constant and <img class="formulaInl" alt="$\theta$" src="form_18.png"/> is the temperature.</p>
+<p>The electrochemical equations are completed with specification of the Butler-Volmer model for the flux of lithium, <img class="formulaInl" alt="$j_n$" src="form_6.png"/>: </p>
 <p class="formulaDsp">
-\[ j_n=j_0\left(\text{exp}\left(\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)-\text{exp}\left(-\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)\right)\\ j_0=k_0(C_2)^{\alpha_a} \frac{(C_1^{\text{max}}-C_{1_\text{Li}})^{\alpha_a}}{(C_1^{\text{max}})^{\alpha_a}} \frac{(C_{1_\text{Li}})^{\alpha_c}}{{(C_1^\text{max}})^{\alpha_c}} \]
+<img class="formulaDsp" alt="\[ j_n=j_0\left(\text{exp}\left(\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)-\text{exp}\left(-\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)\right)\\ j_0=k_0(C_2)^{\alpha_a} \frac{(C_1^{\text{max}}-C_{1_\text{Li}})^{\alpha_a}}{(C_1^{\text{max}})^{\alpha_a}} \frac{(C_{1_\text{Li}})^{\alpha_c}}{{(C_1^\text{max}})^{\alpha_c}} \]" src="form_19.png"/>
 </p>
-<p> where \(\alpha_a, \alpha_c\) are transfer coefficients, \(k_0\) is a kinetic rate constant,and \(C^{\text{max}}_\text{Li}\) is the maximum concentration of lithium that the particle can contain. The open circuit potential \(U\) can be written as a fit depend on \(C_\text{Li}\).</p>
+<p> where <img class="formulaInl" alt="$\alpha_a, \alpha_c$" src="form_20.png"/> are transfer coefficients, <img class="formulaInl" alt="$k_0$" src="form_21.png"/> is a kinetic rate constant,and <img class="formulaInl" alt="$C^{\text{max}}_\text{Li}$" src="form_22.png"/> is the maximum concentration of lithium that the particle can contain. The open circuit potential <img class="formulaInl" alt="$U$" src="form_23.png"/> can be written as a fit depend on <img class="formulaInl" alt="$C_\text{Li}$" src="form_1.png"/>.</p>
 <p><b>The standard thermal equations</b><br/>
  Heat generation and transport are governed by the heat equation, which is derived from the first law of thermodynamics. For the temperature $$, we have the standard form of the heat equation in the electrodes: </p>
 <p class="formulaDsp">
-\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}=\lambda \nabla^2\theta+Q_{\text{rxn}}+Q_{\text{rev}}+Q_{\text{ohm}} \label{eq:ThermalElectrode} \]
+<img class="formulaDsp" alt="\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}=\lambda \nabla^2\theta+Q_{\text{rxn}}+Q_{\text{rev}}+Q_{\text{ohm}} \label{eq:ThermalElectrode} \]" src="form_24.png"/>
 </p>
-<p> where f \(\rho\) is the mass density of the electrode, \(C_p\) is specific heat and \(\lambda\) is the thermal conductivity. In the separator, we have: </p>
+<p> where f <img class="formulaInl" alt="$\rho$" src="form_25.png"/> is the mass density of the electrode, <img class="formulaInl" alt="$C_p$" src="form_26.png"/> is specific heat and <img class="formulaInl" alt="$\lambda$" src="form_27.png"/> is the thermal conductivity. In the separator, we have: </p>
 <p class="formulaDsp">
-\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}=\lambda \nabla^2\theta+Q_{\text{ohm}}. \]
+<img class="formulaDsp" alt="\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}=\lambda \nabla^2\theta+Q_{\text{ohm}}. \]" src="form_28.png"/>
 </p>
 <p> The heat generation terms are: </p>
 <p class="formulaDsp">
-\[ Q_{\text{rxn}}=Faj_n(\phi_\text{S}-\phi_\text{E}-U) \quad \text{irreversible entropic heat}\\ Q_{\text{rev}}=Faj_n\theta\frac{\partial U}{\partial \theta} \quad\text{reversible entropic heat}\\ Q_{\text{ohm}}=-\boldsymbol{i}_1\cdot\nabla\phi_\text{S}-\boldsymbol{i}_2\cdot\nabla\phi_\text{E} \quad\text{Joule heating in electrode}\\ Q_{\text{ohm}}=-\boldsymbol{i}_2\cdot\nabla\phi_\text{E} \quad\text{Joule heating in separator} \]
+<img class="formulaDsp" alt="\[ Q_{\text{rxn}}=Faj_n(\phi_\text{S}-\phi_\text{E}-U) \quad \text{irreversible entropic heat}\\ Q_{\text{rev}}=Faj_n\theta\frac{\partial U}{\partial \theta} \quad\text{reversible entropic heat}\\ Q_{\text{ohm}}=-\boldsymbol{i}_1\cdot\nabla\phi_\text{S}-\boldsymbol{i}_2\cdot\nabla\phi_\text{E} \quad\text{Joule heating in electrode}\\ Q_{\text{ohm}}=-\boldsymbol{i}_2\cdot\nabla\phi_\text{E} \quad\text{Joule heating in separator} \]" src="form_29.png"/>
 </p>
 <h3><a class="anchor" id="subsub2"></a>
 Finite strain mechanics and the evolving porosity model</h3>
 <p>Lithium intercalation/de-intercalation induces particle swelling/contraction which manifests itself as electrode deformation at the macro-scale. Additionally, the particle and separator undergo thermal expansion.{{blue}The electrolyte is assumed not to undergo thermal expansion. Therefore the decomposition of the deformation into elastic, swelling and thermal contributions does not apply to it.} The kinematics of finite strain leads to the following decomposition: </p>
 <p class="formulaDsp">
-\[ \boldsymbol{F}=\boldsymbol{F}^\text{e}\boldsymbol{F}^\text{c}\boldsymbol{F}^{\theta} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{F}=\boldsymbol{F}^\text{e}\boldsymbol{F}^\text{c}\boldsymbol{F}^{\theta} \]" src="form_30.png"/>
 </p>
-<p> where \(\boldsymbol{F} = \boldsymbol{1} + \partial\boldsymbol{u}/\partial\boldsymbol{X}\), is the total deformation gradient tensor averaged over the constituents of the material. It is multiplicatively decomposed into \(\boldsymbol{F}^\text{e}\), \(\boldsymbol{F}^\text{c}\) and \(\boldsymbol{F}^{\theta}\), which are, respectively, its elastic, chemical (induced by lithium intercalation) and thermal components. In the absence of a body force the strong form of the mechanics problem in the current configuration is </p>
+<p> where <img class="formulaInl" alt="$\boldsymbol{F} = \boldsymbol{1} + \partial\boldsymbol{u}/\partial\boldsymbol{X}$" src="form_31.png"/>, is the total deformation gradient tensor averaged over the constituents of the material. It is multiplicatively decomposed into <img class="formulaInl" alt="$\boldsymbol{F}^\text{e}$" src="form_32.png"/>, <img class="formulaInl" alt="$\boldsymbol{F}^\text{c}$" src="form_33.png"/> and <img class="formulaInl" alt="$\boldsymbol{F}^{\theta}$" src="form_34.png"/>, which are, respectively, its elastic, chemical (induced by lithium intercalation) and thermal components. In the absence of a body force the strong form of the mechanics problem in the current configuration is </p>
 <p class="formulaDsp">
-\[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0} \\ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^\text{e}}}\frac{\partial W}{\partial \boldsymbol{F}^\text{e}}\boldsymbol{F}^{\text{e}^\text{T}} \]
+<img class="formulaDsp" alt="\[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0} \\ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^\text{e}}}\frac{\partial W}{\partial \boldsymbol{F}^\text{e}}\boldsymbol{F}^{\text{e}^\text{T}} \]" src="form_35.png"/>
 </p>
 <p> where $$ is the Cauchy stress tensor and $W$ is the strain energy density function.</p>
 <p>we assume that although the particles undergo isotropic swelling in the electrode due to intercalation of lithium, there is unidirectional swelling along the normal to the separator. This assumption models the non-slip boundary condition that would be applied at the current collector-electrode interface, and which would provide a strong constraint against macroscopic expansion of the electrode in the e1 and e3 directions. Since we do not directly model the current collector, this assumption represents its mechanical effect Accordingly, we have </p>
 <p class="formulaDsp">
-\[ F^\text{c}_{iJ}=\beta\delta_{2i}\delta_{2J}+\delta_{iJ} \]
+<img class="formulaDsp" alt="\[ F^\text{c}_{iJ}=\beta\delta_{2i}\delta_{2J}+\delta_{iJ} \]" src="form_36.png"/>
 </p>
 <p> Thermal expansion is modelled as isotropic </p>
 <p class="formulaDsp">
-\[ F^{\theta}_{iJ}=(1+\beta^{\theta})^{1/3}\delta_{iJ} \]
+<img class="formulaDsp" alt="\[ F^{\theta}_{iJ}=(1+\beta^{\theta})^{1/3}\delta_{iJ} \]" src="form_37.png"/>
 </p>
 <p> Based on mixture theory (Z. Wang et.al.), the volume fraction of particle in electrode can be modeled by </p>
 <p class="formulaDsp">
-\[ \epsilon_\text{s}=\frac{\left( \frac{\kappa(\frac{\det\boldsymbol{F}}{(1+\beta)(1+\beta^\theta)}-1)-3P_\text{l}-3P_\text{b}}{\kappa_\text{s}} +1\right)(1+\beta_\text{s})(1+\beta_\text{s}^\theta)}{\det\boldsymbol{F}}\epsilon_{\text{s}_0} \]
+<img class="formulaDsp" alt="\[ \epsilon_\text{s}=\frac{\left( \frac{\kappa(\frac{\det\boldsymbol{F}}{(1+\beta)(1+\beta^\theta)}-1)-3P_\text{l}-3P_\text{b}}{\kappa_\text{s}} +1\right)(1+\beta_\text{s})(1+\beta_\text{s}^\theta)}{\det\boldsymbol{F}}\epsilon_{\text{s}_0} \]" src="form_38.png"/>
 </p>
 <p> Assuming the binder to deform at constant volume during charging and discharging such that ${det}{F}_{b}=1$, we have </p>
 <p class="formulaDsp">
-\[ \epsilon_\text{b}=\frac{1}{\det \boldsymbol{F}}\epsilon_{\text{b}_0}\\ \epsilon_\text{l}=1-\epsilon_{\text{s}}-\epsilon_\text{b} \]
+<img class="formulaDsp" alt="\[ \epsilon_\text{b}=\frac{1}{\det \boldsymbol{F}}\epsilon_{\text{b}_0}\\ \epsilon_\text{l}=1-\epsilon_{\text{s}}-\epsilon_\text{b} \]" src="form_39.png"/>
 </p>
  <h2><a class="anchor" id="sub2"></a>
 Boundary condition</h2>

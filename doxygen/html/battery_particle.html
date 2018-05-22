@@ -13,12 +13,6 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX","output/HTML-CSS"],
-});
-</script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -102,158 +96,158 @@ The multi-physics particle scale model</h2>
 Electro-chemo-thermal equations</h3>
 <p>In the active material we have conservation of lithium: </p>
 <p class="formulaDsp">
-\[ \frac{\partial C_\text{Li}}{\partial t}+\nabla\cdot\boldsymbol{j}=0\\ \boldsymbol{j}=-D\nabla C_\text{Li} \]
+<img class="formulaDsp" alt="\[ \frac{\partial C_\text{Li}}{\partial t}+\nabla\cdot\boldsymbol{j}=0\\ \boldsymbol{j}=-D\nabla C_\text{Li} \]" src="form_40.png"/>
 </p>
-<p> where \(D\) is diffusivity. Conservation of of Li \(^+\) cations in the electrolyte is written similarly: </p>
+<p> where <img class="formulaInl" alt="$D$" src="form_41.png"/> is diffusivity. Conservation of of Li <img class="formulaInl" alt="$^+$" src="form_42.png"/> cations in the electrolyte is written similarly: </p>
 <p class="formulaDsp">
-\[ \frac{\partial C_{\text{Li}^+}}{\partial t}+\nabla\cdot\boldsymbol{j}_+=0 \]
+<img class="formulaDsp" alt="\[ \frac{\partial C_{\text{Li}^+}}{\partial t}+\nabla\cdot\boldsymbol{j}_+=0 \]" src="form_43.png"/>
 </p>
-<p> In general, the flux of each species can depend on the concentration gradients of the other species. This is a special case of the Onsager reciprocity relations with the dependence on chemical potential gradients reduced to concentration gradient dependence. Following Newman and Thomas-Alyea \(^{\text{J. Newman and K. E. Thomas-Alyea,John Wiley and Sons, Inc, (2004).}}\), we have </p>
+<p> In general, the flux of each species can depend on the concentration gradients of the other species. This is a special case of the Onsager reciprocity relations with the dependence on chemical potential gradients reduced to concentration gradient dependence. Following Newman and Thomas-Alyea <img class="formulaInl" alt="$^{\text{J. Newman and K. E. Thomas-Alyea,John Wiley and Sons, Inc, (2004).}}$" src="form_44.png"/>, we have </p>
 <p class="formulaDsp">
-\[ \boldsymbol{j}_+=-D_{+}\nabla C_{\text{Li}^+} +\frac{t_+}{F}\boldsymbol{i}_\text{E}+C_{\text{Li}^+}\boldsymbol{v} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{j}_+=-D_{+}\nabla C_{\text{Li}^+} +\frac{t_+}{F}\boldsymbol{i}_\text{E}+C_{\text{Li}^+}\boldsymbol{v} \]" src="form_45.png"/>
 </p>
-<p> for a binary solution. Here, \(D_{+}\) is the diffusivity, \(t_+\) is the transference number of the cation, \(\boldsymbol{v}\) is the electrolyte velocity, \(F\) is the Faraday constant, and \(\boldsymbol{i}_\text{E}\) is the total current in the electrolyte phase which will be derived in what follows.</p>
+<p> for a binary solution. Here, <img class="formulaInl" alt="$D_{+}$" src="form_46.png"/> is the diffusivity, <img class="formulaInl" alt="$t_+$" src="form_47.png"/> is the transference number of the cation, <img class="formulaInl" alt="$\boldsymbol{v}$" src="form_48.png"/> is the electrolyte velocity, <img class="formulaInl" alt="$F$" src="form_49.png"/> is the Faraday constant, and <img class="formulaInl" alt="$\boldsymbol{i}_\text{E}$" src="form_50.png"/> is the total current in the electrolyte phase which will be derived in what follows.</p>
 <p>The total current in the current collector and active material is governed by Ohm's law: </p>
 <p class="formulaDsp">
-\[ \boldsymbol{i}_\text{S}=-\sigma_\text{S} \nabla\phi_\text{S} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{i}_\text{S}=-\sigma_\text{S} \nabla\phi_\text{S} \]" src="form_51.png"/>
 </p>
-<p> where \(\phi_\text{S}\) is the electric potential, and the conductivity \(\sigma_\text{S}\) differs between the current collector and active material. In the electrolyte we have </p>
+<p> where <img class="formulaInl" alt="$\phi_\text{S}$" src="form_14.png"/> is the electric potential, and the conductivity <img class="formulaInl" alt="$\sigma_\text{S}$" src="form_52.png"/> differs between the current collector and active material. In the electrolyte we have </p>
 <p class="formulaDsp">
-\[ \boldsymbol{i}_\text{E}=-\sigma_\text{E}\nabla\phi_\text{E}-\gamma_\text{D}\nabla\ln C_{\text{Li}^+} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{i}_\text{E}=-\sigma_\text{E}\nabla\phi_\text{E}-\gamma_\text{D}\nabla\ln C_{\text{Li}^+} \]" src="form_53.png"/>
 </p>
-<p> where \(\sigma_\text{E}\) is the electrolyte's conductivity, and \(\gamma_\text{D}\) is the diffusion conductivity evaluated as: </p>
+<p> where <img class="formulaInl" alt="$\sigma_\text{E}$" src="form_54.png"/> is the electrolyte's conductivity, and <img class="formulaInl" alt="$\gamma_\text{D}$" src="form_55.png"/> is the diffusion conductivity evaluated as: </p>
 <p class="formulaDsp">
-\[ \gamma_\text{D}=\frac{2R\theta \sigma_\text{E}}{F}\left(1-t_+\right)\left(1+\frac{d \ln f}{d\ln C_{\text{Li}^+}}\right), \]
+<img class="formulaDsp" alt="\[ \gamma_\text{D}=\frac{2R\theta \sigma_\text{E}}{F}\left(1-t_+\right)\left(1+\frac{d \ln f}{d\ln C_{\text{Li}^+}}\right), \]" src="form_56.png"/>
 </p>
-<p> with \(f\) being the mean molar activity coefficient of the electrolyte, which is assumed to be constant. Thus the relation simplifies to </p>
+<p> with <img class="formulaInl" alt="$f$" src="form_57.png"/> being the mean molar activity coefficient of the electrolyte, which is assumed to be constant. Thus the relation simplifies to </p>
 <p class="formulaDsp">
-\[ \gamma_\text{D}=\frac{2 R\theta \sigma_\text{E}}{F}\left(1-t_+\right). \]
+<img class="formulaDsp" alt="\[ \gamma_\text{D}=\frac{2 R\theta \sigma_\text{E}}{F}\left(1-t_+\right). \]" src="form_58.png"/>
 </p>
 <p> Under the electroneutrality approximation, we have </p>
 <p class="formulaDsp">
-\[ \nabla\cdot (- \sigma_\text{s}\nabla\phi_\text{S})=0 \]
+<img class="formulaDsp" alt="\[ \nabla\cdot (- \sigma_\text{s}\nabla\phi_\text{S})=0 \]" src="form_59.png"/>
 </p>
 <p> in the active material, and </p>
 <p class="formulaDsp">
-\[ \nabla\cdot\left(-\sigma_\text{E}\nabla\phi_\text{E}-\gamma_\text{D}\nabla\ln C_{\text{Li}^+}\right)=0 \]
+<img class="formulaDsp" alt="\[ \nabla\cdot\left(-\sigma_\text{E}\nabla\phi_\text{E}-\gamma_\text{D}\nabla\ln C_{\text{Li}^+}\right)=0 \]" src="form_60.png"/>
 </p>
 <p> in the electrolyte. These two equations properly describe the electric potentials with the electroneutrality approximation, such that the double layer effect is neglected.</p>
 <h2><a class="anchor" id="section2"></a>
 The standard thermal equations</h2>
-<p>Heat generation and transport are governed by the heat equation, which is derived from the first law of thermodynamics. Since the velocity of the electrolyte is low, with a Peclet number Pe \(\sim 1.0\times 10^{-7}\), we neglect heat flux by advection. For the temperature \(\theta\), we have the standard form of the heat equation: </p>
+<p>Heat generation and transport are governed by the heat equation, which is derived from the first law of thermodynamics. Since the velocity of the electrolyte is low, with a Peclet number Pe <img class="formulaInl" alt="$\sim 1.0\times 10^{-7}$" src="form_61.png"/>, we neglect heat flux by advection. For the temperature <img class="formulaInl" alt="$\theta$" src="form_18.png"/>, we have the standard form of the heat equation: </p>
 <p class="formulaDsp">
-\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}+\nabla \cdot\boldsymbol{q}=0 \]
+<img class="formulaDsp" alt="\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}+\nabla \cdot\boldsymbol{q}=0 \]" src="form_62.png"/>
 </p>
-<p> where \(\rho\) is the mass density of the electrode, \(C_p\) is the specific heat and \(\boldsymbol{q}\) is the heat flux. The heat flux can be expressed as </p>
+<p> where <img class="formulaInl" alt="$\rho$" src="form_25.png"/> is the mass density of the electrode, <img class="formulaInl" alt="$C_p$" src="form_26.png"/> is the specific heat and <img class="formulaInl" alt="$\boldsymbol{q}$" src="form_63.png"/> is the heat flux. The heat flux can be expressed as </p>
 <p class="formulaDsp">
-\[ \boldsymbol{q}=\phi F\sum_i z_i\boldsymbol{j}_i-\lambda\nabla\theta+\boldsymbol{q}^\text{D} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{q}=\phi F\sum_i z_i\boldsymbol{j}_i-\lambda\nabla\theta+\boldsymbol{q}^\text{D} \]" src="form_64.png"/>
 </p>
-<p> where \(\lambda\) is the thermal conductivity. The first term on right is associated with Joule heating and the last term \(\boldsymbol{q}^\text{D}\) is the Dufour effect, which is ignored in this work. Again, with the electroneutrality approximation we have $ z_i {j}_i=0$, we have </p>
+<p> where <img class="formulaInl" alt="$\lambda$" src="form_27.png"/> is the thermal conductivity. The first term on right is associated with Joule heating and the last term <img class="formulaInl" alt="$\boldsymbol{q}^\text{D}$" src="form_65.png"/> is the Dufour effect, which is ignored in this work. Again, with the electroneutrality approximation we have $ z_i {j}_i=0$, we have </p>
 <p class="formulaDsp">
-\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}-\lambda \nabla^2\theta+\nabla\phi_\text{S}\cdot\boldsymbol{i}_\text{S}=0 \]
+<img class="formulaDsp" alt="\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}-\lambda \nabla^2\theta+\nabla\phi_\text{S}\cdot\boldsymbol{i}_\text{S}=0 \]" src="form_66.png"/>
 </p>
 <p> in the electrode, and </p>
 <p class="formulaDsp">
-\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}-\lambda \nabla^2\theta+\nabla\phi_\text{E}\cdot\boldsymbol{i}_\text{E}=0 \]
+<img class="formulaDsp" alt="\[ \rho C_p\frac{\text{d}\theta}{\text{d}t}-\lambda \nabla^2\theta+\nabla\phi_\text{E}\cdot\boldsymbol{i}_\text{E}=0 \]" src="form_67.png"/>
 </p>
 <p> in the electrolyte.</p>
 <h2><a class="anchor" id="section3"></a>
 Finite strain mechanics</h2>
 <p>Lithium intercalation and de-intercalation induce expansion and contraction, respectively, of the active material. Additionally, the active material, binder, porous separator and current collector undergo thermal expansion. The kinematics of finite strain leads to the following decomposition in the active material: </p>
 <p class="formulaDsp">
-\[ \boldsymbol{F}=\boldsymbol{F}^\text{e}\boldsymbol{F}^\text{c}\boldsymbol{F}^{\theta}. \]
+<img class="formulaDsp" alt="\[ \boldsymbol{F}=\boldsymbol{F}^\text{e}\boldsymbol{F}^\text{c}\boldsymbol{F}^{\theta}. \]" src="form_68.png"/>
 </p>
 <p> For other solid sub-domains (binder and polymeric separator particles) we have </p>
 <p class="formulaDsp">
-\[ \boldsymbol{F}=\boldsymbol{F}^\text{e}\boldsymbol{F}^{\theta}. \]
+<img class="formulaDsp" alt="\[ \boldsymbol{F}=\boldsymbol{F}^\text{e}\boldsymbol{F}^{\theta}. \]" src="form_69.png"/>
 </p>
-<p> Here, \(\boldsymbol{F} = \boldsymbol{I} + \partial\boldsymbol{u}/\partial\boldsymbol{X}\), is the total deformation gradient tensor in each of the relevant solid regions. Its multiplicative components \(\boldsymbol{F}^\text{e}\), \(\boldsymbol{F}^\text{c}\) and \(\boldsymbol{F}^{\theta}\), are, respectively, the elastic, chemical (induced by lithium intercalation) and thermal components. In the absence of a body force the strong form of the mechanics problem in the current configuration is </p>
+<p> Here, <img class="formulaInl" alt="$\boldsymbol{F} = \boldsymbol{I} + \partial\boldsymbol{u}/\partial\boldsymbol{X}$" src="form_70.png"/>, is the total deformation gradient tensor in each of the relevant solid regions. Its multiplicative components <img class="formulaInl" alt="$\boldsymbol{F}^\text{e}$" src="form_32.png"/>, <img class="formulaInl" alt="$\boldsymbol{F}^\text{c}$" src="form_33.png"/> and <img class="formulaInl" alt="$\boldsymbol{F}^{\theta}$" src="form_34.png"/>, are, respectively, the elastic, chemical (induced by lithium intercalation) and thermal components. In the absence of a body force the strong form of the mechanics problem in the current configuration is </p>
 <p class="formulaDsp">
-\[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0}, \]
+<img class="formulaDsp" alt="\[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0}, \]" src="form_71.png"/>
 </p>
  <p class="formulaDsp">
-\[ \text{for}\quad \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^\text{e}}}\frac{\partial W}{\partial \boldsymbol{F}^\text{e}}\boldsymbol{F}^{\text{e}^\text{T}}, \]
+<img class="formulaDsp" alt="\[ \text{for}\quad \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^\text{e}}}\frac{\partial W}{\partial \boldsymbol{F}^\text{e}}\boldsymbol{F}^{\text{e}^\text{T}}, \]" src="form_72.png"/>
 </p>
-<p> where \(\boldsymbol{T}\) is the Cauchy stress tensor and \(W\) is the strain energy density function. The chemical and thermal expansion components of the multiplicative decomposition of \(\boldsymbol{F}\) are modelled as isotropic, e.g.: </p>
+<p> where <img class="formulaInl" alt="$\boldsymbol{T}$" src="form_73.png"/> is the Cauchy stress tensor and <img class="formulaInl" alt="$W$" src="form_74.png"/> is the strain energy density function. The chemical and thermal expansion components of the multiplicative decomposition of <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_75.png"/> are modelled as isotropic, e.g.: </p>
 <p class="formulaDsp">
-\[ F^{\text{c}}_{iJ}=(1+\beta^{\text{c}})^{1/3}\delta_{iJ} \\ F^{\theta}_{iJ}=(1+\beta^{\theta})^{1/3}\delta_{iJ} \]
+<img class="formulaDsp" alt="\[ F^{\text{c}}_{iJ}=(1+\beta^{\text{c}})^{1/3}\delta_{iJ} \\ F^{\theta}_{iJ}=(1+\beta^{\theta})^{1/3}\delta_{iJ} \]" src="form_76.png"/>
 </p>
 <p> The lithiation swelling response function is parameterized by the lithium concentration. We write </p>
 <p class="formulaDsp">
-\[ \beta^{\theta}(\theta)=\Omega_{\theta} (\theta-\theta_0) \]
+<img class="formulaDsp" alt="\[ \beta^{\theta}(\theta)=\Omega_{\theta} (\theta-\theta_0) \]" src="form_77.png"/>
 </p>
 <p> for the thermal expansion functions.</p>
 <h2><a class="anchor" id="section4"></a>
 Incompressible fluid model</h2>
 <p>We model the electrolyte as an incompressible, creeping flow. In this regime, with inertia and body forces being neglected, the Stokes equations are: </p>
 <p class="formulaDsp">
-\[ -2\eta\nabla\cdot\varepsilon(\boldsymbol{v})+\nabla p=0 \]
+<img class="formulaDsp" alt="\[ -2\eta\nabla\cdot\varepsilon(\boldsymbol{v})+\nabla p=0 \]" src="form_78.png"/>
 </p>
  <p class="formulaDsp">
-\[ \nabla\cdot\boldsymbol{v}=0 \]
+<img class="formulaDsp" alt="\[ \nabla\cdot\boldsymbol{v}=0 \]" src="form_79.png"/>
 </p>
-<p> where \(\varepsilon(\boldsymbol{v})=\frac{1}{2}(\nabla\boldsymbol{v}+\nabla\boldsymbol{v}^\text{T})\) is the strain rate tensor, and \(\eta\) is the dynamic viscosity.</p>
+<p> where <img class="formulaInl" alt="$\varepsilon(\boldsymbol{v})=\frac{1}{2}(\nabla\boldsymbol{v}+\nabla\boldsymbol{v}^\text{T})$" src="form_80.png"/> is the strain rate tensor, and <img class="formulaInl" alt="$\eta$" src="form_81.png"/> is the dynamic viscosity.</p>
 <h2><a class="anchor" id="section5"></a>
 The Arbitrary Lagrangian-Eulerian framework</h2>
-<p>In the fluid (electrolyte) phase, whose description is Eulerian, the mesh must be mapped to evolve with the fluid sub-domain as it flows around the deforming solid components. If the mesh displacement is \(\boldsymbol{u}_\text{m}\), the spatial gradient operator acting on a variable \(\tau\) in the Eulerian setting is </p>
+<p>In the fluid (electrolyte) phase, whose description is Eulerian, the mesh must be mapped to evolve with the fluid sub-domain as it flows around the deforming solid components. If the mesh displacement is <img class="formulaInl" alt="$\boldsymbol{u}_\text{m}$" src="form_82.png"/>, the spatial gradient operator acting on a variable <img class="formulaInl" alt="$\tau$" src="form_83.png"/> in the Eulerian setting is </p>
 <p class="formulaDsp">
-\[ \nabla \tau=\frac{\partial\tau}{\partial\boldsymbol{X}}\boldsymbol{F}_\text{m}^{-1} \]
+<img class="formulaDsp" alt="\[ \nabla \tau=\frac{\partial\tau}{\partial\boldsymbol{X}}\boldsymbol{F}_\text{m}^{-1} \]" src="form_84.png"/>
 </p>
-<p> where \(\boldsymbol{F}_\text{m}= \boldsymbol{I} +\partial \boldsymbol{u}_\text{m}/\partial \boldsymbol{X}\), is the deformation gradient tensor of the mesh. In the solid phase, \(\boldsymbol{u}_\text{m}\) coincides with the displacement of material points, \(\boldsymbol{u}\), and \(\boldsymbol{F}_\text{m}\) is replaced by the deformation gradient tensor of the solid, \(\boldsymbol{F}\). In the fluid phase the description of fluid mesh deformation could be arbitrary, but its choice proves to be critical in solid-fluid interaction problems. The mesh displacement in the fluid phase can be solved by Poisson equations, arbitrary elasticity equations or bi-harmonic equations.</p>
-<p>The large lithium intercalation strain may lead to a dramatic volume change of the active material. The large deformation of active material may cause extreme distortions of the mesh in the fluid. For this reason, we apply adaptive mesh rezoning schemes. The idea is to introduce a constraint condition over two adjacent element nodes \(i\) and \(j\) such that the relative difference of net displacements is less than the element length \(h^e\): </p>
+<p> where <img class="formulaInl" alt="$\boldsymbol{F}_\text{m}= \boldsymbol{I} +\partial \boldsymbol{u}_\text{m}/\partial \boldsymbol{X}$" src="form_85.png"/>, is the deformation gradient tensor of the mesh. In the solid phase, <img class="formulaInl" alt="$\boldsymbol{u}_\text{m}$" src="form_82.png"/> coincides with the displacement of material points, <img class="formulaInl" alt="$\boldsymbol{u}$" src="form_86.png"/>, and <img class="formulaInl" alt="$\boldsymbol{F}_\text{m}$" src="form_87.png"/> is replaced by the deformation gradient tensor of the solid, <img class="formulaInl" alt="$\boldsymbol{F}$" src="form_75.png"/>. In the fluid phase the description of fluid mesh deformation could be arbitrary, but its choice proves to be critical in solid-fluid interaction problems. The mesh displacement in the fluid phase can be solved by Poisson equations, arbitrary elasticity equations or bi-harmonic equations.</p>
+<p>The large lithium intercalation strain may lead to a dramatic volume change of the active material. The large deformation of active material may cause extreme distortions of the mesh in the fluid. For this reason, we apply adaptive mesh rezoning schemes. The idea is to introduce a constraint condition over two adjacent element nodes <img class="formulaInl" alt="$i$" src="form_88.png"/> and <img class="formulaInl" alt="$j$" src="form_89.png"/> such that the relative difference of net displacements is less than the element length <img class="formulaInl" alt="$h^e$" src="form_90.png"/>: </p>
 <p class="formulaDsp">
-\[ |\boldsymbol{u}_m^i-\boldsymbol{u}_m^j|\le\alpha h^e, \]
+<img class="formulaDsp" alt="\[ |\boldsymbol{u}_m^i-\boldsymbol{u}_m^j|\le\alpha h^e, \]" src="form_91.png"/>
 </p>
 <p> which is equivalent to </p>
 <p class="formulaDsp">
-\[ |\nabla\boldsymbol{u}_m|\le\alpha \]
+<img class="formulaDsp" alt="\[ |\nabla\boldsymbol{u}_m|\le\alpha \]" src="form_92.png"/>
 </p>
-<p> where \(\alpha\in[0,1)\) is the tolerance for element distortion. This constraint is applied element wise as a penalty term: </p>
+<p> where <img class="formulaInl" alt="$\alpha\in[0,1)$" src="form_93.png"/> is the tolerance for element distortion. This constraint is applied element wise as a penalty term: </p>
 <p class="formulaDsp">
-\[ \nabla^2(1+\tau_m\boldsymbol{u}_m)=\boldsymbol{0} \]
+<img class="formulaDsp" alt="\[ \nabla^2(1+\tau_m\boldsymbol{u}_m)=\boldsymbol{0} \]" src="form_94.png"/>
 </p>
-<p> where \(\tau_m\) is the weight function that imposes spatially varying stiffening effects for the mesh. The key idea for choosing \(\tau_m\) is to enforce this value to be high for smaller elements and small for large elements. In this work we choose </p>
+<p> where <img class="formulaInl" alt="$\tau_m$" src="form_95.png"/> is the weight function that imposes spatially varying stiffening effects for the mesh. The key idea for choosing <img class="formulaInl" alt="$\tau_m$" src="form_95.png"/> is to enforce this value to be high for smaller elements and small for large elements. In this work we choose </p>
 <p class="formulaDsp">
-\[ \tau_m=\left(\frac{\det \boldsymbol{F}_m^0}{\det \boldsymbol{F}_m} \right)^\delta \]
+<img class="formulaDsp" alt="\[ \tau_m=\left(\frac{\det \boldsymbol{F}_m^0}{\det \boldsymbol{F}_m} \right)^\delta \]" src="form_96.png"/>
 </p>
-<p> where \(\boldsymbol{F}_m^0\) is the initial deformation gradient tensor of the mesh and \(\delta\) is a constant value.</p>
+<p> where <img class="formulaInl" alt="$\boldsymbol{F}_m^0$" src="form_97.png"/> is the initial deformation gradient tensor of the mesh and <img class="formulaInl" alt="$\delta$" src="form_98.png"/> is a constant value.</p>
 <h2><a class="anchor" id="subsection3"></a>
 Boundary and interface condition</h2>
 <p>The multi-physics character of this problem extends to the restriction of certain physics&ndash;and therefore the corresponding partial differential equations&ndash;to specific sub-domains. The conventional application of boundary conditions translates to interface conditions where the sub-domains meet. During discharging or charging, the following chemical reactions occur at the interface between the active material and electrolyte: </p>
 <p class="formulaDsp">
-\[ \text{Li}\to \text{Li}^++q^-, \quad \text{-ve electrode during discharge/+ve electrode during charge,}\nonumber\\ \text{Li}^++q^- \to\text{Li},\quad \text{+ve electrode during discharge/-ve electrode during charge}.\nonumber \]
+<img class="formulaDsp" alt="\[ \text{Li}\to \text{Li}^++q^-, \quad \text{-ve electrode during discharge/+ve electrode during charge,}\nonumber\\ \text{Li}^++q^- \to\text{Li},\quad \text{+ve electrode during discharge/-ve electrode during charge}.\nonumber \]" src="form_99.png"/>
 </p>
 <p> The reaction rate is given by the Butler-Volmer model </p>
 <p class="formulaDsp">
-\[ j_n=j_0\left(\text{exp}\left(\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)-\text{exp}\left(-\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)\right) \label{eq:BVeuqation}\\ j_0=k_0(C_{\text{Li}^+})^{\alpha_a} \frac{(C_\text{Li}^{\text{max}}-C_\text{Li})^{\alpha_a}}{(C_1^{\text{max}})^{\alpha_a}} \frac{(C_\text{Li})^{\alpha_c}}{{(C_1^\text{max}})^{\alpha_c}} \]
+<img class="formulaDsp" alt="\[ j_n=j_0\left(\text{exp}\left(\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)-\text{exp}\left(-\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)\right) \label{eq:BVeuqation}\\ j_0=k_0(C_{\text{Li}^+})^{\alpha_a} \frac{(C_\text{Li}^{\text{max}}-C_\text{Li})^{\alpha_a}}{(C_1^{\text{max}})^{\alpha_a}} \frac{(C_\text{Li})^{\alpha_c}}{{(C_1^\text{max}})^{\alpha_c}} \]" src="form_100.png"/>
 </p>
-<p> where \(\alpha_a, \alpha_c\) are transfer coefficients and \(k_0\) is a kinetic rate constant. The interface condition for lithium and lithium ions: </p>
+<p> where <img class="formulaInl" alt="$\alpha_a, \alpha_c$" src="form_20.png"/> are transfer coefficients and <img class="formulaInl" alt="$k_0$" src="form_21.png"/> is a kinetic rate constant. The interface condition for lithium and lithium ions: </p>
 <p class="formulaDsp">
-\[ \boldsymbol{j}\cdot \boldsymbol{n}_\text{s}=j_n \quad \text{on } \Gamma_\text{s-e},\\ \boldsymbol{j}_+\cdot \boldsymbol{n}_\text{e}=-j_n\ \quad \text{on } \Gamma_\text{s-e}, \]
+<img class="formulaDsp" alt="\[ \boldsymbol{j}\cdot \boldsymbol{n}_\text{s}=j_n \quad \text{on } \Gamma_\text{s-e},\\ \boldsymbol{j}_+\cdot \boldsymbol{n}_\text{e}=-j_n\ \quad \text{on } \Gamma_\text{s-e}, \]" src="form_101.png"/>
 </p>
 <p> The interface condition for the electric potential: </p>
 <p class="formulaDsp">
-\[ \boldsymbol{i}_\text{S}\cdot\boldsymbol{n}_\text{s}=Fj_n \quad \text{on } \Gamma_\text{s-e}\\ \boldsymbol{i}_\text{E}\cdot\boldsymbol{n}_\text{e}=-Fj_n \ \quad \text{on } \Gamma_\text{s-e} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{i}_\text{S}\cdot\boldsymbol{n}_\text{s}=Fj_n \quad \text{on } \Gamma_\text{s-e}\\ \boldsymbol{i}_\text{E}\cdot\boldsymbol{n}_\text{e}=-Fj_n \ \quad \text{on } \Gamma_\text{s-e} \]" src="form_102.png"/>
 </p>
 <p> At the interface, the chemical reactions also generate heat: </p>
 <p class="formulaDsp">
-\[ Q_{\Gamma_\text{s-e}}=q_{\text{rxn}}+q_{\text{rev}} \]
+<img class="formulaDsp" alt="\[ Q_{\Gamma_\text{s-e}}=q_{\text{rxn}}+q_{\text{rev}} \]" src="form_103.png"/>
 </p>
 <p> where </p>
 <p class="formulaDsp">
-\[ q_{\text{rxn}}=Fj_n(\phi_\text{S}-\phi_\text{E}-U) ;\quad \text{irreversible entropic heat,} \\ q_{\text{rev}}=Fj_n\theta\frac{\partial U}{\partial \theta};\quad\text{reversible entropic heat.} \]
+<img class="formulaDsp" alt="\[ q_{\text{rxn}}=Fj_n(\phi_\text{S}-\phi_\text{E}-U) ;\quad \text{irreversible entropic heat,} \\ q_{\text{rev}}=Fj_n\theta\frac{\partial U}{\partial \theta};\quad\text{reversible entropic heat.} \]" src="form_104.png"/>
 </p>
 <p> The electrolytic fluid is bounded within the solid materials: active material, binder, polymeric separator particles, and current collector. No-slip conditions give </p>
 <p class="formulaDsp">
-\[ \boldsymbol{v}=\dot{\boldsymbol{u}} \quad \text{on } \Gamma_\text{s-e}, \Gamma_\text{e-c}, \Gamma_\text{e-p} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{v}=\dot{\boldsymbol{u}} \quad \text{on } \Gamma_\text{s-e}, \Gamma_\text{e-c}, \Gamma_\text{e-p} \]" src="form_105.png"/>
 </p>
 <p> Traction continuity on all solid-fluid interfaces gives: </p>
 <p class="formulaDsp">
-\[ \boldsymbol{T}\boldsymbol{n}_\text{s}=-(2\eta\cdot\varepsilon(\boldsymbol{v})-p\boldsymbol{1})\boldsymbol{n}_\text{e} \quad \text{on } \Gamma_\text{s-e} \\ \boldsymbol{T}\boldsymbol{n}_\text{c}=-(2\eta\cdot\varepsilon(\boldsymbol{v})-p\boldsymbol{1})\boldsymbol{n}_\text{e} \quad \text{on } \Gamma_\text{e-c} \\ \boldsymbol{T}\boldsymbol{n}_\text{p}=-(2\eta\cdot\varepsilon(\boldsymbol{v})-p\boldsymbol{1})\boldsymbol{n}_\text{e} \quad \text{on } \Gamma_\text{e-p} \]
+<img class="formulaDsp" alt="\[ \boldsymbol{T}\boldsymbol{n}_\text{s}=-(2\eta\cdot\varepsilon(\boldsymbol{v})-p\boldsymbol{1})\boldsymbol{n}_\text{e} \quad \text{on } \Gamma_\text{s-e} \\ \boldsymbol{T}\boldsymbol{n}_\text{c}=-(2\eta\cdot\varepsilon(\boldsymbol{v})-p\boldsymbol{1})\boldsymbol{n}_\text{e} \quad \text{on } \Gamma_\text{e-c} \\ \boldsymbol{T}\boldsymbol{n}_\text{p}=-(2\eta\cdot\varepsilon(\boldsymbol{v})-p\boldsymbol{1})\boldsymbol{n}_\text{e} \quad \text{on } \Gamma_\text{e-p} \]" src="form_106.png"/>
 </p>
-<p> Compatibility at the solid-fliud interfaces equates the ALE mesh deformation, \(\boldsymbol{u}_\text{m}\) in the electrolyte sub-domain to the solid deformations: </p>
+<p> Compatibility at the solid-fliud interfaces equates the ALE mesh deformation, <img class="formulaInl" alt="$\boldsymbol{u}_\text{m}$" src="form_82.png"/> in the electrolyte sub-domain to the solid deformations: </p>
 <p class="formulaDsp">
-\[ \boldsymbol{u}_\text{m}=\boldsymbol{u} \quad \text{on } \Gamma_\text{s-e}, \Gamma_\text{c-e}, \Gamma_\text{p-e}. \]
+<img class="formulaDsp" alt="\[ \boldsymbol{u}_\text{m}=\boldsymbol{u} \quad \text{on } \Gamma_\text{s-e}, \Gamma_\text{c-e}, \Gamma_\text{p-e}. \]" src="form_107.png"/>
 </p>
   <style>div.image img[src="boundaryCondition.png"]{width:500px;}</style>  <div class="image">
 <img src="boundaryCondition.png" alt="boundaryCondition.png"/>
@@ -304,7 +298,7 @@ Implementation</h1>
 <div class="line">evaluateScalarFunction&lt;Sacado::Fad::DFad&lt;double&gt;,dim&gt;(activeMaterial_fe_values, activeMaterial_fe_face_values, phi_s_dof, ULocal, phi_s);</div>
 </div><!-- fragment --><p> These interface conditions are Neumman conditions. And the residual is assembled by calling the residual functions as we discuss before.</p>
 <p><b>Applying constraints during solve step</b><br/>
- The interface condition \(\boldsymbol{u}_\text{m}=\boldsymbol{u}\) is a master-slave interface, meanning \(\boldsymbol{u}_\text{m}\) does not affect \(\boldsymbol{u}\) but just take its value as a Dirichlet boundary condition. So we cannot use the constraint materix to apply this constraint. Here we apply this constrain manually during the solve step. First we need to find the pair of DOFs for \(\boldsymbol{u}\) and \(\boldsymbol{u}_\text{m}\) at same node. And save it as constrain_index. </p>
+ The interface condition <img class="formulaInl" alt="$\boldsymbol{u}_\text{m}=\boldsymbol{u}$" src="form_108.png"/> is a master-slave interface, meanning <img class="formulaInl" alt="$\boldsymbol{u}_\text{m}$" src="form_82.png"/> does not affect <img class="formulaInl" alt="$\boldsymbol{u}$" src="form_86.png"/> but just take its value as a Dirichlet boundary condition. So we cannot use the constraint materix to apply this constraint. Here we apply this constrain manually during the solve step. First we need to find the pair of DOFs for <img class="formulaInl" alt="$\boldsymbol{u}$" src="form_86.png"/> and <img class="formulaInl" alt="$\boldsymbol{u}_\text{m}$" src="form_82.png"/> at same node. And save it as constrain_index. </p>
 <div class="fragment"><div class="line"><span class="keywordflow">if</span> (ck1&gt;=0 &amp;&amp; ck1&lt;dim ){</div>
 <div class="line">        <span class="keywordtype">int</span> dof_per_node=local_face_dof_indices2.size()/4;</div>
 <div class="line">        <a class="code" href="classhp_f_e_m.html">hpFEM&lt;dim&gt;::constraints</a>.add_line (local_face_dof_indices1[i]);<span class="comment">//u_mesh                                                      </span></div>
@@ -318,7 +312,7 @@ Implementation</h1>
 <div class="line">            }</div>
 <div class="line">        }                       </div>
 <div class="line">    }   </div>
-</div><!-- fragment --><p> This constraint is equivalent to \(d\boldsymbol{u}_\text{m}=d\boldsymbol{u}\) which can be applied during the nonlinear solve step. We only need to overload function <a class="el" href="classsolve_class.html#a029ece57f667fa697cb29eb482eff31b">apply_dU_constrain </a>. </p>
+</div><!-- fragment --><p> This constraint is equivalent to <img class="formulaInl" alt="$d\boldsymbol{u}_\text{m}=d\boldsymbol{u}$" src="form_109.png"/> which can be applied during the nonlinear solve step. We only need to overload function <a class="el" href="classsolve_class.html#a029ece57f667fa697cb29eb482eff31b">apply_dU_constrain </a>. </p>
 <div class="fragment"><div class="line"><span class="keyword">template</span> &lt;<span class="keywordtype">int</span> dim&gt;</div>
 <div class="line"><span class="keywordtype">void</span> initBoundValProbs&lt;dim&gt;::apply_dU_constrain(PETScWrappers::MPI::Vector&amp; dU)</div>
 <div class="line">{</div>

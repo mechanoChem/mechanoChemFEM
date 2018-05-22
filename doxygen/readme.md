@@ -2,9 +2,6 @@
 =======================================================================
 mechanoChemFEM contains dealMultiphysics: a library based on deal.ii for ease of mechano-chemical modeling using finite element method, and many examples built on this library.
 
-<B>Master</B> branch contains the current stable version of the code and documentaion.<br>
-<B>example</B> branch contains the code for all examples.<br>
-<B>Other</B> branches contain the older versions.
 
 
 <B>List of contributors:</B><br>
@@ -16,7 +13,7 @@ Krishna Garikipati<br>
 [Computational Physics Group, University of Michigan](http://umich.edu/~compphys/index.html)
 
 
-[<B>Code documentation</B>](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/index.html)
+[<B>Code is on Github</B>](https://github.com/mechanoChem/mechanoChemFEM)
 
 <B>Overview</B><br>
 =======================================================================

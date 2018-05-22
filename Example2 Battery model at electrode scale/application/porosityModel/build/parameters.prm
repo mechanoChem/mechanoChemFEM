@@ -1,0 +1,169 @@
+#parameters file
+#1. Thermal modeling of cylindrical lithium ion battery during discharge cycle, Dong Hyup Jeon ⇑,1, Seung Man Baek,2011,Energy Conversion and Management LiC6
+# 2. Numerical study on lithium titanate battery thermal response under adiabatic condition,Qiujuan Sun a, Qingsong Wanga 2015, Energy Conversion and Management
+#3.white Theoretical Analysis of Stresses in a Lithium Ion Cell    
+#4 A Computational Model of the Mechanical Behavior within Reconstructed LixCoO2 Li-ion Battery Cathode Particles, Veruska Malavé, J.R. Berger, EA
+#5. A pseudo three-dimensional electrochemicalethermal model of a prismatic LiFePO4 battery during discharge process
+#6. solid diffusion Single-Particle Model for a Lithium-Ion Cell: Thermal Behavior, Meng Guo,a Godfrey Sikha,b,* and Ralph E. Whitea
+#global parameters
+
+
+#declare problem setting
+subsection Problem
+set print_parameter = true
+set dt = 10
+set totalTime = 370
+set step_load = false
+
+set first_domain_id = 0
+set electrode_id=0
+set separator_id=1
+
+set electrode_fe=0
+set separator_fe=1
+
+#directory
+set output_directory = output/
+set snapshot_directory = snapshot/ 
+#FEM
+set volume_quadrature = 4 
+set face_quadrature = 3 
+#applied current
+set IpA = -100
+end
+
+# some useful geometry information beforehand
+subsection Geometry
+set X_0 = 0
+set Y_0 = 0
+set Z_0 = 0
+set X_end = 120
+set Y_end = 120
+set Z_end = 85
+
+set electrode_Y1 = 60
+set electrode_Y2 = 80
+
+set element_div_x = 1
+set element_div_y = 120
+set element_div_z = 1
+end
+
+# initial condition
+subsection Initial condition
+set c_li_max_neg = 28.7e-3
+set c_li_max_pos = 37.5e-3
+set c_li_100_neg = 0.915
+set c_li_100_pos = 0.022
+set c_li_0_neg = 0.02
+set c_li_0_pos = 0.98
+set c_li_plus_ini = 1.0e-3
+set T_0 = 298
+end
+
+# parameter for elastiticy equations
+subsection Elasticity
+set youngsModulus_neg = 12e3 #cite 3 in porosity paper
+set youngsModulus_pos = 370e3 #cite4
+set youngsModulus_sep = 0.5e3 #cite 3 in porosity paper
+
+set nu_sep = 0.35 #cite 3 in porosity paper
+set nu_neg = 0.3 #cite 3 in porosity paper
+set nu_pos = 0.2 #cite4 
+
+set kappa_sep = 0.42e-3
+set kappa_neg = 4.94e-3
+set kappa_pos = 7.4e-3
+set kappa_s = 25e-3
+set pb = 0
+set pl = 0
+set omega_s = 3.5 #not used but 3.5 is from linear coff in porosity paper
+#following from cite 3 in porosity paper
+set omega_neg = 9.615e-6 
+set omega_pos = 6.025e-6
+set omega_sep = 82.46e-5
+
+end
+
+# parameter for electro-chemo equations
+subsection ElectroChemo #cite6
+set sigma_neg = 1.5e8
+set sigma_pos = 0.5e8
+
+set t_0 = 0.2
+set D_li_neg = 5e-1 #cite 40 in porosity paper in code use expression cite 3 
+set D_li_pos = 1.0e-1 #cite3
+
+set eps_s_0_neg = 0.53
+set eps_s_0_pos = 0.5
+set eps_s_0_sep = 0.35
+
+set eps_l_0_neg = 0.32
+set eps_l_0_pos = 0.35
+set eps_l_0_sep = 0.65
+
+set eps_b_0_neg = 0.15
+set eps_b_0_pos = 0.15
+set eps_b_0_sep = 0
+
+set R_s_0_neg = 8.0
+set R_s_0_pos = 6.0
+set R_s_0_sep = 0.0
+
+# parameter for Butler-Volmer equations at ElectricChemo class
+set F = 96485.3329
+set Rr = 8.3144598
+set alpha_a = 0.5
+set alpha_c = 0.5
+set k_neg = 0.8 #to match porosity paper
+set k_pos = 0.8 #to match porosity paper
+set c_max_neg = 28.7e-3
+set c_max_pos = 37.5e-3
+
+end
+
+# parameter for thermal equations
+subsection Thermal
+set lambda_neg = 1.04e6 #cite1
+set lambda_pos = 5e6  #cite1
+set lambda_sep = 0.33e6  #cite1
+
+
+set density_neg = 2.5e-15  #cite1
+set density_pos = 2.5e-15  #cite1
+set density_sep = 1.1e-15  #cite1
+
+
+set Cp_s_neg = 700e12  #cite1
+set Cp_s_pos = 700e12 #cite1
+set Cp_sep = 700e12  #cite1
+
+
+set h = 5 #Heat transfer coefficient
+end
+			
+					
+#==============================================================================
+# parameters reserved for deal.ii first level code:
+#nonLinear_method : classicNewton
+#solver_method (direct) : PETScsuperLU, PETScMUMPS
+#solver_method (iterative) : PETScGMRES PETScBoomerAMG
+#relative_norm_tolerance, absolute_norm_tolerance, max_iterations
+#
+subsection Nonlinear_solver
+		set nonLinear_method = classicNewton
+		set relative_norm_tolerance = 1.0e-16
+		set absolute_norm_tolerance = 1.0e-7
+		set max_iterations = 60
+end
+						
+subsection Linear_solver
+		set solver_method = PETScMUMPS
+		set system_matrix_symmetricFlag = false # default is false
+end
+
+
+
+
+		
+

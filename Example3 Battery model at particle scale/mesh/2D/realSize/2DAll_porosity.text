@@ -1,0 +1,291 @@
+reset
+create surface circle radius 8 zplane
+
+
+create surface rectangle width 26 height 15 zplane
+webcut volume all with plane yplane noimprint nomerge
+delete volume 2 1
+chop volume 4 with volume 3
+
+surface all copy reflect y
+move surface 10 11 12 x 0 y 15 z 0 include_merged
+
+
+
+move surface all x 0 y 16 z 0 include_merged
+create surface rectangle width 26 height 16 zplane
+move surface 13 x 0 y 8 z 0 include_merged
+
+
+
+surface 8 7 9 12 10 11 copy move x 0 y 15 z 0
+surface 8 7 9 12 10 11 copy move x 0 y 30 z 0
+surface 8 7 9 12 10 11 copy move x 0 y 45 z 0
+
+
+create surface rectangle width 26 height 23 zplane
+move surface 32 location 0 87.5 0 include_merged
+
+
+create surface rectangle width 8 height 4 zplane
+move surface 33 x 9 y 81.5 z 0 include_merged
+create surface circle radius 2 zplane
+move surface 34 x 7 y 81.5 z 0 include_merged
+
+webcut volume 31 with plane xplane offset 7 noimprint nomerge
+webcut volume 32 with plane xplane offset 7 noimprint nomerge
+delete volume 32
+delete volume 33
+
+surface 35 copy move x 0 y 6 z 0 repeat 2
+surface 38 copy move x 0 y 6 z 0 repeat 2
+surface 35 39 40 copy reflect x
+surface 38 41 42 copy reflect x
+
+
+
+chop volume 30 with volume 31
+chop volume 46 with volume 34
+chop volume 48 with volume 35
+chop volume 50 with volume 37
+
+
+chop volume 52 with volume 36
+chop volume 54 with volume 38
+
+chop volume 56 with volume 39
+chop volume 58 with volume 42
+
+chop volume 60 with volume 40
+chop volume 62 with volume 43
+
+chop volume 64 with volume 41
+chop volume 66 with volume 44
+
+
+surface 7 8 9 10 11 12 copy move x 0 y 83 z 0
+surface 7 8 9 10 11 12 copy move x 0 y 98 z 0
+surface 7 8 9 10 11 12 copy move x 0 y 113 z 0
+
+
+
+create surface rectangle width 26 height 9 zplane
+move surface 79 x 0 y 148.5 z 0 include_merged
+
+
+
+create vertex 0 61 0
+create surface circle center vertex 292 97 103
+chop volume 68 with volume 88
+delete vertex 292
+
+create vertex 0 114 0
+create surface circle center vertex 298 224 221
+chop volume 90 with volume 91
+delete vertex 298
+
+
+imprint volume all 
+
+merge volume all 
+
+surface all size 1
+
+mesh surface all
+
+refine surface 29 31 85 62 63 numsplit 1 bias 1 depth 1 smooth
+
+
+
+
+
+
+
+
+
+
+reset
+
+create sphere radius 8
+brick x 18 y 15 z 18
+webcut volume 1 with plane yplane offset 7.5 noimprint nomerge
+webcut volume 1 with plane yplane offset -7.5 noimprint nomerge
+delete volume 1 3 
+
+subtract volume 4 from volume 2 keep
+delete volume 2
+webcut volume all with plane yplane offset 0 noimprint nomerge
+delete volume 5
+delete volume 4
+
+
+volume 6 7 copy reflect y
+move volume 8 9 location 0 11.25 0 include_merged
+9
+move volume 6 7 location 0 19.75 0 include_merged
+move volume 8 9 location 0 27.25 0 include_merged
+brick x 18 y 16 z 18
+move volume 10 location 0 8 0 include_merged
+
+
+volume 6 7 8 9 copy move x 0 y 15 z 0
+volume 6 7 8 9 copy move x 0 y 30 z 0
+volume 6 7 8 9 copy move x 0 y 45 z 0
+
+
+
+create surface rectangle width 18 height 23 zplane
+move surface 115 location 0 87.5 0 include_merged
+move surface 115 location 0 0 9 include_merged
+move surface 115 location 0 87.5 9 include_merged
+
+create surface rectangle width 6 height 4 zplane
+move surface 116 location 6 81.5 9 include_merged
+
+create surface circle radius 2 zplane
+move surface 117 location 5 81.5 9 include_merged
+
+webcut volume 24 with plane xplane offset 5 noimprint nomerge
+webcut volume 25 with plane xplane offset 5 noimprint nomerge
+delete volume 25
+delete volume 26
+
+
+surface 118 copy move x 0 y 6 z 0 repeat 2
+surface 121 copy move x 0 y 6 z 0 repeat 2
+surface 118 121 122 123 124 125 copy reflect x
+
+
+chop volume 23 with volume 24
+chop volume 39 with volume 27
+chop volume 41 with volume 28
+chop volume 43 with volume 30
+
+
+chop volume 45 with volume 29
+chop volume 47 with volume 31
+
+chop volume 49 with volume 32
+chop volume 51 with volume 33
+
+chop volume 53 with volume 34
+chop volume 55 with volume 36
+
+chop volume 57 with volume 35
+chop volume 59 with volume 37
+
+sweep surface 118 121 122 124 123 125 129 131 128 130 126 127 143 vector 0 0 -1 distance 18
+
+volume 6 7 8 9 copy move x 0 y 83 z 0
+volume 6 7 8 9 copy move x 0 y 98 z 0
+volume 6 7 8 9 copy move x 0 y 113 z 0
+
+
+brick x 18 y 9 z 18
+move volume 74 location 0 8 0 include_merged
+move volume 74 location 0 148.5 0 include_merged
+
+create vertex 0 114 0
+create surface circle center vertex 298 224 221
+
+
+
+
+
+
+
+reset
+
+create sphere radius 8
+brick x 18 y 15 z 18
+webcut volume 1 with plane yplane offset 7.5 noimprint nomerge
+webcut volume 1 with plane yplane offset -7.5 noimprint nomerge
+delete volume 1 3 
+
+subtract volume 4 from volume 2 keep
+delete volume 2
+webcut volume all with plane yplane offset 0 noimprint nomerge
+delete volume 5
+delete volume 4
+
+
+volume 6 7 copy reflect y
+move volume 8 9 location 0 11.25 0 include_merged
+9
+move volume 6 7 location 0 19.75 0 include_merged
+move volume 8 9 location 0 27.25 0 include_merged
+brick x 18 y 16 z 18
+move volume 10 location 0 8 0 include_merged
+
+
+volume 6 7 8 9 copy move x 0 y 15 z 0
+volume 6 7 8 9 copy move x 0 y 30 z 0
+volume 6 7 8 9 copy move x 0 y 45 z 0
+
+
+
+create surface rectangle width 18 height 23 zplane
+move surface 115 location 0 87.5 0 include_merged
+move surface 115 location 0 0 9 include_merged
+move surface 115 location 0 87.5 9 include_merged
+
+create surface rectangle width 6 height 4 zplane
+move surface 116 location 6 81.5 9 include_merged
+
+create surface circle radius 2 zplane
+move surface 117 location 5 81.5 9 include_merged
+
+webcut volume 24 with plane xplane offset 5 noimprint nomerge
+webcut volume 25 with plane xplane offset 5 noimprint nomerge
+delete volume 25
+delete volume 26
+
+
+surface 118 copy move x 0 y 6 z 0 repeat 2
+surface 121 copy move x 0 y 6 z 0 repeat 2
+surface 118 121 122 123 124 125 copy reflect x
+
+
+chop volume 23 with volume 24
+chop volume 39 with volume 27
+chop volume 41 with volume 28
+chop volume 43 with volume 30
+
+
+chop volume 45 with volume 29
+chop volume 47 with volume 31
+
+chop volume 49 with volume 32
+chop volume 51 with volume 33
+
+chop volume 53 with volume 34
+chop volume 55 with volume 36
+
+chop volume 57 with volume 35
+chop volume 59 with volume 37
+
+sweep surface 118 121 122 124 123 125 129 131 128 130 126 127 143 vector 0 0 -1 distance 18
+
+volume 6 7 8 9 copy move x 0 y 83 z 0
+volume 6 7 8 9 copy move x 0 y 98 z 0
+volume 6 7 8 9 copy move x 0 y 113 z 0
+
+
+brick x 18 y 9 z 18
+move volume 74 location 0 8 0 include_merged
+move volume 74 location 0 148.5 0 include_merged
+
+create vertex 0 61 0
+
+imprint volume all 
+
+merge volume all 
+
+surface all size 1
+
+mesh surface all
+
+refine curve 7 13 15 17 21 24 25 26 28 29 41 42 43 44 45 56 57 58 60 61 numsplit 1 bias 2 
+
+
+7

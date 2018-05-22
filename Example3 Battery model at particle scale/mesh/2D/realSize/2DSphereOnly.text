@@ -1,0 +1,37 @@
+reset
+create surface circle radius 10 zplane
+create surface circle radius 10 zplane
+move surface 2 location 0 18 0 include_merged
+
+
+
+
+create surface rectangle width 30 height 18 zplane
+move Surface 3 location 0 9 0 include_merged
+chop volume 3 with volume 1 
+chop volume 5 with volume 2 
+unite volume 6 4
+
+
+surface all copy move x 0 y 18 z 
+
+volume 9 10 11 copy move x 0 y 18 z 0
+
+surface all copy move x 0 y 74 z
+
+
+create surface rectangle width 30 height 20 zplane
+move surface 24 location 0 64 0 include_merged
+
+imprint volume all 
+
+merge volume all 
+
+surface all size 1
+
+mesh surface all
+
+refine curve 7 13 15 17 21 24 25 26 28 29 41 42 43 44 45 56 57 58 60 61 numsplit 1 bias 2 
+
+
+7

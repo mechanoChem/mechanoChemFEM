@@ -1,0 +1,31 @@
+
+================================================
+unit
+================================================
+
+reset
+brick x 1.2 y 0.9 z 1.2
+create sphere radius 0.5
+webcut volume 2 with plane surface 5
+webcut volume 2 with plane surface 3
+delete volume 3 4
+subtract volume 2 from volume 1 keep
+delete volume 1
+
+
+=====
+
+volume all copy move y 0.9
+
+
+imprint volume all 
+merge volume all
+
+
+volume all scheme Tetmesh
+ set tetmesher interior points on 
+set tetmesher optimize level 3 optimize overconstrained  off sliver  off 
+set tetmesher boundary recovery off
+Volume all size 0.2
+mesh volume all
+THex Volume all

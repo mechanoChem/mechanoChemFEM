@@ -1,0 +1,28 @@
+
+================================================
+unit
+================================================
+
+reset
+brick x 1.9 y 0.95 z 1.9
+create sphere radius 1
+move volume 2 location 0 0.5 0 include_merged
+
+
+
+=====
+
+volume all copy move y 0.9
+
+
+imprint volume all 
+merge volume all
+
+
+volume all scheme Tetmesh
+ set tetmesher interior points on 
+set tetmesher optimize level 3 optimize overconstrained  off sliver  off 
+set tetmesher boundary recovery off
+Volume all size 0.2
+mesh volume all
+THex Volume all

@@ -1,0 +1,148 @@
+
+reset
+brick x 0.5 y 0.5 z 0.5
+create sphere radius 0.5 xpositive ypositive zpositive 
+align volume 2 surface 7 with surface 4
+subtract volume 2 from volume 1 keep
+delete volume 1
+webcut volume 3  with cylinder radius 0.5 axis x center -0.25 -0.25 -0.25
+webcut volume 3  with cylinder radius 0.5 axis y center -0.25 -0.25 -0.25
+webcut volume all with cylinder radius 0.2 axis x center -0.25 -0.25 -0.25
+
+
+
+
+
+reset
+create sphere radius 0.5
+create sphere radius 0.5
+move volume 2 location 0 0.5 0 include_merged
+
+==========================
+
+reset
+
+create sphere radius 0.5
+brick x 1.2 y 1.2 z 1.2
+ subtract volume 1 from volume 2  keep
+delete volume 2
+create cylinder height 1.2 radius 0.3
+rotate volume 4 angle 90 about x include_merged
+subtract volume 4 from volume 3 1  keep
+delete volume 3
+delete volume 1
+
+
+
+webcut volume 6  with plane xplane noimprint nomerge 
+
+webcut volume 5  with plane xplane noimprint nomerge
+
+webcut volume 5 8 with plane yplane noimprint nomerge 
+
+webcut volume 5 8 9 10 with cylinder radius 0.5 axis y center 0 0 0 
+
+webcut volume 4  with plane yplane offset 0.4 noimprint nomerge
+
+webcut volume 4 with plane yplane offset -0.4 noimprint nomerge
+
+imprint volume all 
+
+merge volume all 
+
+
+volume 10 11 12 13 14 16 5 8 9 size 0.05
+
+mesh volume all
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===========================================
+
+reset
+
+create sphere radius 0.5
+brick x 1.2 y 1.2 z 1.2
+ subtract volume 1 from volume 2  keep
+delete volume 2
+create cylinder height 1.2 radius 0.3
+rotate volume 4 angle 90 about x include_merged
+unite volume 1 4
+subtract volume 1 from volume 3 keep
+delete volume 3
+webcut volume 1 with cylinder radius 0.2 axis y center 0 0 0
+webcut volume 1 with plane xplane offset 0 noimprint nomerge
+
+webcut volume 5  with plane xplane noimprint nomerge
+
+webcut volume 5 8 with plane yplane noimprint nomerge 
+
+webcut volume 5 8 9 10 with cylinder radius 0.5 axis y center 0 0 0 
+
+
+volume 5 scheme sweep source surface 75 target surface 74 sweep_smooth auto sweep_transform least_squares autosmooth_target 
+
+ volume 8 scheme sweep source surface 74 target surface 75 sweep_smooth auto sweep_transform least_squares autosmooth_target off
+
+
+volume 9  scheme Sweep  source surface 80    target surface 78   sweep_smooth Auto  sweep_transform least_squares  autosmooth_target off 
+
+volume 10 scheme sweep source surface 78 target surface 80 sweep_smooth auto sweep_transform least_squares autosmooth_target off
+
+imprint volume all 
+
+merge volume all 
+
+volume all size 0.05
+
+mesh volume all
+
+===============================================
+
+
+
+
+reset
+
+create sphere radius 0.5
+brick x 1.2 y 1.2 z 1.2
+ subtract volume 1 from volume 2  keep
+delete volume 2
+create cylinder height 1.2 radius 0.3
+rotate volume 4 angle 90 about x include_merged
+subtract volume 4 from volume 3  keep
+delete volume 3
+subtract volume 1 from volume 4  keep
+delete volume 4
+
+webcut volume 5  with plane xplane noimprint nomerge
+
+webcut volume 5 8 with plane yplane noimprint nomerge 
+
+webcut volume 5 8 9 10 with cylinder radius 0.5 axis y center 0 0 0 
+
+
+
+imprint volume all 
+
+merge volume all 
+
+volume all size 0.05
+
+mesh volume all
+
+

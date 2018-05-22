@@ -1,0 +1,45 @@
+reset
+
+create sphere radius 0.5
+brick x 1.2 y 1.2 z 1.2
+ subtract volume 1 from volume 2  keep
+delete volume 2
+create cylinder height 1.2 radius 0.3
+rotate volume 4 angle 90 about x include_merged
+subtract volume 4 from volume 3 1  keep
+delete volume 3
+delete volume 1
+
+
+
+webcut volume 6  with plane xplane noimprint nomerge 
+
+webcut volume 5  with plane xplane noimprint nomerge
+
+webcut volume 5 8 with plane yplane noimprint nomerge 
+
+webcut volume 5 8 with plane yplane offset -0.4 noimprint nomerge
+webcut volume 9 10 with plane yplane offset 0.4 noimprint nomerge
+
+
+volume all copy move y 1.8
+brick x 1.2 y 0.6 z 1.2
+move volume 26 location 0 0.9 0 include_merged
+webcut volume 26 with cylinder radius 0.3 axis y center 0 0 0
+webcut volume 26 with cylinder radius 0.5 axis y center 0 0 0
+webcut volume 26 with plane xplane offset 0 noimprint nomerge
+
+
+move volume all normal to surface 91 distance 0.6 include_merged
+move volume all normal to surface 90 distance 0.6 include_merged
+move volume all normal to surface 196 distance 0.6 include_merged
+
+
+imprint volume all 
+
+merge volume all 
+
+
+volume all size 0.05
+
+mesh volume all

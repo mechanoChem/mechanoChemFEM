@@ -1,0 +1,42 @@
+reset
+
+brick x 1 y 1 z 1
+brick x 0.8 y 0.8 z 0.8
+subtract volume 2 from volume 1 keep
+ delete volume 1
+brick x 0.5 y 1 z 0.5
+subtract volume 4 from volume 2 3 keep
+
+delete volume 2 3
+
+brick x 0.8 y 3 z 0.8
+chop volume 6 with volume 7
+subtract volume 7 from volume 6  keep
+
+
+volume all copy move y 1.5
+
+brick x 1 y 0.5 z 1
+move volume 16 location 0 0.75 0 include_merged
+
+brick x 0.5 y 3 z 0.5
+chop volume 16 with volume 17
+brick x 0.8 y 3 z 0.8
+chop volume 19 with volume 20
+
+
+move volume all normal to surface 60 distance 0.5 include_merged
+move volume all normal to surface 55 distance 0.5 include_merged
+move volume all normal to surface 83 distance 0.5 include_merged
+
+imprint volume all 
+
+merge volume all 
+
+
+volume all size 0.05
+
+mesh volume all
+
+
+refine surface 83 107 109 108 106 94 89 92 90 93 91 100 81 101 103 102 29 43 41 45 46 39 36 40 35 38 42 37 44 27 47 48  numsplit 1 bias 2 depth 1 smooth

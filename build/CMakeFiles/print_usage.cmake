@@ -4,7 +4,7 @@ MESSAGE(
 #  Project  main  set up with  deal.II-8.5.0  found at
 #      /Applications/deal.II-8.5-brew.app/Contents/Resources
 #
-#  CMAKE_BUILD_TYPE:          Release
+#  CMAKE_BUILD_TYPE:          Debug
 #
 #  You can now run
 #       $ make                - to compile and link the program

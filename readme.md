@@ -1,6 +1,6 @@
-<B>mechanoChemFEM</B><br>
+<B>mechanoChemFEM 0.3</B><br>
 =======================================================================
-mechanoChemFEM contains dealMultiphysics: a light library based on deal.ii for ease of mechano-chemical modeling using finite element method, and many examples built on this library. Master branch contains the current stable version of the code and documentaion. 
+mechanoChemFEM contains dealMultiphysics: a light library based on deal.ii for ease of mechano-chemical modeling using finite element method, and many examples built on this library. 
 
 
 <B>List of contributors:</B><br>
@@ -33,7 +33,7 @@ ParameterHandler is used for parameter management.
 
 <B>Version information</B><br>
 =======================================================================
-This is version 0.3, the intial release of the code.
+This is version 0.3.
 
 
 <B>License</B><br>
@@ -71,7 +71,7 @@ This code has been developed under the support of the following: <br>
 
 <B>Usage</B><br>
 =======================================================================
-Please see examples.
+Please see examples
 
 
-data:01/20/2018
+data:05/20/2018

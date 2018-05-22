@@ -1,6 +1,3 @@
-/**
-*author zhenlin wang
-*/
 #ifndef hpFEM_h
 #define hpFEM_h
 

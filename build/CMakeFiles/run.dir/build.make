@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
 include CMakeFiles/run.dir/progress.make
 
 CMakeFiles/run: main
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Run main with Release configuration"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Run main with Debug configuration"
 	./main
 
 run: CMakeFiles/run

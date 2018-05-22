@@ -13,14 +13,14 @@ Zhenlin Wang (lead developer）<br>
 
 Krishna Garikipati<br>
 
-Computational Physics Group, University of Michigan(http://umich.edu/~compphys/index.html)
+[Computational Physics Group, University of Michigan](http://umich.edu/~compphys/index.html)
 
 <B>Overview</B><br>
 =======================================================================
 deal.ii [http://www.dealii.org] is a robust finite element library.
 The dealMultiphysics code is a light library for enhancement of using deal.ii for FEM modeling. It contains five modules:
 
-	
+
 	hpFEM<T, dim> : offer high level functions dedicated to mulitphysics modeling using deal.ii
 	
 	Residual< T, dim > : offer residual functions of a variety of equations and boundary conditions
@@ -57,6 +57,7 @@ This code has been developed under the support of the following: <br>
 <B>Installation with cmake:</B><br>
 =======================================================================
 1. <B>Install pre-required libs</B><br>
+
   1) Install CMake [http://www.cmake.org/download/]<br>
   2) Install deal.II [www.dealii.org/download.html] with<br>
 		 - Trilinos [https://trilinos.org/]<br>
@@ -65,6 +66,7 @@ This code has been developed under the support of the following: <br>
 
 
 2. <B>Install dealMuliphysics</B><br>
+
   1) Goes into “build” folder<br>
   2) Modify CMakeList.txt for path of pre-required libs: deal.ii (with Trilinos, Petsc) <br>
   3) ‘cmake CMakeLists.txt <br>’

@@ -13,7 +13,7 @@ Zhenlin Wang (lead developer）<br>
 
 Krishna Garikipati<br>
 
-<a href="http://umich.edu/~compphys/index.html”> Computational Physics Group, University of Michigan</a>.
+Computational Physics Group, University of Michigan(http://umich.edu/~compphys/index.html)
 
 <B>Overview</B><br>
 =======================================================================
@@ -67,7 +67,7 @@ This code has been developed under the support of the following: <br>
 2. <B>Install dealMuliphysics</B><br>
   1) Goes into “build” folder<br>
   2) Modify CMakeList.txt for path of pre-required libs: deal.ii (with Trilinos, Petsc) <br>
-  3) $ cmake CMakeLists.txt <br>
+  3) ‘cmake CMakeLists.txt <br>’
   4) $ make install or do $ make release install<br>
   5) $ make run <br>
      - test(optional) of installation which will run “main” in build folder <br>

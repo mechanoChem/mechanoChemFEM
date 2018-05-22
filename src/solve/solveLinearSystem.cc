@@ -1,0 +1,14 @@
+#include "../../include/solveClass.h"
+
+template <int dim, class matrixType, class vectorType>
+void solveClass<dim, matrixType, vectorType>::solveLinearSystem(dealii::Vector<double>& dU)
+{
+	params->enter_subsection("Linear_solver");
+	std::string solver=params->get("solver_method");
+	params->leave_subsection();	
+	
+}
+
+template class solveClass<1, dealii::SparseMatrix<double>, dealii::Vector<double> >;
+template class solveClass<2, dealii::SparseMatrix<double>, dealii::Vector<double> >;
+template class solveClass<3, dealii::SparseMatrix<double>, dealii::Vector<double> >;

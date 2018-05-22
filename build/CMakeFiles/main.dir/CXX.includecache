@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/wzhenlin/GitLab/researchCode/dealiiBase/build/main.cc
+stdio.h
+-
+stdlib.h
+-
+iostream
+-
+string.h
+-
+

@@ -473,5 +473,5 @@ end
 		
 \htmlonly <style>div.image img[src="v_293.png"]{width:500px;}</style> \endhtmlonly 
 \image html v_293.png Velocity of electrolyte under different far-field boundary conditions and intercalation strain as-sumptions
- * The complete implementaion can be found at GitLab . 
+ * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example3%20Battery%20model%20at%20particle%20scale">Github</a>. 
  */

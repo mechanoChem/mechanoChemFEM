@@ -1,6 +1,10 @@
 <B>mechanoChemFEM</B><br>
 =======================================================================
-mechanoChemFEM contains dealMultiphysics: a light library based on deal.ii for ease of mechano-chemical modeling using finite element method, and many examples built on this library. Master branch contains the current stable version of the code and documentaion. 
+mechanoChemFEM contains dealMultiphysics: a light library based on deal.ii for ease of mechano-chemical modeling using finite element method, and many examples built on this library.
+
+Master branch contains the current stable version of the code and documentaion.<br>
+example branch contains the code for all examples.<br>
+Other branches contain the older versions.
 
 
 <B>List of contributors:</B><br>

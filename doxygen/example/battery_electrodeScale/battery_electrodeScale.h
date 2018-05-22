@@ -468,7 +468,7 @@ end
 Many more results can be found at paper: <B>Intercalation driven porosity effects on the electro-chemo-thermo-mechanical response in continuum models for battery material electrodes</B>,
  Z. Wang, J. Siegel, K. Garikipati, Journal of the Electrochemical Society, Vol. 164: A2199-A2212, 2017, doi:10.1149/2.0081712jes 
 *\section com Complete code
- * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/batteryCode/tree/homogenizedModel">Github</a>. 
+ * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example2%20Battery%20model%20at%20electrode%20scale">Github</a>. 
  */
  */
 

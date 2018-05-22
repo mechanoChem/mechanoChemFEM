@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'(Global Namespace)'],['../_r_e_a_d_m_e_8md.html',1,'(Global Namespace)']]],
+  ['readme_2emd',['readme.md',['../readme_8md.html',1,'(Global Namespace)'],['../readme_8md.html',1,'(Global Namespace)']]],
   ['reinit',['reinit',['../class_residual.html#a683e96e9d88d46820c0964786424fdf2',1,'Residual']]],
   ['reinitlinearsystem',['reinitLinearSystem',['../classsolve_class.html#ab8aad4ce80f4f6fe8532c53e4bba67ec',1,'solveClass']]],
   ['reinitmethod',['reinitMethod',['../classsolve_class.html#a586d70f40869aa09462cc19291702910',1,'solveClass']]],

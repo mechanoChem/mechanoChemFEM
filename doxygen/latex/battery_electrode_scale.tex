@@ -1,25 +1,25 @@
 \hypertarget{_intercalation_Introduction}{}\section{Introduction}\label{_intercalation_Introduction}
 A battery cell usually consists of porous, positive and negative electrodes, a separator and a current collector. This example present coupled continuum formulation for the electrostatic, chemical, thermal and mechanical processes in battery materials. The treatment applies on the macroscopic scale, at which electrodes can be modelled as porous materials made up of active particles held together by binders and perfused by the electrolyte.
 
-This code is used to generate results for paper\-: {\bfseries Intercalation driven porosity effects on the electro-\/chemo-\/thermo-\/mechanical response in continuum models for battery material electrodes}, Z. Wang, J. Siegel, K. Garikipati, Journal of the Electrochemical Society, Vol. 164\-: A2199-\/\-A2212, 2017, doi\-:10.\-1149/2.0081712jes  \hypertarget{battery_particle_section1}{}\subsection{The multi-\/physics particle scale model}\label{battery_particle_section1}
+This code is used to generate results for paper\+: {\bfseries Intercalation driven porosity effects on the electro-\/chemo-\/thermo-\/mechanical response in continuum models for battery material electrodes}, Z. Wang, J. Siegel, K. Garikipati, Journal of the Electrochemical Society, Vol. 164\+: A2199-\/\+A2212, 2017, doi\+:10.\+1149/2.0081712jes  \hypertarget{battery_particle_section1}{}\subsection{The coupled electro-\/chemo-\/thermo-\/mechanical model}\label{battery_particle_section1}
 \hypertarget{battery_particle_subsub1}{}\subsubsection{Electro-\/chemo-\/thermal equations}\label{battery_particle_subsub1}
-{\bfseries The electrochemical equations for finitely deforming electrodes}\par
- The ordinary differential equation for mass balance of lithium\-: \[ \frac{\partial}{\partial t}({\epsilon_\text{s}C_\text{Li}})+\epsilon_\text{s}{a_\text{p}}j_n=0 \] where $C_\text{Li}$ is the concentration of lithium in the deformed configuration, $\epsilon_\text{s}$ is the volume fraction of solid particles, and $a_\text{p}$ is related to the inverse radius. For spherical particles of radius $R_\text{p}$, it is defined as $a_\text{p} = 3/R_\text{p}$. Finally, $j_n$ is the normal flux of lithium on the particle's surface.
+{\bfseries The electrochemical equations for finitely deforming electrodes}~\newline
+ The ordinary differential equation for mass balance of lithium\+: \[ \frac{\partial}{\partial t}({\epsilon_\text{s}C_\text{Li}})+\epsilon_\text{s}{a_\text{p}}j_n=0 \] where $C_\text{Li}$ is the concentration of lithium in the deformed configuration, $\epsilon_\text{s}$ is the volume fraction of solid particles, and $a_\text{p}$ is related to the inverse radius. For spherical particles of radius $R_\text{p}$, it is defined as $a_\text{p} = 3/R_\text{p}$. Finally, $j_n$ is the normal flux of lithium on the particle\textquotesingle{}s surface.
 
-The partial differential equation for mass balance of lithium ions, $C_{\text{Li}^+}$\-: \[ \frac{\partial }{\partial t}(\epsilon_\text{l}C_{\text{Li}^+})=\nabla\cdot (\epsilon_\text{l}D_\text{eff}\nabla C_{\text{Li}^+})+(1-t^0_+)\epsilon_\text{s}{a_\text{p}}j_n. \] where $\epsilon_\text{l}$ is the volume fraction of pores in the electrode, $t^0_+$ is the lithium ion transference number, and \$\-D\-\_\-\{eff\}\$ is the effective diffusivity.
+The partial differential equation for mass balance of lithium ions, $C_{\text{Li}^+}$\+: \[ \frac{\partial }{\partial t}(\epsilon_\text{l}C_{\text{Li}^+})=\nabla\cdot (\epsilon_\text{l}D_\text{eff}\nabla C_{\text{Li}^+})+(1-t^0_+)\epsilon_\text{s}{a_\text{p}}j_n. \] where $\epsilon_\text{l}$ is the volume fraction of pores in the electrode, $t^0_+$ is the lithium ion transference number, and \$\+D\+\_\+\{eff\}\$ is the effective diffusivity.
 
 The equations for the electric fields are, \[ \nabla\cdot\left(\gamma_\text{eff}(-\nabla\phi_\text{E})+\gamma_\text{eff}\frac{2R\theta}{F}(1-t^{0}_{+})\nabla\ln C_{2}\right)=a_\text{p}Fj_{n} \] \[ \nabla\cdot\left(\sigma_\text{eff}(-\nabla\phi_\text{S})\right)=-a_\text{p}Fj_{n} \] where $\phi_\text{E}$ and $\phi_\text{S}$ are, respectively, the electric potential fields in the electrolyte and solid, $\gamma_\text{eff}$ and $\sigma_\text{eff}$ are the corresponding effective conductivities which depend on the porosity, $R$ is the universal gas constant and $\theta$ is the temperature.
 
-The electrochemical equations are completed with specification of the Butler-\/\-Volmer model for the flux of lithium, $j_n$\-: \[ j_n=j_0\left(\text{exp}\left(\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)-\text{exp}\left(-\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)\right)\\ j_0=k_0(C_2)^{\alpha_a} \frac{(C_1^{\text{max}}-C_{1_\text{Li}})^{\alpha_a}}{(C_1^{\text{max}})^{\alpha_a}} \frac{(C_{1_\text{Li}})^{\alpha_c}}{{(C_1^\text{max}})^{\alpha_c}} \] where $\alpha_a, \alpha_c$ are transfer coefficients, $k_0$ is a kinetic rate constant,and $C^{\text{max}}_\text{Li}$ is the maximum concentration of lithium that the particle can contain. The open circuit potential $U$ can be written as a fit depend on $C_\text{Li}$.
+The electrochemical equations are completed with specification of the Butler-\/\+Volmer model for the flux of lithium, $j_n$\+: \[ j_n=j_0\left(\text{exp}\left(\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)-\text{exp}\left(-\frac{\alpha_aF}{R\theta}(\phi_\text{S}-\phi_\text{E}-U)\right)\right)\\ j_0=k_0(C_2)^{\alpha_a} \frac{(C_1^{\text{max}}-C_{1_\text{Li}})^{\alpha_a}}{(C_1^{\text{max}})^{\alpha_a}} \frac{(C_{1_\text{Li}})^{\alpha_c}}{{(C_1^\text{max}})^{\alpha_c}} \] where $\alpha_a, \alpha_c$ are transfer coefficients, $k_0$ is a kinetic rate constant,and $C^{\text{max}}_\text{Li}$ is the maximum concentration of lithium that the particle can contain. The open circuit potential $U$ can be written as a fit depend on $C_\text{Li}$.
 
-{\bfseries The standard thermal equations}\par
- Heat generation and transport are governed by the heat equation, which is derived from the first law of thermodynamics. For the temperature \$\$, we have the standard form of the heat equation in the electrodes\-: \[ \rho C_p\frac{\text{d}\theta}{\text{d}t}=\lambda \nabla^2\theta+Q_{\text{rxn}}+Q_{\text{rev}}+Q_{\text{ohm}} \label{eq:ThermalElectrode} \] where f $\rho$ is the mass density of the electrode, $C_p$ is specific heat and $\lambda$ is the thermal conductivity. In the separator, we have\-: \[ \rho C_p\frac{\text{d}\theta}{\text{d}t}=\lambda \nabla^2\theta+Q_{\text{ohm}}. \] The heat generation terms are\-: \[ Q_{\text{rxn}}=Faj_n(\phi_\text{S}-\phi_\text{E}-U) \quad \text{irreversible entropic heat}\\ Q_{\text{rev}}=Faj_n\theta\frac{\partial U}{\partial \theta} \quad\text{reversible entropic heat}\\ Q_{\text{ohm}}=-\boldsymbol{i}_1\cdot\nabla\phi_\text{S}-\boldsymbol{i}_2\cdot\nabla\phi_\text{E} \quad\text{Joule heating in electrode}\\ Q_{\text{ohm}}=-\boldsymbol{i}_2\cdot\nabla\phi_\text{E} \quad\text{Joule heating in separator} \]\hypertarget{battery_electrode_scale_subsub2}{}\subsubsection{Finite strain mechanics and the evolving porosity model}\label{battery_electrode_scale_subsub2}
-Lithium intercalation/de-\/intercalation induces particle swelling/contraction which manifests itself as electrode deformation at the macro-\/scale. Additionally, the particle and separator undergo thermal expansion.\{\{blue\}The electrolyte is assumed not to undergo thermal expansion. Therefore the decomposition of the deformation into elastic, swelling and thermal contributions does not apply to it.\} The kinematics of finite strain leads to the following decomposition\-: \[ \boldsymbol{F}=\boldsymbol{F}^\text{e}\boldsymbol{F}^\text{c}\boldsymbol{F}^{\theta} \] where $\boldsymbol{F} = \boldsymbol{1} + \partial\boldsymbol{u}/\partial\boldsymbol{X}$, is the total deformation gradient tensor averaged over the constituents of the material. It is multiplicatively decomposed into $\boldsymbol{F}^\text{e}$, $\boldsymbol{F}^\text{c}$ and $\boldsymbol{F}^{\theta}$, which are, respectively, its elastic, chemical (induced by lithium intercalation) and thermal components. In the absence of a body force the strong form of the mechanics problem in the current configuration is \[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0} \\ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^\text{e}}}\frac{\partial W}{\partial \boldsymbol{F}^\text{e}}\boldsymbol{F}^{\text{e}^\text{T}} \] where \$\$ is the Cauchy stress tensor and \$\-W\$ is the strain energy density function.
+{\bfseries The standard thermal equations}~\newline
+ Heat generation and transport are governed by the heat equation, which is derived from the first law of thermodynamics. For the temperature \$\$, we have the standard form of the heat equation in the electrodes\+: \[ \rho C_p\frac{\text{d}\theta}{\text{d}t}=\lambda \nabla^2\theta+Q_{\text{rxn}}+Q_{\text{rev}}+Q_{\text{ohm}} \label{eq:ThermalElectrode} \] where f $\rho$ is the mass density of the electrode, $C_p$ is specific heat and $\lambda$ is the thermal conductivity. In the separator, we have\+: \[ \rho C_p\frac{\text{d}\theta}{\text{d}t}=\lambda \nabla^2\theta+Q_{\text{ohm}}. \] The heat generation terms are\+: \[ Q_{\text{rxn}}=Faj_n(\phi_\text{S}-\phi_\text{E}-U) \quad \text{irreversible entropic heat}\\ Q_{\text{rev}}=Faj_n\theta\frac{\partial U}{\partial \theta} \quad\text{reversible entropic heat}\\ Q_{\text{ohm}}=-\boldsymbol{i}_1\cdot\nabla\phi_\text{S}-\boldsymbol{i}_2\cdot\nabla\phi_\text{E} \quad\text{Joule heating in electrode}\\ Q_{\text{ohm}}=-\boldsymbol{i}_2\cdot\nabla\phi_\text{E} \quad\text{Joule heating in separator} \]\hypertarget{battery_electrode_scale_subsub2}{}\subsubsection{Finite strain mechanics and the evolving porosity model}\label{battery_electrode_scale_subsub2}
+Lithium intercalation/de-\/intercalation induces particle swelling/contraction which manifests itself as electrode deformation at the macro-\/scale. Additionally, the particle and separator undergo thermal expansion.\{\{blue\}The electrolyte is assumed not to undergo thermal expansion. Therefore the decomposition of the deformation into elastic, swelling and thermal contributions does not apply to it.\} The kinematics of finite strain leads to the following decomposition\+: \[ \boldsymbol{F}=\boldsymbol{F}^\text{e}\boldsymbol{F}^\text{c}\boldsymbol{F}^{\theta} \] where $\boldsymbol{F} = \boldsymbol{1} + \partial\boldsymbol{u}/\partial\boldsymbol{X}$, is the total deformation gradient tensor averaged over the constituents of the material. It is multiplicatively decomposed into $\boldsymbol{F}^\text{e}$, $\boldsymbol{F}^\text{c}$ and $\boldsymbol{F}^{\theta}$, which are, respectively, its elastic, chemical (induced by lithium intercalation) and thermal components. In the absence of a body force the strong form of the mechanics problem in the current configuration is \[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0} \\ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^\text{e}}}\frac{\partial W}{\partial \boldsymbol{F}^\text{e}}\boldsymbol{F}^{\text{e}^\text{T}} \] where \$\$ is the Cauchy stress tensor and \$W\$ is the strain energy density function.
 
-we assume that although the particles undergo isotropic swelling in the electrode due to intercalation of lithium, there is unidirectional swelling along the normal to the separator. This assumption models the non-\/slip boundary condition that would be applied at the current collector-\/electrode interface, and which would provide a strong constraint against macroscopic expansion of the electrode in the e1 and e3 directions. Since we do not directly model the current collector, this assumption represents its mechanical effect Accordingly, we have \[ F^\text{c}_{iJ}=\beta\delta_{2i}\delta_{2J}+\delta_{iJ} \] Thermal expansion is modelled as isotropic \[ F^{\theta}_{iJ}=(1+\beta^{\theta})^{1/3}\delta_{iJ} \] Based on mixture theory (Z. Wang et.\-al.), the volume fraction of particle in electrode can be modeled by \[ \epsilon_\text{s}=\frac{\left( \frac{\kappa(\frac{\det\boldsymbol{F}}{(1+\beta)(1+\beta^\theta)}-1)-3P_\text{l}-3P_\text{b}}{\kappa_\text{s}} +1\right)(1+\beta_\text{s})(1+\beta_\text{s}^\theta)}{\det\boldsymbol{F}}\epsilon_{\text{s}_0} \] Assuming the binder to deform at constant volume during charging and discharging such that \$\{det\}\{F\}\-\_\-\{b\}=1\$, we have \[ \epsilon_\text{b}=\frac{1}{\det \boldsymbol{F}}\epsilon_{\text{b}_0}\\ \epsilon_\text{l}=1-\epsilon_{\text{s}}-\epsilon_\text{b} \] \hypertarget{battery_electrode_scale_sub2}{}\subsection{Boundary condition}\label{battery_electrode_scale_sub2}
+we assume that although the particles undergo isotropic swelling in the electrode due to intercalation of lithium, there is unidirectional swelling along the normal to the separator. This assumption models the non-\/slip boundary condition that would be applied at the current collector-\/electrode interface, and which would provide a strong constraint against macroscopic expansion of the electrode in the e1 and e3 directions. Since we do not directly model the current collector, this assumption represents its mechanical effect Accordingly, we have \[ F^\text{c}_{iJ}=\beta\delta_{2i}\delta_{2J}+\delta_{iJ} \] Thermal expansion is modelled as isotropic \[ F^{\theta}_{iJ}=(1+\beta^{\theta})^{1/3}\delta_{iJ} \] Based on mixture theory (Z. Wang et.\+al.), the volume fraction of particle in electrode can be modeled by \[ \epsilon_\text{s}=\frac{\left( \frac{\kappa(\frac{\det\boldsymbol{F}}{(1+\beta)(1+\beta^\theta)}-1)-3P_\text{l}-3P_\text{b}}{\kappa_\text{s}} +1\right)(1+\beta_\text{s})(1+\beta_\text{s}^\theta)}{\det\boldsymbol{F}}\epsilon_{\text{s}_0} \] Assuming the binder to deform at constant volume during charging and discharging such that \$\{det\}\{F\}\+\_\+\{b\}=1\$, we have \[ \epsilon_\text{b}=\frac{1}{\det \boldsymbol{F}}\epsilon_{\text{b}_0}\\ \epsilon_\text{l}=1-\epsilon_{\text{s}}-\epsilon_\text{b} \] \hypertarget{battery_electrode_scale_sub2}{}\subsection{Boundary condition}\label{battery_electrode_scale_sub2}
  \hypertarget{battery_particle_Implementation}{}\section{Implementation}\label{battery_particle_Implementation}
-The coding flow is very similar to \hyperlink{_intercalation}{Example 1 \-: Intercalation with finte strain mechanics}. We discuss the difference here.\hypertarget{battery_electrode_scale_sub1}{}\subsection{Read parameters.\-prm before defining primary variables over different domains}\label{battery_electrode_scale_sub1}
-Here, we want to read the paramters from file at the very beginning of main.\-cc instead of at run.\-cc. This is can be easily done at main.\-cc 
+The coding flow is very similar to \mbox{\hyperlink{_intercalation}{Example 1 \+: Intercalation with finte strain mechanics}}. We discuss the difference here.\hypertarget{battery_electrode_scale_sub1}{}\subsection{Read parameters.\+prm before defining primary variables over different domains}\label{battery_electrode_scale_sub1}
+Here, we want to read the paramters from file at the very beginning of main.\+cc instead of at run.\+cc. This is can be easily done at main.\+cc 
 \begin{DoxyCode}
 ParameterHandler params;
 initBoundValProbs<DIMS> problem(params);
@@ -65,7 +65,7 @@ FE\_support[electrode\_fe].push\_back(1);\textcolor{comment}{//phi\_s}
 FE\_support[electrode\_fe].push\_back(1);\textcolor{comment}{//T}
 \end{DoxyCode}
 \hypertarget{battery_electrode_scale_Generate}{}\subsection{Generate mesh internally}\label{battery_electrode_scale_Generate}
-In Example 1, mesh is imported from existing mesh. Here we use deal.\-ii {\bfseries Grid\-Generator} to generate mesh 
+In Example 1, mesh is imported from existing mesh. Here we use deal.\+ii {\bfseries Grid\+Generator} to generate mesh 
 \begin{DoxyCode}
 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} j = 0; j < element\_div\_x; ++j) step\_sizes[0].push\_back((X\_end-X\_0)/element\_div\_x); 
 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} j = 0; j < element\_div\_y; ++j) step\_sizes[1].push\_back((Y\_end-Y\_0)/element\_div\_y);
@@ -85,7 +85,7 @@ Residual<vectorType,dim>::evaluateSaint_Venant_KirchhoffStress(P\_stress,Fe, E);
 Residual<vectorType,dim>::residualForMechanics(fe\_values, u\_dof, R, P\_stress);  
 \end{DoxyCode}
 \hypertarget{battery_electrode_scale_neumann}{}\subsection{Apply neumann boundary condition}\label{battery_electrode_scale_neumann}
-In this example we need to apply neumann boundary condition for heat dissipation and current. We need to first find the corresponding surface, and use function {\bfseries residual\-For\-Neumman\-B\-C}. 
+In this example we need to apply neumann boundary condition for heat dissipation and current. We need to first find the corresponding surface, and use function {\bfseries residual\+For\+Neumman\+BC}. 
 \begin{DoxyCode}
 \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} faceID=0; faceID<2*dim; faceID++)\{
     \textcolor{keywordflow}{if}(cell->face(faceID)->at\_boundary())\{
@@ -120,7 +120,7 @@ ResidualEq->scalling(fe\_values,phi\_s\_dof,R,1e-6);
 ResidualEq->scalling(fe\_values,T\_dof,R,1e-5);
 \end{DoxyCode}
 \hypertarget{battery_electrode_scale_computed}{}\subsection{Output extral field computed from primary variabls}\label{battery_electrode_scale_computed}
-During battery simulation, reaction rate is a important intermidate results and we want to output it along with the primary variables. To do so we first need to implement a class derived from {\bfseries computed\-Field$<$dim$>$}. 
+During battery simulation, reaction rate is a important intermidate results and we want to output it along with the primary variables. To do so we first need to implement a class derived from {\bfseries computed\+Field$<$dim$>$}. 
 \begin{DoxyCode}
 \textcolor{preprocessor}{#include <deal.II/base/parameter\_handler.h>}
 \textcolor{preprocessor}{#include <supplementary/computedField.h>}
@@ -152,7 +152,7 @@ During battery simulation, reaction rate is a important intermidate results and 
     std::vector<unsigned int > primary\_variables\_dof;
     \textcolor{comment}{//std:}
 \end{DoxyCode}
- And overload function {\bfseries compute\-\_\-derived\-\_\-quantities\-\_\-vector} for the new field\-: 
+ And overload function {\bfseries compute\+\_\+derived\+\_\+quantities\+\_\+vector} for the new field\+: 
 \begin{DoxyCode}
 \textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>
 \textcolor{keywordtype}{void} nodalField<dim>::compute\_derived\_quantities\_vector(\textcolor{keyword}{const} std::vector<Vector<double> > &uh,
@@ -200,7 +200,7 @@ During battery simulation, reaction rate is a important intermidate results and 
 \end{DoxyCode}
 
 
-Then before write K\-T\-K file, we need to pass the class to {\bfseries F\-E\-Mdata$<$dim,\-P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector$>$} 
+Then before write K\+TK file, we need to pass the class to {\bfseries F\+E\+Mdata$<$dim,\+P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector$>$} 
 \begin{DoxyCode}
     nodalField<dim> computedNodalField(*params);
     std::vector<std::vector<std::string> > computed\_primary\_variables=\{\{\textcolor{stringliteral}{"jn"}, \textcolor{stringliteral}{"component\_is\_scalar"}\}\};
@@ -216,110 +216,110 @@ Then before write K\-T\-K file, we need to pass the class to {\bfseries F\-E\-Md
 \end{DoxyCode}
 \hypertarget{battery_electrode_scale_Pa}{}\subsubsection{Parameterhandler is used to manage all parameters as Example 1}\label{battery_electrode_scale_Pa}
 \hypertarget{_intercalation_results}{}\section{Results}\label{_intercalation_results}
-We present few results here by using the following Parameter file\-: 
+We present few results here by using the following Parameter file\+: 
 \begin{DoxyCode}
 \textcolor{preprocessor}{#parameters file}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#1. Thermal modeling of cylindrical lithium ion battery during discharge cycle, Dong Hyup Jeon ⇑,1, Seung
+\textcolor{preprocessor}{#1. Thermal modeling of cylindrical lithium ion battery during discharge cycle, Dong Hyup Jeon ⇑,1, Seung
        Man Baek,2011,Energy Conversion and Management LiC6}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{# 2. Numerical study on lithium titanate battery thermal response under adiabatic condition,Qiujuan Sun a,
+\textcolor{preprocessor}{# 2. Numerical study on lithium titanate battery thermal response under adiabatic condition,Qiujuan Sun a,
        Qingsong Wanga 2015, Energy Conversion and Management}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#3.white Theoretical Analysis of Stresses in a Lithium Ion Cell    }
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#4 A Computational Model of the Mechanical Behavior within Reconstructed LixCoO2 Li-ion Battery Cathode
+\textcolor{preprocessor}{#3.white Theoretical Analysis of Stresses in a Lithium Ion Cell    }
+\textcolor{preprocessor}{#4 A Computational Model of the Mechanical Behavior within Reconstructed LixCoO2 Li-ion Battery Cathode
        Particles, Veruska Malavé, J.R. Berger, EA}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#5. A pseudo three-dimensional electrochemicalethermal model of a prismatic LiFePO4 battery during
+\textcolor{preprocessor}{#5. A pseudo three-dimensional electrochemicalethermal model of a prismatic LiFePO4 battery during
        discharge process}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#6. solid diffusion Single-Particle Model for a Lithium-Ion Cell: Thermal Behavior, Meng Guo,a Godfrey
+\textcolor{preprocessor}{#6. solid diffusion Single-Particle Model for a Lithium-Ion Cell: Thermal Behavior, Meng Guo,a Godfrey
        Sikha,b,* and Ralph E. Whitea}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#global parameters}
-\textcolor{preprocessor}{}
+\textcolor{preprocessor}{#global parameters}
+
 
 \textcolor{preprocessor}{#declare problem setting}
-\textcolor{preprocessor}{}subsection Problem
-set print\_parameter = \textcolor{keyword}{true}
-set dt = 10
-set totalTime = 370
-set step\_load = \textcolor{keyword}{false}
+subsection Problem
+\textcolor{keyword}{set} print\_parameter = \textcolor{keyword}{true}
+\textcolor{keyword}{set} dt = 10
+\textcolor{keyword}{set} totalTime = 370
+\textcolor{keyword}{set} step\_load = \textcolor{keyword}{false}
 
-set first\_domain\_id = 0
-set electrode\_id=0
-set separator\_id=1
+\textcolor{keyword}{set} first\_domain\_id = 0
+\textcolor{keyword}{set} electrode\_id=0
+\textcolor{keyword}{set} separator\_id=1
 
-set electrode\_fe=0
-set separator\_fe=1
+\textcolor{keyword}{set} electrode\_fe=0
+\textcolor{keyword}{set} separator\_fe=1
 
 \textcolor{preprocessor}{#directory}
-\textcolor{preprocessor}{}set output\_directory = output/
-set snapshot\_directory = snapshot/ 
+\textcolor{keyword}{set} output\_directory = output/
+\textcolor{keyword}{set} snapshot\_directory = snapshot/ 
 \textcolor{preprocessor}{#FEM}
-\textcolor{preprocessor}{}set volume\_quadrature = 4 
-set face\_quadrature = 3 
+\textcolor{keyword}{set} volume\_quadrature = 4 
+\textcolor{keyword}{set} face\_quadrature = 3 
 \textcolor{preprocessor}{#applied current}
-\textcolor{preprocessor}{}set IpA = -100
+\textcolor{keyword}{set} IpA = -100
 end
 
 \textcolor{preprocessor}{# some useful geometry information beforehand}
-\textcolor{preprocessor}{}subsection Geometry
-set X\_0 = 0
-set Y\_0 = 0
-set Z\_0 = 0
-set X\_end = 120
-set Y\_end = 120
-set Z\_end = 85
+subsection Geometry
+\textcolor{keyword}{set} X\_0 = 0
+\textcolor{keyword}{set} Y\_0 = 0
+\textcolor{keyword}{set} Z\_0 = 0
+\textcolor{keyword}{set} X\_end = 120
+\textcolor{keyword}{set} Y\_end = 120
+\textcolor{keyword}{set} Z\_end = 85
 
-set electrode\_Y1 = 60
-set electrode\_Y2 = 80
+\textcolor{keyword}{set} electrode\_Y1 = 60
+\textcolor{keyword}{set} electrode\_Y2 = 80
 
-set element\_div\_x = 1
-set element\_div\_y = 120
-set element\_div\_z = 1
+\textcolor{keyword}{set} element\_div\_x = 1
+\textcolor{keyword}{set} element\_div\_y = 120
+\textcolor{keyword}{set} element\_div\_z = 1
 end
 
 \textcolor{preprocessor}{# initial condition}
-\textcolor{preprocessor}{}subsection Initial condition
-set c\_li\_max\_neg = 28.7e-3
-set c\_li\_max\_pos = 37.5e-3
-set c\_li\_100\_neg = 0.915
+subsection Initial condition
+\textcolor{keyword}{set} c\_li\_max\_neg = 28.7e-3
+\textcolor{keyword}{set} c\_li\_max\_pos = 37.5e-3
+\textcolor{keyword}{set} c\_li\_100\_neg = 0.915
 set c\_li\_100\_pos = 0.022
 set c\_li\_0\_neg = 0.02
 set c\_li\_0\_pos = 0.98
 set c\_li\_plus\_ini = 1.0e-3
-set T\_0 = 298
+\textcolor{keyword}{set} T\_0 = 298
 end
 
 \textcolor{preprocessor}{# parameter for elastiticy equations}
-\textcolor{preprocessor}{}subsection Elasticity
-set youngsModulus\_neg = 12e3 #cite 3 in porosity paper
-set youngsModulus\_pos = 370e3 #cite4
-set youngsModulus\_sep = 0.5e3 #cite 3 in porosity paper
+subsection Elasticity
+\textcolor{keyword}{set} youngsModulus\_neg = 12e3 #cite 3 in porosity paper
+\textcolor{keyword}{set} youngsModulus\_pos = 370e3 #cite4
+\textcolor{keyword}{set} youngsModulus\_sep = 0.5e3 #cite 3 in porosity paper
 
-set nu\_sep = 0.35 #cite 3 in porosity paper
-set nu\_neg = 0.3 #cite 3 in porosity paper
-set nu\_pos = 0.2 #cite4 
+\textcolor{keyword}{set} nu\_sep = 0.35 #cite 3 in porosity paper
+\textcolor{keyword}{set} nu\_neg = 0.3 #cite 3 in porosity paper
+\textcolor{keyword}{set} nu\_pos = 0.2 #cite4 
 
-set kappa\_sep = 0.42e-3
-set kappa\_neg = 4.94e-3
-set kappa\_pos = 7.4e-3
-set kappa\_s = 25e-3
-set pb = 0
-set pl = 0
-set omega\_s = 3.5 #not used but 3.5 is from linear coff in porosity paper
+\textcolor{keyword}{set} kappa\_sep = 0.42e-3
+\textcolor{keyword}{set} kappa\_neg = 4.94e-3
+\textcolor{keyword}{set} kappa\_pos = 7.4e-3
+\textcolor{keyword}{set} kappa\_s = 25e-3
+\textcolor{keyword}{set} pb = 0
+\textcolor{keyword}{set} pl = 0
+\textcolor{keyword}{set} omega\_s = 3.5 #not used but 3.5 is from linear coff in porosity paper
 \textcolor{preprocessor}{#following from cite 3 in porosity paper}
-\textcolor{preprocessor}{}set omega\_neg = 9.615e-6 
-set omega\_pos = 6.025e-6
-set omega\_sep = 82.46e-5
+\textcolor{keyword}{set} omega\_neg = 9.615e-6 
+\textcolor{keyword}{set} omega\_pos = 6.025e-6
+\textcolor{keyword}{set} omega\_sep = 82.46e-5
 
 end
 
 \textcolor{preprocessor}{# parameter for electro-chemo equations}
-\textcolor{preprocessor}{}subsection ElectroChemo #cite6
-set sigma\_neg = 1.5e8
-set sigma\_pos = 0.5e8
+subsection ElectroChemo #cite6
+\textcolor{keyword}{set} sigma\_neg = 1.5e8
+\textcolor{keyword}{set} sigma\_pos = 0.5e8
 
-set t\_0 = 0.2
+\textcolor{keyword}{set} t\_0 = 0.2
 set D\_li\_neg = 5e-1 #cite 40 in porosity paper in code use expression cite 3 
-set D\_li\_pos = 1.0e-1 #cite3
+\textcolor{keyword}{set} D\_li\_pos = 1.0e-1 #cite3
 
-set eps\_s\_0\_neg = 0.53
+\textcolor{keyword}{set} eps\_s\_0\_neg = 0.53
 set eps\_s\_0\_pos = 0.5
 set eps\_s\_0\_sep = 0.35
 
@@ -331,66 +331,66 @@ set eps\_b\_0\_neg = 0.15
 set eps\_b\_0\_pos = 0.15
 set eps\_b\_0\_sep = 0
 
-set R\_s\_0\_neg = 8.0
+\textcolor{keyword}{set} R\_s\_0\_neg = 8.0
 set R\_s\_0\_pos = 6.0
 set R\_s\_0\_sep = 0.0
 
 # parameter \textcolor{keywordflow}{for} Butler-Volmer equations at ElectricChemo \textcolor{keyword}{class}
-set F = 96485.3329
+\textcolor{keyword}{set} F = 96485.3329
 set Rr = 8.3144598
 set alpha\_a = 0.5
 set alpha\_c = 0.5
 set k\_neg = 0.8 #to match porosity paper
-set k\_pos = 0.8 #to match porosity paper
-set c\_max\_neg = 28.7e-3
-set c\_max\_pos = 37.5e-3
+\textcolor{keyword}{set} k\_pos = 0.8 #to match porosity paper
+\textcolor{keyword}{set} c\_max\_neg = 28.7e-3
+\textcolor{keyword}{set} c\_max\_pos = 37.5e-3
 
 end
 
 \textcolor{preprocessor}{# parameter for thermal equations}
-\textcolor{preprocessor}{}subsection Thermal
-set lambda\_neg = 1.04e6 #cite1
-set lambda\_pos = 5e6  #cite1
-set lambda\_sep = 0.33e6  #cite1
+subsection Thermal
+\textcolor{keyword}{set} lambda\_neg = 1.04e6 #cite1
+\textcolor{keyword}{set} lambda\_pos = 5e6  #cite1
+\textcolor{keyword}{set} lambda\_sep = 0.33e6  #cite1
 
 
-set density\_neg = 2.5e-15  #cite1
-set density\_pos = 2.5e-15  #cite1
-set density\_sep = 1.1e-15  #cite1
+\textcolor{keyword}{set} density\_neg = 2.5e-15  #cite1
+\textcolor{keyword}{set} density\_pos = 2.5e-15  #cite1
+\textcolor{keyword}{set} density\_sep = 1.1e-15  #cite1
 
 
-set Cp\_s\_neg = 700e12  #cite1
-set Cp\_s\_pos = 700e12 #cite1
-set Cp\_sep = 700e12  #cite1
+\textcolor{keyword}{set} Cp\_s\_neg = 700e12  #cite1
+\textcolor{keyword}{set} Cp\_s\_pos = 700e12 #cite1
+\textcolor{keyword}{set} Cp\_sep = 700e12  #cite1
 
 
-set h = 5 #Heat transfer coefficient
+\textcolor{keyword}{set} h = 5 #Heat transfer coefficient
 end
             
                     
 \textcolor{preprocessor}{#==============================================================================}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{# parameters reserved for deal.ii first level code:}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#nonLinear\_method : classicNewton}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#solver\_method (direct) : PETScsuperLU, PETScMUMPS}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#solver\_method (iterative) : PETScGMRES PETScBoomerAMG}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#relative\_norm\_tolerance, absolute\_norm\_tolerance, max\_iterations}
-\textcolor{preprocessor}{}\textcolor{preprocessor}{#}
-\textcolor{preprocessor}{}subsection Nonlinear\_solver
-        set nonLinear\_method = classicNewton
-        set relative\_norm\_tolerance = 1.0e-10
-        set absolute\_norm\_tolerance = 1.0e-7
-        set max\_iterations = 8
+\textcolor{preprocessor}{# parameters reserved for deal.ii first level code:}
+\textcolor{preprocessor}{#nonLinear\_method : classicNewton}
+\textcolor{preprocessor}{#solver\_method (direct) : PETScsuperLU, PETScMUMPS}
+\textcolor{preprocessor}{#solver\_method (iterative) : PETScGMRES PETScBoomerAMG}
+\textcolor{preprocessor}{#relative\_norm\_tolerance, absolute\_norm\_tolerance, max\_iterations}
+\textcolor{preprocessor}{#}
+subsection Nonlinear\_solver
+        \textcolor{keyword}{set} nonLinear\_method = classicNewton
+        \textcolor{keyword}{set} relative\_norm\_tolerance = 1.0e-10
+        \textcolor{keyword}{set} absolute\_norm\_tolerance = 1.0e-7
+        \textcolor{keyword}{set} max\_iterations = 8
 end
                         
 subsection Linear\_solver
-        set solver\_method = PETScMUMPS
-        set system\_matrix\_symmetricFlag = \textcolor{keyword}{false} # \textcolor{keywordflow}{default} is \textcolor{keyword}{false}
+        \textcolor{keyword}{set} solver\_method = PETScMUMPS
+        \textcolor{keyword}{set} system\_matrix\_symmetricFlag = \textcolor{keyword}{false} # \textcolor{keywordflow}{default} is \textcolor{keyword}{false}
 end
 \end{DoxyCode}
 
 
-   \par
+   ~\newline
  
 
-Many more results can be found at paper\-: {\bfseries Intercalation driven porosity effects on the electro-\/chemo-\/thermo-\/mechanical response in continuum models for battery material electrodes}, Z. Wang, J. Siegel, K. Garikipati, Journal of the Electrochemical Society, Vol. 164\-: A2199-\/\-A2212, 2017, doi\-:10.\-1149/2.0081712jes \hypertarget{_intercalation_com}{}\section{Complete code}\label{_intercalation_com}
+Many more results can be found at paper\+: {\bfseries Intercalation driven porosity effects on the electro-\/chemo-\/thermo-\/mechanical response in continuum models for battery material electrodes}, Z. Wang, J. Siegel, K. Garikipati, Journal of the Electrochemical Society, Vol. 164\+: A2199-\/\+A2212, 2017, doi\+:10.\+1149/2.0081712jes \hypertarget{_intercalation_com}{}\section{Complete code}\label{_intercalation_com}
 The complete implementaion can be found at \href{https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example2%20Battery%20model%20at%20electrode%20scale}{\tt Github}. 

@@ -1,36 +1,30 @@
 warning: source ../diffucReac is not a readable file or directory... skipping.
+warning: source README.md is not a readable file or directory... skipping.
 warning: source ./supplementary.h is not a readable file or directory... skipping.
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:3: warning: multiple use of section label 'Introduction' while adding section, (first occurrence: /Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h, line 3)
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:19: warning: multiple use of section label 'section1' while adding section, (first occurrence: /Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h, line 14)
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:24: warning: multiple use of section label 'subsub1' while adding section, (first occurrence: /Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h, line 15)
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:202: warning: multiple use of section label 'Implementation' while adding section, (first occurrence: /Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h, line 99)
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:288: warning: multiple use of section label 'results' while adding section, (first occurrence: /Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h, line 294)
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/Intercalation/Intercalation.h:3: warning: multiple use of section label 'Introduction' while adding section, (first occurrence: /Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h, line 3)
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/Intercalation/Intercalation.h:321: warning: multiple use of section label 'results' while adding section, (first occurrence: /Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h, line 294)
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/Intercalation/Intercalation.h:326: warning: multiple use of section label 'com' while adding section, (first occurrence: /Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h, line 470)
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:27: warning: Found unknown command `\text'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:48: warning: Found unknown command `\theta'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:66: warning: Found unknown command `\footnote'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:66: warning: Found unknown command `\color'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:75: warning: Found unknown command `\bT'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:90: warning: Found unknown command `\text'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:90: warning: Found unknown command `\boldsymbol'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:90: warning: Found unknown command `\text'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\nabla'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\cdot'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\sum'
-/Users/wzhenlin/Github/mechanoChemFEM_master/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\boldsymbol'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:117: warning: Found unknown command `\partial'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:117: warning: Found unknown command `\partial'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:117: warning: Found unknown command `\nabla'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:104: warning: Found unknown command `\partial'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:104: warning: Found unknown command `\partial'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:104: warning: Found unknown command `\nabla'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:61: warning: Found unknown command `\nabla'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:66: warning: Found unknown command `\bP'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:66: warning: Found unknown command `\cdot'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:66: warning: Found unknown command `\bn'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:148: warning: Found unknown command `\gradc'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:152: warning: Found unknown command `\grad'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:157: warning: Found unknown command `\grad'
-/Users/wzhenlin/Github/mechanoChemFEM_master/include/Residual.h:127: warning: Found unknown command `\nabla'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:27: warning: Found unknown command `\text'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:48: warning: Found unknown command `\theta'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:66: warning: Found unknown command `\footnote'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:66: warning: Found unknown command `\color'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:75: warning: Found unknown command `\bT'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:90: warning: Found unknown command `\text'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:90: warning: Found unknown command `\boldsymbol'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:90: warning: Found unknown command `\text'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\nabla'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\cdot'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\sum'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\boldsymbol'
+/home/wzhenlin/Github/mechanoChemFEM/doxygen/examples.h:5: warning: unable to resolve link to `computedField<dim>' for \link command
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:117: warning: Found unknown command `\partial'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:117: warning: Found unknown command `\partial'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:117: warning: Found unknown command `\nabla'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:104: warning: Found unknown command `\partial'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:104: warning: Found unknown command `\partial'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:104: warning: Found unknown command `\nabla'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:61: warning: Found unknown command `\nabla'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:66: warning: Found unknown command `\bP'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:66: warning: Found unknown command `\cdot'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:66: warning: Found unknown command `\bn'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:148: warning: Found unknown command `\gradc'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:152: warning: Found unknown command `\grad'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:157: warning: Found unknown command `\grad'
+/home/wzhenlin/Github/mechanoChemFEM/include/Residual.h:127: warning: Found unknown command `\nabla'

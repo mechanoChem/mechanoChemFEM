@@ -1,0 +1,105 @@
+#parameters file
+
+subsection Problem
+set print_parameter = true
+
+set with_additional_data = true
+set resuming_additional_data_from_snapshot=false
+set additional_data_snapshot= no_need.dat
+set additional_data_nodal_file =  no_need.dat
+
+set dt = 1
+set totalTime = 100
+set current_increment = 0
+set current_time = 0
+set resuming_from_snapshot = false
+
+set mesh = ../../mesh/testMesh.msh
+
+set meshType =external
+set initial_global_refine = 1
+#set Shell_center_X = 0 
+#set Shell_center_Y = 0 
+#set Shell_center_Z = 0 
+#set inner_radius = 10 
+#set outer_radius = 20 
+#set initial_global_refine = 3
+
+#set a_scale = 1
+#set b_scale = 0.75
+#set c_scale = 1
+#set cort_thickness = 0.07
+
+#set snapshot_file = snapshot/snapshot-2.dat
+set snapshot_file = no_need.dat
+set output_directory = output/
+set snapshot_directory = snapshot/
+
+
+#FEM
+set volume_quadrature = 4 
+set face_quadrature = 3 
+
+set first_domain_id = 0
+set Cortex_id = 0
+set Subcortex_id = 1
+set Ventricle_id = 2
+
+set Cortex_fe = 0 
+set Subcortex_fe = 1
+set Ventricle_fe = 2
+end
+
+subsection Mechanics
+		set youngsModulus =  5.0e3
+		set poissonRatio =  0.45
+			
+		set saturation_matID_Cortex = 1
+		set saturation_matID_Subcortex = 10
+		
+#set GROWTH = Uniform
+	 set GROWTH = Isotropic
+         #set GROWTH = Isotropic
+end
+
+subsection Concentration
+
+		set inward_flux=0.0
+		set c1_ini = 0.5
+		set c2_ini = 0.5
+		set c1_ini_interface = 1
+		set c2_ini_interface = 1
+						
+		set advection_type = noAdvection
+		#set advection_type = radial 
+		set mobility_c1 = 1
+		set mobility_c2 = 1
+	  set reac_10 = 0
+		set reac_20 = 0
+
+end
+						
+#
+# parameters reserved for deal.ii first level code:
+#nonLinear_method : classicNewton
+#solver_method (direct) : PETScsuperLU, PETScMUMPS
+#solver_method (iterative) : PETScGMRES PETScBoomerAMG
+#relative_norm_tolerance, absolute_norm_tolerance, max_iterations
+#
+subsection Nonlinear_solver
+		set nonLinear_method = classicNewton
+		set relative_norm_tolerance = 1.0e-10
+		set absolute_norm_tolerance = 1.0e-10
+		set max_iterations = 50
+end
+						
+subsection Linear_solver
+		set solver_method = PETScsuperLU
+		set system_matrix_symmetricFlag = false # default is false
+end
+
+
+
+
+		
+

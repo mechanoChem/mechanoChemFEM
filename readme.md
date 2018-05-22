@@ -58,20 +58,24 @@ This code has been developed under the support of the following: <br>
 =======================================================================
 1. <B>Install pre-required libs</B><br>
 
-	1) Install CMake [http://www.cmake.org/download/]<br>
-	2) Install deal.II [www.dealii.org/download.html] with<br>
+
+  1) Install CMake [http://www.cmake.org/download/]<br>
+  2) Install deal.II [www.dealii.org/download.html] with<br>
 		 - Trilinos [https://trilinos.org/]<br>
 		 - PetSc [https://www.mcs.anl.gov/petsc/download/index.html]<br>
      Deal.II OSX binaries include full packages of deal.ii with Trillions and other useful libs.
 
+
 2. <B>Install dealMuliphysics</B><br>
 
-	1) Goes into “build” folder<br>
-	2) Modify CMakeList.txt for path of pre-required libs: deal.ii (with Trilinos, Petsc) <br>
-	3) cmake CMakeLists.txt <br>
-	4) $ make install or do $ make release install<br>
-	5) $ make run <br>
+
+  1) Goes into “build” folder<br>
+  2) Modify CMakeList.txt for path of pre-required libs: deal.ii (with Trilinos, Petsc) <br>
+  3) cmake CMakeLists.txt <br>
+  4) $ make install or do $ make release install<br>
+  5) $ make run <br>
      - test(optional) of installation which will run “main” in build folder <br>
+
 
 <B>Usage</B><br>
 =======================================================================

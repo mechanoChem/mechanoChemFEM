@@ -1,6 +1,6 @@
 <B>mechanoChemFEM</B><br>
 =======================================================================
-mechanoChemFEM contains dealMultiphysics: a light library based on deal.ii for ease of mechano-chemical modeling using finite element method, and many examples built on this library.
+mechanoChemFEM contains dealMultiphysics: a library based on deal.ii for ease of mechano-chemical modeling using finite element method, and many examples built on this library.
 
 Master branch contains the current stable version of the code and documentaion.<br>
 example branch contains the code for all examples.<br>
@@ -13,14 +13,14 @@ Zhenlin Wang (lead developer）<br>
 
 Krishna Garikipati<br>
 
-Computational Physics Group, University of Michigan [http://umich.edu/~compphys/index.html]
+<a href="http://umich.edu/~compphys/index.html”> Computational Physics Group, University of Michigan</a>.
 
 <B>Overview</B><br>
 =======================================================================
 deal.ii [http://www.dealii.org] is a robust finite element library.
 The dealMultiphysics code is a light library for enhancement of using deal.ii for FEM modeling. It contains five modules:
 
-	\code{.cpp}
+	
 	hpFEM<T, dim> : offer high level functions dedicated to mulitphysics modeling using deal.ii
 	
 	Residual< T, dim > : offer residual functions of a variety of equations and boundary conditions
@@ -30,7 +30,7 @@ The dealMultiphysics code is a light library for enhancement of using deal.ii fo
 	FEMdata< dim, vectorType > : high level functions for data output and restart(checkpoint)
 	
 	supplementary:a collection of extra data structures and many helper functions
-	\endcode
+
 	
 ParameterHandler is used for parameter management. 
 

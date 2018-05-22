@@ -324,5 +324,5 @@ end
 \htmlonly <style>div.image img[src="u.png"]{width:500px;}</style> \endhtmlonly 
 \image html u.png displacment magnitude
 *\section com Complete code
- * The complete implementaion can be found at GitLab [https://gitlab.com/compPhysCode/brainMorph]. 
+* The complete implementaion can be found at  <a href="https://github.com/mechanoChem/batteryCode/tree/homogenizedModel">Github</a>. 
  */

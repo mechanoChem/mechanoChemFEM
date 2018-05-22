@@ -1,0 +1,36 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+#*
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.vtk
+*.dat
+*~
+*.vts
+*tgz
+CMakeFiles*
+CMakeCache.txt
+cmake_install.cmake
+
+*avi
+*mpeg
+*mp4
+*mat
+main
+results*
+*.o*
+configForce.o*
+stress_stretch.txt
+Makefile
+
+*.cc#
+snapshot*

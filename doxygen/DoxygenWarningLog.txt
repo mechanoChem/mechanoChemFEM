@@ -1,5 +1,5 @@
 warning: source ../diffucReac is not a readable file or directory... skipping.
-warning: source README.md is not a readable file or directory... skipping.
+warning: source ./readme.md is not a readable file or directory... skipping.
 warning: source ./supplementary.h is not a readable file or directory... skipping.
 /home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:27: warning: Found unknown command `\text'
 /home/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_electrodeScale/battery_electrodeScale.h:48: warning: Found unknown command `\theta'

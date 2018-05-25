@@ -3,8 +3,8 @@
 mechanoChemFEM is a libarary consisting of classes and functions based on Deal.ii, and examples. mechano-chemical modeling using finite element method, and many examples built on this library.
 
 <B>Master branch</B> contains the current stable version of the code and documentaion.<br>
-<B>example branch</B> contains the code for all examples.<br>
-<B>Otherbranches</B>  contain the older versions.
+<B>example branch</B> contains all example code.<br>
+<B>Other branches</B>  contain the older versions.
 
 
 <B>List of contributors:</B><br>

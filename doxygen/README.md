@@ -13,7 +13,7 @@ Krishna Garikipati<br>
 [Computational Physics Group, University of Michigan](http://umich.edu/~compphys/index.html)
 
 
-[<B>Code is on Github</B>](https://github.com/mechanoChem/mechanoChemFEM)
+[<B>Download from Github</B>](https://github.com/mechanoChem/mechanoChemFEM)
 
 <B>Overview</B><br>
 =======================================================================

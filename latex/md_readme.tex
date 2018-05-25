@@ -1,0 +1,102 @@
+mechano\-Chem\-F\-E\-M is a libarary for modeling of mechano-\/chemical problems using the finite element method. It consists of \href{https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/annotated.html}{\tt classes} and \href{https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/modules.html}{\tt functions} based on \href{https://www.dealii.org/}{\tt Deal.\-ii}, and examples.
+
+{\bfseries Master branch} contains the current stable version of the code and documentaion.\par
+ {\bfseries example branch} contains all example code.\par
+ {\bfseries Other branches} contain the older versions.
+
+{\bfseries List of contributors\-:}\par
+
+
+Zhenlin Wang (lead developer）\par
+
+
+Krishna Garikipati\par
+
+
+\href{http://umich.edu/~compphys/index.html}{\tt Computational Physics Group, University of Michigan}
+
+\href{https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/index.html}{\tt {\bfseries Code documentation}}
+
+\section*{{\bfseries Overview}\par
+ }
+
+\href{http://www.dealii.org}{\tt deal.\-ii} is a robust finite element library. The deal\-Multiphysics code is a light library for enhancement of using deal.\-ii for F\-E\-M modeling. It contains five modules\-:
+
+\begin{DoxyVerb}hpFEM<T, dim> : offer high level functions dedicated to mulitphysics modeling using deal.ii
+
+Residual< T, dim > : offer residual functions of a variety of equations and boundary conditions
+
+solveClass< dim, matrixType, vectorType > : offer nonlinear solvers based on deal.ii linear solver
+
+FEMdata< dim, vectorType > : high level functions for data output and restart(checkpoint)
+
+supplementary:a collection of extra data structures and many helper functions
+\end{DoxyVerb}
+
+
+Parameter\-Handler is used for parameter management.
+
+\section*{{\bfseries Version information}\par
+ }
+
+This is version 0.\-3, the intial release of the code.
+
+\section*{{\bfseries License}\par
+ }
+
+G\-N\-U Lesser General Public License (L\-G\-P\-L). Please see the file L\-I\-C\-E\-N\-S\-E for details.
+
+\section*{{\bfseries Acknowledgements}\par
+ }
+
+This code has been developed under the support of the following\-: \par
+
+
+
+\begin{DoxyItemize}
+\item N\-S\-F D\-M\-R\-E\-F grant\-: D\-M\-R1436154 \char`\"{}\-D\-M\-R\-E\-F\-: Integrated Computational Framework for Designing Dynamically Controlled Alloy-\/\-Oxide Heterostructures\char`\"{} \par
+
+\item D\-O\-E B\-E\-S, Division of Materials Sciences and Engineering\-: Award \#\-D\-E-\/\-S\-C0008637 that funds the P\-Redictive Integrated Structural Materials Science (P\-R\-I\-S\-M\-S) Center at University of Michigan \par
+
+\item Toyota Research Institute, Award \#849910, \char`\"{}\-Computational framework for data-\/driven, predictive, multi-\/scale and multi-\/physics modeling of battery materials\char`\"{} \par
+
+\end{DoxyItemize}
+
+\section*{{\bfseries Installation with cmake\-:}\par
+ }
+
+
+\begin{DoxyEnumerate}
+\item {\bfseries Install pre-\/required libs}\par
+
+
+1) Install C\-Make \mbox{[}\href{http://www.cmake.org/download/}{\tt http\-://www.\-cmake.\-org/download/}\mbox{]}\par
+ 2) Install deal.\-I\-I \mbox{[}www.\-dealii.\-org/download.html\mbox{]} with\par
+
+\begin{DoxyItemize}
+\item Trilinos \mbox{[}\href{https://trilinos.org/}{\tt https\-://trilinos.\-org/}\mbox{]}\par
+
+\item Pet\-Sc \mbox{[}\href{https://www.mcs.anl.gov/petsc/download/index.html}{\tt https\-://www.\-mcs.\-anl.\-gov/petsc/download/index.\-html}\mbox{]}\par
+ Deal.\-I\-I O\-S\-X binaries include full packages of deal.\-ii with Trillions and other useful libs.
+\end{DoxyItemize}
+\item {\bfseries Install mechano\-Chem\-F\-E\-M lib}\par
+
+
+1) Goes into “build” folder\par
+ 2) Modify C\-Make\-List.\-txt for path of pre-\/required libs\-: deal.\-ii (with Trilinos, Petsc) \par
+ 3) cmake C\-Make\-Lists.\-txt \par
+ 4) \$ make install or do \$ make release install\par
+ 5) \$ make run \par
+
+\begin{DoxyItemize}
+\item test(optional) of installation which will run “main” in build folder \par
+
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+\section*{{\bfseries Usage}\par
+ }
+
+Please see examples.
+
+data\-:01/20/2018 

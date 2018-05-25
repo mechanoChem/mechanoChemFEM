@@ -65,7 +65,7 @@ This code has been developed under the support of the following: <br>
      Deal.II OSX binaries include full packages of deal.ii with Trillions and other useful libs.
 
 
-2. <B>Install dealMuliphysics</B><br>
+2. <B>Install mechanoChemFEM lib</B><br>
 
 
   1) Goes into “build” folder<br>

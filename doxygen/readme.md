@@ -1,7 +1,6 @@
 <B>mechanoChemFEM</B><br>
 =======================================================================
-mechanoChemFEM contains dealMultiphysics: a library based on deal.ii for ease of mechano-chemical modeling using finite element method, and many examples built on this library.
-
+mechanoChemFEM is a libarary for modeling of mechano-chemical problems using the finite element method. It consists of classes and functions based on Deal.ii, and examples.
 
 
 <B>List of contributors:</B><br>
@@ -17,8 +16,7 @@ Krishna Garikipati<br>
 
 <B>Overview</B><br>
 =======================================================================
-[deal.ii](http://www.dealii.org) is a robust finite element library.
-The dealMultiphysics code is a light library for enhancement of using deal.ii for FEM modeling. It contains five modules:
+The mechanoChemFEM lib contains five modules:
 
 
 	hpFEM<T, dim> : offer high level functions dedicated to mulitphysics modeling using deal.ii

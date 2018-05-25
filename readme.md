@@ -1,6 +1,6 @@
 <B>mechanoChemFEM</B><br>
 =======================================================================
-mechanoChemFEM is a libarary for modeling of mechano-chemical problems using the finite element method. It consists of [classes](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/annotated.html) and [functions](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/modules.html) based on Deal.ii, and examples.
+mechanoChemFEM is a libarary for modeling of mechano-chemical problems using the finite element method. It consists of [classes](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/annotated.html) and [functions](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/modules.html) based on [Deal.ii](https://www.dealii.org/), and examples.
 
 <B>Master branch</B> contains the current stable version of the code and documentaion.<br>
 <B>example branch</B> contains all example code.<br>

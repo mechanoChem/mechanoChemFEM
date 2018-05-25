@@ -27,4 +27,3 @@ warning: source ./supplementary.h is not a readable file or directory... skippin
 /home/wzhenlin/mechanoChemFEM/include/Residual.h:152: warning: Found unknown command `\grad'
 /home/wzhenlin/mechanoChemFEM/include/Residual.h:157: warning: Found unknown command `\grad'
 /home/wzhenlin/mechanoChemFEM/include/Residual.h:127: warning: Found unknown command `\nabla'
-error: Problems running latex. Check your installation or look for typos in _formulas.tex and check _formulas.log!

@@ -1,7 +1,7 @@
 /**
  * @page examples Examples
  * 
- * The following is a list of example initial boundary value problems and their documentation. Example 1 serves as a introductary problem of mechano-chemical coupling exmaple built based on dealMultiphysics library.
+ * The following is a list of example initial boundary value problems and their documentation. Example 1 serves as a introductory example of mechano-chemical coupling built on mechanoChemFEM lib.
  * The other examples come from the various research code int the Computational Physics Group. Example 2 includes an extra object of the <a href="https://www.dealii.org/8.5.0/doxygen/deal.II/classDoFHandler.html">dof_handler</a>  class to hold extra nodal data. Example 3 includes \link computedField<dim> computedField \endlink class for post processing.
  * Example 3 includes interface conditions and applys constraints during the solve step. 
 

@@ -362,8 +362,8 @@ Parameterhandler</h2>
 <div class="line">*</div>
 </div><!-- fragment --><p> Alteravely we can use GUI to set the parameters. </p>
 <h1><a class="anchor" id="lib"></a>
-dealMutiphysics</h1>
-<p>To use dealMutiphysics, we need to define a class derived from <code>solveClass&lt;int dim, class matrixType, class vectorType&gt;</code> and <code>hpFEM&lt;int dim&gt;</code>, so that we can used pre-defined variables, functions, and overload the abstract virtual function <code>updateLinearSystem()</code> in parent class. The last reason make the inherientance necessary. Also we usually include the following three classes </p>
+mechanoChemFEM lib</h1>
+<p>To use mechanoChemFEM lib, we need to define a class derived from <code>solveClass&lt;int dim, class matrixType, class vectorType&gt;</code> and <code>hpFEM&lt;int dim&gt;</code>, so that we can used pre-defined variables, functions, and overload the abstract virtual function <code>updateLinearSystem()</code> in parent class. The last reason make the inherientance necessary. Also we usually include the following three classes </p>
 <div class="fragment"><div class="line">ParameterHandler* params;   </div>
 <div class="line"><a class="code" href="class_residual.html">Residual&lt;Sacado::Fad::DFad&lt;double&gt;</a>,dim&gt;* ResidualEq;</div>
 <div class="line"><a class="code" href="class_f_e_mdata.html">FEMdata&lt;dim, PETScWrappers::MPI::Vector&gt;</a>* FEMdata_out;</div>

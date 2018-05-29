@@ -260,8 +260,8 @@ subsection Linear\_solver
 end
 *
 \end{DoxyCode}
- Alteravely we can use G\-U\-I to set the parameters. \hypertarget{_intercalation_lib}{}\section{deal\-Mutiphysics}\label{_intercalation_lib}
-To use deal\-Mutiphysics, we need to define a class derived from {\ttfamily solve\-Class$<$int dim, class matrix\-Type, class vector\-Type$>$} and {\ttfamily hp\-F\-E\-M$<$int dim$>$}, so that we can used pre-\/defined variables, functions, and overload the abstract virtual function {\ttfamily update\-Linear\-System()} in parent class. The last reason make the inherientance necessary. Also we usually include the following three classes 
+ Alteravely we can use G\-U\-I to set the parameters. \hypertarget{_intercalation_lib}{}\section{mechano\-Chem\-F\-E\-M lib}\label{_intercalation_lib}
+To use mechano\-Chem\-F\-E\-M lib, we need to define a class derived from {\ttfamily solve\-Class$<$int dim, class matrix\-Type, class vector\-Type$>$} and {\ttfamily hp\-F\-E\-M$<$int dim$>$}, so that we can used pre-\/defined variables, functions, and overload the abstract virtual function {\ttfamily update\-Linear\-System()} in parent class. The last reason make the inherientance necessary. Also we usually include the following three classes 
 \begin{DoxyCode}
 ParameterHandler* params;   
 Residual<Sacado::Fad::DFad<double>,dim>* ResidualEq;

@@ -308,8 +308,8 @@ subsection Linear_solver
 end
 *\endcode
 * Alteravely we can use GUI to set the parameters.
- * \section lib dealMutiphysics 
- * To use dealMutiphysics, we need to define a class derived from \c solveClass<int dim, class matrixType, class vectorType> and \c hpFEM<int dim>,
+ * \section lib mechanoChemFEM lib 
+ * To use mechanoChemFEM lib, we need to define a class derived from \c solveClass<int dim, class matrixType, class vectorType> and \c hpFEM<int dim>,
  * so that we can used pre-defined variables, functions, and overload the abstract virtual function \c updateLinearSystem() in parent class.
  * The last reason make the inherientance necessary. 
  * Also we usually include the following three classes

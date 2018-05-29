@@ -21,7 +21,7 @@ Krishna Garikipati<br>
 <B>Overview</B><br>
 =======================================================================
 [deal.ii](http://www.dealii.org) is a robust finite element library.
-The dealMultiphysics code is a light library for enhancement of using deal.ii for FEM modeling. It contains five modules:
+mechanoChemFEM lib contains five modules:
 
 
 	hpFEM<T, dim> : offer high level functions dedicated to mulitphysics modeling using deal.ii

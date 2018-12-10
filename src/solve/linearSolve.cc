@@ -4,7 +4,7 @@ template <int dim, class matrixType, class vectorType>
 void solveClass<dim, matrixType, vectorType>::linearSolve(vectorType& U)
 {
 	updateLinearSystem();
-	solveLinearSystem(U);
+	solveLinearSystem_default_direct(U);
 }
 
 template class solveClass<1, dealii::SparseMatrix<double>, dealii::Vector<double> >;

@@ -1,4 +1,4 @@
-# Install script for directory: /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+# Install script for directory: /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -36,7 +36,7 @@ if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMP
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/Users/wzhenlin/numerics/dealmultiPhyics" TYPE STATIC_LIBRARY FILES "/Users/wzhenlin/GitLab/researchCode/dealiiBase/build/dealMultiPhysics.a")
+file(INSTALL DESTINATION "/Users/wzhenlin/numerics/dealmultiPhyics" TYPE STATIC_LIBRARY FILES "/Users/wzhenlin/Github/mechanoChemFEM/build/dealMultiPhysics.a")
   if(EXISTS "$ENV{DESTDIR}/Users/wzhenlin/numerics/dealmultiPhyics/dealMultiPhysics.a" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}/Users/wzhenlin/numerics/dealmultiPhyics/dealMultiPhysics.a")
     execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib" "$ENV{DESTDIR}/Users/wzhenlin/numerics/dealmultiPhyics/dealMultiPhysics.a")
@@ -51,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/wzhenlin/GitLab/researchCode/dealiiBase/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/wzhenlin/Github/mechanoChemFEM/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

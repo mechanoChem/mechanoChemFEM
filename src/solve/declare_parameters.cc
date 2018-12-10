@@ -17,11 +17,10 @@ void solveClass<dim, matrixType, vectorType>::declare_parameters()
 	params->declare_entry("Backtracking_max_iterations","0",Patterns::Integer() );
 	params->leave_subsection();	
 											 
-	params->enter_subsection("Linear_solver");				
-	params->declare_entry("solver_method","PETScMUMPS",
-		 										Patterns::Selection("PETScMUMPS|PETScsuperLU|PETScGMRES|PETScBoomerAMG"),"linear solver");
+	params->enter_subsection("Linear_solver");
+	params->declare_entry("solver_method","PETScsuperLU",
+		 										Patterns::Selection("PETScMUMPS|PETScsuperLU|own_solver"),"linear solver");
 	params->declare_entry("system_matrix_symmetricFlag", "false", Patterns::Bool() );
-	params->declare_entry("preconditioner", "NULL", Patterns::Anything(), "preconditioner for iterative solver");
 	params->leave_subsection();	
 }
 

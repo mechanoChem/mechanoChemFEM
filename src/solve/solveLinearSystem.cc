@@ -1,7 +1,7 @@
 #include "../../include/solveClass.h"
 
 template <int dim, class matrixType, class vectorType>
-void solveClass<dim, matrixType, vectorType>::solveLinearSystem(dealii::Vector<double>& dU)
+void solveClass<dim, matrixType, vectorType>::solveLinearSystem_default_direct(dealii::Vector<double>& dU)
 {
 	params->enter_subsection("Linear_solver");
 	std::string solver=params->get("solver_method");

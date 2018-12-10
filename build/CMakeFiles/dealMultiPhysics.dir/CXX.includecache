@@ -22038,7 +22038,7 @@ vector
 set
 -
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/FEMdata.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/FEMdata.h
 stdio.h
 -
 stdlib.h
@@ -22074,7 +22074,7 @@ deal.II/lac/petsc_vector.h
 deal.II/lac/petsc_parallel_vector.h
 -
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 Sacado.hpp
 -
 deal.II/fe/fe_values.h
@@ -22086,13 +22086,13 @@ deal.II/base/parameter_handler.h
 deal.II/lac/vector.h
 -
 supplementary/dataStruct.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/dataStruct.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/dataStruct.h
 supplementary/supplementaryFunctions.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/supplementaryFunctions.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/supplementaryFunctions.h
 supplementary/functionEvaluations.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/functionEvaluations.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/functionEvaluations.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/hpFEM.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/hpFEM.h
 deal.II/lac/constraint_matrix.h
 -
 deal.II/dofs/dof_handler.h
@@ -22118,7 +22118,7 @@ deal.II/hp/fe_values.h
 deal.II/hp/fe_collection.h
 -
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/solveClass.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/solveClass.h
 stdio.h
 -
 stdlib.h
@@ -22164,9 +22164,9 @@ deal.II/lac/petsc_precondition.h
 deal.II/base/parameter_handler.h
 -
 hpFEM.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/hpFEM.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/hpFEM.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/CustomerPreconditioner.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/CustomerPreconditioner.h
 deal.II/lac/petsc_parallel_sparse_matrix.h
 -
 deal.II/lac/petsc_parallel_vector.h
@@ -22178,7 +22178,7 @@ deal.II/lac/full_matrix.h
 deal.II/lac/sparse_matrix.h
 -
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/computedField.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/computedField.h
 deal.II/base/function.h
 -
 deal.II/lac/vector.h
@@ -22187,16 +22187,14 @@ deal.II/numerics/data_out.h
 -
 deal.II/numerics/data_postprocessor.h
 -
-parameters.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/parameters.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/dataStruct.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/dataStruct.h
 deal.II/base/table.h
 -
 Sacado.hpp
 -
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/functionEvaluations.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/functionEvaluations.h
 deal.II/fe/fe_values.h
 -
 deal.II/base/table.h
@@ -22204,11 +22202,11 @@ deal.II/base/table.h
 Sacado.hpp
 -
 supplementaryFunctions.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/supplementaryFunctions.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/supplementaryFunctions.h
 dataStruct.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/dataStruct.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/dataStruct.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/parameters.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/parameters.h
 iostream
 -
 sstream
@@ -22220,7 +22218,7 @@ map
 deal.II/base/point.h
 -
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/supplementaryFunctions.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/supplementaryFunctions.h
 deal.II/lac/block_vector.h
 -
 deal.II/lac/full_matrix.h
@@ -22252,111 +22250,111 @@ iostream
 string
 -
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc
 ../../include/FEMdata.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/FEMdata.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/FEMdata.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc
 ../../include/FEMdata.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/FEMdata.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/FEMdata.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc
 ../../include/FEMdata.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/FEMdata.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/FEMdata.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc
 ../../include/FEMdata.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/FEMdata.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/FEMdata.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc
 ../../include/Residual.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/Residual.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/Residual.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc
 ../../include/hpFEM.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/hpFEM.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/hpFEM.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc
 ../../include/hpFEM.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/hpFEM.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/hpFEM.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc
 ../../include/solveClass.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/solveClass.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/solveClass.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc
 ../../include/solveClass.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/solveClass.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/solveClass.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc
 ../../include/solveClass.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/solveClass.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/solveClass.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc
 ../../include/solveClass.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/solveClass.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/solveClass.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc
 ../../include/solveClass.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/solveClass.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/solveClass.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc
 ../../include/solveClass.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/solveClass.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/solveClass.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc
 ../../include/solveClass.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/solveClass.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/solveClass.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc
 ../../include/supplementary/CustomerPreconditioner.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/CustomerPreconditioner.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/CustomerPreconditioner.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc
 ../../include/supplementary/computedField.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/computedField.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/computedField.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc
 ../../include/supplementary/functionEvaluations.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/functionEvaluations.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/functionEvaluations.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc
 ../../include/supplementary/parameters.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/parameters.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/parameters.h
 
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc
+/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc
 ../../include/supplementary/supplementaryFunctions.h
-/Users/wzhenlin/GitLab/researchCode/dealiiBase/include/supplementary/supplementaryFunctions.h
+/Users/wzhenlin/Github/mechanoChemFEM/include/supplementary/supplementaryFunctions.h
 

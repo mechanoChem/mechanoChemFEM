@@ -43,10 +43,10 @@ RM = /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_SOURCE_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_BINARY_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # Utility rule file for sign.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
 include CMakeFiles/sign.dir/progress.make
 
 CMakeFiles/sign:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Digitally signing main"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Digitally signing main"
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -E echo '' && /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -E echo '***************************************************************************' && /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -E echo '** Error: No Mac OSX developer certificate specified **' && /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -E echo '** Please reconfigure with -DOSX_CERTIFICATE_NAME="<...>" **' && /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -E echo '***************************************************************************' && /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -E echo ''
 
 sign: CMakeFiles/sign
@@ -72,6 +72,6 @@ CMakeFiles/sign.dir/clean:
 .PHONY : CMakeFiles/sign.dir/clean
 
 CMakeFiles/sign.dir/depend:
-	cd /Users/wzhenlin/GitLab/researchCode/dealiiBase/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles/sign.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/wzhenlin/Github/mechanoChemFEM/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles/sign.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/sign.dir/depend
 

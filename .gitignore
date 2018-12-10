@@ -18,6 +18,7 @@
 *.vts
 *tgz
 CMakeFiles*
+build/CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
 

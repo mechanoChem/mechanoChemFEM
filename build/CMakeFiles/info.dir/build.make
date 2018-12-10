@@ -43,10 +43,10 @@ RM = /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_SOURCE_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_BINARY_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # Utility rule file for info.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
 include CMakeFiles/info.dir/progress.make
 
 CMakeFiles/info:
-	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -P /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles/print_usage.cmake
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -P /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles/print_usage.cmake
 
 info: CMakeFiles/info
 info: CMakeFiles/info.dir/build.make
@@ -71,6 +71,6 @@ CMakeFiles/info.dir/clean:
 .PHONY : CMakeFiles/info.dir/clean
 
 CMakeFiles/info.dir/depend:
-	cd /Users/wzhenlin/GitLab/researchCode/dealiiBase/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles/info.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/wzhenlin/Github/mechanoChemFEM/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles/info.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/info.dir/depend
 

@@ -43,10 +43,10 @@ RM = /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_SOURCE_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_BINARY_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # Utility rule file for strip_comments.
 
@@ -54,8 +54,8 @@ CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
 include CMakeFiles/strip_comments.dir/progress.make
 
 CMakeFiles/strip_comments:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "strip comments"
-	/usr/bin/perl -pi -e 's#^[ \t]*//.*\n##g;' /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "strip comments"
+	/usr/bin/perl -pi -e 's#^[ \t]*//.*\n##g;' /Users/wzhenlin/Github/mechanoChemFEM/build/main.cc
 
 strip_comments: CMakeFiles/strip_comments
 strip_comments: CMakeFiles/strip_comments.dir/build.make
@@ -72,6 +72,6 @@ CMakeFiles/strip_comments.dir/clean:
 .PHONY : CMakeFiles/strip_comments.dir/clean
 
 CMakeFiles/strip_comments.dir/depend:
-	cd /Users/wzhenlin/GitLab/researchCode/dealiiBase/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles/strip_comments.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/wzhenlin/Github/mechanoChemFEM/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles/strip_comments.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/strip_comments.dir/depend
 

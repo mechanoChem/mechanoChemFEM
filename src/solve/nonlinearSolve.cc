@@ -32,8 +32,7 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
 	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n\n", currentIteration); break;}
 			
-			solveLinearSystem(dU);
-			
+			solveLinearSystem_default_direct(dU);
 			
 			U+=dU;
 			currentIteration++;
@@ -67,7 +66,7 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
 	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n\n", currentIteration); break;}
-			solveLinearSystem(dU);
+			solveLinearSystem_default_direct(dU);
 			
 			double alpha=1;
 			if(std::strcmp(Line_search_scheme.c_str(),"Backtracking")==0){
@@ -139,7 +138,7 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
 	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n\n", currentIteration); break;}
 			
-			solveLinearSystem(dU);
+			solveLinearSystem_default_direct(dU);
 			apply_dU_constrain(dU);
 			
 			
@@ -169,7 +168,7 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
 	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n\n", currentIteration); break;}
-			solveLinearSystem(dU);
+			solveLinearSystem_default_direct(dU);
 			apply_dU_constrain(dU);
 			
 			double alpha=1;

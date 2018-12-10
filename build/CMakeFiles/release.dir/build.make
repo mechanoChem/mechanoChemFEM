@@ -43,10 +43,10 @@ RM = /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_SOURCE_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_BINARY_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # Utility rule file for release.
 
@@ -54,9 +54,9 @@ CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
 include CMakeFiles/release.dir/progress.make
 
 CMakeFiles/release:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Switch CMAKE_BUILD_TYPE to Release"
-	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -DCMAKE_BUILD_TYPE=Release /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
-	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake --build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build --target all
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Switch CMAKE_BUILD_TYPE to Release"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -DCMAKE_BUILD_TYPE=Release /Users/wzhenlin/Github/mechanoChemFEM/build
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake --build /Users/wzhenlin/Github/mechanoChemFEM/build --target all
 
 release: CMakeFiles/release
 release: CMakeFiles/release.dir/build.make
@@ -73,6 +73,6 @@ CMakeFiles/release.dir/clean:
 .PHONY : CMakeFiles/release.dir/clean
 
 CMakeFiles/release.dir/depend:
-	cd /Users/wzhenlin/GitLab/researchCode/dealiiBase/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles/release.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/wzhenlin/Github/mechanoChemFEM/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles/release.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/release.dir/depend
 

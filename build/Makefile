@@ -48,10 +48,10 @@ RM = /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_SOURCE_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/wzhenlin/GitLab/researchCode/dealiiBase/build
+CMAKE_BINARY_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -124,9 +124,9 @@ list_install_components/fast: list_install_components
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/GitLab/researchCode/dealiiBase/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -284,734 +284,734 @@ dealMultiPhysics/fast:
 	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/build
 .PHONY : dealMultiPhysics/fast
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.o: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.o
-
-# target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.o
-
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.i
-
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.i
-
-# target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.i
-
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.s
-
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.s
-
-# target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.cc.s
-
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.o
-
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.i: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.s: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.o: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.i: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.s: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.o: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.i: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.s: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.o: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.i: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.s: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.o: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.i: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.s: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.o: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.i: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.s: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.o: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.o
 
 # target to build an object file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.o
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.o
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.i: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.i
 
 # target to preprocess a source file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.i
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.i
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i
 
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.s: Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s
 
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.s
 
 # target to generate assembly for a file
-Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.s
-.PHONY : Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.cc.s
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s
+
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.o
+
+# target to build an object file
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o
+
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.i
+
+# target to preprocess a source file
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i
+
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.s
+
+# target to generate assembly for a file
+Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s
 
 main.o: main.cc.o
 
@@ -1062,87 +1062,87 @@ help:
 	@echo "... debug"
 	@echo "... list_install_components"
 	@echo "... dealMultiPhysics"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/FEMdata.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/set_output_name.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/snapshot.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/FEMdata/write_vtk.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/Saint_Venant_Kirchhoff.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/chemoResidual.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/fluid.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/generalWeakForm.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/init.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/integration.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/mechanics.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/neoHookean.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/Residual/residual.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/hpFEM.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/hpFEMbase/setup_FeSystem.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/declare_parameters.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/linearSolve.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/nonlinearSolve.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/petscFunctions.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveClass.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystem.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/solve/solveLinearSystemPetsc.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/CustomerPreconditioner.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/computedField.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/functionEvaluations.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/parameters.s"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.o"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.i"
-	@echo "... Users/wzhenlin/GitLab/researchCode/dealiiBase/src/supplementary/supplementaryFunctions.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

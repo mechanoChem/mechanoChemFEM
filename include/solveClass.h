@@ -85,13 +85,17 @@ public:
 	void nonlinearSolve(vectorType& U,vectorType& dU);
 	
 	/**
-	*solve Ax=b with dealii matrix and vector type
+	*solve Ax=b with dealii matrix and vector type by default_direct solver
 	*/
-	void solveLinearSystem(dealii::Vector<double>& dU);
+	void solveLinearSystem_default_direct(dealii::Vector<double>& dU);
 	/**
-	*solve Ax=b with PETSc matrix and vector type
+	*solve Ax=b with PETSc matrix and vector type by default_direct solver
 	*/
-	void solveLinearSystem(PETScWrappers::MPI::Vector& dU);
+  void solveLinearSystem_default_direct(PETScWrappers::MPI::Vector& dU);
+	/**
+	*solve Ax=b with PETSc matrix and vector type by customer solver
+	*/
+	virtual void solveLinearSystem(PETScWrappers::MPI::Vector& dU)=0;
 	
 	/**
 	*wrapper for dealii::constraints.distribute_local_to_global

@@ -1,6 +1,7 @@
 <B>mechanoChemFEM</B><br>
 =======================================================================
-mechanoChemFEM is a libarary for modeling of mechano-chemical problems using the finite element method. It consists of [classes](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/annotated.html) and [functions](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/modules.html) based on Deal.ii, and examples.
+mechanoChemFEM is a libarary for modeling of mechano-chemical problems using the finite element method. It consists of [classes](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/annotated.html) and [functions](https://htmlpreview.github.io/?https://raw.githubusercontent.com/mechanoChem/mechanoChemFEM/master/doxygen/html/modules.html) based on [Deal.ii](https://www.dealii.org/), and examples.
+
 
 
 <B>List of contributors:</B><br>
@@ -16,7 +17,7 @@ Krishna Garikipati<br>
 
 <B>Overview</B><br>
 =======================================================================
-The mechanoChemFEM lib contains five modules:
+mechanoChemFEM lib contains five modules:
 
 
 	hpFEM<T, dim> : offer high level functions dedicated to mulitphysics modeling using deal.ii

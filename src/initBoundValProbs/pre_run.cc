@@ -24,10 +24,8 @@ void initBoundValProbs<dim>::pre_run()
 	save_snapshot=params->get_bool("save_snapshot");
 	off_output_index=params->get_integer("off_output_index");
 
-	const QGauss<dim> _volume_quadrature(params->get_integer("volume_quadrature"));
-	volume_quadrature=&_volume_quadrature;
-	const QGauss<dim-1> _face_quadrature(params->get_integer("face_quadrature"));
-	common_face_quadrature=&_face_quadrature;
+	volume_quadrature= new const QGauss<dim>(params->get_integer("volume_quadrature"));
+	common_face_quadrature= new const QGauss<dim-1>(params->get_integer("face_quadrature"));
 	
 	params->leave_subsection();	
 	
@@ -36,7 +34,6 @@ void initBoundValProbs<dim>::pre_run()
 	}
 	this->setup_FeSystem(fe_system, fe_collection, q_collection, primary_variables_dof,primary_variables,FE_support,*volume_quadrature);
 }
-
 
 template class initBoundValProbs<1>;
 template class initBoundValProbs<2>;

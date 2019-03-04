@@ -24,8 +24,8 @@ void initBoundValProbs<dim>::declare_parameters_initBoundValProbs()
 	params->declare_entry("snapshot_directory","1",Patterns::DirectoryName() );
 	
 	//FEM
-	params->declare_entry("volume_quadrature","0",Patterns::Integer());
-	params->declare_entry("face_quadrature","0",Patterns::Integer() );
+	params->declare_entry("volume_quadrature","3",Patterns::Integer());
+	params->declare_entry("face_quadrature","2",Patterns::Integer() );
 	params->leave_subsection();	
 	
 	params->enter_subsection("Geometry");

@@ -22,6 +22,8 @@ initBoundValProbs<dim>::~initBoundValProbs (){
 	this->system_rhs.clear();
 	solution.clear();
 	solution_prev.clear();
+	delete volume_quadrature;
+	delete common_face_quadrature;
 }
 
 template <int dim>

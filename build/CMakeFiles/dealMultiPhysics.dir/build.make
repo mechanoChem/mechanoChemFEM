@@ -537,9 +537,33 @@ CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/s
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
 
 
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o
+
+
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o"
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i: cmake_force
@@ -563,7 +587,7 @@ CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/s
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o"
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i: cmake_force
@@ -585,9 +609,249 @@ CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/s
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
 
 
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_29) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_30) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_31) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_32) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o
+
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_33) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o
+
+
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_23) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_34) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o"
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i: cmake_force
@@ -609,9 +873,33 @@ CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplem
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
 
 
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_35) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.i"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc > CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.i
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.s"
+	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.s
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o.requires:
+
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o.requires
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o.provides: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o.requires
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o.provides.build
+.PHONY : CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o.provides
+
+CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o.provides.build: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o
+
+
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_24) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_36) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o"
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i: cmake_force
@@ -635,7 +923,7 @@ CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplem
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_25) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_37) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o"
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i: cmake_force
@@ -659,7 +947,7 @@ CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplem
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_26) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_38) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o"
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i: cmake_force
@@ -683,7 +971,7 @@ CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplem
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o: CMakeFiles/dealMultiPhysics.dir/flags.make
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o: /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_27) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_39) "Building CXX object CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o"
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/bin/mpicxx   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o -c /Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc
 
 CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i: cmake_force
@@ -727,9 +1015,21 @@ dealMultiPhysics_OBJECTS = \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o" \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o" \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o" \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o" \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o" \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o" \
+"CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o" \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o" \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o" \
 "CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o" \
@@ -758,16 +1058,28 @@ dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechan
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
+dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/build.make
 dealMultiPhysics.a: CMakeFiles/dealMultiPhysics.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_28) "Linking CXX static library dealMultiPhysics.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_40) "Linking CXX static library dealMultiPhysics.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/dealMultiPhysics.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/dealMultiPhysics.dir/link.txt --verbose=$(VERBOSE)
 
@@ -796,9 +1108,21 @@ CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o.requires
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o.requires
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o.requires
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o.requires
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o.requires
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o.requires
+CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o.requires
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o.requires
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o.requires
 CMakeFiles/dealMultiPhysics.dir/requires: CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o.requires

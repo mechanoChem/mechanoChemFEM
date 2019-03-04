@@ -30,7 +30,7 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 			initial_norm=std::max(initial_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
-	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n\n", currentIteration); break;}
+	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration); break;}
 			
 			solveLinearSystem_default_direct(dU);
 			
@@ -65,7 +65,7 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 			initial_norm=std::max(initial_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
-	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n\n", currentIteration); break;}
+	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration); break;}
 			solveLinearSystem_default_direct(dU);
 			
 			double alpha=1;
@@ -136,7 +136,7 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 			initial_norm=std::max(initial_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
-	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n\n", currentIteration); break;}
+	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration); break;}
 			
 			solveLinearSystem_default_direct(dU);
 			apply_dU_constrain(dU);
@@ -167,7 +167,7 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 			initial_norm=std::max(initial_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
-	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n\n", currentIteration); break;}
+	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration); break;}
 			solveLinearSystem_default_direct(dU);
 			apply_dU_constrain(dU);
 			

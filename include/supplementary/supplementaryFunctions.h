@@ -62,6 +62,52 @@ inline void getInverse(Table<2, T>& matrix, Table<2, T>& invMatrix, T& det){
 	}
 }
 
+template <class T, int dim>
+inline Table<1, T> table_scaling(Table<1, T> matrix, double a){
+	unsigned int n_q_points= matrix.size(0);
+	Table<1,T> value(n_q_points);
+	for(unsigned int q=0; q<n_q_points;q++){
+		value[q]=a*matrix[q];	
+	}
+	return value;
+}
+
+template <class T, int dim>
+inline Table<2, T> table_scaling(Table<2, T> matrix, double a){
+	unsigned int n_q_points= matrix.size(0);
+	Table<2, T> value(n_q_points,dim);
+	for(unsigned int q=0; q<n_q_points;q++){
+		for(unsigned int i=0; i<dim;i++){
+			value[q][i]=a*matrix[q][i];
+		}	
+	}
+	return value;
+}
+
+template <class T, int dim>
+inline Table<1, T> table_scaling(Table<1, T> matrix, T a){
+	unsigned int n_q_points= matrix.size(0);
+	Table<1,T> value(n_q_points);
+	for(unsigned int q=0; q<n_q_points;q++){
+		value[q]=a*matrix[q];	
+	}
+	return value;
+}
+
+template <class T, int dim>
+inline Table<2, T> table_scaling(Table<2, T> matrix, T a){
+	unsigned int n_q_points= matrix.size(0);
+	Table<2, T> value(n_q_points,dim);
+	for(unsigned int q=0; q<n_q_points;q++){
+		for(unsigned int i=0; i<dim;i++){
+			value[q][i]=a*matrix[q][i];
+		}	
+	}
+	return value;
+}
+
+
+
 template <int dim>
 void print_mesh_info(const Triangulation<dim> &tria);
 

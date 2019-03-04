@@ -14,7 +14,10 @@ solveClass<dim, matrixType, vectorType>::solveClass(hpFEM<dim>& _FEMbase, dealii
 
 
 template <int dim, class matrixType, class vectorType>
-solveClass<dim, matrixType, vectorType>::~solveClass(){}
+solveClass<dim, matrixType, vectorType>::~solveClass()
+{
+	system_matrix.clear();
+}
 
 template <int dim, class matrixType, class vectorType>
 void solveClass<dim, matrixType, vectorType>::reinitParams(dealii::ParameterHandler& _params)
@@ -47,8 +50,11 @@ template <int dim, class matrixType, class vectorType>
 void solveClass<dim, matrixType, vectorType>::apply_dU_constrain(vectorType& dU)
 {}
 
+template <int dim, class matrixType, class vectorType>
+void solveClass<dim, matrixType, vectorType>::solveLinearSystem(PETScWrappers::MPI::Vector& dU){}
 
-
+template <int dim, class matrixType, class vectorType>
+void solveClass<dim, matrixType, vectorType>::updateLinearSystem(){}
 
 template class solveClass<1, dealii::SparseMatrix<double>, dealii::Vector<double> >;
 template class solveClass<2, dealii::SparseMatrix<double>, dealii::Vector<double> >;

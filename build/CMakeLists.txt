@@ -45,7 +45,7 @@ SET(TARGET "main")
 #this lib is NOT installed as a shared lib
 SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 
-FILE(GLOB dealMultiPhysics_SRC "../src/FEMdata/*.cc" "../src/hpFEMbase/*.cc" "../src/Residual/*.cc" "../src/solve/*.cc" "../src/supplementary/*.cc" )
+FILE(GLOB dealMultiPhysics_SRC "../src/FEMdata/*.cc" "../src/hpFEMbase/*.cc" "../src/Residual/*.cc" "../src/solve/*.cc" "../src/initBoundValProbs/*.cc" "../src/supplementary/*.cc" )
 ADD_LIBRARY(dealMultiPhysics ${dealMultiPhysics_SRC})
 DEAL_II_SETUP_TARGET(dealMultiPhysics RELEASE)
 FILE (GLOB TARGET_SRC  "main.cc")

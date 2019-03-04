@@ -95,7 +95,7 @@ public:
 	/**
 	*solve Ax=b with PETSc matrix and vector type by customer solver
 	*/
-	virtual void solveLinearSystem(PETScWrappers::MPI::Vector& dU)=0;
+	virtual void solveLinearSystem(PETScWrappers::MPI::Vector& dU);
 	
 	/**
 	*wrapper for dealii::constraints.distribute_local_to_global
@@ -106,7 +106,7 @@ public:
 	*/
 	void LinearSystemCompressAdd();
 	
-	virtual void updateLinearSystem()=0;
+	virtual void updateLinearSystem();
 	
 	/**
 	*do PETScWrappers::VectorBase::compress(VectorOperation::add) for system_matrix and system_rhs;

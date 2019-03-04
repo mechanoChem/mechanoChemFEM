@@ -12,8 +12,10 @@ void initBoundValProbs<dim>::run()
 	refine_grid();
 	setMultDomain();
   mark_boundary();
-  setup_system();
+	setup_system();
 	setup_constraints();
+  pcout << "   Number of active cells:       " << hpFEM<dim>::triangulation.n_active_cells() << std::endl;
+  pcout << "   Number of degrees of freedom: " << hpFEM<dim>::dof_handler.n_dofs() << std::endl; 
 	if(!resuming_from_snapshot) {
 	  apply_initial_condition();
 	  std::string output_path = output_directory+"output-0.vtk";

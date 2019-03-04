@@ -18,6 +18,7 @@ public:
 	
 	int totalDOF;
   virtual void vector_value (const Point<dim>   &p, Vector<double>   &values) const;
+	virtual double value(const Point<dim>   &p, const unsigned int 	component=0) const;
 };
 
 #endif

@@ -1,6 +1,6 @@
 /*
 zhenlin wang 2019
-*coupled diffusion reaction
+*CahnHilliard
 */
 #include "initBoundValProbs.h"
 template <int dim>

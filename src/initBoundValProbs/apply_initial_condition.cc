@@ -9,7 +9,7 @@ void initBoundValProbs<dim>::apply_initial_condition()
 { 
 	pcout << "applying initial condition\n";
 	int totalDOF=this->totalDOF(primary_variables);	
-  VectorTools::interpolate(this->dof_handler, InitialConditions<dim>(totalDOF), solution_prev); 
+  VectorTools::interpolate(this->dof_handler, InitialConditions<dim>(totalDOF, *params), solution_prev); 
 	
 	solution_prev.compress(VectorOperation::insert);
 	solution=solution_prev;

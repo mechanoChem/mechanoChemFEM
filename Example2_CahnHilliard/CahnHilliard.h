@@ -60,7 +60,7 @@ template <int dim>
 void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>   &values) const{
   Assert (values.size() == 2, ExcDimensionMismatch (values.size(), 2));
   values(1) = 0;    
- values(0)= -0.25 + static_cast <double> (rand())/(static_cast <double>(RAND_MAX/2.0))/2*1.75;
+ values(0)= 0.5 + 0.04*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
 }
 template class InitialConditions<1>;
 template class InitialConditions<2>;

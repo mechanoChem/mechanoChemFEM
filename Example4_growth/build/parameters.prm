@@ -4,7 +4,7 @@ subsection Problem
 set print_parameter = true
 
 set dt = 1
-set totalTime = 50
+set totalTime = 5
 set current_increment = 0
 set off_output_index=0
 set current_time = 0

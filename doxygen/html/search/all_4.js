@@ -1,7 +1,11 @@
 var searchData=
 [
+  ['example_203_20_3a_20allen_2dcahn_20equation',['Example 3 : Allen-Cahn equation',['../_allen__cahn.html',1,'']]],
   ['example_202_20_3a_20battery_20model_20at_20electrode_20scale',['Example 2 : Battery model at electrode scale',['../battery_electrode_scale.html',1,'']]],
   ['example_203_20_3a_20battery_20model_20at_20particle_20scale',['Example 3 : Battery model at particle scale',['../battery_particle.html',1,'']]],
+  ['example_201_20_3a_20brain_20morph_20with_20finte_20strain_20mechanics',['Example 1 : Brain morph with finte strain mechanics',['../brain_morph.html',1,'']]],
+  ['example_202_20_3a_20cahnhilliard_20with_20single_20species',['Example 2 : CahnHilliard with single species',['../_cahn_hilliard.html',1,'']]],
+  ['example_201_20_3a_20turing_20patterns_3a_20diffusion_2dreaction_20systems',['Example 1 : Turing patterns: diffusion-reaction systems',['../diffusion_reaction.html',1,'']]],
   ['evaluateneohookeanstress',['evaluateNeoHookeanStress',['../class_residual.html#a0f9ff6a237d377803ce368b26ca39652',1,'Residual']]],
   ['evaluatesaint_5fvenant_5fkirchhoffstress',['evaluateSaint_Venant_KirchhoffStress',['../class_residual.html#a4215ec5a6eabd7573e0caeee6fd194ad',1,'Residual']]],
   ['evaluatescalarfunction',['evaluateScalarFunction',['../group___evaluation_functions.html#ga399ae2353249293211c021848a64175c',1,'evaluateScalarFunction(const FEValues&lt; dim &gt; &amp;fe_values, unsigned int DOF, Table&lt; 1, T &gt; &amp;ULocal, Table&lt; 1, T &gt; &amp;U):&#160;functionEvaluations.cc'],['../group___evaluation_functions.html#ga2e2fbeb2173113c6889c73bbb7304789',1,'evaluateScalarFunction(const FEValues&lt; dim &gt; &amp;fe_values, const FEFaceValues&lt; dim &gt; &amp;fe_face_values, unsigned int DOF, Table&lt; 1, T &gt; &amp;ULocal, Table&lt; 1, T &gt; &amp;U):&#160;functionEvaluations.cc'],['../group___evaluation_functions.html#ga399ae2353249293211c021848a64175c',1,'evaluateScalarFunction(const FEValues&lt; dim &gt; &amp;fe_values, unsigned int DOF, Table&lt; 1, T &gt; &amp;ULocal, Table&lt; 1, T &gt; &amp;U):&#160;functionEvaluations.cc'],['../group___evaluation_functions.html#ga2e2fbeb2173113c6889c73bbb7304789',1,'evaluateScalarFunction(const FEValues&lt; dim &gt; &amp;fe_values, const FEFaceValues&lt; dim &gt; &amp;fe_face_values, unsigned int DOF, Table&lt; 1, T &gt; &amp;ULocal, Table&lt; 1, T &gt; &amp;U):&#160;functionEvaluations.cc']]],
@@ -44,5 +48,5 @@ var searchData=
   ['evaluation_20functions',['Evaluation Functions',['../group___evaluation_functions.html',1,'']]],
   ['examples',['Examples',['../examples.html',1,'']]],
   ['examples_2eh',['examples.h',['../examples_8h.html',1,'']]],
-  ['example_201_20_3a_20intercalation_20with_20finte_20strain_20mechanics',['Example 1 : Intercalation with finte strain mechanics',['../_intercalation.html',1,'']]]
+  ['example_204_20_3a_20growth_20model',['Example 4 : Growth model',['../growth.html',1,'']]]
 ];

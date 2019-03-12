@@ -1,13 +1,19 @@
 /**
  * @page examples Examples
  * 
- * The following is a list of example initial boundary value problems and their documentation. Example 1 serves as a introductory example of mechano-chemical coupling built on mechanoChemFEM lib.
- * The other examples come from the various research code int the Computational Physics Group. Example 2 includes an extra object of the <a href="https://www.dealii.org/8.5.0/doxygen/deal.II/classDoFHandler.html">dof_handler</a>  class to hold extra nodal data. Example 3 includes \link computedField<dim> computedField \endlink class for post processing.
- * Example 3 includes interface conditions and applys constraints during the solve step. 
+ * The following is a list of example initial boundary value problems and their documentation. Example 1-4 serves as introductory examples of using <B>mechanoChemFEM</B>.
+ * The other examples are the research code built by the <a href="http://umich.edu/~compphys/index.html"><B>Computational Physics Group</B></a>. 
 
 The code for all examples can be found at <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example"><B>Github</B></a>.
  *
- * @ref Intercalation "Example 1" : Intercalation \n
- * @ref battery_electrodeScale "Example 2" :  Battery model at electrode scale\n
- *@ref battery_particle "Example 3" :  Battery model at particle scale\n
+ * @ref diffusion_reaction  "Example 1" : Schnakenberg kinetics: diffusion reaction systems \n
+ *@ref CahnHilliard  "Example 2" : Cahn-Hilliard equation with single species\n
+ *@ref Allen_Cahn  "Example 3" : Allen-Cahn equation \n
+*@ref growth  "Example 4" : Growth model: coupled mechano-chemical system with multiple doamins\n
+
+*========================================================================================================================
+
+ * @ref brain_morph "research code" : brain morph \n
+ * @ref battery_electrodeScale "research code" :  Battery model at electrode scale\n
+ *@ref battery_particle "research code" :  Battery model at particle scale\n
  */

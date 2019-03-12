@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['linearsolve',['linearSolve',['../classsolve_class.html#a9e6755b7d81862d2a8412de1eec855a7',1,'solveClass']]],
-  ['linearsystemcompressadd',['LinearSystemCompressAdd',['../classsolve_class.html#ad7659997bee5e782a6eaa46db001b66a',1,'solveClass']]]
+  ['initboundvalprobs',['initBoundValProbs',['../classinit_bound_val_probs.html#af836a88e7f9df1d43d6f93c4747858fe',1,'initBoundValProbs']]],
+  ['initialconditions',['InitialConditions',['../class_initial_conditions.html#a86f1233a3d8103059d1a499e1e1d9c04',1,'InitialConditions']]]
 ];

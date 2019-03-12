@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['output_5fmesh',['output_mesh',['../group___supplementary.html#ga0272b346b175b931e89b017fd93b5b80',1,'output_mesh(const Triangulation&lt; dim &gt; &amp;tria, std::string path):&#160;supplementaryFunctions.cc'],['../group___supplementary.html#ga0272b346b175b931e89b017fd93b5b80',1,'output_mesh(const Triangulation&lt; dim &gt; &amp;tria, std::string path):&#160;supplementaryFunctions.cc']]]
+  ['nonlinearsolve',['nonlinearSolve',['../classsolve_class.html#aa848c866771bf63f69e8ff35d4c947aa',1,'solveClass::nonlinearSolve(vectorType &amp;U)'],['../classsolve_class.html#a9240f8777a918e2c20e57857e4b6b97e',1,'solveClass::nonlinearSolve(vectorType &amp;U, vectorType &amp;dU)']]]
 ];

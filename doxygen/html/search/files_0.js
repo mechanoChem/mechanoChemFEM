@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['battery_5felectrodescale_2eh',['battery_electrodeScale.h',['../battery__electrode_scale_8h.html',1,'']]],
-  ['battery_5fparticle_2eh',['battery_particle.h',['../battery__particle_8h.html',1,'']]]
+  ['allen_5fcahn_2eh',['Allen_Cahn.h',['../_allen___cahn_8h.html',1,'']]],
+  ['apply_5finitial_5fcondition_2ecc',['apply_initial_condition.cc',['../apply__initial__condition_8cc.html',1,'']]]
 ];

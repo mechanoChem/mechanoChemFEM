@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['move_5ffile',['move_file',['../group___supplementary.html#gae0eb2d2afc3e33a9bb3b409b0171c470',1,'move_file(const std::string &amp;old_name, const std::string &amp;new_name):&#160;supplementaryFunctions.cc'],['../group___supplementary.html#gae0eb2d2afc3e33a9bb3b409b0171c470',1,'move_file(const std::string &amp;old_name, const std::string &amp;new_name):&#160;supplementaryFunctions.cc']]]
+  ['linearsolve',['linearSolve',['../classsolve_class.html#a9e6755b7d81862d2a8412de1eec855a7',1,'solveClass']]],
+  ['linearsystemcompressadd',['LinearSystemCompressAdd',['../classsolve_class.html#ad7659997bee5e782a6eaa46db001b66a',1,'solveClass']]]
 ];

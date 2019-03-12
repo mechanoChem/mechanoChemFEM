@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['residual',['Residual',['../class_residual.html',1,'']]]
+  ['parametersclass',['parametersClass',['../classparameters_class.html',1,'']]]
 ];

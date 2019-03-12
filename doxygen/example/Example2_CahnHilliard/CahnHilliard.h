@@ -3,7 +3,9 @@
  * \section Introduction
  * The Cahn-Hilliard equation is:
  * \f[
-	\frac{\partial C}{\partial t}=\nabla\cdot(M\nabla\mu)\\
+	\frac{\partial C}{\partial t}=\nabla\cdot(M\nabla\mu)
+\f]
+*\f[
 \mu=\frac{\partial g}{\partial C}-\nabla\cdot k\nabla C
 \f]
 where \f$g\f$ is a non-convex, ``homogeneous'' free energy density function, whose form has been chosen
@@ -12,14 +14,16 @@ g(C)=\omega(C-C_\alpha)^2(C-C_\beta)^2
 \f]
 The boundary condiiton is
 * \f[
-\nabla\mu\cdot\boldsymbol{n}=0; \nabla C\cdot\boldsymbol{n}=0 \text{ on }\Gamma
+\nabla\mu\cdot\boldsymbol{n}=0;\quad \nabla C\cdot\boldsymbol{n}=0 \text{ on }\Gamma
 \f]
 The double-well non-convex free energy density function, \f$g(C)\f$, drives segregation of the system into two distinct types.
 
 Attention is called to the well-known fourth-order nature of this partial differential equation in the concentration \f$C\f$. The polynomial basis can only achieve
 C0 continuity across the element. To overcome this difficuity, we split the equation into two equations:
  * \f[
-	\frac{\partial C}{\partial t}+\nabla\cdot(-M\nabla\mu)=0\\
+	\frac{\partial C}{\partial t}+\nabla\cdot(-M\nabla\mu)=0
+\f]
+*\f[
 k\nabla^2 C=\frac{\partial g}{\partial C}-\mu
 \f]
 The first equation is diffusion equation, and the second one the Possion equation. 

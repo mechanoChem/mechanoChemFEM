@@ -3,7 +3,9 @@
  * \section Introduction
  * We solve two diffusion reaction equations:
  * \f[
-	\frac{\partial C_\text{1}}{\partial t}+\nabla\cdot\boldsymbol{j}_1=r_1 \\
+	\frac{\partial C_\text{1}}{\partial t}+\nabla\cdot\boldsymbol{j}_1=r_1
+\f]
+*\f[
 \frac{\partial C_\text{2}}{\partial t}+\nabla\cdot\boldsymbol{j}_2=r_2
 \f]
 * where \f$\boldsymbol{j}_1 \f$ and  \f$\boldsymbol{j}_2 \f$ are flux terms:

@@ -3,7 +3,9 @@
  * \section Introduction
  * The Allen Cahn equation is:
  * \f[
-	\frac{\partial C}{\partial t}=-M\mu\\
+	\frac{\partial C}{\partial t}=-M\mu
+\f]
+*\f[
 \mu=\frac{\partial g}{\partial C}-\nabla\cdot k\nabla C
 \f]
 where \f$g\f$ is a non-convex, ``homogeneous'' free energy density function, whose form has been chosen
@@ -18,8 +20,12 @@ The double-well non-convex free energy density function, \f$g(C)\f$, drives segr
 
 Before implementing the code, we rewrite the equation in the form of standard diffusion-reaction equations:
 \f[
-\frac{\partial C}{\partial t}+\nabla\cdot\boldsymbol{j}=r\\
-\boldsymbol{j}=-Mk\nabla C\\
+\frac{\partial C}{\partial t}+\nabla\cdot\boldsymbol{j}=r
+\f]                                                                                                                            
+*\f[ 
+\boldsymbol{j}=-Mk\nabla C
+\f]                                                                                                                            
+*\f[ 
 r=-M\frac{\partial g}{\partial C}=-2M\omega(C-C_\alpha)(C-C_\beta)(2C-C_\alpha-C_\beta)
 \f]
 

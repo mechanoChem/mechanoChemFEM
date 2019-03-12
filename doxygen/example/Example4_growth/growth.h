@@ -12,12 +12,16 @@ C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma
 \f]
  * Besides chemistry, we also solve elasticity problem at finite strain:
  * \f[
-	\nabla\cdot\boldsymbol{T} = \boldsymbol{0}\\
+	\nabla\cdot\boldsymbol{T} = \boldsymbol{0}
+\f]                                                                                                                            
+*\f[ 
 \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^{\text{e}}}}\frac{\partial W}{\partial \boldsymbol{F}^{\text{e}}}\boldsymbol{F}^{\text{e}}
 \f]
  * To make it more interesting, we have mechanical deformation induced by species intecalation.
  * \f[
-\boldsymbol{F}=\boldsymbol{F}^{\text{e}}\boldsymbol{F}^{\text{g}}\\
+\boldsymbol{F}=\boldsymbol{F}^{\text{e}}\boldsymbol{F}^{\text{g}}
+\f]                                                                                                                            
+*\f[ 
 \boldsymbol{F}^{\text{g}}=\left(\frac{C}{C_\text{0}}\right)^{\frac{1}{3}}\mathbb{1}
 \f]
 In this example, we have two domains/materials. The diffusion equation is solved over the whole domains, while we restrict the mechanics into the one of the domain.

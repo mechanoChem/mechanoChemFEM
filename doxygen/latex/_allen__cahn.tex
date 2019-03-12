@@ -1,7 +1,7 @@
 \hypertarget{growth_Introduction}{}\section{Introduction}\label{growth_Introduction}
-The Allen Cahn equation is\-: \[ \frac{\partial C}{\partial t}=-M\mu\\ \mu=\frac{\partial g}{\partial C}-\nabla\cdot k\nabla C \] where $g$ is a non-\/convex, ``homogeneous'' free energy density function, whose form has been chosen \[ g(C)=\omega(C-C_\alpha)^2(C-C_\beta)^2 \] The boundary condition is \[ \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma \] The double-\/well non-\/convex free energy density function, $g(C)$, drives segregation of the system into two distinct types.
+The Allen Cahn equation is\-: \[ \frac{\partial C}{\partial t}=-M\mu \] \[ \mu=\frac{\partial g}{\partial C}-\nabla\cdot k\nabla C \] where $g$ is a non-\/convex, ``homogeneous'' free energy density function, whose form has been chosen \[ g(C)=\omega(C-C_\alpha)^2(C-C_\beta)^2 \] The boundary condition is \[ \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma \] The double-\/well non-\/convex free energy density function, $g(C)$, drives segregation of the system into two distinct types.
 
-Before implementing the code, we rewrite the equation in the form of standard diffusion-\/reaction equations\-: \[ \frac{\partial C}{\partial t}+\nabla\cdot\boldsymbol{j}=r\\ \boldsymbol{j}=-Mk\nabla C\\ r=-M\frac{\partial g}{\partial C}=-2M\omega(C-C_\alpha)(C-C_\beta)(2C-C_\alpha-C_\beta) \]\hypertarget{growth_imple}{}\section{Implementation}\label{growth_imple}
+Before implementing the code, we rewrite the equation in the form of standard diffusion-\/reaction equations\-: \[ \frac{\partial C}{\partial t}+\nabla\cdot\boldsymbol{j}=r \] \[ \boldsymbol{j}=-Mk\nabla C \] \[ r=-M\frac{\partial g}{\partial C}=-2M\omega(C-C_\alpha)(C-C_\beta)(2C-C_\alpha-C_\beta) \]\hypertarget{growth_imple}{}\section{Implementation}\label{growth_imple}
 We first define the single scalar primary variable\-: 
 \begin{DoxyCode}
   std::vector<std::vector<std::string> > primary\_variables(1);        

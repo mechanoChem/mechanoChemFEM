@@ -13,12 +13,6 @@
 <script type="text/javascript">
   $(document).ready(function() { searchBox.OnSelectItem(0); });
 </script>
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX","output/HTML-CSS"],
-});
-</script><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -91,20 +85,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Introduction</h1>
 <p>The Cahn-Hilliard equation is: </p>
 <p class="formulaDsp">
-\[ \frac{\partial C}{\partial t}=\nabla\cdot(M\nabla\mu)\\ \mu=\frac{\partial g}{\partial C}-\nabla\cdot k\nabla C \]
+<img class="formulaDsp" alt="\[ \frac{\partial C}{\partial t}=\nabla\cdot(M\nabla\mu)\\ \mu=\frac{\partial g}{\partial C}-\nabla\cdot k\nabla C \]" src="form_131.png"/>
 </p>
-<p> where \(g\) is a non-convex, ``homogeneous'' free energy density function, whose form has been chosen </p>
+<p> where <img class="formulaInl" alt="$g$" src="form_132.png"/> is a non-convex, ``homogeneous'' free energy density function, whose form has been chosen </p>
 <p class="formulaDsp">
-\[ g(C)=\omega(C-C_\alpha)^2(C-C_\beta)^2 \]
+<img class="formulaDsp" alt="\[ g(C)=\omega(C-C_\alpha)^2(C-C_\beta)^2 \]" src="form_133.png"/>
 </p>
 <p> The boundary condiiton is </p>
 <p class="formulaDsp">
-\[ \nabla\mu\cdot\boldsymbol{n}=0; \nabla C\cdot\boldsymbol{n}=0 \text{ on }\Gamma \]
+<img class="formulaDsp" alt="\[ \nabla\mu\cdot\boldsymbol{n}=0; \nabla C\cdot\boldsymbol{n}=0 \text{ on }\Gamma \]" src="form_134.png"/>
 </p>
-<p> The double-well non-convex free energy density function, \(g(C)\), drives segregation of the system into two distinct types.</p>
-<p>Attention is called to the well-known fourth-order nature of this partial differential equation in the concentration \(C\). The polynomial basis can only achieve C0 continuity across the element. To overcome this difficuity, we split the equation into two equations: </p>
+<p> The double-well non-convex free energy density function, <img class="formulaInl" alt="$g(C)$" src="form_135.png"/>, drives segregation of the system into two distinct types.</p>
+<p>Attention is called to the well-known fourth-order nature of this partial differential equation in the concentration <img class="formulaInl" alt="$C$" src="form_136.png"/>. The polynomial basis can only achieve C0 continuity across the element. To overcome this difficuity, we split the equation into two equations: </p>
 <p class="formulaDsp">
-\[ \frac{\partial C}{\partial t}+\nabla\cdot(-M\nabla\mu)=0\\ k\nabla^2 C=\frac{\partial g}{\partial C}-\mu \]
+<img class="formulaDsp" alt="\[ \frac{\partial C}{\partial t}+\nabla\cdot(-M\nabla\mu)=0\\ k\nabla^2 C=\frac{\partial g}{\partial C}-\mu \]" src="form_137.png"/>
 </p>
 <p> The first equation is diffusion equation, and the second one the Possion equation. </p>
 <h1><a class="anchor" id="imple"></a>

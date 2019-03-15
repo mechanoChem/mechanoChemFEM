@@ -23,17 +23,17 @@ Krishna Garikipati<br>
 mechanoChemFEM lib contains six modules:
 
 
-	<B>hpFEM]</B> : offer high level functions dedicated to mulitphysics modeling using deal.ii
+	hpFEM : offer high level functions dedicated to mulitphysics modeling using deal.ii
 	
-	<B>Residual</B> : offer residual functions of a variety of equations and boundary conditions
+	Residual : offer residual functions of a variety of equations and boundary conditions
 
-  <B>solveClass</B> : offer nonlinear solvers based on deal.ii linear solver
+	solveClass : offer nonlinear solvers based on deal.ii linear solver
 
-  <B>FEMdata</B> : high level functions for data output and restart(checkpoint)
+	FEMdata : high level functions for data output and restart(checkpoint)
 	
-	<B>InitBoundValProbs</B> : a pre-defined generic initial boundary value problem framework
+	InitBoundValProbs :  a pre-defined generic initial boundary value problem framework
 	
-	<B>supplementary</B> :a collection of extra data structures and many helper functions
+	supplementary :a collection of extra data structures and many helper functions
 
 	
 <B>ParameterHandler</B> is used for parameter management. 

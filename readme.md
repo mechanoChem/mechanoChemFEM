@@ -20,27 +20,28 @@ Krishna Garikipati<br>
 
 <B>Overview</B><br>
 =======================================================================
-[deal.ii](http://www.dealii.org) is a robust finite element library.
-mechanoChemFEM lib contains five modules:
+mechanoChemFEM lib contains six modules:
 
 
-	hpFEM<T, dim> : offer high level functions dedicated to mulitphysics modeling using deal.ii
+	[hpFEM] : offer high level functions dedicated to mulitphysics modeling using deal.ii
 	
-	Residual< T, dim > : offer residual functions of a variety of equations and boundary conditions
+	[Residual] : offer residual functions of a variety of equations and boundary conditions
 
-	solveClass< dim, matrixType, vectorType > : offer nonlinear solvers based on deal.ii linear solver
+	[solveClass] : offer nonlinear solvers based on deal.ii linear solver
 
-	FEMdata< dim, vectorType > : high level functions for data output and restart(checkpoint)
+	[FEMdata] : high level functions for data output and restart(checkpoint)
 	
-	supplementary:a collection of extra data structures and many helper functions
+	[InitBoundValProbs] : a pre-defined generic initial boundary value problem framework
+	
+	[supplementary] :a collection of extra data structures and many helper functions
 
 	
-ParameterHandler is used for parameter management. 
+[ParameterHandler] is used for parameter management. 
 
 
 <B>Version information</B><br>
 =======================================================================
-This is version 0.3, the intial release of the code.
+This is version 0.4.
 
 
 <B>License</B><br>

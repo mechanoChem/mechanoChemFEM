@@ -932,6 +932,33 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s:
 	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s
 
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.o
+
+# target to build an object file
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o
+
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.i
+
+# target to preprocess a source file
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i
+
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.s
+
+# target to generate assembly for a file
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s:
+	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s
+
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o
 
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.o
@@ -1458,6 +1485,9 @@ help:
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.o"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.i"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.s"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.o"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.i"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.s"

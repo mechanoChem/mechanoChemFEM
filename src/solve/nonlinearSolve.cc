@@ -1,13 +1,16 @@
 #include "../../include/solveClass.h"
 
 template <int dim, class matrixType, class vectorType>
-void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
+bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool converge_flag)
 {	
 	params->enter_subsection("Nonlinear_solver");
 	std::string nonLinearScheme=params->get("nonLinear_method");	
 	
+	vectorType U_initial_0;
+	if(!converge_flag) U_initial_0=U;
 	if(std::strcmp(nonLinearScheme.c_str(),"classicNewton")==0){
 		
+
 		vectorType dU;
 		dU.reinit(U);
 		
@@ -21,8 +24,18 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 	  int currentIteration=0;
 		
 	  while (true){
-	    if (currentIteration>=maxIteration) {PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n"); break; exit (1);}
-	    if (current_norm>1/std::pow(tol,2)){PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n"); break; exit (1);}
+	    if (currentIteration>=maxIteration) {
+				PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n");
+				if(!converge_flag) U=U_initial_0;
+				return false;
+				break;
+			}
+	    if (current_norm>1/std::pow(tol,2)){
+				PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n");
+				if(!converge_flag) U=U_initial_0;
+				return false;
+				break;
+			}
 	    
 			updateLinearSystem();
 			
@@ -30,7 +43,11 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 			initial_norm=std::max(initial_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
-	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration); break;}
+	    if (res<tol || current_norm< abs_tol){
+				PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration);
+			  return true;
+			 break;
+		 }
 			
 			solveLinearSystem_default_direct(dU);
 			
@@ -56,8 +73,18 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 	  int currentIteration=0;
 		
 	  while (true){
-	    if (currentIteration>=maxIteration) {PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n"); break; exit (1);}
-	    if (current_norm>1/std::pow(tol,2)){PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n"); break; exit (1);}
+	    if (currentIteration>=maxIteration) {
+				PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n");
+				if(!converge_flag) U=U_initial_0;
+				return false;
+				 break;
+			 }
+	    if (current_norm>1/std::pow(tol,2)){
+				PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n");
+				if(!converge_flag) U=U_initial_0;
+				return false;
+				 break;
+			}
 	    
 			updateLinearSystem();
 			
@@ -65,7 +92,11 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 			initial_norm=std::max(initial_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
-	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration); break;}
+	    if (res<tol || current_norm< abs_tol){
+				PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration);
+				return true;
+				 break;
+			 }
 			solveLinearSystem_default_direct(dU);
 			
 			double alpha=1;
@@ -109,8 +140,11 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U)
 }
 
 template <int dim, class matrixType, class vectorType>
-void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vectorType& dU)
+bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vectorType& dU,bool converge_flag)
 {	
+	vectorType U_initial_0;
+	if(!converge_flag) U_initial_0=U;
+	
 	params->enter_subsection("Nonlinear_solver");
 	
 	std::string nonLinearScheme=params->get("nonLinear_method");
@@ -127,8 +161,18 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	  int currentIteration=0;
 		
 	  while (true){
-	    if (currentIteration>=maxIteration) {PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n"); break; exit (1);}
-	    if (current_norm>1/std::pow(tol,2)){PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n"); break; exit (1);}
+	    if (currentIteration>=maxIteration) {
+				PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n");
+				if(!converge_flag) U=U_initial_0;
+				return false;
+				 break;
+			 }
+	    if (current_norm>1/std::pow(tol,2)){
+				PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n");
+				if(!converge_flag) U=U_initial_0;
+				return false;
+				break; 
+			}
 	    
 			updateLinearSystem();
 			
@@ -136,7 +180,11 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 			initial_norm=std::max(initial_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
-	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration); break;}
+	    if (res<tol || current_norm< abs_tol){
+				PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration);
+				return true;
+				break;
+			 }
 			
 			solveLinearSystem_default_direct(dU);
 			apply_dU_constrain(dU);
@@ -158,8 +206,18 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	  int currentIteration=0;
 		
 	  while (true){
-	    if (currentIteration>=maxIteration) {PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n"); break; exit (1);}
-	    if (current_norm>1/std::pow(tol,2)){PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n"); break; exit (1);}
+	    if (currentIteration>=maxIteration) {
+				PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n");
+				if(!converge_flag) U=U_initial_0;
+				return false;
+				 break;
+			 }
+	    if (current_norm>1/std::pow(tol,2)){
+				PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n");
+				if(!converge_flag) U=U_initial_0;
+				return false;
+				break;
+			}
 	    
 			updateLinearSystem();
 			
@@ -167,7 +225,11 @@ void solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 			initial_norm=std::max(initial_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
-	    if (res<tol || current_norm< abs_tol){PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration); break;}
+	    if (res<tol || current_norm< abs_tol){
+				PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration);
+				return true;
+		    break;
+			}
 			solveLinearSystem_default_direct(dU);
 			apply_dU_constrain(dU);
 			

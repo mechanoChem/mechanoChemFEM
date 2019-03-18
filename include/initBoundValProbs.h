@@ -121,6 +121,10 @@ class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix
 		*/
     virtual void run ();	
 		/**
+		*solve
+		*/
+		virtual void solve();
+		/**
 		*default:make hyper_rectangle mesh
 		*/
 		virtual void make_grid();

@@ -25,7 +25,7 @@ void diffusion_reaction<dim>::solve()
 		this->pcout<<"not converge, reduce dt by half"<<std::endl;
 		//this->current_dt=this->current_dt;
 		//enforce update even it does not converge (it is usually bad, but useful to get over some difficult steps in some cases)
-		converge_flag=this->nonlinearSolve(this->solution);
+		converge_flag=this->nonlinearSolve(this->solution, true);
 	}
 }
 

@@ -58,7 +58,7 @@ subsection Nonlinear_solver
 		set nonLinear_method = classicNewton
 		set relative_norm_tolerance = 1.0e-12
 		set absolute_norm_tolerance = 1.0e-12
-		set max_iterations = 20
+		set max_iterations = 3
 end
 						
 subsection Linear_solver

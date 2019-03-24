@@ -42,7 +42,7 @@ void initBoundValProbs<dim>::run()
 		PetscPrintf(this->mpi_communicator,"************");
 		PetscPrintf(this->mpi_communicator,"current increment=%d, current time= %f",current_increment, current_time);
 		PetscPrintf(this->mpi_communicator,"************\n");
-		this->nonlinearSolve(solution);
+		solve();
 		
 	  t_solve = clock() - t_solve;
 		PetscPrintf(this->mpi_communicator,"It took me %f seconds for this solve.\n ",((float)t_solve)/CLOCKS_PER_SEC);

@@ -78,6 +78,26 @@ We use the pre-defined functions for diffusion equation and mechanics given the 
 this->ResidualEq.residualForDiffusionEq(fe_values, c_dof, R, c, c_conv, j_c);
  this->ResidualEq.residualForMechanics(fe_values, u_dof, R, P);	
 \endcode
+
+fe_values: deal.ii Finite element evaluated in quadrature points of a cell.
+
+c_dof, u_dof: dof index for the two primial variables.
+
+R: residual vector of a cell.
+
+c: concentration at current time step.
+
+c_conv: concentration at last time step.
+
+j_c: flux of the species.
+
+P: first order Piola-Kirchoff stress tensor.
+
+Fe: deformation gradient tensor.
+
+
+============================================================================================================
+
 we can calculate the flux as before, here we only discuss how to evaluate the deformation gradient tensor with isotropic growth. 
 First we need the total deformation graident tensor
 *\code{.cpp}
@@ -168,12 +188,10 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 }
 \endcode
 
-*\section results Results
-\htmlonly <style>div.image img[src="E4.png"]{width:700px;}</style> \endhtmlonly 
-\image html E4.png
 
-*The results are generated using paramters shown below.
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example4_growth">Github</a>. 
+*The results are generated using paramters shown below.
+*\section file User interface: parameter file
 * 
 *\code{.cpp}
 #parameters file
@@ -239,4 +257,7 @@ subsection Linear_solver
 end
 
 	\endcode
+*\section results Results
+\htmlonly <style>div.image img[src="E4.png"]{width:700px;}</style> \endhtmlonly 
+\image html E4.png
  */

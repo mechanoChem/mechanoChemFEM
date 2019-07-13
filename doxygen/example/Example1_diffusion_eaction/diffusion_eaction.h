@@ -25,7 +25,7 @@ The boundary condiiton is
 The coupled diffusion-reaction equations for two species follow Schnakenberg kinetics.
 For an activator-inhibitor species pair, these equations use auto-inhibition with cross-activation of a short range species, and auto-activation with cross-inhibition of a long range species to form so-called Turing patterns.
 
-*\section imple Implementation
+*\section imple Implementation: Equation level 
 We first define the two scalar primary variables:
 *\code{.cpp}
 std::vector<std::vector<std::string> > primary_variables(2);		
@@ -68,8 +68,22 @@ the pre-defined model:
 this->ResidualEq.residualForDiff_ReacEq(fe_values, c_1_dof, R, c_1, c_1_conv, j_c_1, reaction_1);
 this->ResidualEq.residualForDiff_ReacEq(fe_values, c_2_dof, R, c_2, c_2_conv, j_c_2, reaction_2);
 \endcode
-Though before we call these two functions, we need the flux and reactions terms, we need to first evaluate the values of the primary fields and their spatial gradients.
-We also need to evaluate the value of primary fields at previous time step for the Backward Euler time scheme:
+fe_values: deal.ii Finite element evaluated in quadrature points of a cell.
+
+c_1_dof, c_2_dof: dof index of the two species.
+
+R: residual vector of a cell.
+
+c_1, c_2: concentration at current time step.
+
+c_1_conv, c_2_conv: concentration at the last time step.
+
+j_c_1, j_c_2: flux of the species.
+
+reaction_1, reaction_1: reaction term
+
+============================================================================================================
+The following code deomonstrate how to evaluate the variables defined above.
  *\code{.cpp}
 	dealii::Table<1,double>  c_1_conv(n_q_points), c_2_conv(n_q_points);
 	dealii::Table<1,Sacado::Fad::DFad<double> > c_1(n_q_points), c_2(n_q_points);
@@ -115,13 +129,12 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
   values(0)= 0.5 + 0.1*static_cast <double> (rand())/(static_cast <double>(RAND_MAX/2.0))/2;
 }
 \endcode
-*\section results Results
-The right plot shows the patterns of the Schnakenberg kinetics.
-\htmlonly <style>div.image img[src="E1.png"]{width:400px;}</style> \endhtmlonly 
-\image html E1.png
-
-*The results are generated using paramters shown below.
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example1_diffusion_eaction">Github</a>.
+*The results are generated using paramters shown below.
+
+
+*\section file User interface: parameter file
+
 * 
 *\code{.cpp}
 #parameters file
@@ -189,4 +202,10 @@ subsection Linear_solver
 		set system_matrix_symmetricFlag = false # default is false
 end
 	\endcode
+
+*\section results Results
+The right plot shows the patterns of the Schnakenberg kinetics.
+\htmlonly <style>div.image img[src="E1.png"]{width:400px;}</style> \endhtmlonly 
+\image html E1.png
+
  */

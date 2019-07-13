@@ -6,6 +6,7 @@ var searchData=
   ['setup_5ffesystem_2ecc',['setup_FeSystem.cc',['../setup___fe_system_8cc.html',1,'']]],
   ['setup_5fsystem_2ecc',['setup_system.cc',['../setup__system_8cc.html',1,'']]],
   ['snapshot_2ecc',['snapshot.cc',['../snapshot_8cc.html',1,'']]],
+  ['solve_2ecc',['solve.cc',['../solve_8cc.html',1,'']]],
   ['solveclass_2ecc',['solveClass.cc',['../solve_class_8cc.html',1,'']]],
   ['solveclass_2eh',['solveClass.h',['../solve_class_8h.html',1,'']]],
   ['solveclass_5fpetsc_2ecc',['solveClass_petsc.cc',['../solve_class__petsc_8cc.html',1,'']]],

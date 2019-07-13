@@ -28,6 +28,8 @@ var searchData=
   ['snapshot_5fdirectory',['snapshot_directory',['../classinit_bound_val_probs.html#af7ed49a5ea9a6407acb26c5a729d4bd0',1,'initBoundValProbs']]],
   ['solution',['solution',['../classinit_bound_val_probs.html#ae539da5c193ce7d8d07f654067f111ca',1,'initBoundValProbs']]],
   ['solution_5fprev',['solution_prev',['../classinit_bound_val_probs.html#ab5b94542feace0c45c2c69696ce9a266',1,'initBoundValProbs']]],
+  ['solve',['solve',['../classinit_bound_val_probs.html#af7d39f0eac0af0ed5785935ac72a1e7d',1,'initBoundValProbs']]],
+  ['solve_2ecc',['solve.cc',['../solve_8cc.html',1,'']]],
   ['solveclass',['solveClass',['../classsolve_class.html',1,'solveClass&lt; dim, matrixType, vectorType &gt;'],['../classsolve_class.html#ac210b30d39cb640ec4d65b667467583d',1,'solveClass::solveClass()'],['../classsolve_class.html#ada67813836ea60d10b21940008f37585',1,'solveClass::solveClass(hpFEM&lt; dim &gt; &amp;_FEMbase)'],['../classsolve_class.html#a50fb5916f24e3b239ff60602c31cc536',1,'solveClass::solveClass(hpFEM&lt; dim &gt; &amp;_FEMbase, dealii::ParameterHandler &amp;_params)']]],
   ['solveclass_2ecc',['solveClass.cc',['../solve_class_8cc.html',1,'']]],
   ['solveclass_2eh',['solveClass.h',['../solve_class_8h.html',1,'']]],

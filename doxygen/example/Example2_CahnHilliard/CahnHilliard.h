@@ -27,7 +27,7 @@ C0 continuity across the element. To overcome this difficuity, we split the equa
 k\nabla^2 C=\frac{\partial g}{\partial C}-\mu
 \f]
 The first equation is diffusion equation, and the second one the Possion equation. 
-*\section imple Implementation
+*\section imple Implementation: Equation level 
 We first define the two scalar primary variables:
 *\code{.cpp}
 std::vector<std::vector<std::string> > primary_variables(2);		
@@ -70,8 +70,24 @@ the pre-defined model:
 	this->ResidualEq.residualForDiffusionEq(fe_values, c_dof, R, c_1, c_1_conv, j_c_1);
 	this->ResidualEq.residualForPoissonEq(fe_values, mu_dof, R, kappa_c_1_grad, rhs_mu);
 \endcode
-Though before we call these two functions, we need the flux and reactions terms, we need to first evaluate the values of the primary fields and their spatial gradients.
-We also need to evaluate the value of primary fields at previous time step for the Backward Euler time scheme:
+fe_values: deal.ii Finite element evaluated in quadrature points of a cell.
+
+c_1_dof, mu_dof: dof index for two primial variables.
+
+R: residual vector of a cell.
+
+c_1: concentration at current time step.
+
+c_1_conv: concentration at the last time step.
+
+j_c_1: flux of the species.
+
+kappa_c_1_grad:left hand side of the Possion equation.
+
+rhs_mu: right hand side of the Possion equation.
+
+============================================================================================================
+The following code deomonstrate how to evaluate the variables defined above.
  *\code{.cpp}
 	dealii::Table<1,double>  c_1_conv(n_q_points);
 	dealii::Table<1,Sacado::Fad::DFad<double> > c_1(n_q_points), mu(n_q_points);
@@ -102,14 +118,13 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
   values(1) = 0;    
  values(0)= 0.5 + 0.04*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
 }
-\endcode
-*\section results Results
-\htmlonly <style>div.image img[src="E2.png"]{width:400px;}</style> \endhtmlonly 
-\image html E2.png
 
-*The results are generated using paramters shown below.
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example2_CahnHilliard">Github</a>. 
+*The results are generated using paramters shown below.
 * 
+\endcode
+
+*\section file User interface: parameter file
 *\code{.cpp}
 #parameters file
 
@@ -172,4 +187,8 @@ subsection Linear_solver
 		set system_matrix_symmetricFlag = false # default is false
 end
 	\endcode
+
+*\section results Results
+\htmlonly <style>div.image img[src="E2.png"]{width:400px;}</style> \endhtmlonly 
+\image html E2.png
  */

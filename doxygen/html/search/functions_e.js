@@ -16,6 +16,7 @@ var searchData=
   ['setup_5fsystem',['setup_system',['../classinit_bound_val_probs.html#a8f0c6272cf214048329d7cf1aa58b860',1,'initBoundValProbs']]],
   ['setupcomputedfield',['setupComputedField',['../classcomputed_field.html#ac6ff6cde468abcaa2ee7c9c4fd6b9047',1,'computedField']]],
   ['setuplinearsystem',['setupLinearSystem',['../classsolve_class.html#abcdd7b865378898804f4831f0a078e04',1,'solveClass']]],
+  ['solve',['solve',['../classinit_bound_val_probs.html#af7d39f0eac0af0ed5785935ac72a1e7d',1,'initBoundValProbs']]],
   ['solveclass',['solveClass',['../classsolve_class.html#ac210b30d39cb640ec4d65b667467583d',1,'solveClass::solveClass()'],['../classsolve_class.html#ada67813836ea60d10b21940008f37585',1,'solveClass::solveClass(hpFEM&lt; dim &gt; &amp;_FEMbase)'],['../classsolve_class.html#a50fb5916f24e3b239ff60602c31cc536',1,'solveClass::solveClass(hpFEM&lt; dim &gt; &amp;_FEMbase, dealii::ParameterHandler &amp;_params)']]],
   ['solvelinearsystem',['solveLinearSystem',['../classsolve_class.html#a31c22340527a596f8d6aeeea60ffe52a',1,'solveClass']]],
   ['solvelinearsystem_5fdefault_5fdirect',['solveLinearSystem_default_direct',['../classsolve_class.html#aaed39c6902f1e1de684583e56fb14f66',1,'solveClass::solveLinearSystem_default_direct(dealii::Vector&lt; double &gt; &amp;dU)'],['../classsolve_class.html#ac888eaa37061db46d24d90065b733a82',1,'solveClass::solveLinearSystem_default_direct(PETScWrappers::MPI::Vector &amp;dU)']]],

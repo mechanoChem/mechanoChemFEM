@@ -33,7 +33,7 @@ r=-M\frac{\partial g}{\partial C}=-2M\omega(C-C_\alpha)(C-C_\beta)(2C-C_\alpha-C
 We first define the single scalar primary variable:
 *\code{.cpp}
 		std::vector<std::vector<std::string> > primary_variables(1);		
-	  primary_variables[0].push_back("mu"); primary_variables[0].push_back("component_is_scalar");
+	  primary_variables[0].push_back("C"); primary_variables[0].push_back("component_is_scalar");
 \endcode
 and setup the order of basis function for it:
 *\code{.cpp}
@@ -67,27 +67,42 @@ class AllenCahn: public initBoundValProbs<dim>
 In the overloaded <B>get_residual</B> function, we define the residual for our problem. As our equation is standrad diffusion-reaction, we can simiply use 
 the pre-defined model:
  *\code{.cpp}
-this->ResidualEq.residualForDiff_ReacEq(fe_values, 0, R, mu, mu_conv, j_mu, rhs_mu);
+this->ResidualEq.residualForDiff_ReacEq(fe_values, 0, R, C, C_conv, j_C, rhs_C);
 \endcode
+
+fe_values: deal.ii Finite element evaluated in quadrature points of a cell.
+
+R: residual vector of a cell.
+
+C: the order parameter at current time step.
+
+C_conv: the order parameter at last time step.
+
+j_C: the flux term
+
+rhs_C: the reaction term.
+
+============================================================================================================
+
 Before we call these two functions, we need the flux and reactions term, we need to first evaluate the values of the primary field and the spatial gradient.
 We also need to evaluate the value of primary field at previous time step for the Backward Euler time scheme:
  *\code{.cpp}
-	dealii::Table<1,double>  mu_conv(n_q_points);
-	dealii::Table<1,Sacado::Fad::DFad<double> >  mu(n_q_points);
-	dealii::Table<2,Sacado::Fad::DFad<double> >  mu_grad(n_q_points, dim);
+	dealii::Table<1,double>  C_conv(n_q_points);
+	dealii::Table<1,Sacado::Fad::DFad<double> >  C(n_q_points);
+	dealii::Table<2,Sacado::Fad::DFad<double> >  C_grad(n_q_points, dim);
 	
-	evaluateScalarFunction<double,dim>(fe_values, 0, ULocalConv, mu_conv);
-	evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, 0, ULocal, mu);	
-	evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe_values, 0, ULocal, mu_grad);
+	evaluateScalarFunction<double,dim>(fe_values, 0, ULocalConv, C_conv);
+	evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, 0, ULocal, C);	
+	evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe_values, 0, ULocal, C_grad);
 	
 	//evaluate diffusion and reaction term
-	dealii::Table<1,Sacado::Fad::DFad<double> > rhs_mu(n_q_points);
-	dealii::Table<2,Sacado::Fad::DFad<double> > j_mu(n_q_points, dim);
+	dealii::Table<1,Sacado::Fad::DFad<double> > rhs_C(n_q_points);
+	dealii::Table<2,Sacado::Fad::DFad<double> > j_C(n_q_points, dim);
 	
-	j_mu=table_scaling<Sacado::Fad::DFad<double>, dim>(mu_grad,-kappa*M);
+	j_C=table_scaling<Sacado::Fad::DFad<double>, dim>(C_grad,-kappa*M);
 	
 	for(unsigned int q=0; q<n_q_points;q++){
-		 rhs_mu[q]=-M*(2*omega*(mu[q]-c_alpha)*(mu[q]-c_beta)*(2*mu[q]-c_alpha-c_beta));
+		 rhs_C[q]=-M*(2*omega*(C[q]-c_alpha)*(C[q]-c_beta)*(2*C[q]-c_alpha-c_beta));
 	 }
 \endcode
 The last thing we need to define is the initial condition, we can simpily overload the  <a href="../html/class_initial_conditions.html#a369cea7ba74f8cd0a6ca12e0c164ff74">value()</a> function
@@ -98,12 +113,11 @@ double InitialConditions<dim>::value(const Point<dim>   &p, const unsigned int 	
 }
 \endcode
 
-*\section results Results
-\htmlonly <style>div.image img[src="E3.png"]{width:600px;}</style> \endhtmlonly 
-\image html E3.png
 
-*The results are generated using paramters shown below.
+
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example3_Allen-Cahn">Github</a>. 
+*The results are generated using paramters shown below.
+*\section file User interface: parameter file
 * 
 *\code{.cpp}
 #parameters file
@@ -166,4 +180,8 @@ subsection Linear_solver
 		set system_matrix_symmetricFlag = false # default is false
 end
 	\endcode
+
+*\section results Results
+\htmlonly <style>div.image img[src="E3.png"]{width:600px;}</style> \endhtmlonly 
+\image html E3.png
  */

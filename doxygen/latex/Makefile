@@ -1,5 +1,3 @@
-LATEX_CMD=latex
-
 all: refman.dvi
 
 ps: refman.ps
@@ -18,20 +16,20 @@ refman.pdf: refman.ps
 
 refman.dvi: clean refman.tex doxygen.sty
 	echo "Running latex..."
-	$(LATEX_CMD) refman.tex
+	latex refman.tex
 	echo "Running makeindex..."
 	makeindex refman.idx
 	echo "Rerunning latex...."
-	$(LATEX_CMD) refman.tex
-	latex_count=8 ; \
+	latex refman.tex
+	latex_count=5 ; \
 	while egrep -s 'Rerun (LaTeX|to get cross-references right)' refman.log && [ $$latex_count -gt 0 ] ;\
 	    do \
 	      echo "Rerunning latex...." ;\
-	      $(LATEX_CMD) refman.tex ; \
+	      latex refman.tex ;\
 	      latex_count=`expr $$latex_count - 1` ;\
 	    done
 	makeindex refman.idx
-	$(LATEX_CMD) refman.tex
+	latex refman.tex
 
 refman_2on1.ps: refman.ps
 	psnup -2 refman.ps >refman_2on1.ps

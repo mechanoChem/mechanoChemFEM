@@ -116,7 +116,7 @@ double InitialConditions<dim>::value(const Point<dim>   &p, const unsigned int 	
 
 
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example3_Allen-Cahn">Github</a>. 
-*The results are generated using paramters shown below.
+
 *\section file User interface: parameter file
 * 
 *\code{.cpp}
@@ -182,6 +182,8 @@ end
 	\endcode
 
 *\section results Results
+The results are generated using paramters shown above. 
+
 \htmlonly <style>div.image img[src="E3.png"]{width:600px;}</style> \endhtmlonly 
 \image html E3.png
  */

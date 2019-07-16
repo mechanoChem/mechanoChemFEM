@@ -202,7 +202,8 @@ end
 	\endcode
 
 *\section results Results
-*<B>The results are generated using paramters shown above. <\B>
+The results are generated using paramters shown above. 
+
 The right plot shows the patterns of the Schnakenberg kinetics.
 \htmlonly <style>div.image img[src="E1.png"]{width:400px;}</style> \endhtmlonly 
 \image html E1.png

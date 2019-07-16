@@ -1,0 +1,809 @@
+\section{mechano\+Chem\+F\+E\+M/src/supplementary/function\+Evaluations.cc File Reference}
+\label{function_evaluations_8cc}\index{mechanoChemFEM/src/supplementary/functionEvaluations.cc@{mechanoChemFEM/src/supplementary/functionEvaluations.cc}}
+{\ttfamily \#include \char`\"{}../../include/supplementary/function\+Evaluations.\+h\char`\"{}}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga399ae2353249293211c021848a64175c}{evaluate\+Scalar\+Function}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 1, T $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a6856c1b1b83231bc778cecda3950533d}{evaluate\+Scalar\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_af8ed01aa7f3c36625c149e3600d96714}{evaluate\+Scalar\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a57853d187be6c5f0a186e6ba62f141d6}{evaluate\+Scalar\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a436a979f117d9baba72821197a739e19}{evaluate\+Scalar\+Function$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 1, double $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a675557db3f31c27e2c45a8bee20dd42a}{evaluate\+Scalar\+Function$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 1, double $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_acf0861a6c93d4385e4738cd36457969d}{evaluate\+Scalar\+Function$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 1, double $>$ \&U)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 1, T $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aba734fcd49b3387c248667715e27f4d8}{evaluate\+Scalar\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ad678c1a358c17bdfbe0ddebfc9936057}{evaluate\+Scalar\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aff733718e441e77597fb5f7369b962d7}{evaluate\+Scalar\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a1b7c8170a7edbde30679da8b7f16d53b}{evaluate\+Scalar\+Function$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 1, double $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a9d228a6175fb599a42cf7a0721ad2f32}{evaluate\+Scalar\+Function$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 1, double $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ab0361b7dabb7d8e4edf83632ddb3129c}{evaluate\+Scalar\+Function$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 1, double $>$ \&U)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga3ee6127c2c5c8333bb7fb384dcdb431f}{evaluate\+Scalar\+Function\+Gradient}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 2, T $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ae408f77762afad2daeaa555239d1d38f}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a780341ff23fa9a724797a3963b5eb267}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a612155392eef7fae67e40615ddfce82a}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a778e8b0e56686ca05b7ae735ede7547d}{evaluate\+Scalar\+Function\+Gradient$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aebfcd53aa3d6ed1aade3f0a3b404e790}{evaluate\+Scalar\+Function\+Gradient$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a9c4d97c0a964edc8d705a9086abc7a87}{evaluate\+Scalar\+Function\+Gradient$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_gabeb71201e8213a7c7616cd8824617f73}{evaluate\+Scalar\+Function\+Gradient}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 2, T $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a7a07a439fec6ad8cbb76757b9e0832ce}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a9314f95484440c9c86bff06911c6d52e}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aa5c93137a9a61bb5f455809ac3862e34}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a3cc57fd0ac6ea503b820934671353e6f}{evaluate\+Scalar\+Function\+Gradient$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a22ad018eab8d203fd930ad1209435d89}{evaluate\+Scalar\+Function\+Gradient$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a57903628597a149ecf0c07eb33c3cc94}{evaluate\+Scalar\+Function\+Gradient$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga4622566d0fe19b017cf8d2643ffeb47a}{evaluate\+Scalar\+Function\+Gradient}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 2, T $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a4a0fd4f75bf25ccf08f6da45df20d5a7}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a2830ce5e64fad106ba55eb1282bf7f79}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aa26b2aef5debe4912a94bd082f89223e}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a91bad8776fff0a4128d167e13f9cba03}{evaluate\+Scalar\+Function\+Gradient$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a6a96dc1c1ba16074a76b1d809a10a3c6}{evaluate\+Scalar\+Function\+Gradient$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a0a5f51dad78d15ef40ed772bb4eeea4c}{evaluate\+Scalar\+Function\+Gradient$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 2, T $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a5cba4e9f1222a7f8c1d9776c905bad20}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_afe7a628ac86500a836308f5d73763eb9}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a28b649ef8b832ed57cd596b5a68d62c2}{evaluate\+Scalar\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a089c72529f691dcdbd062a644a861a93}{evaluate\+Scalar\+Function\+Gradient$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ad5e8e4a735ad40906adb7a5107748ea9}{evaluate\+Scalar\+Function\+Gradient$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a121295365acb762462c0f9812a5fc118}{evaluate\+Scalar\+Function\+Gradient$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_gab9e164be1be244df81c932426a4bd513}{evaluate\+Vector\+Function}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 2, T $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a668c45fc65b525a83192a67dd35571c6}{evaluate\+Vector\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a28ceac224510d9b9753dbe934874d56b}{evaluate\+Vector\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a49bf826d13c295bef33c6d320e96a6ee}{evaluate\+Vector\+Function$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_adab42860d3e6d233bc937b4574606f60}{evaluate\+Vector\+Function$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a418401c6810307bd7073ff5f72b3bd77}{evaluate\+Vector\+Function$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&U)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_af05742550c00c35879af970241b9f6fc}{evaluate\+Vector\+Function$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 2, double $>$ \&U)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga84eb2ee714466f113c96fcf6a9fd23e8}{evaluate\+Vector\+Function\+Gradient}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 3, T $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a4c7ae8f070eed3d1d47ea4ed5dab92f9}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_afadde85222d3c01dcc7555e0c47d4aa9}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_afdde5bc51307ce007f95ba2af9d138b2}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a960ffa13fae84ece6dc59bc0b91beea3}{evaluate\+Vector\+Function\+Gradient$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a268d56529013650c702d05cd22cf6148}{evaluate\+Vector\+Function\+Gradient$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aae302a9653e837488a7c5989cff31c04}{evaluate\+Vector\+Function\+Gradient$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga5adf8aa2d91dbdf393aa91dcc65e42e8}{evaluate\+Vector\+Function\+Gradient}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 3, T $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a1fb7d1f43d659f0916ca96a9c951931c}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a85f7c6e4046993a83815972185df45ab}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aa336e130a0840b38bf3470c6b1133bb7}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a62dbc9fdef114b76a143e86bb1c6df96}{evaluate\+Vector\+Function\+Gradient$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a2d6fafd5544183a2ed0f3190b142c853}{evaluate\+Vector\+Function\+Gradient$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a05515d4765602312924bf90d040f146e}{evaluate\+Vector\+Function\+Gradient$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_gab2771d18ff704decbbc12ca2b848bbfe}{evaluate\+Vector\+Function\+Gradient}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 3, T $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a0a0df4cf8cab669622b2a696651aca8b}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a955a54316c2cc8ddcd9c9d5b148d86ff}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_af8f262e2bdb9eda799771e932e7bf340}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ac57e06f570eda3571e00912325612971}{evaluate\+Vector\+Function\+Gradient$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a729ea5c9032a46494dbeb1c6e1a678c6}{evaluate\+Vector\+Function\+Gradient$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aa2d12bff0463147f781bf71f070705cc}{evaluate\+Vector\+Function\+Gradient$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, Table$<$ 3, T $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ae5de39f710bc6b9e6009f18de76cadbb}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a27075eb9170789806dc7fb366382e29d}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ab4669516f8f9436b73dedeb24cc0ffff}{evaluate\+Vector\+Function\+Gradient$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a20af37a91c353a81f4d9ad3b2dd678af}{evaluate\+Vector\+Function\+Gradient$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a60c8d8f11fc75f1a2d1775dd5ea95d79}{evaluate\+Vector\+Function\+Gradient$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a9aaa007fb989c138e170beb650e31c31}{evaluate\+Vector\+Function\+Gradient$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, Table$<$ 3, double $>$ \&gradU, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga62b026b5bcee0bda21159ff6782b4b59}{get\+Deformation\+Map}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a03a34b508ad64e47d31b1b36a05f4e7b}{get\+Deformation\+Map$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a024d1c1e0bf1b0c62eb8e8eba210e04f}{get\+Deformation\+Map$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_aed838368af3e1f968a4234eb18bee8e8}{get\+Deformation\+Map$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a4e726f8c8f17b338819f30946e6d4274}{get\+Deformation\+Map$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a934f34bca13586e71d79d67e2d405170}{get\+Deformation\+Map$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a9d25cc478ac60031a64a48a1687fabc2}{get\+Deformation\+Map$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map, unsigned int iteration)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ae3b81f1c251c883431db31f41eb1c340}{get\+Deformation\+Map$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ad11d0f7ed38dbb3358eb93a823679880}{get\+Deformation\+Map$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a2b4c316f681796502a2308af3aaf6627}{get\+Deformation\+Map$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a2128b8b5715cb868caf25dc37b818a1d}{get\+Deformation\+Map$<$ double, 1 $>$}} (const F\+E\+Values$<$ 1 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 1 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ad204a932cf153014c52e1c59196fab28}{get\+Deformation\+Map$<$ double, 2 $>$}} (const F\+E\+Values$<$ 2 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 2 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map, unsigned int iteration)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a7c7b5895783c8ab03bd49b2d099a8d36}{get\+Deformation\+Map$<$ double, 3 $>$}} (const F\+E\+Values$<$ 3 $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ 3 $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, Table$<$ 1, double $>$ \&U\+Local, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map, unsigned int iteration)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_gad4003712a2346a79e13bdbfcad4d1e1c}{get\+Deformation\+Map\+Transpose}} (\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map\+\_\+new, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map\+\_\+old)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a57b94bf3e5309492433be576f3e57c03}{get\+Deformation\+Map\+Transpose$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map\+\_\+new, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map\+\_\+old)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a4ddf5fdc58a19c93899099e38e4a2125}{get\+Deformation\+Map\+Transpose$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map\+\_\+new, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map\+\_\+old)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_afa134cc0a430399a7c20d2d82dd652bb}{get\+Deformation\+Map\+Transpose$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map\+\_\+new, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map\+\_\+old)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a7e7354d28657df00b72c866eccede24a}{get\+Deformation\+Map\+Transpose$<$ double, 1 $>$}} (\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map\+\_\+new, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map\+\_\+old)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a06a40fe8ccce6ea8a8005e65e4495a90}{get\+Deformation\+Map\+Transpose$<$ double, 2 $>$}} (\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map\+\_\+new, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map\+\_\+old)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a867f90eaceee3244d8e5fd5692fe0117}{get\+Deformation\+Map\+Transpose$<$ double, 3 $>$}} (\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map\+\_\+new, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map\+\_\+old)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_gadb862d9530a60b8ce5255222778ceeb6}{evaluate\+Spatialgradients}} (Table$<$ 2, T $>$ \&gradU, Table$<$ 2, T $>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a63fd1422475c69c324aefec06a9b4fa0}{evaluate\+Spatialgradients$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a574a864ff662620c8b632523d5a2fe61}{evaluate\+Spatialgradients$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_adc3a2ad656bc48d7a11c24f546ba43bd}{evaluate\+Spatialgradients$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a629c7bb265581b5853dbfb9af43c4a0a}{evaluate\+Spatialgradients$<$ double, 1 $>$}} (Table$<$ 2, double $>$ \&gradU, Table$<$ 2, double $>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a8f2e81f6aec814594a6ce54d2a8634f4}{evaluate\+Spatialgradients$<$ double, 2 $>$}} (Table$<$ 2, double $>$ \&gradU, Table$<$ 2, double $>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ac4df16de901d5280657a240a274e62a2}{evaluate\+Spatialgradients$<$ double, 3 $>$}} (Table$<$ 2, double $>$ \&gradU, Table$<$ 2, double $>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map)
+\item 
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}} (Table$<$ 3, T $>$ \&gradU, Table$<$ 3, T $>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a31257b0c4b710fb48bf0b70e7b262da9}{evaluate\+Spatialgradients$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$}} (Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_ab89d365bd9b7a2124796e27f59a3b190}{evaluate\+Spatialgradients$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$}} (Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a343650e4cd1050b8776d2fec5dfc1804}{evaluate\+Spatialgradients$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$}} (Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&gradU, Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a688e887a593bf0c3effebec8495fb849}{evaluate\+Spatialgradients$<$ double, 1 $>$}} (Table$<$ 3, double $>$ \&gradU, Table$<$ 3, double $>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a3f479e2f2e28603def984ea4c2e02ad9}{evaluate\+Spatialgradients$<$ double, 2 $>$}} (Table$<$ 3, double $>$ \&gradU, Table$<$ 3, double $>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&def\+Map)
+\item 
+template void \mbox{\hyperlink{function_evaluations_8cc_a9c17d7db3f0ade6c01cfb5450b958efc}{evaluate\+Spatialgradients$<$ double, 3 $>$}} (Table$<$ 3, double $>$ \&gradU, Table$<$ 3, double $>$ grad\+U\+\_\+spat, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&def\+Map)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\label{function_evaluations_8cc_a436a979f117d9baba72821197a739e19}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ double, 1 $>$@{evaluateScalarFunction$<$ double, 1 $>$}}
+\index{evaluateScalarFunction$<$ double, 1 $>$@{evaluateScalarFunction$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ double, 1 $>$()}{evaluateScalarFunction< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 1, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a1b7c8170a7edbde30679da8b7f16d53b}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ double, 1 $>$@{evaluateScalarFunction$<$ double, 1 $>$}}
+\index{evaluateScalarFunction$<$ double, 1 $>$@{evaluateScalarFunction$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ double, 1 $>$()}{evaluateScalarFunction< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 1, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a675557db3f31c27e2c45a8bee20dd42a}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ double, 2 $>$@{evaluateScalarFunction$<$ double, 2 $>$}}
+\index{evaluateScalarFunction$<$ double, 2 $>$@{evaluateScalarFunction$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ double, 2 $>$()}{evaluateScalarFunction< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 1, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a9d228a6175fb599a42cf7a0721ad2f32}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ double, 2 $>$@{evaluateScalarFunction$<$ double, 2 $>$}}
+\index{evaluateScalarFunction$<$ double, 2 $>$@{evaluateScalarFunction$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ double, 2 $>$()}{evaluateScalarFunction< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 1, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_acf0861a6c93d4385e4738cd36457969d}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ double, 3 $>$@{evaluateScalarFunction$<$ double, 3 $>$}}
+\index{evaluateScalarFunction$<$ double, 3 $>$@{evaluateScalarFunction$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ double, 3 $>$()}{evaluateScalarFunction< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 1, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ab0361b7dabb7d8e4edf83632ddb3129c}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ double, 3 $>$@{evaluateScalarFunction$<$ double, 3 $>$}}
+\index{evaluateScalarFunction$<$ double, 3 $>$@{evaluateScalarFunction$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ double, 3 $>$()}{evaluateScalarFunction< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 1, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a6856c1b1b83231bc778cecda3950533d}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateScalarFunction< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aba734fcd49b3387c248667715e27f4d8}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateScalarFunction< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_af8ed01aa7f3c36625c149e3600d96714}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateScalarFunction< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ad678c1a358c17bdfbe0ddebfc9936057}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateScalarFunction< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a57853d187be6c5f0a186e6ba62f141d6}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateScalarFunction< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aff733718e441e77597fb5f7369b962d7}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateScalarFunction< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga2e2fbeb2173113c6889c73bbb7304789}{evaluate\+Scalar\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a778e8b0e56686ca05b7ae735ede7547d}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 1 $>$@{evaluateScalarFunctionGradient$<$ double, 1 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 1 $>$@{evaluateScalarFunctionGradient$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 1 $>$()}{evaluateScalarFunctionGradient< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a3cc57fd0ac6ea503b820934671353e6f}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 1 $>$@{evaluateScalarFunctionGradient$<$ double, 1 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 1 $>$@{evaluateScalarFunctionGradient$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 1 $>$()}{evaluateScalarFunctionGradient< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a91bad8776fff0a4128d167e13f9cba03}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 1 $>$@{evaluateScalarFunctionGradient$<$ double, 1 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 1 $>$@{evaluateScalarFunctionGradient$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 1 $>$()}{evaluateScalarFunctionGradient< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a089c72529f691dcdbd062a644a861a93}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 1 $>$@{evaluateScalarFunctionGradient$<$ double, 1 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 1 $>$@{evaluateScalarFunctionGradient$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 1 $>$()}{evaluateScalarFunctionGradient< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aebfcd53aa3d6ed1aade3f0a3b404e790}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 2 $>$@{evaluateScalarFunctionGradient$<$ double, 2 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 2 $>$@{evaluateScalarFunctionGradient$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 2 $>$()}{evaluateScalarFunctionGradient< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a22ad018eab8d203fd930ad1209435d89}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 2 $>$@{evaluateScalarFunctionGradient$<$ double, 2 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 2 $>$@{evaluateScalarFunctionGradient$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 2 $>$()}{evaluateScalarFunctionGradient< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a6a96dc1c1ba16074a76b1d809a10a3c6}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 2 $>$@{evaluateScalarFunctionGradient$<$ double, 2 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 2 $>$@{evaluateScalarFunctionGradient$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 2 $>$()}{evaluateScalarFunctionGradient< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ad5e8e4a735ad40906adb7a5107748ea9}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 2 $>$@{evaluateScalarFunctionGradient$<$ double, 2 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 2 $>$@{evaluateScalarFunctionGradient$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 2 $>$()}{evaluateScalarFunctionGradient< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a9c4d97c0a964edc8d705a9086abc7a87}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 3 $>$@{evaluateScalarFunctionGradient$<$ double, 3 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 3 $>$@{evaluateScalarFunctionGradient$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 3 $>$()}{evaluateScalarFunctionGradient< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a57903628597a149ecf0c07eb33c3cc94}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 3 $>$@{evaluateScalarFunctionGradient$<$ double, 3 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 3 $>$@{evaluateScalarFunctionGradient$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 3 $>$()}{evaluateScalarFunctionGradient< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a0a5f51dad78d15ef40ed772bb4eeea4c}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 3 $>$@{evaluateScalarFunctionGradient$<$ double, 3 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 3 $>$@{evaluateScalarFunctionGradient$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 3 $>$()}{evaluateScalarFunctionGradient< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a121295365acb762462c0f9812a5fc118}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ double, 3 $>$@{evaluateScalarFunctionGradient$<$ double, 3 $>$}}
+\index{evaluateScalarFunctionGradient$<$ double, 3 $>$@{evaluateScalarFunctionGradient$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ double, 3 $>$()}{evaluateScalarFunctionGradient< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ae408f77762afad2daeaa555239d1d38f}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a7a07a439fec6ad8cbb76757b9e0832ce}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a4a0fd4f75bf25ccf08f6da45df20d5a7}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a5cba4e9f1222a7f8c1d9776c905bad20}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a780341ff23fa9a724797a3963b5eb267}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a9314f95484440c9c86bff06911c6d52e}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a2830ce5e64fad106ba55eb1282bf7f79}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_afe7a628ac86500a836308f5d73763eb9}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a612155392eef7fae67e40615ddfce82a}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aa5c93137a9a61bb5f455809ac3862e34}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aa26b2aef5debe4912a94bd082f89223e}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a28b649ef8b832ed57cd596b5a68d62c2}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateScalarFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateScalarFunctionGradient< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gabedd4ae2841d2332ed0df0513b189e34}{evaluate\+Scalar\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a629c7bb265581b5853dbfb9af43c4a0a}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ double, 1 $>$@{evaluateSpatialgradients$<$ double, 1 $>$}}
+\index{evaluateSpatialgradients$<$ double, 1 $>$@{evaluateSpatialgradients$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ double, 1 $>$()}{evaluateSpatialgradients< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{Table$<$ 2, double $>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a688e887a593bf0c3effebec8495fb849}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ double, 1 $>$@{evaluateSpatialgradients$<$ double, 1 $>$}}
+\index{evaluateSpatialgradients$<$ double, 1 $>$@{evaluateSpatialgradients$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ double, 1 $>$()}{evaluateSpatialgradients< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{Table$<$ 3, double $>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a8f2e81f6aec814594a6ce54d2a8634f4}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ double, 2 $>$@{evaluateSpatialgradients$<$ double, 2 $>$}}
+\index{evaluateSpatialgradients$<$ double, 2 $>$@{evaluateSpatialgradients$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ double, 2 $>$()}{evaluateSpatialgradients< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{Table$<$ 2, double $>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a3f479e2f2e28603def984ea4c2e02ad9}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ double, 2 $>$@{evaluateSpatialgradients$<$ double, 2 $>$}}
+\index{evaluateSpatialgradients$<$ double, 2 $>$@{evaluateSpatialgradients$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ double, 2 $>$()}{evaluateSpatialgradients< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{Table$<$ 3, double $>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ac4df16de901d5280657a240a274e62a2}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ double, 3 $>$@{evaluateSpatialgradients$<$ double, 3 $>$}}
+\index{evaluateSpatialgradients$<$ double, 3 $>$@{evaluateSpatialgradients$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ double, 3 $>$()}{evaluateSpatialgradients< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 2, double $>$ \&}]{gradU,  }\item[{Table$<$ 2, double $>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a9c17d7db3f0ade6c01cfb5450b958efc}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ double, 3 $>$@{evaluateSpatialgradients$<$ double, 3 $>$}}
+\index{evaluateSpatialgradients$<$ double, 3 $>$@{evaluateSpatialgradients$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ double, 3 $>$()}{evaluateSpatialgradients< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{Table$<$ 3, double $>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a63fd1422475c69c324aefec06a9b4fa0}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateSpatialgradients< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a31257b0c4b710fb48bf0b70e7b262da9}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateSpatialgradients< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a574a864ff662620c8b632523d5a2fe61}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateSpatialgradients< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ab89d365bd9b7a2124796e27f59a3b190}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateSpatialgradients< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_adc3a2ad656bc48d7a11c24f546ba43bd}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateSpatialgradients< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a343650e4cd1050b8776d2fec5dfc1804}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateSpatialgradients$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateSpatialgradients< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga0b976342d491f6215953e2e65ea6a0de}{evaluate\+Spatialgradients}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$}]{grad\+U\+\_\+spat,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_adab42860d3e6d233bc937b4574606f60}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunction$<$ double, 1 $>$@{evaluateVectorFunction$<$ double, 1 $>$}}
+\index{evaluateVectorFunction$<$ double, 1 $>$@{evaluateVectorFunction$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunction$<$ double, 1 $>$()}{evaluateVectorFunction< double, 1 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gab9e164be1be244df81c932426a4bd513}{evaluate\+Vector\+Function}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a418401c6810307bd7073ff5f72b3bd77}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunction$<$ double, 2 $>$@{evaluateVectorFunction$<$ double, 2 $>$}}
+\index{evaluateVectorFunction$<$ double, 2 $>$@{evaluateVectorFunction$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunction$<$ double, 2 $>$()}{evaluateVectorFunction< double, 2 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gab9e164be1be244df81c932426a4bd513}{evaluate\+Vector\+Function}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_af05742550c00c35879af970241b9f6fc}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunction$<$ double, 3 $>$@{evaluateVectorFunction$<$ double, 3 $>$}}
+\index{evaluateVectorFunction$<$ double, 3 $>$@{evaluateVectorFunction$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunction$<$ double, 3 $>$()}{evaluateVectorFunction< double, 3 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gab9e164be1be244df81c932426a4bd513}{evaluate\+Vector\+Function}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 2, double $>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a668c45fc65b525a83192a67dd35571c6}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateVectorFunction< Sacado::Fad::DFad< double >, 1 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gab9e164be1be244df81c932426a4bd513}{evaluate\+Vector\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a28ceac224510d9b9753dbe934874d56b}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateVectorFunction< Sacado::Fad::DFad< double >, 2 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gab9e164be1be244df81c932426a4bd513}{evaluate\+Vector\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a49bf826d13c295bef33c6d320e96a6ee}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunction$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateVectorFunction< Sacado::Fad::DFad< double >, 3 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gab9e164be1be244df81c932426a4bd513}{evaluate\+Vector\+Function}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 2, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a960ffa13fae84ece6dc59bc0b91beea3}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 1 $>$@{evaluateVectorFunctionGradient$<$ double, 1 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 1 $>$@{evaluateVectorFunctionGradient$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 1 $>$()}{evaluateVectorFunctionGradient< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a62dbc9fdef114b76a143e86bb1c6df96}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 1 $>$@{evaluateVectorFunctionGradient$<$ double, 1 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 1 $>$@{evaluateVectorFunctionGradient$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 1 $>$()}{evaluateVectorFunctionGradient< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ac57e06f570eda3571e00912325612971}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 1 $>$@{evaluateVectorFunctionGradient$<$ double, 1 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 1 $>$@{evaluateVectorFunctionGradient$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 1 $>$()}{evaluateVectorFunctionGradient< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a20af37a91c353a81f4d9ad3b2dd678af}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 1 $>$@{evaluateVectorFunctionGradient$<$ double, 1 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 1 $>$@{evaluateVectorFunctionGradient$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 1 $>$()}{evaluateVectorFunctionGradient< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a268d56529013650c702d05cd22cf6148}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 2 $>$@{evaluateVectorFunctionGradient$<$ double, 2 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 2 $>$@{evaluateVectorFunctionGradient$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 2 $>$()}{evaluateVectorFunctionGradient< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a2d6fafd5544183a2ed0f3190b142c853}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 2 $>$@{evaluateVectorFunctionGradient$<$ double, 2 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 2 $>$@{evaluateVectorFunctionGradient$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 2 $>$()}{evaluateVectorFunctionGradient< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a729ea5c9032a46494dbeb1c6e1a678c6}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 2 $>$@{evaluateVectorFunctionGradient$<$ double, 2 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 2 $>$@{evaluateVectorFunctionGradient$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 2 $>$()}{evaluateVectorFunctionGradient< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a60c8d8f11fc75f1a2d1775dd5ea95d79}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 2 $>$@{evaluateVectorFunctionGradient$<$ double, 2 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 2 $>$@{evaluateVectorFunctionGradient$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 2 $>$()}{evaluateVectorFunctionGradient< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aae302a9653e837488a7c5989cff31c04}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 3 $>$@{evaluateVectorFunctionGradient$<$ double, 3 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 3 $>$@{evaluateVectorFunctionGradient$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 3 $>$()}{evaluateVectorFunctionGradient< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a05515d4765602312924bf90d040f146e}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 3 $>$@{evaluateVectorFunctionGradient$<$ double, 3 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 3 $>$@{evaluateVectorFunctionGradient$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 3 $>$()}{evaluateVectorFunctionGradient< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aa2d12bff0463147f781bf71f070705cc}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 3 $>$@{evaluateVectorFunctionGradient$<$ double, 3 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 3 $>$@{evaluateVectorFunctionGradient$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 3 $>$()}{evaluateVectorFunctionGradient< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a9aaa007fb989c138e170beb650e31c31}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ double, 3 $>$@{evaluateVectorFunctionGradient$<$ double, 3 $>$}}
+\index{evaluateVectorFunctionGradient$<$ double, 3 $>$@{evaluateVectorFunctionGradient$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ double, 3 $>$()}{evaluateVectorFunctionGradient< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{Table$<$ 3, double $>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a4c7ae8f070eed3d1d47ea4ed5dab92f9}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a1fb7d1f43d659f0916ca96a9c951931c}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a0a0df4cf8cab669622b2a696651aca8b}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ae5de39f710bc6b9e6009f18de76cadbb}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_afadde85222d3c01dcc7555e0c47d4aa9}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a85f7c6e4046993a83815972185df45ab}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a955a54316c2cc8ddcd9c9d5b148d86ff}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a27075eb9170789806dc7fb366382e29d}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_afdde5bc51307ce007f95ba2af9d138b2}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aa336e130a0840b38bf3470c6b1133bb7}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_af8f262e2bdb9eda799771e932e7bf340}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ab4669516f8f9436b73dedeb24cc0ffff}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{evaluateVectorFunctionGradient$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{evaluateVectorFunctionGradient< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga9608539d601a91aff1ba01ccc720fbe0}{evaluate\+Vector\+Function\+Gradient}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 3, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{gradU,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a4e726f8c8f17b338819f30946e6d4274}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ double, 1 $>$@{getDeformationMap$<$ double, 1 $>$}}
+\index{getDeformationMap$<$ double, 1 $>$@{getDeformationMap$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ double, 1 $>$()}{getDeformationMap< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a2128b8b5715cb868caf25dc37b818a1d}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ double, 1 $>$@{getDeformationMap$<$ double, 1 $>$}}
+\index{getDeformationMap$<$ double, 1 $>$@{getDeformationMap$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ double, 1 $>$()}{getDeformationMap< double, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a934f34bca13586e71d79d67e2d405170}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ double, 2 $>$@{getDeformationMap$<$ double, 2 $>$}}
+\index{getDeformationMap$<$ double, 2 $>$@{getDeformationMap$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ double, 2 $>$()}{getDeformationMap< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ad204a932cf153014c52e1c59196fab28}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ double, 2 $>$@{getDeformationMap$<$ double, 2 $>$}}
+\index{getDeformationMap$<$ double, 2 $>$@{getDeformationMap$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ double, 2 $>$()}{getDeformationMap< double, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a9d25cc478ac60031a64a48a1687fabc2}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ double, 3 $>$@{getDeformationMap$<$ double, 3 $>$}}
+\index{getDeformationMap$<$ double, 3 $>$@{getDeformationMap$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ double, 3 $>$()}{getDeformationMap< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a7c7b5895783c8ab03bd49b2d099a8d36}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ double, 3 $>$@{getDeformationMap$<$ double, 3 $>$}}
+\index{getDeformationMap$<$ double, 3 $>$@{getDeformationMap$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ double, 3 $>$()}{getDeformationMap< double, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a03a34b508ad64e47d31b1b36a05f4e7b}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{getDeformationMap< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ae3b81f1c251c883431db31f41eb1c340}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{getDeformationMap< Sacado::Fad::DFad< double >, 1 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 1 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 1 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a024d1c1e0bf1b0c62eb8e8eba210e04f}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{getDeformationMap< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_ad11d0f7ed38dbb3358eb93a823679880}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{getDeformationMap< Sacado::Fad::DFad< double >, 2 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 2 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 2 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_aed838368af3e1f968a4234eb18bee8e8}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{getDeformationMap< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a2b4c316f681796502a2308af3aaf6627}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMap$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{getDeformationMap< Sacado::Fad::DFad< double >, 3 >()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_ga239b206235603af9482484c29c8d57ea}{get\+Deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ 3 $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ 3 $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map,  }\item[{unsigned int}]{iteration }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a7e7354d28657df00b72c866eccede24a}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMapTranspose$<$ double, 1 $>$@{getDeformationMapTranspose$<$ double, 1 $>$}}
+\index{getDeformationMapTranspose$<$ double, 1 $>$@{getDeformationMapTranspose$<$ double, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMapTranspose$<$ double, 1 $>$()}{getDeformationMapTranspose< double, 1 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gad4003712a2346a79e13bdbfcad4d1e1c}{get\+Deformation\+Map\+Transpose}}$<$ double, 1 $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map\+\_\+new,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 1 $>$ \&}]{def\+Map\+\_\+old }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a06a40fe8ccce6ea8a8005e65e4495a90}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMapTranspose$<$ double, 2 $>$@{getDeformationMapTranspose$<$ double, 2 $>$}}
+\index{getDeformationMapTranspose$<$ double, 2 $>$@{getDeformationMapTranspose$<$ double, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMapTranspose$<$ double, 2 $>$()}{getDeformationMapTranspose< double, 2 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gad4003712a2346a79e13bdbfcad4d1e1c}{get\+Deformation\+Map\+Transpose}}$<$ double, 2 $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map\+\_\+new,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 2 $>$ \&}]{def\+Map\+\_\+old }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a867f90eaceee3244d8e5fd5692fe0117}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMapTranspose$<$ double, 3 $>$@{getDeformationMapTranspose$<$ double, 3 $>$}}
+\index{getDeformationMapTranspose$<$ double, 3 $>$@{getDeformationMapTranspose$<$ double, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMapTranspose$<$ double, 3 $>$()}{getDeformationMapTranspose< double, 3 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gad4003712a2346a79e13bdbfcad4d1e1c}{get\+Deformation\+Map\+Transpose}}$<$ double, 3 $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map\+\_\+new,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ double, 3 $>$ \&}]{def\+Map\+\_\+old }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a57b94bf3e5309492433be576f3e57c03}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}}
+\index{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$@{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 1 $>$()}{getDeformationMapTranspose< Sacado::Fad::DFad< double >, 1 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gad4003712a2346a79e13bdbfcad4d1e1c}{get\+Deformation\+Map\+Transpose}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map\+\_\+new,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 1 $>$ \&}]{def\+Map\+\_\+old }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_a4ddf5fdc58a19c93899099e38e4a2125}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}}
+\index{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$@{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 2 $>$()}{getDeformationMapTranspose< Sacado::Fad::DFad< double >, 2 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gad4003712a2346a79e13bdbfcad4d1e1c}{get\+Deformation\+Map\+Transpose}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map\+\_\+new,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 2 $>$ \&}]{def\+Map\+\_\+old }\end{DoxyParamCaption})}
+
+\mbox{\label{function_evaluations_8cc_afa134cc0a430399a7c20d2d82dd652bb}} 
+\index{functionEvaluations.cc@{functionEvaluations.cc}!getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}}
+\index{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$@{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$}!functionEvaluations.cc@{functionEvaluations.cc}}
+\subsubsection{\texorpdfstring{getDeformationMapTranspose$<$ Sacado::Fad::DFad$<$ double $>$, 3 $>$()}{getDeformationMapTranspose< Sacado::Fad::DFad< double >, 3 >()}}
+{\footnotesize\ttfamily template void \mbox{\hyperlink{group___evaluation_functions_gad4003712a2346a79e13bdbfcad4d1e1c}{get\+Deformation\+Map\+Transpose}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map\+\_\+new,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, 3 $>$ \&}]{def\+Map\+\_\+old }\end{DoxyParamCaption})}
+

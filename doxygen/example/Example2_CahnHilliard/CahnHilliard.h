@@ -120,7 +120,6 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 }
 
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example2_CahnHilliard">Github</a>. 
-*The results are generated using paramters shown below.
 * 
 \endcode
 
@@ -189,6 +188,8 @@ end
 	\endcode
 
 *\section results Results
+The results are generated using paramters shown above. 
+
 \htmlonly <style>div.image img[src="E2.png"]{width:400px;}</style> \endhtmlonly 
 \image html E2.png
  */

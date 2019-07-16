@@ -190,7 +190,6 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 
 
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example4_growth">Github</a>. 
-*The results are generated using paramters shown below.
 *\section file User interface: parameter file
 * 
 *\code{.cpp}
@@ -258,6 +257,8 @@ end
 
 	\endcode
 *\section results Results
+The results are generated using paramters shown above. 
+
 \htmlonly <style>div.image img[src="E4.png"]{width:700px;}</style> \endhtmlonly 
 \image html E4.png
  */

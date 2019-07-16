@@ -1,0 +1,463 @@
+\section{Residual$<$ T, dim $>$ Class Template Reference}
+\label{class_residual}\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+
+
+{\ttfamily \#include $<$Residual.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_residual_a4b540ba8e3ad0a1f8cfe2b4acd20493b}{Residual}} ()
+\item 
+\mbox{\hyperlink{class_residual_a8eef8c757003dd763b7dddc733f65641}{$\sim$\+Residual}} ()
+\item 
+void \mbox{\hyperlink{class_residual_a683e96e9d88d46820c0964786424fdf2}{reinit}} (dealii\+::\+Parameter\+Handler \&\+\_\+params)
+\item 
+void \mbox{\hyperlink{class_residual_a74a86942f009e483e946ac0a0036bd71}{set\+Lame\+Parameters\+By\+Youngs\+Modulus\+Poisson\+Ratio}} (double youngs\+Modulus, double poisson\+Ratio)
+\item 
+double \mbox{\hyperlink{class_residual_a10e7144d5c4746f15a48d506830790cb}{S\+V\+K3D}} (unsigned int i, unsigned int j, unsigned int k, unsigned int l)
+\item 
+double \mbox{\hyperlink{class_residual_abd1627afa72ac735e6907067e1d47bb6}{S\+V\+K2D}} (unsigned int i, unsigned int j)
+\item 
+void \mbox{\hyperlink{class_residual_a4b181b84ebad5e2adb629b4a542dc9c6}{evaluate\+Strain}} (dealii\+::\+Table$<$ 3, T $>$ \&Fe, dealii\+::\+Table$<$ 3, T $>$ \&E, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, bool infinitesimal\+\_\+strain\+\_\+indicator=false)
+\item 
+void \mbox{\hyperlink{class_residual_a4215ec5a6eabd7573e0caeee6fd194ad}{evaluate\+Saint\+\_\+\+Venant\+\_\+\+Kirchhoff\+Stress}} (dealii\+::\+Table$<$ 3, T $>$ \&P, dealii\+::\+Table$<$ 3, T $>$ \&Fe, dealii\+::\+Table$<$ 3, T $>$ \&E)
+\item 
+void \mbox{\hyperlink{class_residual_a0f9ff6a237d377803ce368b26ca39652}{evaluate\+Neo\+Hookean\+Stress}} (dealii\+::\+Table$<$ 3, T $>$ \&P, dealii\+::\+Table$<$ 3, T $>$ \&Fe)
+\item 
+void \mbox{\hyperlink{class_residual_a432fe02216f182fd241f09775131f854}{residual\+For\+Mechanics}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 3, T $>$ P)
+\item 
+void \mbox{\hyperlink{class_residual_a4c8fd158c8034b25780abfe785755baa}{residual\+For\+Neumman\+BC}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 2, T $>$ \&gradn)
+\item 
+void \mbox{\hyperlink{class_residual_a9a8f493fb66e0bd394948af13a27d821}{residual\+For\+Stokes\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&R, Table$<$ 3, T $>$ \&gradV, dealii\+::\+Table$<$ 1, T $>$ \&pressure)
+\item 
+void \mbox{\hyperlink{class_residual_a95ad863ab9066d2dbfef9db3907a911f}{residual\+For\+Stokes\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, Table$<$ 3, T $>$ \&gradV, dealii\+::\+Table$<$ 1, T $>$ \&pressure)
+\item 
+void \mbox{\hyperlink{class_residual_a34f1f680e957e21ac47c35f404e9fd6a}{residual\+For\+Navier\+\_\+\+Stokes\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, Table$<$ 2, T $>$ \&V, dealii\+::\+Table$<$ 2, double $>$ \&V\+\_\+conv, Table$<$ 3, T $>$ \&gradV, dealii\+::\+Table$<$ 1, T $>$ \&pressure)
+\item 
+void \mbox{\hyperlink{class_residual_a7e33928364e99df9a42db58752aca7f3}{evaluate\+Stokes\+Stress}} (dealii\+::\+Table$<$ 3, T $>$ P\+\_\+stoke, const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, Table$<$ 3, T $>$ \&gradV, dealii\+::\+Table$<$ 1, T $>$ \&pressure)
+\item 
+void \mbox{\hyperlink{class_residual_a882f4595a6547599cfe8f65897f45896}{residual\+For\+Continuity\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&R, Table$<$ 1, T $>$ \&div\+Velocity)
+\item 
+void \mbox{\hyperlink{class_residual_afddbdda003424f242266894fdd1f7b1a}{residual\+For\+Continuity\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, Table$<$ 1, T $>$ \&div\+Velocity)
+\item 
+void \mbox{\hyperlink{class_residual_a224462af849f5a1927bc90eb3795f2f2}{residual\+For\+Diffusion\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 1, T $>$ \&c, dealii\+::\+Table$<$ 1, double $>$ \&c\+\_\+conv, dealii\+::\+Table$<$ 2, T $>$ \&flux)
+\item 
+void \mbox{\hyperlink{class_residual_a69b8ab1cc85ae177f9c627b60b1b8468}{residual\+For\+Diffusion\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, dealii\+::\+Table$<$ 1, T $>$ \&c, dealii\+::\+Table$<$ 1, double $>$ \&c\+\_\+conv, dealii\+::\+Table$<$ 2, T $>$ \&flux)
+\item 
+void \mbox{\hyperlink{class_residual_a144663fb81fc60d4db0c5a8e45176e61}{residual\+For\+Diff\+\_\+\+Reac\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 1, T $>$ \&c, dealii\+::\+Table$<$ 1, double $>$ \&c\+\_\+conv, dealii\+::\+Table$<$ 2, T $>$ \&flux, dealii\+::\+Table$<$ 1, T $>$ \&reaction)
+\item 
+void \mbox{\hyperlink{class_residual_aa88dcdddfeefb2ba5f1f1196d8608b70}{residual\+For\+Diff\+\_\+\+Reac\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, dealii\+::\+Table$<$ 1, T $>$ \&c, dealii\+::\+Table$<$ 1, double $>$ \&c\+\_\+conv, dealii\+::\+Table$<$ 2, T $>$ \&flux, dealii\+::\+Table$<$ 1, T $>$ \&reaction)
+\item 
+void \mbox{\hyperlink{class_residual_af1d58eecf6eeae74de2f7ebc6a158b18}{residual\+For\+Poisson\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 2, T $>$ \&phi\+\_\+grad, dealii\+::\+Table$<$ 1, T $>$ \&rhs)
+\item 
+void \mbox{\hyperlink{class_residual_ad457db9bcfe7ff4d134642440cd1c4e6}{residual\+For\+Poisson\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, dealii\+::\+Table$<$ 2, T $>$ \&phi\+\_\+grad, dealii\+::\+Table$<$ 1, T $>$ \&rhs)
+\item 
+void \mbox{\hyperlink{class_residual_ad1d5fc375c6f93d9aad89fc1cf9fd25f}{residual\+For\+Poisson\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 3, T $>$ \&phi\+\_\+grad, dealii\+::\+Table$<$ 2, T $>$ \&rhs)
+\item 
+void \mbox{\hyperlink{class_residual_ada0899a86c88ceb84cc3c1155663b8ba}{residual\+For\+Poisson\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, dealii\+::\+Table$<$ 3, T $>$ \&phi\+\_\+grad, dealii\+::\+Table$<$ 2, T $>$ \&rhs)
+\item 
+void \mbox{\hyperlink{class_residual_ab90bb5476a96c0e7098264562b313b7b}{residual\+For\+General\+Weak\+Form}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 1, T $>$ \&scalar\+\_\+term, dealii\+::\+Table$<$ 2, T $>$ \&vector\+\_\+term)
+\item 
+void \mbox{\hyperlink{class_residual_a478a5fee7d75f3a16707ad5915a34d3f}{residual\+For\+General\+Weak\+Form}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, dealii\+::\+Table$<$ 1, T $>$ \&scalar\+\_\+term, dealii\+::\+Table$<$ 2, T $>$ \&vector\+\_\+term)
+\item 
+void \mbox{\hyperlink{class_residual_ad0e81fca1fe14909b80e709c1e93e393}{residual\+For\+Neumman\+BC}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 1, T $>$ \&gradn)
+\item 
+void \mbox{\hyperlink{class_residual_af2aedfc68848cd35cac392aad840db05}{residual\+For\+Neumman\+BC}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map, dealii\+::\+Table$<$ 1, T $>$ \&gradn)
+\item 
+void \mbox{\hyperlink{class_residual_a1e66cf9fc807561fc00cffb93c52d37d}{residual\+For\+Neumman\+BC}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, double gradn)
+\item 
+void \mbox{\hyperlink{class_residual_ab1fcf2c2ae911f4d0c73e59e60f1e6ad}{residual\+For\+Constant\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 1, T $>$ \&value)
+\item 
+void \mbox{\hyperlink{class_residual_a5d0f09e08ac7a6603bab9f192fd3c109}{residual\+For\+Constant\+Eq}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, dealii\+::\+Table$<$ 1, T $>$ \&R, dealii\+::\+Table$<$ 2, T $>$ \&value)
+\item 
+void \mbox{\hyperlink{class_residual_a339d8e3f5d146ad54951896c5f1e3d19}{scalling}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, unsigned int D\+OF, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&R, double scalling\+Factor)
+\item 
+double \mbox{\hyperlink{class_residual_a8ac0b75533aa9e599cc3c623e57fa5aa}{volume\+Integration}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, double value\+\_\+quad)
+\item 
+double \mbox{\hyperlink{class_residual_ad535764375d2690424b1545898b8a168}{volume\+Integration}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, double value\+\_\+quad, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+double \mbox{\hyperlink{class_residual_ab9fdc6a8b102af5beaa1e4eb6fb7fa40}{volume\+Integration}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&value\+\_\+quad)
+\item 
+double \mbox{\hyperlink{class_residual_a50acc2c1f154889f83606a2b2e2d555c}{volume\+Integration}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&value\+\_\+quad, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+double \mbox{\hyperlink{class_residual_a734c1bb6a4a56aa1c774485441e47340}{volume\+Integration}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, Table$<$ 1, double $>$ \&value\+\_\+quad)
+\item 
+double \mbox{\hyperlink{class_residual_ae097f5d9f2a92108cb0a1c7ecf4510c3}{volume\+Integration}} (const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, Table$<$ 1, double $>$ \&value\+\_\+quad, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map)
+\item 
+double \mbox{\hyperlink{class_residual_ac48cd0a04f0d2f91a23e60135652d938}{surface\+Integration}} (const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, double value\+\_\+quad)
+\item 
+double \mbox{\hyperlink{class_residual_ad44c10c32c915ba9b431c0256a2769c2}{surface\+Integration}} (const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, double value\+\_\+quad, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map\+\_\+face)
+\item 
+double \mbox{\hyperlink{class_residual_a6753ecdc0e19b7bac24615d47889ae65}{surface\+Integration}} (const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, dealii\+::\+Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&value\+\_\+quad)
+\item 
+double \mbox{\hyperlink{class_residual_a71923ccf434fa6503c37afd0ca7d0100}{surface\+Integration}} (const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, dealii\+::\+Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&value\+\_\+quad, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map\+\_\+face)
+\item 
+double \mbox{\hyperlink{class_residual_a454c4fd90cd46e3108e3d76eccbf2075}{surface\+Integration}} (const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, dealii\+::\+Table$<$ 1, double $>$ \&value\+\_\+quad)
+\item 
+double \mbox{\hyperlink{class_residual_a8c32782b660888461d7b8f8a728b2751}{surface\+Integration}} (const F\+E\+Face\+Values$<$ dim $>$ \&fe\+\_\+face\+\_\+values, dealii\+::\+Table$<$ 1, double $>$ \&value\+\_\+quad, \mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&def\+Map\+\_\+face)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+dealii\+::\+Parameter\+Handler $\ast$ \mbox{\hyperlink{class_residual_accca5aede13ea52f0c11dff4daf1ad97}{params}}
+\item 
+double \mbox{\hyperlink{class_residual_a272038ad264893a568c808f13d818b17}{current\+Time}}
+\item 
+double \mbox{\hyperlink{class_residual_a03e28be41881b703c836edbfe9b51b17}{dt}}
+\item 
+double \mbox{\hyperlink{class_residual_a3db359547eed8cfd48ca821d95f577af}{lambda}}
+\item 
+double \mbox{\hyperlink{class_residual_a74577585cf12d1712ab9c57616d49205}{mu}}
+\item 
+double \mbox{\hyperlink{class_residual_ad80875e5d1c4362e2eae93663ad723fb}{viscosity}}
+\item 
+double \mbox{\hyperlink{class_residual_a6f8c052f8417728038991f7f2826d38d}{density}}
+\item 
+std\+::string \mbox{\hyperlink{class_residual_a83be21658f82b0682f84f5dc9f10190f}{constitutive\+Model}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\label{class_residual_a4b540ba8e3ad0a1f8cfe2b4acd20493b}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!Residual@{Residual}}
+\index{Residual@{Residual}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{Residual()}{Residual()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_residual}{Residual}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\label{class_residual_a8eef8c757003dd763b7dddc733f65641}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!````~Residual@{$\sim$Residual}}
+\index{````~Residual@{$\sim$Residual}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{$\sim$Residual()}{~Residual()}}
+{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_residual}{Residual}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\label{class_residual_a0f9ff6a237d377803ce368b26ca39652}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!evaluateNeoHookeanStress@{evaluateNeoHookeanStress}}
+\index{evaluateNeoHookeanStress@{evaluateNeoHookeanStress}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{evaluateNeoHookeanStress()}{evaluateNeoHookeanStress()}}
+{\footnotesize\ttfamily void evaluate\+Neo\+Hookean\+Stress (\begin{DoxyParamCaption}\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{P,  }\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{Fe }\end{DoxyParamCaption})}
+
+evaluate stress tensor using neo\+Hookean constitutive model \mbox{\label{class_residual_a4215ec5a6eabd7573e0caeee6fd194ad}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!evaluateSaint\_Venant\_KirchhoffStress@{evaluateSaint\_Venant\_KirchhoffStress}}
+\index{evaluateSaint\_Venant\_KirchhoffStress@{evaluateSaint\_Venant\_KirchhoffStress}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{evaluateSaint\_Venant\_KirchhoffStress()}{evaluateSaint\_Venant\_KirchhoffStress()}}
+{\footnotesize\ttfamily void evaluate\+Saint\+\_\+\+Venant\+\_\+\+Kirchhoff\+Stress (\begin{DoxyParamCaption}\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{P,  }\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{Fe,  }\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{E }\end{DoxyParamCaption})}
+
+evaluate stress tensor using Saint-\/\+Venant Kirchhoff constitutive model \mbox{\label{class_residual_a7e33928364e99df9a42db58752aca7f3}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!evaluateStokesStress@{evaluateStokesStress}}
+\index{evaluateStokesStress@{evaluateStokesStress}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{evaluateStokesStress()}{evaluateStokesStress()}}
+{\footnotesize\ttfamily void evaluate\+Stokes\+Stress (\begin{DoxyParamCaption}\item[{dealii\+::\+Table$<$ 3, T $>$}]{P\+\_\+stoke,  }\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{Table$<$ 3, T $>$ \&}]{gradV,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{pressure }\end{DoxyParamCaption})}
+
+evaluate Stokes Stress \mbox{\label{class_residual_a4b181b84ebad5e2adb629b4a542dc9c6}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!evaluateStrain@{evaluateStrain}}
+\index{evaluateStrain@{evaluateStrain}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{evaluateStrain()}{evaluateStrain()}}
+{\footnotesize\ttfamily void evaluate\+Strain (\begin{DoxyParamCaption}\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{Fe,  }\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{E,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{bool}]{infinitesimal\+\_\+strain\+\_\+indicator = {\ttfamily false} }\end{DoxyParamCaption})}
+
+evaluate strain tensor with infinitesimal\+\_\+strain\+\_\+indicator from residual\+For\+Mechanics \mbox{\label{class_residual_a683e96e9d88d46820c0964786424fdf2}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!reinit@{reinit}}
+\index{reinit@{reinit}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{reinit()}{reinit()}}
+{\footnotesize\ttfamily void reinit (\begin{DoxyParamCaption}\item[{dealii\+::\+Parameter\+Handler \&}]{\+\_\+params }\end{DoxyParamCaption})}
+
+re-\/initialize parameters\+Class \mbox{\label{class_residual_ab1fcf2c2ae911f4d0c73e59e60f1e6ad}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForConstantEq@{residualForConstantEq}}
+\index{residualForConstantEq@{residualForConstantEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForConstantEq()}{residualForConstantEq()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void residual\+For\+Constant\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{value }\end{DoxyParamCaption})}
+
+assemble constant equation in scalar varibable like u=v$\ast$t in 1D \mbox{\label{class_residual_a5d0f09e08ac7a6603bab9f192fd3c109}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForConstantEq@{residualForConstantEq}}
+\index{residualForConstantEq@{residualForConstantEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForConstantEq()}{residualForConstantEq()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void residual\+For\+Constant\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{value }\end{DoxyParamCaption})}
+
+assemble constant equation in vector variable like u=v$\ast$t in 3D \mbox{\label{class_residual_a882f4595a6547599cfe8f65897f45896}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForContinuityEq@{residualForContinuityEq}}
+\index{residualForContinuityEq@{residualForContinuityEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForContinuityEq()}{residualForContinuityEq()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void residual\+For\+Continuity\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, T $>$ \&}]{R,  }\item[{Table$<$ 1, T $>$ \&}]{div\+Velocity }\end{DoxyParamCaption})}
+
+assemble residual for Continuity equation with fixed mesh of fluid doamin \mbox{\label{class_residual_afddbdda003424f242266894fdd1f7b1a}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForContinuityEq@{residualForContinuityEq}}
+\index{residualForContinuityEq@{residualForContinuityEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForContinuityEq()}{residualForContinuityEq()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void residual\+For\+Continuity\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{Table$<$ 1, T $>$ \&}]{div\+Velocity }\end{DoxyParamCaption})}
+
+assemble residual for Continuity equation with movint mesh of fluid doamin stored in deformation\+Map \mbox{\label{class_residual_a144663fb81fc60d4db0c5a8e45176e61}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForDiff\_ReacEq@{residualForDiff\_ReacEq}}
+\index{residualForDiff\_ReacEq@{residualForDiff\_ReacEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForDiff\_ReacEq()}{residualForDiff\_ReacEq()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void residual\+For\+Diff\+\_\+\+Reac\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{c,  }\item[{dealii\+::\+Table$<$ 1, double $>$ \&}]{c\+\_\+conv,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{flux,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{reaction }\end{DoxyParamCaption})}
+
+assemble residual for diffusion-\/reaction equation at reference configuration\+: general diffusion-\/reaction equation \textbackslash{}partial c/\textbackslash{}partial t + \textbackslash{}nabla flux=reaction; \mbox{\label{class_residual_aa88dcdddfeefb2ba5f1f1196d8608b70}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForDiff\_ReacEq@{residualForDiff\_ReacEq}}
+\index{residualForDiff\_ReacEq@{residualForDiff\_ReacEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForDiff\_ReacEq()}{residualForDiff\_ReacEq()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void residual\+For\+Diff\+\_\+\+Reac\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{c,  }\item[{dealii\+::\+Table$<$ 1, double $>$ \&}]{c\+\_\+conv,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{flux,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{reaction }\end{DoxyParamCaption})}
+
+same as above but assemble residual for diffusion-\/reaction equation at current configuration by deformation\+Map \mbox{\label{class_residual_a224462af849f5a1927bc90eb3795f2f2}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForDiffusionEq@{residualForDiffusionEq}}
+\index{residualForDiffusionEq@{residualForDiffusionEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForDiffusionEq()}{residualForDiffusionEq()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void residual\+For\+Diffusion\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{c,  }\item[{dealii\+::\+Table$<$ 1, double $>$ \&}]{c\+\_\+conv,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{flux }\end{DoxyParamCaption})}
+
+assemble residual for diffusion equation at reference configuration\+: general fick\textquotesingle{}s law of diffusion \textbackslash{}partial c/\textbackslash{}partial t + \textbackslash{}nabla flux=0; \mbox{\label{class_residual_a69b8ab1cc85ae177f9c627b60b1b8468}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForDiffusionEq@{residualForDiffusionEq}}
+\index{residualForDiffusionEq@{residualForDiffusionEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForDiffusionEq()}{residualForDiffusionEq()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void residual\+For\+Diffusion\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{c,  }\item[{dealii\+::\+Table$<$ 1, double $>$ \&}]{c\+\_\+conv,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{flux }\end{DoxyParamCaption})}
+
+same as above but assemble residual for diffusion equation at current configuration by deformation\+Map \mbox{\label{class_residual_ab90bb5476a96c0e7098264562b313b7b}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForGeneralWeakForm@{residualForGeneralWeakForm}}
+\index{residualForGeneralWeakForm@{residualForGeneralWeakForm}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForGeneralWeakForm()}{residualForGeneralWeakForm()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void residual\+For\+General\+Weak\+Form (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{scalar\+\_\+term,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{vector\+\_\+term }\end{DoxyParamCaption})}
+
+\mbox{\label{class_residual_a478a5fee7d75f3a16707ad5915a34d3f}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForGeneralWeakForm@{residualForGeneralWeakForm}}
+\index{residualForGeneralWeakForm@{residualForGeneralWeakForm}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForGeneralWeakForm()}{residualForGeneralWeakForm()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void residual\+For\+General\+Weak\+Form (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{scalar\+\_\+term,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{vector\+\_\+term }\end{DoxyParamCaption})}
+
+\mbox{\label{class_residual_a432fe02216f182fd241f09775131f854}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForMechanics@{residualForMechanics}}
+\index{residualForMechanics@{residualForMechanics}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForMechanics()}{residualForMechanics()}}
+{\footnotesize\ttfamily void residual\+For\+Mechanics (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 3, T $>$}]{P }\end{DoxyParamCaption})}
+
+assemble residual for mechanics governing equation, \textbackslash{}nabla P=0, with infinitesimal\+\_\+strain\+\_\+indicator (false as default) \mbox{\label{class_residual_a34f1f680e957e21ac47c35f404e9fd6a}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForNavier\_StokesEq@{residualForNavier\_StokesEq}}
+\index{residualForNavier\_StokesEq@{residualForNavier\_StokesEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForNavier\_StokesEq()}{residualForNavier\_StokesEq()}}
+{\footnotesize\ttfamily void residual\+For\+Navier\+\_\+\+Stokes\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{Table$<$ 2, T $>$ \&}]{V,  }\item[{dealii\+::\+Table$<$ 2, double $>$ \&}]{V\+\_\+conv,  }\item[{Table$<$ 3, T $>$ \&}]{gradV,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{pressure }\end{DoxyParamCaption})}
+
+assemble residual for Navier\+\_\+\+Stokes equation with moving mesh of fluid doamin stored in deformation\+Map \mbox{\label{class_residual_a4c8fd158c8034b25780abfe785755baa}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForNeummanBC@{residualForNeummanBC}}
+\index{residualForNeummanBC@{residualForNeummanBC}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForNeummanBC()}{residualForNeummanBC()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void residual\+For\+Neumman\+BC (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{gradn }\end{DoxyParamCaption})}
+
+assemble residual for Neumman boundary condtion \textbackslash{}bP\textbackslash{}cdot\textbackslash{}bn=gradn \mbox{\label{class_residual_ad0e81fca1fe14909b80e709c1e93e393}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForNeummanBC@{residualForNeummanBC}}
+\index{residualForNeummanBC@{residualForNeummanBC}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForNeummanBC()}{residualForNeummanBC()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void residual\+For\+Neumman\+BC (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{gradn }\end{DoxyParamCaption})}
+
+applying Neumman boundary condition \textbackslash{}gradc $\ast$n=gradn \mbox{\label{class_residual_af2aedfc68848cd35cac392aad840db05}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForNeummanBC@{residualForNeummanBC}}
+\index{residualForNeummanBC@{residualForNeummanBC}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForNeummanBC()}{residualForNeummanBC()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void residual\+For\+Neumman\+BC (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{gradn }\end{DoxyParamCaption})}
+
+applying Neumman boundary condition \textbackslash{}grad c $\ast$n=gradn at current configuration \mbox{\label{class_residual_a1e66cf9fc807561fc00cffb93c52d37d}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForNeummanBC@{residualForNeummanBC}}
+\index{residualForNeummanBC@{residualForNeummanBC}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForNeummanBC()}{residualForNeummanBC()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void residual\+For\+Neumman\+BC (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{double}]{gradn }\end{DoxyParamCaption})}
+
+applying Neumman boundary condition \textbackslash{}grad c $\ast$n=gradn for constant gradn \mbox{\label{class_residual_af1d58eecf6eeae74de2f7ebc6a158b18}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForPoissonEq@{residualForPoissonEq}}
+\index{residualForPoissonEq@{residualForPoissonEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForPoissonEq()}{residualForPoissonEq()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily void residual\+For\+Poisson\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{phi\+\_\+grad,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{rhs }\end{DoxyParamCaption})}
+
+assemble residual for Poisson equation at reference configuration\+: \textbackslash{}nabla$^\wedge$2 phi=rhs; \mbox{\label{class_residual_ad457db9bcfe7ff4d134642440cd1c4e6}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForPoissonEq@{residualForPoissonEq}}
+\index{residualForPoissonEq@{residualForPoissonEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForPoissonEq()}{residualForPoissonEq()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily void residual\+For\+Poisson\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{phi\+\_\+grad,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{rhs }\end{DoxyParamCaption})}
+
+same as before but assemble residual for Poisson equation at current configuration by deformation\+Map \mbox{\label{class_residual_ad1d5fc375c6f93d9aad89fc1cf9fd25f}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForPoissonEq@{residualForPoissonEq}}
+\index{residualForPoissonEq@{residualForPoissonEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForPoissonEq()}{residualForPoissonEq()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily void residual\+For\+Poisson\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{phi\+\_\+grad,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{rhs }\end{DoxyParamCaption})}
+
+\mbox{\label{class_residual_ada0899a86c88ceb84cc3c1155663b8ba}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForPoissonEq@{residualForPoissonEq}}
+\index{residualForPoissonEq@{residualForPoissonEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForPoissonEq()}{residualForPoissonEq()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily void residual\+For\+Poisson\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{dealii\+::\+Table$<$ 3, T $>$ \&}]{phi\+\_\+grad,  }\item[{dealii\+::\+Table$<$ 2, T $>$ \&}]{rhs }\end{DoxyParamCaption})}
+
+\mbox{\label{class_residual_a9a8f493fb66e0bd394948af13a27d821}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForStokesEq@{residualForStokesEq}}
+\index{residualForStokesEq@{residualForStokesEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForStokesEq()}{residualForStokesEq()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void residual\+For\+Stokes\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, T $>$ \&}]{R,  }\item[{Table$<$ 3, T $>$ \&}]{gradV,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{pressure }\end{DoxyParamCaption})}
+
+assemble residual for Stokes equation with fixed mesh of fluid doamin \mbox{\label{class_residual_a95ad863ab9066d2dbfef9db3907a911f}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!residualForStokesEq@{residualForStokesEq}}
+\index{residualForStokesEq@{residualForStokesEq}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{residualForStokesEq()}{residualForStokesEq()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void residual\+For\+Stokes\+Eq (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, T $>$ \&}]{R,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map,  }\item[{Table$<$ 3, T $>$ \&}]{gradV,  }\item[{dealii\+::\+Table$<$ 1, T $>$ \&}]{pressure }\end{DoxyParamCaption})}
+
+assemble residual for Stokes equation with moving mesh of fluid doamin stored in deformation\+Map \mbox{\label{class_residual_a339d8e3f5d146ad54951896c5f1e3d19}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!scalling@{scalling}}
+\index{scalling@{scalling}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{scalling()}{scalling()}}
+{\footnotesize\ttfamily void scalling (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{unsigned int}]{D\+OF,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&}]{R,  }\item[{double}]{scalling\+Factor }\end{DoxyParamCaption})}
+
+scale the residual by scalling\+Factor \mbox{\label{class_residual_a74a86942f009e483e946ac0a0036bd71}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!setLameParametersByYoungsModulusPoissonRatio@{setLameParametersByYoungsModulusPoissonRatio}}
+\index{setLameParametersByYoungsModulusPoissonRatio@{setLameParametersByYoungsModulusPoissonRatio}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{setLameParametersByYoungsModulusPoissonRatio()}{setLameParametersByYoungsModulusPoissonRatio()}}
+{\footnotesize\ttfamily void set\+Lame\+Parameters\+By\+Youngs\+Modulus\+Poisson\+Ratio (\begin{DoxyParamCaption}\item[{double}]{youngs\+Modulus,  }\item[{double}]{poisson\+Ratio }\end{DoxyParamCaption})}
+
+\mbox{\label{class_residual_ac48cd0a04f0d2f91a23e60135652d938}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!surfaceIntegration@{surfaceIntegration}}
+\index{surfaceIntegration@{surfaceIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{surfaceIntegration()}{surfaceIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily double surface\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{double}]{value\+\_\+quad }\end{DoxyParamCaption})}
+
+doing integration of scalar variable over surface of the cell and return the value
+
+Surface integration \mbox{\label{class_residual_ad44c10c32c915ba9b431c0256a2769c2}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!surfaceIntegration@{surfaceIntegration}}
+\index{surfaceIntegration@{surfaceIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{surfaceIntegration()}{surfaceIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily double surface\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{double}]{value\+\_\+quad,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map\+\_\+face }\end{DoxyParamCaption})}
+
+same as above, but at current configuration using Nanson\textquotesingle{}s formula \mbox{\label{class_residual_a6753ecdc0e19b7bac24615d47889ae65}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!surfaceIntegration@{surfaceIntegration}}
+\index{surfaceIntegration@{surfaceIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{surfaceIntegration()}{surfaceIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily double surface\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{dealii\+::\+Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&}]{value\+\_\+quad }\end{DoxyParamCaption})}
+
+doing integration of vector variable over surface of the cell and return the value \mbox{\label{class_residual_a71923ccf434fa6503c37afd0ca7d0100}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!surfaceIntegration@{surfaceIntegration}}
+\index{surfaceIntegration@{surfaceIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{surfaceIntegration()}{surfaceIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily double surface\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{dealii\+::\+Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&}]{value\+\_\+quad,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map\+\_\+face }\end{DoxyParamCaption})}
+
+same as above, but at current configuration using Nanson\textquotesingle{}s formula \mbox{\label{class_residual_a454c4fd90cd46e3108e3d76eccbf2075}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!surfaceIntegration@{surfaceIntegration}}
+\index{surfaceIntegration@{surfaceIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{surfaceIntegration()}{surfaceIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily double surface\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{dealii\+::\+Table$<$ 1, double $>$ \&}]{value\+\_\+quad }\end{DoxyParamCaption})}
+
+same as above, but with doulbe type input \mbox{\label{class_residual_a8c32782b660888461d7b8f8a728b2751}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!surfaceIntegration@{surfaceIntegration}}
+\index{surfaceIntegration@{surfaceIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{surfaceIntegration()}{surfaceIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily double surface\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Face\+Values$<$ dim $>$ \&}]{fe\+\_\+face\+\_\+values,  }\item[{dealii\+::\+Table$<$ 1, double $>$ \&}]{value\+\_\+quad,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map\+\_\+face }\end{DoxyParamCaption})}
+
+same as above, but at current configuration using Nanson\textquotesingle{}s formula \mbox{\label{class_residual_abd1627afa72ac735e6907067e1d47bb6}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!SVK2D@{SVK2D}}
+\index{SVK2D@{SVK2D}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{SVK2D()}{SVK2D()}}
+{\footnotesize\ttfamily double S\+V\+K2D (\begin{DoxyParamCaption}\item[{unsigned int}]{i,  }\item[{unsigned int}]{j }\end{DoxyParamCaption})}
+
+Saint-\/\+Venant Kirchhoff constitutive model in 2D \mbox{\label{class_residual_a10e7144d5c4746f15a48d506830790cb}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!SVK3D@{SVK3D}}
+\index{SVK3D@{SVK3D}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{SVK3D()}{SVK3D()}}
+{\footnotesize\ttfamily double S\+V\+K3D (\begin{DoxyParamCaption}\item[{unsigned int}]{i,  }\item[{unsigned int}]{j,  }\item[{unsigned int}]{k,  }\item[{unsigned int}]{l }\end{DoxyParamCaption})}
+
+Saint-\/\+Venant Kirchhoff constitutive model in 3D \mbox{\label{class_residual_a8ac0b75533aa9e599cc3c623e57fa5aa}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!volumeIntegration@{volumeIntegration}}
+\index{volumeIntegration@{volumeIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{volumeIntegration()}{volumeIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily double volume\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{double}]{value\+\_\+quad }\end{DoxyParamCaption})}
+
+doing integration of scalar variable over volume of the cell and return the value \mbox{\label{class_residual_ad535764375d2690424b1545898b8a168}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!volumeIntegration@{volumeIntegration}}
+\index{volumeIntegration@{volumeIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{volumeIntegration()}{volumeIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily double volume\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{double}]{value\+\_\+quad,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+same as above but at current configuration \mbox{\label{class_residual_ab9fdc6a8b102af5beaa1e4eb6fb7fa40}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!volumeIntegration@{volumeIntegration}}
+\index{volumeIntegration@{volumeIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{volumeIntegration()}{volumeIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily double volume\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&}]{value\+\_\+quad }\end{DoxyParamCaption})}
+
+doing integration of vector variable over volume of the cell and return the value
+
+volume integration \mbox{\label{class_residual_a50acc2c1f154889f83606a2b2e2d555c}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!volumeIntegration@{volumeIntegration}}
+\index{volumeIntegration@{volumeIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{volumeIntegration()}{volumeIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily double volume\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&}]{value\+\_\+quad,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+same as above but at current configuration \mbox{\label{class_residual_a734c1bb6a4a56aa1c774485441e47340}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!volumeIntegration@{volumeIntegration}}
+\index{volumeIntegration@{volumeIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{volumeIntegration()}{volumeIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily double volume\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{Table$<$ 1, double $>$ \&}]{value\+\_\+quad }\end{DoxyParamCaption})}
+
+same as above, but with doulbe type input \mbox{\label{class_residual_ae097f5d9f2a92108cb0a1c7ecf4510c3}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!volumeIntegration@{volumeIntegration}}
+\index{volumeIntegration@{volumeIntegration}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{volumeIntegration()}{volumeIntegration()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily double volume\+Integration (\begin{DoxyParamCaption}\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{Table$<$ 1, double $>$ \&}]{value\+\_\+quad,  }\item[{\mbox{\hyperlink{structdeformation_map}{deformation\+Map}}$<$ T, dim $>$ \&}]{def\+Map }\end{DoxyParamCaption})}
+
+same as above but at current configuration 
+
+\subsection{Member Data Documentation}
+\mbox{\label{class_residual_a83be21658f82b0682f84f5dc9f10190f}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!constitutiveModel@{constitutiveModel}}
+\index{constitutiveModel@{constitutiveModel}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{constitutiveModel}{constitutiveModel}}
+{\footnotesize\ttfamily std\+::string constitutive\+Model}
+
+\mbox{\label{class_residual_a272038ad264893a568c808f13d818b17}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!currentTime@{currentTime}}
+\index{currentTime@{currentTime}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{currentTime}{currentTime}}
+{\footnotesize\ttfamily double current\+Time}
+
+\mbox{\label{class_residual_a6f8c052f8417728038991f7f2826d38d}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!density@{density}}
+\index{density@{density}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{density}{density}}
+{\footnotesize\ttfamily double density}
+
+\mbox{\label{class_residual_a03e28be41881b703c836edbfe9b51b17}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!dt@{dt}}
+\index{dt@{dt}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{dt}{dt}}
+{\footnotesize\ttfamily double dt}
+
+\mbox{\label{class_residual_a3db359547eed8cfd48ca821d95f577af}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!lambda@{lambda}}
+\index{lambda@{lambda}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{lambda}{lambda}}
+{\footnotesize\ttfamily double lambda}
+
+\mbox{\label{class_residual_a74577585cf12d1712ab9c57616d49205}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!mu@{mu}}
+\index{mu@{mu}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{mu}{mu}}
+{\footnotesize\ttfamily double mu}
+
+\mbox{\label{class_residual_accca5aede13ea52f0c11dff4daf1ad97}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!params@{params}}
+\index{params@{params}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{params}{params}}
+{\footnotesize\ttfamily dealii\+::\+Parameter\+Handler$\ast$ params}
+
+\mbox{\label{class_residual_ad80875e5d1c4362e2eae93663ad723fb}} 
+\index{Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}!viscosity@{viscosity}}
+\index{viscosity@{viscosity}!Residual$<$ T, dim $>$@{Residual$<$ T, dim $>$}}
+\subsubsection{\texorpdfstring{viscosity}{viscosity}}
+{\footnotesize\ttfamily double viscosity}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+mechano\+Chem\+F\+E\+M/include/\mbox{\hyperlink{_residual_8h}{Residual.\+h}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{chemo_residual_8cc}{chemo\+Residual.\+cc}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{fluid_8cc}{fluid.\+cc}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{general_weak_form_8cc}{general\+Weak\+Form.\+cc}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{init_8cc}{init.\+cc}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{integration_8cc}{integration.\+cc}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{mechanics_8cc}{mechanics.\+cc}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{neo_hookean_8cc}{neo\+Hookean.\+cc}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{residual_8cc}{residual.\+cc}}\item 
+mechano\+Chem\+F\+E\+M/src/\+Residual/\mbox{\hyperlink{_saint___venant___kirchhoff_8cc}{Saint\+\_\+\+Venant\+\_\+\+Kirchhoff.\+cc}}\end{DoxyCompactItemize}

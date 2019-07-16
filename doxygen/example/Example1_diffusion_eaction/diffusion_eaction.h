@@ -130,8 +130,6 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 }
 \endcode
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example1_diffusion_eaction">Github</a>.
-*The results are generated using paramters shown below.
-
 
 *\section file User interface: parameter file
 
@@ -204,6 +202,7 @@ end
 	\endcode
 
 *\section results Results
+*<B>The results are generated using paramters shown above. <\B>
 The right plot shows the patterns of the Schnakenberg kinetics.
 \htmlonly <style>div.image img[src="E1.png"]{width:400px;}</style> \endhtmlonly 
 \image html E1.png

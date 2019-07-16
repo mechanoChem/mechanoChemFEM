@@ -32,8 +32,6 @@ warning: source ./supplementary.h is not a readable file or directory... skippin
 /afs/umich.edu/user/w/z/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\sum'
 /afs/umich.edu/user/w/z/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_particle/battery_particle.h:77: warning: Found unknown command `\boldsymbol'
 /afs/umich.edu/user/w/z/wzhenlin/Github/mechanoChemFEM/doxygen/example/battery_particle/battery_particle.h:286: warning: unable to resolve link to `solveClass< dim, matrixType, vectorType >::nonlinearSolve(vectorType &U, vectorType &dU)' for \link command
-/afs/umich.edu/user/w/z/wzhenlin/Github/mechanoChemFEM/doxygen/example/Example1_diffusion_eaction/diffusion_eaction.h:204: warning: Found unknown command `\B'
-/afs/umich.edu/user/w/z/wzhenlin/Github/mechanoChemFEM/doxygen/example/Example1_diffusion_eaction/diffusion_eaction.h:208: warning: end of comment block while expecting command </b>
 /afs/umich.edu/user/w/z/wzhenlin/Github/mechanoChemFEM/include/Residual.h:117: warning: Found unknown command `\partial'
 /afs/umich.edu/user/w/z/wzhenlin/Github/mechanoChemFEM/include/Residual.h:117: warning: Found unknown command `\partial'
 /afs/umich.edu/user/w/z/wzhenlin/Github/mechanoChemFEM/include/Residual.h:117: warning: Found unknown command `\nabla'

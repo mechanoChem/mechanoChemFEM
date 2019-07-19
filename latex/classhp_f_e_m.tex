@@ -1,10 +1,10 @@
-\section{hp\+F\+EM$<$ dim $>$ Class Template Reference}
-\label{classhp_f_e_m}\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
+\section{hp\-F\-E\-M$<$ dim $>$ Class Template Reference}
+\label{classhp_f_e_m}\index{hp\-F\-E\-M$<$ dim $>$@{hp\-F\-E\-M$<$ dim $>$}}
 
 
-{\ttfamily \#include $<$hp\+F\+E\+M.\+h$>$}
+{\ttfamily \#include $<$hp\-F\-E\-M.\-h$>$}
 
-Inheritance diagram for hp\+F\+EM$<$ dim $>$\+:\begin{figure}[H]
+Inheritance diagram for hp\-F\-E\-M$<$ dim $>$\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classhp_f_e_m}
@@ -13,96 +13,99 @@ Inheritance diagram for hp\+F\+EM$<$ dim $>$\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classhp_f_e_m_ac1540fdd371c0b89a90809251b618025}{hp\+F\+EM}} ()
+\hyperlink{classhp_f_e_m_ac1540fdd371c0b89a90809251b618025}{hp\-F\-E\-M} ()
 \item 
-\mbox{\hyperlink{classhp_f_e_m_acf426058508649734ee9618b5c9148c1}{$\sim$hp\+F\+EM}} ()
+\hyperlink{classhp_f_e_m_acf426058508649734ee9618b5c9148c1}{$\sim$hp\-F\-E\-M} ()
 \item 
-void \mbox{\hyperlink{classhp_f_e_m_afe86b756fb757221f5a8a16c956b7e76}{setup\+\_\+\+Fe\+System}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ F\+E\+System$<$ dim $>$$>$ $>$ \&fe\+\_\+system, hp\+::\+F\+E\+Collection$<$ dim $>$ \&fe\+\_\+collection, hp\+::\+Q\+Collection$<$ dim $>$ \&q\+\_\+collection, std\+::vector$<$ unsigned int $>$ \&primary\+\_\+variables\+\_\+dof, std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \&primary\+\_\+variables, std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&F\+E\+\_\+support, const Q\+Gauss$<$ dim $>$ \&volume\+\_\+quadrature)
+void \hyperlink{classhp_f_e_m_afe86b756fb757221f5a8a16c956b7e76}{setup\-\_\-\-Fe\-System} (std\-::vector$<$ std\-::shared\-\_\-ptr$<$ F\-E\-System$<$ dim $>$$>$ $>$ \&fe\-\_\-system, hp\-::\-F\-E\-Collection$<$ dim $>$ \&fe\-\_\-collection, hp\-::\-Q\-Collection$<$ dim $>$ \&q\-\_\-collection, std\-::vector$<$ unsigned int $>$ \&primary\-\_\-variables\-\_\-dof, std\-::vector$<$ std\-::vector$<$ std\-::string $>$ $>$ \&primary\-\_\-variables, std\-::vector$<$ std\-::vector$<$ int $>$ $>$ \&F\-E\-\_\-support, const Q\-Gauss$<$ dim $>$ \&volume\-\_\-quadrature)
 \item 
-void \mbox{\hyperlink{classhp_f_e_m_a12205240784051ad249a536cb7ee98d5}{set\+\_\+active\+\_\+fe\+\_\+indices}} (std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&F\+E\+\_\+support, hp\+::\+Do\+F\+Handler$<$ dim $>$ \&local\+\_\+handler, int domain=0)
+void \hyperlink{classhp_f_e_m_a12205240784051ad249a536cb7ee98d5}{set\-\_\-active\-\_\-fe\-\_\-indices} (std\-::vector$<$ std\-::vector$<$ int $>$ $>$ \&F\-E\-\_\-support, hp\-::\-Do\-F\-Handler$<$ dim $>$ \&local\-\_\-handler, int domain=0)
 \item 
-int \mbox{\hyperlink{classhp_f_e_m_a9ceee3881af75e3be863fdb2d1688c0e}{total\+D\+OF}} (std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \&primary\+\_\+variables)
+int \hyperlink{classhp_f_e_m_a9ceee3881af75e3be863fdb2d1688c0e}{total\-D\-O\-F} (std\-::vector$<$ std\-::vector$<$ std\-::string $>$ $>$ \&primary\-\_\-variables)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-Triangulation$<$ dim $>$ \mbox{\hyperlink{classhp_f_e_m_a1e604d1e68926caf1ebc67d2a7451783}{triangulation}}
+Triangulation$<$ dim $>$ \hyperlink{classhp_f_e_m_a1e604d1e68926caf1ebc67d2a7451783}{triangulation}
 \item 
-hp\+::\+Do\+F\+Handler$<$ dim $>$ \mbox{\hyperlink{classhp_f_e_m_ab4df20fb431f370878adc06e19280d62}{dof\+\_\+handler}}
+hp\-::\-Do\-F\-Handler$<$ dim $>$ \hyperlink{classhp_f_e_m_ab4df20fb431f370878adc06e19280d62}{dof\-\_\-handler}
 \item 
-Constraint\+Matrix \mbox{\hyperlink{classhp_f_e_m_aa08dcec4445eed1687b99cdb7b24b785}{constraints}}
+Constraint\-Matrix \hyperlink{classhp_f_e_m_aa08dcec4445eed1687b99cdb7b24b785}{constraints}
 \end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
-\subsubsection*{template$<$int dim$>$\newline
-class hp\+F\+E\+M$<$ dim $>$}
+\subsubsection*{template$<$int dim$>$class hp\-F\-E\-M$<$ dim $>$}
 
-This class is intended to be base/abstract class. It contains three essential objects in deal.\+ii\+: {\ttfamily Triangulation$<$dim$>$}, {\ttfamily hp\+::\+Do\+F\+Handler$<$dim$>$} and {\ttfamily Constraint\+Matrix}. Those three will be shared in other classes\+:
-\begin{DoxyCode}{0}
-\DoxyCodeLine{solveClass< dim, matrixType, vectorType > and FEMdata< dim, vectorType >}
+This class is intended to be base/abstract class. It contains three essential objects in deal.\-ii\-: {\ttfamily Triangulation$<$dim$>$}, {\ttfamily hp\-::\-Do\-F\-Handler$<$dim$>$} and {\ttfamily Constraint\-Matrix}. Those three will be shared in other classes\-:
+\begin{DoxyCode}
+solveClass< dim, matrixType, vectorType > and FEMdata< dim, vectorType >
 \end{DoxyCode}
- Class hp\+F\+E\+M$<$ dim $>$ also provide functions to 
+ Class hp\-F\-E\-M$<$ dim $>$ also provide functions to 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\label{classhp_f_e_m_ac1540fdd371c0b89a90809251b618025}} 
-\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}!hpFEM@{hpFEM}}
-\index{hpFEM@{hpFEM}!hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
-\subsubsection{\texorpdfstring{hpFEM()}{hpFEM()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classhp_f_e_m}{hp\+F\+EM}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-abstract class, do nothing specifically except initializing dof\+\_\+handler with triangulation. \mbox{\label{classhp_f_e_m_acf426058508649734ee9618b5c9148c1}} 
-\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}!````~hpFEM@{$\sim$hpFEM}}
-\index{````~hpFEM@{$\sim$hpFEM}!hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
-\subsubsection{\texorpdfstring{$\sim$hpFEM()}{~hpFEM()}}
-{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{classhp_f_e_m}{hp\+F\+EM}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
+\index{hp\-F\-E\-M@{hp\-F\-E\-M}!hp\-F\-E\-M@{hp\-F\-E\-M}}
+\index{hp\-F\-E\-M@{hp\-F\-E\-M}!hpFEM@{hp\-F\-E\-M}}
+\subsubsection[{hp\-F\-E\-M}]{\setlength{\rightskip}{0pt plus 5cm}{\bf hp\-F\-E\-M} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classhp_f_e_m_ac1540fdd371c0b89a90809251b618025}
+abstract class, do nothing specifically except initializing dof\-\_\-handler with triangulation. \index{hp\-F\-E\-M@{hp\-F\-E\-M}!$\sim$hp\-F\-E\-M@{$\sim$hp\-F\-E\-M}}
+\index{$\sim$hp\-F\-E\-M@{$\sim$hp\-F\-E\-M}!hpFEM@{hp\-F\-E\-M}}
+\subsubsection[{$\sim$hp\-F\-E\-M}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf hp\-F\-E\-M} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classhp_f_e_m_acf426058508649734ee9618b5c9148c1}
 
 
 \subsection{Member Function Documentation}
-\mbox{\label{classhp_f_e_m_a12205240784051ad249a536cb7ee98d5}} 
-\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}!set\_active\_fe\_indices@{set\_active\_fe\_indices}}
-\index{set\_active\_fe\_indices@{set\_active\_fe\_indices}!hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
-\subsubsection{\texorpdfstring{set\_active\_fe\_indices()}{set\_active\_fe\_indices()}}
-{\footnotesize\ttfamily void set\+\_\+active\+\_\+fe\+\_\+indices (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&}]{F\+E\+\_\+support,  }\item[{hp\+::\+Do\+F\+Handler$<$ dim $>$ \&}]{local\+\_\+handler,  }\item[{int}]{domain = {\ttfamily 0} }\end{DoxyParamCaption})}
-
-\mbox{\label{classhp_f_e_m_afe86b756fb757221f5a8a16c956b7e76}} 
-\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}!setup\_FeSystem@{setup\_FeSystem}}
-\index{setup\_FeSystem@{setup\_FeSystem}!hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
-\subsubsection{\texorpdfstring{setup\_FeSystem()}{setup\_FeSystem()}}
-{\footnotesize\ttfamily void setup\+\_\+\+Fe\+System (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ F\+E\+System$<$ dim $>$$>$ $>$ \&}]{fe\+\_\+system,  }\item[{hp\+::\+F\+E\+Collection$<$ dim $>$ \&}]{fe\+\_\+collection,  }\item[{hp\+::\+Q\+Collection$<$ dim $>$ \&}]{q\+\_\+collection,  }\item[{std\+::vector$<$ unsigned int $>$ \&}]{primary\+\_\+variables\+\_\+dof,  }\item[{std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \&}]{primary\+\_\+variables,  }\item[{std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \&}]{F\+E\+\_\+support,  }\item[{const Q\+Gauss$<$ dim $>$ \&}]{volume\+\_\+quadrature }\end{DoxyParamCaption})}
-
-\mbox{\label{classhp_f_e_m_a9ceee3881af75e3be863fdb2d1688c0e}} 
-\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}!totalDOF@{totalDOF}}
-\index{totalDOF@{totalDOF}!hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
-\subsubsection{\texorpdfstring{totalDOF()}{totalDOF()}}
-{\footnotesize\ttfamily int total\+D\+OF (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \&}]{primary\+\_\+variables }\end{DoxyParamCaption})}
-
+\index{hp\-F\-E\-M@{hp\-F\-E\-M}!set\-\_\-active\-\_\-fe\-\_\-indices@{set\-\_\-active\-\_\-fe\-\_\-indices}}
+\index{set\-\_\-active\-\_\-fe\-\_\-indices@{set\-\_\-active\-\_\-fe\-\_\-indices}!hpFEM@{hp\-F\-E\-M}}
+\subsubsection[{set\-\_\-active\-\_\-fe\-\_\-indices}]{\setlength{\rightskip}{0pt plus 5cm}void set\-\_\-active\-\_\-fe\-\_\-indices (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ std\-::vector$<$ int $>$ $>$ \&}]{F\-E\-\_\-support, }
+\item[{hp\-::\-Do\-F\-Handler$<$ dim $>$ \&}]{local\-\_\-handler, }
+\item[{int}]{domain = {\ttfamily 0}}
+\end{DoxyParamCaption}
+)}\label{classhp_f_e_m_a12205240784051ad249a536cb7ee98d5}
+\index{hp\-F\-E\-M@{hp\-F\-E\-M}!setup\-\_\-\-Fe\-System@{setup\-\_\-\-Fe\-System}}
+\index{setup\-\_\-\-Fe\-System@{setup\-\_\-\-Fe\-System}!hpFEM@{hp\-F\-E\-M}}
+\subsubsection[{setup\-\_\-\-Fe\-System}]{\setlength{\rightskip}{0pt plus 5cm}void setup\-\_\-\-Fe\-System (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ std\-::shared\-\_\-ptr$<$ F\-E\-System$<$ dim $>$$>$ $>$ \&}]{fe\-\_\-system, }
+\item[{hp\-::\-F\-E\-Collection$<$ dim $>$ \&}]{fe\-\_\-collection, }
+\item[{hp\-::\-Q\-Collection$<$ dim $>$ \&}]{q\-\_\-collection, }
+\item[{std\-::vector$<$ unsigned int $>$ \&}]{primary\-\_\-variables\-\_\-dof, }
+\item[{std\-::vector$<$ std\-::vector$<$ std\-::string $>$ $>$ \&}]{primary\-\_\-variables, }
+\item[{std\-::vector$<$ std\-::vector$<$ int $>$ $>$ \&}]{F\-E\-\_\-support, }
+\item[{const Q\-Gauss$<$ dim $>$ \&}]{volume\-\_\-quadrature}
+\end{DoxyParamCaption}
+)}\label{classhp_f_e_m_afe86b756fb757221f5a8a16c956b7e76}
+\index{hp\-F\-E\-M@{hp\-F\-E\-M}!total\-D\-O\-F@{total\-D\-O\-F}}
+\index{total\-D\-O\-F@{total\-D\-O\-F}!hpFEM@{hp\-F\-E\-M}}
+\subsubsection[{total\-D\-O\-F}]{\setlength{\rightskip}{0pt plus 5cm}int total\-D\-O\-F (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ std\-::vector$<$ std\-::string $>$ $>$ \&}]{primary\-\_\-variables}
+\end{DoxyParamCaption}
+)}\label{classhp_f_e_m_a9ceee3881af75e3be863fdb2d1688c0e}
 
 
 \subsection{Member Data Documentation}
-\mbox{\label{classhp_f_e_m_aa08dcec4445eed1687b99cdb7b24b785}} 
-\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}!constraints@{constraints}}
-\index{constraints@{constraints}!hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
-\subsubsection{\texorpdfstring{constraints}{constraints}}
-{\footnotesize\ttfamily Constraint\+Matrix constraints}
-
-\mbox{\label{classhp_f_e_m_ab4df20fb431f370878adc06e19280d62}} 
-\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}!dof\_handler@{dof\_handler}}
-\index{dof\_handler@{dof\_handler}!hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
-\subsubsection{\texorpdfstring{dof\_handler}{dof\_handler}}
-{\footnotesize\ttfamily hp\+::\+Do\+F\+Handler$<$dim$>$ dof\+\_\+handler}
-
-\mbox{\label{classhp_f_e_m_a1e604d1e68926caf1ebc67d2a7451783}} 
-\index{hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}!triangulation@{triangulation}}
-\index{triangulation@{triangulation}!hpFEM$<$ dim $>$@{hpFEM$<$ dim $>$}}
-\subsubsection{\texorpdfstring{triangulation}{triangulation}}
-{\footnotesize\ttfamily Triangulation$<$dim$>$ triangulation}
+\index{hp\-F\-E\-M@{hp\-F\-E\-M}!constraints@{constraints}}
+\index{constraints@{constraints}!hpFEM@{hp\-F\-E\-M}}
+\subsubsection[{constraints}]{\setlength{\rightskip}{0pt plus 5cm}Constraint\-Matrix constraints}\label{classhp_f_e_m_aa08dcec4445eed1687b99cdb7b24b785}
+\index{hp\-F\-E\-M@{hp\-F\-E\-M}!dof\-\_\-handler@{dof\-\_\-handler}}
+\index{dof\-\_\-handler@{dof\-\_\-handler}!hpFEM@{hp\-F\-E\-M}}
+\subsubsection[{dof\-\_\-handler}]{\setlength{\rightskip}{0pt plus 5cm}hp\-::\-Do\-F\-Handler$<$dim$>$ dof\-\_\-handler}\label{classhp_f_e_m_ab4df20fb431f370878adc06e19280d62}
+\index{hp\-F\-E\-M@{hp\-F\-E\-M}!triangulation@{triangulation}}
+\index{triangulation@{triangulation}!hpFEM@{hp\-F\-E\-M}}
+\subsubsection[{triangulation}]{\setlength{\rightskip}{0pt plus 5cm}Triangulation$<$dim$>$ triangulation}\label{classhp_f_e_m_a1e604d1e68926caf1ebc67d2a7451783}
 
 
-
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-mechano\+Chem\+F\+E\+M/include/\mbox{\hyperlink{hp_f_e_m_8h}{hp\+F\+E\+M.\+h}}\item 
-mechano\+Chem\+F\+E\+M/src/hp\+F\+E\+Mbase/\mbox{\hyperlink{hp_f_e_m_8cc}{hp\+F\+E\+M.\+cc}}\item 
-mechano\+Chem\+F\+E\+M/src/hp\+F\+E\+Mbase/\mbox{\hyperlink{setup___fe_system_8cc}{setup\+\_\+\+Fe\+System.\+cc}}\end{DoxyCompactItemize}
+mechano\-Chem\-F\-E\-M/include/\hyperlink{hp_f_e_m_8h}{hp\-F\-E\-M.\-h}\item 
+mechano\-Chem\-F\-E\-M/src/hp\-F\-E\-Mbase/\hyperlink{hp_f_e_m_8cc}{hp\-F\-E\-M.\-cc}\item 
+mechano\-Chem\-F\-E\-M/src/hp\-F\-E\-Mbase/\hyperlink{setup___fe_system_8cc}{setup\-\_\-\-Fe\-System.\-cc}\end{DoxyCompactItemize}

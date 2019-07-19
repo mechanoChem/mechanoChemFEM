@@ -1,162 +1,167 @@
 \hypertarget{growth_Introduction}{}\section{Introduction}\label{growth_Introduction}
-The Cahn-\/\+Hilliard equation is\+: \[ \frac{\partial C}{\partial t}=\nabla\cdot(M\nabla\mu) \] \[ \mu=\frac{\partial g}{\partial C}-\nabla\cdot k\nabla C \] where $g$ is a non-\/convex, \`{}`homogeneous'\textquotesingle{} free energy density function, whose form has been chosen \[ g(C)=\omega(C-C_\alpha)^2(C-C_\beta)^2 \] The boundary condiiton is \[ \nabla\mu\cdot\boldsymbol{n}=0;\quad \nabla C\cdot\boldsymbol{n}=0 \text{ on }\Gamma \] The double-\/well non-\/convex free energy density function, $g(C)$, drives segregation of the system into two distinct types.
+The Cahn-\/\-Hilliard equation is\-: \[ \frac{\partial C}{\partial t}=\nabla\cdot(M\nabla\mu) \] \[ \mu=\frac{\partial g}{\partial C}-\nabla\cdot k\nabla C \] where $g$ is a non-\/convex, ``homogeneous'' free energy density function, whose form has been chosen \[ g(C)=\omega(C-C_\alpha)^2(C-C_\beta)^2 \] The boundary condiiton is \[ \nabla\mu\cdot\boldsymbol{n}=0;\quad \nabla C\cdot\boldsymbol{n}=0 \text{ on }\Gamma \] The double-\/well non-\/convex free energy density function, $g(C)$, drives segregation of the system into two distinct types.
 
-Attention is called to the well-\/known fourth-\/order nature of this partial differential equation in the concentration $C$. The polynomial basis can only achieve C0 continuity across the element. To overcome this difficuity, we split the equation into two equations\+: \[ \frac{\partial C}{\partial t}+\nabla\cdot(-M\nabla\mu)=0 \] \[ k\nabla^2 C=\frac{\partial g}{\partial C}-\mu \] The first equation is diffusion equation, and the second one the Possion equation. \hypertarget{growth_imple}{}\section{Implementation\+: level 1 user}\label{growth_imple}
-We first define the two scalar primary variables\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{std::vector<std::vector<std::string> > primary\_variables(2);        }
-\DoxyCodeLine{      primary\_variables[0].push\_back(\textcolor{stringliteral}{"c1"}); primary\_variables[0].push\_back(\textcolor{stringliteral}{"component\_is\_scalar"});}
-\DoxyCodeLine{      primary\_variables[1].push\_back(\textcolor{stringliteral}{"mu"}); primary\_variables[1].push\_back(\textcolor{stringliteral}{"component\_is\_scalar"});}
+Attention is called to the well-\/known fourth-\/order nature of this partial differential equation in the concentration $C$. The polynomial basis can only achieve C0 continuity across the element. To overcome this difficuity, we split the equation into two equations\-: \[ \frac{\partial C}{\partial t}+\nabla\cdot(-M\nabla\mu)=0 \] \[ k\nabla^2 C=\frac{\partial g}{\partial C}-\mu \] The first equation is diffusion equation, and the second one the Possion equation. \hypertarget{growth_imple}{}\section{Implementation\-: level 1 user}\label{growth_imple}
+We first define the two scalar primary variables\-: 
+\begin{DoxyCode}
+std::vector<std::vector<std::string> > primary\_variables(2);        
+      primary\_variables[0].push\_back(\textcolor{stringliteral}{"c1"}); primary\_variables[0].push\_back(\textcolor{stringliteral}{"component\_is\_scalar"});
+      primary\_variables[1].push\_back(\textcolor{stringliteral}{"mu"}); primary\_variables[1].push\_back(\textcolor{stringliteral}{"component\_is\_scalar"});
 \end{DoxyCode}
- and we solve both species in one domain. We define the domain and basis order for each primal variables\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{int} number\_domain=1;}
-\DoxyCodeLine{\textcolor{keywordtype}{int} diff\_degree=1;}
-\DoxyCodeLine{std::vector<std::vector<int> > FE\_support(number\_domain);\textcolor{comment}{// store order of polynomial basis functions, 0 means FE\_Nothing   }}
-\DoxyCodeLine{FE\_support[0].push\_back(diff\_degree);}
-\DoxyCodeLine{FE\_support[0].push\_back(diff\_degree);}
+ and we solve both species in one domain. We define the domain and basis order for each primal variables\-: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} number\_domain=1;
+\textcolor{keywordtype}{int} diff\_degree=1;
+std::vector<std::vector<int> > FE\_support(number\_domain);\textcolor{comment}{// store order of polynomial basis functions, 0
+       means FE\_Nothing   }
+FE\_support[0].push\_back(diff\_degree);
+FE\_support[0].push\_back(diff\_degree);
 \end{DoxyCode}
- Before launching the \href{../html/classinit_bound_val_probs.html}{\texttt{ init\+Bound\+Val\+Probs}}, we need to initialize the {\bfseries{Parameter\+Handler}} and declare all paramters we may use\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{ParameterHandler params;}
-\DoxyCodeLine{params.enter\_subsection(\textcolor{stringliteral}{"Concentration"});   }
-\DoxyCodeLine{params.declare\_entry(\textcolor{stringliteral}{"omega"},\textcolor{stringliteral}{"0"},Patterns::Double() );}
-\DoxyCodeLine{params.declare\_entry(\textcolor{stringliteral}{"c\_alpha"},\textcolor{stringliteral}{"0"},Patterns::Double() );}
-\DoxyCodeLine{\textcolor{comment}{//... more parameters }}
-\DoxyCodeLine{params.leave\_subsection();  }
+ Before launching the \href{../html/classinit_bound_val_probs.html}{\tt init\-Bound\-Val\-Probs}, we need to initialize the {\bfseries Parameter\-Handler} and declare all paramters we may use\-: 
+\begin{DoxyCode}
+ParameterHandler params;
+params.enter\_subsection(\textcolor{stringliteral}{"Concentration"});   
+params.declare\_entry(\textcolor{stringliteral}{"omega"},\textcolor{stringliteral}{"0"},Patterns::Double() );
+params.declare\_entry(\textcolor{stringliteral}{"c\_alpha"},\textcolor{stringliteral}{"0"},Patterns::Double() );
+\textcolor{comment}{//... more parameters }
+params.leave\_subsection();  
 \end{DoxyCode}
- Now we just need to have class inherited from \href{../html/classinit_bound_val_probs.html}{\texttt{ init\+Bound\+Val\+Probs}} class, and overload the \href{../html/classinit_bound_val_probs.html\#ac8f2c3e2a1040c70b709900dc3dfdaea}{\texttt{ get\+\_\+residual()}} function\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keyword}{class }CahnHilliard: \textcolor{keyword}{public} initBoundValProbs<dim>}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keyword}{public}:}
-\DoxyCodeLine{        CahnHilliard(std::vector<std::vector<std::string> > \_primary\_variables, std::vector<std::vector<int> > \_FE\_support, ParameterHandler\& \_params);}
-\DoxyCodeLine{        \textcolor{comment}{//this is a overloaded function }}
-\DoxyCodeLine{        \textcolor{keywordtype}{void} get\_residual(\textcolor{keyword}{const} \textcolor{keyword}{typename} hp::DoFHandler<dim>::active\_cell\_iterator \&cell, \textcolor{keyword}{const} FEValues<dim>\& fe\_values, Table<1, Sacado::Fad::DFad<double> >\& R, Table<1, Sacado::Fad::DFad<double>>\& ULocal, Table<1, double >\& ULocalConv);}
-\DoxyCodeLine{        ParameterHandler* params;       }
-\DoxyCodeLine{\};}
+ Now we just need to have class inherited from \href{../html/classinit_bound_val_probs.html}{\tt init\-Bound\-Val\-Probs} class, and overload the \href{../html/classinit_bound_val_probs.html#ac8f2c3e2a1040c70b709900dc3dfdaea}{\tt get\-\_\-residual()} function\-: 
+\begin{DoxyCode}
+\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>
+\textcolor{keyword}{class }CahnHilliard: \textcolor{keyword}{public} initBoundValProbs<dim>
+\{
+    \textcolor{keyword}{public}:
+        CahnHilliard(std::vector<std::vector<std::string> > \_primary\_variables, std::vector<
+      std::vector<int> > \_FE\_support, ParameterHandler& \_params);
+        \textcolor{comment}{//this is a overloaded function }
+        \textcolor{keywordtype}{void} get_residual(\textcolor{keyword}{const} \textcolor{keyword}{typename} hp::DoFHandler<dim>::active\_cell\_iterator &cell, \textcolor{keyword}{const} 
+      FEValues<dim>& fe\_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, 
+      Table<1, double >& ULocalConv);
+        ParameterHandler* params;       
+\};
 \end{DoxyCode}
- In the overloaded {\bfseries{get\+\_\+residual}} function, we define the residual for our problem. As our equations are one standrad diffusion equation and Possion equation, we can simiply use the pre-\/defined model\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{this->ResidualEq.residualForDiffusionEq(fe\_values, c\_dof, R, c\_1, c\_1\_conv, j\_c\_1);}
-\DoxyCodeLine{this->ResidualEq.residualForPoissonEq(fe\_values, mu\_dof, R, kappa\_c\_1\_grad, rhs\_mu);}
+ In the overloaded {\bfseries get\-\_\-residual} function, we define the residual for our problem. As our equations are one standrad diffusion equation and Possion equation, we can simiply use the pre-\/defined model\-: 
+\begin{DoxyCode}
+this->ResidualEq.residualForDiffusionEq(fe\_values, c\_dof, R, c\_1, c\_1\_conv, j\_c\_1);
+this->ResidualEq.residualForPoissonEq(fe\_values, mu\_dof, R, kappa\_c\_1\_grad, rhs\_mu);
 \end{DoxyCode}
- fe\+\_\+values\+: deal.\+ii Finite element evaluated in quadrature points of a cell.
+ fe\-\_\-values\-: deal.\-ii Finite element evaluated in quadrature points of a cell.
 
-c\+\_\+1\+\_\+dof, mu\+\_\+dof\+: dof index for two primial variables.
+c\-\_\-1\-\_\-dof, mu\-\_\-dof\-: dof index for two primial variables.
 
-R\+: residual vector of a cell.
+R\-: residual vector of a cell.
 
-c\+\_\+1\+: concentration at current time step.
+c\-\_\-1\-: concentration at current time step.
 
-c\+\_\+1\+\_\+conv\+: concentration at the last time step.
+c\-\_\-1\-\_\-conv\-: concentration at the last time step.
 
-j\+\_\+c\+\_\+1\+: flux of the species.
+j\-\_\-c\-\_\-1\-: flux of the species.
 
-kappa\+\_\+c\+\_\+1\+\_\+grad\+:left hand side of the Possion equation.
+kappa\-\_\-c\-\_\-1\-\_\-grad\-:left hand side of the Possion equation.
 
-rhs\+\_\+mu\+: right hand side of the Possion equation.
-
-
+rhs\-\_\-mu\-: right hand side of the Possion equation. 
 
  The following code deomonstrate how to evaluate the variables defined above. 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{dealii::Table<1,double>  c\_1\_conv(n\_q\_points);}
-\DoxyCodeLine{dealii::Table<1,Sacado::Fad::DFad<double> > c\_1(n\_q\_points), mu(n\_q\_points);}
-\DoxyCodeLine{dealii::Table<2,Sacado::Fad::DFad<double> >  c\_1\_grad(n\_q\_points, dim), mu\_grad(n\_q\_points, dim);}
-\DoxyCodeLine{}
-\DoxyCodeLine{evaluateScalarFunction<double,dim>(fe\_values, c\_dof, ULocalConv, c\_1\_conv);}
-\DoxyCodeLine{evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe\_values, c\_dof, ULocal, c\_1);   }
-\DoxyCodeLine{evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe\_values, c\_dof, ULocal, c\_1\_grad);}
-\DoxyCodeLine{}
-\DoxyCodeLine{evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe\_values, mu\_dof, ULocal, mu);   }
-\DoxyCodeLine{evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe\_values, mu\_dof, ULocal, mu\_grad);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{comment}{//evaluate diffusion and reaction term}}
-\DoxyCodeLine{dealii::Table<1,Sacado::Fad::DFad<double> > rhs\_mu(n\_q\_points);}
-\DoxyCodeLine{dealii::Table<2,Sacado::Fad::DFad<double> > j\_c\_1(n\_q\_points, dim), kappa\_c\_1\_grad(n\_q\_points, dim);}
-\DoxyCodeLine{}
-\DoxyCodeLine{j\_c\_1=table\_scaling<Sacado::Fad::DFad<double>, dim>(mu\_grad,-M);\textcolor{comment}{//-D\_1*c\_1\_grad}}
-\DoxyCodeLine{kappa\_c\_1\_grad=table\_scaling<Sacado::Fad::DFad<double>, dim>(c\_1\_grad,kappa);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} q=0; q<n\_q\_points;q++) rhs\_mu[q]=2*omega*(c\_1[q]-c\_alpha)*(c\_1[q]-c\_beta)*(2*c\_1[q]-c\_alpha-c\_beta)-mu[q];}
+\begin{DoxyCode}
+dealii::Table<1,double>  c\_1\_conv(n\_q\_points);
+dealii::Table<1,Sacado::Fad::DFad<double> > c\_1(n\_q\_points), mu(n\_q\_points);
+dealii::Table<2,Sacado::Fad::DFad<double> >  c\_1\_grad(n\_q\_points, dim), mu\_grad(n\_q\_points, dim);
+
+evaluateScalarFunction<double,dim>(fe\_values, c\_dof, ULocalConv, c\_1\_conv);
+evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe\_values, c\_dof, ULocal, c\_1);   
+evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe\_values, c\_dof, ULocal, c\_1\_grad);
+
+evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe\_values, mu\_dof, ULocal, mu);   
+evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe\_values, mu\_dof, ULocal, mu\_grad);
+
+\textcolor{comment}{//evaluate diffusion and reaction term}
+dealii::Table<1,Sacado::Fad::DFad<double> > rhs\_mu(n\_q\_points);
+dealii::Table<2,Sacado::Fad::DFad<double> > j\_c\_1(n\_q\_points, dim), kappa\_c\_1\_grad(n\_q\_points, dim);
+
+j\_c\_1=table\_scaling<Sacado::Fad::DFad<double>, dim>(mu\_grad,-M);\textcolor{comment}{//-D\_1*c\_1\_grad}
+kappa\_c\_1\_grad=table\_scaling<Sacado::Fad::DFad<double>, dim>(c\_1\_grad,kappa);
+
+\textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} q=0; q<n\_q\_points;q++) rhs\_mu[q]=2*omega*(c\_1[q]-c\_alpha)*(c\_1[q]-c\_beta)*(2*c\_1[q]-
+      c\_alpha-c\_beta)-mu[q];
 \end{DoxyCode}
 
 
-The last thing we need to define is the initial condition, we can simpily overload the \href{../html/class_initial_conditions.html\#aa10cfdd7350c3810a8deab707f397657}{\texttt{ vector\+\_\+value()}} function of the \href{../html/class_initial_conditions.html}{\texttt{ Initial\+Conditions }} class, 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} InitialConditions<dim>::vector\_value (\textcolor{keyword}{const} Point<dim>   \&p, Vector<double>   \&values)\textcolor{keyword}{ const}\{}
-\DoxyCodeLine{  Assert (values.size() == 2, ExcDimensionMismatch (values.size(), 2));}
-\DoxyCodeLine{  values(1) = 0;    }
-\DoxyCodeLine{ values(0)= 0.5 + 0.04*(static\_cast <double> (rand())/(static\_cast <double>(RAND\_MAX))-0.5);}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{}
-\DoxyCodeLine{  The complete implementaion can be found at  <a href=\textcolor{stringliteral}{"https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example2\_CahnHilliard"}>Github</a>. }
-\end{DoxyCode}
-\hypertarget{growth_file}{}\section{Parameter file\+: interface for level 2 user}\label{growth_file}
+The last thing we need to define is the initial condition, we can simpily overload the \href{../html/class_initial_conditions.html#aa10cfdd7350c3810a8deab707f397657}{\tt vector\-\_\-value()} function of the \href{../html/class_initial_conditions.html}{\tt Initial\-Conditions } class, 
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} InitialConditions<dim>::vector_value (\textcolor{keyword}{const} Point<dim>   &p, Vector<double>   &values)\textcolor{keyword}{ const}\{
+  Assert (values.size() == 2, ExcDimensionMismatch (values.size(), 2));
+  values(1) = 0;    
+ values(0)= 0.5 + 0.04*(static\_cast <\textcolor{keywordtype}{double}> (rand())/(static\_cast <double>(RAND\_MAX))-0.5);
+\}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#parameters file}}
-\DoxyCodeLine{}
-\DoxyCodeLine{subsection Problem}
-\DoxyCodeLine{set print\_parameter = \textcolor{keyword}{true}}
-\DoxyCodeLine{}
-\DoxyCodeLine{set dt = 5}
-\DoxyCodeLine{set totalTime = 250}
-\DoxyCodeLine{set current\_increment = 0}
-\DoxyCodeLine{set off\_output\_index=0}
-\DoxyCodeLine{set current\_time = 0}
-\DoxyCodeLine{set resuming\_from\_snapshot = \textcolor{keyword}{false}}
-\DoxyCodeLine{}
-\DoxyCodeLine{set output\_directory = output/}
-\DoxyCodeLine{set snapshot\_directory = snapshot/}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#FEM}}
-\DoxyCodeLine{set volume\_quadrature = 3 }
-\DoxyCodeLine{set face\_quadrature = 2 }
-\DoxyCodeLine{}
-\DoxyCodeLine{end}
-\DoxyCodeLine{}
-\DoxyCodeLine{subsection Geometry}
-\DoxyCodeLine{set X\_0 = 0}
-\DoxyCodeLine{set Y\_0 = 0}
-\DoxyCodeLine{set Z\_0 = 0}
-\DoxyCodeLine{set X\_end = 1 }
-\DoxyCodeLine{set Y\_end = 1}
-\DoxyCodeLine{set Z\_end = 2.0 \#no need to 2D}
-\DoxyCodeLine{}
-\DoxyCodeLine{set element\_div\_x=50}
-\DoxyCodeLine{set element\_div\_y=50}
-\DoxyCodeLine{set element\_div\_z=5 \#no need to 2D}
-\DoxyCodeLine{end}
-\DoxyCodeLine{}
-\DoxyCodeLine{subsection Concentration}
-\DoxyCodeLine{set omega = 0.25}
-\DoxyCodeLine{set c\_alpha = 0.2}
-\DoxyCodeLine{set c\_beta = 0.8}
-\DoxyCodeLine{set kappa = 0.002}
-\DoxyCodeLine{set M=0.1}
-\DoxyCodeLine{end}
-\DoxyCodeLine{                        }
-\DoxyCodeLine{\textcolor{preprocessor}{\#}}
-\DoxyCodeLine{\textcolor{preprocessor}{\# parameters reserved for deal.ii first level code:}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#nonLinear\_method : classicNewton}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#solver\_method (direct) : PETScsuperLU, PETScMUMPS}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#solver\_method (iterative) : PETScGMRES PETScBoomerAMG}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#relative\_norm\_tolerance, absolute\_norm\_tolerance, max\_iterations}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#}}
-\DoxyCodeLine{subsection Nonlinear\_solver}
-\DoxyCodeLine{        set nonLinear\_method = classicNewton}
-\DoxyCodeLine{        set relative\_norm\_tolerance = 1.0e-12}
-\DoxyCodeLine{        set absolute\_norm\_tolerance = 1.0e-12}
-\DoxyCodeLine{        set max\_iterations = 10}
-\DoxyCodeLine{end}
-\DoxyCodeLine{                        }
-\DoxyCodeLine{subsection Linear\_solver}
-\DoxyCodeLine{        set solver\_method = PETScsuperLU}
-\DoxyCodeLine{        set system\_matrix\_symmetricFlag = \textcolor{keyword}{false} \# \textcolor{keywordflow}{default} is \textcolor{keyword}{false}}
-\DoxyCodeLine{end}
+* The complete implementaion can be found at  <a href=\textcolor{stringliteral}{"
+      https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example2\_CahnHilliard"}>Github</a>. 
+* 
+\end{DoxyCode}
+\hypertarget{growth_file}{}\section{Parameter file\-: interface for level 2 user}\label{growth_file}
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#parameters file}
+\textcolor{preprocessor}{}
+subsection Problem
+set print\_parameter = \textcolor{keyword}{true}
+
+set dt = 5
+set totalTime = 250
+set current\_increment = 0
+set off\_output\_index=0
+set current\_time = 0
+set resuming\_from\_snapshot = \textcolor{keyword}{false}
+
+set output\_directory = output/
+set snapshot\_directory = snapshot/
+
+\textcolor{preprocessor}{#FEM}
+\textcolor{preprocessor}{}set volume\_quadrature = 3 
+set face\_quadrature = 2 
+
+end
+
+subsection Geometry
+set X\_0 = 0
+set Y\_0 = 0
+set Z\_0 = 0
+set X\_end = 1 
+set Y\_end = 1
+set Z\_end = 2.0 #no need to 2D
+
+set element\_div\_x=50
+set element\_div\_y=50
+set element\_div\_z=5 #no need to 2D
+end
+
+subsection Concentration
+set omega = 0.25
+set c\_alpha = 0.2
+set c\_beta = 0.8
+set kappa = 0.002
+set M=0.1
+end
+                        
+\textcolor{preprocessor}{#}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{# parameters reserved for deal.ii first level code:}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#nonLinear\_method : classicNewton}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#solver\_method (direct) : PETScsuperLU, PETScMUMPS}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#solver\_method (iterative) : PETScGMRES PETScBoomerAMG}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#relative\_norm\_tolerance, absolute\_norm\_tolerance, max\_iterations}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#}
+\textcolor{preprocessor}{}subsection Nonlinear\_solver
+        set nonLinear\_method = classicNewton
+        set relative\_norm\_tolerance = 1.0e-12
+        set absolute\_norm\_tolerance = 1.0e-12
+        set max\_iterations = 10
+end
+                        
+subsection Linear\_solver
+        set solver\_method = PETScsuperLU
+        set system\_matrix\_symmetricFlag = \textcolor{keyword}{false} # \textcolor{keywordflow}{default} is \textcolor{keyword}{false}
+end
 \end{DoxyCode}
 \hypertarget{growth_results}{}\section{Results}\label{growth_results}
 The results are generated using paramters shown above.

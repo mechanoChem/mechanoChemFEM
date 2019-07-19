@@ -1,5 +1,5 @@
 /**
- * @page growth Example 4 : Growth model
+ * @page growth Example 4 : Coupled mechano-chemical system with multiple doamins
  * \section Introduction
 * In this example, we first want to solve one diffusion equation:
  * \f[
@@ -28,7 +28,7 @@ In this example, we have two domains/materials. The diffusion equation is solved
 We want to model that the species transports from domain 1 into domain 2, and casues expansion of domain 2. By this example, we demonstrate how to setup 
 multiple domains, using <B>FE_Nothing</B> to exclude primary varialbe from certain doamin, and applying DOF constrains on the interface.
 
-*\section imple Implementation
+*\section imple Implementation: level 1 user
 We first define the one scalar variable, and one vector variable for displacment:
 *\code{.cpp}
 std::vector<std::vector<std::string> > primary_variables(2);		
@@ -190,7 +190,7 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 
 
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example4_growth">Github</a>. 
-*\section file User interface: parameter file
+*\section file Parameter file: interface for level 2 user
 * 
 *\code{.cpp}
 #parameters file

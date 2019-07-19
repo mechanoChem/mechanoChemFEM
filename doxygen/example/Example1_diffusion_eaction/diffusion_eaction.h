@@ -25,7 +25,7 @@ The boundary condiiton is
 The coupled diffusion-reaction equations for two species follow Schnakenberg kinetics.
 For an activator-inhibitor species pair, these equations use auto-inhibition with cross-activation of a short range species, and auto-activation with cross-inhibition of a long range species to form so-called Turing patterns.
 
-*\section imple Implementation: Equation level 
+*\section imple Implementation: level 1 user 
 We first define the two scalar primary variables:
 *\code{.cpp}
 std::vector<std::vector<std::string> > primary_variables(2);		
@@ -131,7 +131,7 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 \endcode
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example1_diffusion_eaction">Github</a>.
 
-*\section file User interface: parameter file
+*\section file Parameter file: interface for level 2 user
 
 * 
 *\code{.cpp}

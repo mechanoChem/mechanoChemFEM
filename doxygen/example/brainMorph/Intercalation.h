@@ -1,5 +1,5 @@
 /**
- * @page brain_morph Example 1 : Brain morph with finte strain mechanics
+ * @page brain_morph Example 5 : Coupled mechano-chemical system with multiple growth model
  * \section Introduction
  * We solve two diffusion reaction equations:
  * \f[

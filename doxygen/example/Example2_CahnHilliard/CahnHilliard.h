@@ -27,7 +27,7 @@ C0 continuity across the element. To overcome this difficuity, we split the equa
 k\nabla^2 C=\frac{\partial g}{\partial C}-\mu
 \f]
 The first equation is diffusion equation, and the second one the Possion equation. 
-*\section imple Implementation: Equation level 
+*\section imple Implementation: level 1 user 
 We first define the two scalar primary variables:
 *\code{.cpp}
 std::vector<std::vector<std::string> > primary_variables(2);		

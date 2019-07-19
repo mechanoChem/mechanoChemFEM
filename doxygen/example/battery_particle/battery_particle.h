@@ -1,5 +1,5 @@
 /**
- * @page battery_particle Example 3 : Battery model at particle scale
+ * @page battery_particle Battery model at particle scale
  * \section Introduction
 A battery cell consists of porous, positive and negative electrodes, a separator and current collectors(see Figure 1). 
 The electrode consists of active-material particles and carbon-binders, and the porespace is filled with the electrolyte.
@@ -12,7 +12,7 @@ The treatment is at the particle scale, at whic hthe active particles held toget
 
 This code is used to generate results for paper:
 <B>A multi-physics battery model with particle scale resolution ofporosity evolution driven by intercalation strain and electrolyte flow</B>,
-Z. Wang, K. Garikipati, arXiv:1804.06436
+Z. Wang, K. Garikipati, Journal of the Electrochemical Society, Vol. 165: A2421-A438, 2018, doi:10.1149/2.0141811jes 
 *\htmlonly <style>div.image img[src="domain_binder.png"]{width:700px;}</style> \endhtmlonly 
 *\image html domain_binder.png A schematic showing each component of a battery cell. The entire battery cell is a rolled or folded structure of a layer.
 
@@ -199,7 +199,7 @@ Compatibility at the solid-fliud interfaces equates the ALE mesh deformation, \f
 \htmlonly <style>div.image img[src="boundaryCondition.png"]{width:500px;}</style> \endhtmlonly 
 \image html boundaryCondition.png A schematic showing boundary and interface conditions.
 
-\section Implementation
+\section Implementation Implementation: level 0 developer
 The code is very similar to \ref battery_electrodeScale. Here we mainly discuss how to apply interface condition and apply constraints during solve step.
 
 <B>Applying boundary and interface conditions</B><br>
@@ -465,13 +465,13 @@ subsection Linear_solver
 		set system_matrix_symmetricFlag = false # default is false
 end
 \endcode
-\htmlonly <style>div.image img[src="C_li_293.png"]{width:500px;}</style> \endhtmlonly 
-\image html C_li_293.png Lithium concentration under different far-field boundary conditions and intercalation strain as-sumptions
+\htmlonly <style>div.image img[src="c_li.png"]{width:500px;}</style> \endhtmlonly 
+\image html c_li.png Lithium concentration under different far-field boundary conditions and intercalation strain as-sumptions
 
-\htmlonly <style>div.image img[src="C_li_plus_293.png"]{width:500px;}</style> \endhtmlonly 
-\image html C_li_plus_293.png Lithium ion concentration under different far-field boundary conditions and intercalation strain as-sumptions
+\htmlonly <style>div.image img[src="c_li_plus.png"]{width:500px;}</style> \endhtmlonly 
+\image html c_li_plus.png Lithium ion concentration under different far-field boundary conditions and intercalation strain as-sumptions
 		
-\htmlonly <style>div.image img[src="v_293.png"]{width:500px;}</style> \endhtmlonly 
-\image html v_293.png Velocity of electrolyte under different far-field boundary conditions and intercalation strain as-sumptions
- * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example3%20Battery%20model%20at%20particle%20scale">Github</a>. 
+\htmlonly <style>div.image img[src="V.png"]{width:500px;}</style> \endhtmlonly 
+\image html V.png Velocity of electrolyte under different far-field boundary conditions and intercalation strain as-sumptions
+ * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Battery%20model%20at%20particle%20scale">Github</a>. 
  */

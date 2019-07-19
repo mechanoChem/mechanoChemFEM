@@ -1,5 +1,5 @@
 /**
- * @page battery_electrodeScale Example 2 : Battery model at electrode scale
+ * @page battery_electrodeScale Battery model at electrode scale
  * \section Introduction
  *A battery cell usually consists of porous, positive and negative electrodes, a separator and a current collector.
  * This example present coupled continuum formulation for the electrostatic, chemical, thermal and mechanical processes in battery materials.
@@ -96,8 +96,7 @@ Assuming the binder to deform at constant volume during charging and discharging
 *\htmlonly <style>div.image img[src="3d-solving-domain.png"]{width:700px;}</style> \endhtmlonly 
 *\image html 3d-solving-domain.png A schematic of the initial/boundary value problem showing the fields solved for in the electrode and separator sub-domains, with the surfaces labelled.
 
-\section Implementation
-The coding flow is very similar to \ref Intercalation. We discuss the difference here.
+\section Implementation Implementation: level 0 developer
 
 \subsection sub1 Read parameters.prm before defining primary variables over different domains
 Here, we want to read the paramters from file at the very beginning of main.cc instead of at run.cc. This is can be easily done at main.cc
@@ -459,16 +458,16 @@ subsection Linear_solver
 end
 \endcode
 
-\htmlonly <style>div.image img[src="baElectrode_C1.png"]{width:1000px;}</style> \endhtmlonly 
-\htmlonly <style>div.image img[src="baElectrode_jn.png"]{width:1000px;}</style> \endhtmlonly 
-\image html baElectrode_C1.png
+\htmlonly <style>div.image img[src="10C-phis.png"]{width:800px;}</style> \endhtmlonly 
+\htmlonly <style>div.image img[src="10C-epl-thermal.png"]{width:800px;}</style> \endhtmlonly 
+\image html 10C-phis.png
 <br>
-\image html baElectrode_jn.png 
+\image html 10C-epl-thermal.png 
 
 Many more results can be found at paper: <B>Intercalation driven porosity effects on the electro-chemo-thermo-mechanical response in continuum models for battery material electrodes</B>,
  Z. Wang, J. Siegel, K. Garikipati, Journal of the Electrochemical Society, Vol. 164: A2199-A2212, 2017, doi:10.1149/2.0081712jes 
 *\section com Complete code
- * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example2%20Battery%20model%20at%20electrode%20scale">Github</a>. 
+ * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Battery%20model%20at%20electrode%20scale">Github</a>. 
  */
  */
 

@@ -29,7 +29,7 @@ Before implementing the code, we rewrite the equation in the form of standard di
 r=-M\frac{\partial g}{\partial C}=-2M\omega(C-C_\alpha)(C-C_\beta)(2C-C_\alpha-C_\beta)
 \f]
 
-*\section imple Implementation
+*\section imple Implementation: level 1 user
 We first define the single scalar primary variable:
 *\code{.cpp}
 		std::vector<std::vector<std::string> > primary_variables(1);		
@@ -117,7 +117,7 @@ double InitialConditions<dim>::value(const Point<dim>   &p, const unsigned int 	
 
 * The complete implementaion can be found at  <a href="https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example3_Allen-Cahn">Github</a>. 
 
-*\section file User interface: parameter file
+*\section file Parameter file: interface for level 2 user
 * 
 *\code{.cpp}
 #parameters file

@@ -1,0 +1,352 @@
+\section{init\-Bound\-Val\-Probs$<$ dim $>$ Class Template Reference}
+\label{classinit_bound_val_probs}\index{init\-Bound\-Val\-Probs$<$ dim $>$@{init\-Bound\-Val\-Probs$<$ dim $>$}}
+
+
+{\ttfamily \#include $<$init\-Bound\-Val\-Probs.\-h$>$}
+
+Inheritance diagram for init\-Bound\-Val\-Probs$<$ dim $>$\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.100196cm]{classinit_bound_val_probs}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classinit_bound_val_probs_af836a88e7f9df1d43d6f93c4747858fe}{init\-Bound\-Val\-Probs} (std\-::vector$<$ std\-::vector$<$ std\-::string $>$ $>$ \-\_\-primary\-\_\-variables, std\-::vector$<$ std\-::vector$<$ int $>$ $>$ \-\_\-\-F\-E\-\_\-support, Parameter\-Handler \&\-\_\-params)
+\item 
+\hyperlink{classinit_bound_val_probs_a38783cfbd559fbad9696ebd823769f53}{$\sim$init\-Bound\-Val\-Probs} ()
+\item 
+void \hyperlink{classinit_bound_val_probs_af60fa8844da68c0cd887b300855c086c}{declare\-\_\-parameters\-\_\-init\-Bound\-Val\-Probs} ()
+\item 
+void \hyperlink{classinit_bound_val_probs_a8f0c6272cf214048329d7cf1aa58b860}{setup\-\_\-system} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_af78c2c6284234c93872188334fb997d8}{update\-Linear\-System} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_ac8f2c3e2a1040c70b709900dc3dfdaea}{get\-\_\-residual} (const typename hp\-::\-Do\-F\-Handler$<$ dim $>$\-::active\-\_\-cell\-\_\-iterator \&cell, const F\-E\-Values$<$ dim $>$ \&fe\-\_\-values, Table$<$ 1, Sacado\-::\-Fad\-::\-D\-Fad$<$ double $>$ $>$ \&R, Table$<$ 1, Sacado\-::\-Fad\-::\-D\-Fad$<$ double $>$$>$ \&U\-Local, Table$<$ 1, double $>$ \&U\-Local\-Conv)
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_a7a8df3f99e1d582c6c136b16d6e34d13}{pre\-\_\-run} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_a13a43e6d814de94978c515cb084873b1}{run} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_af7d39f0eac0af0ed5785935ac72a1e7d}{solve} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_aadd4943e52767516f3f7c5460ea35032}{make\-\_\-grid} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_a7ed791f6f2c777286743182bf2f481bf}{mark\-\_\-boundary} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_a8d32e81a32f1aaf5682065458548e8e2}{apply\-\_\-initial\-\_\-condition} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_aea55077652a6fc58f1c0c250c4abd856}{refine\-\_\-grid} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_a5fb25d0981afa1f7d87875fffcc272c1}{set\-Mult\-Domain} ()
+\item 
+virtual void \hyperlink{classinit_bound_val_probs_a97967f7bc5aba9a2158464d2de9d2352}{setup\-\_\-constraints} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{classinit_bound_val_probs_a68c7b36b181a92a91945137308e74a6d}{current\-\_\-dt}
+\item 
+Parameter\-Handler $\ast$ \hyperlink{classinit_bound_val_probs_a31d5e7a5228d9d55ba00fae854fcfaa0}{params}
+\item 
+\hyperlink{class_residual}{Residual}$<$ Sacado\-::\-Fad\-::\-D\-Fad\\*
+$<$ double $>$, dim $>$ \hyperlink{classinit_bound_val_probs_adeaa7307c79088ccde0e35feb27eb0b0}{Residual\-Eq}
+\item 
+\hyperlink{class_f_e_mdata}{F\-E\-Mdata}$<$ dim, \\*
+P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector $>$ \hyperlink{classinit_bound_val_probs_af7b22336bf40c3a2865dff2cb708136d}{F\-E\-Mdata\-\_\-out}
+\item 
+std\-::vector$<$ std\-::vector\\*
+$<$ std\-::string $>$ $>$ \hyperlink{classinit_bound_val_probs_a4933860ad833b7b9bd2b8effee5c36d6}{primary\-\_\-variables}
+\item 
+std\-::vector$<$ unsigned int $>$ \hyperlink{classinit_bound_val_probs_a20e37946082ad677ffab164a6dead8b3}{primary\-\_\-variables\-\_\-dof}
+\item 
+std\-::vector$<$ std\-::vector$<$ int $>$ $>$ \hyperlink{classinit_bound_val_probs_ab0e06106bfe2ab795399d91169290e8a}{F\-E\-\_\-support}
+\item 
+std\-::vector$<$ std\-::shared\-\_\-ptr\\*
+$<$ F\-E\-System$<$ dim $>$ $>$ $>$ \hyperlink{classinit_bound_val_probs_abeb9cdd6078108148320406c68bfa0d1}{fe\-\_\-system}
+\item 
+P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector \hyperlink{classinit_bound_val_probs_ae539da5c193ce7d8d07f654067f111ca}{solution}
+\item 
+P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector \hyperlink{classinit_bound_val_probs_ab5b94542feace0c45c2c69696ce9a266}{solution\-\_\-prev}
+\item 
+const Q\-Gauss$<$ dim $>$ $\ast$ \hyperlink{classinit_bound_val_probs_a7e2363a91f6f1626f463f3a06108c03b}{volume\-\_\-quadrature}
+\item 
+const Q\-Gauss$<$ dim-\/1 $>$ $\ast$ \hyperlink{classinit_bound_val_probs_af302403bba9078de92d05b4cbe6f44dd}{common\-\_\-face\-\_\-quadrature}
+\item 
+hp\-::\-F\-E\-Collection$<$ dim $>$ \hyperlink{classinit_bound_val_probs_a02ae472de2833f8763bfe10520be87db}{fe\-\_\-collection}
+\item 
+hp\-::\-Q\-Collection$<$ dim $>$ \hyperlink{classinit_bound_val_probs_a748ffdb78a6294cd525fe5979bb30649}{q\-\_\-collection}
+\item 
+Constraint\-Matrix \hyperlink{classinit_bound_val_probs_aa08dcec4445eed1687b99cdb7b24b785}{constraints}
+\item 
+double \hyperlink{classinit_bound_val_probs_a9db8ce20b0de349987441b8d6830c97a}{domain\-\_\-\-X}
+\item 
+double \hyperlink{classinit_bound_val_probs_ae7a91557a809cfab5c3dee32ae1de8cb}{domain\-\_\-\-Y}
+\item 
+double \hyperlink{classinit_bound_val_probs_a199da42cf8a8e51eaeb5cacfdef1c37e}{domain\-\_\-\-Z}
+\item 
+int \hyperlink{classinit_bound_val_probs_a9a75da991ed1d29646660b1d16a0418f}{current\-\_\-increment}
+\item 
+double \hyperlink{classinit_bound_val_probs_a557717b333342f1e34a905d6162ce493}{current\-\_\-time}
+\item 
+double \hyperlink{classinit_bound_val_probs_abc276e47b85df9dd59f248e663b3b971}{total\-\_\-time}
+\item 
+M\-P\-I\-\_\-\-Comm \hyperlink{classinit_bound_val_probs_a03728ed636ca889ae407c84d181bc611}{mpi\-\_\-communicator}
+\item 
+const unsigned int \hyperlink{classinit_bound_val_probs_a7320777b83fedaf7a54cdb2fb0ef02e4}{n\-\_\-mpi\-\_\-processes}
+\item 
+const unsigned int \hyperlink{classinit_bound_val_probs_a6c34addfd3b89faf0a7b4e3fe1236fb0}{this\-\_\-mpi\-\_\-process}
+\item 
+Conditional\-O\-Stream \hyperlink{classinit_bound_val_probs_a914f651bc9ca2e223b243695dd37ba53}{pcout}
+\item 
+std\-::string \hyperlink{classinit_bound_val_probs_a95f0e6f488a1faae487cab4198842ebe}{output\-\_\-directory}
+\item 
+std\-::string \hyperlink{classinit_bound_val_probs_af7ed49a5ea9a6407acb26c5a729d4bd0}{snapshot\-\_\-directory}
+\item 
+int \hyperlink{classinit_bound_val_probs_a5413329bd1d73152f051cc8d11134f60}{skip\-\_\-output}
+\item 
+std\-::string \hyperlink{classinit_bound_val_probs_a3ce0cf43eef10e4757e8a225e9b98e96}{snapfile}
+\item 
+bool \hyperlink{classinit_bound_val_probs_a34ea26077a33f792a9468a4d0ac2feaf}{resuming\-\_\-from\-\_\-snapshot}
+\item 
+bool \hyperlink{classinit_bound_val_probs_ade455df689de2bc3fb79e1f468fd5404}{save\-\_\-snapshot}
+\item 
+int \hyperlink{classinit_bound_val_probs_a5b4ed019aaae8f2992f9418a93cd1dbb}{off\-\_\-output\-\_\-index}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{init\-Bound\-Val\-Probs}]{\setlength{\rightskip}{0pt plus 5cm}{\bf init\-Bound\-Val\-Probs} (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ std\-::vector$<$ std\-::string $>$ $>$}]{\-\_\-primary\-\_\-variables, }
+\item[{std\-::vector$<$ std\-::vector$<$ int $>$ $>$}]{\-\_\-\-F\-E\-\_\-support, }
+\item[{Parameter\-Handler \&}]{\-\_\-params}
+\end{DoxyParamCaption}
+)}\label{classinit_bound_val_probs_af836a88e7f9df1d43d6f93c4747858fe}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!$\sim$init\-Bound\-Val\-Probs@{$\sim$init\-Bound\-Val\-Probs}}
+\index{$\sim$init\-Bound\-Val\-Probs@{$\sim$init\-Bound\-Val\-Probs}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{$\sim$init\-Bound\-Val\-Probs}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf init\-Bound\-Val\-Probs} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classinit_bound_val_probs_a38783cfbd559fbad9696ebd823769f53}
+
+
+\subsection{Member Function Documentation}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!apply\-\_\-initial\-\_\-condition@{apply\-\_\-initial\-\_\-condition}}
+\index{apply\-\_\-initial\-\_\-condition@{apply\-\_\-initial\-\_\-condition}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{apply\-\_\-initial\-\_\-condition}]{\setlength{\rightskip}{0pt plus 5cm}void apply\-\_\-initial\-\_\-condition (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_a8d32e81a32f1aaf5682065458548e8e2}
+default\-: set all solution vector to be zero \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!declare\-\_\-parameters\-\_\-init\-Bound\-Val\-Probs@{declare\-\_\-parameters\-\_\-init\-Bound\-Val\-Probs}}
+\index{declare\-\_\-parameters\-\_\-init\-Bound\-Val\-Probs@{declare\-\_\-parameters\-\_\-init\-Bound\-Val\-Probs}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{declare\-\_\-parameters\-\_\-init\-Bound\-Val\-Probs}]{\setlength{\rightskip}{0pt plus 5cm}void declare\-\_\-parameters\-\_\-init\-Bound\-Val\-Probs (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classinit_bound_val_probs_af60fa8844da68c0cd887b300855c086c}
+declare generic paramters \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!get\-\_\-residual@{get\-\_\-residual}}
+\index{get\-\_\-residual@{get\-\_\-residual}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{get\-\_\-residual}]{\setlength{\rightskip}{0pt plus 5cm}void get\-\_\-residual (
+\begin{DoxyParamCaption}
+\item[{const typename hp\-::\-Do\-F\-Handler$<$ dim $>$\-::active\-\_\-cell\-\_\-iterator \&}]{cell, }
+\item[{const F\-E\-Values$<$ dim $>$ \&}]{fe\-\_\-values, }
+\item[{Table$<$ 1, Sacado\-::\-Fad\-::\-D\-Fad$<$ double $>$ $>$ \&}]{R, }
+\item[{Table$<$ 1, Sacado\-::\-Fad\-::\-D\-Fad$<$ double $>$$>$ \&}]{U\-Local, }
+\item[{Table$<$ 1, double $>$ \&}]{U\-Local\-Conv}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_ac8f2c3e2a1040c70b709900dc3dfdaea}
+abstract function \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!make\-\_\-grid@{make\-\_\-grid}}
+\index{make\-\_\-grid@{make\-\_\-grid}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{make\-\_\-grid}]{\setlength{\rightskip}{0pt plus 5cm}void make\-\_\-grid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_aadd4943e52767516f3f7c5460ea35032}
+default\-:make hyper\-\_\-rectangle mesh \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!mark\-\_\-boundary@{mark\-\_\-boundary}}
+\index{mark\-\_\-boundary@{mark\-\_\-boundary}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{mark\-\_\-boundary}]{\setlength{\rightskip}{0pt plus 5cm}void mark\-\_\-boundary (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_a7ed791f6f2c777286743182bf2f481bf}
+mark boundary \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!pre\-\_\-run@{pre\-\_\-run}}
+\index{pre\-\_\-run@{pre\-\_\-run}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{pre\-\_\-run}]{\setlength{\rightskip}{0pt plus 5cm}void pre\-\_\-run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_a7a8df3f99e1d582c6c136b16d6e34d13}
+generic function calls before running the simulations \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!refine\-\_\-grid@{refine\-\_\-grid}}
+\index{refine\-\_\-grid@{refine\-\_\-grid}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{refine\-\_\-grid}]{\setlength{\rightskip}{0pt plus 5cm}void refine\-\_\-grid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_aea55077652a6fc58f1c0c250c4abd856}
+default\-: pure virtual function \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!run@{run}}
+\index{run@{run}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{run}]{\setlength{\rightskip}{0pt plus 5cm}void run (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_a13a43e6d814de94978c515cb084873b1}
+generic function calls to runthe simulations \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!set\-Mult\-Domain@{set\-Mult\-Domain}}
+\index{set\-Mult\-Domain@{set\-Mult\-Domain}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{set\-Mult\-Domain}]{\setlength{\rightskip}{0pt plus 5cm}void set\-Mult\-Domain (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_a5fb25d0981afa1f7d87875fffcc272c1}
+default\-: pure virtual function \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!setup\-\_\-constraints@{setup\-\_\-constraints}}
+\index{setup\-\_\-constraints@{setup\-\_\-constraints}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{setup\-\_\-constraints}]{\setlength{\rightskip}{0pt plus 5cm}void setup\-\_\-constraints (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_a97967f7bc5aba9a2158464d2de9d2352}
+default\-: set up constrains \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!setup\-\_\-system@{setup\-\_\-system}}
+\index{setup\-\_\-system@{setup\-\_\-system}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{setup\-\_\-system}]{\setlength{\rightskip}{0pt plus 5cm}void setup\-\_\-system (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classinit_bound_val_probs_a8f0c6272cf214048329d7cf1aa58b860}
+this function should not be modified. \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!solve@{solve}}
+\index{solve@{solve}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{solve}]{\setlength{\rightskip}{0pt plus 5cm}void solve (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_af7d39f0eac0af0ed5785935ac72a1e7d}
+solve \index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!update\-Linear\-System@{update\-Linear\-System}}
+\index{update\-Linear\-System@{update\-Linear\-System}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{update\-Linear\-System}]{\setlength{\rightskip}{0pt plus 5cm}void update\-Linear\-System (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classinit_bound_val_probs_af78c2c6284234c93872188334fb997d8}
+overload function from solve\-Class 
+
+Reimplemented from \hyperlink{classsolve_class_af78c2c6284234c93872188334fb997d8}{solve\-Class$<$ dim, P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Sparse\-Matrix, P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector $>$}.
+
+
+
+\subsection{Member Data Documentation}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!common\-\_\-face\-\_\-quadrature@{common\-\_\-face\-\_\-quadrature}}
+\index{common\-\_\-face\-\_\-quadrature@{common\-\_\-face\-\_\-quadrature}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{common\-\_\-face\-\_\-quadrature}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-Gauss$<$dim-\/1$>$$\ast$ common\-\_\-face\-\_\-quadrature}\label{classinit_bound_val_probs_af302403bba9078de92d05b4cbe6f44dd}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!constraints@{constraints}}
+\index{constraints@{constraints}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{constraints}]{\setlength{\rightskip}{0pt plus 5cm}Constraint\-Matrix constraints}\label{classinit_bound_val_probs_aa08dcec4445eed1687b99cdb7b24b785}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!current\-\_\-dt@{current\-\_\-dt}}
+\index{current\-\_\-dt@{current\-\_\-dt}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{current\-\_\-dt}]{\setlength{\rightskip}{0pt plus 5cm}double current\-\_\-dt}\label{classinit_bound_val_probs_a68c7b36b181a92a91945137308e74a6d}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!current\-\_\-increment@{current\-\_\-increment}}
+\index{current\-\_\-increment@{current\-\_\-increment}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{current\-\_\-increment}]{\setlength{\rightskip}{0pt plus 5cm}int current\-\_\-increment}\label{classinit_bound_val_probs_a9a75da991ed1d29646660b1d16a0418f}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!current\-\_\-time@{current\-\_\-time}}
+\index{current\-\_\-time@{current\-\_\-time}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{current\-\_\-time}]{\setlength{\rightskip}{0pt plus 5cm}double current\-\_\-time}\label{classinit_bound_val_probs_a557717b333342f1e34a905d6162ce493}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!domain\-\_\-\-X@{domain\-\_\-\-X}}
+\index{domain\-\_\-\-X@{domain\-\_\-\-X}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{domain\-\_\-\-X}]{\setlength{\rightskip}{0pt plus 5cm}double domain\-\_\-\-X}\label{classinit_bound_val_probs_a9db8ce20b0de349987441b8d6830c97a}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!domain\-\_\-\-Y@{domain\-\_\-\-Y}}
+\index{domain\-\_\-\-Y@{domain\-\_\-\-Y}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{domain\-\_\-\-Y}]{\setlength{\rightskip}{0pt plus 5cm}double domain\-\_\-\-Y}\label{classinit_bound_val_probs_ae7a91557a809cfab5c3dee32ae1de8cb}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!domain\-\_\-\-Z@{domain\-\_\-\-Z}}
+\index{domain\-\_\-\-Z@{domain\-\_\-\-Z}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{domain\-\_\-\-Z}]{\setlength{\rightskip}{0pt plus 5cm}double domain\-\_\-\-Z}\label{classinit_bound_val_probs_a199da42cf8a8e51eaeb5cacfdef1c37e}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!fe\-\_\-collection@{fe\-\_\-collection}}
+\index{fe\-\_\-collection@{fe\-\_\-collection}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{fe\-\_\-collection}]{\setlength{\rightskip}{0pt plus 5cm}hp\-::\-F\-E\-Collection$<$dim$>$ fe\-\_\-collection}\label{classinit_bound_val_probs_a02ae472de2833f8763bfe10520be87db}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!F\-E\-\_\-support@{F\-E\-\_\-support}}
+\index{F\-E\-\_\-support@{F\-E\-\_\-support}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{F\-E\-\_\-support}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::vector$<$int$>$ $>$ F\-E\-\_\-support}\label{classinit_bound_val_probs_ab0e06106bfe2ab795399d91169290e8a}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!fe\-\_\-system@{fe\-\_\-system}}
+\index{fe\-\_\-system@{fe\-\_\-system}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{fe\-\_\-system}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::shared\-\_\-ptr$<$F\-E\-System$<$dim$>$ $>$ $>$ fe\-\_\-system}\label{classinit_bound_val_probs_abeb9cdd6078108148320406c68bfa0d1}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!F\-E\-Mdata\-\_\-out@{F\-E\-Mdata\-\_\-out}}
+\index{F\-E\-Mdata\-\_\-out@{F\-E\-Mdata\-\_\-out}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{F\-E\-Mdata\-\_\-out}]{\setlength{\rightskip}{0pt plus 5cm}{\bf F\-E\-Mdata}$<$dim, P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector$>$ F\-E\-Mdata\-\_\-out}\label{classinit_bound_val_probs_af7b22336bf40c3a2865dff2cb708136d}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!mpi\-\_\-communicator@{mpi\-\_\-communicator}}
+\index{mpi\-\_\-communicator@{mpi\-\_\-communicator}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{mpi\-\_\-communicator}]{\setlength{\rightskip}{0pt plus 5cm}M\-P\-I\-\_\-\-Comm mpi\-\_\-communicator}\label{classinit_bound_val_probs_a03728ed636ca889ae407c84d181bc611}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!n\-\_\-mpi\-\_\-processes@{n\-\_\-mpi\-\_\-processes}}
+\index{n\-\_\-mpi\-\_\-processes@{n\-\_\-mpi\-\_\-processes}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{n\-\_\-mpi\-\_\-processes}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned int n\-\_\-mpi\-\_\-processes}\label{classinit_bound_val_probs_a7320777b83fedaf7a54cdb2fb0ef02e4}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!off\-\_\-output\-\_\-index@{off\-\_\-output\-\_\-index}}
+\index{off\-\_\-output\-\_\-index@{off\-\_\-output\-\_\-index}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{off\-\_\-output\-\_\-index}]{\setlength{\rightskip}{0pt plus 5cm}int off\-\_\-output\-\_\-index}\label{classinit_bound_val_probs_a5b4ed019aaae8f2992f9418a93cd1dbb}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!output\-\_\-directory@{output\-\_\-directory}}
+\index{output\-\_\-directory@{output\-\_\-directory}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{output\-\_\-directory}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string output\-\_\-directory}\label{classinit_bound_val_probs_a95f0e6f488a1faae487cab4198842ebe}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!params@{params}}
+\index{params@{params}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{params}]{\setlength{\rightskip}{0pt plus 5cm}Parameter\-Handler$\ast$ params}\label{classinit_bound_val_probs_a31d5e7a5228d9d55ba00fae854fcfaa0}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!pcout@{pcout}}
+\index{pcout@{pcout}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{pcout}]{\setlength{\rightskip}{0pt plus 5cm}Conditional\-O\-Stream pcout}\label{classinit_bound_val_probs_a914f651bc9ca2e223b243695dd37ba53}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!primary\-\_\-variables@{primary\-\_\-variables}}
+\index{primary\-\_\-variables@{primary\-\_\-variables}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{primary\-\_\-variables}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::vector$<$std\-::string$>$ $>$ primary\-\_\-variables}\label{classinit_bound_val_probs_a4933860ad833b7b9bd2b8effee5c36d6}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!primary\-\_\-variables\-\_\-dof@{primary\-\_\-variables\-\_\-dof}}
+\index{primary\-\_\-variables\-\_\-dof@{primary\-\_\-variables\-\_\-dof}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{primary\-\_\-variables\-\_\-dof}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$unsigned int $>$ primary\-\_\-variables\-\_\-dof}\label{classinit_bound_val_probs_a20e37946082ad677ffab164a6dead8b3}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!q\-\_\-collection@{q\-\_\-collection}}
+\index{q\-\_\-collection@{q\-\_\-collection}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{q\-\_\-collection}]{\setlength{\rightskip}{0pt plus 5cm}hp\-::\-Q\-Collection$<$dim$>$ q\-\_\-collection}\label{classinit_bound_val_probs_a748ffdb78a6294cd525fe5979bb30649}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!Residual\-Eq@{Residual\-Eq}}
+\index{Residual\-Eq@{Residual\-Eq}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{Residual\-Eq}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Residual}$<$Sacado\-::\-Fad\-::\-D\-Fad$<$double$>$,dim$>$ Residual\-Eq}\label{classinit_bound_val_probs_adeaa7307c79088ccde0e35feb27eb0b0}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!resuming\-\_\-from\-\_\-snapshot@{resuming\-\_\-from\-\_\-snapshot}}
+\index{resuming\-\_\-from\-\_\-snapshot@{resuming\-\_\-from\-\_\-snapshot}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{resuming\-\_\-from\-\_\-snapshot}]{\setlength{\rightskip}{0pt plus 5cm}bool resuming\-\_\-from\-\_\-snapshot}\label{classinit_bound_val_probs_a34ea26077a33f792a9468a4d0ac2feaf}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!save\-\_\-snapshot@{save\-\_\-snapshot}}
+\index{save\-\_\-snapshot@{save\-\_\-snapshot}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{save\-\_\-snapshot}]{\setlength{\rightskip}{0pt plus 5cm}bool save\-\_\-snapshot}\label{classinit_bound_val_probs_ade455df689de2bc3fb79e1f468fd5404}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!skip\-\_\-output@{skip\-\_\-output}}
+\index{skip\-\_\-output@{skip\-\_\-output}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{skip\-\_\-output}]{\setlength{\rightskip}{0pt plus 5cm}int skip\-\_\-output}\label{classinit_bound_val_probs_a5413329bd1d73152f051cc8d11134f60}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!snapfile@{snapfile}}
+\index{snapfile@{snapfile}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{snapfile}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string snapfile}\label{classinit_bound_val_probs_a3ce0cf43eef10e4757e8a225e9b98e96}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!snapshot\-\_\-directory@{snapshot\-\_\-directory}}
+\index{snapshot\-\_\-directory@{snapshot\-\_\-directory}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{snapshot\-\_\-directory}]{\setlength{\rightskip}{0pt plus 5cm}std\-::string snapshot\-\_\-directory}\label{classinit_bound_val_probs_af7ed49a5ea9a6407acb26c5a729d4bd0}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!solution@{solution}}
+\index{solution@{solution}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{solution}]{\setlength{\rightskip}{0pt plus 5cm}P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector solution}\label{classinit_bound_val_probs_ae539da5c193ce7d8d07f654067f111ca}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!solution\-\_\-prev@{solution\-\_\-prev}}
+\index{solution\-\_\-prev@{solution\-\_\-prev}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{solution\-\_\-prev}]{\setlength{\rightskip}{0pt plus 5cm}P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector solution\-\_\-prev}\label{classinit_bound_val_probs_ab5b94542feace0c45c2c69696ce9a266}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!this\-\_\-mpi\-\_\-process@{this\-\_\-mpi\-\_\-process}}
+\index{this\-\_\-mpi\-\_\-process@{this\-\_\-mpi\-\_\-process}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{this\-\_\-mpi\-\_\-process}]{\setlength{\rightskip}{0pt plus 5cm}const unsigned int this\-\_\-mpi\-\_\-process}\label{classinit_bound_val_probs_a6c34addfd3b89faf0a7b4e3fe1236fb0}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!total\-\_\-time@{total\-\_\-time}}
+\index{total\-\_\-time@{total\-\_\-time}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{total\-\_\-time}]{\setlength{\rightskip}{0pt plus 5cm}double total\-\_\-time}\label{classinit_bound_val_probs_abc276e47b85df9dd59f248e663b3b971}
+\index{init\-Bound\-Val\-Probs@{init\-Bound\-Val\-Probs}!volume\-\_\-quadrature@{volume\-\_\-quadrature}}
+\index{volume\-\_\-quadrature@{volume\-\_\-quadrature}!initBoundValProbs@{init\-Bound\-Val\-Probs}}
+\subsubsection[{volume\-\_\-quadrature}]{\setlength{\rightskip}{0pt plus 5cm}const Q\-Gauss$<$dim$>$$\ast$ volume\-\_\-quadrature}\label{classinit_bound_val_probs_a7e2363a91f6f1626f463f3a06108c03b}
+
+
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{init_bound_val_probs_8h}{init\-Bound\-Val\-Probs.\-h}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{apply__initial__condition_8cc}{apply\-\_\-initial\-\_\-condition.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{init_bound_val_probs_2declare__parameters_8cc}{declare\-\_\-parameters.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{init_bound_val_probs_8cc}{init\-Bound\-Val\-Probs.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{make__grid_8cc}{make\-\_\-grid.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{mark__boundary_8cc}{mark\-\_\-boundary.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{pre__run_8cc}{pre\-\_\-run.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{run_8cc}{run.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{setup__constraints_8cc}{setup\-\_\-constraints.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{setup__system_8cc}{setup\-\_\-system.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{solve_8cc}{solve.\-cc}\item 
+src/init\-Bound\-Val\-Probs/\hyperlink{update_linear_system_8cc}{update\-Linear\-System.\-cc}\end{DoxyCompactItemize}

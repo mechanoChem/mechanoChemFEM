@@ -14,6 +14,7 @@ set resuming_from_snapshot = false
 #set mesh = /home/wzhenlin/workspace/brainMorph/mesh/STA21_hex.msh
 set output_directory = output/
 set snapshot_directory = snapshot/
+set save_snapshot = true
 
 #FEM
 set volume_quadrature = 3 

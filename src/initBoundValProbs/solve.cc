@@ -7,6 +7,8 @@ template <int dim>
 void initBoundValProbs<dim>::solve()
 {		
 	this->nonlinearSolve(solution);
+	//update
+	solution_prev=solution;
 }
 template class initBoundValProbs<1>;
 template class initBoundValProbs<2>;

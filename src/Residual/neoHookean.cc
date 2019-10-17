@@ -3,6 +3,7 @@
 template <class T, int dim>
 void Residual<T,dim>::evaluateNeoHookeanStress(dealii::Table<3, T >& P, dealii::Table<3, T > &Fe)
 {
+	//determine second Piola-Kirchhoff stress tensor, S, first Piola-Kirchhoff stress tensor P
 	unsigned int n_q_points= P.size(0);
 	for (unsigned int q=0; q<n_q_points; ++q){
 		

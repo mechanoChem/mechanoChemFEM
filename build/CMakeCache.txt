@@ -18,7 +18,7 @@
 CMAKE_AR:FILEPATH=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ar
 
 //Choose the type of build, options are: Debug, Release
-CMAKE_BUILD_TYPE:STRING=Debug
+CMAKE_BUILD_TYPE:STRING=Release
 
 //Enable/Disable color output during build.
 CMAKE_COLOR_MAKEFILE:BOOL=ON
@@ -184,14 +184,14 @@ PERL_EXECUTABLE:FILEPATH=/usr/bin/perl
 //The directory containing a CMake configuration file for deal.II.
 deal.II_DIR:PATH=/Applications/deal.II-8.5-brew.app/Contents/Resources/lib/cmake/deal.II
 
-//Dependencies for the target
-dealMultiPhysics_LIB_DEPENDS:STATIC=general;deal_II;
-
 //Value Computed by CMake
 main_BINARY_DIR:STATIC=/Users/wzhenlin/Github/mechanoChemFEM/build
 
 //Value Computed by CMake
 main_SOURCE_DIR:STATIC=/Users/wzhenlin/Github/mechanoChemFEM/build
+
+//Dependencies for the target
+mechanochemFEM_LIB_DEPENDS:STATIC=general;deal_II;
 
 
 ########################

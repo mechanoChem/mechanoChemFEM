@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 include CMakeFiles/run.dir/progress.make
 
 CMakeFiles/run: main
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Run main with Debug configuration"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Run main with Release configuration"
 	./main
 
 run: CMakeFiles/run

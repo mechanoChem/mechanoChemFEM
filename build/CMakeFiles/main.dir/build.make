@@ -90,8 +90,7 @@ main_EXTERNAL_OBJECTS =
 
 main: CMakeFiles/main.dir/main.cc.o
 main: CMakeFiles/main.dir/build.make
-main: /Applications/deal.II-8.5-brew.app/Contents/Resources/lib/libdeal_II.g.8.5.0.dylib
-main: dealMultiPhysics.a
+main: mechanochemFEM.dylib
 main: /Applications/deal.II-8.5-brew.app/Contents/Resources/lib/libdeal_II.8.5.0.dylib
 main: /usr/lib/libbz2.dylib
 main: /Applications/deal.II-8.5-brew.app/Contents/Resources/brew/lib/libpike-blackbox.dylib

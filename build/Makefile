@@ -79,6 +79,16 @@ install/fast: preinstall/fast
 	/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/Cellar/cmake/3.7.2/bin/cmake -P cmake_install.cmake
 .PHONY : install/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -111,16 +121,6 @@ install/strip: preinstall
 install/strip/fast: install/strip
 
 .PHONY : install/strip/fast
-
-# Special rule for the target list_install_components
-list_install_components:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
-.PHONY : list_install_components
-
-# Special rule for the target list_install_components
-list_install_components/fast: list_install_components
-
-.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -220,6 +220,32 @@ release/fast:
 .PHONY : release/fast
 
 #=============================================================================
+# Target rules for targets named main
+
+# Build rule for target.
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
+
+# fast build rule for target.
+main/fast:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
+
+#=============================================================================
+# Target rules for targets named mechanochemFEM
+
+# Build rule for target.
+mechanochemFEM: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 mechanochemFEM
+.PHONY : mechanochemFEM
+
+# fast build rule for target.
+mechanochemFEM/fast:
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/build
+.PHONY : mechanochemFEM/fast
+
+#=============================================================================
 # Target rules for targets named run
 
 # Build rule for target.
@@ -246,19 +272,6 @@ sign/fast:
 .PHONY : sign/fast
 
 #=============================================================================
-# Target rules for targets named main
-
-# Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 main
-.PHONY : main
-
-# fast build rule for target.
-main/fast:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
-
-#=============================================================================
 # Target rules for targets named debug
 
 # Build rule for target.
@@ -271,26 +284,13 @@ debug/fast:
 	$(MAKE) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/build
 .PHONY : debug/fast
 
-#=============================================================================
-# Target rules for targets named dealMultiPhysics
-
-# Build rule for target.
-dealMultiPhysics: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 dealMultiPhysics
-.PHONY : dealMultiPhysics
-
-# fast build rule for target.
-dealMultiPhysics/fast:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/build
-.PHONY : dealMultiPhysics/fast
-
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.o: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o
 
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.o
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.i: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i
@@ -299,7 +299,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.i: Users/wzhenlin/Githu
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.s: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s
@@ -308,7 +308,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.s: Users/wzhenlin/Githu
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.o: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o
@@ -317,7 +317,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.o: Users/wzhenl
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.i: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i
@@ -326,7 +326,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.i: Users/wzhenl
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.s: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s
@@ -335,7 +335,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.s: Users/wzhenl
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/set_output_name.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.o: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o
@@ -344,7 +344,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.o: Users/wzhenlin/Gith
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.i: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i
@@ -353,7 +353,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.i: Users/wzhenlin/Gith
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.s: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s
@@ -362,7 +362,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.s: Users/wzhenlin/Gith
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/snapshot.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.o: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o
@@ -371,7 +371,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.o: Users/wzhenlin/Git
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.i: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i
@@ -380,7 +380,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.i: Users/wzhenlin/Git
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.s: Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s
@@ -389,7 +389,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.s: Users/wzhenlin/Git
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/write_vtk.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o
@@ -398,7 +398,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.o: User
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i
@@ -407,7 +407,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.i: User
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s
@@ -416,7 +416,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.s: User
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/Saint_Venant_Kirchhoff.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o
@@ -425,7 +425,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.o: Users/wzhenli
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i
@@ -434,7 +434,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.i: Users/wzhenli
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s
@@ -443,7 +443,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.s: Users/wzhenli
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/chemoResidual.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o
@@ -452,7 +452,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.o: Users/wzhenlin/Github
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i
@@ -461,7 +461,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.i: Users/wzhenlin/Github
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s
@@ -470,7 +470,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.s: Users/wzhenlin/Github
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/fluid.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o
@@ -479,7 +479,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.o: Users/wzhen
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i
@@ -488,7 +488,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.i: Users/wzhen
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s
@@ -497,7 +497,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.s: Users/wzhen
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/generalWeakForm.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o
@@ -506,7 +506,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.o: Users/wzhenlin/Github/
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i
@@ -515,7 +515,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.i: Users/wzhenlin/Github/
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s
@@ -524,7 +524,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.s: Users/wzhenlin/Github/
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/init.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o
@@ -533,7 +533,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.o: Users/wzhenlin/
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i
@@ -542,7 +542,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.i: Users/wzhenlin/
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s
@@ -551,7 +551,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.s: Users/wzhenlin/
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/integration.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o
@@ -560,7 +560,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.o: Users/wzhenlin/Gi
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i
@@ -569,7 +569,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.i: Users/wzhenlin/Gi
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s
@@ -578,7 +578,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.s: Users/wzhenlin/Gi
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/mechanics.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o
@@ -587,7 +587,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.o: Users/wzhenlin/G
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i
@@ -596,7 +596,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.i: Users/wzhenlin/G
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s
@@ -605,7 +605,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.s: Users/wzhenlin/G
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/neoHookean.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.o: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o
@@ -614,7 +614,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.o: Users/wzhenlin/Git
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.i: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i
@@ -623,7 +623,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.i: Users/wzhenlin/Git
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.s: Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s
@@ -632,7 +632,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.s: Users/wzhenlin/Git
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/Residual/residual.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.o: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o
@@ -641,7 +641,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.o: Users/wzhenlin/Githu
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.i: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i
@@ -650,7 +650,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.i: Users/wzhenlin/Githu
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.s: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s
@@ -659,7 +659,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.s: Users/wzhenlin/Githu
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/hpFEM.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.o: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o
@@ -668,7 +668,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.o: Users/wzhen
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.i: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i
@@ -677,7 +677,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.i: Users/wzhen
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.s: Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s
@@ -686,7 +686,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.s: Users/wzhen
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/hpFEMbase/setup_FeSystem.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o
@@ -695,7 +695,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_conditi
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.i
@@ -704,7 +704,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_conditi
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.s
@@ -713,7 +713,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_conditi
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/apply_initial_condition.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o
@@ -722,7 +722,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.o:
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.i
@@ -731,7 +731,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.i:
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.s
@@ -740,7 +740,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.s:
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/declare_parameters.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o
@@ -749,7 +749,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.o: 
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.i
@@ -758,7 +758,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.i: 
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.s
@@ -767,7 +767,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.s: 
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/initBoundValProbs.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o
@@ -776,7 +776,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.o: Users/wz
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.i
@@ -785,7 +785,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.i: Users/wz
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.s
@@ -794,7 +794,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.s: Users/wz
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/make_grid.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o
@@ -803,7 +803,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.o: User
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.i
@@ -812,7 +812,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.i: User
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.s
@@ -821,8 +821,35 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.s: User
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.cc.s
+
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.o
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.o
+
+# target to build an object file
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.o:
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.o
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.o
+
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.i
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.i
+
+# target to preprocess a source file
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.i:
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.i
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.i
+
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.s
+
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.s
+
+# target to generate assembly for a file
+Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.s:
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.s
+.PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o
 
@@ -830,7 +857,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.o: Users/wzhe
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.i
@@ -839,7 +866,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.i: Users/wzhe
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.s
@@ -848,7 +875,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.s: Users/wzhe
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o
@@ -857,7 +884,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.o: Users/wzhenlin
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.i
@@ -866,7 +893,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.i: Users/wzhenlin
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.s
@@ -875,7 +902,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.s: Users/wzhenlin
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/run.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o
@@ -884,7 +911,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.o: 
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.i
@@ -893,7 +920,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.i: 
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.s
@@ -902,7 +929,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.s: 
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_constraints.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o
@@ -911,7 +938,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.o: Users
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.i
@@ -920,7 +947,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.i: Users
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s
@@ -929,7 +956,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.s: Users
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/setup_system.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o
@@ -938,7 +965,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.o: Users/wzhenl
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i
@@ -947,7 +974,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.i: Users/wzhenl
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s
@@ -956,7 +983,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.s: Users/wzhenl
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/solve.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.o: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o
@@ -965,7 +992,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.o:
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.i: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.i
@@ -974,7 +1001,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.i:
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.s: Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.s
@@ -983,7 +1010,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.s:
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/updateLinearSystem.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o
@@ -992,7 +1019,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.o: Users/wzhen
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i
@@ -1001,7 +1028,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.i: Users/wzhen
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s
@@ -1010,7 +1037,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.s: Users/wzhen
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/declare_parameters.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o
@@ -1019,7 +1046,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.o: Users/wzhenlin/Git
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i
@@ -1028,7 +1055,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.i: Users/wzhenlin/Git
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s
@@ -1037,7 +1064,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.s: Users/wzhenlin/Git
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/linearSolve.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o
@@ -1046,7 +1073,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.o: Users/wzhenlin/
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i
@@ -1055,7 +1082,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.i: Users/wzhenlin/
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s
@@ -1064,7 +1091,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.s: Users/wzhenlin/
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/nonlinearSolve.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o
@@ -1073,7 +1100,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.o: Users/wzhenlin/
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i
@@ -1082,7 +1109,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.i: Users/wzhenlin/
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s
@@ -1091,7 +1118,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.s: Users/wzhenlin/
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/petscFunctions.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
@@ -1100,7 +1127,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.o: Users/wzhenlin/Gith
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i
@@ -1109,7 +1136,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.i: Users/wzhenlin/Gith
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s
@@ -1118,7 +1145,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.s: Users/wzhenlin/Gith
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o
@@ -1127,7 +1154,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.o: Users/wzhenli
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.i
@@ -1136,7 +1163,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.i: Users/wzhenli
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.s
@@ -1145,7 +1172,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.s: Users/wzhenli
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveClass_petsc.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o
@@ -1154,7 +1181,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.o: Users/wzhenl
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i
@@ -1163,7 +1190,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.i: Users/wzhenl
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s
@@ -1172,7 +1199,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.s: Users/wzhenl
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystem.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.o: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
@@ -1181,7 +1208,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.o: Users/w
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.i: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i
@@ -1190,7 +1217,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.i: Users/w
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.s: Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s
@@ -1199,7 +1226,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.s: Users/w
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/solve/solveLinearSystemPetsc.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
@@ -1208,7 +1235,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.o:
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i
@@ -1217,7 +1244,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.i:
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s
@@ -1226,7 +1253,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.s:
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/CustomerPreconditioner.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o
@@ -1235,7 +1262,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.o: User
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.i
@@ -1244,7 +1271,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.i: User
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.s
@@ -1253,7 +1280,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.s: User
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/InitialConditions.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o
@@ -1262,7 +1289,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.o: Users/wz
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i
@@ -1271,7 +1298,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.i: Users/wz
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s
@@ -1280,7 +1307,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.s: Users/wz
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/computedField.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o
@@ -1289,7 +1316,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.o: Us
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i
@@ -1298,7 +1325,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.i: Us
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s
@@ -1307,7 +1334,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.s: Us
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/functionEvaluations.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o
@@ -1316,7 +1343,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.o: Users/wzhen
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i
@@ -1325,7 +1352,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.i: Users/wzhen
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s
@@ -1334,7 +1361,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.s: Users/wzhen
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/parameters.cc.s
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.o: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o
@@ -1343,7 +1370,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.o:
 
 # target to build an object file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.o
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.i: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i
@@ -1352,7 +1379,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.i:
 
 # target to preprocess a source file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.i
 
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.s: Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s
@@ -1361,7 +1388,7 @@ Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.s:
 
 # target to generate assembly for a file
 Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s
 .PHONY : Users/wzhenlin/Github/mechanoChemFEM/src/supplementary/supplementaryFunctions.cc.s
 
 main.o: main.cc.o
@@ -1399,6 +1426,7 @@ help:
 	@echo "... depend"
 	@echo "... install/local"
 	@echo "... install"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... runclean"
 	@echo "... edit_cache"
@@ -1407,12 +1435,11 @@ help:
 	@echo "... strip_comments"
 	@echo "... distclean"
 	@echo "... release"
+	@echo "... main"
+	@echo "... mechanochemFEM"
 	@echo "... run"
 	@echo "... sign"
-	@echo "... main"
 	@echo "... debug"
-	@echo "... list_install_components"
-	@echo "... dealMultiPhysics"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.o"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.i"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/FEMdata/FEMdata.s"
@@ -1473,6 +1500,9 @@ help:
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.o"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.i"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/mark_boundary.s"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.o"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.i"
+	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/output.s"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.o"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.i"
 	@echo "... Users/wzhenlin/Github/mechanoChemFEM/src/initBoundValProbs/pre_run.s"

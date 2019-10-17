@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /Users/wzhenlin/Github/mechanoChemFEM/build
 CMakeFiles/runclean.dir/all:
 	$(MAKE) -f CMakeFiles/runclean.dir/build.make CMakeFiles/runclean.dir/depend
 	$(MAKE) -f CMakeFiles/runclean.dir/build.make CMakeFiles/runclean.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=48 "Built target runclean"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=49 "Built target runclean"
 .PHONY : CMakeFiles/runclean.dir/all
 
 # Build rule for subdir invocation for target.
@@ -130,7 +130,7 @@ clean: CMakeFiles/info.dir/clean
 CMakeFiles/strip_comments.dir/all:
 	$(MAKE) -f CMakeFiles/strip_comments.dir/build.make CMakeFiles/strip_comments.dir/depend
 	$(MAKE) -f CMakeFiles/strip_comments.dir/build.make CMakeFiles/strip_comments.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=50 "Built target strip_comments"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=51 "Built target strip_comments"
 .PHONY : CMakeFiles/strip_comments.dir/all
 
 # Build rule for subdir invocation for target.
@@ -162,7 +162,7 @@ clean: CMakeFiles/strip_comments.dir/clean
 CMakeFiles/distclean.dir/all:
 	$(MAKE) -f CMakeFiles/distclean.dir/build.make CMakeFiles/distclean.dir/depend
 	$(MAKE) -f CMakeFiles/distclean.dir/build.make CMakeFiles/distclean.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=43 "Built target distclean"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=2 "Built target distclean"
 .PHONY : CMakeFiles/distclean.dir/all
 
 # Build rule for subdir invocation for target.
@@ -194,7 +194,7 @@ clean: CMakeFiles/distclean.dir/clean
 CMakeFiles/release.dir/all:
 	$(MAKE) -f CMakeFiles/release.dir/build.make CMakeFiles/release.dir/depend
 	$(MAKE) -f CMakeFiles/release.dir/build.make CMakeFiles/release.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=46 "Built target release"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=47 "Built target release"
 .PHONY : CMakeFiles/release.dir/all
 
 # Build rule for subdir invocation for target.
@@ -220,18 +220,92 @@ clean: CMakeFiles/release.dir/clean
 .PHONY : clean
 
 #=============================================================================
+# Target rules for target CMakeFiles/main.dir
+
+# All Build rule for target.
+CMakeFiles/main.dir/all: CMakeFiles/mechanochemFEM.dir/all
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=3,4 "Built target main"
+.PHONY : CMakeFiles/main.dir/all
+
+# Include target in all.
+all: CMakeFiles/main.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/main.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 44
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/main.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 0
+.PHONY : CMakeFiles/main.dir/rule
+
+# Convenience name for target.
+main: CMakeFiles/main.dir/rule
+
+.PHONY : main
+
+# clean rule for target.
+CMakeFiles/main.dir/clean:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/clean
+.PHONY : CMakeFiles/main.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/main.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/mechanochemFEM.dir
+
+# All Build rule for target.
+CMakeFiles/mechanochemFEM.dir/all:
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/depend
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46 "Built target mechanochemFEM"
+.PHONY : CMakeFiles/mechanochemFEM.dir/all
+
+# Include target in all.
+all: CMakeFiles/mechanochemFEM.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/mechanochemFEM.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 42
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/mechanochemFEM.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 0
+.PHONY : CMakeFiles/mechanochemFEM.dir/rule
+
+# Convenience name for target.
+mechanochemFEM: CMakeFiles/mechanochemFEM.dir/rule
+
+.PHONY : mechanochemFEM
+
+# clean rule for target.
+CMakeFiles/mechanochemFEM.dir/clean:
+	$(MAKE) -f CMakeFiles/mechanochemFEM.dir/build.make CMakeFiles/mechanochemFEM.dir/clean
+.PHONY : CMakeFiles/mechanochemFEM.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/mechanochemFEM.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
 # Target rules for target CMakeFiles/run.dir
 
 # All Build rule for target.
 CMakeFiles/run.dir/all: CMakeFiles/main.dir/all
 	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/depend
 	$(MAKE) -f CMakeFiles/run.dir/build.make CMakeFiles/run.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=47 "Built target run"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=48 "Built target run"
 .PHONY : CMakeFiles/run.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/run.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 44
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 45
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/run.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 0
 .PHONY : CMakeFiles/run.dir/rule
@@ -258,7 +332,7 @@ clean: CMakeFiles/run.dir/clean
 CMakeFiles/sign.dir/all:
 	$(MAKE) -f CMakeFiles/sign.dir/build.make CMakeFiles/sign.dir/depend
 	$(MAKE) -f CMakeFiles/sign.dir/build.make CMakeFiles/sign.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=49 "Built target sign"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=50 "Built target sign"
 .PHONY : CMakeFiles/sign.dir/all
 
 # Build rule for subdir invocation for target.
@@ -284,50 +358,13 @@ clean: CMakeFiles/sign.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/main.dir
-
-# All Build rule for target.
-CMakeFiles/main.dir/all: CMakeFiles/dealMultiPhysics.dir/all
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=44,45 "Built target main"
-.PHONY : CMakeFiles/main.dir/all
-
-# Include target in all.
-all: CMakeFiles/main.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/main.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 43
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/main.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 0
-.PHONY : CMakeFiles/main.dir/rule
-
-# Convenience name for target.
-main: CMakeFiles/main.dir/rule
-
-.PHONY : main
-
-# clean rule for target.
-CMakeFiles/main.dir/clean:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/clean
-.PHONY : CMakeFiles/main.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/main.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/debug.dir
 
 # All Build rule for target.
 CMakeFiles/debug.dir/all:
 	$(MAKE) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/depend
 	$(MAKE) -f CMakeFiles/debug.dir/build.make CMakeFiles/debug.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=42 "Built target debug"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=1 "Built target debug"
 .PHONY : CMakeFiles/debug.dir/all
 
 # Build rule for subdir invocation for target.
@@ -349,43 +386,6 @@ CMakeFiles/debug.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/debug.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/dealMultiPhysics.dir
-
-# All Build rule for target.
-CMakeFiles/dealMultiPhysics.dir/all:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/depend
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41 "Built target dealMultiPhysics"
-.PHONY : CMakeFiles/dealMultiPhysics.dir/all
-
-# Include target in all.
-all: CMakeFiles/dealMultiPhysics.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/dealMultiPhysics.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 41
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/dealMultiPhysics.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/wzhenlin/Github/mechanoChemFEM/build/CMakeFiles 0
-.PHONY : CMakeFiles/dealMultiPhysics.dir/rule
-
-# Convenience name for target.
-dealMultiPhysics: CMakeFiles/dealMultiPhysics.dir/rule
-
-.PHONY : dealMultiPhysics
-
-# clean rule for target.
-CMakeFiles/dealMultiPhysics.dir/clean:
-	$(MAKE) -f CMakeFiles/dealMultiPhysics.dir/build.make CMakeFiles/dealMultiPhysics.dir/clean
-.PHONY : CMakeFiles/dealMultiPhysics.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/dealMultiPhysics.dir/clean
 
 .PHONY : clean
 

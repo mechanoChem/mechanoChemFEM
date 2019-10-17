@@ -12,7 +12,7 @@ if(NOT DEFINED CMAKE_INSTALL_CONFIG_NAME)
     string(REGEX REPLACE "^[^A-Za-z0-9_]+" ""
            CMAKE_INSTALL_CONFIG_NAME "${BUILD_TYPE}")
   else()
-    set(CMAKE_INSTALL_CONFIG_NAME "Debug")
+    set(CMAKE_INSTALL_CONFIG_NAME "Release")
   endif()
   message(STATUS "Install configuration: \"${CMAKE_INSTALL_CONFIG_NAME}\"")
 endif()
@@ -29,17 +29,25 @@ endif()
 
 if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/Users/wzhenlin/numerics/dealmultiPhyics/dealMultiPhysics.a")
+   "/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/Users/wzhenlin/numerics/dealmultiPhyics" TYPE STATIC_LIBRARY FILES "/Users/wzhenlin/Github/mechanoChemFEM/build/dealMultiPhysics.a")
-  if(EXISTS "$ENV{DESTDIR}/Users/wzhenlin/numerics/dealmultiPhyics/dealMultiPhysics.a" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/Users/wzhenlin/numerics/dealmultiPhyics/dealMultiPhysics.a")
-    execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ranlib" "$ENV{DESTDIR}/Users/wzhenlin/numerics/dealmultiPhyics/dealMultiPhysics.a")
+file(INSTALL DESTINATION "/Users/wzhenlin/numerics/mechanochem" TYPE SHARED_LIBRARY FILES "/Users/wzhenlin/Github/mechanoChemFEM/build/mechanochemFEM.dylib")
+  if(EXISTS "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
+    execute_process(COMMAND "/usr/bin/install_name_tool"
+      -id "mechanochemFEM.dylib"
+      "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
+    execute_process(COMMAND /usr/bin/install_name_tool
+      -delete_rpath "/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/lib"
+      "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
+    if(CMAKE_INSTALL_DO_STRIP)
+      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
+    endif()
   endif()
 endif()
 

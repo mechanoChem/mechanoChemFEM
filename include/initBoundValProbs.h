@@ -136,6 +136,7 @@ class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix
 		*default: set all solution vector to be zero 
 		*/
 		virtual void apply_initial_condition();
+		virtual void output();
 		/**
 		*default: pure virtual function
 		*/

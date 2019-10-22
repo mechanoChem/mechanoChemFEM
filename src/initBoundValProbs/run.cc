@@ -14,13 +14,13 @@ void initBoundValProbs<dim>::run()
   mark_boundary();
 	setup_system();
 	setup_constraints();
-	apply_initial_condition();
+  pcout << "   Number of active cells:       " << hpFEM<dim>::triangulation.n_active_cells() << std::endl;
+  pcout << "   Number of degrees of freedom: " << hpFEM<dim>::dof_handler.n_dofs() << std::endl; 
 	
 	if(!resuming_from_snapshot) {
 		apply_initial_condition();		
 	  std::string output_path = output_directory+"output-0.vtk";
 	  FEMdata_out.write_vtk(solution, output_path);
-	  solution_prev=solution;
 	  if(save_snapshot){
 			std::string snapshot_path = snapshot_directory+"snapshot-"+std::to_string(0)+".dat";
 	  	FEMdata_out.create_vector_snapshot(solution, snapshot_path);

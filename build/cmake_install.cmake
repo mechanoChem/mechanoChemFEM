@@ -1,8 +1,8 @@
-# Install script for directory: /Users/wzhenlin/Github/mechanoChemFEM/build
+# Install script for directory: /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/mechanoChemFEM/build
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/Applications/deal.II-8.5-brew.app/Contents/Resources/brew")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -27,28 +27,21 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-if("${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
+# Install shared libraries without execute permission?
+if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
+  set(CMAKE_INSTALL_SO_NO_EXE "0")
+endif()
+
+if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
+   "/gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/lib/mechanoChemFEM.a")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/Users/wzhenlin/numerics/mechanochem" TYPE SHARED_LIBRARY FILES "/Users/wzhenlin/Github/mechanoChemFEM/build/mechanochemFEM.dylib")
-  if(EXISTS "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
-    execute_process(COMMAND "/usr/bin/install_name_tool"
-      -id "mechanochemFEM.dylib"
-      "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
-    execute_process(COMMAND /usr/bin/install_name_tool
-      -delete_rpath "/Applications/deal.II-8.5-brew.app/Contents/Resources/brew/lib"
-      "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
-    if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" "$ENV{DESTDIR}/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib")
-    endif()
-  endif()
+file(INSTALL DESTINATION "/gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/lib" TYPE STATIC_LIBRARY FILES "/gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/mechanoChemFEM/build/mechanoChemFEM.a")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -59,5 +52,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/wzhenlin/Github/mechanoChemFEM/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/mechanoChemFEM/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

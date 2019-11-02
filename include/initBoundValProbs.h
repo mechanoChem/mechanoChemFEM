@@ -97,9 +97,9 @@ class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix
 		void declare_parameters_initBoundValProbs();
 		
 		/**
-		*this function should not be modified. 
+		*generic function to setup the system
 		*/
-		void setup_system();
+		virtual void setup_system();
 		
 		/**
 		*overload function from solveClass
@@ -117,7 +117,7 @@ class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix
 		*/
 		virtual void pre_run();
 		/**
-		*generic function calls to runthe simulations
+		*generic function calls to run the simulations
 		*/
     virtual void run ();	
 		/**

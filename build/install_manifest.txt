@@ -1,1 +1,1 @@
-/Users/wzhenlin/numerics/mechanochem/mechanochemFEM.dylib
+/gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/lib/mechanoChemFEM.a

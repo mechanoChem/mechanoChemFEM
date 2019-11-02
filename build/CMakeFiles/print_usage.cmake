@@ -1,16 +1,14 @@
 MESSAGE(
 "###
 #
-#  Project  main  set up with  deal.II-8.5.0  found at
-#      /Applications/deal.II-8.5-brew.app/Contents/Resources
+#  Project  main  set up with  deal.II-8.5.1  found at
+#      /gpfs/gpfs0/groups/garikipati/Software/dealii-8.5.1/install
 #
 #  CMAKE_BUILD_TYPE:          Release
 #
 #  You can now run
 #       $ make                - to compile and link the program
 #       $ make run            - to (compile, link and) run the program
-#
-#       $ make sign           - to sign the executable with the supplied OSX developer key
 #
 #       $ make debug          - to switch the build type to 'Debug'
 #       $ make release        - to switch the build type to 'Release'

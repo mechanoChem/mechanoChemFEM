@@ -45,33 +45,29 @@ SET(TARGET "main")
 #this lib is NOT installed as a shared lib
 SET_PROPERTY(GLOBAL PROPERTY TARGET_SUPPORTS_SHARED_LIBS TRUE)
 
-FILE(GLOB dealMultiPhysics_SRC "../src/FEMdata/*.cc" "../src/hpFEMbase/*.cc" "../src/Residual/*.cc" "../src/solve/*.cc" "../src/initBoundValProbs/*.cc" "../src/supplementary/*.cc" )
-#installed as shared lib
-ADD_LIBRARY(mechanochemFEM SHARED ${dealMultiPhysics_SRC})   
-#installed as static lib
-#ADD_LIBRARY(mechanochemFEM ${dealMultiPhysics_SRC})
-DEAL_II_SETUP_TARGET(mechanochemFEM RELEASE)
-FILE (GLOB TARGET_SRC  "main.cc")
+FILE(GLOB mechanoChemFEM_SRC "../src/FEMdata/*.cc" "../src/initBoundValProbs/*.cc" "../src/hpFEMbase/*.cc" "../src/Residual/*.cc" "../src/solve/*.cc" "../src/supplementary/*.cc" )
+ADD_LIBRARY(mechanoChemFEM ${mechanoChemFEM_SRC})
+DEAL_II_SETUP_TARGET(mechanoChemFEM RELEASE)
+FILE (GLOB TARGET_SRC "main.cc")
 
 DEAL_II_INITIALIZE_CACHED_VARIABLES()
 PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
-#set(CMAKE_STATIC_LIBRARY_PREFIX "")
-set(CMAKE_SHARED_LIBRARY_PREFIX "")
+set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
-#SET (sacado_INC "/home/wzhenlin/app/trilinos-11.8.1-Source/install/include")
-#SET (sacado_LIB "/home/wzhenlin/app/trilinos-11.8.1-Source/install/lib/libsacado.a")
+SET (sacado_INC "/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install/include")
+SET (sacado_LIB "/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install/lib/libsacado.a")
 
-#INCLUDE_DIRECTORIES(${sacado_INC})
-TARGET_LINK_LIBRARIES(main mechanochemFEM)
+INCLUDE_DIRECTORIES(${sacado_INC})
+TARGET_LINK_LIBRARIES(main mechanoChemFEM)
 ##---------------------------------------------------------------------------------------------------------------------
 
 
 
-##Set dirdctory, please give a full path and make sure the directory is valid 
+##Set dirdctory for openIGA, please give a full path and make sure the directory is valid 
 ##---------------------------------------------------------------------------------------------------------------------
-install(TARGETS mechanochemFEM DESTINATION /Users/wzhenlin/numerics/mechanochem/)
-FILE(COPY ../include DESTINATION /Users/wzhenlin/numerics/mechanochem)
+install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/lib)
+#FILE(COPY ../include DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/)
 
 
 

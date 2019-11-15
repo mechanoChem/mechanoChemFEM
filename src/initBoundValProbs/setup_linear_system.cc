@@ -2,10 +2,10 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::setup_system()
+void mechanoChemFEM<dim>::setup_linear_system()
 {
 	GridTools::partition_triangulation (n_mpi_processes, hpFEM<dim>::triangulation);
 	hpFEM<dim>::dof_handler.distribute_dofs (fe_collection);
@@ -20,6 +20,6 @@ void initBoundValProbs<dim>::setup_system()
 	solution_prev.reinit (mpi_communicator,n_total_dofs,n_local_dofs);
 }
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

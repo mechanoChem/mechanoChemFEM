@@ -1,10 +1,10 @@
 /*
 zhenlin wang 2019
 */
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::setup_constraints()
+void mechanoChemFEM<dim>::apply_boundary_condition()
 {	
 	hpFEM<dim>::constraints.clear ();
   DoFTools::make_hanging_node_constraints (hpFEM<dim>::dof_handler, hpFEM<dim>::constraints);
@@ -12,6 +12,6 @@ void initBoundValProbs<dim>::setup_constraints()
 }
 
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

@@ -1,1 +1,1 @@
-/gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/lib/mechanoChemFEM.a
+/Users/wzhenlin/numerics/mechanochem/v0.51/lib/mechanoChemFEM.a

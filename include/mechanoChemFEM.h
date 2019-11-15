@@ -1,5 +1,5 @@
-#ifndef initBoundValProbs_h
-#define initBoundValProbs_h
+#ifndef mechanoChemFEM_h
+#define mechanoChemFEM_h
 
 //more headers in deal.ii
 
@@ -78,11 +78,11 @@
 #include "supplementary/InitialConditions.h"
 
 template <int dim>
-class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, PETScWrappers::MPI::Vector>, public hpFEM<dim>
+class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, PETScWrappers::MPI::Vector>, public hpFEM<dim>
 {
   public:
-    initBoundValProbs (std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params);
-    ~ initBoundValProbs();
+    mechanoChemFEM (std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params);
+    ~ mechanoChemFEM();
 		
 		double current_dt;
 				
@@ -94,12 +94,13 @@ class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix
 		/**
 		*declare generic paramters
 		*/
-		void declare_parameters_initBoundValProbs();
+		void declare_parameters_mechanoChemFEM();
+		void load_parameters();
 		
 		/**
 		*generic function to setup the system
 		*/
-		virtual void setup_system();
+		virtual void setup_linear_system();
 		
 		/**
 		*overload function from solveClass
@@ -123,7 +124,7 @@ class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix
 		/**
 		*solve
 		*/
-		virtual void solve();
+		virtual void solve_ibvp();
 		/**
 		*default:make hyper_rectangle mesh
 		*/
@@ -136,7 +137,7 @@ class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix
 		*default: set all solution vector to be zero 
 		*/
 		virtual void apply_initial_condition();
-		virtual void output();
+		virtual void output_results();
 		/**
 		*default: pure virtual function
 		*/
@@ -148,7 +149,9 @@ class initBoundValProbs: public solveClass<dim, PETScWrappers::MPI::SparseMatrix
 		/**
 		*default: set up constrains
 		*/
-		virtual void setup_constraints();
+		virtual void apply_boundary_condition();
+		
+		virtual std::vector<double> get_solution();
 
 		std::vector<std::vector<std::string> > primary_variables;
 		std::vector<unsigned int > primary_variables_dof;

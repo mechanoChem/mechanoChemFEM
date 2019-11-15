@@ -2,10 +2,10 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::make_grid()
+void mechanoChemFEM<dim>::make_grid()
 {	
 	params->enter_subsection("Geometry");
 	double X_0=params->get_double("X_0");
@@ -34,6 +34,6 @@ void initBoundValProbs<dim>::make_grid()
 }
 
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

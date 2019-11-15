@@ -2,9 +2,9 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 template <int dim>
-void initBoundValProbs<dim>::declare_parameters_initBoundValProbs()
+void mechanoChemFEM<dim>::declare_parameters_mechanoChemFEM()
 {
 	params->enter_subsection("Problem");
 	params->declare_entry("print_parameter","true",Patterns::Bool());
@@ -42,6 +42,19 @@ void initBoundValProbs<dim>::declare_parameters_initBoundValProbs()
 	params->leave_subsection();		
 }
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template <int dim>
+void mechanoChemFEM<dim>::load_parameters()
+{
+	params->read_input ("parameters.prm");
+	
+	params->enter_subsection("Problem");
+	bool printParameter=params->get_bool("print_parameter");
+	params->leave_subsection();	
+	if(printParameter) {
+		if(this_mpi_process == 0) params->print_parameters (std::cout, ParameterHandler::Text);
+	}
+}
+
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

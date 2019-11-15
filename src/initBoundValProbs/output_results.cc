@@ -1,10 +1,10 @@
 /*
 zhenlin wang 2019
 */
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::output()
+void mechanoChemFEM<dim>::output_results()
 {
 	
 	//write vtk and snapshot for solution
@@ -19,6 +19,6 @@ void initBoundValProbs<dim>::output()
 }
 
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

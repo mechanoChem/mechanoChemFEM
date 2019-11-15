@@ -2,18 +2,11 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 template <int dim>
-void initBoundValProbs<dim>::run()
+void mechanoChemFEM<dim>::run()
 {		
-	pre_run();
-		
-	make_grid();
-	refine_grid();
-	setMultDomain();
-  mark_boundary();
-	setup_system();
-	setup_constraints();
+	apply_boundary_condition();
   pcout << "   Number of active cells:       " << hpFEM<dim>::triangulation.n_active_cells() << std::endl;
   pcout << "   Number of degrees of freedom: " << hpFEM<dim>::dof_handler.n_dofs() << std::endl; 
 	
@@ -35,8 +28,6 @@ void initBoundValProbs<dim>::run()
 	}
 	pcout<<"initial condition applied"<<std::endl;
 	
-
-
 	PetscPrintf(this->mpi_communicator,"running....\n\n");
 	clock_t t_solve;	
 	t_solve = clock();
@@ -45,18 +36,18 @@ void initBoundValProbs<dim>::run()
 		PetscPrintf(this->mpi_communicator,"************");
 		PetscPrintf(this->mpi_communicator,"current increment=%d, current time= %f",current_increment, current_time);
 		PetscPrintf(this->mpi_communicator,"************\n");
-		solve();
+		solve_ibvp();
 		
 	  t_solve = clock() - t_solve;
 		PetscPrintf(this->mpi_communicator,"It took me %f seconds for this solve.\n ",((float)t_solve)/CLOCKS_PER_SEC);
 		PetscPrintf(this->mpi_communicator,"\n\n");
 		
-		output();
+		output_results();
 	}
 	PetscPrintf(this->mpi_communicator,"Finish running!!\n");
 }
 
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

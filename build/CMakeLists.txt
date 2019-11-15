@@ -66,8 +66,9 @@ TARGET_LINK_LIBRARIES(main mechanoChemFEM)
 
 ##Set dirdctory for openIGA, please give a full path and make sure the directory is valid 
 ##---------------------------------------------------------------------------------------------------------------------
-install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/lib)
-#FILE(COPY ../include DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/)
+#install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/lib)
+install(TARGETS mechanoChemFEM DESTINATION /Users/wzhenlin/numerics/mechanochem/v0.51/lib)
+FILE(COPY ../include DESTINATION /Users/wzhenlin/numerics/mechanochem/v0.51/)
 
 
 

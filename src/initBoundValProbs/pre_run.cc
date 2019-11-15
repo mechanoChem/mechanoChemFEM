@@ -2,13 +2,13 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::pre_run()
+void mechanoChemFEM<dim>::pre_run()
 {
 	FEMdata_out.set_output_name(primary_variables);	
-	declare_parameters_initBoundValProbs();
+	declare_parameters_mechanoChemFEM();
 	params->read_input ("parameters.prm");
 	params->enter_subsection("Problem");
 	bool printParameter=params->get_bool("print_parameter");
@@ -35,6 +35,6 @@ void initBoundValProbs<dim>::pre_run()
 	this->setup_FeSystem(fe_system, fe_collection, q_collection, primary_variables_dof,primary_variables,FE_support,*volume_quadrature);
 }
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

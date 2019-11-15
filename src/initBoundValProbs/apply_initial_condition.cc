@@ -2,10 +2,10 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::apply_initial_condition()
+void mechanoChemFEM<dim>::apply_initial_condition()
 { 
 	pcout << "applying initial condition\n";
 	int totalDOF=this->totalDOF(primary_variables);	
@@ -16,6 +16,6 @@ void initBoundValProbs<dim>::apply_initial_condition()
 }
 
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

@@ -55,8 +55,9 @@ PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
-SET (sacado_INC "/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install/include")
-SET (sacado_LIB "/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install/lib/libsacado.a")
+#export SACADO_DIR=/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install
+SET (sacado_INC $ENV{SACADO_DIR}/include)
+SET (sacado_LIB $ENV{SACADO_DIR}/lib/libsacado.a)
 
 INCLUDE_DIRECTORIES(${sacado_INC})
 TARGET_LINK_LIBRARIES(main mechanoChemFEM)
@@ -67,8 +68,9 @@ TARGET_LINK_LIBRARIES(main mechanoChemFEM)
 ##Set dirdctory for openIGA, please give a full path and make sure the directory is valid 
 ##---------------------------------------------------------------------------------------------------------------------
 #install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.5/lib)
-install(TARGETS mechanoChemFEM DESTINATION /Users/wzhenlin/numerics/mechanochem/v0.51/lib)
-FILE(COPY ../include DESTINATION /Users/wzhenlin/numerics/mechanochem/v0.51/)
+#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
+install(TARGETS mechanoChemFEM DESTINATION $ENV{mechanoChemFEM_DIR}/v0.51/lib)
+FILE(COPY ../include DESTINATION $ENV{mechanoChemFEM_DIR}/v0.51/)
 
 
 

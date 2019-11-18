@@ -34,5 +34,5 @@ stress_stretch.txt
 Makefile
 
 *.cc#
-snapshot*
+snapshot/*
 build/*

@@ -29,8 +29,8 @@ ENDIF()
 #SET(inc_DIR "/home/wzhenlin/workspace/dataDrivenIdentifyGovenEq/FEMcode/include")
 
 #path on my mac
-SET(mechanoChemFEM_INC "/Users/wzhenlin/numerics/mechanoChem/v0.51/include")
-SET(mechanoChemFEM_LIB "/Users/wzhenlin/numerics/mechanoChem/v0.51/lib/mechanochemFEM.a")
+SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.51/include)
+SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.51/lib/mechanoChemFEM.a)
 
 
 FILE (GLOB TARGET_SRC "../*.cc")

@@ -3,6 +3,7 @@ zhenlin wang 2019
 */
 
 #include"../../include/mechanoChemFEM.h"
+#include <cstdlib>
 
 template <int dim>
 void mechanoChemFEM<dim>::pre_run()
@@ -28,6 +29,14 @@ void mechanoChemFEM<dim>::pre_run()
 	common_face_quadrature= new const QGauss<dim-1>(params->get_integer("face_quadrature"));
 	
 	params->leave_subsection();	
+
+  const int dir_err1 = system(("mkdir -p " + output_directory).c_str());
+  const int dir_err2 = system(("mkdir -p " + snapshot_directory).c_str());
+  if (dir_err1 == -1 or dir_err2 == -1)
+  {
+    printf("Error creating directory!\n");
+    exit(1);
+  }
 	
 	if(printParameter) {
 		if(this_mpi_process == 0) params->print_parameters (std::cout, ParameterHandler::Text);

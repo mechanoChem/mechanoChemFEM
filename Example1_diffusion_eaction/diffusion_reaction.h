@@ -2,23 +2,23 @@
 zhenlin wang 2019
 *coupled diffusion reaction
 */
-#include "initBoundValProbs.h"
+#include "mechanoChemFEM.h"
 template <int dim>
-class diffusion_reaction: public initBoundValProbs<dim>
+class diffusion_reaction: public mechanoChemFEM<dim>
 {
 	public:
 		diffusion_reaction(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params);
 		//this is a overloaded function 
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
-		void solve();
+		void solve_ibvp();
 		ParameterHandler* params;		
 };
 template <int dim>
 diffusion_reaction<dim>::diffusion_reaction(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
-	:initBoundValProbs<dim>(_primary_variables, _FE_support, _params),params(&_params){}
+	:mechanoChemFEM<dim>(_primary_variables, _FE_support, _params),params(&_params){}
 
 template <int dim>
-void diffusion_reaction<dim>::solve()
+void diffusion_reaction<dim>::solve_ibvp()
 {		
 	bool converge_flag=this->nonlinearSolve(this->solution);
 	if(!converge_flag) {
@@ -27,6 +27,7 @@ void diffusion_reaction<dim>::solve()
 		//enforce update even it does not converge (it is usually bad, but useful to get over some difficult steps in some cases)
 		converge_flag=this->nonlinearSolve(this->solution, true);
 	}
+	this->solution_prev=this->solution;
 }
 
 template <int dim>

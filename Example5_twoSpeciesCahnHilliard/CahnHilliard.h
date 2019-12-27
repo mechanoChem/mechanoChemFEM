@@ -11,13 +11,21 @@ class CahnHilliard: public mechanoChemFEM<dim>
 		//this is a overloaded function 
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		void solve_ibvp();
+		void save_features();
 		int iter_count=0;
 		ParameterHandler* params;		
+		
+		std::vector<double> local_features;
+		std::vector<double> features;
+		
+
 };
 template <int dim>
 CahnHilliard<dim>::CahnHilliard(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
 	:mechanoChemFEM<dim>(_primary_variables, _FE_support, _params),params(&_params){
 		this->pcout<<"CahnHilliard initiated"<<std::endl;
+		local_features.resize(4);
+		features.resize(4);
 	}
 
 template <int dim>
@@ -40,6 +48,8 @@ void CahnHilliard<dim>::solve_ibvp()
 		this->current_dt *= 2;//double dt
 	}
 	this->solution_prev=this->solution;
+	
+	save_features();
 }
 
 template <int dim>
@@ -105,6 +115,25 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 	this->ResidualEq.residualForDiffusionEq(fe_values, c2_dof, R, c2, c2_conv, j_c2);
 	this->ResidualEq.residualForPoissonEq(fe_values, mu2_dof, R, kappa_c2_grad, rhs_mu2);
 	
+	//calculate features
+	dealii::Table<1,Sacado::Fad::DFad<double> > theta1(n_q_points);
+	dealii::Table<1,Sacado::Fad::DFad<double> > theta2(n_q_points);
+	dealii::Table<1,Sacado::Fad::DFad<double> > theta3(n_q_points);
+	dealii::Table<1,Sacado::Fad::DFad<double> > gamma(n_q_points);
+	for(unsigned int q=0; q<n_q_points;q++){
+		if (c2[q]+0.866*c1[q] > 0 and c1[q] >= 0) theta1[q]=1;
+		else if (c2[q]-0.866*c1[q] >= 0 and c1[q] < 0) theta2[q]=1;
+		else theta3[q]=1;
+		gamma[q]=0.5*(c1_grad[q][0]*c1_grad[q][0]+c1_grad[q][1]*c1_grad[q][1]);
+	}
+	local_features[0]+=this->ResidualEq.volumeIntegration(fe_values, theta1);
+	local_features[1]+=this->ResidualEq.volumeIntegration(fe_values, theta2);
+	local_features[2]+=this->ResidualEq.volumeIntegration(fe_values, theta3);
+	local_features[3]+=this->ResidualEq.volumeIntegration(fe_values, gamma);
+	
+	MPI_Reduce(&local_features[0], &features[0], 4, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+	
+	
 }
 
 template <int dim>
@@ -116,6 +145,23 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
  	values(3) = 0;    
 	params->leave_subsection();
 }
+
+template <int dim>
+void CahnHilliard<dim>::save_features(){
+	if (this->this_mpi_process == 0 ){
+	  std::ofstream myfile;
+	  myfile.open ( (this->output_directory+"Features.dat").c_str(),std::ios_base::app);
+		if(!myfile.is_open()) {std::cout<<"file failed to open!"; exit(1);}
+		myfile <<this->current_increment<<" ";
+		for(unsigned int i=0;i<4;i++) {
+		  myfile <<features[i]<<" ";
+		}
+		myfile <<this->current_time<<" ";
+		myfile <<"\n";
+	}
+	
+}
+
 template class InitialConditions<1>;
 template class InitialConditions<2>;
 template class InitialConditions<3>;

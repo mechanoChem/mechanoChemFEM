@@ -13,7 +13,8 @@ void mechanoChemFEM<dim>::declare_parameters_mechanoChemFEM()
 	params->declare_entry("current_increment","0",Patterns::Integer());
 	params->declare_entry("current_time","0",Patterns::Double());
 	params->declare_entry("resuming_from_snapshot","false",Patterns::Bool());
-	params->declare_entry("save_snapshot","false",Patterns::Bool());
+	params->declare_entry("save_output","true",Patterns::Bool());
+	params->declare_entry("save_snapshot","true",Patterns::Bool());
 	
 	params->declare_entry("off_output_index","0",Patterns::Integer() );
 	params->declare_entry("skip_output","1",Patterns::Integer() );

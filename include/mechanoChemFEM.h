@@ -137,6 +137,7 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		*default: set all solution vector to be zero 
 		*/
 		virtual void apply_initial_condition();
+		//void apply_initial_condition_py(){apply_initial_condition();};
 		virtual void output_results();
 		/**
 		*default: pure virtual function
@@ -185,6 +186,7 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		std::string snapfile;
 		bool resuming_from_snapshot;
 		bool save_snapshot;
+		bool save_output;
 		int off_output_index;
 		
 };

@@ -56,11 +56,12 @@ DEAL_II_INVOKE_AUTOPILOT()
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
 #export SACADO_DIR=/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install
-SET (sacado_INC $ENV{SACADO_DIR}/include)
-SET (sacado_LIB $ENV{SACADO_DIR}/lib/libsacado.a)
+#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem/v0.51
+#SET (sacado_INC $ENV{SACADO_DIR}/include)
+#SET (sacado_LIB $ENV{SACADO_DIR}/lib/libsacado.a)
 
-INCLUDE_DIRECTORIES(${sacado_INC})
-TARGET_LINK_LIBRARIES(main mechanoChemFEM)
+#INCLUDE_DIRECTORIES(${sacado_INC})
+#TARGET_LINK_LIBRARIES(main mechanoChemFEM)
 ##---------------------------------------------------------------------------------------------------------------------
 
 

@@ -23,6 +23,7 @@ void mechanoChemFEM<dim>::pre_run()
 	current_time=params->get_double("current_time");
 	resuming_from_snapshot=params->get_bool("resuming_from_snapshot");
 	save_snapshot=params->get_bool("save_snapshot");
+	save_output=params->get_bool("save_output");
 	off_output_index=params->get_integer("off_output_index");
 
 	volume_quadrature= new const QGauss<dim>(params->get_integer("volume_quadrature"));

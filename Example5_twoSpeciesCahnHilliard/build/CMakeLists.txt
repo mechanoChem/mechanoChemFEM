@@ -22,14 +22,14 @@ ENDIF()
 
 
 #path on conflux
-SET(mechanoChemFEM_INC "$ENV{mechanoChemFEM_DIR}/v0.51/include")
-SET(mechanoChemFEM_LIB "$ENV{mechanoChemFEM_DIR}/v0.51/lib/mechanoChemFEM.a")
-SET (sacado_INC "/gpfs/gpfs0/groups/garikipati/wzhenlin/app/trilinos-11.8.1-Source/install/include")
-SET (sacado_LIB "/gpfs/gpfs0/groups/garikipati/wzhenlin/app/trilinos-11.8.1-Source/install/lib/libsacado.a")
+#SET(mechanoChemFEM_INC "$ENV{mechanoChemFEM_DIR}/v0.51/include")
+#SET(mechanoChemFEM_LIB "$ENV{mechanoChemFEM_DIR}/v0.51/lib/mechanoChemFEM.a")
+#SET (sacado_INC "/gpfs/gpfs0/groups/garikipati/wzhenlin/app/trilinos-11.8.1-Source/install/include")
+#SET (sacado_LIB "/gpfs/gpfs0/groups/garikipati/wzhenlin/app/trilinos-11.8.1-Source/install/lib/libsacado.a")
 
 #path on my mac
-#SET(mechanoChemFEM_INC "/Users/wzhenlin/numerics/mechanoChem/v0.51/include")
-#SET(mechanoChemFEM_LIB "/Users/wzhenlin/numerics/mechanoChem/v0.51/lib/mechanochemFEM.a")
+SET(mechanoChemFEM_INC "/Users/wzhenlin/numerics/mechanoChem/v0.51/include")
+SET(mechanoChemFEM_LIB "/Users/wzhenlin/numerics/mechanoChem/v0.51/lib/mechanochemFEM.a")
 
 
 FILE (GLOB TARGET_SRC "../*.cc")
@@ -39,8 +39,8 @@ PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
 
 
-INCLUDE_DIRECTORIES(${mechanoChemFEM_INC} ${sacado_INC})
-TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB} ${sacado_LIB} )
+#INCLUDE_DIRECTORIES(${mechanoChemFEM_INC} ${sacado_INC})
+#TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB} ${sacado_LIB} )
 
-
-
+INCLUDE_DIRECTORIES(${mechanoChemFEM_INC})
+TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB} )

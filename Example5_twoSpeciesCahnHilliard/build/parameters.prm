@@ -4,7 +4,7 @@ subsection Problem
 set print_parameter = true
 
 set dt = 1
-set totalTime = 250
+set totalTime = 2
 set current_increment = 0
 set off_output_index=0
 set current_time = 0
@@ -29,8 +29,8 @@ set X_end = 40
 set Y_end = 40
 set Z_end = 0 #no need to 2D
 
-set element_div_x=40
-set element_div_y=40
+set element_div_x=1
+set element_div_y=1
 set element_div_z=0 #no need to 2D
 end
 

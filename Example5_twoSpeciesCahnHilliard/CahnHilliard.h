@@ -55,7 +55,6 @@ class CahnHilliard: public mechanoChemFEM<dim>
 		ParameterHandler* params;		
 		nodalField<dim> computedNodalField;
 		
-		std::vector<double> local_features;
 		std::vector<double> features;
 		bool output_w_theta;
 
@@ -64,7 +63,6 @@ template <int dim>
 CahnHilliard<dim>::CahnHilliard(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
 	:mechanoChemFEM<dim>(_primary_variables, _FE_support, _params),params(&_params),computedNodalField(_params){
 		this->pcout<<"CahnHilliard initiated"<<std::endl;
-		local_features.resize(4);
 		features.resize(4);
 		std::vector<std::vector<std::string> > computed_primary_variables={ {"theta", "component_is_scalar"}};
 		computedNodalField.setupComputedField(computed_primary_variables);
@@ -188,8 +186,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 	local_features[2]+=this->ResidualEq.volumeIntegration(fe_values, theta3);
 	local_features[3]+=this->ResidualEq.volumeIntegration(fe_values, gamma);
 	
-	MPI_Reduce(&local_features[0], &features[0], 4, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
-	
+	MPI_Reduce(&local_features[0], &features[0], 4, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);	
 	
 }
 

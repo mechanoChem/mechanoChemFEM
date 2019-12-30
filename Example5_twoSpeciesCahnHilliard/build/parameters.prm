@@ -10,12 +10,10 @@ set off_output_index=0
 set current_time = 0
 set resuming_from_snapshot = false
 
-#set mesh = /Users/wzhenlin/GitLab/researchCode/brainMorph/mesh/testMesh.msh
-#set mesh = /home/wzhenlin/workspace/brainMorph/mesh/STA21_hex.msh
 set output_directory = output/
 set snapshot_directory = snapshot/
 set save_output=true
-set output_w_theta=false
+set output_w_theta=true
 
 #FEM
 set volume_quadrature = 3 

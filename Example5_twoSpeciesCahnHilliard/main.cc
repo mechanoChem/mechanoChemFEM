@@ -24,6 +24,9 @@ int main(int argc, char **argv){
 		for (unsigned int i=0;i<4;i++) FE_support[0].push_back(diff_degree);
 		
 		ParameterHandler params;
+		params.enter_subsection("Problem");
+		params.declare_entry("output_w_theta","true",Patterns::Bool());
+		params.leave_subsection();
 		params.enter_subsection("Concentration");
 		params.declare_entry("c1_ini","0",Patterns::Double() );
 		params.declare_entry("c2_ini","0",Patterns::Double() );
@@ -34,8 +37,7 @@ int main(int argc, char **argv){
 		
 		params.declare_entry("d","0",Patterns::Double() );
 		params.declare_entry("s","0",Patterns::Double() );
-	
-
+		
 		params.leave_subsection();		
 		
 			

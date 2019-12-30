@@ -3,6 +3,45 @@ zhenlin wang 2019
 *CahnHilliard
 */
 #include "mechanoChemFEM.h"
+#include "supplementary/computedField.h"
+
+template <int dim>
+class nodalField : public computedField<dim>
+{
+public:
+	nodalField(dealii::ParameterHandler& _params);
+	
+	dealii::ParameterHandler* params;
+	void compute_derived_quantities_vector(const std::vector<Vector<double> > &uh,
+					       const std::vector<std::vector<Tensor<1,dim> > > &duh,
+					       const std::vector<std::vector<Tensor<2,dim> > > &dduh,
+					       const std::vector<Point<dim> >                  &normals,
+					       const std::vector<Point<dim> >                  &evaluation_points,
+					       std::vector<Vector<double> >                    &computed_quantities) const;								 							 
+};
+
+template <int dim>
+nodalField<dim>::nodalField(dealii::ParameterHandler& _params):params(&_params){}
+
+template <int dim>
+void nodalField<dim>::compute_derived_quantities_vector(const std::vector<Vector<double> > &uh,
+					       const std::vector<std::vector<Tensor<1,dim> > > &duh,
+					       const std::vector<std::vector<Tensor<2,dim> > > &dduh,
+					       const std::vector<Point<dim> >                  &normals,
+					       const std::vector<Point<dim> >                  &evaluation_points,
+					       std::vector<Vector<double> >                    &computed_quantities) const
+{
+	
+	//std::cout<<"computed_quantities="<<computed_quantities.size<<std::endl;
+	const unsigned int n_q_points = uh.size();	
+	for(unsigned int q=0; q<n_q_points;q++){
+		double c1=uh[q][0], c2=uh[q][1];
+		if (c2+0.866*c1 > 0 and c1 >= 0) computed_quantities[q][0]=1;
+		else if (c2-0.866*c1>= 0 and c1 < 0) computed_quantities[q][0]=0;
+		else computed_quantities[q][0]=-1;
+	}
+}
+
 template <int dim>
 class CahnHilliard: public mechanoChemFEM<dim>
 {
@@ -14,18 +53,24 @@ class CahnHilliard: public mechanoChemFEM<dim>
 		void save_features();
 		int iter_count=0;
 		ParameterHandler* params;		
+		nodalField<dim> computedNodalField;
 		
 		std::vector<double> local_features;
 		std::vector<double> features;
-		
+		bool output_w_theta;
 
 };
 template <int dim>
 CahnHilliard<dim>::CahnHilliard(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
-	:mechanoChemFEM<dim>(_primary_variables, _FE_support, _params),params(&_params){
+	:mechanoChemFEM<dim>(_primary_variables, _FE_support, _params),params(&_params),computedNodalField(_params){
 		this->pcout<<"CahnHilliard initiated"<<std::endl;
 		local_features.resize(4);
 		features.resize(4);
+		std::vector<std::vector<std::string> > computed_primary_variables={ {"theta", "component_is_scalar"}};
+		computedNodalField.setupComputedField(computed_primary_variables);
+		params->enter_subsection("Problem");
+		output_w_theta=params->get_bool("output_w_theta");
+		params->leave_subsection();
 	}
 
 template <int dim>
@@ -50,6 +95,18 @@ void CahnHilliard<dim>::solve_ibvp()
 	this->solution_prev=this->solution;
 	
 	save_features();
+	if(output_w_theta){
+		Vector<double> localized_U(this->solution_prev);
+		this->FEMdata_out.clear_data_vectors();
+		Vector<float> material_id(this->triangulation.n_active_cells()); 
+		this->FEMdata_out.data_out.add_data_vector(localized_U, computedNodalField);
+		std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
+		this->FEMdata_out.write_vtk(this->solution_prev,output_path);
+		this->save_output=false;
+	}
+
+
+	
 }
 
 template <int dim>
@@ -137,16 +194,6 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 }
 
 template <int dim>
-void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>   &values) const{
-	params->enter_subsection("Concentration");
- 	values(0)= params->get_double("c1_ini") + 0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
-  values(1) = 0;    
-	values(2)= params->get_double("c2_ini") + 0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
- 	values(3) = 0;    
-	params->leave_subsection();
-}
-
-template <int dim>
 void CahnHilliard<dim>::save_features(){
 	if (this->this_mpi_process == 0 ){
 	  std::ofstream myfile;
@@ -162,6 +209,15 @@ void CahnHilliard<dim>::save_features(){
 	
 }
 
+template <int dim>
+void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>   &values) const{
+	params->enter_subsection("Concentration");
+ 	values(0)= params->get_double("c1_ini") + 0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+  values(1) = 0;    
+	values(2)= params->get_double("c2_ini") + 0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+ 	values(3) = 0;    
+	params->leave_subsection();
+}
 template class InitialConditions<1>;
 template class InitialConditions<2>;
 template class InitialConditions<3>;

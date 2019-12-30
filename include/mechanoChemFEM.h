@@ -103,6 +103,11 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		virtual void setup_linear_system();
 		
 		/**
+		*empty function just before updateLinearSystem
+		*/
+		virtual void ini_updateLinearSystem();
+		
+		/**
 		*overload function from solveClass
 		*/
 		virtual void updateLinearSystem();

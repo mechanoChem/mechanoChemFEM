@@ -8,6 +8,7 @@ template <int dim>
 void mechanoChemFEM<dim>::updateLinearSystem()
 {
 	this->reinitLinearSystem();
+	ini_updateLinearSystem();
 	
   hp::FEValues<dim> hp_fe_values (fe_collection, q_collection, update_values | update_quadrature_points  | update_JxW_values | update_gradients);	
   FullMatrix<double> local_matrix;

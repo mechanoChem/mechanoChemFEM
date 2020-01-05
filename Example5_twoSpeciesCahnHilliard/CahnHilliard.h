@@ -4,6 +4,7 @@ zhenlin wang 2019
 */
 #include "mechanoChemFEM.h"
 #include "supplementary/computedField.h"
+//#include <deal.II/lac/affine_constraints.h>
 
 template <int dim>
 class nodalField : public computedField<dim>
@@ -32,10 +33,9 @@ void nodalField<dim>::compute_derived_quantities_vector(const std::vector<Vector
 					       std::vector<Vector<double> >                    &computed_quantities) const
 {
 	
-	//std::cout<<"computed_quantities="<<computed_quantities.size<<std::endl;
-	const unsigned int n_q_points = uh.size();	
+	const unsigned int n_q_points = uh.size();
 	for(unsigned int q=0; q<n_q_points;q++){
-		double c1=uh[q][0], c2=uh[q][1];
+		double c1=uh[q][0], c2=uh[q][2];
 		if (c2+0.866*c1 > 0 and c1 >= 0) computed_quantities[q][0]=1;
 		else if (c2-0.866*c1>= 0 and c1 < 0) computed_quantities[q][0]=0;
 		else computed_quantities[q][0]=-1;
@@ -58,6 +58,9 @@ class CahnHilliard: public mechanoChemFEM<dim>
 		std::vector<double> local_features;
 		std::vector<double> features;
 		bool output_w_theta;
+		
+		//AffineConstraints<double> null_constraints;
+		
 
 };
 template <int dim>

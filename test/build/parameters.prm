@@ -4,16 +4,15 @@ subsection Problem
 set print_parameter = true
 
 set dt = 1
-set totalTime = 100
+set totalTime = 1
 set current_increment = 0
 set off_output_index=0
 set current_time = 0
 set resuming_from_snapshot = false
 
-set output_directory = output/
-set snapshot_directory = snapshot/
+set output_directory = output_theta/
 set save_output=true
-set output_w_theta=true
+set save_snapshot=false
 
 #FEM
 set volume_quadrature = 3 
@@ -25,26 +24,15 @@ subsection Geometry
 set X_0 = 0
 set Y_0 = 0
 set Z_0 = 0
-set X_end = 80
-set Y_end = 80
+set X_end = 40
+set Y_end = 40
 set Z_end = 0 #no need to 2D
 
-set element_div_x=80
-set element_div_y=80
+set element_div_x=1
+set element_div_y=1
 set element_div_z=0 #no need to 2D
 end
 
-subsection Concentration
-set d = 0.4
-set s = 0.7
-set mobility_1 = 0.1
-set mobility_2 = 0.1
-set kappa_1=1
-set kappa_2=1
-
-set c1_ini=0
-set c2_ini=0
-end
 						
 #
 # parameters reserved for deal.ii first level code:

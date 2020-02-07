@@ -27,11 +27,6 @@ mechanoChemFEM<dim>::~mechanoChemFEM (){
 }
 
 template <int dim>
-void mechanoChemFEM<dim>::define_primary_fields(){
-	//read from parameters.
-}
-
-template <int dim>
 void mechanoChemFEM<dim>::refine_grid(){}
 
 template <int dim>

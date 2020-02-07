@@ -8,6 +8,9 @@ void mechanoChemFEM<dim>::declare_parameters_mechanoChemFEM()
 {
 	params_mechanoChemFEM->enter_subsection("Problem");
 	params_mechanoChemFEM->declare_entry("print_parameter","true",Patterns::Bool());
+	params_mechanoChemFEM->declare_entry("primary_variables_list","u , component_is_scalar",Patterns::FileName() );
+	params_mechanoChemFEM->declare_entry("FE_support_list","1",Patterns::FileName() );
+	
 	params_mechanoChemFEM->declare_entry("dt","0",Patterns::Double() );
 	params_mechanoChemFEM->declare_entry("totalTime","0",Patterns::Double() );
 	params_mechanoChemFEM->declare_entry("current_increment","0",Patterns::Integer());

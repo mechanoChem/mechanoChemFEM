@@ -30,18 +30,12 @@ diffusion_reaction<dim>::diffusion_reaction()
 	params->declare_entry("R_23","0",Patterns::Double() );
 	params->declare_entry("jn","0",Patterns::Double() );
 	params->leave_subsection();
-	//This is necessary, 	
+	//Declear the parameters before load it
 	this->load_parameters("parameters.prm");
 	
 	//main fields 
-	this->primary_variables.resize(2);		
-  this->primary_variables[0].push_back("c1"); this->primary_variables[0].push_back("component_is_scalar");
-  this->primary_variables[1].push_back("c2"); this->primary_variables[1].push_back("component_is_scalar");
-	
-	this->FE_support.resize(1);// store order of polynomial basis functions, 0 means FE_Nothing	
-	this->FE_support[0].push_back(1);
-	this->FE_support[0].push_back(1);
-	
+
+	this->define_primary_fields();
 	this->init_ibvp();
 }
 

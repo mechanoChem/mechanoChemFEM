@@ -15,6 +15,7 @@ class diffusion_reaction: public mechanoChemFEM<dim>
 template <int dim>
 diffusion_reaction<dim>::diffusion_reaction()
 {
+	//This let you use one params to get all parameters pre-defined in the mechanoChemFEM
 	params=this->params_mechanoChemFEM;
 	
 	params->enter_subsection("Concentration");	
@@ -30,12 +31,13 @@ diffusion_reaction<dim>::diffusion_reaction()
 	params->declare_entry("R_23","0",Patterns::Double() );
 	params->declare_entry("jn","0",Patterns::Double() );
 	params->leave_subsection();
+	
 	//Declear the parameters before load it
 	this->load_parameters("parameters.prm");
 	
-	//main fields 
-
+	//define main fields from parameter file.
 	this->define_primary_fields();
+	//Set up the ibvp.
 	this->init_ibvp();
 }
 

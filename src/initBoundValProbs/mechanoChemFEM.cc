@@ -5,22 +5,13 @@ zhenlin wang 2019
 #include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-mechanoChemFEM<dim>::mechanoChemFEM(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
-	:solveClass<dim, PETScWrappers::MPI::SparseMatrix, PETScWrappers::MPI::Vector>(*this, _params),FEMdata_out(this->dof_handler),params(&_params),
-	primary_variables(_primary_variables),FE_support(_FE_support),
-	mpi_communicator(MPI_COMM_WORLD), n_mpi_processes (Utilities::MPI::n_mpi_processes(mpi_communicator)), 
+mechanoChemFEM<dim>::mechanoChemFEM():FEMdata_out(this->dof_handler),
+	 mpi_communicator(MPI_COMM_WORLD), n_mpi_processes (Utilities::MPI::n_mpi_processes(mpi_communicator)), 
   this_mpi_process (Utilities::MPI::this_mpi_process(mpi_communicator)), pcout (std::cout, (Utilities::MPI::this_mpi_process(MPI_COMM_WORLD) == 0))
 {
 	pcout<<"mechanoChemFEM initiated"<<std::endl;
-	
-	pre_run();
-		
-	make_grid();
-	refine_grid();
-	setMultDomain();
-  mark_boundary();
-	setup_linear_system();
-		
+	params_mechanoChemFEM=&this->params_ref;
+	declare_parameters_mechanoChemFEM();
 }
 
 
@@ -33,6 +24,11 @@ mechanoChemFEM<dim>::~mechanoChemFEM (){
 	solution_prev.clear();
 	delete volume_quadrature;
 	delete common_face_quadrature;
+}
+
+template <int dim>
+void mechanoChemFEM<dim>::define_primary_fields(){
+	//read from parameters.
 }
 
 template <int dim>

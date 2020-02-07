@@ -5,7 +5,6 @@
 #include <deal.II/base/table.h>
 #include <deal.II/base/parameter_handler.h>
 #include <deal.II/lac/vector.h>
-
 #include "supplementary/dataStruct.h"
 #include "supplementary/supplementaryFunctions.h"
 #include "supplementary/functionEvaluations.h"
@@ -16,19 +15,13 @@ class Residual
 public:
   Residual ();
   ~Residual();
-	
-	dealii::ParameterHandler* params;
-	
+		
 	double currentTime, dt;
 	//unsigned int iteration;
 	//material properity
 	double lambda, mu, viscosity, density;	
 	std::string constitutiveModel;
 	
-	/**
-	*re-initialize parametersClass
-	*/
-	void reinit(dealii::ParameterHandler& _params);
 	
 	void setLameParametersByYoungsModulusPoissonRatio(double youngsModulus, double poissonRatio);
 	/**

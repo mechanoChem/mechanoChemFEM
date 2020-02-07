@@ -3,9 +3,9 @@
 template <int dim, class matrixType, class vectorType>
 void solveClass<dim, matrixType, vectorType>::solveLinearSystem_default_direct(dealii::Vector<double>& dU)
 {
-	params->enter_subsection("Linear_solver");
-	std::string solver=params->get("solver_method");
-	params->leave_subsection();	
+	params_solve->enter_subsection("Linear_solver");
+	std::string solver=params_solve->get("solver_method");
+	params_solve->leave_subsection();	
 	
 }
 

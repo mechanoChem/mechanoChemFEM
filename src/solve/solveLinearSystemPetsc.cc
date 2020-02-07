@@ -3,8 +3,8 @@
 template <int dim, class matrixType, class vectorType>
 void solveClass<dim, matrixType, vectorType>::solveLinearSystem_default_direct(PETScWrappers::MPI::Vector& dU)
 {
-	params->enter_subsection("Linear_solver");
-	std::string solver_method=params->get("solver_method");
+	params_solve->enter_subsection("Linear_solver");
+	std::string solver_method=params_solve->get("solver_method");
 	
 	
 	if(std::strcmp(solver_method.c_str(),"PETScsuperLU")==0){
@@ -14,7 +14,7 @@ void solveClass<dim, matrixType, vectorType>::solveLinearSystem_default_direct(P
     solver.solve(system_matrix, dU, system_rhs, preconditioner);
 	}
 	else if(std::strcmp(solver_method.c_str(),"PETScMUMPS")==0){
-		bool symmetricFlag=params->get_bool("system_matrix_symmetricFlag");
+		bool symmetricFlag=params_solve->get_bool("system_matrix_symmetricFlag");
     SolverControl cn;
     PETScWrappers::SparseDirectMUMPS solver(cn, mpi_communicator);
     if(symmetricFlag) solver.set_symmetric_mode(true);
@@ -25,9 +25,9 @@ void solveClass<dim, matrixType, vectorType>::solveLinearSystem_default_direct(P
 	}
 	
 	PETScWrappers::Vector localized_dU(dU);
-	FEMbase->constraints.distribute (localized_dU);
+	constraints.distribute (localized_dU);
 	dU=localized_dU;
-	params->leave_subsection();	
+	params_solve->leave_subsection();	
 }
 
 template class solveClass<1, PETScWrappers::MPI::SparseMatrix, PETScWrappers::MPI::Vector>;

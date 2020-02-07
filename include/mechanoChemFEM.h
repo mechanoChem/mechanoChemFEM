@@ -81,12 +81,12 @@ template <int dim>
 class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, PETScWrappers::MPI::Vector>, public hpFEM<dim>
 {
   public:
-    mechanoChemFEM (std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params);
+    mechanoChemFEM ();
     ~ mechanoChemFEM();
 		
 		double current_dt;
 				
-		ParameterHandler* params;
+		ParameterHandler* params_mechanoChemFEM;
 		
 		Residual<Sacado::Fad::DFad<double>,dim> ResidualEq;
 		FEMdata<dim, PETScWrappers::MPI::Vector> FEMdata_out;
@@ -95,7 +95,15 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		*declare generic paramters
 		*/
 		void declare_parameters_mechanoChemFEM();
-		void load_parameters();
+		/**
+		*load parameters
+		*/
+		void load_parameters(std::string parametersfile);
+		
+		/**
+		*define primary field
+		*/
+		void define_primary_fields();
 		
 		/**
 		*generic function to setup the system
@@ -121,7 +129,7 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		/**
 		*generic function calls before running the simulations
 		*/
-		virtual void pre_run();
+		virtual void init_ibvp();
 		/**
 		*generic function calls to run the simulations
 		*/

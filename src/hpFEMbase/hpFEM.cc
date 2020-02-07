@@ -8,8 +8,6 @@ hpFEM<dim>::hpFEM ()
 template <int dim>
 hpFEM<dim>::~hpFEM (){dof_handler.clear ();}
 
-//template <int dim>
-//void hpFEM<dim>::updateLinearSystem(){};
 
 template class hpFEM<1>;
 template class hpFEM<2>;

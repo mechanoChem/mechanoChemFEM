@@ -1,0 +1,76 @@
+# Listing of Parameters
+# ---------------------
+subsection Backtracking
+  set Backtracking_beta           = 0
+  set Backtracking_gamma          = 0
+  set Backtracking_max_iterations = 0
+end
+
+
+subsection Concentration
+  set D_1  = 0
+  set D_2  = 0
+  set R_10 = 0
+  set R_11 = 0
+  set R_12 = 0
+  set R_13 = 0
+  set R_20 = 0
+  set R_21 = 0
+  set R_22 = 0
+  set R_23 = 0
+  set jn   = 0
+end
+
+
+subsection Geometry
+  set X_0           = 0
+  set X_end         = 0
+  set Y_0           = 0
+  set Y_end         = 0
+  set Z_0           = 0
+  set Z_end         = 0
+  set element_div_x = 0
+  set element_div_y = 0
+  set element_div_z = 0
+end
+
+
+subsection Linear_solver
+  # linear solver
+  set solver_method               = PETScsuperLU
+  set system_matrix_symmetricFlag = false
+end
+
+
+subsection Nonlinear_solver
+  # support shceme: Backtracking
+  set Line_search_scheme      = NONE
+  set absolute_norm_tolerance = 1.0e-16
+  set max_iterations          = 1
+
+  # support method: classicNewton, NewtonLS
+  set nonLinear_method        = classicNewton
+  set relative_norm_tolerance = 1.0e-16
+end
+
+
+subsection Problem
+  set current_increment      = 0
+  set current_time           = 0
+  set dt                     = 0
+  set face_quadrature        = 2
+  set mesh                   = 1
+  set off_output_index       = 0
+  set output_directory       = 1
+  set print_parameter        = true
+  set resuming_from_snapshot = false
+  set save_output            = true
+  set save_snapshot          = true
+  set skip_output            = 1
+  set snapshot_directory     = 1
+  set snapshot_file          = 1
+  set totalTime              = 0
+  set volume_quadrature      = 3
+end
+
+

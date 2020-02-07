@@ -3,8 +3,8 @@
 template <int dim, class matrixType, class vectorType>
 bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool converge_flag)
 {	
-	params->enter_subsection("Nonlinear_solver");
-	std::string nonLinearScheme=params->get("nonLinear_method");	
+	params_solve->enter_subsection("Nonlinear_solver");
+	std::string nonLinearScheme=params_solve->get("nonLinear_method");	
 	
 	vectorType U_initial_0;
 	if(!converge_flag) U_initial_0=U;
@@ -14,10 +14,10 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool
 		vectorType dU;
 		dU.reinit(U);
 		
-	  double tol=params->get_double("relative_norm_tolerance");
-		double abs_tol=params->get_double("absolute_norm_tolerance");
-		int maxIteration=params->get_integer("max_iterations");
-		params->leave_subsection();
+	  double tol=params_solve->get_double("relative_norm_tolerance");
+		double abs_tol=params_solve->get_double("absolute_norm_tolerance");
+		int maxIteration=params_solve->get_integer("max_iterations");
+		params_solve->leave_subsection();
 		double initial_norm=0;
 		double current_norm=0;
 	  double res=1.0;
@@ -61,11 +61,11 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool
 		vectorType dU;
 		dU.reinit(U);
 		
-	  double tol=params->get_double("relative_norm_tolerance");
-		double abs_tol=params->get_double("absolute_norm_tolerance");
-		int maxIteration=params->get_integer("max_iterations");
-		std::string Line_search_scheme=params->get("Line_search_scheme");
-		params->leave_subsection();
+	  double tol=params_solve->get_double("relative_norm_tolerance");
+		double abs_tol=params_solve->get_double("absolute_norm_tolerance");
+		int maxIteration=params_solve->get_integer("max_iterations");
+		std::string Line_search_scheme=params_solve->get("Line_search_scheme");
+		params_solve->leave_subsection();
 		
 		double initial_norm=0;
 		double current_norm=0;
@@ -103,11 +103,11 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool
 			if(std::strcmp(Line_search_scheme.c_str(),"Backtracking")==0){
 				vectorType U_initial;
 				U_initial.reinit(U);
-				params->enter_subsection("Backtracking");
-				double gamma=params->get_double("Backtracking_gamma");
-				double beta=params->get_double("Backtracking_beta");
-				int max_backtracking_iterations=params->get_double("Backtracking_max_iterations");
-				params->leave_subsection();
+				params_solve->enter_subsection("Backtracking");
+				double gamma=params_solve->get_double("Backtracking_gamma");
+				double beta=params_solve->get_double("Backtracking_beta");
+				int max_backtracking_iterations=params_solve->get_double("Backtracking_max_iterations");
+				params_solve->leave_subsection();
 				U+=dU;
 				updateLinearSystem();
 				double norm_0=system_rhs.l2_norm();
@@ -145,16 +145,16 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	vectorType U_initial_0;
 	if(!converge_flag) U_initial_0=U;
 	
-	params->enter_subsection("Nonlinear_solver");
+	params_solve->enter_subsection("Nonlinear_solver");
 	
-	std::string nonLinearScheme=params->get("nonLinear_method");
-  double tol=params->get_double("relative_norm_tolerance");
-	double abs_tol=params->get_double("absolute_norm_tolerance");
-	int maxIteration=params->get_integer("max_iterations");
+	std::string nonLinearScheme=params_solve->get("nonLinear_method");
+  double tol=params_solve->get_double("relative_norm_tolerance");
+	double abs_tol=params_solve->get_double("absolute_norm_tolerance");
+	int maxIteration=params_solve->get_integer("max_iterations");
 	
 	if(std::strcmp(nonLinearScheme.c_str(),"classicNewton")==0){	
 
-		params->leave_subsection();	
+		params_solve->leave_subsection();	
 		double initial_norm=0;
 		double current_norm=0;
 	  double res=1.0;
@@ -197,8 +197,8 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	
 	
 	if(std::strcmp(nonLinearScheme.c_str(),"NewtonLS")==0){
-		std::string Line_search_scheme=params->get("Line_search_scheme");
-		params->leave_subsection();
+		std::string Line_search_scheme=params_solve->get("Line_search_scheme");
+		params_solve->leave_subsection();
 		
 		double initial_norm=0;
 		double current_norm=0;
@@ -237,11 +237,11 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 			if(std::strcmp(Line_search_scheme.c_str(),"Backtracking")==0){
 				vectorType U_initial;
 				U_initial.reinit(U);
-				params->enter_subsection("Backtracking");
-				double gamma=params->get_double("Backtracking_gamma");
-				double beta=params->get_double("Backtracking_beta");
-				int max_backtracking_iterations=params->get_double("Backtracking_max_iterations");
-				params->leave_subsection();
+				params_solve->enter_subsection("Backtracking");
+				double gamma=params_solve->get_double("Backtracking_gamma");
+				double beta=params_solve->get_double("Backtracking_beta");
+				int max_backtracking_iterations=params_solve->get_double("Backtracking_max_iterations");
+				params_solve->leave_subsection();
 				U+=dU;
 				updateLinearSystem();
 				double norm_0=system_rhs.l2_norm();

@@ -53,6 +53,25 @@ void mechanoChemFEM<dim>::init_ibvp()
 	setMultDomain();
   mark_boundary();
 	setup_linear_system();
+	apply_boundary_condition();
+  pcout << "   Number of active cells:       " << hpFEM<dim>::triangulation.n_active_cells() << std::endl;
+  pcout << "   Number of degrees of freedom: " << hpFEM<dim>::dof_handler.n_dofs() << std::endl; 
+	if(!resuming_from_snapshot) {
+		apply_initial_condition();		
+	  std::string output_path = output_directory+"output-0.vtk";
+	  FEMdata_out.write_vtk(solution, output_path);
+	  if(save_snapshot){
+			std::string snapshot_path = snapshot_directory+"snapshot-"+std::to_string(0)+".dat";
+	  	FEMdata_out.create_vector_snapshot(solution, snapshot_path);
+		}
+	}
+	else {
+	  pcout<<"resuming from snapshot"<<std::endl;
+	  FEMdata_out.resume_vector_from_snapshot(solution,snapfile);
+	  std::string output_path = output_directory+"output-resume.vtk";
+    FEMdata_out.write_vtk(solution, output_path);
+	  solution_prev=solution;
+	}
 }
 
 template class mechanoChemFEM<1>;

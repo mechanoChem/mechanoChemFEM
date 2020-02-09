@@ -7,28 +7,40 @@ template <int dim>
 class diffusion_reaction: public mechanoChemFEM<dim>
 {
 	public:
-		diffusion_reaction(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params);
+		diffusion_reaction();
 		//this is a overloaded function 
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
-		void solve_ibvp();
 		ParameterHandler* params;		
 };
 template <int dim>
-diffusion_reaction<dim>::diffusion_reaction(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
-	:mechanoChemFEM<dim>(_primary_variables, _FE_support, _params),params(&_params){}
-
-template <int dim>
-void diffusion_reaction<dim>::solve_ibvp()
-{		
-	bool converge_flag=this->nonlinearSolve(this->solution);
-	if(!converge_flag) {
-		this->pcout<<"not converge, reduce dt by half"<<std::endl;
-		//this->current_dt=this->current_dt;
-		//enforce update even it does not converge (it is usually bad, but useful to get over some difficult steps in some cases)
-		converge_flag=this->nonlinearSolve(this->solution, true);
-	}
-	this->solution_prev=this->solution;
+diffusion_reaction<dim>::diffusion_reaction()
+{
+	//This let you use one params to get all parameters pre-defined in the mechanoChemFEM
+	params=this->params_mechanoChemFEM;
+	
+	params->enter_subsection("Concentration");	
+	params->declare_entry("D_1","0",Patterns::Double() );
+	params->declare_entry("D_2","0",Patterns::Double() );
+	params->declare_entry("R_10","0",Patterns::Double() );
+	params->declare_entry("R_11","0",Patterns::Double() );
+	params->declare_entry("R_12","0",Patterns::Double() );
+	params->declare_entry("R_13","0",Patterns::Double() );
+	params->declare_entry("R_20","0",Patterns::Double() );
+	params->declare_entry("R_21","0",Patterns::Double() );
+	params->declare_entry("R_22","0",Patterns::Double() );
+	params->declare_entry("R_23","0",Patterns::Double() );
+	params->declare_entry("jn","0",Patterns::Double() );
+	params->leave_subsection();
+	
+	//Declear the parameters before load it
+	this->load_parameters("../parameters.prm");
+	
+	//define main fields from parameter file.
+	this->define_primary_fields();
+	//Set up the ibvp.
+	this->init_ibvp();
 }
+
 
 template <int dim>
 void diffusion_reaction<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)

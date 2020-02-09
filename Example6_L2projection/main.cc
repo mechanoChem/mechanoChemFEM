@@ -25,7 +25,7 @@ int main(int argc, char **argv){
 		std::vector<std::vector<std::string> > primary_variables(1);	
 		primary_variables[0].push_back("theta"); primary_variables[0].push_back("component_is_scalar");
 		std::vector<std::vector<int> > FE_support(number_domain);
-		FE_support[0].push_back(1);
+		FE_support[0].push_back(2);
 				
 		ParameterHandler params;
 		params.enter_subsection("Problem");

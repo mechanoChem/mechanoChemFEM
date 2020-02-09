@@ -153,13 +153,13 @@ public:
 	
 	
 	/**
-	*assemble constant equation in scalar varibable like u=v*t in 1D   
+	*assemble constant equation for scalar varibable value=0
 	*/
-	void residualForConstantEq(const FEValues<dim>& fe_values, unsigned int DOF, dealii::Table<1, T >& R, dealii::Table<1,T >& value);
+	void residualForEqualityEq(const FEValues<dim>& fe_values, unsigned int DOF, dealii::Table<1, T >& R, dealii::Table<1,T >& value);
 	/**
-	*assemble constant equation in vector variable like u=v*t in 3D
+	*assemble constant equation for vector variable 
 	*/
-	void residualForConstantEq(const FEValues<dim>& fe_values, unsigned int DOF, dealii::Table<1, T >& R, dealii::Table<2,T >& value);
+	void residualForEqualityEq(const FEValues<dim>& fe_values, unsigned int DOF, dealii::Table<1, T >& R, dealii::Table<2,T >& value);
 	
 	
 	/**

@@ -39,7 +39,7 @@ void mechanoChemFEM<dim>::define_primary_fields()
 	}
 	pcout<<std::endl;
 	pcout<<"=========== Primary Fields Defined ==========="<<std::endl;
-	if(primary_variables_s.size()%2!=0 or FE_support_list_v.size()%2!=0){pcout<<"variable and domains are not consistent!!"<<std::endl; exit(1);}
+	if(primary_variables_s.size()%2!=0 or FE_support_list_v.size()%num_variables!=0){pcout<<"variable and domains are not consistent!!"<<std::endl; exit(1);}
 	
 }
 

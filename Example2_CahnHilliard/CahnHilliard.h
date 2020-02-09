@@ -2,19 +2,39 @@
 zhenlin wang 2019
 *CahnHilliard
 */
-#include "initBoundValProbs.h"
+#include "mechanoChemFEM.h"
 template <int dim>
-class CahnHilliard: public initBoundValProbs<dim>
+class CahnHilliard: public mechanoChemFEM<dim>
 {
 	public:
-		CahnHilliard(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params);
+		CahnHilliard();
 		//this is a overloaded function 
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		ParameterHandler* params;		
 };
 template <int dim>
-CahnHilliard<dim>::CahnHilliard(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
-	:initBoundValProbs<dim>(_primary_variables, _FE_support, _params),params(&_params){}
+CahnHilliard<dim>::CahnHilliard()
+{
+	//This let you use one params to get all parameters pre-defined in the mechanoChemFEM
+	params=this->params_mechanoChemFEM;
+	params->enter_subsection("Concentration");
+	params->declare_entry("c_ini","0",Patterns::Double() );
+
+	params->declare_entry("omega","0",Patterns::Double() );
+	params->declare_entry("c_alpha","0",Patterns::Double() );
+	params->declare_entry("c_beta","0",Patterns::Double() );
+	params->declare_entry("kappa","0",Patterns::Double() );
+	params->declare_entry("M","0",Patterns::Double() );
+	params->leave_subsection();		
+	
+	//Declear the parameters before load it
+	this->load_parameters("../parameters.prm");
+	
+	//define main fields from parameter file.
+	this->define_primary_fields();
+	//Set up the ibvp.
+	this->init_ibvp();
+}
 
 template <int dim>
 void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)

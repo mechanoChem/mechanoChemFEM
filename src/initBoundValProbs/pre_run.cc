@@ -34,8 +34,9 @@ void mechanoChemFEM<dim>::define_primary_fields()
 		pcout<<"for domain number id "<<i<<" the basis order is: "<<std::endl;
 		for(unsigned int j=0;j< num_variables;j++){
 			pcout<<FE_support_list_v[i*num_variables+j]<<"  ";
-			FE_support[i].push_back(FE_support_list_v[j]);
+			FE_support[i].push_back(FE_support_list_v[i*num_variables+j]);
 		}
+		pcout<<std::endl;
 	}
 	pcout<<std::endl;
 	pcout<<"=========== Primary Fields Defined ==========="<<std::endl;

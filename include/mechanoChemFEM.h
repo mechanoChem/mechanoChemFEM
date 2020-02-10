@@ -175,12 +175,12 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		
 		PETScWrappers::MPI::Vector solution;
 		PETScWrappers::MPI::Vector solution_prev;
+		ConstraintMatrix* constraints_mechanoChemFEM;
 		
     const QGauss<dim>* volume_quadrature;
 		const QGauss<dim-1>* common_face_quadrature;
     hp::FECollection<dim> fe_collection;
     hp::QCollection<dim>  q_collection;
-    ConstraintMatrix      constraints;
 		
 		double domain_X, domain_Y, domain_Z;
 		

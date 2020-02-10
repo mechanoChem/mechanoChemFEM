@@ -25,7 +25,7 @@ void solveClass<dim, matrixType, vectorType>::solveLinearSystem_default_direct(P
 	}
 	
 	PETScWrappers::Vector localized_dU(dU);
-	constraints.distribute (localized_dU);
+	constraints_solver.distribute (localized_dU);
 	dU=localized_dU;
 	params_solve->leave_subsection();	
 }

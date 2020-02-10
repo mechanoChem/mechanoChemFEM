@@ -102,7 +102,7 @@ public:
 	
   matrixType system_matrix;
   vectorType system_rhs;
-	ConstraintMatrix constraints;
+	ConstraintMatrix constraints_solver;
 	
 	MPI_Comm mpi_communicator;
 	

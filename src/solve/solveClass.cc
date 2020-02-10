@@ -25,7 +25,7 @@ void solveClass<dim, matrixType, vectorType>::reinitLinearSystem()
 template <int dim, class matrixType, class vectorType>
 void solveClass<dim, matrixType, vectorType>::distribute_local_to_global(dealii::FullMatrix<double>& local_matrix, dealii::Vector<double>& local_rhs, std::vector<types::global_dof_index> local_dof_indices)
 {
-	constraints.distribute_local_to_global (local_matrix, local_rhs, local_dof_indices, system_matrix, system_rhs);
+	constraints_solver.distribute_local_to_global (local_matrix, local_rhs, local_dof_indices, system_matrix, system_rhs);
 }
 
 template <int dim, class matrixType, class vectorType>

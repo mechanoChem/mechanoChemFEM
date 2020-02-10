@@ -2,21 +2,42 @@
 zhenlin wang 2019
 *coupled diffusion reaction
 */
-#include "initBoundValProbs.h"
+#include "mechanoChemFEM.h"
 template <int dim>
-class growth: public initBoundValProbs<dim>
+class growth: public mechanoChemFEM<dim>
 {
 	public:
-		growth(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params);
+		growth();
 		//this is a overloaded function 
 		void setMultDomain();
-		void setup_constraints();
+		void apply_boundary_condition();
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		ParameterHandler* params;		
+		
+		ConstraintMatrix* constraints;
 };
 template <int dim>
-growth<dim>::growth(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
-	:initBoundValProbs<dim>(_primary_variables, _FE_support, _params),params(&_params){}
+growth<dim>::growth()
+{
+	//pass the pointer to "constraints" in mechanoChemFEM
+	constraints=this->constraints_mechanoChemFEM;
+	//This let you use one params to get all parameters pre-defined in the mechanoChemFEM
+	params=this->params_mechanoChemFEM;
+	params->enter_subsection("parameters");
+	params->declare_entry("youngsModulus","0",Patterns::Double() );
+	params->declare_entry("poissonRatio","0",Patterns::Double() );
+	params->declare_entry("c_ini","0",Patterns::Double() );
+	params->declare_entry("M","0",Patterns::Double() );
+	params->leave_subsection();	
+	
+	//Declear the parameters before load it
+	this->load_parameters("../parameters.prm");
+	
+	//define main fields from parameter file.
+	this->define_primary_fields();
+	//Set up the ibvp.
+	this->init_ibvp();
+}
 
 template <int dim>
 void growth<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
@@ -86,16 +107,16 @@ void growth<dim>::setMultDomain()
 
 //set Dirichlet BC
 template <int dim>
-void growth<dim>::setup_constraints()
+void growth<dim>::apply_boundary_condition()
 {
 	this->pcout<<"setup_constraints"<<std::endl;
-	hpFEM<dim>::constraints.clear ();
-	DoFTools::make_hanging_node_constraints (this->dof_handler, hpFEM<dim>::constraints);
+	constraints->clear ();
+	DoFTools::make_hanging_node_constraints (this->dof_handler, *constraints);
 	
 	int totalDOF=this->totalDOF(this->primary_variables);
   std::vector<bool> c_component (totalDOF, false); c_component[0]=true; 
 	//apply constraints on boundary
-	VectorTools:: interpolate_boundary_values (hpFEM<dim>::dof_handler, dim, ZeroFunction<dim> (totalDOF),hpFEM<dim>::constraints, c_component);
+	VectorTools:: interpolate_boundary_values (this->dof_handler, dim, ZeroFunction<dim> (totalDOF),*constraints, c_component);
 	//apply constraints on interface (domain 1 side)
 	
 	std::vector<types::global_dof_index> local_face_dof_indices_1 (this->fe_system[1]->dofs_per_face);
@@ -108,7 +129,7 @@ void growth<dim>::setup_constraints()
 		  			cell->face(f)->get_dof_indices (local_face_dof_indices_1, 1);
 		  			for (unsigned int i=0; i<local_face_dof_indices_1.size(); ++i){
 					  	const unsigned int ck = this->fe_system[1]->face_system_to_component_index(i).first;
-					  	if(ck>0) hpFEM<dim>::constraints.add_line (local_face_dof_indices_1[i]);//add constrain line for all u dofs
+					  	if(ck>0) constraints->add_line (local_face_dof_indices_1[i]);//add constrain line for all u dofs
 		  		 	}
 					}
 				}
@@ -116,7 +137,7 @@ void growth<dim>::setup_constraints()
 		}
 	}
 	
-	hpFEM<dim>::constraints.close ();
+	constraints->close ();
 }
 
 template <int dim>

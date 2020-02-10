@@ -2,6 +2,8 @@
 
 subsection Problem
 set print_parameter = true
+set primary_variables_list= c1, component_is_scalar
+set FE_support_list= 1
 
 set dt = 1
 set totalTime = 50

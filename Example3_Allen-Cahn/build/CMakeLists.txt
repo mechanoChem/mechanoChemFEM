@@ -29,8 +29,8 @@ ENDIF()
 #SET(inc_DIR "/home/wzhenlin/workspace/dataDrivenIdentifyGovenEq/FEMcode/include")
 
 #path on my mac
-SET(dealiiBase_inc_DIR "/Users/wzhenlin/Github/mechanoChemFEM/include")
-SET(dealiiBase_lib "/Users/wzhenlin/numerics/dealmultiPhyics/dealMultiPhysics.a")
+SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.6/include)
+SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.6/lib/mechanoChemFEM.a)
 
 
 FILE (GLOB TARGET_SRC "../*.cc")
@@ -39,9 +39,9 @@ DEAL_II_INITIALIZE_CACHED_VARIABLES()
 PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
 
-
-INCLUDE_DIRECTORIES(${dealiiBase_inc_DIR} )
-TARGET_LINK_LIBRARIES(${TARGET} ${dealiiBase_lib})
+#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
+INCLUDE_DIRECTORIES(${mechanoChemFEM_INC} )
+TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB})
 
 
 

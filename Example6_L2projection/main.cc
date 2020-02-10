@@ -20,21 +20,8 @@ int main(int argc, char **argv){
 		int mech_degree=1;
 		
 		std::vector<std::vector<int> > FE_support_add(number_domain);// store order of polynomial basis functions, 0 means FE_Nothing	
-		for(unsigned int i=0;i<4;i++) FE_support_add[0].push_back(1);
-		
-		std::vector<std::vector<std::string> > primary_variables(1);	
-		primary_variables[0].push_back("theta"); primary_variables[0].push_back("component_is_scalar");
-		std::vector<std::vector<int> > FE_support(number_domain);
-		FE_support[0].push_back(2);
-				
-		ParameterHandler params;
-		params.enter_subsection("Problem");
-    params.declare_entry("additional_data_snapshot","0",Patterns::FileName());
-	
-    params.leave_subsection();	
-		
-			
-		L2projection<DIMS> problem(primary_variables,FE_support,primary_variables_add,FE_support_add, params);	
+		for(unsigned int i=0;i<4;i++) FE_support_add[0].push_back(1);	
+		L2projection<DIMS> problem(primary_variables_add,FE_support_add, params);	
     problem.run ();
   }
   catch (std::exception &exc){

@@ -6,7 +6,7 @@ template <int dim>
 class L2projection: public mechanoChemFEM<dim>
 {
 	public:
-		L2projection(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support,std::vector<std::vector<std::string> > _variables_add, std::vector<std::vector<int> > _FE_support_add, ParameterHandler& _params);
+		L2projection(std::vector<std::vector<std::string> > _variables_add, std::vector<std::vector<int> > _FE_support_add, ParameterHandler& _params);
 		~L2projection();
 		//these are overloaded functions 
 		void updateLinearSystem();
@@ -30,10 +30,25 @@ class L2projection: public mechanoChemFEM<dim>
 };
 
 template <int dim>
-L2projection<dim>::L2projection(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support,std::vector<std::vector<std::string> > _variables_add, std::vector<std::vector<int> > _FE_support_add, ParameterHandler& _params)
-	:mechanoChemFEM<dim>(_primary_variables, _FE_support, _params),variables_add(_variables_add), FE_support_add(_FE_support_add),params(&_params){
+L2projection<dim>::L2projection(std::vector<std::vector<std::string> > _variables_add, std::vector<std::vector<int> > _FE_support_add, ParameterHandler& _params)
+	:variables_add(_variables_add), FE_support_add(_FE_support_add){
   dof_handler_add=new hp::DoFHandler<dim>(this->triangulation);
 	this->pcout<<"L2 projection initialized"<<std::endl;
+	//This let you use one params to get all parameters pre-defined in the mechanoChemFEM
+	params=this->params_mechanoChemFEM;
+
+	params->enter_subsection("Problem");
+  params->declare_entry("additional_data_snapshot","0",Patterns::FileName());
+  params->leave_subsection();	
+	
+	//Declear the parameters before load it
+	this->load_parameters("../parameters.prm");
+	
+	//define main fields from parameter file.
+	this->define_primary_fields();
+	//Set up the ibvp.
+	this->init_ibvp();
+	
 }
 template <int dim>
 L2projection<dim>::~L2projection(){delete dof_handler_add; }

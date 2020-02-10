@@ -22,7 +22,8 @@ public:
 };
 
 template <int dim>
-nodalField<dim>::nodalField(dealii::ParameterHandler& _params):params(&_params){}
+nodalField<dim>::nodalField(dealii::ParameterHandler& _params):params(&_params)
+{}
 
 template <int dim>
 void nodalField<dim>::compute_derived_quantities_vector(const std::vector<Vector<double> > &uh,
@@ -46,7 +47,7 @@ template <int dim>
 class CahnHilliard: public mechanoChemFEM<dim>
 {
 	public:
-		CahnHilliard(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params);
+		CahnHilliard();
 		//this is a overloaded function 
 		void ini_updateLinearSystem();
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
@@ -64,9 +65,31 @@ class CahnHilliard: public mechanoChemFEM<dim>
 
 };
 template <int dim>
-CahnHilliard<dim>::CahnHilliard(std::vector<std::vector<std::string> > _primary_variables, std::vector<std::vector<int> > _FE_support, ParameterHandler& _params)
-	:mechanoChemFEM<dim>(_primary_variables, _FE_support, _params),params(&_params),computedNodalField(_params){
+CahnHilliard<dim>::CahnHilliard():computedNodalField(*params)
+{
 		this->pcout<<"CahnHilliard initiated"<<std::endl;
+		//This let you use one params to get all parameters pre-defined in the mechanoChemFEM
+		params=this->params_mechanoChemFEM;
+		
+		params->enter_subsection("Problem");
+		params->declare_entry("output_w_theta","true",Patterns::Bool());
+		params->leave_subsection();
+		params->enter_subsection("Concentration");
+		params->declare_entry("c1_ini","0",Patterns::Double() );
+		params->declare_entry("c2_ini","0",Patterns::Double() );
+		params->declare_entry("mobility_1","0",Patterns::Double() );
+		params->declare_entry("mobility_2","0",Patterns::Double() );
+		params->declare_entry("kappa_1","0",Patterns::Double() );
+		params->declare_entry("kappa_2","0",Patterns::Double() );
+		
+		params->declare_entry("d","0",Patterns::Double() );
+		params->declare_entry("s","0",Patterns::Double() );
+		
+		params->leave_subsection();		
+		
+		//Declear the parameters before load it
+		this->load_parameters("../parameters.prm");
+		//initiate computed fields.
 		std::vector<std::vector<std::string> > computed_primary_variables={ {"theta", "component_is_scalar"}};
 		computedNodalField.setupComputedField(computed_primary_variables);
 		params->enter_subsection("Problem");
@@ -74,6 +97,11 @@ CahnHilliard<dim>::CahnHilliard(std::vector<std::vector<std::string> > _primary_
 		params->leave_subsection();
 		local_features.resize(4,0.0);
 		features.resize(4,0.0);
+		
+		//define main fields from parameter file.
+		this->define_primary_fields();
+		//Set up the ibvp.
+		this->init_ibvp();
 	}
 
 

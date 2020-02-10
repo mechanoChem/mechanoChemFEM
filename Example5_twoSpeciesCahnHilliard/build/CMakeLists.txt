@@ -21,15 +21,16 @@ IF(NOT ${deal.II_FOUND})
 ENDIF()
 
 
-#path on conflux
-#SET(mechanoChemFEM_INC "$ENV{mechanoChemFEM_DIR}/v0.51/include")
-#SET(mechanoChemFEM_LIB "$ENV{mechanoChemFEM_DIR}/v0.51/lib/mechanoChemFEM.a")
-#SET (sacado_INC "/gpfs/gpfs0/groups/garikipati/wzhenlin/app/trilinos-11.8.1-Source/install/include")
-#SET (sacado_LIB "/gpfs/gpfs0/groups/garikipati/wzhenlin/app/trilinos-11.8.1-Source/install/lib/libsacado.a")
+#path on flux
+#SET(dealiiBase_inc_DIR "/nfs/turbo/compphys/dealiiBase/include")
+#SET(dealiiBase_lib "/nfs/turbo/compphys/dealiiBase/lib/dealMultiPhysics.a")
+
+#SET(src_DIR "/home/wzhenlin/workspace/dataDrivenIdentifyGovenEq/FEMcode/src")
+#SET(inc_DIR "/home/wzhenlin/workspace/dataDrivenIdentifyGovenEq/FEMcode/include")
 
 #path on my mac
-SET(mechanoChemFEM_INC "/Users/wzhenlin/numerics/mechanoChem/v0.51/include")
-SET(mechanoChemFEM_LIB "/Users/wzhenlin/numerics/mechanoChem/v0.51/lib/mechanochemFEM.a")
+SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.6/include)
+SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.6/lib/mechanoChemFEM.a)
 
 
 FILE (GLOB TARGET_SRC "../*.cc")
@@ -38,9 +39,9 @@ DEAL_II_INITIALIZE_CACHED_VARIABLES()
 PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
 
+#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
+INCLUDE_DIRECTORIES(${mechanoChemFEM_INC} )
+TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB})
 
-#INCLUDE_DIRECTORIES(${mechanoChemFEM_INC} ${sacado_INC})
-#TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB} ${sacado_LIB} )
 
-INCLUDE_DIRECTORIES(${mechanoChemFEM_INC})
-TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB} )
+

@@ -5,9 +5,9 @@ void solveClass<dim, matrixType, vectorType>::declare_parameters_solveClass()
 {
 	params_solve->enter_subsection("Nonlinear_solver");
 	params_solve->declare_entry("nonLinear_method","classicNewton", Patterns::Selection("classicNewton|NewtonLS"),"support method: classicNewton, NewtonLS");
-	params_solve->declare_entry("relative_norm_tolerance", "1.0e-16", Patterns::Double() );
-	params_solve->declare_entry("absolute_norm_tolerance", "1.0e-16", Patterns::Double() );
-	params_solve->declare_entry("max_iterations", "1", Patterns::Integer() );
+	params_solve->declare_entry("relative_norm_tolerance", "1.0e-12", Patterns::Double() );
+	params_solve->declare_entry("absolute_norm_tolerance", "1.0e-12", Patterns::Double() );
+	params_solve->declare_entry("max_iterations", "5", Patterns::Integer() );
 	params_solve->declare_entry("Line_search_scheme", "NONE", Patterns::Selection("NONE|Backtracking"),"support shceme: Backtracking");
 	params_solve->leave_subsection();	
 	

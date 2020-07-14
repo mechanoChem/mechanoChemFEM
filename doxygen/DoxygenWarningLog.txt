@@ -45,3 +45,4 @@ warning: source ./supplementary.h is not a readable file or directory... skippin
 /afs/umich.edu/user/w/z/wzhenlin/mechanoChemFEM/include/Residual.h:145: warning: Found unknown command `\grad'
 /afs/umich.edu/user/w/z/wzhenlin/mechanoChemFEM/include/Residual.h:150: warning: Found unknown command `\grad'
 /afs/umich.edu/user/w/z/wzhenlin/mechanoChemFEM/include/Residual.h:120: warning: Found unknown command `\nabla'
+error: Problems running latex. Check your installation or look for typos in _formulas.tex and check _formulas.log!

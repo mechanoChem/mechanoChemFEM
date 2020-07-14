@@ -1,226 +1,237 @@
 \hypertarget{growth_Introduction}{}\section{Introduction}\label{growth_Introduction}
-In this example, we first want to solve one diffusion equation\+: \[ \frac{\partial C}{\partial t}+\nabla\cdot\boldsymbol{j}=0 \] where $\boldsymbol{j}_1=-M\nabla C$ is the flux. The boundary condition is \[ C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=jn \text{ on }\Gamma \backslash \Gamma_1 \] Besides chemistry, we also solve elasticity problem at finite strain\+: \[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0} \] \[ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^{\text{e}}}}\frac{\partial W}{\partial \boldsymbol{F}^{\text{e}}}\boldsymbol{F}^{\text{e}} \] To make it more interesting, we have mechanical deformation induced by species intecalation. \[ \boldsymbol{F}=\boldsymbol{F}^{\text{e}}\boldsymbol{F}^{\text{g}} \] \[ \boldsymbol{F}^{\text{g}}=\left(\frac{C}{C_\text{0}}\right)^{\frac{1}{3}}\mathbb{1} \] In this example, we have two domains/materials. The diffusion equation is solved over the whole domains, while we restrict the mechanics into the one of the domain. We want to model that the species transports from domain 1 into domain 2, and casues expansion of domain 2. By this example, we demonstrate how to setup multiple domains, using {\bfseries{F\+E\+\_\+\+Nothing}} to exclude primary varialbe from certain doamin, and applying D\+OF constrains on the interface.
+In this example, we first want to solve one diffusion equation\-: \[ \frac{\partial C}{\partial t}+\nabla\cdot\boldsymbol{j}=0 \] where $\boldsymbol{j}_1=-M\nabla C$ is the flux. The boundary condition is \[ C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma \backslash \Gamma_1 \] Besides chemistry, we also solve elasticity problem at finite strain\-: \[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0} \] \[ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^{\text{e}}}}\frac{\partial W}{\partial \boldsymbol{F}^{\text{e}}}\boldsymbol{F}^{\text{e}} \] To make it more interesting, we have mechanical deformation induced by species intecalation. \[ \boldsymbol{F}=\boldsymbol{F}^{\text{e}}\boldsymbol{F}^{\text{g}} \] \[ \boldsymbol{F}^{\text{g}}=\left(\frac{C}{C_\text{0}}\right)^{\frac{1}{3}}\mathbb{1} \] In this example, we have two domains/materials. The diffusion equation is solved over the whole domains, while we restrict the mechanics into the one of the domain. We want to model that the species transports from domain 1 into domain 2, and casues expansion of domain 2. By this example, we demonstrate how to setup multiple domains, using {\bfseries F\-E\-\_\-\-Nothing} to exclude primary varialbe from certain doamin, and applying D\-O\-F constrains on the interface.
 
- \hypertarget{growth_imple}{}\section{Implementation\+: level 1 user}\label{growth_imple}
-We first define the one scalar variable, and one vector variable for displacment\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{std::vector<std::vector<std::string> > primary\_variables(2);        }
-\DoxyCodeLine{      primary\_variables[0].push\_back(\textcolor{stringliteral}{"c1"}); primary\_variables[0].push\_back(\textcolor{stringliteral}{"component\_is\_scalar"});}
-\DoxyCodeLine{      primary\_variables[1].push\_back(\textcolor{stringliteral}{"u"}); primary\_variables[1].push\_back(\textcolor{stringliteral}{"component\_is\_vector"});}
+ \hypertarget{growth_imple}{}\section{Implementation\-: level 1 user}\label{growth_imple}
+We first define the one scalar variable, and one vector variable for displacment\-: 
+\begin{DoxyCode}
+std::vector<std::vector<std::string> > primary\_variables(2);        
+      primary\_variables[0].push\_back(\textcolor{stringliteral}{"c1"}); primary\_variables[0].push\_back(\textcolor{stringliteral}{"component\_is\_scalar"});
+      primary\_variables[1].push\_back(\textcolor{stringliteral}{"u"}); primary\_variables[1].push\_back(\textcolor{stringliteral}{"component\_is\_vector"});
 \end{DoxyCode}
- We define two domains and basis order for each primal variables\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{int} number\_domain=2;}
-\DoxyCodeLine{\textcolor{keywordtype}{int} basis\_order=1;}
-\DoxyCodeLine{std::vector<std::vector<int> > FE\_support(number\_domain);\textcolor{comment}{// store order of polynomial basis functions, 0 means FE\_Nothing   }}
-\DoxyCodeLine{FE\_support[0].push\_back(basis\_order);}
-\DoxyCodeLine{FE\_support[0].push\_back(0);}
-\DoxyCodeLine{FE\_support[1].push\_back(basis\_order);}
-\DoxyCodeLine{FE\_support[1].push\_back(basis\_order);}
+ We define two domains and basis order for each primal variables\-: 
+\begin{DoxyCode}
+\textcolor{keywordtype}{int} number\_domain=2;
+\textcolor{keywordtype}{int} basis\_order=1;
+std::vector<std::vector<int> > FE\_support(number\_domain);\textcolor{comment}{// store order of polynomial basis functions, 0
+       means FE\_Nothing   }
+FE\_support[0].push\_back(basis\_order);
+FE\_support[0].push\_back(0);
+FE\_support[1].push\_back(basis\_order);
+FE\_support[1].push\_back(basis\_order);
 \end{DoxyCode}
- In domain 1, we set the order of polynomial basis to be zero for the second variable, i.\+e. the displacment, which will impose F\+E\+\_\+\+Nothing to this field.
+ In domain 1, we set the order of polynomial basis to be zero for the second variable, i.\-e. the displacment, which will impose F\-E\-\_\-\-Nothing to this field.
 
-Before launching the \href{../html/classinit_bound_val_probs.html}{\texttt{ init\+Bound\+Val\+Probs}}, we need to initialize the {\bfseries{Parameter\+Handler}} and declare all paramters we may use\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{ParameterHandler params;}
-\DoxyCodeLine{        params.enter\_subsection(\textcolor{stringliteral}{"parameters"});}
-\DoxyCodeLine{        params.declare\_entry(\textcolor{stringliteral}{"youngsModulus"},\textcolor{stringliteral}{"0"},Patterns::Double() );}
-\DoxyCodeLine{        params.declare\_entry(\textcolor{stringliteral}{"poissonRatio"},\textcolor{stringliteral}{"0"},Patterns::Double() );}
-\DoxyCodeLine{        params.declare\_entry(\textcolor{stringliteral}{"c\_ini"},\textcolor{stringliteral}{"0"},Patterns::Double() );}
-\DoxyCodeLine{        params.declare\_entry(\textcolor{stringliteral}{"M"},\textcolor{stringliteral}{"0"},Patterns::Double() );}
-\DoxyCodeLine{        params.leave\_subsection();  }
+Before launching the \href{../html/classinit_bound_val_probs.html}{\tt init\-Bound\-Val\-Probs}, we need to initialize the {\bfseries Parameter\-Handler} and declare all paramters we may use\-: 
+\begin{DoxyCode}
+ParameterHandler params;
+        params.enter\_subsection(\textcolor{stringliteral}{"parameters"});
+        params.declare\_entry(\textcolor{stringliteral}{"youngsModulus"},\textcolor{stringliteral}{"0"},Patterns::Double() );
+        params.declare\_entry(\textcolor{stringliteral}{"poissonRatio"},\textcolor{stringliteral}{"0"},Patterns::Double() );
+        params.declare\_entry(\textcolor{stringliteral}{"c\_ini"},\textcolor{stringliteral}{"0"},Patterns::Double() );
+        params.declare\_entry(\textcolor{stringliteral}{"M"},\textcolor{stringliteral}{"0"},Patterns::Double() );
+        params.leave\_subsection();  
 \end{DoxyCode}
- Now we just need to have class inherited from \href{../html/classinit_bound_val_probs.html}{\texttt{ init\+Bound\+Val\+Probs}} class, and overload several functions as discussed below. function\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keyword}{class }growth: \textcolor{keyword}{public} initBoundValProbs<dim>}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{    \textcolor{keyword}{public}:}
-\DoxyCodeLine{        growth(std::vector<std::vector<std::string> > \_primary\_variables, std::vector<std::vector<int> > \_FE\_support, ParameterHandler\& \_params);}
-\DoxyCodeLine{        \textcolor{comment}{//this is a overloaded function }}
-\DoxyCodeLine{        \textcolor{keywordtype}{void} get\_residual(\textcolor{keyword}{const} \textcolor{keyword}{typename} hp::DoFHandler<dim>::active\_cell\_iterator \&cell, \textcolor{keyword}{const} FEValues<dim>\& fe\_values, Table<1, Sacado::Fad::DFad<double> >\& R, Table<1, Sacado::Fad::DFad<double>>\& ULocal, Table<1, double >\& ULocalConv);}
-\DoxyCodeLine{        \textcolor{keywordtype}{void} setMultDomain();}
-\DoxyCodeLine{        \textcolor{keywordtype}{void} setup\_constraints();}
-\DoxyCodeLine{        ParameterHandler* params;       }
-\DoxyCodeLine{\};}
+ Now we just need to have class inherited from \href{../html/classinit_bound_val_probs.html}{\tt init\-Bound\-Val\-Probs} class, and overload several functions as discussed below. function\-: 
+\begin{DoxyCode}
+\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>
+\textcolor{keyword}{class }growth: \textcolor{keyword}{public} initBoundValProbs<dim>
+\{
+    \textcolor{keyword}{public}:
+        growth(std::vector<std::vector<std::string> > \_primary\_variables, std::vector<std::vector<int> > 
+      \_FE\_support, ParameterHandler& \_params);
+        \textcolor{comment}{//this is a overloaded function }
+        \textcolor{keywordtype}{void} get\_residual(\textcolor{keyword}{const} \textcolor{keyword}{typename} hp::DoFHandler<dim>::active\_cell\_iterator &cell, \textcolor{keyword}{const} 
+      FEValues<dim>& fe\_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, 
+      Table<1, double >& ULocalConv);
+        \textcolor{keywordtype}{void} setMultDomain();
+        \textcolor{keywordtype}{void} setup\_constraints();
+        ParameterHandler* params;       
+\};
 \end{DoxyCode}
- In the first overloaded {\bfseries{get\+\_\+residual}} function, we define the residual for our problem. We use the pre-\/defined functions for diffusion equation and mechanics given the flux and stress P. 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{this->ResidualEq.residualForDiffusionEq(fe\_values, c\_dof, R, c, c\_conv, j\_c);}
-\DoxyCodeLine{ this->ResidualEq.residualForMechanics(fe\_values, u\_dof, R, P); }
+ In the first overloaded {\bfseries get\-\_\-residual} function, we define the residual for our problem. We use the pre-\/defined functions for diffusion equation and mechanics given the flux and stress P. 
+\begin{DoxyCode}
+this->ResidualEq.residualForDiffusionEq(fe\_values, c\_dof, R, c, c\_conv, j\_c);
+ this->ResidualEq.residualForMechanics(fe\_values, u\_dof, R, P); 
 \end{DoxyCode}
 
 
-fe\+\_\+values\+: deal.\+ii Finite element evaluated in quadrature points of a cell.
+fe\-\_\-values\-: deal.\-ii Finite element evaluated in quadrature points of a cell.
 
-c\+\_\+dof, u\+\_\+dof\+: dof index for the two primial variables.
+c\-\_\-dof, u\-\_\-dof\-: dof index for the two primial variables.
 
-R\+: residual vector of a cell.
+R\-: residual vector of a cell.
 
-c\+: concentration at current time step.
+c\-: concentration at current time step.
 
-c\+\_\+conv\+: concentration at last time step.
+c\-\_\-conv\-: concentration at last time step.
 
-j\+\_\+c\+: flux of the species.
+j\-\_\-c\-: flux of the species.
 
-P\+: first order Piola-\/\+Kirchoff stress tensor.
+P\-: first order Piola-\/\-Kirchoff stress tensor.
 
-Fe\+: deformation gradient tensor.
+Fe\-: deformation gradient tensor.
 
 
 
 
 
 we can calculate the flux as before, here we only discuss how to evaluate the deformation gradient tensor with isotropic growth. First we need the total deformation graident tensor 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{deformationMap<Sacado::Fad::DFad<double>, dim> defMap(n\_q\_points); }
-\DoxyCodeLine{getDeformationMap<Sacado::Fad::DFad<double>, dim>(fe\_values, u\_dof, ULocal, defMap);}
+\begin{DoxyCode}
+deformationMap<Sacado::Fad::DFad<double>, dim> defMap(n\_q\_points); 
+getDeformationMap<Sacado::Fad::DFad<double>, dim>(fe\_values, u\_dof, ULocal, defMap);
 \end{DoxyCode}
- Then the deformation gradient tensor induced by elasticity can be computed via the inverse of multiplicative decomposition, and the stress can be evaluated after chosing certain material model\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{dealii::Table<3, Sacado::Fad::DFad<double> > P(n\_q\_points,dim,dim), Fe(n\_q\_points,dim,dim);}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} q=0; q<n\_q\_points;q++)\{}
-\DoxyCodeLine{    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i=0; i<dim; ++i)\{}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} j=0; j<dim; ++j)\{}
-\DoxyCodeLine{        Fe[q][i][j]=defMap.F[q][i][j]/std::pow((c[q]/c\_ini), 1.0/3.0); \textcolor{comment}{//Isotropic growth}}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{this->ResidualEq.evaluateNeoHookeanStress(P, Fe);\textcolor{comment}{// NeoHookean model, Saint\_Venant\_Kirchhoff is also available }}
-\end{DoxyCode}
- Setting multiple domains/materials is quite easy. We first need to overload the {\bfseries{set\+Mult\+Domain}} function, and pop out the cell iterator in {\bfseries{Deal.\+ii}} to set the material id for each cell/element. Remember to assign Fe\+\_\+system to corresponding cells by calling the {\bfseries{set\+\_\+active\+\_\+fe\+\_\+indices}} afterwards. 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} growth<dim>::setMultDomain()}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{    this->pcout<<\textcolor{stringliteral}{"setMultDomain"}<<std::endl;}
-\DoxyCodeLine{    }
-\DoxyCodeLine{  \textcolor{keywordflow}{for} (\textcolor{keyword}{typename} Triangulation<dim>::active\_cell\_iterator cell = this->dof\_handler.begin\_active(); cell != this->dof\_handler.end(); ++cell)\{}
-\DoxyCodeLine{    Point<dim> cell\_center = cell->center();}
-\DoxyCodeLine{        \textcolor{keywordflow}{if}(cell\_center[2]<0.5) cell->set\_material\_id(0);}
-\DoxyCodeLine{        \textcolor{keywordflow}{else} cell->set\_material\_id(1);}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{    \textcolor{comment}{//assign Fe\_system to corresponding cells}}
-\DoxyCodeLine{    this->set\_active\_fe\_indices (this->FE\_support, this->dof\_handler);}
-\DoxyCodeLine{    }
-\DoxyCodeLine{\}}
-\end{DoxyCode}
- To apply Dirchlet boundary condition and contraints in general, we need to overload the {\bfseries{setup\+\_\+constraints}} function. We can apply the Dirchlet boundary condition easily by {\bfseries{constraints}}. Similarly applying linear contraints on certain D\+OF can also be done by {\bfseries{ constraints}}, we only need to find the D\+OF where we want to apply the constraints\+: 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>}
-\DoxyCodeLine{\textcolor{keywordtype}{void} growth<dim>::setup\_constraints()}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{    this->pcout<<\textcolor{stringliteral}{"setup\_constraints"}<<std::endl;}
-\DoxyCodeLine{    hpFEM<dim>::constraints.clear ();}
-\DoxyCodeLine{    DoFTools::make\_hanging\_node\_constraints (this->dof\_handler, hpFEM<dim>::constraints);}
-\DoxyCodeLine{    }
-\DoxyCodeLine{    \textcolor{keywordtype}{int} totalDOF=this->totalDOF(this->primary\_variables);}
-\DoxyCodeLine{  std::vector<bool> c\_component (totalDOF, \textcolor{keyword}{false}); c\_component[0]=\textcolor{keyword}{true}; }
-\DoxyCodeLine{    \textcolor{comment}{//apply constraints on boundary}}
-\DoxyCodeLine{    VectorTools:: interpolate\_boundary\_values (hpFEM<dim>::dof\_handler, dim, ZeroFunction<dim> (totalDOF),hpFEM<dim>::constraints, c\_component);}
-\DoxyCodeLine{    \textcolor{comment}{//apply constraints on interface (domain 1 side)}}
-\DoxyCodeLine{    }
-\DoxyCodeLine{    std::vector<types::global\_dof\_index> local\_face\_dof\_indices\_1 (this->fe\_system[1]->dofs\_per\_face);}
-\DoxyCodeLine{  \textcolor{keyword}{typename} hp::DoFHandler<dim>::active\_cell\_iterator cell = this->dof\_handler.begin\_active(), endc=this->dof\_handler.end();}
-\DoxyCodeLine{  \textcolor{keywordflow}{for} (;cell!=endc; ++cell)\{}
-\DoxyCodeLine{        \textcolor{keywordflow}{if}(cell->material\_id()==1 )\{}
-\DoxyCodeLine{        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} f=0; f<GeometryInfo<dim>::faces\_per\_cell; ++f)\{}
-\DoxyCodeLine{                \textcolor{keywordflow}{if} (cell->at\_boundary(f) == \textcolor{keyword}{false})\{}
-\DoxyCodeLine{                    \textcolor{keywordflow}{if}(cell->neighbor(f)->material\_id()==0 and cell->neighbor(f)->has\_children() == \textcolor{keyword}{false})\{}
-\DoxyCodeLine{                    cell->face(f)->get\_dof\_indices (local\_face\_dof\_indices\_1, 1);}
-\DoxyCodeLine{                    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i=0; i<local\_face\_dof\_indices\_1.size(); ++i)\{}
-\DoxyCodeLine{                        \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} ck = this->fe\_system[1]->face\_system\_to\_component\_index(i).first;}
-\DoxyCodeLine{                        \textcolor{keywordflow}{if}(ck>0) hpFEM<dim>::constraints.add\_line (local\_face\_dof\_indices\_1[i]);\textcolor{comment}{//add constrain line for all u dofs}}
-\DoxyCodeLine{                    \}}
-\DoxyCodeLine{                    \}}
-\DoxyCodeLine{                \}}
-\DoxyCodeLine{            \}}
-\DoxyCodeLine{        \}}
-\DoxyCodeLine{    \}}
-\DoxyCodeLine{    }
-\DoxyCodeLine{    hpFEM<dim>::constraints.close ();}
-\DoxyCodeLine{\}}
-\end{DoxyCode}
+ Then the deformation gradient tensor induced by elasticity can be computed via the inverse of multiplicative decomposition, and the stress can be evaluated after chosing certain material model\-: 
+\begin{DoxyCode}
+dealii::Table<3, Sacado::Fad::DFad<double> > P(n\_q\_points,dim,dim), Fe(n\_q\_points,dim,dim);
 
-
-The last thing we need to define is the initial condition, we can simpily overload the \href{../html/class_initial_conditions.html\#aa10cfdd7350c3810a8deab707f397657}{\texttt{ vector\+\_\+value()}} function of the \href{../html/class_initial_conditions.html}{\texttt{ Initial\+Conditions }} class, 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{keywordtype}{void} InitialConditions<dim>::vector\_value (\textcolor{keyword}{const} Point<dim>   \&p, Vector<double>   \&values)\textcolor{keyword}{ const}\{}
-\DoxyCodeLine{  Assert (values.size() == 2, ExcDimensionMismatch (values.size(), 2));}
-\DoxyCodeLine{    \textcolor{keywordflow}{if}(p[2]==0) values(0)= 1;}
-\DoxyCodeLine{  \textcolor{keywordflow}{else} values(0)= 0.5;}
-\DoxyCodeLine{    values(1)=0;}
-\DoxyCodeLine{\}}
+\textcolor{keywordflow}{for}(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} q=0; q<n\_q\_points;q++)\{
+    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i=0; i<dim; ++i)\{
+        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} j=0; j<dim; ++j)\{
+        Fe[q][i][j]=defMap.F[q][i][j]/std::pow((c[q]/c\_ini), 1.0/3.0); \textcolor{comment}{//Isotropic growth}
+        \}
+    \}
+\}
+this->ResidualEq.evaluateNeoHookeanStress(P, Fe);\textcolor{comment}{// NeoHookean model, Saint\_Venant\_Kirchhoff is also
+       available }
+\end{DoxyCode}
+ Setting multiple domains/materials is quite easy. We first need to overload the {\bfseries set\-Mult\-Domain} function, and pop out the cell iterator in {\bfseries Deal.\-ii} to set the material id for each cell/element. Remember to assign Fe\-\_\-system to corresponding cells by calling the {\bfseries set\-\_\-active\-\_\-fe\-\_\-indices} afterwards. 
+\begin{DoxyCode}
+\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>
+\textcolor{keywordtype}{void} growth<dim>::setMultDomain()
+\{
+    this->pcout<<\textcolor{stringliteral}{"setMultDomain"}<<std::endl;
+    
+  \textcolor{keywordflow}{for} (\textcolor{keyword}{typename} Triangulation<dim>::active\_cell\_iterator cell = this->dof\_handler.begin\_active(); cell != 
+      this->dof\_handler.end(); ++cell)\{
+    Point<dim> cell\_center = cell->center();
+        \textcolor{keywordflow}{if}(cell\_center[2]<0.5) cell->set\_material\_id(0);
+        \textcolor{keywordflow}{else} cell->set\_material\_id(1);
+    \}
+    \textcolor{comment}{//assign Fe\_system to corresponding cells}
+    this->set\_active\_fe\_indices (this->FE\_support, this->dof\_handler);
+    
+\}
+\end{DoxyCode}
+ To apply Dirchlet boundary condition and contraints in general, we need to overload the {\bfseries setup\-\_\-constraints} function. We can apply the Dirchlet boundary condition easily by {\bfseries constraints}. Similarly applying linear contraints on certain D\-O\-F can also be done by {\bfseries  constraints}, we only need to find the D\-O\-F where we want to apply the constraints\-: 
+\begin{DoxyCode}
+\textcolor{keyword}{template} <\textcolor{keywordtype}{int} dim>
+\textcolor{keywordtype}{void} growth<dim>::setup\_constraints()
+\{
+    this->pcout<<\textcolor{stringliteral}{"setup\_constraints"}<<std::endl;
+    hpFEM<dim>::constraints.clear ();
+    DoFTools::make\_hanging\_node\_constraints (this->dof\_handler, 
+      hpFEM<dim>::constraints);
+    
+    \textcolor{keywordtype}{int} totalDOF=this->totalDOF(this->primary\_variables);
+  std::vector<bool> c\_component (totalDOF, \textcolor{keyword}{false}); c\_component[0]=\textcolor{keyword}{true}; 
+    \textcolor{comment}{//apply constraints on boundary}
+    VectorTools:: interpolate\_boundary\_values (hpFEM<dim>::dof_handler, dim, ZeroFunction<dim> (totalDOF),
+      hpFEM<dim>::constraints, c\_component);
+    \textcolor{comment}{//apply constraints on interface (domain 1 side)}
+    
+    std::vector<types::global\_dof\_index> local\_face\_dof\_indices\_1 (this->fe\_system[1]->dofs\_per\_face);
+  \textcolor{keyword}{typename} hp::DoFHandler<dim>::active\_cell\_iterator cell = this->dof\_handler.begin\_active(), endc=this->
+      dof\_handler.end();
+  \textcolor{keywordflow}{for} (;cell!=endc; ++cell)\{
+        \textcolor{keywordflow}{if}(cell->material\_id()==1 )\{
+        \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} f=0; f<GeometryInfo<dim>::faces\_per\_cell; ++f)\{
+                \textcolor{keywordflow}{if} (cell->at\_boundary(f) == \textcolor{keyword}{false})\{
+                    \textcolor{keywordflow}{if}(cell->neighbor(f)->material\_id()==0 and cell->neighbor(f)->has\_children() == \textcolor{keyword}{false})\{
+                    cell->face(f)->get\_dof\_indices (local\_face\_dof\_indices\_1, 1);
+                    \textcolor{keywordflow}{for} (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} i=0; i<local\_face\_dof\_indices\_1.size(); ++i)\{
+                        \textcolor{keyword}{const} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} ck = this->fe\_system[1]->face\_system\_to\_component\_index(i).first
+      ;
+                        \textcolor{keywordflow}{if}(ck>0) hpFEM<dim>::constraints.add\_line (local\_face\_dof\_indices\_1[i]);\textcolor{comment}{//add
+       constrain line for all u dofs}
+                    \}
+                    \}
+                \}
+            \}
+        \}
+    \}
+    
+    hpFEM<dim>::constraints.close ();
+\}
 \end{DoxyCode}
 
 
-The complete implementaion can be found at \href{https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example4_growth}{\texttt{ Github}}. \hypertarget{growth_file}{}\section{Parameter file\+: interface for level 2 user}\label{growth_file}
+The last thing we need to define is the initial condition, we can simpily overload the \href{../html/class_initial_conditions.html#aa10cfdd7350c3810a8deab707f397657}{\tt vector\-\_\-value()} function of the \href{../html/class_initial_conditions.html}{\tt Initial\-Conditions } class, 
+\begin{DoxyCode}
+\textcolor{keywordtype}{void} InitialConditions<dim>::vector_value (\textcolor{keyword}{const} Point<dim>   &p, Vector<double>   &values)\textcolor{keyword}{ const}\{
+  Assert (values.size() == 2, ExcDimensionMismatch (values.size(), 2));
+    \textcolor{keywordflow}{if}(p[2]==0) values(0)= 1;
+  \textcolor{keywordflow}{else} values(0)= 0.5;
+    values(1)=0;
+\}
+\end{DoxyCode}
 
-\begin{DoxyCode}{0}
-\DoxyCodeLine{\textcolor{preprocessor}{\#parameters file}}
-\DoxyCodeLine{}
-\DoxyCodeLine{subsection Problem}
-\DoxyCodeLine{set print\_parameter = \textcolor{keyword}{true}}
-\DoxyCodeLine{set primary\_variables\_list= c1, component\_is\_scalar , u, component\_is\_vector}
-\DoxyCodeLine{set FE\_support\_list= 1,0,  1,1}
-\DoxyCodeLine{}
-\DoxyCodeLine{set dt = 1}
-\DoxyCodeLine{set totalTime = 5}
-\DoxyCodeLine{set current\_increment = 0}
-\DoxyCodeLine{set off\_output\_index=0}
-\DoxyCodeLine{set current\_time = 0}
-\DoxyCodeLine{set resuming\_from\_snapshot = \textcolor{keyword}{false}}
-\DoxyCodeLine{}
-\DoxyCodeLine{set output\_directory = output/}
-\DoxyCodeLine{set snapshot\_directory = snapshot/}
-\DoxyCodeLine{set save\_snapshot = \textcolor{keyword}{true}}
-\DoxyCodeLine{}
-\DoxyCodeLine{\textcolor{preprocessor}{\#FEM}}
-\DoxyCodeLine{set volume\_quadrature = 3 }
-\DoxyCodeLine{set face\_quadrature = 2 }
-\DoxyCodeLine{}
-\DoxyCodeLine{end}
-\DoxyCodeLine{}
-\DoxyCodeLine{subsection Geometry}
-\DoxyCodeLine{set X\_0 = 0}
-\DoxyCodeLine{set Y\_0 = 0}
-\DoxyCodeLine{set Z\_0 = 0}
-\DoxyCodeLine{set X\_end = 5 }
-\DoxyCodeLine{set Y\_end = 5}
-\DoxyCodeLine{set Z\_end = 2 \#no need to 2D}
-\DoxyCodeLine{}
-\DoxyCodeLine{set element\_div\_x=5}
-\DoxyCodeLine{set element\_div\_y=5}
-\DoxyCodeLine{set element\_div\_z=8 \#no need to 2D}
-\DoxyCodeLine{end}
-\DoxyCodeLine{}
-\DoxyCodeLine{subsection parameters}
-\DoxyCodeLine{set c\_ini =0.5}
-\DoxyCodeLine{set youngsModulus =  5.0e3}
-\DoxyCodeLine{set poissonRatio =  0.45}
-\DoxyCodeLine{set M=1 }
-\DoxyCodeLine{set out\_flux=-0.1}
-\DoxyCodeLine{end}
-\DoxyCodeLine{                        }
-\DoxyCodeLine{\textcolor{preprocessor}{\#}}
-\DoxyCodeLine{\textcolor{preprocessor}{\# parameters reserved for deal.ii first level code:}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#nonLinear\_method : classicNewton}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#solver\_method (direct) : PETScsuperLU, PETScMUMPS}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#solver\_method (iterative) : PETScGMRES PETScBoomerAMG}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#relative\_norm\_tolerance, absolute\_norm\_tolerance, max\_iterations}}
-\DoxyCodeLine{\textcolor{preprocessor}{\#}}
-\DoxyCodeLine{subsection Nonlinear\_solver}
-\DoxyCodeLine{        set nonLinear\_method = classicNewton}
-\DoxyCodeLine{        set relative\_norm\_tolerance = 1.0e-10}
-\DoxyCodeLine{        set absolute\_norm\_tolerance = 1.0e-10}
-\DoxyCodeLine{        set max\_iterations = 10}
-\DoxyCodeLine{end}
-\DoxyCodeLine{                        }
-\DoxyCodeLine{subsection Linear\_solver}
-\DoxyCodeLine{        set solver\_method = PETScsuperLU}
-\DoxyCodeLine{        set system\_matrix\_symmetricFlag = \textcolor{keyword}{false} \# \textcolor{keywordflow}{default} is \textcolor{keyword}{false}}
-\DoxyCodeLine{end}
+
+The complete implementaion can be found at \href{https://github.com/mechanoChem/mechanoChemFEM/tree/example/Example4_growth}{\tt Github}. \hypertarget{growth_file}{}\section{Parameter file\-: interface for level 2 user}\label{growth_file}
+
+\begin{DoxyCode}
+\textcolor{preprocessor}{#parameters file}
+\textcolor{preprocessor}{}
+subsection Problem
+set print\_parameter = \textcolor{keyword}{true}
+set primary\_variables\_list= c1, component\_is\_scalar , u, component\_is\_vector
+set FE\_support\_list= 1,0,  1,1
+
+set dt = 1
+set totalTime = 5
+set current\_increment = 0
+set off\_output\_index=0
+set current\_time = 0
+set resuming\_from\_snapshot = \textcolor{keyword}{false}
+
+set output\_directory = output/
+set snapshot\_directory = snapshot/
+set save\_snapshot = \textcolor{keyword}{true}
+
+\textcolor{preprocessor}{#FEM}
+\textcolor{preprocessor}{}set volume\_quadrature = 3 
+set face\_quadrature = 2 
+
+end
+
+subsection Geometry
+set X\_0 = 0
+set Y\_0 = 0
+set Z\_0 = 0
+set X\_end = 5 
+set Y\_end = 5
+set Z\_end = 2 #no need to 2D
+
+set element\_div\_x=5
+set element\_div\_y=5
+set element\_div\_z=8 #no need to 2D
+end
+
+subsection parameters
+set c\_ini =0.5
+set youngsModulus =  5.0e3
+set poissonRatio =  0.45
+set M=1 
+set out\_flux=-0.1
+end
+                        
+\textcolor{preprocessor}{#}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{# parameters reserved for deal.ii first level code:}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#nonLinear\_method : classicNewton}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#solver\_method (direct) : PETScsuperLU, PETScMUMPS}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#solver\_method (iterative) : PETScGMRES PETScBoomerAMG}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#relative\_norm\_tolerance, absolute\_norm\_tolerance, max\_iterations}
+\textcolor{preprocessor}{}\textcolor{preprocessor}{#}
+\textcolor{preprocessor}{}subsection Nonlinear\_solver
+        set nonLinear\_method = classicNewton
+        set relative\_norm\_tolerance = 1.0e-10
+        set absolute\_norm\_tolerance = 1.0e-10
+        set max\_iterations = 10
+end
+                        
+subsection Linear\_solver
+        set solver\_method = PETScsuperLU
+        set system\_matrix\_symmetricFlag = \textcolor{keyword}{false} # \textcolor{keywordflow}{default} is \textcolor{keyword}{false}
+end
 \end{DoxyCode}
  \hypertarget{growth_results}{}\section{Results}\label{growth_results}
 The results are generated using paramters shown above.

@@ -1,10 +1,10 @@
-\section{solve\+Class$<$ dim, matrix\+Type, vector\+Type $>$ Class Template Reference}
-\label{classsolve_class}\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
+\section{solve\-Class$<$ dim, matrix\-Type, vector\-Type $>$ Class Template Reference}
+\label{classsolve_class}\index{solve\-Class$<$ dim, matrix\-Type, vector\-Type $>$@{solve\-Class$<$ dim, matrix\-Type, vector\-Type $>$}}
 
 
-{\ttfamily \#include $<$solve\+Class.\+h$>$}
+{\ttfamily \#include $<$solve\-Class.\-h$>$}
 
-Inheritance diagram for solve\+Class$<$ dim, matrix\+Type, vector\+Type $>$\+:\begin{figure}[H]
+Inheritance diagram for solve\-Class$<$ dim, matrix\-Type, vector\-Type $>$\-:\begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[height=2.000000cm]{classsolve_class}
@@ -13,192 +13,199 @@ Inheritance diagram for solve\+Class$<$ dim, matrix\+Type, vector\+Type $>$\+:\b
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{classsolve_class_ac210b30d39cb640ec4d65b667467583d}{solve\+Class}} ()
+\hyperlink{classsolve_class_ac210b30d39cb640ec4d65b667467583d}{solve\-Class} ()
 \item 
-\mbox{\hyperlink{classsolve_class_a827189cdd4bd715d08e4cda1695c8409}{$\sim$solve\+Class}} ()
+\hyperlink{classsolve_class_a827189cdd4bd715d08e4cda1695c8409}{$\sim$solve\-Class} ()
 \item 
-void \mbox{\hyperlink{classsolve_class_a5cd5eff72b86e1cf736ddfdcbda31db1}{declare\+\_\+parameters\+\_\+solve\+Class}} ()
+void \hyperlink{classsolve_class_a5cd5eff72b86e1cf736ddfdcbda31db1}{declare\-\_\-parameters\-\_\-solve\-Class} ()
 \item 
-void \mbox{\hyperlink{classsolve_class_abcdd7b865378898804f4831f0a078e04}{setup\+Linear\+System}} (int n\+\_\+total\+\_\+dofs, int n\+\_\+local\+\_\+dofs, int max\+\_\+couplings\+\_\+between\+\_\+dofs)
+void \hyperlink{classsolve_class_abcdd7b865378898804f4831f0a078e04}{setup\-Linear\-System} (int n\-\_\-total\-\_\-dofs, int n\-\_\-local\-\_\-dofs, int max\-\_\-couplings\-\_\-between\-\_\-dofs)
 \item 
-void \mbox{\hyperlink{classsolve_class_ab8aad4ce80f4f6fe8532c53e4bba67ec}{reinit\+Linear\+System}} ()
+void \hyperlink{classsolve_class_ab8aad4ce80f4f6fe8532c53e4bba67ec}{reinit\-Linear\-System} ()
 \item 
-void \mbox{\hyperlink{classsolve_class_a9e6755b7d81862d2a8412de1eec855a7}{linear\+Solve}} (vector\+Type \&U)
+void \hyperlink{classsolve_class_a9e6755b7d81862d2a8412de1eec855a7}{linear\-Solve} (vector\-Type \&U)
 \item 
-bool \mbox{\hyperlink{classsolve_class_a9522b1c3074e38e3eeaa060a01709580}{nonlinear\+Solve}} (vector\+Type \&U, bool converge\+\_\+flag=false)
+bool \hyperlink{classsolve_class_a9522b1c3074e38e3eeaa060a01709580}{nonlinear\-Solve} (vector\-Type \&U, bool converge\-\_\-flag=false)
 \item 
-bool \mbox{\hyperlink{classsolve_class_ae8689a33a3a9ed36b59529c53527c5f9}{nonlinear\+Solve}} (vector\+Type \&U, vector\+Type \&dU, bool converge\+\_\+flag=false)
+bool \hyperlink{classsolve_class_ae8689a33a3a9ed36b59529c53527c5f9}{nonlinear\-Solve} (vector\-Type \&U, vector\-Type \&d\-U, bool converge\-\_\-flag=false)
 \item 
-void \mbox{\hyperlink{classsolve_class_aaed39c6902f1e1de684583e56fb14f66}{solve\+Linear\+System\+\_\+default\+\_\+direct}} (dealii\+::\+Vector$<$ double $>$ \&dU)
+void \hyperlink{classsolve_class_aaed39c6902f1e1de684583e56fb14f66}{solve\-Linear\-System\-\_\-default\-\_\-direct} (dealii\-::\-Vector$<$ double $>$ \&d\-U)
 \item 
-void \mbox{\hyperlink{classsolve_class_ac888eaa37061db46d24d90065b733a82}{solve\+Linear\+System\+\_\+default\+\_\+direct}} (P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector \&dU)
+void \hyperlink{classsolve_class_ac888eaa37061db46d24d90065b733a82}{solve\-Linear\-System\-\_\-default\-\_\-direct} (P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector \&d\-U)
 \item 
-virtual void \mbox{\hyperlink{classsolve_class_a31c22340527a596f8d6aeeea60ffe52a}{solve\+Linear\+System}} (P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector \&dU)
+virtual void \hyperlink{classsolve_class_a31c22340527a596f8d6aeeea60ffe52a}{solve\-Linear\-System} (P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector \&d\-U)
 \item 
-void \mbox{\hyperlink{classsolve_class_af9e8a3e1a38280c43f242bbeb7139f00}{distribute\+\_\+local\+\_\+to\+\_\+global}} (dealii\+::\+Full\+Matrix$<$ double $>$ \&local\+\_\+matrix, dealii\+::\+Vector$<$ double $>$ \&local\+\_\+rhs, std\+::vector$<$ types\+::global\+\_\+dof\+\_\+index $>$ local\+\_\+dof\+\_\+indices)
+void \hyperlink{classsolve_class_af9e8a3e1a38280c43f242bbeb7139f00}{distribute\-\_\-local\-\_\-to\-\_\-global} (dealii\-::\-Full\-Matrix$<$ double $>$ \&local\-\_\-matrix, dealii\-::\-Vector$<$ double $>$ \&local\-\_\-rhs, std\-::vector$<$ types\-::global\-\_\-dof\-\_\-index $>$ local\-\_\-dof\-\_\-indices)
 \item 
-void \mbox{\hyperlink{classsolve_class_ad7659997bee5e782a6eaa46db001b66a}{Linear\+System\+Compress\+Add}} ()
+void \hyperlink{classsolve_class_ad7659997bee5e782a6eaa46db001b66a}{Linear\-System\-Compress\-Add} ()
 \item 
-virtual void \mbox{\hyperlink{classsolve_class_af78c2c6284234c93872188334fb997d8}{update\+Linear\+System}} ()
+virtual void \hyperlink{classsolve_class_af78c2c6284234c93872188334fb997d8}{update\-Linear\-System} ()
 \item 
-virtual void \mbox{\hyperlink{classsolve_class_a029ece57f667fa697cb29eb482eff31b}{apply\+\_\+d\+U\+\_\+constrain}} (vector\+Type \&dU)
+virtual void \hyperlink{classsolve_class_a029ece57f667fa697cb29eb482eff31b}{apply\-\_\-d\-U\-\_\-constrain} (vector\-Type \&d\-U)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-dealii\+::\+Parameter\+Handler $\ast$ \mbox{\hyperlink{classsolve_class_a706fc42e2c257a3172aaeb3b1364a1a1}{params\+\_\+solve}}
+dealii\-::\-Parameter\-Handler $\ast$ \hyperlink{classsolve_class_a706fc42e2c257a3172aaeb3b1364a1a1}{params\-\_\-solve}
 \item 
-matrix\+Type \mbox{\hyperlink{classsolve_class_a56f7357eb335f9ce4ac30bc30d7513e8}{system\+\_\+matrix}}
+matrix\-Type \hyperlink{classsolve_class_a56f7357eb335f9ce4ac30bc30d7513e8}{system\-\_\-matrix}
 \item 
-vector\+Type \mbox{\hyperlink{classsolve_class_a6c39fa839fdc40d2408946617a778571}{system\+\_\+rhs}}
+vector\-Type \hyperlink{classsolve_class_a6c39fa839fdc40d2408946617a778571}{system\-\_\-rhs}
 \item 
-Constraint\+Matrix \mbox{\hyperlink{classsolve_class_a2aaaefb2c7e18e09392c22659c344881}{constraints\+\_\+solver}}
+Constraint\-Matrix \hyperlink{classsolve_class_a2aaaefb2c7e18e09392c22659c344881}{constraints\-\_\-solver}
 \item 
-M\+P\+I\+\_\+\+Comm \mbox{\hyperlink{classsolve_class_a03728ed636ca889ae407c84d181bc611}{mpi\+\_\+communicator}}
+M\-P\-I\-\_\-\-Comm \hyperlink{classsolve_class_a03728ed636ca889ae407c84d181bc611}{mpi\-\_\-communicator}
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\label{classsolve_class_ac210b30d39cb640ec4d65b667467583d}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!solveClass@{solveClass}}
-\index{solveClass@{solveClass}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{solveClass()}{solveClass()}}
-{\footnotesize\ttfamily \mbox{\hyperlink{classsolve_class}{solve\+Class}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-constructor with abstract classhp\+F\+E\+M$<$dim$>$ \mbox{\label{classsolve_class_a827189cdd4bd715d08e4cda1695c8409}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!````~solveClass@{$\sim$solveClass}}
-\index{````~solveClass@{$\sim$solveClass}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{$\sim$solveClass()}{~solveClass()}}
-{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{classsolve_class}{solve\+Class}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
+\index{solve\-Class@{solve\-Class}!solve\-Class@{solve\-Class}}
+\index{solve\-Class@{solve\-Class}!solveClass@{solve\-Class}}
+\subsubsection[{solve\-Class}]{\setlength{\rightskip}{0pt plus 5cm}{\bf solve\-Class} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_ac210b30d39cb640ec4d65b667467583d}
+constructor with abstract classhp\-F\-E\-M$<$dim$>$ \index{solve\-Class@{solve\-Class}!$\sim$solve\-Class@{$\sim$solve\-Class}}
+\index{$\sim$solve\-Class@{$\sim$solve\-Class}!solveClass@{solve\-Class}}
+\subsubsection[{$\sim$solve\-Class}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf solve\-Class} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_a827189cdd4bd715d08e4cda1695c8409}
 
 
 \subsection{Member Function Documentation}
-\mbox{\label{classsolve_class_a029ece57f667fa697cb29eb482eff31b}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!apply\_dU\_constrain@{apply\_dU\_constrain}}
-\index{apply\_dU\_constrain@{apply\_dU\_constrain}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{apply\_dU\_constrain()}{apply\_dU\_constrain()}}
-{\footnotesize\ttfamily void apply\+\_\+d\+U\+\_\+constrain (\begin{DoxyParamCaption}\item[{vector\+Type \&}]{dU }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+\index{solve\-Class@{solve\-Class}!apply\-\_\-d\-U\-\_\-constrain@{apply\-\_\-d\-U\-\_\-constrain}}
+\index{apply\-\_\-d\-U\-\_\-constrain@{apply\-\_\-d\-U\-\_\-constrain}!solveClass@{solve\-Class}}
+\subsubsection[{apply\-\_\-d\-U\-\_\-constrain}]{\setlength{\rightskip}{0pt plus 5cm}void apply\-\_\-d\-U\-\_\-constrain (
+\begin{DoxyParamCaption}
+\item[{vector\-Type \&}]{d\-U}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolve_class_a029ece57f667fa697cb29eb482eff31b}
+do P\-E\-T\-Sc\-Wrappers\-::\-Vector\-Base\-::compress(\-Vector\-Operation\-::add) for system\-\_\-matrix and system\-\_\-rhs; \index{solve\-Class@{solve\-Class}!declare\-\_\-parameters\-\_\-solve\-Class@{declare\-\_\-parameters\-\_\-solve\-Class}}
+\index{declare\-\_\-parameters\-\_\-solve\-Class@{declare\-\_\-parameters\-\_\-solve\-Class}!solveClass@{solve\-Class}}
+\subsubsection[{declare\-\_\-parameters\-\_\-solve\-Class}]{\setlength{\rightskip}{0pt plus 5cm}void declare\-\_\-parameters\-\_\-solve\-Class (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_a5cd5eff72b86e1cf736ddfdcbda31db1}
+declare\-\_\-parameters\-\_\-solve \index{solve\-Class@{solve\-Class}!distribute\-\_\-local\-\_\-to\-\_\-global@{distribute\-\_\-local\-\_\-to\-\_\-global}}
+\index{distribute\-\_\-local\-\_\-to\-\_\-global@{distribute\-\_\-local\-\_\-to\-\_\-global}!solveClass@{solve\-Class}}
+\subsubsection[{distribute\-\_\-local\-\_\-to\-\_\-global}]{\setlength{\rightskip}{0pt plus 5cm}void distribute\-\_\-local\-\_\-to\-\_\-global (
+\begin{DoxyParamCaption}
+\item[{dealii\-::\-Full\-Matrix$<$ double $>$ \&}]{local\-\_\-matrix, }
+\item[{dealii\-::\-Vector$<$ double $>$ \&}]{local\-\_\-rhs, }
+\item[{std\-::vector$<$ types\-::global\-\_\-dof\-\_\-index $>$}]{local\-\_\-dof\-\_\-indices}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_af9e8a3e1a38280c43f242bbeb7139f00}
+wrapper for dealii\-::constraints.\-distribute\-\_\-local\-\_\-to\-\_\-global \index{solve\-Class@{solve\-Class}!linear\-Solve@{linear\-Solve}}
+\index{linear\-Solve@{linear\-Solve}!solveClass@{solve\-Class}}
+\subsubsection[{linear\-Solve}]{\setlength{\rightskip}{0pt plus 5cm}void linear\-Solve (
+\begin{DoxyParamCaption}
+\item[{vector\-Type \&}]{U}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_a9e6755b7d81862d2a8412de1eec855a7}
+linear Solve \index{solve\-Class@{solve\-Class}!Linear\-System\-Compress\-Add@{Linear\-System\-Compress\-Add}}
+\index{Linear\-System\-Compress\-Add@{Linear\-System\-Compress\-Add}!solveClass@{solve\-Class}}
+\subsubsection[{Linear\-System\-Compress\-Add}]{\setlength{\rightskip}{0pt plus 5cm}void Linear\-System\-Compress\-Add (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_ad7659997bee5e782a6eaa46db001b66a}
+do P\-E\-T\-Sc\-Wrappers\-::\-Vector\-Base\-::compress(\-Vector\-Operation\-::add) for system\-\_\-matrix and system\-\_\-rhs; \index{solve\-Class@{solve\-Class}!nonlinear\-Solve@{nonlinear\-Solve}}
+\index{nonlinear\-Solve@{nonlinear\-Solve}!solveClass@{solve\-Class}}
+\subsubsection[{nonlinear\-Solve}]{\setlength{\rightskip}{0pt plus 5cm}bool nonlinear\-Solve (
+\begin{DoxyParamCaption}
+\item[{vector\-Type \&}]{U, }
+\item[{bool}]{converge\-\_\-flag = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_a9522b1c3074e38e3eeaa060a01709580}
+nonlinear Solve \index{solve\-Class@{solve\-Class}!nonlinear\-Solve@{nonlinear\-Solve}}
+\index{nonlinear\-Solve@{nonlinear\-Solve}!solveClass@{solve\-Class}}
+\subsubsection[{nonlinear\-Solve}]{\setlength{\rightskip}{0pt plus 5cm}bool nonlinear\-Solve (
+\begin{DoxyParamCaption}
+\item[{vector\-Type \&}]{U, }
+\item[{vector\-Type \&}]{d\-U, }
+\item[{bool}]{converge\-\_\-flag = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_ae8689a33a3a9ed36b59529c53527c5f9}
+nonlinear Solve with access of incremental solution d\-U \index{solve\-Class@{solve\-Class}!reinit\-Linear\-System@{reinit\-Linear\-System}}
+\index{reinit\-Linear\-System@{reinit\-Linear\-System}!solveClass@{solve\-Class}}
+\subsubsection[{reinit\-Linear\-System}]{\setlength{\rightskip}{0pt plus 5cm}void reinit\-Linear\-System (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_ab8aad4ce80f4f6fe8532c53e4bba67ec}
+set system\-\_\-matrix=0 and system\-\_\-rhs=0 \index{solve\-Class@{solve\-Class}!setup\-Linear\-System@{setup\-Linear\-System}}
+\index{setup\-Linear\-System@{setup\-Linear\-System}!solveClass@{solve\-Class}}
+\subsubsection[{setup\-Linear\-System}]{\setlength{\rightskip}{0pt plus 5cm}void setup\-Linear\-System (
+\begin{DoxyParamCaption}
+\item[{int}]{n\-\_\-total\-\_\-dofs, }
+\item[{int}]{n\-\_\-local\-\_\-dofs, }
+\item[{int}]{max\-\_\-couplings\-\_\-between\-\_\-dofs}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_abcdd7b865378898804f4831f0a078e04}
+set up size and partition of system\-\_\-matrix and system\-\_\-rhs \index{solve\-Class@{solve\-Class}!solve\-Linear\-System@{solve\-Linear\-System}}
+\index{solve\-Linear\-System@{solve\-Linear\-System}!solveClass@{solve\-Class}}
+\subsubsection[{solve\-Linear\-System}]{\setlength{\rightskip}{0pt plus 5cm}void solve\-Linear\-System (
+\begin{DoxyParamCaption}
+\item[{P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector \&}]{d\-U}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolve_class_a31c22340527a596f8d6aeeea60ffe52a}
+solve Ax=b with P\-E\-T\-Sc matrix and vector type by customer solver \index{solve\-Class@{solve\-Class}!solve\-Linear\-System\-\_\-default\-\_\-direct@{solve\-Linear\-System\-\_\-default\-\_\-direct}}
+\index{solve\-Linear\-System\-\_\-default\-\_\-direct@{solve\-Linear\-System\-\_\-default\-\_\-direct}!solveClass@{solve\-Class}}
+\subsubsection[{solve\-Linear\-System\-\_\-default\-\_\-direct}]{\setlength{\rightskip}{0pt plus 5cm}void solve\-Linear\-System\-\_\-default\-\_\-direct (
+\begin{DoxyParamCaption}
+\item[{dealii\-::\-Vector$<$ double $>$ \&}]{d\-U}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_aaed39c6902f1e1de684583e56fb14f66}
+solve Ax=b with dealii matrix and vector type by default\-\_\-direct solver \index{solve\-Class@{solve\-Class}!solve\-Linear\-System\-\_\-default\-\_\-direct@{solve\-Linear\-System\-\_\-default\-\_\-direct}}
+\index{solve\-Linear\-System\-\_\-default\-\_\-direct@{solve\-Linear\-System\-\_\-default\-\_\-direct}!solveClass@{solve\-Class}}
+\subsubsection[{solve\-Linear\-System\-\_\-default\-\_\-direct}]{\setlength{\rightskip}{0pt plus 5cm}void solve\-Linear\-System\-\_\-default\-\_\-direct (
+\begin{DoxyParamCaption}
+\item[{P\-E\-T\-Sc\-Wrappers\-::\-M\-P\-I\-::\-Vector \&}]{d\-U}
+\end{DoxyParamCaption}
+)}\label{classsolve_class_ac888eaa37061db46d24d90065b733a82}
+solve Ax=b with P\-E\-T\-Sc matrix and vector type by default\-\_\-direct solver \index{solve\-Class@{solve\-Class}!update\-Linear\-System@{update\-Linear\-System}}
+\index{update\-Linear\-System@{update\-Linear\-System}!solveClass@{solve\-Class}}
+\subsubsection[{update\-Linear\-System}]{\setlength{\rightskip}{0pt plus 5cm}void update\-Linear\-System (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\label{classsolve_class_af78c2c6284234c93872188334fb997d8}
 
-do P\+E\+T\+Sc\+Wrappers\+::\+Vector\+Base\+::compress(\+Vector\+Operation\+::add) for system\+\_\+matrix and system\+\_\+rhs; \mbox{\label{classsolve_class_a5cd5eff72b86e1cf736ddfdcbda31db1}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!declare\_parameters\_solveClass@{declare\_parameters\_solveClass}}
-\index{declare\_parameters\_solveClass@{declare\_parameters\_solveClass}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{declare\_parameters\_solveClass()}{declare\_parameters\_solveClass()}}
-{\footnotesize\ttfamily void declare\+\_\+parameters\+\_\+solve\+Class (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-declare\+\_\+parameters\+\_\+solve \mbox{\label{classsolve_class_af9e8a3e1a38280c43f242bbeb7139f00}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!distribute\_local\_to\_global@{distribute\_local\_to\_global}}
-\index{distribute\_local\_to\_global@{distribute\_local\_to\_global}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{distribute\_local\_to\_global()}{distribute\_local\_to\_global()}}
-{\footnotesize\ttfamily void distribute\+\_\+local\+\_\+to\+\_\+global (\begin{DoxyParamCaption}\item[{dealii\+::\+Full\+Matrix$<$ double $>$ \&}]{local\+\_\+matrix,  }\item[{dealii\+::\+Vector$<$ double $>$ \&}]{local\+\_\+rhs,  }\item[{std\+::vector$<$ types\+::global\+\_\+dof\+\_\+index $>$}]{local\+\_\+dof\+\_\+indices }\end{DoxyParamCaption})}
-
-wrapper for dealii\+::constraints.\+distribute\+\_\+local\+\_\+to\+\_\+global \mbox{\label{classsolve_class_a9e6755b7d81862d2a8412de1eec855a7}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!linearSolve@{linearSolve}}
-\index{linearSolve@{linearSolve}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{linearSolve()}{linearSolve()}}
-{\footnotesize\ttfamily void linear\+Solve (\begin{DoxyParamCaption}\item[{vector\+Type \&}]{U }\end{DoxyParamCaption})}
-
-linear Solve \mbox{\label{classsolve_class_ad7659997bee5e782a6eaa46db001b66a}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!LinearSystemCompressAdd@{LinearSystemCompressAdd}}
-\index{LinearSystemCompressAdd@{LinearSystemCompressAdd}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{LinearSystemCompressAdd()}{LinearSystemCompressAdd()}}
-{\footnotesize\ttfamily void Linear\+System\+Compress\+Add (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-do P\+E\+T\+Sc\+Wrappers\+::\+Vector\+Base\+::compress(\+Vector\+Operation\+::add) for system\+\_\+matrix and system\+\_\+rhs; \mbox{\label{classsolve_class_a9522b1c3074e38e3eeaa060a01709580}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!nonlinearSolve@{nonlinearSolve}}
-\index{nonlinearSolve@{nonlinearSolve}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{nonlinearSolve()}{nonlinearSolve()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily bool nonlinear\+Solve (\begin{DoxyParamCaption}\item[{vector\+Type \&}]{U,  }\item[{bool}]{converge\+\_\+flag = {\ttfamily false} }\end{DoxyParamCaption})}
-
-nonlinear Solve \mbox{\label{classsolve_class_ae8689a33a3a9ed36b59529c53527c5f9}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!nonlinearSolve@{nonlinearSolve}}
-\index{nonlinearSolve@{nonlinearSolve}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{nonlinearSolve()}{nonlinearSolve()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily bool nonlinear\+Solve (\begin{DoxyParamCaption}\item[{vector\+Type \&}]{U,  }\item[{vector\+Type \&}]{dU,  }\item[{bool}]{converge\+\_\+flag = {\ttfamily false} }\end{DoxyParamCaption})}
-
-nonlinear Solve with access of incremental solution dU \mbox{\label{classsolve_class_ab8aad4ce80f4f6fe8532c53e4bba67ec}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!reinitLinearSystem@{reinitLinearSystem}}
-\index{reinitLinearSystem@{reinitLinearSystem}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{reinitLinearSystem()}{reinitLinearSystem()}}
-{\footnotesize\ttfamily void reinit\+Linear\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-set system\+\_\+matrix=0 and system\+\_\+rhs=0 \mbox{\label{classsolve_class_abcdd7b865378898804f4831f0a078e04}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!setupLinearSystem@{setupLinearSystem}}
-\index{setupLinearSystem@{setupLinearSystem}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{setupLinearSystem()}{setupLinearSystem()}}
-{\footnotesize\ttfamily void setup\+Linear\+System (\begin{DoxyParamCaption}\item[{int}]{n\+\_\+total\+\_\+dofs,  }\item[{int}]{n\+\_\+local\+\_\+dofs,  }\item[{int}]{max\+\_\+couplings\+\_\+between\+\_\+dofs }\end{DoxyParamCaption})}
-
-set up size and partition of system\+\_\+matrix and system\+\_\+rhs \mbox{\label{classsolve_class_a31c22340527a596f8d6aeeea60ffe52a}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!solveLinearSystem@{solveLinearSystem}}
-\index{solveLinearSystem@{solveLinearSystem}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{solveLinearSystem()}{solveLinearSystem()}}
-{\footnotesize\ttfamily void solve\+Linear\+System (\begin{DoxyParamCaption}\item[{P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector \&}]{dU }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-solve Ax=b with P\+E\+T\+Sc matrix and vector type by customer solver \mbox{\label{classsolve_class_aaed39c6902f1e1de684583e56fb14f66}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!solveLinearSystem\_default\_direct@{solveLinearSystem\_default\_direct}}
-\index{solveLinearSystem\_default\_direct@{solveLinearSystem\_default\_direct}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{solveLinearSystem\_default\_direct()}{solveLinearSystem\_default\_direct()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily void solve\+Linear\+System\+\_\+default\+\_\+direct (\begin{DoxyParamCaption}\item[{dealii\+::\+Vector$<$ double $>$ \&}]{dU }\end{DoxyParamCaption})}
-
-solve Ax=b with dealii matrix and vector type by default\+\_\+direct solver \mbox{\label{classsolve_class_ac888eaa37061db46d24d90065b733a82}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!solveLinearSystem\_default\_direct@{solveLinearSystem\_default\_direct}}
-\index{solveLinearSystem\_default\_direct@{solveLinearSystem\_default\_direct}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{solveLinearSystem\_default\_direct()}{solveLinearSystem\_default\_direct()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily void solve\+Linear\+System\+\_\+default\+\_\+direct (\begin{DoxyParamCaption}\item[{P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector \&}]{dU }\end{DoxyParamCaption})}
-
-solve Ax=b with P\+E\+T\+Sc matrix and vector type by default\+\_\+direct solver \mbox{\label{classsolve_class_af78c2c6284234c93872188334fb997d8}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!updateLinearSystem@{updateLinearSystem}}
-\index{updateLinearSystem@{updateLinearSystem}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{updateLinearSystem()}{updateLinearSystem()}}
-{\footnotesize\ttfamily void update\+Linear\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
-
-
-
-Reimplemented in \mbox{\hyperlink{classmechano_chem_f_e_m_af78c2c6284234c93872188334fb997d8}{mechano\+Chem\+F\+E\+M$<$ dim $>$}}.
+Reimplemented in \hyperlink{classmechano_chem_f_e_m_af78c2c6284234c93872188334fb997d8}{mechano\-Chem\-F\-E\-M$<$ dim $>$}.
 
 
 
 \subsection{Member Data Documentation}
-\mbox{\label{classsolve_class_a2aaaefb2c7e18e09392c22659c344881}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!constraints\_solver@{constraints\_solver}}
-\index{constraints\_solver@{constraints\_solver}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{constraints\_solver}{constraints\_solver}}
-{\footnotesize\ttfamily Constraint\+Matrix constraints\+\_\+solver}
-
-\mbox{\label{classsolve_class_a03728ed636ca889ae407c84d181bc611}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!mpi\_communicator@{mpi\_communicator}}
-\index{mpi\_communicator@{mpi\_communicator}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{mpi\_communicator}{mpi\_communicator}}
-{\footnotesize\ttfamily M\+P\+I\+\_\+\+Comm mpi\+\_\+communicator}
-
-\mbox{\label{classsolve_class_a706fc42e2c257a3172aaeb3b1364a1a1}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!params\_solve@{params\_solve}}
-\index{params\_solve@{params\_solve}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{params\_solve}{params\_solve}}
-{\footnotesize\ttfamily dealii\+::\+Parameter\+Handler$\ast$ params\+\_\+solve}
-
-\mbox{\label{classsolve_class_a56f7357eb335f9ce4ac30bc30d7513e8}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!system\_matrix@{system\_matrix}}
-\index{system\_matrix@{system\_matrix}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{system\_matrix}{system\_matrix}}
-{\footnotesize\ttfamily matrix\+Type system\+\_\+matrix}
-
-\mbox{\label{classsolve_class_a6c39fa839fdc40d2408946617a778571}} 
-\index{solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}!system\_rhs@{system\_rhs}}
-\index{system\_rhs@{system\_rhs}!solveClass$<$ dim, matrixType, vectorType $>$@{solveClass$<$ dim, matrixType, vectorType $>$}}
-\subsubsection{\texorpdfstring{system\_rhs}{system\_rhs}}
-{\footnotesize\ttfamily vector\+Type system\+\_\+rhs}
+\index{solve\-Class@{solve\-Class}!constraints\-\_\-solver@{constraints\-\_\-solver}}
+\index{constraints\-\_\-solver@{constraints\-\_\-solver}!solveClass@{solve\-Class}}
+\subsubsection[{constraints\-\_\-solver}]{\setlength{\rightskip}{0pt plus 5cm}Constraint\-Matrix constraints\-\_\-solver}\label{classsolve_class_a2aaaefb2c7e18e09392c22659c344881}
+\index{solve\-Class@{solve\-Class}!mpi\-\_\-communicator@{mpi\-\_\-communicator}}
+\index{mpi\-\_\-communicator@{mpi\-\_\-communicator}!solveClass@{solve\-Class}}
+\subsubsection[{mpi\-\_\-communicator}]{\setlength{\rightskip}{0pt plus 5cm}M\-P\-I\-\_\-\-Comm mpi\-\_\-communicator}\label{classsolve_class_a03728ed636ca889ae407c84d181bc611}
+\index{solve\-Class@{solve\-Class}!params\-\_\-solve@{params\-\_\-solve}}
+\index{params\-\_\-solve@{params\-\_\-solve}!solveClass@{solve\-Class}}
+\subsubsection[{params\-\_\-solve}]{\setlength{\rightskip}{0pt plus 5cm}dealii\-::\-Parameter\-Handler$\ast$ params\-\_\-solve}\label{classsolve_class_a706fc42e2c257a3172aaeb3b1364a1a1}
+\index{solve\-Class@{solve\-Class}!system\-\_\-matrix@{system\-\_\-matrix}}
+\index{system\-\_\-matrix@{system\-\_\-matrix}!solveClass@{solve\-Class}}
+\subsubsection[{system\-\_\-matrix}]{\setlength{\rightskip}{0pt plus 5cm}matrix\-Type system\-\_\-matrix}\label{classsolve_class_a56f7357eb335f9ce4ac30bc30d7513e8}
+\index{solve\-Class@{solve\-Class}!system\-\_\-rhs@{system\-\_\-rhs}}
+\index{system\-\_\-rhs@{system\-\_\-rhs}!solveClass@{solve\-Class}}
+\subsubsection[{system\-\_\-rhs}]{\setlength{\rightskip}{0pt plus 5cm}vector\-Type system\-\_\-rhs}\label{classsolve_class_a6c39fa839fdc40d2408946617a778571}
 
 
-
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-include/\mbox{\hyperlink{solve_class_8h}{solve\+Class.\+h}}\item 
-src/solve/\mbox{\hyperlink{solve_2declare__parameters_8cc}{declare\+\_\+parameters.\+cc}}\item 
-src/solve/\mbox{\hyperlink{linear_solve_8cc}{linear\+Solve.\+cc}}\item 
-src/solve/\mbox{\hyperlink{nonlinear_solve_8cc}{nonlinear\+Solve.\+cc}}\item 
-src/solve/\mbox{\hyperlink{petsc_functions_8cc}{petsc\+Functions.\+cc}}\item 
-src/solve/\mbox{\hyperlink{solve_class_8cc}{solve\+Class.\+cc}}\item 
-src/solve/\mbox{\hyperlink{solve_class__petsc_8cc}{solve\+Class\+\_\+petsc.\+cc}}\item 
-src/solve/\mbox{\hyperlink{solve_linear_system_8cc}{solve\+Linear\+System.\+cc}}\item 
-src/solve/\mbox{\hyperlink{solve_linear_system_petsc_8cc}{solve\+Linear\+System\+Petsc.\+cc}}\end{DoxyCompactItemize}
+include/\hyperlink{solve_class_8h}{solve\-Class.\-h}\item 
+src/solve/\hyperlink{solve_2declare__parameters_8cc}{declare\-\_\-parameters.\-cc}\item 
+src/solve/\hyperlink{linear_solve_8cc}{linear\-Solve.\-cc}\item 
+src/solve/\hyperlink{nonlinear_solve_8cc}{nonlinear\-Solve.\-cc}\item 
+src/solve/\hyperlink{petsc_functions_8cc}{petsc\-Functions.\-cc}\item 
+src/solve/\hyperlink{solve_class_8cc}{solve\-Class.\-cc}\item 
+src/solve/\hyperlink{solve_class__petsc_8cc}{solve\-Class\-\_\-petsc.\-cc}\item 
+src/solve/\hyperlink{solve_linear_system_8cc}{solve\-Linear\-System.\-cc}\item 
+src/solve/\hyperlink{solve_linear_system_petsc_8cc}{solve\-Linear\-System\-Petsc.\-cc}\end{DoxyCompactItemize}

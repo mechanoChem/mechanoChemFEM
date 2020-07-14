@@ -1,134 +1,135 @@
-\section{F\+E\+Mdata$<$ dim, vector\+Type $>$ Class Template Reference}
-\label{class_f_e_mdata}\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
+\section{F\-E\-Mdata$<$ dim, vector\-Type $>$ Class Template Reference}
+\label{class_f_e_mdata}\index{F\-E\-Mdata$<$ dim, vector\-Type $>$@{F\-E\-Mdata$<$ dim, vector\-Type $>$}}
 
 
-{\ttfamily \#include $<$F\+E\+Mdata.\+h$>$}
+{\ttfamily \#include $<$F\-E\-Mdata.\-h$>$}
 
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\hyperlink{class_f_e_mdata_abb8edbdb28fbec855696a4a02648ad2d}{F\+E\+Mdata}} ()
+\hyperlink{class_f_e_mdata_abb8edbdb28fbec855696a4a02648ad2d}{F\-E\-Mdata} ()
 \item 
-\mbox{\hyperlink{class_f_e_mdata_ada690a46b4cec06866ffa32ca2e07c07}{F\+E\+Mdata}} (dealii\+::hp\+::\+Do\+F\+Handler$<$ dim $>$ \&\+\_\+dof\+\_\+handler)
+\hyperlink{class_f_e_mdata_ada690a46b4cec06866ffa32ca2e07c07}{F\-E\-Mdata} (dealii\-::hp\-::\-Do\-F\-Handler$<$ dim $>$ \&\-\_\-dof\-\_\-handler)
 \item 
-\mbox{\hyperlink{class_f_e_mdata_ab7baf283d0dd33996919e2530b735d84}{$\sim$\+F\+E\+Mdata}} ()
+\hyperlink{class_f_e_mdata_ab7baf283d0dd33996919e2530b735d84}{$\sim$\-F\-E\-Mdata} ()
 \item 
-void \mbox{\hyperlink{class_f_e_mdata_a770f8539c16d21624bcedc1f6bee9d68}{set\+\_\+output\+\_\+name}} (std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ primary\+\_\+variables)
+void \hyperlink{class_f_e_mdata_a770f8539c16d21624bcedc1f6bee9d68}{set\-\_\-output\-\_\-name} (std\-::vector$<$ std\-::vector$<$ std\-::string $>$ $>$ primary\-\_\-variables)
 \item 
-void \mbox{\hyperlink{class_f_e_mdata_ac201e22d75178ffe4d4355c53ee0b756}{clear\+\_\+data\+\_\+vectors}} ()
+void \hyperlink{class_f_e_mdata_ac201e22d75178ffe4d4355c53ee0b756}{clear\-\_\-data\-\_\-vectors} ()
 \item 
-void \mbox{\hyperlink{class_f_e_mdata_a62d54e01135c4ab0b58f51441732dca3}{write\+\_\+vtk}} (vector\+Type \&solution, std\+::string path)
+void \hyperlink{class_f_e_mdata_a62d54e01135c4ab0b58f51441732dca3}{write\-\_\-vtk} (vector\-Type \&solution, std\-::string path)
 \item 
-void \mbox{\hyperlink{class_f_e_mdata_aaffa90fc1adcd37311428f7e49b98263}{create\+\_\+vector\+\_\+snapshot}} (vector\+Type \&U, std\+::string out\+\_\+snap\+\_\+file, unsigned int precision=16, const bool scientific=true, const bool across=true) const
+void \hyperlink{class_f_e_mdata_a1c60b025bc1f1de692cabdd1f253d343}{create\-\_\-vector\-\_\-snapshot} (vector\-Type \&U, std\-::string out\-\_\-snap\-\_\-file, unsigned int precision=16, const bool scientific=true, const bool across=true) const 
 \item 
-void \mbox{\hyperlink{class_f_e_mdata_a2611613e158345b619062316e281c4c9}{resume\+\_\+vector\+\_\+from\+\_\+snapshot}} (vector\+Type \&Un, std\+::string in\+\_\+snap\+\_\+file)
+void \hyperlink{class_f_e_mdata_a2611613e158345b619062316e281c4c9}{resume\-\_\-vector\-\_\-from\-\_\-snapshot} (vector\-Type \&Un, std\-::string in\-\_\-snap\-\_\-file)
 \end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-dealii\+::hp\+::\+Do\+F\+Handler$<$ dim $>$ $\ast$ \mbox{\hyperlink{class_f_e_mdata_a38887e3bbeaa16b46355ba99d22e8063}{dof\+\_\+handler}}
+dealii\-::hp\-::\-Do\-F\-Handler$<$ dim $>$ $\ast$ \hyperlink{class_f_e_mdata_a38887e3bbeaa16b46355ba99d22e8063}{dof\-\_\-handler}
 \item 
-dealii\+::\+Data\+Out$<$ dim, dealii\+::hp\+::\+Do\+F\+Handler$<$ dim $>$ $>$ \mbox{\hyperlink{class_f_e_mdata_ab8d2ee01f13a0a7b7d2dd50edabbe8b6}{data\+\_\+out}}
+dealii\-::\-Data\-Out$<$ dim, \\*
+dealii\-::hp\-::\-Do\-F\-Handler$<$ dim $>$ $>$ \hyperlink{class_f_e_mdata_ab8d2ee01f13a0a7b7d2dd50edabbe8b6}{data\-\_\-out}
 \item 
-std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_f_e_mdata_a7b00177ad21830fe46a5bf4b1b4a3ea5}{nodal\+\_\+solution\+\_\+names}}
+std\-::vector$<$ std\-::string $>$ \hyperlink{class_f_e_mdata_a7b00177ad21830fe46a5bf4b1b4a3ea5}{nodal\-\_\-solution\-\_\-names}
 \item 
-std\+::vector$<$ dealii\+::\+Data\+Component\+Interpretation\+::\+Data\+Component\+Interpretation $>$ \mbox{\hyperlink{class_f_e_mdata_a42965751ff10a28b5add7c0bfa265cee}{nodal\+\_\+data\+\_\+component\+\_\+interpretation}}
+std\-::vector\\*
+$<$ dealii\-::\-Data\-Component\-Interpretation\-::\-Data\-Component\-Interpretation $>$ \hyperlink{class_f_e_mdata_a42965751ff10a28b5add7c0bfa265cee}{nodal\-\_\-data\-\_\-component\-\_\-interpretation}
 \item 
-M\+P\+I\+\_\+\+Comm \mbox{\hyperlink{class_f_e_mdata_a03728ed636ca889ae407c84d181bc611}{mpi\+\_\+communicator}}
+M\-P\-I\-\_\-\-Comm \hyperlink{class_f_e_mdata_a03728ed636ca889ae407c84d181bc611}{mpi\-\_\-communicator}
 \end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
-\mbox{\label{class_f_e_mdata_abb8edbdb28fbec855696a4a02648ad2d}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!FEMdata@{FEMdata}}
-\index{FEMdata@{FEMdata}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{FEMdata()}{FEMdata()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_f_e_mdata}{F\+E\+Mdata}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-\mbox{\label{class_f_e_mdata_ada690a46b4cec06866ffa32ca2e07c07}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!FEMdata@{FEMdata}}
-\index{FEMdata@{FEMdata}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{FEMdata()}{FEMdata()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
-{\footnotesize\ttfamily \mbox{\hyperlink{class_f_e_mdata}{F\+E\+Mdata}} (\begin{DoxyParamCaption}\item[{dealii\+::hp\+::\+Do\+F\+Handler$<$ dim $>$ \&}]{\+\_\+dof\+\_\+handler }\end{DoxyParamCaption})}
-
-\mbox{\label{class_f_e_mdata_ab7baf283d0dd33996919e2530b735d84}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!````~FEMdata@{$\sim$FEMdata}}
-\index{````~FEMdata@{$\sim$FEMdata}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{$\sim$FEMdata()}{~FEMdata()}}
-{\footnotesize\ttfamily $\sim$\mbox{\hyperlink{class_f_e_mdata}{F\+E\+Mdata}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
+\index{F\-E\-Mdata@{F\-E\-Mdata}!F\-E\-Mdata@{F\-E\-Mdata}}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{F\-E\-Mdata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf F\-E\-Mdata} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_f_e_mdata_abb8edbdb28fbec855696a4a02648ad2d}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!F\-E\-Mdata@{F\-E\-Mdata}}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{F\-E\-Mdata}]{\setlength{\rightskip}{0pt plus 5cm}{\bf F\-E\-Mdata} (
+\begin{DoxyParamCaption}
+\item[{dealii\-::hp\-::\-Do\-F\-Handler$<$ dim $>$ \&}]{\-\_\-dof\-\_\-handler}
+\end{DoxyParamCaption}
+)}\label{class_f_e_mdata_ada690a46b4cec06866ffa32ca2e07c07}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!$\sim$\-F\-E\-Mdata@{$\sim$\-F\-E\-Mdata}}
+\index{$\sim$\-F\-E\-Mdata@{$\sim$\-F\-E\-Mdata}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{$\sim$\-F\-E\-Mdata}]{\setlength{\rightskip}{0pt plus 5cm}$\sim${\bf F\-E\-Mdata} (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_f_e_mdata_ab7baf283d0dd33996919e2530b735d84}
 
 
 \subsection{Member Function Documentation}
-\mbox{\label{class_f_e_mdata_ac201e22d75178ffe4d4355c53ee0b756}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!clear\_data\_vectors@{clear\_data\_vectors}}
-\index{clear\_data\_vectors@{clear\_data\_vectors}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{clear\_data\_vectors()}{clear\_data\_vectors()}}
-{\footnotesize\ttfamily void clear\+\_\+data\+\_\+vectors (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-\mbox{\label{class_f_e_mdata_aaffa90fc1adcd37311428f7e49b98263}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!create\_vector\_snapshot@{create\_vector\_snapshot}}
-\index{create\_vector\_snapshot@{create\_vector\_snapshot}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{create\_vector\_snapshot()}{create\_vector\_snapshot()}}
-{\footnotesize\ttfamily void create\+\_\+vector\+\_\+snapshot (\begin{DoxyParamCaption}\item[{vector\+Type \&}]{U,  }\item[{std\+::string}]{out\+\_\+snap\+\_\+file,  }\item[{unsigned int}]{precision = {\ttfamily 16},  }\item[{const bool}]{scientific = {\ttfamily true},  }\item[{const bool}]{across = {\ttfamily true} }\end{DoxyParamCaption}) const}
-
-create snapshot of vector basically do printing of the vector use it with resume\+\_\+vector\+\_\+from\+\_\+snapshot to do restart \mbox{\label{class_f_e_mdata_a2611613e158345b619062316e281c4c9}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!resume\_vector\_from\_snapshot@{resume\_vector\_from\_snapshot}}
-\index{resume\_vector\_from\_snapshot@{resume\_vector\_from\_snapshot}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{resume\_vector\_from\_snapshot()}{resume\_vector\_from\_snapshot()}}
-{\footnotesize\ttfamily void resume\+\_\+vector\+\_\+from\+\_\+snapshot (\begin{DoxyParamCaption}\item[{vector\+Type \&}]{Un,  }\item[{std\+::string}]{in\+\_\+snap\+\_\+file }\end{DoxyParamCaption})}
-
-resume snapshot of vector stored in \textquotesingle{}in\+\_\+snap\+\_\+file\textquotesingle{} to vector \textquotesingle{}Un\textquotesingle{} according to this dof\+\_\+handler. only works when two vector initialized based on same mesh, otherwise dof sequence and partition would not be recoverd \mbox{\label{class_f_e_mdata_a770f8539c16d21624bcedc1f6bee9d68}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!set\_output\_name@{set\_output\_name}}
-\index{set\_output\_name@{set\_output\_name}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{set\_output\_name()}{set\_output\_name()}}
-{\footnotesize\ttfamily void set\+\_\+output\+\_\+name (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$}]{primary\+\_\+variables }\end{DoxyParamCaption})}
-
-set nodal\+\_\+solution\+\_\+names and nodal\+\_\+data\+\_\+component\+\_\+interpretation in deal.\+ii convention \mbox{\label{class_f_e_mdata_a62d54e01135c4ab0b58f51441732dca3}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!write\_vtk@{write\_vtk}}
-\index{write\_vtk@{write\_vtk}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{write\_vtk()}{write\_vtk()}}
-{\footnotesize\ttfamily void write\+\_\+vtk (\begin{DoxyParamCaption}\item[{vector\+Type \&}]{solution,  }\item[{std\+::string}]{path }\end{DoxyParamCaption})}
-
-write vtk using solution vector corresponding to this dof\+\_\+handler into path. path is the full directory with file name e.\+g. \textquotesingle{}/home/output/output.vtk\textquotesingle{}. 
+\index{F\-E\-Mdata@{F\-E\-Mdata}!clear\-\_\-data\-\_\-vectors@{clear\-\_\-data\-\_\-vectors}}
+\index{clear\-\_\-data\-\_\-vectors@{clear\-\_\-data\-\_\-vectors}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{clear\-\_\-data\-\_\-vectors}]{\setlength{\rightskip}{0pt plus 5cm}void clear\-\_\-data\-\_\-vectors (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\label{class_f_e_mdata_ac201e22d75178ffe4d4355c53ee0b756}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!create\-\_\-vector\-\_\-snapshot@{create\-\_\-vector\-\_\-snapshot}}
+\index{create\-\_\-vector\-\_\-snapshot@{create\-\_\-vector\-\_\-snapshot}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{create\-\_\-vector\-\_\-snapshot}]{\setlength{\rightskip}{0pt plus 5cm}void create\-\_\-vector\-\_\-snapshot (
+\begin{DoxyParamCaption}
+\item[{vector\-Type \&}]{U, }
+\item[{std\-::string}]{out\-\_\-snap\-\_\-file, }
+\item[{unsigned int}]{precision = {\ttfamily 16}, }
+\item[{const bool}]{scientific = {\ttfamily true}, }
+\item[{const bool}]{across = {\ttfamily true}}
+\end{DoxyParamCaption}
+) const}\label{class_f_e_mdata_a1c60b025bc1f1de692cabdd1f253d343}
+create snapshot of vector basically do printing of the vector use it with resume\-\_\-vector\-\_\-from\-\_\-snapshot to do restart \index{F\-E\-Mdata@{F\-E\-Mdata}!resume\-\_\-vector\-\_\-from\-\_\-snapshot@{resume\-\_\-vector\-\_\-from\-\_\-snapshot}}
+\index{resume\-\_\-vector\-\_\-from\-\_\-snapshot@{resume\-\_\-vector\-\_\-from\-\_\-snapshot}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{resume\-\_\-vector\-\_\-from\-\_\-snapshot}]{\setlength{\rightskip}{0pt plus 5cm}void resume\-\_\-vector\-\_\-from\-\_\-snapshot (
+\begin{DoxyParamCaption}
+\item[{vector\-Type \&}]{Un, }
+\item[{std\-::string}]{in\-\_\-snap\-\_\-file}
+\end{DoxyParamCaption}
+)}\label{class_f_e_mdata_a2611613e158345b619062316e281c4c9}
+resume snapshot of vector stored in 'in\-\_\-snap\-\_\-file' to vector 'Un' according to this dof\-\_\-handler. only works when two vector initialized based on same mesh, otherwise dof sequence and partition would not be recoverd \index{F\-E\-Mdata@{F\-E\-Mdata}!set\-\_\-output\-\_\-name@{set\-\_\-output\-\_\-name}}
+\index{set\-\_\-output\-\_\-name@{set\-\_\-output\-\_\-name}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{set\-\_\-output\-\_\-name}]{\setlength{\rightskip}{0pt plus 5cm}void set\-\_\-output\-\_\-name (
+\begin{DoxyParamCaption}
+\item[{std\-::vector$<$ std\-::vector$<$ std\-::string $>$ $>$}]{primary\-\_\-variables}
+\end{DoxyParamCaption}
+)}\label{class_f_e_mdata_a770f8539c16d21624bcedc1f6bee9d68}
+set nodal\-\_\-solution\-\_\-names and nodal\-\_\-data\-\_\-component\-\_\-interpretation in deal.\-ii convention \index{F\-E\-Mdata@{F\-E\-Mdata}!write\-\_\-vtk@{write\-\_\-vtk}}
+\index{write\-\_\-vtk@{write\-\_\-vtk}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{write\-\_\-vtk}]{\setlength{\rightskip}{0pt plus 5cm}void write\-\_\-vtk (
+\begin{DoxyParamCaption}
+\item[{vector\-Type \&}]{solution, }
+\item[{std\-::string}]{path}
+\end{DoxyParamCaption}
+)}\label{class_f_e_mdata_a62d54e01135c4ab0b58f51441732dca3}
+write vtk using solution vector corresponding to this dof\-\_\-handler into path. path is the full directory with file name e.\-g. '/home/output/output.vtk'. 
 
 \subsection{Member Data Documentation}
-\mbox{\label{class_f_e_mdata_ab8d2ee01f13a0a7b7d2dd50edabbe8b6}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!data\_out@{data\_out}}
-\index{data\_out@{data\_out}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{data\_out}{data\_out}}
-{\footnotesize\ttfamily dealii\+::\+Data\+Out$<$dim,dealii\+::hp\+::\+Do\+F\+Handler$<$dim$>$ $>$ data\+\_\+out}
-
-\mbox{\label{class_f_e_mdata_a38887e3bbeaa16b46355ba99d22e8063}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!dof\_handler@{dof\_handler}}
-\index{dof\_handler@{dof\_handler}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{dof\_handler}{dof\_handler}}
-{\footnotesize\ttfamily dealii\+::hp\+::\+Do\+F\+Handler$<$dim$>$$\ast$ dof\+\_\+handler}
-
-deal.\+ii dof\+\_\+handler \mbox{\label{class_f_e_mdata_a03728ed636ca889ae407c84d181bc611}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!mpi\_communicator@{mpi\_communicator}}
-\index{mpi\_communicator@{mpi\_communicator}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{mpi\_communicator}{mpi\_communicator}}
-{\footnotesize\ttfamily M\+P\+I\+\_\+\+Comm mpi\+\_\+communicator}
-
-\mbox{\label{class_f_e_mdata_a42965751ff10a28b5add7c0bfa265cee}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!nodal\_data\_component\_interpretation@{nodal\_data\_component\_interpretation}}
-\index{nodal\_data\_component\_interpretation@{nodal\_data\_component\_interpretation}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{nodal\_data\_component\_interpretation}{nodal\_data\_component\_interpretation}}
-{\footnotesize\ttfamily std\+::vector$<$dealii\+::\+Data\+Component\+Interpretation\+::\+Data\+Component\+Interpretation$>$ nodal\+\_\+data\+\_\+component\+\_\+interpretation}
-
-\mbox{\label{class_f_e_mdata_a7b00177ad21830fe46a5bf4b1b4a3ea5}} 
-\index{FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}!nodal\_solution\_names@{nodal\_solution\_names}}
-\index{nodal\_solution\_names@{nodal\_solution\_names}!FEMdata$<$ dim, vectorType $>$@{FEMdata$<$ dim, vectorType $>$}}
-\subsubsection{\texorpdfstring{nodal\_solution\_names}{nodal\_solution\_names}}
-{\footnotesize\ttfamily std\+::vector$<$std\+::string$>$ nodal\+\_\+solution\+\_\+names}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!data\-\_\-out@{data\-\_\-out}}
+\index{data\-\_\-out@{data\-\_\-out}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{data\-\_\-out}]{\setlength{\rightskip}{0pt plus 5cm}dealii\-::\-Data\-Out$<$dim,dealii\-::hp\-::\-Do\-F\-Handler$<$dim$>$ $>$ data\-\_\-out}\label{class_f_e_mdata_ab8d2ee01f13a0a7b7d2dd50edabbe8b6}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!dof\-\_\-handler@{dof\-\_\-handler}}
+\index{dof\-\_\-handler@{dof\-\_\-handler}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{dof\-\_\-handler}]{\setlength{\rightskip}{0pt plus 5cm}dealii\-::hp\-::\-Do\-F\-Handler$<$dim$>$$\ast$ dof\-\_\-handler}\label{class_f_e_mdata_a38887e3bbeaa16b46355ba99d22e8063}
+deal.\-ii dof\-\_\-handler \index{F\-E\-Mdata@{F\-E\-Mdata}!mpi\-\_\-communicator@{mpi\-\_\-communicator}}
+\index{mpi\-\_\-communicator@{mpi\-\_\-communicator}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{mpi\-\_\-communicator}]{\setlength{\rightskip}{0pt plus 5cm}M\-P\-I\-\_\-\-Comm mpi\-\_\-communicator}\label{class_f_e_mdata_a03728ed636ca889ae407c84d181bc611}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!nodal\-\_\-data\-\_\-component\-\_\-interpretation@{nodal\-\_\-data\-\_\-component\-\_\-interpretation}}
+\index{nodal\-\_\-data\-\_\-component\-\_\-interpretation@{nodal\-\_\-data\-\_\-component\-\_\-interpretation}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{nodal\-\_\-data\-\_\-component\-\_\-interpretation}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$dealii\-::\-Data\-Component\-Interpretation\-::\-Data\-Component\-Interpretation$>$ nodal\-\_\-data\-\_\-component\-\_\-interpretation}\label{class_f_e_mdata_a42965751ff10a28b5add7c0bfa265cee}
+\index{F\-E\-Mdata@{F\-E\-Mdata}!nodal\-\_\-solution\-\_\-names@{nodal\-\_\-solution\-\_\-names}}
+\index{nodal\-\_\-solution\-\_\-names@{nodal\-\_\-solution\-\_\-names}!FEMdata@{F\-E\-Mdata}}
+\subsubsection[{nodal\-\_\-solution\-\_\-names}]{\setlength{\rightskip}{0pt plus 5cm}std\-::vector$<$std\-::string$>$ nodal\-\_\-solution\-\_\-names}\label{class_f_e_mdata_a7b00177ad21830fe46a5bf4b1b4a3ea5}
 
 
-
-The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\-:\begin{DoxyCompactItemize}
 \item 
-include/\mbox{\hyperlink{_f_e_mdata_8h}{F\+E\+Mdata.\+h}}\item 
-src/\+F\+E\+Mdata/\mbox{\hyperlink{_f_e_mdata_8cc}{F\+E\+Mdata.\+cc}}\item 
-src/\+F\+E\+Mdata/\mbox{\hyperlink{set__output__name_8cc}{set\+\_\+output\+\_\+name.\+cc}}\item 
-src/\+F\+E\+Mdata/\mbox{\hyperlink{snapshot_8cc}{snapshot.\+cc}}\item 
-src/\+F\+E\+Mdata/\mbox{\hyperlink{write__vtk_8cc}{write\+\_\+vtk.\+cc}}\end{DoxyCompactItemize}
+include/\hyperlink{_f_e_mdata_8h}{F\-E\-Mdata.\-h}\item 
+src/\-F\-E\-Mdata/\hyperlink{_f_e_mdata_8cc}{F\-E\-Mdata.\-cc}\item 
+src/\-F\-E\-Mdata/\hyperlink{set__output__name_8cc}{set\-\_\-output\-\_\-name.\-cc}\item 
+src/\-F\-E\-Mdata/\hyperlink{snapshot_8cc}{snapshot.\-cc}\item 
+src/\-F\-E\-Mdata/\hyperlink{write__vtk_8cc}{write\-\_\-vtk.\-cc}\end{DoxyCompactItemize}

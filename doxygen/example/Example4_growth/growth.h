@@ -8,7 +8,7 @@
 * where \f$\boldsymbol{j}_1=-M\nabla C\f$ is the flux.
 The boundary condition is
 \f[
-C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma \backslash \Gamma_1
+C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma_2
 \f]
  * Besides chemistry, we also solve elasticity problem at finite strain:
  * \f[
@@ -32,22 +32,7 @@ multiple domains, using <B>FE_Nothing</B> to exclude primary varialbe from certa
  *@image html domain.png 
 
 *\section imple Implementation: level 1 user
-We first define the one scalar variable, and one vector variable for displacment:
-*\code{.cpp}
-std::vector<std::vector<std::string> > primary_variables(2);		
-	  primary_variables[0].push_back("c1"); primary_variables[0].push_back("component_is_scalar");
-	  primary_variables[1].push_back("u"); primary_variables[1].push_back("component_is_vector");
-\endcode
-We define two domains and basis order for each primal variables:
-*\code{.cpp}
-		int number_domain=2;
-		int basis_order=1;
-		std::vector<std::vector<int> > FE_support(number_domain);// store order of polynomial basis functions, 0 means FE_Nothing	
-		FE_support[0].push_back(basis_order);
-		FE_support[0].push_back(0);
-		FE_support[1].push_back(basis_order);
-		FE_support[1].push_back(basis_order);
-\endcode
+
 In domain 1, we set the order of polynomial basis to be zero for the second variable, i.e. the displacment, which will impose FE_Nothing to this field.
  
 Before launching the <a href="../html/classinit_bound_val_probs.html">initBoundValProbs</a>, we need to initialize the <B>ParameterHandler</B> and declare all paramters we may use:

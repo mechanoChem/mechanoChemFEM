@@ -89,7 +89,7 @@ Introduction</h1>
 </p>
 <p> where <img class="formulaInl" alt="$\boldsymbol{j}_1=-M\nabla C$" src="form_148.png"/> is the flux. The boundary condition is </p>
 <p class="formulaDsp">
-<img class="formulaDsp" alt="\[ C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma \backslash \Gamma_1 \]" src="form_149.png"/>
+<img class="formulaDsp" alt="\[ C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma_2 \]" src="form_154.png"/>
 </p>
 <p> Besides chemistry, we also solve elasticity problem at finite strain: </p>
 <p class="formulaDsp">
@@ -111,19 +111,7 @@ Introduction</h1>
 </div>
 <h1><a class="anchor" id="imple"></a>
 Implementation: level 1 user</h1>
-<p>We first define the one scalar variable, and one vector variable for displacment: </p>
-<div class="fragment"><div class="line">std::vector&lt;std::vector&lt;std::string&gt; &gt; primary_variables(2);        </div>
-<div class="line">      primary_variables[0].push_back(<span class="stringliteral">&quot;c1&quot;</span>); primary_variables[0].push_back(<span class="stringliteral">&quot;component_is_scalar&quot;</span>);</div>
-<div class="line">      primary_variables[1].push_back(<span class="stringliteral">&quot;u&quot;</span>); primary_variables[1].push_back(<span class="stringliteral">&quot;component_is_vector&quot;</span>);</div>
-</div><!-- fragment --><p> We define two domains and basis order for each primal variables: </p>
-<div class="fragment"><div class="line"><span class="keywordtype">int</span> number_domain=2;</div>
-<div class="line"><span class="keywordtype">int</span> basis_order=1;</div>
-<div class="line">std::vector&lt;std::vector&lt;int&gt; &gt; FE_support(number_domain);<span class="comment">// store order of polynomial basis functions, 0 means FE_Nothing   </span></div>
-<div class="line">FE_support[0].push_back(basis_order);</div>
-<div class="line">FE_support[0].push_back(0);</div>
-<div class="line">FE_support[1].push_back(basis_order);</div>
-<div class="line">FE_support[1].push_back(basis_order);</div>
-</div><!-- fragment --><p> In domain 1, we set the order of polynomial basis to be zero for the second variable, i.e. the displacment, which will impose FE_Nothing to this field.</p>
+<p>In domain 1, we set the order of polynomial basis to be zero for the second variable, i.e. the displacment, which will impose FE_Nothing to this field.</p>
 <p>Before launching the <a href="../html/classinit_bound_val_probs.html">initBoundValProbs</a>, we need to initialize the <b>ParameterHandler</b> and declare all paramters we may use: </p>
 <div class="fragment"><div class="line">ParameterHandler params;</div>
 <div class="line">        params.enter_subsection(<span class="stringliteral">&quot;parameters&quot;</span>);</div>

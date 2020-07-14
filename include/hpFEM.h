@@ -20,13 +20,13 @@
 #include <deal.II/hp/q_collection.h>
 #include <deal.II/hp/fe_values.h>
 #include <deal.II/hp/fe_collection.h>
+#include "mechanoChemPrimitive.h"
 
 using namespace dealii;
 template<int dim>
 /**
 *This class is intended to be base/abstract class. It contains three essential
-*objects in deal.ii:  \c Triangulation<dim>, \c hp::DoFHandler<dim> and \c ConstraintMatrix. Those three will be shared in other classes: \code{.cpp}solveClass< dim, matrixType, vectorType > and FEMdata< dim, vectorType >\endcode
-*Class hpFEM< dim > also provide functions to
+*objects in deal.ii:  \c Triangulation<dim>, \c hp::DoFHandler<dim> Those two need to be initialized at very beginning by constructor
 */
 class hpFEM
 {
@@ -43,7 +43,6 @@ class hpFEM
 		int totalDOF(std::vector<std::vector<std::string> >& primary_variables);
 		Triangulation<dim>    triangulation;
 		hp::DoFHandler<dim>   dof_handler;
-		ConstraintMatrix constraints;
 
 };
 

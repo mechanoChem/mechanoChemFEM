@@ -1,0 +1,70 @@
+\section{include/mechano\+Chem\+F\+EM.h File Reference}
+\label{mechano_chem_f_e_m_8h}\index{include/mechanoChemFEM.h@{include/mechanoChemFEM.h}}
+{\ttfamily \#include $<$deal.\+I\+I/base/tensor\+\_\+function.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/base/quadrature\+\_\+lib.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/base/logstream.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/base/function.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/base/conditional\+\_\+ostream.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/base/utilities.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/base/timer.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/base/parameter\+\_\+handler.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/block\+\_\+vector.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/full\+\_\+matrix.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/block\+\_\+sparse\+\_\+matrix.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/sparse\+\_\+direct.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/precondition.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/constraint\+\_\+matrix.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/solver\+\_\+gmres.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/petsc\+\_\+vector.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/petsc\+\_\+parallel\+\_\+vector.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/petsc\+\_\+parallel\+\_\+sparse\+\_\+matrix.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/petsc\+\_\+solver.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/petsc\+\_\+precondition.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/grid\+\_\+generator.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/tria.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/grid\+\_\+in.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/grid\+\_\+out.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/tria\+\_\+accessor.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/tria\+\_\+iterator.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/tria\+\_\+boundary\+\_\+lib.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/grid\+\_\+tools.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/grid\+\_\+refinement.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/manifold\+\_\+lib.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/dofs/dof\+\_\+handler.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/dofs/dof\+\_\+renumbering.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/dofs/dof\+\_\+accessor.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/dofs/dof\+\_\+tools.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/fe/fe\+\_\+dgq.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/fe/fe\+\_\+nothing.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/fe/fe\+\_\+system.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/fe/fe\+\_\+values.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/hp/dof\+\_\+handler.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/hp/q\+\_\+collection.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/hp/fe\+\_\+values.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/hp/fe\+\_\+collection.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/numerics/vector\+\_\+tools.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/numerics/matrix\+\_\+tools.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/numerics/data\+\_\+out.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/numerics/solution\+\_\+transfer.\+h$>$}\newline
+{\ttfamily \#include $<$Sacado.\+hpp$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$mpi.\+h$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$ctime$>$}\newline
+{\ttfamily \#include \char`\"{}hp\+F\+E\+M.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Residual.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}solve\+Class.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}F\+E\+Mdata.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}supplementary/function\+Evaluations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}supplementary/parameters.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}supplementary/\+Initial\+Conditions.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classmechano_chem_f_e_m}{mechano\+Chem\+F\+E\+M$<$ dim $>$}}
+\end{DoxyCompactItemize}

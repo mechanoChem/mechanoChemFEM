@@ -28,6 +28,9 @@ In this example, we have two domains/materials. The diffusion equation is solved
 We want to model that the species transports from domain 1 into domain 2, and casues expansion of domain 2. By this example, we demonstrate how to setup 
 multiple domains, using <B>FE_Nothing</B> to exclude primary varialbe from certain doamin, and applying DOF constrains on the interface.
 
+\htmlonly <style>div.image img[src="domain.png"]{width:500px;}</style> \endhtmlonly 
+ *@image html domain.png 
+
 *\section imple Implementation: level 1 user
 We first define the one scalar variable, and one vector variable for displacment:
 *\code{.cpp}
@@ -197,6 +200,8 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 
 subsection Problem
 set print_parameter = true
+set primary_variables_list= c1, component_is_scalar , u, component_is_vector
+set FE_support_list= 1,0,  1,1
 
 set dt = 1
 set totalTime = 5
@@ -205,10 +210,9 @@ set off_output_index=0
 set current_time = 0
 set resuming_from_snapshot = false
 
-#set mesh = /Users/wzhenlin/GitLab/researchCode/brainMorph/mesh/testMesh.msh
-#set mesh = /home/wzhenlin/workspace/brainMorph/mesh/STA21_hex.msh
 set output_directory = output/
 set snapshot_directory = snapshot/
+set save_snapshot = true
 
 #FEM
 set volume_quadrature = 3 
@@ -226,7 +230,7 @@ set Z_end = 2 #no need to 2D
 
 set element_div_x=5
 set element_div_y=5
-set element_div_z=4 #no need to 2D
+set element_div_z=8 #no need to 2D
 end
 
 subsection parameters
@@ -234,6 +238,7 @@ set c_ini =0.5
 set youngsModulus =  5.0e3
 set poissonRatio =  0.45
 set M=1 
+set out_flux=-0.1
 end
 						
 #
@@ -245,8 +250,8 @@ end
 #
 subsection Nonlinear_solver
 		set nonLinear_method = classicNewton
-		set relative_norm_tolerance = 1.0e-12
-		set absolute_norm_tolerance = 1.0e-12
+		set relative_norm_tolerance = 1.0e-10
+		set absolute_norm_tolerance = 1.0e-10
 		set max_iterations = 10
 end
 						

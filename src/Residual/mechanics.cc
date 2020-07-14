@@ -1,6 +1,12 @@
 #include"../../include/Residual.h"
 
 //default evaluateStress No thermal chemical coupling
+template <class T, int dim>
+void Residual<T, dim>::setLameParametersByYoungsModulusPoissonRatio(double youngsModulus, double poissonRatio)
+{
+	lambda=(youngsModulus*poissonRatio)/((1+poissonRatio)*(1-2*poissonRatio));
+	mu=youngsModulus/(2*(1+poissonRatio));
+}
 
 template <class T, int dim>
 void Residual<T,dim>::evaluateStrain(dealii::Table<3, T >& Fe, dealii::Table<3, T >& E, deformationMap<T, dim>& defMap, bool infinitesimal_strain_indicator)

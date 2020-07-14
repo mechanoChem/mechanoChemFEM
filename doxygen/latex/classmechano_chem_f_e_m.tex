@@ -1,0 +1,473 @@
+\section{mechano\+Chem\+F\+EM$<$ dim $>$ Class Template Reference}
+\label{classmechano_chem_f_e_m}\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+
+
+{\ttfamily \#include $<$mechano\+Chem\+F\+E\+M.\+h$>$}
+
+Inheritance diagram for mechano\+Chem\+F\+EM$<$ dim $>$\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.650295cm]{classmechano_chem_f_e_m}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classmechano_chem_f_e_m_ae86e36350c9dd3aef65944d2e926311a}{mechano\+Chem\+F\+EM}} ()
+\item 
+\mbox{\hyperlink{classmechano_chem_f_e_m_a6ac6ffa723cf5e22f90dc80fa5e77ff6}{$\sim$ mechano\+Chem\+F\+EM}} ()
+\item 
+void \mbox{\hyperlink{classmechano_chem_f_e_m_aa745c884c3343abacbffa4669a72488d}{declare\+\_\+parameters\+\_\+mechano\+Chem\+F\+EM}} ()
+\item 
+void \mbox{\hyperlink{classmechano_chem_f_e_m_a5d2215a9bdbd1f1726f1e9c2182d2072}{load\+\_\+parameters}} (std\+::string parametersfile)
+\item 
+void \mbox{\hyperlink{classmechano_chem_f_e_m_a3d9afee26426f7a184185dba31a2d138}{define\+\_\+primary\+\_\+fields}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a082302fff160a5e5535e6647af388389}{setup\+\_\+linear\+\_\+system}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a295e0565636db5e7b8d22639182de706}{ini\+\_\+update\+Linear\+System}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_af78c2c6284234c93872188334fb997d8}{update\+Linear\+System}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_ac8f2c3e2a1040c70b709900dc3dfdaea}{get\+\_\+residual}} (const typename hp\+::\+Do\+F\+Handler$<$ dim $>$\+::active\+\_\+cell\+\_\+iterator \&cell, const F\+E\+Values$<$ dim $>$ \&fe\+\_\+values, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&R, Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&U\+Local, Table$<$ 1, double $>$ \&U\+Local\+Conv)
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_ad01ab2c3347ff55e8787624a97732182}{init\+\_\+ibvp}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a13a43e6d814de94978c515cb084873b1}{run}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a856108deee592fc9dde678b60a9b6596}{solve\+\_\+ibvp}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_aadd4943e52767516f3f7c5460ea35032}{make\+\_\+grid}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a7ed791f6f2c777286743182bf2f481bf}{mark\+\_\+boundary}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a8d32e81a32f1aaf5682065458548e8e2}{apply\+\_\+initial\+\_\+condition}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a40157fe5d9875c83d46e3a86a680c758}{output\+\_\+results}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_aea55077652a6fc58f1c0c250c4abd856}{refine\+\_\+grid}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a5fb25d0981afa1f7d87875fffcc272c1}{set\+Mult\+Domain}} ()
+\item 
+virtual void \mbox{\hyperlink{classmechano_chem_f_e_m_a668a12cfbc07238b37e8d202dc4ab3f6}{apply\+\_\+boundary\+\_\+condition}} ()
+\item 
+virtual std\+::vector$<$ double $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_a7c52028f5388b9cc83fbc90e842fda22}{get\+\_\+solution}} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{classmechano_chem_f_e_m_a68c7b36b181a92a91945137308e74a6d}{current\+\_\+dt}}
+\item 
+Parameter\+Handler $\ast$ \mbox{\hyperlink{classmechano_chem_f_e_m_ae9ff200523ba41f15a09a1d39af96649}{params\+\_\+mechano\+Chem\+F\+EM}}
+\item 
+\mbox{\hyperlink{class_residual}{Residual}}$<$ Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$, dim $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_adeaa7307c79088ccde0e35feb27eb0b0}{Residual\+Eq}}
+\item 
+\mbox{\hyperlink{class_f_e_mdata}{F\+E\+Mdata}}$<$ dim, P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_af7b22336bf40c3a2865dff2cb708136d}{F\+E\+Mdata\+\_\+out}}
+\item 
+std\+::vector$<$ std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_a4933860ad833b7b9bd2b8effee5c36d6}{primary\+\_\+variables}}
+\item 
+std\+::vector$<$ unsigned int $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_a20e37946082ad677ffab164a6dead8b3}{primary\+\_\+variables\+\_\+dof}}
+\item 
+std\+::vector$<$ std\+::vector$<$ int $>$ $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_ab0e06106bfe2ab795399d91169290e8a}{F\+E\+\_\+support}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ F\+E\+System$<$ dim $>$ $>$ $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_abeb9cdd6078108148320406c68bfa0d1}{fe\+\_\+system}}
+\item 
+P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector \mbox{\hyperlink{classmechano_chem_f_e_m_ae539da5c193ce7d8d07f654067f111ca}{solution}}
+\item 
+P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector \mbox{\hyperlink{classmechano_chem_f_e_m_ab5b94542feace0c45c2c69696ce9a266}{solution\+\_\+prev}}
+\item 
+Constraint\+Matrix $\ast$ \mbox{\hyperlink{classmechano_chem_f_e_m_ae2063c17722c7eae9e91a4ad6b353b34}{constraints\+\_\+mechano\+Chem\+F\+EM}}
+\item 
+const Q\+Gauss$<$ dim $>$ $\ast$ \mbox{\hyperlink{classmechano_chem_f_e_m_a7e2363a91f6f1626f463f3a06108c03b}{volume\+\_\+quadrature}}
+\item 
+const Q\+Gauss$<$ dim-\/1 $>$ $\ast$ \mbox{\hyperlink{classmechano_chem_f_e_m_af302403bba9078de92d05b4cbe6f44dd}{common\+\_\+face\+\_\+quadrature}}
+\item 
+hp\+::\+F\+E\+Collection$<$ dim $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_a02ae472de2833f8763bfe10520be87db}{fe\+\_\+collection}}
+\item 
+hp\+::\+Q\+Collection$<$ dim $>$ \mbox{\hyperlink{classmechano_chem_f_e_m_a748ffdb78a6294cd525fe5979bb30649}{q\+\_\+collection}}
+\item 
+double \mbox{\hyperlink{classmechano_chem_f_e_m_a9db8ce20b0de349987441b8d6830c97a}{domain\+\_\+X}}
+\item 
+double \mbox{\hyperlink{classmechano_chem_f_e_m_ae7a91557a809cfab5c3dee32ae1de8cb}{domain\+\_\+Y}}
+\item 
+double \mbox{\hyperlink{classmechano_chem_f_e_m_a199da42cf8a8e51eaeb5cacfdef1c37e}{domain\+\_\+Z}}
+\item 
+int \mbox{\hyperlink{classmechano_chem_f_e_m_a9a75da991ed1d29646660b1d16a0418f}{current\+\_\+increment}}
+\item 
+double \mbox{\hyperlink{classmechano_chem_f_e_m_a557717b333342f1e34a905d6162ce493}{current\+\_\+time}}
+\item 
+double \mbox{\hyperlink{classmechano_chem_f_e_m_abc276e47b85df9dd59f248e663b3b971}{total\+\_\+time}}
+\item 
+M\+P\+I\+\_\+\+Comm \mbox{\hyperlink{classmechano_chem_f_e_m_a03728ed636ca889ae407c84d181bc611}{mpi\+\_\+communicator}}
+\item 
+const unsigned int \mbox{\hyperlink{classmechano_chem_f_e_m_a7320777b83fedaf7a54cdb2fb0ef02e4}{n\+\_\+mpi\+\_\+processes}}
+\item 
+const unsigned int \mbox{\hyperlink{classmechano_chem_f_e_m_a6c34addfd3b89faf0a7b4e3fe1236fb0}{this\+\_\+mpi\+\_\+process}}
+\item 
+Conditional\+O\+Stream \mbox{\hyperlink{classmechano_chem_f_e_m_a914f651bc9ca2e223b243695dd37ba53}{pcout}}
+\item 
+std\+::string \mbox{\hyperlink{classmechano_chem_f_e_m_a95f0e6f488a1faae487cab4198842ebe}{output\+\_\+directory}}
+\item 
+std\+::string \mbox{\hyperlink{classmechano_chem_f_e_m_af7ed49a5ea9a6407acb26c5a729d4bd0}{snapshot\+\_\+directory}}
+\item 
+int \mbox{\hyperlink{classmechano_chem_f_e_m_a5413329bd1d73152f051cc8d11134f60}{skip\+\_\+output}}
+\item 
+std\+::string \mbox{\hyperlink{classmechano_chem_f_e_m_a3ce0cf43eef10e4757e8a225e9b98e96}{snapfile}}
+\item 
+bool \mbox{\hyperlink{classmechano_chem_f_e_m_a34ea26077a33f792a9468a4d0ac2feaf}{resuming\+\_\+from\+\_\+snapshot}}
+\item 
+bool \mbox{\hyperlink{classmechano_chem_f_e_m_ade455df689de2bc3fb79e1f468fd5404}{save\+\_\+snapshot}}
+\item 
+bool \mbox{\hyperlink{classmechano_chem_f_e_m_a883c18cdb18f3c36a226a7cf83e6bae0}{save\+\_\+output}}
+\item 
+int \mbox{\hyperlink{classmechano_chem_f_e_m_a5b4ed019aaae8f2992f9418a93cd1dbb}{off\+\_\+output\+\_\+index}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\label{classmechano_chem_f_e_m_ae86e36350c9dd3aef65944d2e926311a}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!mechanoChemFEM@{mechanoChemFEM}}
+\index{mechanoChemFEM@{mechanoChemFEM}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{mechanoChemFEM()}{mechanoChemFEM()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classmechano_chem_f_e_m}{mechano\+Chem\+F\+EM}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\label{classmechano_chem_f_e_m_a6ac6ffa723cf5e22f90dc80fa5e77ff6}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!````~ mechanoChemFEM@{$\sim$ mechanoChemFEM}}
+\index{````~ mechanoChemFEM@{$\sim$ mechanoChemFEM}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{$\sim$ mechanoChemFEM()}{~ mechanoChemFEM()}}
+{\footnotesize\ttfamily $\sim$ \mbox{\hyperlink{classmechano_chem_f_e_m}{mechano\+Chem\+F\+EM}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\label{classmechano_chem_f_e_m_a668a12cfbc07238b37e8d202dc4ab3f6}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!apply\_boundary\_condition@{apply\_boundary\_condition}}
+\index{apply\_boundary\_condition@{apply\_boundary\_condition}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{apply\_boundary\_condition()}{apply\_boundary\_condition()}}
+{\footnotesize\ttfamily void apply\+\_\+boundary\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+default\+: set up constrains \mbox{\label{classmechano_chem_f_e_m_a8d32e81a32f1aaf5682065458548e8e2}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!apply\_initial\_condition@{apply\_initial\_condition}}
+\index{apply\_initial\_condition@{apply\_initial\_condition}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{apply\_initial\_condition()}{apply\_initial\_condition()}}
+{\footnotesize\ttfamily void apply\+\_\+initial\+\_\+condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+default\+: set all solution vector to be zero \mbox{\label{classmechano_chem_f_e_m_aa745c884c3343abacbffa4669a72488d}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!declare\_parameters\_mechanoChemFEM@{declare\_parameters\_mechanoChemFEM}}
+\index{declare\_parameters\_mechanoChemFEM@{declare\_parameters\_mechanoChemFEM}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{declare\_parameters\_mechanoChemFEM()}{declare\_parameters\_mechanoChemFEM()}}
+{\footnotesize\ttfamily void declare\+\_\+parameters\+\_\+mechano\+Chem\+F\+EM (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+declare generic paramters \mbox{\label{classmechano_chem_f_e_m_a3d9afee26426f7a184185dba31a2d138}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!define\_primary\_fields@{define\_primary\_fields}}
+\index{define\_primary\_fields@{define\_primary\_fields}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{define\_primary\_fields()}{define\_primary\_fields()}}
+{\footnotesize\ttfamily void define\+\_\+primary\+\_\+fields (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+define primary field \mbox{\label{classmechano_chem_f_e_m_ac8f2c3e2a1040c70b709900dc3dfdaea}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!get\_residual@{get\_residual}}
+\index{get\_residual@{get\_residual}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{get\_residual()}{get\_residual()}}
+{\footnotesize\ttfamily void get\+\_\+residual (\begin{DoxyParamCaption}\item[{const typename hp\+::\+Do\+F\+Handler$<$ dim $>$\+::active\+\_\+cell\+\_\+iterator \&}]{cell,  }\item[{const F\+E\+Values$<$ dim $>$ \&}]{fe\+\_\+values,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$ $>$ \&}]{R,  }\item[{Table$<$ 1, Sacado\+::\+Fad\+::\+D\+Fad$<$ double $>$$>$ \&}]{U\+Local,  }\item[{Table$<$ 1, double $>$ \&}]{U\+Local\+Conv }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+abstract function \mbox{\label{classmechano_chem_f_e_m_a7c52028f5388b9cc83fbc90e842fda22}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!get\_solution@{get\_solution}}
+\index{get\_solution@{get\_solution}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{get\_solution()}{get\_solution()}}
+{\footnotesize\ttfamily std\+::vector$<$ double $>$ get\+\_\+solution (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\mbox{\label{classmechano_chem_f_e_m_a295e0565636db5e7b8d22639182de706}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!ini\_updateLinearSystem@{ini\_updateLinearSystem}}
+\index{ini\_updateLinearSystem@{ini\_updateLinearSystem}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{ini\_updateLinearSystem()}{ini\_updateLinearSystem()}}
+{\footnotesize\ttfamily void ini\+\_\+update\+Linear\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+empty function just before update\+Linear\+System \mbox{\label{classmechano_chem_f_e_m_ad01ab2c3347ff55e8787624a97732182}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!init\_ibvp@{init\_ibvp}}
+\index{init\_ibvp@{init\_ibvp}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{init\_ibvp()}{init\_ibvp()}}
+{\footnotesize\ttfamily void init\+\_\+ibvp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generic function calls before running the simulations \mbox{\label{classmechano_chem_f_e_m_a5d2215a9bdbd1f1726f1e9c2182d2072}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!load\_parameters@{load\_parameters}}
+\index{load\_parameters@{load\_parameters}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{load\_parameters()}{load\_parameters()}}
+{\footnotesize\ttfamily void load\+\_\+parameters (\begin{DoxyParamCaption}\item[{std\+::string}]{parametersfile }\end{DoxyParamCaption})}
+
+load parameters \mbox{\label{classmechano_chem_f_e_m_aadd4943e52767516f3f7c5460ea35032}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!make\_grid@{make\_grid}}
+\index{make\_grid@{make\_grid}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{make\_grid()}{make\_grid()}}
+{\footnotesize\ttfamily void make\+\_\+grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+default\+:make hyper\+\_\+rectangle mesh \mbox{\label{classmechano_chem_f_e_m_a7ed791f6f2c777286743182bf2f481bf}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!mark\_boundary@{mark\_boundary}}
+\index{mark\_boundary@{mark\_boundary}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{mark\_boundary()}{mark\_boundary()}}
+{\footnotesize\ttfamily void mark\+\_\+boundary (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+mark boundary \mbox{\label{classmechano_chem_f_e_m_a40157fe5d9875c83d46e3a86a680c758}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!output\_results@{output\_results}}
+\index{output\_results@{output\_results}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{output\_results()}{output\_results()}}
+{\footnotesize\ttfamily void output\+\_\+results (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\mbox{\label{classmechano_chem_f_e_m_aea55077652a6fc58f1c0c250c4abd856}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!refine\_grid@{refine\_grid}}
+\index{refine\_grid@{refine\_grid}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{refine\_grid()}{refine\_grid()}}
+{\footnotesize\ttfamily void refine\+\_\+grid (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+default\+: pure virtual function \mbox{\label{classmechano_chem_f_e_m_a13a43e6d814de94978c515cb084873b1}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!run@{run}}
+\index{run@{run}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{run()}{run()}}
+{\footnotesize\ttfamily void run (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generic function calls to run the simulations \mbox{\label{classmechano_chem_f_e_m_a5fb25d0981afa1f7d87875fffcc272c1}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!setMultDomain@{setMultDomain}}
+\index{setMultDomain@{setMultDomain}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{setMultDomain()}{setMultDomain()}}
+{\footnotesize\ttfamily void set\+Mult\+Domain (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+default\+: pure virtual function \mbox{\label{classmechano_chem_f_e_m_a082302fff160a5e5535e6647af388389}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!setup\_linear\_system@{setup\_linear\_system}}
+\index{setup\_linear\_system@{setup\_linear\_system}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{setup\_linear\_system()}{setup\_linear\_system()}}
+{\footnotesize\ttfamily void setup\+\_\+linear\+\_\+system (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+generic function to setup the system \mbox{\label{classmechano_chem_f_e_m_a856108deee592fc9dde678b60a9b6596}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!solve\_ibvp@{solve\_ibvp}}
+\index{solve\_ibvp@{solve\_ibvp}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{solve\_ibvp()}{solve\_ibvp()}}
+{\footnotesize\ttfamily void solve\+\_\+ibvp (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+solve \mbox{\label{classmechano_chem_f_e_m_af78c2c6284234c93872188334fb997d8}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!updateLinearSystem@{updateLinearSystem}}
+\index{updateLinearSystem@{updateLinearSystem}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{updateLinearSystem()}{updateLinearSystem()}}
+{\footnotesize\ttfamily void update\+Linear\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+overload function from solve\+Class 
+
+Reimplemented from \mbox{\hyperlink{classsolve_class_af78c2c6284234c93872188334fb997d8}{solve\+Class$<$ dim, P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Sparse\+Matrix, P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector $>$}}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\label{classmechano_chem_f_e_m_af302403bba9078de92d05b4cbe6f44dd}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!common\_face\_quadrature@{common\_face\_quadrature}}
+\index{common\_face\_quadrature@{common\_face\_quadrature}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{common\_face\_quadrature}{common\_face\_quadrature}}
+{\footnotesize\ttfamily const Q\+Gauss$<$dim-\/1$>$$\ast$ common\+\_\+face\+\_\+quadrature}
+
+\mbox{\label{classmechano_chem_f_e_m_ae2063c17722c7eae9e91a4ad6b353b34}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!constraints\_mechanoChemFEM@{constraints\_mechanoChemFEM}}
+\index{constraints\_mechanoChemFEM@{constraints\_mechanoChemFEM}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{constraints\_mechanoChemFEM}{constraints\_mechanoChemFEM}}
+{\footnotesize\ttfamily Constraint\+Matrix$\ast$ constraints\+\_\+mechano\+Chem\+F\+EM}
+
+\mbox{\label{classmechano_chem_f_e_m_a68c7b36b181a92a91945137308e74a6d}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!current\_dt@{current\_dt}}
+\index{current\_dt@{current\_dt}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{current\_dt}{current\_dt}}
+{\footnotesize\ttfamily double current\+\_\+dt}
+
+\mbox{\label{classmechano_chem_f_e_m_a9a75da991ed1d29646660b1d16a0418f}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!current\_increment@{current\_increment}}
+\index{current\_increment@{current\_increment}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{current\_increment}{current\_increment}}
+{\footnotesize\ttfamily int current\+\_\+increment}
+
+\mbox{\label{classmechano_chem_f_e_m_a557717b333342f1e34a905d6162ce493}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!current\_time@{current\_time}}
+\index{current\_time@{current\_time}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{current\_time}{current\_time}}
+{\footnotesize\ttfamily double current\+\_\+time}
+
+\mbox{\label{classmechano_chem_f_e_m_a9db8ce20b0de349987441b8d6830c97a}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!domain\_X@{domain\_X}}
+\index{domain\_X@{domain\_X}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{domain\_X}{domain\_X}}
+{\footnotesize\ttfamily double domain\+\_\+X}
+
+\mbox{\label{classmechano_chem_f_e_m_ae7a91557a809cfab5c3dee32ae1de8cb}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!domain\_Y@{domain\_Y}}
+\index{domain\_Y@{domain\_Y}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{domain\_Y}{domain\_Y}}
+{\footnotesize\ttfamily double domain\+\_\+Y}
+
+\mbox{\label{classmechano_chem_f_e_m_a199da42cf8a8e51eaeb5cacfdef1c37e}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!domain\_Z@{domain\_Z}}
+\index{domain\_Z@{domain\_Z}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{domain\_Z}{domain\_Z}}
+{\footnotesize\ttfamily double domain\+\_\+Z}
+
+\mbox{\label{classmechano_chem_f_e_m_a02ae472de2833f8763bfe10520be87db}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!fe\_collection@{fe\_collection}}
+\index{fe\_collection@{fe\_collection}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{fe\_collection}{fe\_collection}}
+{\footnotesize\ttfamily hp\+::\+F\+E\+Collection$<$dim$>$ fe\+\_\+collection}
+
+\mbox{\label{classmechano_chem_f_e_m_ab0e06106bfe2ab795399d91169290e8a}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!FE\_support@{FE\_support}}
+\index{FE\_support@{FE\_support}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{FE\_support}{FE\_support}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::vector$<$int$>$ $>$ F\+E\+\_\+support}
+
+\mbox{\label{classmechano_chem_f_e_m_abeb9cdd6078108148320406c68bfa0d1}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!fe\_system@{fe\_system}}
+\index{fe\_system@{fe\_system}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{fe\_system}{fe\_system}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$F\+E\+System$<$dim$>$ $>$ $>$ fe\+\_\+system}
+
+\mbox{\label{classmechano_chem_f_e_m_af7b22336bf40c3a2865dff2cb708136d}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!FEMdata\_out@{FEMdata\_out}}
+\index{FEMdata\_out@{FEMdata\_out}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{FEMdata\_out}{FEMdata\_out}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_f_e_mdata}{F\+E\+Mdata}}$<$dim, P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector$>$ F\+E\+Mdata\+\_\+out}
+
+\mbox{\label{classmechano_chem_f_e_m_a03728ed636ca889ae407c84d181bc611}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!mpi\_communicator@{mpi\_communicator}}
+\index{mpi\_communicator@{mpi\_communicator}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{mpi\_communicator}{mpi\_communicator}}
+{\footnotesize\ttfamily M\+P\+I\+\_\+\+Comm mpi\+\_\+communicator}
+
+\mbox{\label{classmechano_chem_f_e_m_a7320777b83fedaf7a54cdb2fb0ef02e4}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!n\_mpi\_processes@{n\_mpi\_processes}}
+\index{n\_mpi\_processes@{n\_mpi\_processes}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{n\_mpi\_processes}{n\_mpi\_processes}}
+{\footnotesize\ttfamily const unsigned int n\+\_\+mpi\+\_\+processes}
+
+\mbox{\label{classmechano_chem_f_e_m_a5b4ed019aaae8f2992f9418a93cd1dbb}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!off\_output\_index@{off\_output\_index}}
+\index{off\_output\_index@{off\_output\_index}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{off\_output\_index}{off\_output\_index}}
+{\footnotesize\ttfamily int off\+\_\+output\+\_\+index}
+
+\mbox{\label{classmechano_chem_f_e_m_a95f0e6f488a1faae487cab4198842ebe}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!output\_directory@{output\_directory}}
+\index{output\_directory@{output\_directory}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{output\_directory}{output\_directory}}
+{\footnotesize\ttfamily std\+::string output\+\_\+directory}
+
+\mbox{\label{classmechano_chem_f_e_m_ae9ff200523ba41f15a09a1d39af96649}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!params\_mechanoChemFEM@{params\_mechanoChemFEM}}
+\index{params\_mechanoChemFEM@{params\_mechanoChemFEM}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{params\_mechanoChemFEM}{params\_mechanoChemFEM}}
+{\footnotesize\ttfamily Parameter\+Handler$\ast$ params\+\_\+mechano\+Chem\+F\+EM}
+
+\mbox{\label{classmechano_chem_f_e_m_a914f651bc9ca2e223b243695dd37ba53}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!pcout@{pcout}}
+\index{pcout@{pcout}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{pcout}{pcout}}
+{\footnotesize\ttfamily Conditional\+O\+Stream pcout}
+
+\mbox{\label{classmechano_chem_f_e_m_a4933860ad833b7b9bd2b8effee5c36d6}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!primary\_variables@{primary\_variables}}
+\index{primary\_variables@{primary\_variables}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{primary\_variables}{primary\_variables}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::vector$<$std\+::string$>$ $>$ primary\+\_\+variables}
+
+\mbox{\label{classmechano_chem_f_e_m_a20e37946082ad677ffab164a6dead8b3}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!primary\_variables\_dof@{primary\_variables\_dof}}
+\index{primary\_variables\_dof@{primary\_variables\_dof}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{primary\_variables\_dof}{primary\_variables\_dof}}
+{\footnotesize\ttfamily std\+::vector$<$unsigned int $>$ primary\+\_\+variables\+\_\+dof}
+
+\mbox{\label{classmechano_chem_f_e_m_a748ffdb78a6294cd525fe5979bb30649}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!q\_collection@{q\_collection}}
+\index{q\_collection@{q\_collection}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{q\_collection}{q\_collection}}
+{\footnotesize\ttfamily hp\+::\+Q\+Collection$<$dim$>$ q\+\_\+collection}
+
+\mbox{\label{classmechano_chem_f_e_m_adeaa7307c79088ccde0e35feb27eb0b0}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!ResidualEq@{ResidualEq}}
+\index{ResidualEq@{ResidualEq}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{ResidualEq}{ResidualEq}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_residual}{Residual}}$<$Sacado\+::\+Fad\+::\+D\+Fad$<$double$>$,dim$>$ Residual\+Eq}
+
+\mbox{\label{classmechano_chem_f_e_m_a34ea26077a33f792a9468a4d0ac2feaf}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!resuming\_from\_snapshot@{resuming\_from\_snapshot}}
+\index{resuming\_from\_snapshot@{resuming\_from\_snapshot}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{resuming\_from\_snapshot}{resuming\_from\_snapshot}}
+{\footnotesize\ttfamily bool resuming\+\_\+from\+\_\+snapshot}
+
+\mbox{\label{classmechano_chem_f_e_m_a883c18cdb18f3c36a226a7cf83e6bae0}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!save\_output@{save\_output}}
+\index{save\_output@{save\_output}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{save\_output}{save\_output}}
+{\footnotesize\ttfamily bool save\+\_\+output}
+
+\mbox{\label{classmechano_chem_f_e_m_ade455df689de2bc3fb79e1f468fd5404}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!save\_snapshot@{save\_snapshot}}
+\index{save\_snapshot@{save\_snapshot}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{save\_snapshot}{save\_snapshot}}
+{\footnotesize\ttfamily bool save\+\_\+snapshot}
+
+\mbox{\label{classmechano_chem_f_e_m_a5413329bd1d73152f051cc8d11134f60}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!skip\_output@{skip\_output}}
+\index{skip\_output@{skip\_output}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{skip\_output}{skip\_output}}
+{\footnotesize\ttfamily int skip\+\_\+output}
+
+\mbox{\label{classmechano_chem_f_e_m_a3ce0cf43eef10e4757e8a225e9b98e96}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!snapfile@{snapfile}}
+\index{snapfile@{snapfile}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{snapfile}{snapfile}}
+{\footnotesize\ttfamily std\+::string snapfile}
+
+\mbox{\label{classmechano_chem_f_e_m_af7ed49a5ea9a6407acb26c5a729d4bd0}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!snapshot\_directory@{snapshot\_directory}}
+\index{snapshot\_directory@{snapshot\_directory}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{snapshot\_directory}{snapshot\_directory}}
+{\footnotesize\ttfamily std\+::string snapshot\+\_\+directory}
+
+\mbox{\label{classmechano_chem_f_e_m_ae539da5c193ce7d8d07f654067f111ca}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!solution@{solution}}
+\index{solution@{solution}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{solution}{solution}}
+{\footnotesize\ttfamily P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector solution}
+
+\mbox{\label{classmechano_chem_f_e_m_ab5b94542feace0c45c2c69696ce9a266}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!solution\_prev@{solution\_prev}}
+\index{solution\_prev@{solution\_prev}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{solution\_prev}{solution\_prev}}
+{\footnotesize\ttfamily P\+E\+T\+Sc\+Wrappers\+::\+M\+P\+I\+::\+Vector solution\+\_\+prev}
+
+\mbox{\label{classmechano_chem_f_e_m_a6c34addfd3b89faf0a7b4e3fe1236fb0}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!this\_mpi\_process@{this\_mpi\_process}}
+\index{this\_mpi\_process@{this\_mpi\_process}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{this\_mpi\_process}{this\_mpi\_process}}
+{\footnotesize\ttfamily const unsigned int this\+\_\+mpi\+\_\+process}
+
+\mbox{\label{classmechano_chem_f_e_m_abc276e47b85df9dd59f248e663b3b971}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!total\_time@{total\_time}}
+\index{total\_time@{total\_time}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{total\_time}{total\_time}}
+{\footnotesize\ttfamily double total\+\_\+time}
+
+\mbox{\label{classmechano_chem_f_e_m_a7e2363a91f6f1626f463f3a06108c03b}} 
+\index{mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}!volume\_quadrature@{volume\_quadrature}}
+\index{volume\_quadrature@{volume\_quadrature}!mechanoChemFEM$<$ dim $>$@{mechanoChemFEM$<$ dim $>$}}
+\subsubsection{\texorpdfstring{volume\_quadrature}{volume\_quadrature}}
+{\footnotesize\ttfamily const Q\+Gauss$<$dim$>$$\ast$ volume\+\_\+quadrature}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{mechano_chem_f_e_m_8h}{mechano\+Chem\+F\+E\+M.\+h}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{apply__boundary__condition_8cc}{apply\+\_\+boundary\+\_\+condition.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{apply__initial__condition_8cc}{apply\+\_\+initial\+\_\+condition.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{init_bound_val_probs_2declare__parameters_8cc}{declare\+\_\+parameters.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{get__solution_8cc}{get\+\_\+solution.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{make__grid_8cc}{make\+\_\+grid.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{mark__boundary_8cc}{mark\+\_\+boundary.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{mechano_chem_f_e_m_8cc}{mechano\+Chem\+F\+E\+M.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{output__results_8cc}{output\+\_\+results.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{pre__run_8cc}{pre\+\_\+run.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{run_8cc}{run.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{setup__linear__system_8cc}{setup\+\_\+linear\+\_\+system.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{solve__ibvp_8cc}{solve\+\_\+ibvp.\+cc}}\item 
+src/init\+Bound\+Val\+Probs/\mbox{\hyperlink{update_linear_system_8cc}{update\+Linear\+System.\+cc}}\end{DoxyCompactItemize}

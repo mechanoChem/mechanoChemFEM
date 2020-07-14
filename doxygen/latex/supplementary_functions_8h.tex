@@ -1,91 +1,77 @@
-\section{include/supplementary/supplementary\-Functions.h File Reference}
-\label{supplementary_functions_8h}\index{include/supplementary/supplementary\-Functions.\-h@{include/supplementary/supplementary\-Functions.\-h}}
-{\ttfamily \#include $<$deal.\-I\-I/lac/block\-\_\-vector.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/lac/full\-\_\-matrix.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/lac/block\-\_\-sparse\-\_\-matrix.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/lac/sparse\-\_\-direct.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/lac/precondition.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/lac/solver\-\_\-cg.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/lac/solver\-\_\-bicgstab.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/lac/solver\-\_\-gmres.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/lac/constraint\-\_\-matrix.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/grid/grid\-\_\-out.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/numerics/data\-\_\-out.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/numerics/vector\-\_\-tools.\-h$>$}\\*
-{\ttfamily \#include $<$deal.\-I\-I/numerics/matrix\-\_\-tools.\-h$>$}\\*
-{\ttfamily \#include $<$iostream$>$}\\*
-{\ttfamily \#include $<$string$>$}\\*
+\section{include/supplementary/supplementary\+Functions.h File Reference}
+\label{supplementary_functions_8h}\index{include/supplementary/supplementaryFunctions.h@{include/supplementary/supplementaryFunctions.h}}
+{\ttfamily \#include $<$deal.\+I\+I/lac/block\+\_\+vector.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/full\+\_\+matrix.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/block\+\_\+sparse\+\_\+matrix.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/sparse\+\_\+direct.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/precondition.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/solver\+\_\+cg.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/solver\+\_\+bicgstab.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/solver\+\_\+gmres.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/lac/constraint\+\_\+matrix.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/grid/grid\+\_\+out.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/numerics/data\+\_\+out.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/numerics/vector\+\_\+tools.\+h$>$}\newline
+{\ttfamily \#include $<$deal.\+I\+I/numerics/matrix\+\_\+tools.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
 \subsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\footnotesize template$<$class T , int dim$>$ }\\T \hyperlink{supplementary_functions_8h_a95bed1847eed9d7f9da90da4aa8fe7c1}{determinant\-Of\-Minor} (unsigned int the\-Row\-Height\-Y, unsigned int the\-Column\-Width\-X, Table$<$ 2, T $>$ \&matrix)
+{\footnotesize template$<$class T , int dim$>$ }\\T \mbox{\hyperlink{supplementary_functions_8h_a95bed1847eed9d7f9da90da4aa8fe7c1}{determinant\+Of\+Minor}} (unsigned int the\+Row\+HeightY, unsigned int the\+Column\+WidthX, Table$<$ 2, T $>$ \&matrix)
 \item 
-{\footnotesize template$<$class T , int dim$>$ }\\void \hyperlink{supplementary_functions_8h_ade5a79ed03042894cbe451fc7e1ccdf1}{get\-Inverse} (Table$<$ 2, T $>$ \&matrix, Table$<$ 2, T $>$ \&inv\-Matrix, T \&det)
+{\footnotesize template$<$class T , int dim$>$ }\\void \mbox{\hyperlink{supplementary_functions_8h_ade5a79ed03042894cbe451fc7e1ccdf1}{get\+Inverse}} (Table$<$ 2, T $>$ \&matrix, Table$<$ 2, T $>$ \&inv\+Matrix, T \&det)
 \item 
-{\footnotesize template$<$class T , int dim$>$ }\\Table$<$ 1, T $>$ \hyperlink{supplementary_functions_8h_ab98a2b7c384c7057fc9fca4a37350c63}{table\-\_\-scaling} (Table$<$ 1, T $>$ matrix, double a)
+{\footnotesize template$<$class T , int dim$>$ }\\Table$<$ 1, T $>$ \mbox{\hyperlink{supplementary_functions_8h_ab98a2b7c384c7057fc9fca4a37350c63}{table\+\_\+scaling}} (Table$<$ 1, T $>$ matrix, double a)
 \item 
-{\footnotesize template$<$class T , int dim$>$ }\\Table$<$ 2, T $>$ \hyperlink{supplementary_functions_8h_a6426196fb732830b7cae464a93ee2b15}{table\-\_\-scaling} (Table$<$ 2, T $>$ matrix, double a)
+{\footnotesize template$<$class T , int dim$>$ }\\Table$<$ 2, T $>$ \mbox{\hyperlink{supplementary_functions_8h_a6426196fb732830b7cae464a93ee2b15}{table\+\_\+scaling}} (Table$<$ 2, T $>$ matrix, double a)
 \item 
-{\footnotesize template$<$class T , int dim$>$ }\\Table$<$ 1, T $>$ \hyperlink{supplementary_functions_8h_a5cd1e11e92aa6488e65b7ee7ef8acfb4}{table\-\_\-scaling} (Table$<$ 1, T $>$ matrix, T a)
+{\footnotesize template$<$class T , int dim$>$ }\\Table$<$ 1, T $>$ \mbox{\hyperlink{supplementary_functions_8h_a5cd1e11e92aa6488e65b7ee7ef8acfb4}{table\+\_\+scaling}} (Table$<$ 1, T $>$ matrix, T a)
 \item 
-{\footnotesize template$<$class T , int dim$>$ }\\Table$<$ 2, T $>$ \hyperlink{supplementary_functions_8h_a33371416e7cbc73fd7af9a9df5c7c2f7}{table\-\_\-scaling} (Table$<$ 2, T $>$ matrix, T a)
+{\footnotesize template$<$class T , int dim$>$ }\\Table$<$ 2, T $>$ \mbox{\hyperlink{supplementary_functions_8h_a33371416e7cbc73fd7af9a9df5c7c2f7}{table\+\_\+scaling}} (Table$<$ 2, T $>$ matrix, T a)
 \item 
-{\footnotesize template$<$int dim$>$ }\\void \hyperlink{group___supplementary_ga2971a293263dddc17f3df81add2ffbbe}{print\-\_\-mesh\-\_\-info} (const Triangulation$<$ dim $>$ \&tria)
+{\footnotesize template$<$int dim$>$ }\\void \mbox{\hyperlink{group___supplementary_ga2971a293263dddc17f3df81add2ffbbe}{print\+\_\+mesh\+\_\+info}} (const Triangulation$<$ dim $>$ \&tria)
 \item 
-{\footnotesize template$<$int dim$>$ }\\void \hyperlink{group___supplementary_ga0272b346b175b931e89b017fd93b5b80}{output\-\_\-mesh} (const Triangulation$<$ dim $>$ \&tria, std\-::string path)
+{\footnotesize template$<$int dim$>$ }\\void \mbox{\hyperlink{group___supplementary_ga0272b346b175b931e89b017fd93b5b80}{output\+\_\+mesh}} (const Triangulation$<$ dim $>$ \&tria, std\+::string path)
 \item 
-void \hyperlink{group___supplementary_gae0eb2d2afc3e33a9bb3b409b0171c470}{move\-\_\-file} (const std\-::string \&old\-\_\-name, const std\-::string \&new\-\_\-name)
+void \mbox{\hyperlink{group___supplementary_gae0eb2d2afc3e33a9bb3b409b0171c470}{move\+\_\+file}} (const std\+::string \&old\+\_\+name, const std\+::string \&new\+\_\+name)
 \end{DoxyCompactItemize}
 
 
 \subsection{Function Documentation}
-\index{supplementary\-Functions.\-h@{supplementary\-Functions.\-h}!determinant\-Of\-Minor@{determinant\-Of\-Minor}}
-\index{determinant\-Of\-Minor@{determinant\-Of\-Minor}!supplementaryFunctions.h@{supplementary\-Functions.\-h}}
-\subsubsection[{determinant\-Of\-Minor}]{\setlength{\rightskip}{0pt plus 5cm}T determinant\-Of\-Minor (
-\begin{DoxyParamCaption}
-\item[{unsigned int}]{the\-Row\-Height\-Y, }
-\item[{unsigned int}]{the\-Column\-Width\-X, }
-\item[{Table$<$ 2, T $>$ \&}]{matrix}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{supplementary_functions_8h_a95bed1847eed9d7f9da90da4aa8fe7c1}
-\index{supplementary\-Functions.\-h@{supplementary\-Functions.\-h}!get\-Inverse@{get\-Inverse}}
-\index{get\-Inverse@{get\-Inverse}!supplementaryFunctions.h@{supplementary\-Functions.\-h}}
-\subsubsection[{get\-Inverse}]{\setlength{\rightskip}{0pt plus 5cm}void get\-Inverse (
-\begin{DoxyParamCaption}
-\item[{Table$<$ 2, T $>$ \&}]{matrix, }
-\item[{Table$<$ 2, T $>$ \&}]{inv\-Matrix, }
-\item[{T \&}]{det}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{supplementary_functions_8h_ade5a79ed03042894cbe451fc7e1ccdf1}
-\index{supplementary\-Functions.\-h@{supplementary\-Functions.\-h}!table\-\_\-scaling@{table\-\_\-scaling}}
-\index{table\-\_\-scaling@{table\-\_\-scaling}!supplementaryFunctions.h@{supplementary\-Functions.\-h}}
-\subsubsection[{table\-\_\-scaling}]{\setlength{\rightskip}{0pt plus 5cm}Table$<$1, T$>$ table\-\_\-scaling (
-\begin{DoxyParamCaption}
-\item[{Table$<$ 1, T $>$}]{matrix, }
-\item[{double}]{a}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{supplementary_functions_8h_ab98a2b7c384c7057fc9fca4a37350c63}
-\index{supplementary\-Functions.\-h@{supplementary\-Functions.\-h}!table\-\_\-scaling@{table\-\_\-scaling}}
-\index{table\-\_\-scaling@{table\-\_\-scaling}!supplementaryFunctions.h@{supplementary\-Functions.\-h}}
-\subsubsection[{table\-\_\-scaling}]{\setlength{\rightskip}{0pt plus 5cm}Table$<$2, T$>$ table\-\_\-scaling (
-\begin{DoxyParamCaption}
-\item[{Table$<$ 2, T $>$}]{matrix, }
-\item[{double}]{a}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{supplementary_functions_8h_a6426196fb732830b7cae464a93ee2b15}
-\index{supplementary\-Functions.\-h@{supplementary\-Functions.\-h}!table\-\_\-scaling@{table\-\_\-scaling}}
-\index{table\-\_\-scaling@{table\-\_\-scaling}!supplementaryFunctions.h@{supplementary\-Functions.\-h}}
-\subsubsection[{table\-\_\-scaling}]{\setlength{\rightskip}{0pt plus 5cm}Table$<$1, T$>$ table\-\_\-scaling (
-\begin{DoxyParamCaption}
-\item[{Table$<$ 1, T $>$}]{matrix, }
-\item[{T}]{a}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{supplementary_functions_8h_a5cd1e11e92aa6488e65b7ee7ef8acfb4}
-\index{supplementary\-Functions.\-h@{supplementary\-Functions.\-h}!table\-\_\-scaling@{table\-\_\-scaling}}
-\index{table\-\_\-scaling@{table\-\_\-scaling}!supplementaryFunctions.h@{supplementary\-Functions.\-h}}
-\subsubsection[{table\-\_\-scaling}]{\setlength{\rightskip}{0pt plus 5cm}Table$<$2, T$>$ table\-\_\-scaling (
-\begin{DoxyParamCaption}
-\item[{Table$<$ 2, T $>$}]{matrix, }
-\item[{T}]{a}
-\end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [inline]}}\label{supplementary_functions_8h_a33371416e7cbc73fd7af9a9df5c7c2f7}
+\mbox{\label{supplementary_functions_8h_a95bed1847eed9d7f9da90da4aa8fe7c1}} 
+\index{supplementaryFunctions.h@{supplementaryFunctions.h}!determinantOfMinor@{determinantOfMinor}}
+\index{determinantOfMinor@{determinantOfMinor}!supplementaryFunctions.h@{supplementaryFunctions.h}}
+\subsubsection{\texorpdfstring{determinantOfMinor()}{determinantOfMinor()}}
+{\footnotesize\ttfamily T determinant\+Of\+Minor (\begin{DoxyParamCaption}\item[{unsigned int}]{the\+Row\+HeightY,  }\item[{unsigned int}]{the\+Column\+WidthX,  }\item[{Table$<$ 2, T $>$ \&}]{matrix }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{supplementary_functions_8h_ade5a79ed03042894cbe451fc7e1ccdf1}} 
+\index{supplementaryFunctions.h@{supplementaryFunctions.h}!getInverse@{getInverse}}
+\index{getInverse@{getInverse}!supplementaryFunctions.h@{supplementaryFunctions.h}}
+\subsubsection{\texorpdfstring{getInverse()}{getInverse()}}
+{\footnotesize\ttfamily void get\+Inverse (\begin{DoxyParamCaption}\item[{Table$<$ 2, T $>$ \&}]{matrix,  }\item[{Table$<$ 2, T $>$ \&}]{inv\+Matrix,  }\item[{T \&}]{det }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{supplementary_functions_8h_ab98a2b7c384c7057fc9fca4a37350c63}} 
+\index{supplementaryFunctions.h@{supplementaryFunctions.h}!table\_scaling@{table\_scaling}}
+\index{table\_scaling@{table\_scaling}!supplementaryFunctions.h@{supplementaryFunctions.h}}
+\subsubsection{\texorpdfstring{table\_scaling()}{table\_scaling()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily Table$<$1, T$>$ table\+\_\+scaling (\begin{DoxyParamCaption}\item[{Table$<$ 1, T $>$}]{matrix,  }\item[{double}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{supplementary_functions_8h_a6426196fb732830b7cae464a93ee2b15}} 
+\index{supplementaryFunctions.h@{supplementaryFunctions.h}!table\_scaling@{table\_scaling}}
+\index{table\_scaling@{table\_scaling}!supplementaryFunctions.h@{supplementaryFunctions.h}}
+\subsubsection{\texorpdfstring{table\_scaling()}{table\_scaling()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily Table$<$2, T$>$ table\+\_\+scaling (\begin{DoxyParamCaption}\item[{Table$<$ 2, T $>$}]{matrix,  }\item[{double}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{supplementary_functions_8h_a5cd1e11e92aa6488e65b7ee7ef8acfb4}} 
+\index{supplementaryFunctions.h@{supplementaryFunctions.h}!table\_scaling@{table\_scaling}}
+\index{table\_scaling@{table\_scaling}!supplementaryFunctions.h@{supplementaryFunctions.h}}
+\subsubsection{\texorpdfstring{table\_scaling()}{table\_scaling()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily Table$<$1, T$>$ table\+\_\+scaling (\begin{DoxyParamCaption}\item[{Table$<$ 1, T $>$}]{matrix,  }\item[{T}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\label{supplementary_functions_8h_a33371416e7cbc73fd7af9a9df5c7c2f7}} 
+\index{supplementaryFunctions.h@{supplementaryFunctions.h}!table\_scaling@{table\_scaling}}
+\index{table\_scaling@{table\_scaling}!supplementaryFunctions.h@{supplementaryFunctions.h}}
+\subsubsection{\texorpdfstring{table\_scaling()}{table\_scaling()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily Table$<$2, T$>$ table\+\_\+scaling (\begin{DoxyParamCaption}\item[{Table$<$ 2, T $>$}]{matrix,  }\item[{T}]{a }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+

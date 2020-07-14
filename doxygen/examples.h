@@ -10,7 +10,6 @@ The code for all examples can be found at <a href="https://github.com/mechanoChe
  *@ref CahnHilliard  "Example 2" : Cahn-Hilliard equation with single species\n
  *@ref Allen_Cahn  "Example 3" : Allen-Cahn equation \n
 *@ref growth  "Example 4" : Coupled mechano-chemical system with multiple doamins\n
- * @ref brain_morph "Example 5" : Coupled mechano-chemical system with multiple growth  model\n
 
 *========================================================================================================================
 

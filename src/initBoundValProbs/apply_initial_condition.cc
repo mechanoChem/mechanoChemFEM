@@ -2,20 +2,20 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::apply_initial_condition()
+void mechanoChemFEM<dim>::apply_initial_condition()
 { 
 	pcout << "applying initial condition\n";
 	int totalDOF=this->totalDOF(primary_variables);	
-  VectorTools::interpolate(this->dof_handler, InitialConditions<dim>(totalDOF, *params), solution_prev); 
+  VectorTools::interpolate(this->dof_handler, InitialConditions<dim>(totalDOF, *params_mechanoChemFEM), solution_prev); 
 	
 	solution_prev.compress(VectorOperation::insert);
 	solution=solution_prev;
 }
 
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

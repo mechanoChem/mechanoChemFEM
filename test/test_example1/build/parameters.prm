@@ -1,0 +1,75 @@
+#parameters file
+
+subsection Problem
+set print_parameter = true
+
+set primary_variables_list= c1, component_is_scalar , c2, component_is_scalar
+set FE_support_list= 1,1
+set dt = 1
+set totalTime = 1
+set current_increment = 0
+set off_output_index=0
+set current_time = 0
+set resuming_from_snapshot = false
+
+#set mesh = /Users/wzhenlin/GitLab/researchCode/brainMorph/mesh/testMesh.msh
+#set mesh = /home/wzhenlin/workspace/brainMorph/mesh/STA21_hex.msh
+set output_directory = output/
+set snapshot_directory = snapshot/
+
+#FEM
+set volume_quadrature = 3 
+set face_quadrature = 2 
+
+end
+
+subsection Geometry
+set X_0 = 0
+set Y_0 = 0
+set Z_0 = 0
+set X_end = 10
+set Y_end = 10
+set Z_end = 2.0 #no need to 2D
+
+set element_div_x=5
+set element_div_y=5
+set element_div_z=5 #no need to 2D
+end
+
+subsection Concentration
+
+set D_1 = 0.1
+set D_2 = 4.0
+set R_10 = 0.1
+set R_11 = -1
+set R_13 = 1
+set R_20 = 0.9
+set R_21 = 0
+set R_23 = -1
+set jn=-0.01
+end
+						
+#
+# parameters reserved for deal.ii first level code:
+#nonLinear_method : classicNewton
+#solver_method (direct) : PETScsuperLU, PETScMUMPS
+#solver_method (iterative) : PETScGMRES PETScBoomerAMG
+#relative_norm_tolerance, absolute_norm_tolerance, max_iterations
+#
+subsection Nonlinear_solver
+		set nonLinear_method = classicNewton
+		set relative_norm_tolerance = 1.0e-12
+		set absolute_norm_tolerance = 1.0e-12
+		set max_iterations = 10
+end
+						
+subsection Linear_solver
+		set solver_method = PETScsuperLU
+		set system_matrix_symmetricFlag = false # default is false
+end
+
+
+
+
+		
+

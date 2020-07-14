@@ -5,7 +5,6 @@
 #include <deal.II/base/table.h>
 #include <deal.II/base/parameter_handler.h>
 #include <deal.II/lac/vector.h>
-
 #include "supplementary/dataStruct.h"
 #include "supplementary/supplementaryFunctions.h"
 #include "supplementary/functionEvaluations.h"
@@ -16,19 +15,13 @@ class Residual
 public:
   Residual ();
   ~Residual();
-	
-	dealii::ParameterHandler* params;
-	
+		
 	double currentTime, dt;
 	//unsigned int iteration;
 	//material properity
 	double lambda, mu, viscosity, density;	
 	std::string constitutiveModel;
 	
-	/**
-	*re-initialize parametersClass
-	*/
-	void reinit(dealii::ParameterHandler& _params);
 	
 	void setLameParametersByYoungsModulusPoissonRatio(double youngsModulus, double poissonRatio);
 	/**
@@ -160,13 +153,13 @@ public:
 	
 	
 	/**
-	*assemble constant equation in scalar varibable like u=v*t in 1D   
+	*assemble constant equation for scalar varibable value=0
 	*/
-	void residualForConstantEq(const FEValues<dim>& fe_values, unsigned int DOF, dealii::Table<1, T >& R, dealii::Table<1,T >& value);
+	void residualForEqualityEq(const FEValues<dim>& fe_values, unsigned int DOF, dealii::Table<1, T >& R, dealii::Table<1,T >& value);
 	/**
-	*assemble constant equation in vector variable like u=v*t in 3D
+	*assemble constant equation for vector variable 
 	*/
-	void residualForConstantEq(const FEValues<dim>& fe_values, unsigned int DOF, dealii::Table<1, T >& R, dealii::Table<2,T >& value);
+	void residualForEqualityEq(const FEValues<dim>& fe_values, unsigned int DOF, dealii::Table<1, T >& R, dealii::Table<2,T >& value);
 	
 	
 	/**

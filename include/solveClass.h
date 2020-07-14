@@ -27,37 +27,22 @@
 #include <deal.II/base/parameter_handler.h>
 
 #include "hpFEM.h"
-
+#include "mechanoChemPrimitive.h"
 
 template <int dim, class matrixType, class vectorType>
-class solveClass
+class solveClass : public mechanoChemPrimitive
 {
 public:
-	/**
-	*constructor without arguments
-	*/
-	solveClass();
+
 	/**
 	*constructor with abstract classhpFEM<dim>
 	*/
-	solveClass(hpFEM<dim>& _FEMbase);
-	/**
-	*constructor with abstract classhpFEM<dim> and parametersClass<dim>
-	*/
-  solveClass(hpFEM<dim>& _FEMbase, dealii::ParameterHandler& _params);
+	solveClass();
   ~solveClass();
-	
 	/**
-	*set parametersClass
-	*/
-	void reinitParams(dealii::ParameterHandler& _params);
-	
-	/**
-	*re-set abstract class hpFEM<dim>. Though it should be passed by constructor  
-	*/
-	void reinitMethod(hpFEM<dim>& _FEMbase);
-	
-	void declare_parameters();
+	*declare_parameters_solve
+	*/	
+	void declare_parameters_solveClass();
 	
 	/**
 	*set up size and partition of system_matrix and system_rhs
@@ -113,11 +98,11 @@ public:
 	*/
 	virtual void apply_dU_constrain(vectorType& dU);
 	
-	hpFEM<dim>* FEMbase;
-	dealii::ParameterHandler* params;
+	dealii::ParameterHandler* params_solve;
 	
   matrixType system_matrix;
   vectorType system_rhs;
+	ConstraintMatrix constraints_solver;
 	
 	MPI_Comm mpi_communicator;
 	

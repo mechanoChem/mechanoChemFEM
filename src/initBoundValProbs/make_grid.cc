@@ -2,24 +2,25 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::make_grid()
+void mechanoChemFEM<dim>::make_grid()
 {	
-	params->enter_subsection("Geometry");
-	double X_0=params->get_double("X_0");
-	double Y_0=params->get_double("Y_0");
-	double Z_0=params->get_double("Z_0");
 	
-	double X_end=params->get_double("X_end");
-	double Y_end=params->get_double("Y_end");
-	double Z_end=params->get_double("Z_end");
+	params_mechanoChemFEM->enter_subsection("Geometry");
+	double X_0=params_mechanoChemFEM->get_double("X_0");
+	double Y_0=params_mechanoChemFEM->get_double("Y_0");
+	double Z_0=params_mechanoChemFEM->get_double("Z_0");
 	
-	int element_div_x=params->get_double("element_div_x");
-	int element_div_y=params->get_double("element_div_y");
-	int element_div_z=params->get_double("element_div_z");
-	params->leave_subsection();	
+	double X_end=params_mechanoChemFEM->get_double("X_end");
+	double Y_end=params_mechanoChemFEM->get_double("Y_end");
+	double Z_end=params_mechanoChemFEM->get_double("Z_end");
+	
+	int element_div_x=params_mechanoChemFEM->get_double("element_div_x");
+	int element_div_y=params_mechanoChemFEM->get_double("element_div_y");
+	int element_div_z=params_mechanoChemFEM->get_double("element_div_z");
+	params_mechanoChemFEM->leave_subsection();	
 	
 	bool colorize = false;
   std::vector< std::vector< double > > step_sizes;
@@ -34,6 +35,6 @@ void initBoundValProbs<dim>::make_grid()
 }
 
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

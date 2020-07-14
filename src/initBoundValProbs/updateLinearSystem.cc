@@ -2,12 +2,13 @@
 zhenlin wang 2019
 */
 
-#include"../../include/initBoundValProbs.h"
+#include"../../include/mechanoChemFEM.h"
 
 template <int dim>
-void initBoundValProbs<dim>::updateLinearSystem()
+void mechanoChemFEM<dim>::updateLinearSystem()
 {
 	this->reinitLinearSystem();
+	ini_updateLinearSystem();
 	
   hp::FEValues<dim> hp_fe_values (fe_collection, q_collection, update_values | update_quadrature_points  | update_JxW_values | update_gradients);	
   FullMatrix<double> local_matrix;
@@ -62,6 +63,6 @@ void initBoundValProbs<dim>::updateLinearSystem()
 	this->LinearSystemCompressAdd();
 }
 
-template class initBoundValProbs<1>;
-template class initBoundValProbs<2>;
-template class initBoundValProbs<3>;
+template class mechanoChemFEM<1>;
+template class mechanoChemFEM<2>;
+template class mechanoChemFEM<3>;

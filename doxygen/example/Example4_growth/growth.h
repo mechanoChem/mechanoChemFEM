@@ -8,7 +8,7 @@
 * where \f$\boldsymbol{j}_1=-M\nabla C\f$ is the flux.
 The boundary condition is
 \f[
-C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma_2
+C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=jn \text{ on }\Gamma_2
 \f]
  * Besides chemistry, we also solve elasticity problem at finite strain:
  * \f[

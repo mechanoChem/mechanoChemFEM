@@ -70,8 +70,8 @@ set(CMAKE_STATIC_LIBRARY_PREFIX "")
 ##---------------------------------------------------------------------------------------------------------------------
 #install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.6/lib)
 #export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
-install(TARGETS mechanoChemFEM DESTINATION $ENV{mechanoChemFEM_DIR}/v0.6/lib)
-FILE(COPY ../include DESTINATION $ENV{mechanoChemFEM_DIR}/v0.6/)
+install(TARGETS mechanoChemFEM DESTINATION $ENV{mechanoChemFEM_DIR}/v0.61/lib)
+FILE(COPY ../include DESTINATION $ENV{mechanoChemFEM_DIR}/v0.61/)
 
 
 

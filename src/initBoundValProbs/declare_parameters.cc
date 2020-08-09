@@ -49,7 +49,7 @@ void mechanoChemFEM<dim>::declare_parameters_mechanoChemFEM()
 template <int dim>
 void mechanoChemFEM<dim>::load_parameters(std::string parametersfile)
 {	
-	params_mechanoChemFEM->read_input (parametersfile);
+	params_mechanoChemFEM->parse_input (parametersfile);
 	params_mechanoChemFEM->enter_subsection("Problem");
 	bool printParameter=params_mechanoChemFEM->get_bool("print_parameter");
 	output_directory=params_mechanoChemFEM->get("output_directory");

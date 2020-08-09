@@ -15,6 +15,7 @@
 #include <deal.II/fe/fe_nothing.h>
 #include <deal.II/fe/fe_system.h>
 #include <deal.II/fe/fe_values.h>
+#include <deal.II/fe/fe_q.h>
 
 #include <deal.II/hp/dof_handler.h>
 #include <deal.II/hp/q_collection.h>

@@ -147,7 +147,7 @@
 \form#146:\[ r=-M\frac{\partial g}{\partial C}=-2M\omega(C-C_\alpha)(C-C_\beta)(2C-C_\alpha-C_\beta) \]
 \form#147:\[ \frac{\partial C}{\partial t}+\nabla\cdot\boldsymbol{j}=0 \]
 \form#148:$\boldsymbol{j}_1=-M\nabla C$
-\form#149:\[ C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=0 \text{ on }\Gamma_2 \]
+\form#149:\[ C=1 \text{ on }\Gamma_1; \quad \nabla \mu\cdot\boldsymbol{n}=jn \text{ on }\Gamma_2 \]
 \form#150:\[ \nabla\cdot\boldsymbol{T} = \boldsymbol{0} \]
 \form#151:\[ \boldsymbol{T}= \frac{1}{\det{\boldsymbol{F}^{\text{e}}}}\frac{\partial W}{\partial \boldsymbol{F}^{\text{e}}}\boldsymbol{F}^{\text{e}} \]
 \form#152:\[ \boldsymbol{F}=\boldsymbol{F}^{\text{e}}\boldsymbol{F}^{\text{g}} \]

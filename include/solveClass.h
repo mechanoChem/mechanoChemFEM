@@ -77,12 +77,14 @@ public:
 	/**
 	*nonlinear Solve
 	*/
-	bool nonlinearSolve(vectorType& U, bool converge_flag=false);
+	//bool nonlinearSolve(vectorType& U, bool converge_flag=false);
+	int nonlinearSolve(vectorType& U, bool converge_flag=false);
 	
 	/**
 	*nonlinear Solve with access of incremental solution dU
 	*/
-  bool nonlinearSolve(vectorType& U,vectorType& dU, bool converge_flag=false);
+	//bool nonlinearSolve(vectorType& U,vectorType& dU, bool converge_flag=false);
+	int nonlinearSolve(vectorType& U,vectorType& dU, bool converge_flag=false);
 	
 	/**
 	*solve Ax=b with dealii matrix and vector type by default_direct solver

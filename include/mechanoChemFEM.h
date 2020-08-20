@@ -122,10 +122,20 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		*generic function calls before running the simulations
 		*/
 		virtual void pre_run();
+
+		/**
+		 *empty function called after pre-run for user
+		 */
+		virtual void setup_model(){};
+		
 		/**
 		*generic function calls to run the simulations
 		*/
-    virtual void run ();	
+    virtual void run ();		
+    /**
+     *empty function called after each time step for user
+     */
+    virtual void update_post_TS (){};	
 		/**
 		*solve
 		*/

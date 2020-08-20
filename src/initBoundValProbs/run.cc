@@ -41,6 +41,9 @@ void mechanoChemFEM<dim>::run()
 	  t_solve = clock() - t_solve;
 		PetscPrintf(this->mpi_communicator,"It took me %f seconds for this solve.\n ",((float)t_solve)/CLOCKS_PER_SEC);
 		PetscPrintf(this->mpi_communicator,"\n\n");
+
+		//call post TS update function (e.g. for adaptive mesh refinement)
+		update_post_TS ();
 		
 		output_results();
 	}

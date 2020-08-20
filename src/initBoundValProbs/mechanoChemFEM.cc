@@ -14,6 +14,7 @@ mechanoChemFEM<dim>::mechanoChemFEM(std::vector<std::vector<std::string> > _prim
 	pcout<<"mechanoChemFEM initiated"<<std::endl;
 	
 	pre_run();
+	setup_model();
 		
 	make_grid();
 	refine_grid();

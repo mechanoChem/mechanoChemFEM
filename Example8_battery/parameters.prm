@@ -1,19 +1,25 @@
 #parameters file
+#	Lithium Displacement
 
 subsection Problem
 set print_parameter = true
-set primary_variables_list= c1, component_is_scalar , u, component_is_vector
-set FE_support_list= 1,0,  1,1
+
+#set primary_variables_list=Lithium, component_is_scalar
+#set FE_support_list= 1
+
+#set primary_variables_list=Displacement, component_is_vector
+#set FE_support_list= 1
+
+set primary_variables_list=Lithium, component_is_scalar, Displacement, component_is_vector
+set FE_support_list= 1,1
 
 set dt = 1
-set totalTime = 10
+set totalTime = 2
 set current_increment = 0
 set off_output_index=0
 set current_time = 0
 set resuming_from_snapshot = false
 
-#set mesh = /Users/wzhenlin/GitLab/researchCode/brainMorph/mesh/testMesh.msh
-#set mesh = /home/wzhenlin/workspace/brainMorph/mesh/STA21_hex.msh
 set output_directory = output/
 set snapshot_directory = snapshot/
 set save_snapshot = true
@@ -32,17 +38,20 @@ set X_end = 5
 set Y_end = 5
 set Z_end = 2 #no need to 2D
 
-set element_div_x=5
-set element_div_y=5
-set element_div_z=8 #no need to 2D
+set element_div_x=4
+set element_div_y=4
+set element_div_z=4 #no need to 2D
 end
 
-subsection parameters
-set c_ini =0.5
+subsection parameters_Lithium
+set lithium_diffusivity=1 
+set lithium_ini=1
+end
+
+subsection parameters_Mechanics
 set youngsModulus =  5.0e3
 set poissonRatio =  0.45
-set M=1 
-set out_flux=-0.1
+set lithium_0 = 1
 end
 						
 #

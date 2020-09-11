@@ -20,26 +20,20 @@ IF(NOT ${deal.II_FOUND})
     )
 ENDIF()
 
-
-#path on flux
-#SET(dealiiBase_inc_DIR "/nfs/turbo/compphys/dealiiBase/include")
-#SET(dealiiBase_lib "/nfs/turbo/compphys/dealiiBase/lib/dealMultiPhysics.a")
-
-#SET(src_DIR "/home/wzhenlin/workspace/dataDrivenIdentifyGovenEq/FEMcode/src")
-#SET(inc_DIR "/home/wzhenlin/workspace/dataDrivenIdentifyGovenEq/FEMcode/include")
-
 #path on my mac
+#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
+
 SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.61/include)
 SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.61/lib/mechanoChemFEM.a)
 
 
-FILE (GLOB TARGET_SRC "../*.cc")
+FILE (GLOB TARGET_SRC "../*.cc" "../battery_package/src/*.cc")
 
 DEAL_II_INITIALIZE_CACHED_VARIABLES()
 PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
 
-#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
+
 INCLUDE_DIRECTORIES(${mechanoChemFEM_INC} )
 TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB})
 

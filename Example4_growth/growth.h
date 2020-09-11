@@ -13,13 +13,12 @@ class growth: public mechanoChemFEM<dim>
 		void apply_boundary_condition();
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		ParameterHandler* params;		
-		
 		ConstraintMatrix* constraints;
 };
 template <int dim>
 growth<dim>::growth()
 {
-	//pass the pointer to "constraints" in mechanoChemFEM
+	//pass the pointer to "constraints" in that defined in mechanoChemFEM
 	constraints=this->constraints_mechanoChemFEM;
 	//This let you use one params to get all parameters pre-defined in the mechanoChemFEM
 	params=this->params_mechanoChemFEM;
@@ -28,6 +27,7 @@ growth<dim>::growth()
 	params->declare_entry("poissonRatio","0",Patterns::Double() );
 	params->declare_entry("c_ini","0",Patterns::Double() );
 	params->declare_entry("M","0",Patterns::Double() );
+	params->declare_entry("out_flux","0",Patterns::Double() );
 	params->leave_subsection();	
 	
 	//Declear the parameters before load it
@@ -46,9 +46,11 @@ void growth<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_i
 	params->enter_subsection("parameters");
 	double M=params->get_double("M");
 	double c_ini=params->get_double("c_ini");
+	double jn=params->get_double("out_flux");
 	
 	double youngsModulus=params->get_double("youngsModulus");
 	double poissonRatio=params->get_double("poissonRatio");
+	
 	params->leave_subsection();
 	
 	unsigned int n_q_points= fe_values.n_quadrature_points;
@@ -85,6 +87,15 @@ void growth<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_i
   this->ResidualEq.setLameParametersByYoungsModulusPoissonRatio(youngsModulus, poissonRatio);
 	this->ResidualEq.evaluateNeoHookeanStress(P, Fe);// NeoHookean model, Saint_Venant_Kirchhoff is also available 
   this->ResidualEq.residualForMechanics(fe_values, u_dof, R, P);	
+	
+	//BC
+	for (unsigned int faceID=0; faceID<2*dim; faceID++){
+		if(cell->face(faceID)->boundary_id()==dim*2 ){
+		  FEFaceValues<dim> fe_face_values(fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
+			fe_face_values.reinit(cell,faceID);
+			this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, c_dof, R, jn);
+		}
+	}
 	
 }
 
@@ -143,7 +154,7 @@ void growth<dim>::apply_boundary_condition()
 template <int dim>
 void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>   &values) const{
 	Assert (values.size() == totalDOF, ExcDimensionMismatch (values.size(), totalDOF));
-	if(p[2]==0) values(0)= 1;
+	if(p[2]==0) values(0)= 0.5;
   else values(0)= 0.5;
 	values(1)=0;
 }

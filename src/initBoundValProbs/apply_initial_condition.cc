@@ -9,7 +9,7 @@ void mechanoChemFEM<dim>::apply_initial_condition()
 { 
 	pcout << "applying initial condition\n";
 	int totalDOF=this->totalDOF(primary_variables);	
-  VectorTools::interpolate(this->dof_handler, InitialConditions<dim>(totalDOF, *params_mechanoChemFEM), solution_prev); 
+  VectorTools::interpolate(this->dof_handler, InitialConditions<dim>(totalDOF, primary_variables, primary_variables_dof, *params_mechanoChemFEM), solution_prev); 
 	
 	solution_prev.compress(VectorOperation::insert);
 	solution=solution_prev;

@@ -16,8 +16,8 @@ void mechanoChemFEM<dim>::updateLinearSystem()
   std::vector<types::global_dof_index> local_dof_indices;
 	
   //loop over cells
-  PETScWrappers::VectorBase localized_U(solution);
-  PETScWrappers::VectorBase localized_Un(solution_prev);
+  dealii::Vector<double> localized_U(solution);
+  dealii::Vector<double> localized_Un(solution_prev);
 	
 	ResidualEq.dt=current_dt;
 	

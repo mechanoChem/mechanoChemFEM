@@ -3,7 +3,8 @@
  */
 #include"../../include/supplementary/InitialConditions.h"
 template <int dim>
-InitialConditions<dim>::InitialConditions (int _totalDOF, ParameterHandler& _params): Function<dim>(_totalDOF), totalDOF(_totalDOF),params(&_params) {}
+InitialConditions<dim>::InitialConditions (int _totalDOF, std::vector<std::vector<std::string> >& _primary_variables,std::vector<unsigned int >& _primary_variables_dof, ParameterHandler& _params)
+	: Function<dim>(_totalDOF), primary_variables(_primary_variables), primary_variables_dof(_primary_variables_dof), totalDOF(_totalDOF),params(&_params) {}
 
 template <int dim>
 void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>   &values) const{

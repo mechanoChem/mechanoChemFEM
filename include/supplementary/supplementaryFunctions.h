@@ -1,7 +1,6 @@
 /*
  * supplementaryFunctions.h
  *
- *  Created on: May 11, 2011
  */
 
 #ifndef SUPPLEMENTARYFUNCTIONS_H_
@@ -63,45 +62,147 @@ inline void getInverse(Table<2, T>& matrix, Table<2, T>& invMatrix, T& det){
 }
 
 template <class T, int dim>
-inline Table<1, T> table_scaling(Table<1, T> matrix, double a){
-	unsigned int n_q_points= matrix.size(0);
-	Table<1,T> value(n_q_points);
-	for(unsigned int q=0; q<n_q_points;q++){
-		value[q]=a*matrix[q];	
+inline void getInverse(Table<2, T>& matrix, Table<2, T>& invMatrix){
+	T det;
+	if (dim==1){
+		det=matrix[0][0];
+		invMatrix[0][0]=1.0/det;
+	}
+	else if(dim==2){
+		det=matrix[0][0]*matrix[1][1]-matrix[0][1]*matrix[1][0];
+		invMatrix[0][0]=matrix[1][1]/det;
+		invMatrix[1][0]=-matrix[1][0]/det;
+		invMatrix[0][1]=-matrix[0][1]/det;
+		invMatrix[1][1]=matrix[0][0]/det;
+	}
+	else if(dim==3){
+		det=  matrix[0][0]*determinantOfMinor<T, dim>(0, 0, matrix) - matrix[0][1]*determinantOfMinor<T, dim>(0, 1, matrix) +  matrix[0][2]*determinantOfMinor<T, dim>(0, 2, matrix);
+		for (int y=0;  y< dim;  y++){
+			for (int x=0; x< dim;  x++){
+				invMatrix[y][x] = determinantOfMinor<T, dim>(x, y, matrix)/det;
+				if( ((x + y) % 2)==1){invMatrix[y][x]*=-1;}
+			}
+		}
+	}
+	else throw "dim>3";
+	if (std::abs(det)< 1.0e-15){
+		printf("**************Near zero determinant in Matrix inversion***********************\n"); throw "Near zero determinant in Matrix inversion";
+	}
+}
+
+
+template <int dim,class T>
+inline Table<dim, T> table_scaling(Table<dim, T> matrix, double a){
+	TableIndices<dim> tableIndex=matrix.size();
+	Table<dim,T> value(matrix);
+	TableIndices<dim> tableIndex_tem;
+		
+	if(dim==1){
+		for(unsigned int i=0; i<tableIndex[0];i++) {
+			tableIndex_tem[0]=i;
+			value(tableIndex_tem)=a*matrix(tableIndex_tem);	
+		}
+	}
+	if (dim==2){
+		for(unsigned int i=0; i<tableIndex[0];i++){
+			for(unsigned int j=0; j<tableIndex[1];j++){
+				tableIndex_tem[0]=i;
+				tableIndex_tem[1]=j;
+				value(tableIndex_tem)=a*matrix(tableIndex_tem);	
+			}
+		} 
+	}
+	
+	if (dim==3){
+		for(unsigned int i=0; i<tableIndex[0];i++){
+			for(unsigned int j=0; j<tableIndex[1];j++){
+				for(unsigned int k=0; k<tableIndex[2];k++){
+					tableIndex_tem[0]=i;
+					tableIndex_tem[1]=j;
+					tableIndex_tem[2]=k;
+					value(tableIndex_tem)=a*matrix(tableIndex_tem);	
+				}
+			}
+		} 
 	}
 	return value;
 }
 
-template <class T, int dim>
-inline Table<2, T> table_scaling(Table<2, T> matrix, double a){
-	unsigned int n_q_points= matrix.size(0);
-	Table<2, T> value(n_q_points,dim);
-	for(unsigned int q=0; q<n_q_points;q++){
-		for(unsigned int i=0; i<dim;i++){
-			value[q][i]=a*matrix[q][i];
-		}	
+template <int dim,class T >
+inline Table<dim, T> table_scaling(Table<dim, T> matrix, T a){
+	TableIndices<dim> tableIndex=matrix.size();
+	Table<dim,T> value(matrix);
+	TableIndices<dim> tableIndex_tem;
+		
+	if(dim==1){
+		for(unsigned int i=0; i<tableIndex[0];i++) {
+			tableIndex_tem[0]=i;
+			value(tableIndex_tem)=a*matrix(tableIndex_tem);	
+		}
+	}
+	
+	if (dim==2){
+		for(unsigned int i=0; i<tableIndex[0];i++){
+			for(unsigned int j=0; j<tableIndex[1];j++){
+				tableIndex_tem[0]=i;
+				tableIndex_tem[1]=j;
+				value(tableIndex_tem)=a*matrix(tableIndex_tem);	
+			}
+		} 
+	}
+	
+	if (dim==3){
+		for(unsigned int i=0; i<tableIndex[0];i++){
+			for(unsigned int j=0; j<tableIndex[1];j++){
+				for(unsigned int k=0; k<tableIndex[2];k++){
+					tableIndex_tem[0]=i;
+					tableIndex_tem[1]=j;
+					tableIndex_tem[2]=k;
+					value(tableIndex_tem)=a*matrix(tableIndex_tem);	
+				}
+			}
+		} 
 	}
 	return value;
 }
 
-template <class T, int dim>
-inline Table<1, T> table_scaling(Table<1, T> matrix, T a){
-	unsigned int n_q_points= matrix.size(0);
-	Table<1,T> value(n_q_points);
-	for(unsigned int q=0; q<n_q_points;q++){
-		value[q]=a*matrix[q];	
-	}
-	return value;
-}
 
-template <class T, int dim>
-inline Table<2, T> table_scaling(Table<2, T> matrix, T a){
-	unsigned int n_q_points= matrix.size(0);
-	Table<2, T> value(n_q_points,dim);
-	for(unsigned int q=0; q<n_q_points;q++){
-		for(unsigned int i=0; i<dim;i++){
-			value[q][i]=a*matrix[q][i];
-		}	
+
+
+
+
+template <int dim, class T>
+inline Table<dim, T> table_add(Table<dim, T> matrix_a, Table<dim, T> matrix_b){
+	TableIndices<dim> tableIndex=matrix_a.size();
+	Table<dim,T> value(matrix_a);
+	TableIndices<dim> tableIndex_tem;
+		
+	if(dim==1){
+		for(unsigned int i=0; i<tableIndex[0];i++){
+			tableIndex_tem[0]=i;
+			 value(tableIndex_tem)=matrix_a(tableIndex_tem)+matrix_b(tableIndex_tem);	
+		 }
+	}
+	if (dim==2){
+		for(unsigned int i=0; i<tableIndex[0];i++){
+			for(unsigned int j=0; j<tableIndex[1];j++){
+				tableIndex_tem[0]=i;
+				tableIndex_tem[1]=j;
+				value(tableIndex_tem)=matrix_a(tableIndex_tem)+matrix_b(tableIndex_tem);	
+			}
+		} 
+	}
+	if (dim==3){
+		for(unsigned int i=0; i<tableIndex[0];i++){
+			for(unsigned int j=0; j<tableIndex[1];j++){
+				for(unsigned int k=0; k<tableIndex[2];k++){
+					tableIndex_tem[0]=i;
+					tableIndex_tem[1]=j;
+					tableIndex_tem[2]=k;
+					value(tableIndex_tem)=matrix_a(tableIndex_tem)+matrix_b(tableIndex_tem);	
+				}
+			}
+		} 
 	}
 	return value;
 }

@@ -91,10 +91,10 @@ inline void getInverse(Table<2, T>& matrix, Table<2, T>& invMatrix){
 }
 
 
-template <int dim,class T>
-inline Table<dim, T> table_scaling(Table<dim, T> matrix, double a){
+template <int dim,class T_a, class T_b>
+inline Table<dim, T_a> table_scaling(Table<dim, T_a> matrix, T_b a){
 	TableIndices<dim> tableIndex=matrix.size();
-	Table<dim,T> value(matrix);
+	Table<dim,T_a> value(matrix);
 	TableIndices<dim> tableIndex_tem;
 		
 	if(dim==1){
@@ -128,53 +128,10 @@ inline Table<dim, T> table_scaling(Table<dim, T> matrix, double a){
 	return value;
 }
 
-template <int dim,class T >
-inline Table<dim, T> table_scaling(Table<dim, T> matrix, T a){
-	TableIndices<dim> tableIndex=matrix.size();
-	Table<dim,T> value(matrix);
-	TableIndices<dim> tableIndex_tem;
-		
-	if(dim==1){
-		for(unsigned int i=0; i<tableIndex[0];i++) {
-			tableIndex_tem[0]=i;
-			value(tableIndex_tem)=a*matrix(tableIndex_tem);	
-		}
-	}
-	
-	if (dim==2){
-		for(unsigned int i=0; i<tableIndex[0];i++){
-			for(unsigned int j=0; j<tableIndex[1];j++){
-				tableIndex_tem[0]=i;
-				tableIndex_tem[1]=j;
-				value(tableIndex_tem)=a*matrix(tableIndex_tem);	
-			}
-		} 
-	}
-	
-	if (dim==3){
-		for(unsigned int i=0; i<tableIndex[0];i++){
-			for(unsigned int j=0; j<tableIndex[1];j++){
-				for(unsigned int k=0; k<tableIndex[2];k++){
-					tableIndex_tem[0]=i;
-					tableIndex_tem[1]=j;
-					tableIndex_tem[2]=k;
-					value(tableIndex_tem)=a*matrix(tableIndex_tem);	
-				}
-			}
-		} 
-	}
-	return value;
-}
-
-
-
-
-
-
-template <int dim, class T>
-inline Table<dim, T> table_add(Table<dim, T> matrix_a, Table<dim, T> matrix_b){
+template <int dim, class T_a, class T_b>
+inline Table<dim, T_a> table_add(Table<dim, T_a> matrix_a, Table<dim, T_b> matrix_b){
 	TableIndices<dim> tableIndex=matrix_a.size();
-	Table<dim,T> value(matrix_a);
+	Table<dim,T_a> value(matrix_a);
 	TableIndices<dim> tableIndex_tem;
 		
 	if(dim==1){

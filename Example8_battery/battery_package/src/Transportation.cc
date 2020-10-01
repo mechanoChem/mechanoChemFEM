@@ -41,22 +41,11 @@ void Transportation<dim>::r_get_residual(const typename hp::DoFHandler<dim>::act
 {
 //evaluate primary fields
 	unsigned int n_q_points= fe_values.n_quadrature_points;
-	  
-	//chemo
-	TableIndices<1> tableIndex1(n_q_points);
-	TableIndices<2> tableIndex2(n_q_points,n_q_points);
-	Solution->quad_fields[primiary_dof].value_conv.reinit(tableIndex1);
-	Solution->quad_fields[primiary_dof].value.reinit(tableIndex1);
-	Solution->quad_fields[primiary_dof].value_grad.reinit(tableIndex2);
-	
 	dealii::Table<1,Sacado::Fad::DFad<double> > react(n_q_points);
 	dealii::Table<2,Sacado::Fad::DFad<double> > diffu(n_q_points, dim);
-	evaluateScalarFunction<double,dim>(fe_values, primiary_dof, ULocalConv, Solution->quad_fields[primiary_dof].value_conv);
-	evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, primiary_dof, ULocal, Solution->quad_fields[primiary_dof].value);
-	evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe_values, primiary_dof, ULocal, Solution->quad_fields[primiary_dof].value_grad);
 	set_reaction_term(react);
 	set_diffusion_term(diffu);
-	
+		
 	//call residual functions
 	ResidualEq->residualForDiff_ReacEq(fe_values,primiary_dof, R,Solution->quad_fields[primiary_dof].value, Solution->quad_fields[primiary_dof].value_conv, diffu,react);
 	

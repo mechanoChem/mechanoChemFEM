@@ -69,7 +69,7 @@ void growth<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_i
 	evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, c_dof, ULocal, c);	
 	evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe_values, c_dof, ULocal, c_grad);//at current configuration 
 
-	j_c=table_scaling<Sacado::Fad::DFad<double>, dim>(c_grad,-M);//-D_1*c_1_grad	
+	j_c=table_scaling<2, Sacado::Fad::DFad<double>>(c_grad,-M);//-D_1*c_1_grad	
 	
 	dealii::Table<3, Sacado::Fad::DFad<double> > P(n_q_points,dim,dim), Fe(n_q_points,dim,dim);
 	

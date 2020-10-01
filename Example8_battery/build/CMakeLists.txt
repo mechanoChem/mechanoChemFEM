@@ -21,10 +21,10 @@ IF(NOT ${deal.II_FOUND})
 ENDIF()
 
 #path on my mac
-#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
+SET ( mechanoChemFEM_DIR /Users/wzhenlin/numerics/mechanochem/v0.7)
 
-SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.61/include)
-SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.61/lib/mechanoChemFEM.a)
+SET(mechanoChemFEM_INC ${mechanoChemFEM_DIR}/include)
+SET(mechanoChemFEM_LIB ${mechanoChemFEM_DIR}/lib/mechanoChemFEM.a)
 
 
 FILE (GLOB TARGET_SRC "../*.cc" "../battery_package/src/*.cc")

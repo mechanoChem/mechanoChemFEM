@@ -8,8 +8,9 @@ using namespace dealii;
 int main(int argc, char **argv){
   try{
 		Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv,1);
-		deallog.depth_console (0);			
-		battery<DIMS> problem;	
+		deallog.depth_console (0);
+					
+		battery<DIMS> problem(argv[1]);	
     problem.run ();
   }
   catch (std::exception &exc){

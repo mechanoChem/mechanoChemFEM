@@ -68,10 +68,10 @@ set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
 ##Set dirdctory for openIGA, please give a full path and make sure the directory is valid 
 ##---------------------------------------------------------------------------------------------------------------------
-#install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.6/lib)
-#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
-install(TARGETS mechanoChemFEM DESTINATION $ENV{mechanoChemFEM_DIR}/v0.61/lib)
-FILE(COPY ../include DESTINATION $ENV{mechanoChemFEM_DIR}/v0.61/)
+#install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.7/lib)
+set(mechanoChemFEM_DIR /Users/wzhenlin/numerics/mechanochem)
+install(TARGETS mechanoChemFEM DESTINATION ${mechanoChemFEM_DIR}/v0.7/lib)
+FILE(COPY ../include DESTINATION ${mechanoChemFEM_DIR}/v0.7/)
 
 
 

@@ -11,6 +11,7 @@ mechanoChemFEM<dim>::mechanoChemFEM():FEMdata_out(this->dof_handler),
 {
 	pcout<<"mechanoChemFEM initiated"<<std::endl;
 	params_mechanoChemFEM=&this->params_ref;
+	params_mechanoChemFEM_json=&this->params_ref_json;
 	constraints_mechanoChemFEM=&this->constraints_solver;
 	declare_parameters_mechanoChemFEM();
 }

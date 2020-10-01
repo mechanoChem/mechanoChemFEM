@@ -99,6 +99,7 @@ public:
 	virtual void apply_dU_constrain(vectorType& dU);
 	
 	dealii::ParameterHandler* params_solve;
+	nlohmann::json* params_solve_json;
 	
   matrixType system_matrix;
   vectorType system_rhs;

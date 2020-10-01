@@ -7,15 +7,29 @@ zhenlin wang 2019
 template <int dim>
 void mechanoChemFEM<dim>::mark_boundary()
 {
-	params_mechanoChemFEM->enter_subsection("Geometry");
-	double X_0=params_mechanoChemFEM->get_double("X_0");
-	double Y_0=params_mechanoChemFEM->get_double("Y_0");
-	double Z_0=params_mechanoChemFEM->get_double("Z_0");
+	double X_0,Y_0,Z_0,X_end,Y_end,Z_end;
 	
-	double X_end=params_mechanoChemFEM->get_double("X_end");
-	double Y_end=params_mechanoChemFEM->get_double("Y_end");
-	double Z_end=params_mechanoChemFEM->get_double("Z_end");
-	params_mechanoChemFEM->leave_subsection();	
+	if(this->use_ParameterHandler){
+		params_mechanoChemFEM->enter_subsection("Geometry");
+		X_0=params_mechanoChemFEM->get_double("x_min");
+		Y_0=params_mechanoChemFEM->get_double("y_min");
+		Z_0=params_mechanoChemFEM->get_double("z_min");
+	
+		X_end=params_mechanoChemFEM->get_double("x_max");
+		Y_end=params_mechanoChemFEM->get_double("y_max");
+		Z_end=params_mechanoChemFEM->get_double("z_max");
+
+		params_mechanoChemFEM->leave_subsection();	
+	}
+	if(this->use_ParameterJson){
+		X_0=(*params_mechanoChemFEM_json)["Geometry"]["x_min"];
+		Y_0=(*params_mechanoChemFEM_json)["Geometry"]["y_min"];
+		Z_0=(*params_mechanoChemFEM_json)["Geometry"]["z_min"];
+	
+		X_end=(*params_mechanoChemFEM_json)["Geometry"]["x_max"];
+		Y_end=(*params_mechanoChemFEM_json)["Geometry"]["y_max"];
+		Z_end=(*params_mechanoChemFEM_json)["Geometry"]["z_max"];
+	}	
 	
   typename  Triangulation<dim>::active_cell_iterator cell = hpFEM<dim>::triangulation.begin_active(), endc = hpFEM<dim>::triangulation.end();
   for (;cell!=endc; ++cell){

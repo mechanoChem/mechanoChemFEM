@@ -5,6 +5,7 @@ template <int dim, class matrixType, class vectorType>
 solveClass<dim, matrixType, vectorType>::solveClass():mpi_communicator(MPI_COMM_WORLD)
 {
 	params_solve=&this->params_ref;
+	params_solve_json=&this->params_ref_json;
 	declare_parameters_solveClass();
 }
 

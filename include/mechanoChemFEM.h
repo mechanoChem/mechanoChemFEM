@@ -87,6 +87,7 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		double current_dt;
 				
 		ParameterHandler* params_mechanoChemFEM;
+		nlohmann::json* params_mechanoChemFEM_json;
 		
 		Residual<Sacado::Fad::DFad<double>,dim> ResidualEq;
 		FEMdata<dim, PETScWrappers::MPI::Vector> FEMdata_out;
@@ -98,7 +99,7 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		/**
 		*load parameters
 		*/
-		void load_parameters(std::string parametersfile);
+		void load_parameters(std::string parametersfile, std::string paramepterFile_type="auto");
 		
 		/**
 		*define primary field

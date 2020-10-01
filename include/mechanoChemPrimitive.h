@@ -2,6 +2,7 @@
 *author zhenlin wang
 */
 #include <deal.II/base/parameter_handler.h>
+#include "supplementary/json.hpp"
 
 #ifndef mechanoChemPrimitive_h
 #define mechanoChemPrimitive_h
@@ -20,6 +21,10 @@ class mechanoChemPrimitive
     ~mechanoChemPrimitive(){};
 		
 		dealii::ParameterHandler params_ref;
+		bool use_ParameterHandler=false;
+   
+		nlohmann::json params_ref_json;
+	 	bool use_ParameterJson=false;
 
 };
 

@@ -9,14 +9,23 @@ template <int dim>
 void mechanoChemFEM<dim>::define_primary_fields()
 {
 	//define_primary_fields from parameters file.
-	params_mechanoChemFEM->enter_subsection("Problem");
-	std::string primary_variables_list=params_mechanoChemFEM->get("primary_variables_list");
-	std::string FE_support_list=params_mechanoChemFEM->get("FE_support_list");
-	params_mechanoChemFEM->leave_subsection();		
+	std::vector<std::string> primary_variables_s;
+	std::vector<int> FE_support_list_v;
 	
-	std::vector<std::string> primary_variables_s=Utilities::split_string_list(primary_variables_list);
-	std::vector<std::string> FE_support_list_s=Utilities::split_string_list(FE_support_list);
-	std::vector<int> FE_support_list_v=Utilities::string_to_int(FE_support_list_s);
+	if(this->use_ParameterHandler){
+		params_mechanoChemFEM->enter_subsection("Problem");
+		std::string primary_variables_list=params_mechanoChemFEM->get("primary_variables_list");
+		std::string FE_support_list=params_mechanoChemFEM->get("FE_support_list");
+		primary_variables_s=Utilities::split_string_list(primary_variables_list);
+		std::vector<std::string> FE_support_list_s=Utilities::split_string_list(FE_support_list);
+		FE_support_list_v=Utilities::string_to_int(FE_support_list_s);
+		
+		params_mechanoChemFEM->leave_subsection();		
+	}
+	if(this->use_ParameterJson){
+		primary_variables_s=(*params_mechanoChemFEM_json)["Problem"]["primary_variables_list"].get<std::vector<std::string>>();
+		FE_support_list_v=(*params_mechanoChemFEM_json)["Problem"]["FE_support_list"].get<std::vector<int>>();
+	}
 	
 	int num_variables=primary_variables_s.size()/2;
 	int num_domain=FE_support_list_v.size()/num_variables;

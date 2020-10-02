@@ -168,9 +168,6 @@ void mechanoChemFEM<dim>::load_parameters(std::string parametersfile, std::strin
 		pcout<<"Wrong parameter file"<<std::endl;
 		exit(-1);
 	}
-
-
-
   const int dir_err1 = system(("mkdir -p " + output_directory).c_str());
   const int dir_err2 = system(("mkdir -p " + snapshot_directory).c_str());
   if (dir_err1 == -1 or dir_err2 == -1)
@@ -178,8 +175,126 @@ void mechanoChemFEM<dim>::load_parameters(std::string parametersfile, std::strin
     printf("Error creating directory!\n");
     exit(1);
   }
-	
+}
 
+template <int dim>
+void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,double val){
+  
+  std::string one_name;
+  for (auto i : names){
+    one_name += "/" + i;
+  }
+  
+  nlohmann::json tmp_val = val;
+  nlohmann::json tmp_old = params_mechanoChemFEM_json->flatten();
+
+  //Throw error if parameter name does not exist
+  if ( tmp_old[one_name].type() == nlohmann::json::value_t::null ){
+    tmp_old[one_name] = val;
+    params_mechanoChemFEM_json->update(tmp_old.unflatten());
+    //throw std::invalid_argument( "Given parameter: '" + one_name + "' does not exist.");
+  }
+  if ( tmp_old[one_name].type() == tmp_val.type() ){
+    // New parameter type matches old parameter type
+    tmp_old[one_name] = val;
+    params_mechanoChemFEM_json->update(tmp_old.unflatten());
+  }
+  else{
+    std::string new_type_name(tmp_val.type_name());
+    std::string true_type_name(tmp_old[one_name].type_name());
+    
+    throw std::invalid_argument( "Incorrect value type: '" + new_type_name + "' for given parameter: '" + one_name + "'. Should be of type: '" + true_type_name + "'");
+  }
+}
+
+template <int dim>
+void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,int val){
+  
+  std::string one_name;
+  for (auto i : names){
+    one_name += "/" + i;
+  }
+  
+  nlohmann::json tmp_val = val;
+  nlohmann::json tmp_old = params_mechanoChemFEM_json->flatten();
+
+  //Throw error if parameter name does not exist
+  if ( tmp_old[one_name].type() == nlohmann::json::value_t::null ){
+    tmp_old[one_name] = val;
+    params_mechanoChemFEM_json->update(tmp_old.unflatten());
+    //throw std::invalid_argument( "Given parameter: '" + one_name + "' does not exist.");
+  }
+  if ( tmp_old[one_name].type() == tmp_val.type() ){
+    // New parameter type matches old parameter type
+    tmp_old[one_name] = val;
+    params_mechanoChemFEM_json->update(tmp_old.unflatten());
+  }
+  else{
+    std::string new_type_name(tmp_val.type_name());
+    std::string true_type_name(tmp_old[one_name].type_name());
+    
+    throw std::invalid_argument( "Incorrect value type: '" + new_type_name + "' for given parameter: '" + one_name + "'. Should be of type: '" + true_type_name + "'");
+  }
+}
+
+template <int dim>
+void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,bool val){
+  
+  std::string one_name;
+  for (auto i : names){
+    one_name += "/" + i;
+  }
+  
+  nlohmann::json tmp_val = val;
+  nlohmann::json tmp_old = params_mechanoChemFEM_json->flatten();
+
+  //Throw error if parameter name does not exist
+  if ( tmp_old[one_name].type() == nlohmann::json::value_t::null ){
+    tmp_old[one_name] = val;
+    params_mechanoChemFEM_json->update(tmp_old.unflatten());
+    //throw std::invalid_argument( "Given parameter: '" + one_name + "' does not exist.");
+  }
+  if ( tmp_old[one_name].type() == tmp_val.type() ){
+    // New parameter type matches old parameter type
+    tmp_old[one_name] = val;
+    params_mechanoChemFEM_json->update(tmp_old.unflatten());
+  }
+  else{
+    std::string new_type_name(tmp_val.type_name());
+    std::string true_type_name(tmp_old[one_name].type_name());
+    
+    throw std::invalid_argument( "Incorrect value type: '" + new_type_name + "' for given parameter: '" + one_name + "'. Should be of type: '" + true_type_name + "'");
+  }
+}
+
+template <int dim>
+void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,std::string val){
+  
+  std::string one_name;
+  for (auto i : names){
+    one_name += "/" + i;
+  }
+  
+  nlohmann::json tmp_val = val;
+  nlohmann::json tmp_old = params_mechanoChemFEM_json->flatten();
+
+  //Throw error if parameter name does not exist
+  if ( tmp_old[one_name].type() == nlohmann::json::value_t::null ){
+    tmp_old[one_name] = val;
+    params_mechanoChemFEM_json->update(tmp_old.unflatten());
+    //throw std::invalid_argument( "Given parameter: '" + one_name + "' does not exist.");
+  }
+  if ( tmp_old[one_name].type() == tmp_val.type() ){
+    // New parameter type matches old parameter type
+    tmp_old[one_name] = val;
+    params_mechanoChemFEM_json->update(tmp_old.unflatten());
+  }
+  else{
+    std::string new_type_name(tmp_val.type_name());
+    std::string true_type_name(tmp_old[one_name].type_name());
+    
+    throw std::invalid_argument( "Incorrect value type: '" + new_type_name + "' for given parameter: '" + one_name + "'. Should be of type: '" + true_type_name + "'");
+  }
 }
 
 template class mechanoChemFEM<1>;

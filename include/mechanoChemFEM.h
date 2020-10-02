@@ -102,6 +102,13 @@ class mechanoChemFEM: public solveClass<dim, PETScWrappers::MPI::SparseMatrix, P
 		void load_parameters(std::string parametersfile, std::string paramepterFile_type="auto");
 		
 		/**
+		*set one specific parameters by name
+		*/
+		void set_parameter(std::vector<std::string> names,double val);
+		void set_parameter(std::vector<std::string> names,int val);
+		void set_parameter(std::vector<std::string> names,bool val);
+		void set_parameter(std::vector<std::string> names,std::string val);
+		/**
 		*define primary field
 		*/
 		void define_primary_fields();

@@ -179,7 +179,6 @@ void mechanoChemFEM<dim>::load_parameters(std::string parametersfile, std::strin
 
 template <int dim>
 void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,double val){
-  
   std::string one_name;
   for (auto i : names){
     one_name += "/" + i;
@@ -194,7 +193,7 @@ void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,double va
     params_mechanoChemFEM_json->update(tmp_old.unflatten());
     //throw std::invalid_argument( "Given parameter: '" + one_name + "' does not exist.");
   }
-  if ( tmp_old[one_name].type() == tmp_val.type() ){
+  if ( tmp_old[one_name].type_name() == tmp_val.type_name() ){
     // New parameter type matches old parameter type
     tmp_old[one_name] = val;
     params_mechanoChemFEM_json->update(tmp_old.unflatten());
@@ -208,8 +207,7 @@ void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,double va
 }
 
 template <int dim>
-void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,int val){
-  
+void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,int val){  
   std::string one_name;
   for (auto i : names){
     one_name += "/" + i;
@@ -224,7 +222,7 @@ void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,int val){
     params_mechanoChemFEM_json->update(tmp_old.unflatten());
     //throw std::invalid_argument( "Given parameter: '" + one_name + "' does not exist.");
   }
-  if ( tmp_old[one_name].type() == tmp_val.type() ){
+  if ( tmp_old[one_name].type_name() == tmp_val.type_name() ){
     // New parameter type matches old parameter type
     tmp_old[one_name] = val;
     params_mechanoChemFEM_json->update(tmp_old.unflatten());
@@ -254,7 +252,7 @@ void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,bool val)
     params_mechanoChemFEM_json->update(tmp_old.unflatten());
     //throw std::invalid_argument( "Given parameter: '" + one_name + "' does not exist.");
   }
-  if ( tmp_old[one_name].type() == tmp_val.type() ){
+  if ( tmp_old[one_name].type_name() == tmp_val.type_name() ){
     // New parameter type matches old parameter type
     tmp_old[one_name] = val;
     params_mechanoChemFEM_json->update(tmp_old.unflatten());
@@ -284,7 +282,7 @@ void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,std::stri
     params_mechanoChemFEM_json->update(tmp_old.unflatten());
     //throw std::invalid_argument( "Given parameter: '" + one_name + "' does not exist.");
   }
-  if ( tmp_old[one_name].type() == tmp_val.type() ){
+  if ( tmp_old[one_name].type_name() == tmp_val.type_name() ){
     // New parameter type matches old parameter type
     tmp_old[one_name] = val;
     params_mechanoChemFEM_json->update(tmp_old.unflatten());

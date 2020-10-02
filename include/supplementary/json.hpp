@@ -1,4 +1,6 @@
 /*
+
+(Note: Lines 23516 - 23519 modified by Greg Teichert, 10/2/2020)
     __ _____ _____ _____
  __|  |   __|     |   | |  JSON for Modern C++
 |  |  |__   |  |  | | | |  version 3.9.1
@@ -23511,8 +23513,10 @@ class basic_json
                     return "binary";
                 case value_t::discarded:
                     return "discarded";
+                case value_t::number_float:
+                    return "number (float)";
                 default:
-                    return "number";
+                    return "number (integer)";
             }
         }
     }

@@ -1,14 +1,34 @@
 {
+	"test":1,
+	#Problem
+	"Problem":{
+		"print_parameter": true,
+    "primary_variables_list": ["Lithium", "component_is_scalar"],
+    "FE_support_list":[1,1,1],
+    "current_increment": 0,
+    "current_time": 0,
+    "dt": 1,
+    "output_directory": "output/",
+    "totalTime": 0,
+    "volume_quadrature": 3,
+		"face_quadrature": 2
+	},
   "Geometry": {
       "num_elem_x": 4,
-      "num_elem_y": 4,
-      "num_elem_z": 4,
-      "x_max": 4,
+      "num_elem_y": 1,
+      "num_elem_z": 1,
+      "x_max": 3,
       "x_min": 0,
-      "y_max": 4,
+      "y_max": 1,
       "y_min": 0,
-      "z_max": 4,
-      "z_min": 0
+      "z_max": 1,
+      "z_min": 0,
+			"pos_electrode_len":1,
+			"separator_len":1,
+			"neg_electrode_len":1,
+			"num_elem_pos_electrode":4,
+			"num_elem_separator":4,
+			"num_elem_neg_electrode":4
   },
 	"Lithium":{
 		"lithium_diffusivity":1

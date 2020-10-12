@@ -14,7 +14,7 @@ void battery<dim>::apply_boundary_condition()
 	
 	int totalDOF=this->totalDOF(this->primary_variables);
   std::vector<bool> All_component (totalDOF, true);	
-	VectorTools:: interpolate_boundary_values (this->dof_handler, dim, ZeroFunction<dim> (totalDOF),*constraints, All_component);
+	VectorTools:: interpolate_boundary_values (this->dof_handler, 0, ZeroFunction<dim> (totalDOF),*constraints, All_component);
 	
 	constraints->close ();
 }
@@ -35,7 +35,7 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 	for(unsigned int i=0;i<primary_variables.size();i++){
 		if(std::strcmp(primary_variables[i][0].c_str(),"Lithium")==0){
 			values(primary_variables_dof[i])= 0.5;
-			if(p[2]==0) values(primary_variables_dof[i])= 1;
+			if(p[0]==0) values(primary_variables_dof[i])= 1;
 		}
 		//if(std::strcmp(primary_variables[i][0].c_str(),"Displacement")==0) values(primary_variables_dof[i])= 1.0;
 	}

@@ -8,14 +8,14 @@ template <int dim>
 Mechanics<dim>::Mechanics(){}
 
 template <int dim>
-Mechanics<dim>::Mechanics(Battery_fields& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq)
+Mechanics<dim>::Mechanics(Battery_fields<dim>& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq)
 {
 	Solution=&_fields;
 	ResidualEq=&_ResidualEq;
 }
 
 template <int dim>
-Mechanics<dim>::Mechanics(Battery_fields& _fields,Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
+Mechanics<dim>::Mechanics(Battery_fields<dim>& _fields,Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
 	Solution=&_fields;
 	ResidualEq=&_ResidualEq;
@@ -23,7 +23,7 @@ Mechanics<dim>::Mechanics(Battery_fields& _fields,Residual<Sacado::Fad::DFad<dou
 }
 
 template <int dim>
-void Mechanics<dim>::set_up_fields(Battery_fields& _battery_fields,Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
+void Mechanics<dim>::set_up_fields(Battery_fields<dim>& _battery_fields,Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
 	Solution=&_battery_fields;
 	ResidualEq=&_ResidualEq;
@@ -37,7 +37,7 @@ void Mechanics<dim>::set_primiary_dof(int _primiary_dof)
 }
 
 template <int dim>
-void Mechanics<dim>::r_get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
+void Mechanics<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {
 //evaluate primary fields	
 	ResidualEq->setLameParametersByYoungsModulusPoissonRatio(youngsModulus, poissonRatio);

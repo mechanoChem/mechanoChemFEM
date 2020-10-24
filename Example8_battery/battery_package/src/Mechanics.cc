@@ -10,22 +10,31 @@ Mechanics<dim>::Mechanics(){}
 template <int dim>
 Mechanics<dim>::Mechanics(Battery_fields<dim>& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq)
 {
-	Solution=&_fields;
+	battery_fields=&_fields;
 	ResidualEq=&_ResidualEq;
 }
 
 template <int dim>
 Mechanics<dim>::Mechanics(Battery_fields<dim>& _fields,Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
-	Solution=&_fields;
+	battery_fields=&_fields;
 	ResidualEq=&_ResidualEq;
 	primiary_dof=_primiary_dof;
 }
 
 template <int dim>
-void Mechanics<dim>::set_up_fields(Battery_fields<dim>& _battery_fields,Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
+void Mechanics<dim>::set_up_fields(Battery_fields<dim>& _battery_fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
-	Solution=&_battery_fields;
+	battery_fields=&_battery_fields;
+	ResidualEq=&_ResidualEq;
+	primiary_dof=_primiary_dof;
+}
+
+template <int dim>
+void Mechanics<dim>::set_up_fields(Battery_fields<dim>& _battery_fields, ElectricChemo<dim, Sacado::Fad::DFad<double>>& _electricChemoFormula, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
+{
+	battery_fields=&_battery_fields;
+	electricChemoFormula=&_electricChemoFormula;
 	ResidualEq=&_ResidualEq;
 	primiary_dof=_primiary_dof;
 }

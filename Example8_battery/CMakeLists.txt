@@ -27,7 +27,7 @@ SET(mechanoChemFEM_INC ${mechanoChemFEM_DIR}/include)
 SET(mechanoChemFEM_LIB ${mechanoChemFEM_DIR}/lib/mechanoChemFEM.a)
 
 
-FILE (GLOB TARGET_SRC "../*.cc" "../battery_package/src/*.cc" "../battery_package/src/battery_components/*.cc")
+FILE (GLOB TARGET_SRC "*.cc" "battery_package/src/*.cc" "battery_package/src/battery_components/*.cc")
 
 DEAL_II_INITIALIZE_CACHED_VARIABLES()
 PROJECT(${TARGET})

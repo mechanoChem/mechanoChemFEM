@@ -10,7 +10,7 @@ PoissonEquation<dim>::PoissonEquation(){}
 template <int dim>
 PoissonEquation<dim>::PoissonEquation(Battery_fields<dim>& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
-	Solution=&_fields;
+	battery_fields=&_fields;
 	ResidualEq=&_ResidualEq;
 	primiary_dof=_primiary_dof;
 }
@@ -18,7 +18,16 @@ PoissonEquation<dim>::PoissonEquation(Battery_fields<dim>& _fields, Residual<Sac
 template <int dim>
 void PoissonEquation<dim>::set_up_fields(Battery_fields<dim>& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
-	Solution=&_fields;
+	battery_fields=&_fields;
+	ResidualEq=&_ResidualEq;
+	primiary_dof=_primiary_dof;
+}
+
+template <int dim>
+void PoissonEquation<dim>::set_up_fields(Battery_fields<dim>& _fields, ElectricChemo<dim,Sacado::Fad::DFad<double>>& _electricChemoFormula, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
+{
+	battery_fields=&_fields;
+	electricChemoFormula=&_electricChemoFormula;
 	ResidualEq=&_ResidualEq;
 	primiary_dof=_primiary_dof;
 }
@@ -41,7 +50,7 @@ void PoissonEquation<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<
 template <int dim>
 void PoissonEquation<dim>::set_field_and_source_term(dealii::Table<2,Sacado::Fad::DFad<double> >& field, dealii::Table<1,Sacado::Fad::DFad<double> >& source)
 {
-	field=Solution->quad_fields[primiary_dof].value_grad;
+	field=battery_fields->quad_fields[primiary_dof].value_grad;
 	source=table_scaling<1,Sacado::Fad::DFad<double> > (source,0);
 }
 

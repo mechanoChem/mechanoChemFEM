@@ -35,8 +35,16 @@ void Battery_fields<dim>::set_up_active_fields(std::vector<std::vector<std::stri
 }
 
 template <int dim>
-void Battery_fields<dim>::declare_parameters_batteryFields(nlohmann::json& _params)
+void Battery_fields<dim>::declare_parameters(nlohmann::json& _params)
 {
+	params_json=&_params;
+	(*params_json)["Geometry"]["pos_electrode_len"]=0.0;
+	(*params_json)["Geometry"]["num_elem_pos_electrode"]=1;
+	(*params_json)["Geometry"]["separator_len"]=0;
+	(*params_json)["Geometry"]["num_elem_speparator"]=1;
+	(*params_json)["Geometry"]["neg_electrode_len"]=0.0;
+	(*params_json)["Geometry"]["num_elem_neg_electrode"]=1;
+	(*params_json)["Problem"]["battery_variables"]={"None"};
 }
 
 template <int dim>

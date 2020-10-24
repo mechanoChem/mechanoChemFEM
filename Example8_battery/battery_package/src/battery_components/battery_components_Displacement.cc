@@ -7,16 +7,6 @@ zhenlin wang 2019
 template <int dim>
 void Displacement<dim>::declare_parameters(nlohmann::json& _params){
 	params_json=&_params;
-	(*params_json)["Mechanics"]["youngs_modulus"]=0;
-	(*params_json)["Mechanics"]["poisson_ratio"]=0;
-	(*params_json)["Mechanics"]["lithium_a"]=0;
-	(*params_json)["Mechanics"]["lithium_b"]=1;
-	(*params_json)["Mechanics"]["Feiga_11"]=0;
-	(*params_json)["Mechanics"]["Feiga_22"]=0;
-	(*params_json)["Mechanics"]["Feiga_33"]=0;
-	(*params_json)["Mechanics"]["Feigb_11"]=0;
-	(*params_json)["Mechanics"]["Feigb_22"]=0;
-	(*params_json)["Mechanics"]["Feigb_33"]=0;
 }
 
 template <int dim>
@@ -26,7 +16,7 @@ void Displacement<dim>::set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& 
 	this->ResidualEq->setLameParametersByYoungsModulusPoissonRatio(this->youngsModulus, this->poissonRatio);
 	
 	unsigned int n_q_points= P.size(0);
-	int lithium_index=this->Solution->active_fields_index["Lithium"];
+	int lithium_index=this->battery_fields->active_fields_index["Lithium"];
 		
 	
 	if (lithium_index==-1){
@@ -53,7 +43,7 @@ void Displacement<dim>::set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& 
 		}
 		
 		for(unsigned int q=0; q<n_q_points;q++){
-			Sacado::Fad::DFad<double> C_q=this->Solution->quad_fields[lithium_index].value[q];
+			Sacado::Fad::DFad<double> C_q=this->battery_fields->quad_fields[lithium_index].value[q];
 			
 					
 			dealii::Table<2,Sacado::Fad::DFad<double> > Feig(dim,dim);

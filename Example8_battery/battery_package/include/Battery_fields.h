@@ -19,7 +19,7 @@ class Battery_fields
 		};
 		std::map<std::string,int> active_fields_index;
 		std::vector<struct Fields> quad_fields;
-		void declare_parameters_batteryFields(nlohmann::json& _params);
+		void declare_parameters(nlohmann::json& _params);
 		virtual void set_up_active_fields(std::vector<std::vector<std::string> > primary_variables);
 		void update_fields(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		

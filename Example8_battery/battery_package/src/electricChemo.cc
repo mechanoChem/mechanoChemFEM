@@ -1,25 +1,46 @@
-#include "../include/battery_components.h"
+#include "../include/ElectricChemo.h"
 
-template <class T>
-ElectricChemo<T>::ElectricChemo(){}
+template <int dim, class T>
+ElectricChemo<dim, T>::ElectricChemo(){}
 
-template <class T>
-void ElectricChemo<T>::declare_parameters(nlohmann::json& _params)
+template <int dim, class T>
+void ElectricChemo<dim, T>::declare_parameters(nlohmann::json& _params)
 {
 	params_ElectricChemo_json=&_params;
 	(*params_ElectricChemo_json)["ElectroChemo"]["F"]=96485.3329;
 	(*params_ElectricChemo_json)["ElectroChemo"]["Rr"]=8.3144598;
+	(*params_ElectricChemo_json)["ElectroChemo"]["T_0"]=340;
+	(*params_ElectricChemo_json)["ElectroChemo"]["t_0"]=0.2;
 	(*params_ElectricChemo_json)["ElectroChemo"]["alpha_a"]=0.5;
 	(*params_ElectricChemo_json)["ElectroChemo"]["alpha_c"]=0.5;
   (*params_ElectricChemo_json)["ElectroChemo"]["k_neg"]=0.8;
 	(*params_ElectricChemo_json)["ElectroChemo"]["k_pos"]=0.8;
   (*params_ElectricChemo_json)["ElectroChemo"]["c_max_neg"]=28.7e-3;
 	(*params_ElectricChemo_json)["ElectroChemo"]["c_max_pos"]=37.5e-3;
+	(*params_ElectricChemo_json)["ElectroChemo"]["D_li_neg"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["D_li_pos"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["sigma_s_neg"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["sigma_s_pos"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Lithium_phaseField"]["kappa"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Lithium_phaseField"]["c_alpha"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Lithium_phaseField"]["c_beta"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Lithium_phaseField"]["omega"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["youngs_modulus"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["poisson_ratio"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["lithium_a"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["lithium_b"]=1;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_11"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_22"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_33"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_11"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_22"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_33"]=0;
 }
 
-template <class T>
-void ElectricChemo<T>::init()
+template <int dim, class T>
+void ElectricChemo<dim, T>::init(Battery_fields<dim>& _fields)
 {
+	battery_fields=&_fields;
 	F=(*params_ElectricChemo_json)["ElectroChemo"]["F"];
 	Rr=(*params_ElectricChemo_json)["ElectroChemo"]["Rr"];
 	k_neg=(*params_ElectricChemo_json)["ElectroChemo"]["k_neg"];
@@ -36,47 +57,54 @@ Sindhuja Renganathan, Godfrey Sikha, Shriram Santhanagopalan, and Ralph E. White
 *type 2 Multi-Domain Modeling of Lithium-Ion Batteries Encompassing Multi-Physics in Varied Length Scales,
 Gi-Heon Kim, Kandler Smith, Kyu-Jin Lee, Shriram Santhanagopalan, and Ahmad Pesaran, Journal of The Electrochemical Society, 2010
 */
-template <class T>
-T ElectricChemo<T>::formula_conductivity_e(T Temp, T c_li_plus, int type)
+template <int dim, class T>
+dealii::Table<1,T > ElectricChemo<dim, T>::sigma_e(int type)
 {
-	T Ke;
-	if(type==1) Ke=c_li_plus*std::pow(-10.5+0.074*Temp-6.96e-5*Temp*Temp+668*c_li_plus-17.8*c_li_plus*Temp+0.028*c_li_plus*Temp*Temp+4.94e5*c_li_plus*c_li_plus-886*c_li_plus*c_li_plus*Temp,2.0)*1.0e8;
+	double Temp=(*params_ElectricChemo_json)["ElectroChemo"]["T_0"];
+	int c_li_plus_index=battery_fields->active_fields_index["Lithium_cation"];
+	dealii::Table<1,T > C_li_plus_q=battery_fields->quad_fields[c_li_plus_index].value;
+	unsigned int n_q_points= C_li_plus_q.size(0);
+	T c_li_plus;
+	
+	dealii::Table<1,T > _sigma_e(n_q_points);
+	
+	if(type==1) {
+		for(unsigned int q=0; q<n_q_points;q++){
+			c_li_plus=C_li_plus_q[q];
+			_sigma_e[q]=c_li_plus*std::pow(-10.5+0.074*Temp-6.96e-5*Temp*Temp+668*c_li_plus-17.8*c_li_plus*Temp+0.028*c_li_plus*Temp*Temp+4.94e5*c_li_plus*c_li_plus-886*c_li_plus*c_li_plus*Temp,2.0)*1.0e8;
+		}
+	}
 	else {std::cout<<"wrong type for Ke"<<std::endl; exit(-1);}
-	return Ke;
+	return _sigma_e;
 }
 
-template <class T>
-T ElectricChemo<T>::formula_diffusivity_e(T Temp, T c_li_plus, int type)
+template <int dim, class T>
+dealii::Table<1,T > ElectricChemo<dim, T>::D_li_plus(int type)
 {
-	T D_l;
-	if(type==1) D_l=std::pow(10,(-4.43-54/(Temp-229-5e3*c_li_plus)-2.2e2*c_li_plus))*1.0e8;
-	//else if(type==2) D_l=std::pow(10,(-4.43-54/(this_Temp-299-5e3*this_c_li_plus)-2.2e2*this_c_li_plus))*1.0e8;
+	double Temp=(*params_ElectricChemo_json)["ElectroChemo"]["T_0"];
+	
+	int c_li_plus_index=battery_fields->active_fields_index["Lithium_cation"];
+	dealii::Table<1,T > C_li_plus_q=battery_fields->quad_fields[c_li_plus_index].value;
+	unsigned int n_q_points= C_li_plus_q.size(0);
+	
+	dealii::Table<1,T > _D_li_plus(n_q_points);
+	T c_li_plus;
+	if(type==1) {
+		for(unsigned int q=0; q<n_q_points;q++){
+			c_li_plus=C_li_plus_q[q];
+			_D_li_plus[q]=std::pow(10,(-4.43-54/(Temp-229-5e3*c_li_plus)-2.2e2*c_li_plus))*1.0e8;
+		}
+	}
 	else {std::cout<<"wrong type for D_l"<<std::endl; exit(-1);}
-	return D_l;
-}
-
-template <class T>
-T ElectricChemo<T>::formula_diffusivity_s(T Temp, T c_li, int type)
-{
-	T D_s;
-	if(type==1) D_s=1.4523*1.0e-9*exp(68025.7/Rr*(1/318-1/Temp))*1.0e8;
-	else {std::cout<<"wrong type for D_s"<<std::endl; exit(-1);}
-	return D_s;
-}
-
-template <class T>
-T ElectricChemo<T>::solid_particle_expansion(T unitC, int type)
-{
-	T gamma;
-	if(type==1) gamma=1.496*std::pow(unitC,3)-1.739*unitC*unitC+1.02*unitC-0.03304*std::exp(2.972*unitC)-0.04587*tanh((unitC-0.1)/0.1)-0.003608*tanh((unitC-0.3)/0.1)+0.0214*tanh((un\
-itC-0.65)/0.1);
-	else {std::cout<<"wrong type for D_s"<<std::endl; exit(-1);}
-	return gamma;
+	return _D_li_plus;
 }
 
 
-template <class T>
-T ElectricChemo<T>::formula_dUdt(T UnitC)
+
+
+
+template <int dim, class T>
+T ElectricChemo<dim, T>::formula_dUdt(T UnitC)
 {
 	T dUdt;
 	if(UnitC<=0.2)  dUdt=0.01442*UnitC*UnitC-0.00291*UnitC-0.000138;
@@ -90,8 +118,8 @@ T ElectricChemo<T>::formula_dUdt(T UnitC)
 	return dUdt;
 }
 
-template <class T>
-T ElectricChemo<T>::formula_Usc(T x, int domainflag)
+template <int dim, class T>
+T ElectricChemo<dim, T>::formula_Usc(T x, int domainflag)
 {
 	T Usc;
 	if(domainflag==-1){
@@ -115,8 +143,8 @@ T ElectricChemo<T>::formula_Usc(T x, int domainflag)
 }
 
 
-template <class T>
-T ElectricChemo<T>::formula_j0(T c_li, T c_li_plus, int domainflag)
+template <int dim, class T>
+T ElectricChemo<dim, T>::formula_j0(T c_li, T c_li_plus, int domainflag)
 {
 	double k, alpha, c1max;
 	T UnitC_surface, j0;
@@ -127,8 +155,8 @@ T ElectricChemo<T>::formula_j0(T c_li, T c_li_plus, int domainflag)
 	return j0;
 }
 
-template <class T>
-T ElectricChemo<T>::formula_jn(T Temp, T c_li, T c_li_plus, T phi_s, T phi_e, int domainflag)
+template <int dim, class T>
+T ElectricChemo<dim, T>::formula_jn(T Temp, T c_li, T c_li_plus, T phi_s, T phi_e, int domainflag)
 {
 	T jn;
 	if(domainflag==0)jn=0;
@@ -147,5 +175,6 @@ T ElectricChemo<T>::formula_jn(T Temp, T c_li, T c_li_plus, T phi_s, T phi_e, in
 	return jn;
 }
 
-template class ElectricChemo<Sacado::Fad::DFad<double>>;
-template class ElectricChemo<double>;
+template class ElectricChemo<1,Sacado::Fad::DFad<double>>;
+template class ElectricChemo<2,Sacado::Fad::DFad<double>>;
+template class ElectricChemo<3,Sacado::Fad::DFad<double>>;

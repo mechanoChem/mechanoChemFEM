@@ -20,10 +20,10 @@ battery<dim>::battery(std::string parameter_file_Dir)
 	phi_e.declare_parameters(*params_json);
 	displacement.declare_parameters(*params_json);
 	
-	
+	std::cout<<"1"<<std::endl;
 	//Declear the parameters before load it
 	this->load_parameters(parameter_file_Dir);		
-	
+	std::cout<<"2"<<std::endl;
 	electricChemoFormula.init(battery_fields);
 	define_battery_fields();
 	this->define_primary_fields();
@@ -37,13 +37,12 @@ battery<dim>::battery(std::string parameter_file_Dir)
 	if(battery_fields.active_fields_index["Displacement"]>-1) displacement.set_up_fields(battery_fields, electricChemoFormula, this->ResidualEq, battery_fields.active_fields_index["Displacement"]);
 
 	this->init_ibvp();
-	setup_diffuse_interface();
 	
 	output_w_domain();
 }
 
 template <int dim>
-battery<dim>::~battery(){delete dof_handler_interface;}
+battery<dim>::~battery(){}
 template <int dim>
 void battery<dim>::define_battery_fields()
 {
@@ -81,49 +80,6 @@ void battery<dim>::output_w_domain(){
 template <int dim>
 void battery<dim>::declare_parameters(){}
 
-template <int dim>
-void battery<dim>::make_grid()
-{
-	this->pcout<<"make grid..."<<std::endl;
-	double X_0,Y_0,Z_0,X_end,Y_end,Z_end;
-	int element_div_x, element_div_y,element_div_z;
-	
-	X_0=(*params_json)["Geometry"]["x_min"];
-	Y_0=(*params_json)["Geometry"]["y_min"];
-	Z_0=(*params_json)["Geometry"]["z_min"];
-
-	X_end=(*params_json)["Geometry"]["x_max"];
-	Y_end=(*params_json)["Geometry"]["y_max"];
-	Z_end=(*params_json)["Geometry"]["z_max"];
-
-	element_div_x=(*params_json)["Geometry"]["num_elem_x"].get<int>();
-	element_div_y=(*params_json)["Geometry"]["num_elem_y"].get<int>();
-	element_div_z=(*params_json)["Geometry"]["num_elem_z"].get<int>();
-	
-	double pos_electrode_len=(*params_json)["Geometry"]["pos_electrode_len"];
-	double separator_len=(*params_json)["Geometry"]["separator_len"];
-	double neg_electrode_len=(*params_json)["Geometry"]["neg_electrode_len"];
-	int num_elem_pos_electrode=(*params_json)["Geometry"]["num_elem_pos_electrode"];
-	int num_elem_separator=(*params_json)["Geometry"]["num_elem_separator"];
-	int num_elem_neg_electrode=(*params_json)["Geometry"]["num_elem_neg_electrode"];
-	bool colorize = false;
-  std::vector< std::vector< double > > step_sizes;
-  step_sizes.resize(dim);
-	
-	if(std::abs(pos_electrode_len+neg_electrode_len+separator_len-X_end+X_0)>1.0e-3){
-    throw std::invalid_argument( "pos_electrode_len+neg_electrode_len+separator_len!=(X_end-X_0) ");
-	}
-	
-  for (unsigned int j = 0; j < num_elem_pos_electrode; ++j) step_sizes[0].push_back(pos_electrode_len/num_elem_pos_electrode); 
-	for (unsigned int j = 0; j < num_elem_separator; ++j) step_sizes[0].push_back(separator_len/num_elem_separator); 
-	for (unsigned int j = 0; j < num_elem_neg_electrode; ++j) step_sizes[0].push_back(neg_electrode_len/num_elem_neg_electrode); 
-	
-  for (unsigned int j = 0; j < element_div_y; ++j) step_sizes[1].push_back((Y_end-Y_0)/element_div_y);
-	if(dim==3)	for (unsigned int j = 0; j < element_div_z; ++j) step_sizes[2].push_back((Z_end-Z_0)/element_div_z);
-	
-  if(dim==2) GridGenerator::subdivided_hyper_rectangle (this->triangulation, step_sizes, Point<dim>(X_0,Y_0), Point<dim>(X_end,Y_end), colorize);
-	else GridGenerator::subdivided_hyper_rectangle (this->triangulation, step_sizes, Point<dim>(X_0,Y_0,Z_0), Point<dim>(X_end,Y_end,Z_end), colorize);
-}
 
 template <int dim>
 void battery<dim>::setMultDomain()
@@ -153,44 +109,16 @@ void battery<dim>::setMultDomain()
 	// this->set_active_fe_indices (this->FE_support, this->dof_handler);
 }
 
-template <int dim>
-void battery<dim>::setup_diffuse_interface()
-{
-	dof_handler_interface=new hp::DoFHandler<dim>(this->triangulation);
-	std::vector<unsigned int > variables_dof_tem;
-	std::vector<std::vector<std::string> > primary_variables_interface(1);		
-  primary_variables_interface[0].push_back("diffuse_interface");
-	std::vector<std::vector<int> > FE_support_interface(1);
-	FE_support_interface[0].push_back(1);	
-	
-	this->setup_FeSystem(fe_system_interface,fe_collection_interface, q_collection_interface, variables_dof_tem,variables_interface,FE_support_interface,*(this->volume_quadrature) );
-	dof_handler_add->distribute_dofs (fe_collection_interface);
-	DoFRenumbering::component_wise (*dof_handler_interface);
-	const types::global_dof_index n_local_dofs = DoFTools::count_dofs_with_subdomain_association(*dof_handler_interface, this->this_mpi_process);
-	const types::global_dof_index n_total_dofs=dof_handler_interface->n_dofs();
-										
-	diffuse_interface.reinit (this->mpi_communicator,n_total_dofs,n_local_dofs); 
-	
-  typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler_interface.begin_active(), endc=this->dof_handler_interface.end();
-  for (;cell!=endc; ++cell){
-		if (cell->subdomain_id() == this->this_mpi_process){
-			
-	}		
-}
+
 template <int dim>
 void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
 	battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
-	if(cell->material_id()==battery_fields.separator_domain_id) {
-		if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	}
-	else{
-		if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	}
+	if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	
 	
 	apply_Neumann_boundary_condition();
 

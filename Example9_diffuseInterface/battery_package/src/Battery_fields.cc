@@ -52,6 +52,8 @@ template <int dim>
 void Battery_fields<dim>::update_fields(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {
 	current_cell=&cell;
+	//const typename hp::DoFHandler<dim>::active_cell_iterator current=cell;
+	//const Point<dim> face_center = (*current_cell)->center();
 	current_domain_id=cell->material_id();
 	unsigned int n_q_points= fe_values.n_quadrature_points;
 	TableIndices<1> tableIndex1(n_q_points);

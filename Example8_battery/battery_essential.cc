@@ -158,8 +158,8 @@ void battery<dim>::setup_diffuse_interface()
 {
 	dof_handler_interface=new hp::DoFHandler<dim>(this->triangulation);
 	std::vector<unsigned int > variables_dof_tem;
-	std::vector<std::vector<std::string> > primary_variables_interface(1);		
-  primary_variables_interface[0].push_back("diffuse_interface");
+	std::vector<std::vector<std::string> > variables_interface(1);		
+  variables_interface[0].push_back("diffuse_interface");
 	std::vector<std::vector<int> > FE_support_interface(1);
 	FE_support_interface[0].push_back(1);	
 	
@@ -175,7 +175,8 @@ void battery<dim>::setup_diffuse_interface()
   for (;cell!=endc; ++cell){
 		if (cell->subdomain_id() == this->this_mpi_process){
 			
-	}		
+		}		
+	}
 }
 template <int dim>
 void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)

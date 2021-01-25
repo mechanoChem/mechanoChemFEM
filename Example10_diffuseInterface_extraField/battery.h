@@ -13,13 +13,10 @@ class battery: public mechanoChemFEM<dim>
 		battery(std::string parameter_file_Dir);
 		~battery();
 		//this is a overloaded function 
-		void apply_initial_condition();
 		void apply_boundary_condition();
 		void apply_Neumann_boundary_condition();
 		void declare_parameters();
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
-		void setMultDomain();
-		void output_w_domain();
 		void define_battery_fields();
 		void get_residual_at_diffuse_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		
@@ -35,25 +32,9 @@ class battery: public mechanoChemFEM<dim>
 		Electrode_potential<dim> phi_s;
 		Electrolyte_potential<dim> phi_e;
 		Displacement<dim> displacement;
+		Diffuse_interface<dim> diffuse_interface;
 		
-		/*
-		--------------------------------------------------------------------------------------------
-		* FE for order parameter to define diffuse interface 
-		--------------------------------------------------------------------------------------------
-		*/
-		void setup_diffuse_interface_FEM();
-		void setup_diffuse_interface();
-		void output_diffuse_interface();
-		std::vector<std::shared_ptr<FESystem<dim>> > fe_system_interface;
-		std::vector<std::vector<std::string> > variables_interface;	
-		hp::FECollection<dim> fe_collection_interface;
-		hp::QCollection<dim>  q_collection_interface;
-		hp::DoFHandler<dim>*  dof_handler_interface;
-		
-
-		PETScWrappers::MPI::Vector diffuse_interface;
-		
-		
+		void setup_diffuse_interface();		
 		
 };
 

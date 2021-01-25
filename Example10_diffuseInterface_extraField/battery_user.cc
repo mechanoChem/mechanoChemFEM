@@ -62,8 +62,9 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 		if(std::strcmp(primary_variables[i][0].c_str(),"Lithium")==0){
 			values(primary_variables_dof[i])= 0.5+ 0.04*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
 			values(primary_variables_dof[i])=values(primary_variables_dof[i])*values(primary_variables_dof.back());
-			// if (p.distance(origin)<1) values(primary_variables_dof[i])= 0.5+ 0.04*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
-			// else values(primary_variables_dof[i])=0;
+		}
+		if(std::strcmp(primary_variables[i][0].c_str(),"Lithium_cation")==0){
+			values(primary_variables_dof[i])=1*(1-values(primary_variables_dof.back()));
 		}
 	}
 }

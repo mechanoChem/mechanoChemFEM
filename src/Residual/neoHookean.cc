@@ -49,3 +49,6 @@ void Residual<T,dim>::evaluateNeoHookeanStress(dealii::Table<3, T >& P, dealii::
 template class Residual<Sacado::Fad::DFad<double>, 1>;
 template class Residual<Sacado::Fad::DFad<double>, 2>;
 template class Residual<Sacado::Fad::DFad<double>, 3>;
+template class Residual<double, 1>;
+template class Residual<double, 2>;
+template class Residual<double, 3>;

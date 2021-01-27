@@ -159,7 +159,6 @@ void mechanoChemFEM<dim>::load_parameters(std::string parametersfile, std::strin
 		
 		if(printParameter) {
 			if(this_mpi_process == 0) 	std::cout << std::setw(4) << (*params_mechanoChemFEM_json) << '\n';
-;
 		}
 	}
 	else if (std::strcmp(paramepterFile_type.c_str(),"test")==0 ){
@@ -183,10 +182,12 @@ void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,double va
   for (auto i : names){
     one_name += "/" + i;
   }
-  
+  std::cout<<"double"<<std::endl;
   nlohmann::json tmp_val = val;
   nlohmann::json tmp_old = params_mechanoChemFEM_json->flatten();
-
+	
+	std::cout<<tmp_val.type_name()<<std::endl;
+	
   //Throw error if parameter name does not exist
   if ( tmp_old[one_name].type() == nlohmann::json::value_t::null ){
     tmp_old[one_name] = val;
@@ -198,6 +199,9 @@ void mechanoChemFEM<dim>::set_parameter(std::vector<std::string> names,double va
     tmp_old[one_name] = val;
     params_mechanoChemFEM_json->update(tmp_old.unflatten());
   }
+	else if(tmp_old[one_name].type_name()=="number (integer)" and fmod(val,1) == 0 ){
+		set_parameter(names,int(val));
+	}
   else{
     std::string new_type_name(tmp_val.type_name());
     std::string true_type_name(tmp_old[one_name].type_name());

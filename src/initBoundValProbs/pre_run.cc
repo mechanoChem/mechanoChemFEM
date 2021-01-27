@@ -53,7 +53,7 @@ void mechanoChemFEM<dim>::define_primary_fields()
 	
 }
 
-template <int dim>
+template<int dim>
 void mechanoChemFEM<dim>::init_ibvp()
 {
 	FEMdata_out.set_output_name(primary_variables);	

@@ -5,6 +5,7 @@ zhenlin wang 2019
 #ifndef battery_h
 #include "mechanoChemFEM.h"
 #include "battery_package/include/battery_components.h"
+#include "battery_package/include/SDdata.h"
 
 template <int dim>
 class battery: public mechanoChemFEM<dim>
@@ -44,11 +45,13 @@ class battery: public mechanoChemFEM<dim>
 		void setup_diffuse_interface_FEM();
 		void setup_diffuse_interface();
 		void output_diffuse_interface();
+    void identify_diffuse_interface();
 		std::vector<std::shared_ptr<FESystem<dim>> > fe_system_interface;
 		std::vector<std::vector<std::string> > variables_interface;	
 		hp::FECollection<dim> fe_collection_interface;
 		hp::QCollection<dim>  q_collection_interface;
 		hp::DoFHandler<dim>*  dof_handler_interface;
+    std::vector<SDdata<dim>> cell_SDdata;
 		
 
 		PETScWrappers::MPI::Vector diffuse_interface;

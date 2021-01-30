@@ -35,6 +35,12 @@ battery<dim>::battery(std::string parameter_file_Dir)
 	if(battery_fields.active_fields_index["Displacement"]>-1) displacement.set_up_fields(battery_fields, electricChemoFormula, this->ResidualEq, battery_fields.active_fields_index["Displacement"]);
 	if(battery_fields.active_fields_index["Diffuse_interface"]>-1) diffuse_interface.set_up_fields(battery_fields, electricChemoFormula, this->ResidualEq, battery_fields.active_fields_index["Diffuse_interface"]);
 	this->init_ibvp();
+	
+	//set up projection fields
+	std::vector<std::vector<std::string> > computed_primary_variables={ {"VonMises", "component_is_scalar"}};
+	computedNodalField.setup(battery_fields,*params_json);
+	computedNodalField.setupComputedField(computed_primary_variables);
+	computedNodalField.primary_variables_dof=this->primary_variables_dof;
 }
 
 template <int dim>
@@ -72,9 +78,34 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	if(battery_fields.active_fields_index["Diffuse_interface"]>-1) diffuse_interface.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	
-	
 	apply_Neumann_boundary_condition();
+}
 
+template <int dim>
+void battery<dim>::run()
+{
+	this->pcout<<std::endl<<std::endl;
+	this->pcout<<"======== RUNNING... ========"<<std::endl;	
+	clock_t t_solve;	
+	t_solve = clock();
+  for (; this->current_time<=this->total_time; this->current_time+=this->current_dt){
+    this->current_increment++;
+		PetscPrintf(this->mpi_communicator,"************");
+		PetscPrintf(this->mpi_communicator,"current increment=%d, current time= %f",this->current_increment, this->current_time);
+		PetscPrintf(this->mpi_communicator,"************\n");
+		this->solve_ibvp();
+		
+	  t_solve = clock() - t_solve;
+		this->pcout<<"It took me"<< ((float)t_solve)/CLOCKS_PER_SEC<<" seconds for this solve"<<std::endl<<std::endl;
+		
+		this->FEMdata_out.clear_data_vectors();
+		Vector<double> localized_U(this->solution_prev);
+		this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);	
+		std::string output_path = this->output_directory+"output-tem.vtk";
+		this->FEMdata_out.write_vtk(this->solution_prev, output_path);	
+		//this->output_results();
+	}
+	this->pcout<<"Finish running!!"<<std::endl;
 }
 
 template class battery<1>;

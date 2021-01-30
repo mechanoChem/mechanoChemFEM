@@ -2,7 +2,7 @@
 	"test":1,
 	"Problem":{
 		"print_parameter": true,
-    "battery_variables":["Lithium","Lithium_phaseField","Lithium_cation","Displacement","Diffuse_interface"],
+    "battery_variables":["Lithium","Displacement","Diffuse_interface"],
     "current_increment": 0,
     "current_time": 0,
     "dt": 10,

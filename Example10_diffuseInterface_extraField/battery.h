@@ -5,6 +5,7 @@ zhenlin wang 2019
 #ifndef battery_h
 #include "mechanoChemFEM.h"
 #include "battery_package/include/battery_components.h"
+#include "nodalField.h"
 
 template <int dim>
 class battery: public mechanoChemFEM<dim>
@@ -19,7 +20,7 @@ class battery: public mechanoChemFEM<dim>
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		void define_battery_fields();
 		void get_residual_at_diffuse_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
-		
+		void run();
 		
 		ParameterHandler* params;		
 		nlohmann::json* params_json;
@@ -35,6 +36,8 @@ class battery: public mechanoChemFEM<dim>
 		Diffuse_interface<dim> diffuse_interface;
 		
 		void setup_diffuse_interface();		
+		
+		nodalField<dim> computedNodalField;
 		
 };
 

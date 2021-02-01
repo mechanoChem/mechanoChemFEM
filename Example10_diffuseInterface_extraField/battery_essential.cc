@@ -74,7 +74,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
 
   // update reaction rate at the interface 
-  cell_SDdata[cell_id].reaction_rate = 0.00;
+  cell_SDdata[cell_id].reaction_rate = 0.001;
 
   if (cell_SDdata[cell_id].is_interface_element){
 	  if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
@@ -116,7 +116,7 @@ void battery<dim>::run()
 		this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);	
 		std::string output_path = this->output_directory+"output-tem.vtk";
 		this->FEMdata_out.write_vtk(this->solution_prev, output_path);	
-		//this->output_results();
+    this->output_results();
 	}
 	this->pcout<<"Finish running!!"<<std::endl;
 }

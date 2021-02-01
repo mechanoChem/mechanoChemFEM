@@ -298,9 +298,9 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 		Feigba[2][2]=(*params_json)["Mechanics"]["Feigb_33"];
 		Feigba[2][2]-=(*params_json)["Mechanics"]["Feiga_33"].get<double>();
 	}
-	std::cout<<"n_q_points"<<n_q_points<<std::endl;
-	std::cout<<"input_data.solution_values[q]"<<input_data.solution_values[0].size()<<std::endl;
-	std::cout<<"u_index="<<u_index<<std::endl;
+	//std::cout<<"n_q_points"<<n_q_points<<std::endl;
+	//std::cout<<"input_data.solution_values[q]"<<input_data.solution_values[0].size()<<std::endl;
+	//std::cout<<"u_index="<<u_index<<std::endl;
 	for (unsigned int q=0; q<n_q_points; ++q){
 		dealii::Table<3,double > Fe(1,dim,dim);
 		dealii::Table<3, double > P_stress(1,dim,dim);

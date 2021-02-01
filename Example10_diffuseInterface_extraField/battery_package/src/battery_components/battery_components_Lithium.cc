@@ -23,7 +23,7 @@ void Lithium<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad
 	if(this->battery_fields->quad_fields[interface_index].value[0]<1-eps_0 ) M=0;	 
 	else{	 
 		unsigned int n_q_points= react.size(0);
-		for (unsigned int q=0; q<n_q_points; ++q) react[q]=jn_react;
+		//for (unsigned int q=0; q<n_q_points; ++q) react[q]=jn_react;
 	}
 	
 	int phaesField_index=this->battery_fields->active_fields_index["Lithium_phaseField"];

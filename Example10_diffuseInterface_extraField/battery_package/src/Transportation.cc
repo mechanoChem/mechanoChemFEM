@@ -154,7 +154,8 @@ void Transportation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 	unsigned int n_q_points= react.size(0);
 	for (unsigned int q=0; q<n_q_points; ++q) {
 		react[q]=0;
-		for (unsigned int i=0; i<dim; ++i) diffu[q][i]=-battery_fields->quad_fields[primiary_dof].value_grad[q][i];
+		//for (unsigned int i=0; i<dim; ++i) diffu[q][i]=-battery_fields->quad_fields[primiary_dof].value_grad[q][i];
+		for (unsigned int i=0; i<dim; ++i) diffu[q][i]=0.0;
 	}
 }
 

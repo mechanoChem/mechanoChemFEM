@@ -7,7 +7,7 @@
     "current_time": 0,
     "dt": 10,
     "output_directory": "output/",
-    "totalTime": 1000,
+    "totalTime": 30,
     "volume_quadrature": 3,
 		"face_quadrature": 2
 	},

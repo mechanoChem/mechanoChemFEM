@@ -5,6 +5,7 @@ zhenlin wang 2019
 #ifndef battery_h
 #include "mechanoChemFEM.h"
 #include "battery_package/include/battery_components.h"
+#include "battery_package/include/SDdata.h"
 #include "nodalField.h"
 
 template <int dim>
@@ -36,6 +37,8 @@ class battery: public mechanoChemFEM<dim>
 		Diffuse_interface<dim> diffuse_interface;
 		
 		void setup_diffuse_interface();		
+    void identify_diffuse_interface();
+    std::vector<SDdata<dim>> cell_SDdata;
 		
 		nodalField<dim> computedNodalField;
 		

@@ -70,10 +70,21 @@ void battery<dim>::declare_parameters(){}
 template <int dim>
 void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
+  int cell_id = cell->active_cell_index();
 	battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
-	if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
+
+  // update reaction rate at the interface 
+  cell_SDdata[cell_id].reaction_rate = 0.00;
+
+  if (cell_SDdata[cell_id].is_interface_element){
+	  if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+  }
+  else{
+	  if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
+  }
 	if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	if(battery_fields.active_fields_index["Diffuse_interface"]>-1) diffuse_interface.r_get_residual(fe_values, R, ULocal, ULocalConv);
@@ -84,6 +95,8 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 template <int dim>
 void battery<dim>::run()
 {
+  identify_diffuse_interface();
+
 	this->pcout<<std::endl<<std::endl;
 	this->pcout<<"======== RUNNING... ========"<<std::endl;	
 	clock_t t_solve;	

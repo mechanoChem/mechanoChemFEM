@@ -48,14 +48,9 @@ void battery<dim>::identify_diffuse_interface()
 {
   int primary_dof = -1;
   int opposite_flux_dof = -1;
-	for (std::map<std::string,int>::iterator it=battery_fields.active_fields_index.begin(); it!=battery_fields.active_fields_index.end(); ++it){
-		if(it->second>-1 and std::strcmp(it->first.c_str(),"Diffuse_interface")==0){
-			primary_dof=it->second;
-		}
-		if(it->second>-1 and std::strcmp(it->first.c_str(),"Lithium_cation")==0){
-			opposite_flux_dof=it->second;
-		}
-	}
+	if(battery_fields.active_fields_index["Diffuse_interface"]>-1) primary_dof=battery_fields.active_fields_index["Diffuse_interface"];
+	if(battery_fields.active_fields_index["Lithium_cation"]>-1) opposite_flux_dof=battery_fields.active_fields_index["Lithium_cation"];
+	
   std::cout << "---------- primary dof for diffusive interface ------ " << primary_dof  << " opposite dof " << opposite_flux_dof << std::endl;
 
   hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points  | update_JxW_values | update_gradients);	
@@ -260,12 +255,30 @@ template <int dim>
 void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>   &values) const{
 	Assert (values.size() == totalDOF, ExcDimensionMismatch (values.size(), totalDOF));
 	values=0;
-	Point<dim> origin(2,2);
+	double r=0.8;
+	double bandwitdh=0.1;
+	std::vector<std::vector<double>> origin_list={{1.5,1},{3,1},{4.5,1} };
 	for(unsigned int i=0;i<primary_variables.size();i++){
 		if(std::strcmp(primary_variables[i][0].c_str(),"Diffuse_interface")==0){
-			if(p.distance(origin)<1) values(primary_variables_dof[i])=1;
-			else if(p.distance(origin)<1.1) values(primary_variables_dof[i])=1-(p.distance(origin)-1)*10;
-			else values(primary_variables_dof[i])=0.0;
+			bool inside_flag=false;
+			bool interface_flag=false;
+			int particle_index=-1;
+			double current_dis=1.0e4;
+			for (unsigned int ori_index=0;ori_index<origin_list.size();ori_index++){
+				Point<dim> origin(origin_list[ori_index][0],origin_list[ori_index][1]);
+				if(p.distance(origin)<r) {interface_flag=false; values(primary_variables_dof[i])=1; break; }
+				else if(p.distance(origin)<r+bandwitdh) {
+					interface_flag=true;
+					if (p.distance(origin)<current_dis){
+						current_dis=p.distance(origin);
+						particle_index=ori_index;
+					}
+				}
+			}
+			if(interface_flag) {
+				Point<dim> origin(origin_list[particle_index][0],origin_list[particle_index][1]);
+				values(primary_variables_dof[i])=1-(p.distance(origin)-r)*(1/bandwitdh);
+			}
 		}
 	}
 	for(unsigned int i=0;i<primary_variables.size();i++){
@@ -288,13 +301,16 @@ template <int dim>
 void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vector< dim > &input_data, std::vector< Vector< double >> &computed_quantities)const
 {	
 	const unsigned int n_q_points = computed_quantities.size();	
-	double youngsModulus=(*params_json)["Mechanics"]["youngs_modulus"];
+	double youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_particle"];
 	double poissonRatio=(*params_json)["Mechanics"]["poisson_ratio"];
+	
 	Residual<double,dim> ResidualEq;
 	int lithium_index=this->battery_fields->active_fields_index["Lithium"];
 	int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];
 	int u_index=this->battery_fields->active_fields_index["Displacement"];
 	double eps_0=1.0e-5;
+	
+	if(input_data.solution_values[0][interface_index]<1-eps_0) youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_electrolyte"];
 	
 	ResidualEq.setLameParametersByYoungsModulusPoissonRatio(youngsModulus, poissonRatio);	
 	double C_a=(*params_json)["Mechanics"]["lithium_a"];

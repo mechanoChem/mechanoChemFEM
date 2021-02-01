@@ -11,7 +11,9 @@ void Displacement<dim>::declare_parameters(nlohmann::json& _params){
 
 template <int dim>
 void Displacement<dim>::set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& F, dealii::Table<3,Sacado::Fad::DFad<double> >& P){
-	this->youngsModulus=(*params_json)["Mechanics"]["youngs_modulus"];
+	int mat_id = (* this->battery_fields->current_cell)->material_id();
+	this->youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_particle"];
+	if (mat_id == 2) this->youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_electrolyte"];
 	this->poissonRatio=(*params_json)["Mechanics"]["poisson_ratio"];
 	this->ResidualEq->setLameParametersByYoungsModulusPoissonRatio(this->youngsModulus, this->poissonRatio);
 	

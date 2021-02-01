@@ -105,6 +105,18 @@ void battery<dim>::identify_diffuse_interface()
           greater_flag = false;
         };
       }
+
+      if (greater_flag)
+      {
+        // active particle = 1
+        cell->set_material_id(1);
+      }
+      if (smaller_flag)
+      {
+        // electrolyte = 2
+        cell->set_material_id(2);
+      }
+
       if ((not greater_flag) and (not smaller_flag))
       {
         cell_SDdata[cell_id].is_interface_element = true;
@@ -226,7 +238,11 @@ void battery<dim>::identify_diffuse_interface()
         if  (cell_SDdata[cell_id].is_interface_element)
         {
           Point<dim> cell_center=cell->center();
-          //std::cout << " cell_id = " << cell_id << " center = " << cell_center << " has interface! " << std::endl;
+          //std::cout 
+            //<< " cell_id = " << cell_id << " center = " 
+            //<< cell_center << " has interface!  R = " 
+            //<< std::sqrt((cell_center(0)-2)*(cell_center(0)-2) + (cell_center(1)-2)*(cell_center(1)-2))
+            //<< std::endl;
         }
       }
     }

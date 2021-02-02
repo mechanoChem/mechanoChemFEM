@@ -45,7 +45,7 @@ void Displacement<dim>::set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& 
 		}
 		double eps_0=1.0e-5;
 		int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];
-		if(this->battery_fields->quad_fields[interface_index].value[0]>=1-eps_0 ){
+		if(this->battery_fields->quad_fields[interface_index].value[0]>=0.5 ){
 			for(unsigned int q=0; q<n_q_points;q++){
 				Sacado::Fad::DFad<double> C_q=this->battery_fields->quad_fields[lithium_index].value[q];
 			

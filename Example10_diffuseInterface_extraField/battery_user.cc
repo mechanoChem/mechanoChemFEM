@@ -310,7 +310,7 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 	int u_index=this->battery_fields->active_fields_index["Displacement"];
 	double eps_0=1.0e-5;
 	
-	if(input_data.solution_values[0][interface_index]<1-eps_0) youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_electrolyte"];
+	if(input_data.solution_values[0][interface_index]<0.5) youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_electrolyte"];
 	
 	ResidualEq.setLameParametersByYoungsModulusPoissonRatio(youngsModulus, poissonRatio);	
 	double C_a=(*params_json)["Mechanics"]["lithium_a"];
@@ -342,7 +342,7 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 			  Fe[0][i][j] = (i==j) + input_data.solution_gradients[q][i+u_index][j];
 			}
 		}
-		if(input_data.solution_values[q][interface_index]>=1-eps_0){
+		if(input_data.solution_values[q][interface_index]>=0.5){
 			double C_q=input_data.solution_values[q][lithium_index];
 			dealii::Table<2,double > Feig(dim,dim);
 			dealii::Table<2,double> invFeig(dim,dim);

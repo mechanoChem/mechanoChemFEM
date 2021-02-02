@@ -5,9 +5,9 @@
     "battery_variables":["Lithium","Lithium_phaseField","Lithium_cation","Displacement","Diffuse_interface"],
     "current_increment": 0,
     "current_time": 0,
-    "dt": 10,
+    "dt": 20,
     "output_directory": "output/",
-    "totalTime": 1000,
+    "totalTime": 2000,
     "volume_quadrature": 3,
 		"face_quadrature": 2
 	},
@@ -37,8 +37,8 @@
 		"omega":0.25
 	},
 	"Mechanics":{
-		"youngs_modulus_particle":1.0e4,
-		"youngs_modulus_electrolyte":0.7e4,
+		"youngs_modulus_particle":77,
+		"youngs_modulus_electrolyte":20,
 		"poisson_ratio":0.3,
 		"lithium_a":0.5,
 		"lithium_b":1.5,

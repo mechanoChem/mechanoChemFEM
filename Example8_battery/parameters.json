@@ -2,7 +2,7 @@
 	"test":1,
 	"Problem":{
 		"print_parameter": true,
-    "battery_variables":["Lithium","Lithium_phaseField","Lithium_cation","Diffuse_interface"],
+    "battery_variables":["Lithium","Lithium_phaseField","Lithium_cation","Electrode_potential","Electrolyte_potential","Diffuse_interface"],
     "current_increment": 0,
     "current_time": 0,
     "dt": 20,
@@ -10,15 +10,15 @@
 		"snapshot_directory": "snapshot/",
 		"save_snapshot":true,
 		"save_output":true,
-    "totalTime": 2000,
+    "totalTime": 2,
     "volume_quadrature": 3,
 		"face_quadrature": 2
 	},
   "Geometry": {
-      "num_elem_x": 120,
+      "num_elem_x": 60,
       "num_elem_y": 40,
       "num_elem_z": 0,
-      "x_max": 6,
+      "x_max": 3,
       "x_min": 0,
       "y_max": 2,
       "y_min": 0,
@@ -26,6 +26,8 @@
       "z_min": 0
   },
 	"ElectroChemo":{
+		"particle_R":0.8,
+		"interface_bandwitdh":0.05,
 		"flip_time":1000,
 		"D_li":0.005,
 		"D_li_plus":0.005,

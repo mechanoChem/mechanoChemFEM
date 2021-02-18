@@ -31,8 +31,7 @@ template <int dim>
 void battery<dim>::setMultDomain()
 {
 	std::vector<std::vector<double>> origin_list={{1.5,1},{4.5,1}};
-	double r=0.8;
-	double bandwitdh=0.1;
+	double r=(*params_json)["ElectroChemo"]["particle_R"];
 	
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
@@ -43,7 +42,7 @@ void battery<dim>::setMultDomain()
 				Point<dim> vertrx_point=cell->vertex(vertex);
 				for (unsigned int ori_index=0;ori_index<origin_list.size();ori_index++){
 					Point<dim> origin(origin_list[ori_index][0],origin_list[ori_index][1]);
-					if(vertrx_point.distance(origin)<=r) {
+					if(vertrx_point.distance(origin)<r-1.0e-15) {
 						inside_vertex++;
 						break;
 					}
@@ -60,8 +59,8 @@ template <int dim>
 void battery<dim>::apply_initial_condition()
 {
 	std::vector<std::vector<double>> origin_list={{1.5,1},{4.5,1}};
-	double r=0.8;
-	double bandwitdh=0.1;
+	double r=(*params_json)["ElectroChemo"]["particle_R"];
+	double bandwitdh=(*params_json)["ElectroChemo"]["interface_bandwitdh"];
 	
 	double C_li_0_neg=(*params_json)["ElectroChemo"]["C_li_0_neg"];
 	double C_li_0_pos=(*params_json)["ElectroChemo"]["C_li_0_pos"];
@@ -96,25 +95,25 @@ void battery<dim>::apply_initial_condition()
 				else if(ck==battery_fields.active_fields_index["Electrolyte_potential"]) this->solution_prev(local_dof_indices[i])=phi_e_0;
 				
 				if (cell->material_id()==interface_id){
-					int vertex_id=i / GeometryInfo<dim>::vertices_per_cell;
+					int vertex_id=i / (dofs_per_cell/GeometryInfo<dim>::vertices_per_cell);
 					Point<dim> vertrx_point=cell->vertex(vertex_id);
 					bool inside_flag=false;
+					double distance=1.0e16;
 					for (unsigned int ori_index=0;ori_index<origin_list.size();ori_index++){
-						
 						Point<dim> origin(origin_list[ori_index][0],origin_list[ori_index][1]);
+						if (vertrx_point.distance(origin)<distance) distance=vertrx_point.distance(origin);
 						if(vertrx_point.distance(origin)<=r) {inside_flag=true; break;}
 					}
+					if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(r-distance);
 					if (inside_flag){
 						if (ck==battery_fields.active_fields_index["Lithium_cation"] or ck==battery_fields.active_fields_index["Electrolyte_potential"]){
 							this->solution_prev(local_dof_indices[i])=0;
 						}
-						if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=1;
 					}
 					else{
 						if (ck==battery_fields.active_fields_index["Lithium"] or ck==battery_fields.active_fields_index["Electrode_potential"]){
 							this->solution_prev(local_dof_indices[i])=0;
 						}
-						//if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=2;
 					}
 				}
 			}

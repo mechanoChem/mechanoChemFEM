@@ -57,7 +57,7 @@ void battery<dim>::define_battery_fields()
 			battery_fileds_s.push_back(battery_fileds[i]);
 			if(battery_fileds[i]=="Displacement") battery_fileds_s.push_back("component_is_vector");
 			else battery_fileds_s.push_back("component_is_scalar");
-			
+		  // define all at interface 
 			FE_support_list_v[i+2*battery_fileds.size()]=1;
 			if(battery_fileds[i]=="Lithium" or battery_fileds[i]=="Lithium_phaseField" or battery_fileds[i]=="Electrode_potential"){
 				FE_support_list_v[i]=1;
@@ -71,6 +71,10 @@ void battery<dim>::define_battery_fields()
 				FE_support_list_v[i]=1;
 				FE_support_list_v[i+battery_fileds.size()]=1;
 			}
+			//turn on all fileds everywhere
+			//FE_support_list_v[i]=1;
+			//FE_support_list_v[i+battery_fileds.size()]=1;
+			//FE_support_list_v[i+2*battery_fileds.size()]=1;
 		}
 		(*params_json)["Problem"]["primary_variables_list"]=battery_fileds_s;
 		(*params_json)["Problem"]["FE_support_list"]=FE_support_list_v;
@@ -107,12 +111,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
 	int Li_index=battery_fields.active_fields_index["Lithium"];
 	int Li_plus_index=battery_fields.active_fields_index["Lithium_cation"];
-	//cell_SDdata[cell_id].reaction_rate = 0.0005*this->battery_fields.quad_fields[Li_plus_index].value_conv[0];
-	//if(this->current_time>fliptime) cell_SDdata[cell_id].reaction_rate=-0.0005*this->battery_fields.quad_fields[Li_index].value_conv[0];
-  if (cell->material_id()==interface_id){
-	  //if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
-	  //if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
-		
+  if (cell->material_id()==interface_id){		
 		if(battery_fields.active_fields_index["Diffuse_interface"]>-1) diffuse_interface.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);

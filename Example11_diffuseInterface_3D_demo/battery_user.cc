@@ -30,7 +30,7 @@ void battery<dim>::apply_boundary_condition()
 		}
 	}
 	constraints->close ();
-	setup_diffuse_interface();
+	//setup_diffuse_interface();
 }
 template <int dim>
 void battery<dim>::apply_Neumann_boundary_condition()
@@ -258,7 +258,7 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 	double r=0.8;
 	double bandwitdh=0.1;
 	//std::vector<std::vector<double>> origin_list={{1.5,1},{3,1},{4.5,1} };
-	std::vector<std::vector<double>> origin_list={{1.5,1}};
+	std::vector<std::vector<double>> origin_list={{1,1,1}};
 	for(unsigned int i=0;i<primary_variables.size();i++){
 		if(std::strcmp(primary_variables[i][0].c_str(),"Diffuse_interface")==0){
 			bool inside_flag=false;
@@ -266,7 +266,7 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 			int particle_index=-1;
 			double current_dis=1.0e4;
 			for (unsigned int ori_index=0;ori_index<origin_list.size();ori_index++){
-				Point<dim> origin(origin_list[ori_index][0],origin_list[ori_index][1]);
+				Point<dim> origin(origin_list[ori_index][0],origin_list[ori_index][1],origin_list[ori_index][2]);
 				if(p.distance(origin)<r) {interface_flag=false; values(primary_variables_dof[i])=1; break; }
 				else if(p.distance(origin)<r+bandwitdh) {
 					interface_flag=true;
@@ -277,7 +277,7 @@ void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>
 				}
 			}
 			if(interface_flag) {
-				Point<dim> origin(origin_list[particle_index][0],origin_list[particle_index][1]);
+				Point<dim> origin(origin_list[particle_index][0],origin_list[particle_index][1],origin_list[particle_index][2]);
 				values(primary_variables_dof[i])=1-(p.distance(origin)-r)*(1/bandwitdh);
 			}
 		}

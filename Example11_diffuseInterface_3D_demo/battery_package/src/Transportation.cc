@@ -59,6 +59,7 @@ void Transportation<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1
 		
 	//call residual functions
 	ResidualEq->residualForDiff_ReacEq(fe_values,primiary_dof, R,battery_fields->quad_fields[primiary_dof].value, battery_fields->quad_fields[primiary_dof].value_conv, diffu,react);
+	
 }
 
 template <int dim>

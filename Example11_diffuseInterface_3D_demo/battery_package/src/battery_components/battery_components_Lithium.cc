@@ -15,11 +15,18 @@ void Lithium<dim>::declare_parameters(nlohmann::json& _params){
 template <int dim>
 void Lithium<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react)
 {
-	
+	Point<dim> origin(1,1,1);
 	double M=(*params_json)["ElectroChemo"]["D_li"];
 	double jn_react=(*params_json)["ElectroChemo"]["jn_react"];
 	double eps_0=1.0e-5;
 	int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];
+	Point<dim> center = (*(this->battery_fields->current_cell))->center();
+  //int mat_id = (* this->battery_fields->current_cell)->material_id();
+	if(center.distance(origin)>=0.9) M=0;	 
+	if(center.distance(origin)>0.8 and center.distance(origin)<0.9){	 
+		unsigned int n_q_points= react.size(0);
+		for (unsigned int q=0; q<n_q_points; ++q) react[q]=jn_react;
+	}
 	
 	int phaesField_index=this->battery_fields->active_fields_index["Lithium_phaseField"];
 	if(phaesField_index==-1) diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[this->primiary_dof].value_grad,-M);

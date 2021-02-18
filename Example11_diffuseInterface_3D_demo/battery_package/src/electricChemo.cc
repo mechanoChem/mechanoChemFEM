@@ -25,16 +25,16 @@ void ElectricChemo<dim, T>::declare_parameters(nlohmann::json& _params)
 	(*params_ElectricChemo_json)["ElectroChemo"]["Lithium_phaseField"]["c_alpha"]=0;
 	(*params_ElectricChemo_json)["ElectroChemo"]["Lithium_phaseField"]["c_beta"]=0;
 	(*params_ElectricChemo_json)["ElectroChemo"]["Lithium_phaseField"]["omega"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["youngs_modulus"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["poisson_ratio"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["lithium_a"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["lithium_b"]=1;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_11"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_22"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_33"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_11"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_22"]=0;
-	// (*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_33"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["youngs_modulus"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["poisson_ratio"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["lithium_a"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["lithium_b"]=1;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_11"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_22"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feiga_33"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_11"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_22"]=0;
+	(*params_ElectricChemo_json)["ElectroChemo"]["Mechanics"]["Feigb_33"]=0;
 }
 
 template <int dim, class T>

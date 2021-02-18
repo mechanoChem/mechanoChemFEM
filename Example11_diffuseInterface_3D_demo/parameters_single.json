@@ -5,17 +5,17 @@
     "battery_variables":["Lithium","Lithium_phaseField","Lithium_cation","Displacement","Diffuse_interface"],
     "current_increment": 0,
     "current_time": 0,
-    "dt": 10,
+    "dt": 20,
     "output_directory": "output/",
-    "totalTime": 500,
+    "totalTime": 2000,
     "volume_quadrature": 3,
 		"face_quadrature": 2
 	},
   "Geometry": {
       "num_elem_x": 120,
-      "num_elem_y": 40,
+      "num_elem_y": 80,
       "num_elem_z": 0,
-      "x_max": 6,
+      "x_max": 3,
       "x_min": 0,
       "y_max": 2,
       "y_min": 0,
@@ -23,9 +23,10 @@
       "z_min": 0
   },
 	"ElectroChemo":{
-		"D_li":0.001,
+		"flip_time":1000,
+		"D_li":0.005,
 		"D_li_plus":0.005,
-		"jn_react":0.001,
+		"jn_react":0.2,
 		"sigma_s_neg":1.5e8,
 		"sigma_s_pos" : 0.5e8
 	},
@@ -36,7 +37,8 @@
 		"omega":0.25
 	},
 	"Mechanics":{
-		"youngs_modulus":1.0e4,
+		"youngs_modulus_particle":77,
+		"youngs_modulus_electrolyte":20,
 		"poisson_ratio":0.3,
 		"lithium_a":0.5,
 		"lithium_b":1.5,

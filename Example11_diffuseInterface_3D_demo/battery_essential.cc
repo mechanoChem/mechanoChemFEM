@@ -76,19 +76,20 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
   // update reaction rate at the interface 
 	double tem=(*params_json)["ElectroChemo"]["jn_react"];
 	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
-	int Li_index=battery_fields.active_fields_index["Lithium"];
-	int Li_plus_index=battery_fields.active_fields_index["Lithium_cation"];
-  cell_SDdata[cell_id].reaction_rate = 0.0005*this->battery_fields.quad_fields[Li_plus_index].value_conv[0];
-	if(this->current_time>fliptime) cell_SDdata[cell_id].reaction_rate=-0.0005*this->battery_fields.quad_fields[Li_index].value_conv[0];
-
-  if (cell_SDdata[cell_id].is_interface_element){
-	  if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
-	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
-  }
-  else{
-	  if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
-  }
+	
+	//   cell_SDdata[cell_id].reaction_rate = tem;
+	// if(this->current_time>fliptime) cell_SDdata[cell_id].reaction_rate=-tem;
+	//
+	//   if (cell_SDdata[cell_id].is_interface_element){
+	//   if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+	//   if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+	//   }
+  // else{
+  // 	  if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
+  // 	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
+  // }
+	if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
@@ -100,7 +101,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 template <int dim>
 void battery<dim>::run()
 {
-  identify_diffuse_interface();
+  //identify_diffuse_interface();
 
 	this->pcout<<std::endl<<std::endl;
 	this->pcout<<"======== RUNNING... ========"<<std::endl;	
@@ -116,11 +117,11 @@ void battery<dim>::run()
 	  t_solve = clock() - t_solve;
 		this->pcout<<"It took me"<< ((float)t_solve)/CLOCKS_PER_SEC<<" seconds for this solve"<<std::endl<<std::endl;
 		
-		this->FEMdata_out.clear_data_vectors();
-		Vector<double> localized_U(this->solution_prev);
-		this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);	
-		std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
-		this->FEMdata_out.write_vtk(this->solution_prev, output_path);	
+		// this->FEMdata_out.clear_data_vectors();
+		// Vector<double> localized_U(this->solution_prev);
+		// this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);
+		// std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
+		// this->FEMdata_out.write_vtk(this->solution_prev, output_path);
     this->output_results();
 	}
 	this->pcout<<"Finish running!!"<<std::endl;

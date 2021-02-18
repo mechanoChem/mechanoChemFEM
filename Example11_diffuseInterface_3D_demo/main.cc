@@ -1,7 +1,7 @@
 #include "battery.h"
 
 
-#define DIMS 2
+#define DIMS 3
 using namespace dealii;
 
 

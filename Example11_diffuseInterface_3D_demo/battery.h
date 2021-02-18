@@ -16,16 +16,12 @@ class battery: public mechanoChemFEM<dim>
 		~battery();
 		//this is a overloaded function 
 		void apply_boundary_condition();
-		void apply_initial_condition();
-		void setMultDomain();
 		void apply_Neumann_boundary_condition();
 		void declare_parameters();
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		void define_battery_fields();
 		void get_residual_at_diffuse_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
-		void output_w_domain();
 		void run();
-		
 		
 		ParameterHandler* params;		
 		nlohmann::json* params_json;
@@ -45,8 +41,7 @@ class battery: public mechanoChemFEM<dim>
     std::vector<SDdata<dim>> cell_SDdata;
 		
 		nodalField<dim> computedNodalField;
-		double iso_value = 0.5;
-		int active_particle_id=0, electrolyte_id=1, interface_id=2;
+		
 };
 
 #endif

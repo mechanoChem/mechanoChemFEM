@@ -69,6 +69,7 @@ void battery<dim>::apply_initial_condition()
 	double phi_s_0_pos=(*params_json)["ElectroChemo"]["phi_s_0_pos"];
 	double phi_e_0=(*params_json)["ElectroChemo"]["phi_e_0"];
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	double iso_value=(*params_json)["ElectroChemo"]["iso_value"];
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
 		if (cell->subdomain_id() == this->this_mpi_process){
@@ -104,7 +105,7 @@ void battery<dim>::apply_initial_condition()
 						if (vertrx_point.distance(origin)<distance) distance=vertrx_point.distance(origin);
 						if(vertrx_point.distance(origin)<=r) {inside_flag=true; break;}
 					}
-					if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(r-distance);
+					if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(r-distance)+iso_value;
 					if (inside_flag){
 						if (ck==battery_fields.active_fields_index["Lithium_cation"] or ck==battery_fields.active_fields_index["Electrolyte_potential"]){
 							this->solution_prev(local_dof_indices[i])=0;

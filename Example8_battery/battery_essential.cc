@@ -151,7 +151,7 @@ void battery<dim>::run()
 		this->solve_ibvp();
 		
 	  t_solve = clock() - t_solve;
-		this->pcout<<"It took me"<< ((float)t_solve)/CLOCKS_PER_SEC<<" seconds for this solve"<<std::endl<<std::endl;
+		this->pcout<<"It took me "<< ((float)t_solve)/CLOCKS_PER_SEC<<" seconds for this solve"<<std::endl<<std::endl;
 		
 		// this->FEMdata_out.clear_data_vectors();
 		// Vector<double> localized_U(this->solution_prev);

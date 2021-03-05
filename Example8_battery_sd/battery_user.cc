@@ -17,6 +17,7 @@ void battery<dim>::apply_boundary_condition()
   std::vector<bool> All_component (totalDOF, true);	
 	VectorTools:: interpolate_boundary_values (this->dof_handler, 1, ZeroFunction<dim> (totalDOF),*constraints, All_component);
 	int interface_index=battery_fields.active_fields_index["Diffuse_interface"];
+
 	constraints->close ();
 }
 template <int dim>
@@ -122,6 +123,79 @@ void battery<dim>::apply_initial_condition()
 	}
 	this->solution_prev.compress(VectorOperation::insert);
 	this->solution=this->solution_prev;		
+
+  identify_diffuse_interface();
+
+	constraints->clear ();
+	
+	DoFTools::make_hanging_node_constraints (this->dof_handler, *constraints);
+	
+	int totalDOF=this->totalDOF(this->primary_variables);
+  std::vector<bool> All_component (totalDOF, true);	
+	VectorTools:: interpolate_boundary_values (this->dof_handler, 1, ZeroFunction<dim> (totalDOF),*constraints, All_component);
+	int interface_index=battery_fields.active_fields_index["Diffuse_interface"];
+
+  {
+    // remove the minus or plus side of node, not to solve
+    typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc = this->dof_handler.end();
+    for (; cell != endc; ++cell) {
+      if (cell->subdomain_id() == this->this_mpi_process) {
+        int cell_id = cell->active_cell_index();
+        if (cell_SDdata[cell_id].is_interface_element) {
+
+          const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
+          std::vector<unsigned int> local_dof_indices(dofs_per_cell);
+          cell->get_dof_indices(local_dof_indices);
+          const unsigned int dofs_per_node = dofs_per_cell / 4;
+
+
+          for (auto i0 : cell_SDdata[cell_id].lnode_minus)
+          {
+	          if(battery_fields.active_fields_index["Lithium"]>-1) 
+            {
+              auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Lithium"]];
+              //std::cout << "Lithium " << i0*dofs_per_node + battery_fields.active_fields_index["Lithium"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
+              constraints->add_line(globalDOF);
+              constraints->set_inhomogeneity(globalDOF, 0.0);
+            }
+            if(battery_fields.active_fields_index["Electrode_potential"]>-1)
+            {
+              auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]];
+              //std::cout << "Electrode_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
+              constraints->add_line(globalDOF);
+              constraints->set_inhomogeneity(globalDOF, 0.0);
+            }
+
+          }
+
+          for (auto i0 : cell_SDdata[cell_id].lnode_plus)
+          {
+            if(battery_fields.active_fields_index["Lithium_cation"]>-1) 
+            {
+              auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Lithium_cation"]];
+              //std::cout << "Lithium_cation " << i0*dofs_per_node + battery_fields.active_fields_index["Lithium_cation"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
+              constraints->add_line(globalDOF);
+              constraints->set_inhomogeneity(globalDOF, 0.0);
+            }
+            if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) 
+            {
+              auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]];
+              //std::cout << "Electrolyte_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
+              constraints->add_line(globalDOF);
+              constraints->set_inhomogeneity(globalDOF, 0.0);
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+
+
+	constraints->close ();
+
+
 }
 
 template class battery<1>;

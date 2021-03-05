@@ -47,6 +47,9 @@ class battery: public mechanoChemFEM<dim>
 		nodalField<dim> computedNodalField;
 		double iso_value = 0.5;
 		int active_particle_id=0, electrolyte_id=1, interface_id=2;
+
+
+		PETScWrappers::MPI::Vector solution_k;
 };
 
 #endif

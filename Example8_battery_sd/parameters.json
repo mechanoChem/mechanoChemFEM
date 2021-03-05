@@ -10,7 +10,7 @@
 		"snapshot_directory": "snapshot/",
 		"save_snapshot":true,
 		"save_output":true,
-    "totalTime": 20,
+    "totalTime": 40,
     "volume_quadrature": 2,
 		"face_quadrature": 2
 	},

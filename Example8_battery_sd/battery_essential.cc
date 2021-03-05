@@ -106,6 +106,9 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
   int cell_id = cell->active_cell_index();
 	battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
 
+  cell_SDdata[cell_id].reaction_rate_potential = 0.0000001;
+  cell_SDdata[cell_id].reaction_rate_li = 0.0001;
+
   // update reaction rate at the interface 
 	double tem=(*params_json)["ElectroChemo"]["jn_react"];
 	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
@@ -114,16 +117,22 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
   if (cell->material_id()==interface_id){		
 		if(battery_fields.active_fields_index["Diffuse_interface"]>-1) diffuse_interface.r_get_residual(fe_values, R, ULocal, ULocalConv);
 
-		//if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	  if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+    //if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
+    if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
 
 		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		//if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
-		//if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
-		//if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+    //if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
+    if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+    //if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
+    if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+    //if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual(fe_values, R, ULocal, ULocalConv);
+    if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+
+    unsigned int dofs_per_cell= fe_values.dofs_per_cell;
+	  for (unsigned int i=0; i<dofs_per_cell; ++i){
+      cell_SDdata[cell_id].ULocal_k[i] = ULocal[i].val(); // save previous iteration solution
+	  }
+
   }
 	else if (cell->material_id()==active_particle_id){
 		if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
@@ -142,7 +151,6 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 template <int dim>
 void battery<dim>::run()
 {
-  identify_diffuse_interface();
 	output_w_domain();
 
 	this->pcout<<std::endl<<std::endl;
@@ -159,6 +167,9 @@ void battery<dim>::run()
     // update history variables
     for (unsigned i = 0; i < cell_SDdata.size(); ++i) {
       cell_SDdata[i].xi_conv = cell_SDdata[i].xi_old;
+      cell_SDdata[i].xi_conv_c_e = cell_SDdata[i].xi_old_c_e;
+      cell_SDdata[i].xi_conv_phi_s = cell_SDdata[i].xi_old_phi_s;
+      cell_SDdata[i].xi_conv_phi_e = cell_SDdata[i].xi_old_phi_e;
     }
 		
 	  t_solve = clock() - t_solve;
@@ -178,14 +189,14 @@ template <int dim>
 void battery<dim>::identify_diffuse_interface()
 {
   int primary_dof = -1;
-  int opposite_flux_dof = -1;
+  int opposite_flux_dof_li = -1;
   int opposite_flux_dof_potential = -1;
 	if(battery_fields.active_fields_index["Diffuse_interface"]>-1) primary_dof=battery_fields.active_fields_index["Diffuse_interface"];
-	if(battery_fields.active_fields_index["Lithium_cation"]>-1) opposite_flux_dof=battery_fields.active_fields_index["Lithium_cation"];
+	if(battery_fields.active_fields_index["Lithium_cation"]>-1) opposite_flux_dof_li=battery_fields.active_fields_index["Lithium_cation"];
 	if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) opposite_flux_dof_potential=battery_fields.active_fields_index["Electrolyte_potential"];
 
 	
-  std::cout << "---------- primary dof for diffusive interface ------ " << primary_dof  << " opposite dof " << opposite_flux_dof << std::endl;
+  std::cout << "---------- primary dof for diffusive interface ------ " << primary_dof  << " opposite dof " << opposite_flux_dof_li << " "<< opposite_flux_dof_potential << std::endl;
 
   hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points  | update_JxW_values | update_gradients);	
 
@@ -203,7 +214,7 @@ void battery<dim>::identify_diffuse_interface()
 	      int cell_id = cell->active_cell_index();
         //std::cout <<  " cell_id " << cell_id << " cell_SDdata.size() " << cell_SDdata.size() << " interface_id " << interface_id << std::endl;
 	      cell_SDdata[cell_id].cell_id = cell_id;
-	      cell_SDdata[cell_id].opposite_flux_dof = opposite_flux_dof;
+	      cell_SDdata[cell_id].opposite_flux_dof_li = opposite_flux_dof_li;
 	      cell_SDdata[cell_id].opposite_flux_dof_potential = opposite_flux_dof_potential;
 
 	      const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
@@ -231,11 +242,45 @@ void battery<dim>::identify_diffuse_interface()
         cell_SDdata[cell_id].xi_old(0) = 0.0;
         cell_SDdata[cell_id].xi_conv.reinit(1);
         cell_SDdata[cell_id].xi_conv(0) = 0.0;
-
         cell_SDdata[cell_id].Kcc.reinit(4,4);
         cell_SDdata[cell_id].Kcxi.reinit(4,1);
         cell_SDdata[cell_id].Kxic.reinit(1,4);
         cell_SDdata[cell_id].Kxixi_inv.reinit(1,1);
+
+        cell_SDdata[cell_id].rlocal_c_e.reinit(1);
+        cell_SDdata[cell_id].rlocal_c_e(0) = 0.0;
+        cell_SDdata[cell_id].xi_old_c_e.reinit(1);
+        cell_SDdata[cell_id].xi_old_c_e(0) = 0.0;
+        cell_SDdata[cell_id].xi_conv_c_e.reinit(1);
+        cell_SDdata[cell_id].xi_conv_c_e(0) = 0.0;
+        cell_SDdata[cell_id].Kcc_c_e.reinit(4,4);
+        cell_SDdata[cell_id].Kcxi_c_e.reinit(4,1);
+        cell_SDdata[cell_id].Kxic_c_e.reinit(1,4);
+        cell_SDdata[cell_id].Kxixi_inv_c_e.reinit(1,1);
+
+        cell_SDdata[cell_id].rlocal_phi_s.reinit(1);
+        cell_SDdata[cell_id].rlocal_phi_s(0) = 0.0;
+        cell_SDdata[cell_id].xi_old_phi_s.reinit(1);
+        cell_SDdata[cell_id].xi_old_phi_s(0) = 0.0;
+        cell_SDdata[cell_id].xi_conv_phi_s.reinit(1);
+        cell_SDdata[cell_id].xi_conv_phi_s(0) = 0.0;
+        cell_SDdata[cell_id].Kcc_phi_s.reinit(4,4);
+        cell_SDdata[cell_id].Kcxi_phi_s.reinit(4,1);
+        cell_SDdata[cell_id].Kxic_phi_s.reinit(1,4);
+        cell_SDdata[cell_id].Kxixi_inv_phi_s.reinit(1,1);
+
+        cell_SDdata[cell_id].rlocal_phi_e.reinit(1);
+        cell_SDdata[cell_id].rlocal_phi_e(0) = 0.0;
+        cell_SDdata[cell_id].xi_old_phi_e.reinit(1);
+        cell_SDdata[cell_id].xi_old_phi_e(0) = 0.0;
+        cell_SDdata[cell_id].xi_conv_phi_e.reinit(1);
+        cell_SDdata[cell_id].xi_conv_phi_e(0) = 0.0;
+        cell_SDdata[cell_id].Kcc_phi_e.reinit(4,4);
+        cell_SDdata[cell_id].Kcxi_phi_e.reinit(4,1);
+        cell_SDdata[cell_id].Kxic_phi_e.reinit(1,4);
+        cell_SDdata[cell_id].Kxixi_inv_phi_e.reinit(1,1);
+
+        cell_SDdata[cell_id].ULocal_k.reinit(40);
 
         unsigned int n_q_points = fe_values.n_quadrature_points;
         for (unsigned int q = 0; q < n_q_points; ++q) {
@@ -261,6 +306,7 @@ void battery<dim>::identify_diffuse_interface()
             cell_SDdata[cell_id].lnode_minus.push_back(i);
             count_smaller_c += 1;
           };
+          //std::cout << " --- ** -- " << i << std::endl;
         }
 
         std::vector<types::global_dof_index> local_face_dof_indices(this->fe_system[interface_id]->dofs_per_face);

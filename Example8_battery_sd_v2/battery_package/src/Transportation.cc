@@ -1,14 +1,21 @@
 /*
-zhenlin wang 2019
+zhenlin wang 2020
 *module transportation
 */
-#include "../include/PoissonEquation.h"
+#include "../include/Transportation.h"
 
 template <int dim>
-PoissonEquation<dim>::PoissonEquation(){}
+Transportation<dim>::Transportation(){}
 
 template <int dim>
-PoissonEquation<dim>::PoissonEquation(Battery_fields<dim>& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
+Transportation<dim>::Transportation(Battery_fields<dim>& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq)
+{
+	battery_fields=&_fields;
+	ResidualEq=&_ResidualEq;
+}
+
+template <int dim>
+Transportation<dim>::Transportation(Battery_fields<dim>& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
 	battery_fields=&_fields;
 	ResidualEq=&_ResidualEq;
@@ -16,39 +23,46 @@ PoissonEquation<dim>::PoissonEquation(Battery_fields<dim>& _fields, Residual<Sac
 }
 
 template <int dim>
-void PoissonEquation<dim>::set_up_fields(Battery_fields<dim>& _fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
+void Transportation<dim>::set_up_fields(Battery_fields<dim>& _battery_fields, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
-	battery_fields=&_fields;
+	battery_fields=&_battery_fields;
 	ResidualEq=&_ResidualEq;
 	primiary_dof=_primiary_dof;
 }
 
 template <int dim>
-void PoissonEquation<dim>::set_up_fields(Battery_fields<dim>& _fields, ElectricChemo<dim,Sacado::Fad::DFad<double>>& _electricChemoFormula, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
+void Transportation<dim>::set_up_fields(Battery_fields<dim>& _battery_fields, ElectricChemo<dim,Sacado::Fad::DFad<double>>& _electricChemoFormula, Residual<Sacado::Fad::DFad<double>,dim>& _ResidualEq, int _primiary_dof)
 {
-	battery_fields=&_fields;
+	battery_fields=&_battery_fields;
 	electricChemoFormula=&_electricChemoFormula;
 	ResidualEq=&_ResidualEq;
 	primiary_dof=_primiary_dof;
 }
 
+
 template <int dim>
-void PoissonEquation<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
+void Transportation<dim>::set_primiary_dof(int _primiary_dof)
 {
-//evaluate primary fields
-	unsigned int n_q_points= fe_values.n_quadrature_points;
-	
-	dealii::Table<2,Sacado::Fad::DFad<double> > field(n_q_points,dim);
-	dealii::Table<1,Sacado::Fad::DFad<double> > source(n_q_points);
-	set_field_and_source_term(field,source);
-	
-	//call residual functions
-	ResidualEq->residualForPoissonEq(fe_values, primiary_dof, R, field, source);
-	
+	primiary_dof=_primiary_dof;
 }
 
 template <int dim>
-void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv, std::vector<SDdata<dim>> &cell_SDdata)
+void Transportation<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
+{
+//evaluate primary fields
+	unsigned int n_q_points= fe_values.n_quadrature_points;
+	dealii::Table<1,Sacado::Fad::DFad<double> > react(n_q_points);
+	dealii::Table<2,Sacado::Fad::DFad<double> > diffu(n_q_points, dim);
+	diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[this->primiary_dof].value_grad,0);
+	react=table_scaling<1,Sacado::Fad::DFad<double>,double >(react,0);
+	set_diffusion_reaction_term(diffu,react);
+		
+	//call residual functions
+	ResidualEq->residualForDiff_ReacEq(fe_values,primiary_dof, R,battery_fields->quad_fields[primiary_dof].value, battery_fields->quad_fields[primiary_dof].value_conv, diffu,react);
+}
+
+template <int dim>
+void Transportation<dim>::r_get_residual_with_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv, std::vector<SDdata<dim>> &cell_SDdata)
 {
   int cell_id = cell->active_cell_index();
   unsigned int dofs_per_cell= fe_values.dofs_per_cell;
@@ -58,21 +72,21 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
   double D_1 = 1.0;
 //evaluate primary fields
 	unsigned int n_q_points= fe_values.n_quadrature_points;
-
-	dealii::Table<2,Sacado::Fad::DFad<double> > field(n_q_points,dim);
-	dealii::Table<1,Sacado::Fad::DFad<double> > source(n_q_points);
-	source=table_scaling<1,Sacado::Fad::DFad<double> > (source,0);
+	dealii::Table<1,Sacado::Fad::DFad<double> > react(n_q_points);
+	dealii::Table<2,Sacado::Fad::DFad<double> > diffu(n_q_points, dim);
+	diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[this->primiary_dof].value_grad,0);
+	react=table_scaling<1,Sacado::Fad::DFad<double>,double >(react,0);
   // Question: what's the diffusion coefficient for this part?
 
   dealii::Table<1, double> coeff(n_q_points);
   for (unsigned int q = 0; q < n_q_points; q++) {
     coeff[q] = 1.0;
-    for (unsigned int i=0; i<dim; ++i) field[q][i] = D_1 * battery_fields->quad_fields[primiary_dof].value_grad[q][i]; // is there a minus sign needed?
-		//field=battery_fields->quad_fields[primiary_dof].value_grad;
+    for (unsigned int i=0; i<dim; ++i) diffu[q][i]=- D_1 * battery_fields->quad_fields[primiary_dof].value_grad[q][i];
   }
 		
   //std::cout << "--b0-0 (primary_dof)--: " << primiary_dof << " " << this->primiary_dof  << std::endl;
 	//call residual functions
+	//ResidualEq->residualForDiff_ReacEq(fe_values,primiary_dof, R,battery_fields->quad_fields[primiary_dof].value, battery_fields->quad_fields[primiary_dof].value_conv, diffu,react);
   int DOF = primiary_dof;
   std::vector<int> this_dof_local_index;
   {
@@ -105,25 +119,25 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
   Vector<double> dxi_k1;
   dxi_k1.reinit(1);
   Table<1, Sacado::Fad::DFad<double>> xi_0(1);  // define sacado xi_0 for stiffness calculation.
-  if (primiary_dof != cell_SDdata[cell_id].opposite_flux_dof_potential)
+  if (primiary_dof != cell_SDdata[cell_id].opposite_flux_dof_li)
   { // for electrode
-    cell_SDdata[cell_id].Kxic_phi_s.vmult(dxi_k1, dC_k1);
-    cell_SDdata[cell_id].rlocal_phi_s -= dxi_k1;
-    cell_SDdata[cell_id].rlocal_phi_s[0] += cell_SDdata[cell_id].reaction_rate_potential * cell_SDdata[cell_id].interface_length;
-    cell_SDdata[cell_id].Kxixi_inv_phi_s.vmult(dxi_k1, cell_SDdata[cell_id].rlocal_phi_s);
-    xi_0[0] = cell_SDdata[cell_id].xi_old_phi_s(0) + dxi_k1(0);  
-    cell_SDdata[cell_id].xi_old_phi_s(0) = xi_0[0].val();
+    cell_SDdata[cell_id].Kxic.vmult(dxi_k1, dC_k1);
+    cell_SDdata[cell_id].rlocal -= dxi_k1;
+    cell_SDdata[cell_id].rlocal[0] += cell_SDdata[cell_id].reaction_rate_li * cell_SDdata[cell_id].interface_length;
+    cell_SDdata[cell_id].Kxixi_inv.vmult(dxi_k1, cell_SDdata[cell_id].rlocal);
+    xi_0[0] = cell_SDdata[cell_id].xi_old(0) + dxi_k1(0);  
+    cell_SDdata[cell_id].xi_old(0) = xi_0[0].val();
     //std::cout << "--a0-0--"  << std::endl;
   }
   else
-  { // for electrolyte
+  {// for electrolyte
     //std::cout << "--a0-1--" << std::endl;
-    cell_SDdata[cell_id].Kxic_phi_e.vmult(dxi_k1, dC_k1);
-    cell_SDdata[cell_id].rlocal_phi_e -= dxi_k1;
-    cell_SDdata[cell_id].rlocal_phi_e[0] += (-1 * cell_SDdata[cell_id].reaction_rate_potential) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
-    cell_SDdata[cell_id].Kxixi_inv_phi_e.vmult(dxi_k1, cell_SDdata[cell_id].rlocal_phi_e);
-    xi_0[0] = cell_SDdata[cell_id].xi_old_phi_e(0) + dxi_k1(0);  
-    cell_SDdata[cell_id].xi_old_phi_e(0) = xi_0[0].val();
+    cell_SDdata[cell_id].Kxic_c_e.vmult(dxi_k1, dC_k1);
+    cell_SDdata[cell_id].rlocal_c_e -= dxi_k1;
+    cell_SDdata[cell_id].rlocal_c_e[0] += (-1 *cell_SDdata[cell_id].reaction_rate_li) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
+    cell_SDdata[cell_id].Kxixi_inv_c_e.vmult(dxi_k1, cell_SDdata[cell_id].rlocal_c_e);
+    xi_0[0] = cell_SDdata[cell_id].xi_old_c_e(0) + dxi_k1(0);  
+    cell_SDdata[cell_id].xi_old_c_e(0) = xi_0[0].val();
   }
   xi_0[0].diff(0, 1);
 
@@ -163,7 +177,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
     }
   }
     
-  if (primiary_dof != cell_SDdata[cell_id].opposite_flux_dof_potential)
+  if (primiary_dof != cell_SDdata[cell_id].opposite_flux_dof_li)
   { // for electrode
     std::vector<double> Ms_list;
     for (unsigned int q = 0; q < n_q_points; ++q) {
@@ -189,9 +203,9 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
         }
       }
       c_1_tilde[q] = Ms * ULocal_xi[dofs_per_cell];
-      c_1_tilde_conv[q] = Ms * cell_SDdata[cell_id].xi_conv_phi_s[0];
+      c_1_tilde_conv[q] = Ms * cell_SDdata[cell_id].xi_conv[0];
     }
-    rr[0] = - cell_SDdata[cell_id].reaction_rate_potential * cell_SDdata[cell_id].interface_length;
+    rr[0] = - cell_SDdata[cell_id].reaction_rate_li * cell_SDdata[cell_id].interface_length;
 
     //std::cout << "--a2--" << rr[0] << std::endl;
 
@@ -201,7 +215,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
     //std::cout << "--a2-1--" << rxixi[0]  << std::endl;
 
     for (unsigned int q = 0; q < n_q_points; ++q) {
-        rxic[0] += cell_SDdata[cell_id].interface_length /  dummy_area * (cell_SDdata[cell_id].computed_area /dummy_area)  * (field[q][0] * cell_SDdata[cell_id].crk_n[0] + field[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); 
+        rxic[0] += cell_SDdata[cell_id].interface_length /  dummy_area * (cell_SDdata[cell_id].computed_area /dummy_area)  * (diffu[q][0] * cell_SDdata[cell_id].crk_n[0] + diffu[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); 
     }
     //std::cout << "--a2-2--" << rxic[0] << std::endl;
 
@@ -211,6 +225,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
       for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_plus.size(); ++i) {
         int plus_node = this_dof_local_index[cell_SDdata[cell_id].lnode_plus[i]];
           //std::cout << "--a2-3--" << i << " " << q << " " << plus_node << " " << cell_SDdata[cell_id].lnode_plus[i] << std::endl;
+        Rcxi[cell_SDdata[cell_id].lnode_plus[i]] +=  fe_values.shape_value(plus_node, q)*((c_1_tilde[q]-c_1_tilde_conv[q])/ResidualEq->dt)*fe_values.JxW(q);
         for (unsigned int j = 0; j < dim; j++) {
           Rcxi[cell_SDdata[cell_id].lnode_plus[i]] += - coeff[q] * D_1 * c_1_tilde_grad[q][j] * fe_values.shape_grad(plus_node, q)[j] * fe_values.JxW(q);  
           //std::cout << "--a2-4--" << plus_node << " " << cell_SDdata[cell_id].lnode_plus[i]<< std::endl;
@@ -245,8 +260,9 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
     for (unsigned int q = 0; q < n_q_points; ++q) {
       for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_plus.size(); ++i) {
         int plus_node = this_dof_local_index[cell_SDdata[cell_id].lnode_plus[i]];
+          Rcc[cell_SDdata[cell_id].lnode_plus[i]] +=  fe_values.shape_value(plus_node, q)*((battery_fields->quad_fields[primiary_dof].value[q]-battery_fields->quad_fields[primiary_dof].value_conv[q])/ResidualEq->dt)*fe_values.JxW(q);
         for (unsigned int j = 0; j < dim; j++) {
-            Rcc[cell_SDdata[cell_id].lnode_plus[i]] += -fe_values.shape_grad(plus_node, q)[j]*field[q][j]*fe_values.JxW(q); // oscillation
+            Rcc[cell_SDdata[cell_id].lnode_plus[i]] += -fe_values.shape_grad(plus_node, q)[j]*diffu[q][j]*fe_values.JxW(q); // oscillation
         }
       }
     }
@@ -271,9 +287,9 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
       }
     }
 
-    cell_SDdata[cell_id].Kxic_phi_s = Kxic;
-    cell_SDdata[cell_id].rlocal_phi_s[0] = rr[0].val();
-    cell_SDdata[cell_id].Kxixi_inv_phi_s(0,0) = 1.0/Kxixi(0,0);
+    cell_SDdata[cell_id].Kxic = Kxic;
+    cell_SDdata[cell_id].rlocal[0] = rr[0].val();
+    cell_SDdata[cell_id].Kxixi_inv(0,0) = 1.0/Kxixi(0,0);
     //std::cout << "--a4-2-- " << std::endl;
 
   }
@@ -303,9 +319,9 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
         }
       }
       c_1_tilde[q] = Ms * ULocal_xi[dofs_per_cell];
-      c_1_tilde_conv[q] = Ms * cell_SDdata[cell_id].xi_conv_phi_e[0];
+      c_1_tilde_conv[q] = Ms * cell_SDdata[cell_id].xi_conv_c_e[0];
     }
-    rr[0] = - (-1.0 * cell_SDdata[cell_id].reaction_rate_potential) * cell_SDdata[cell_id].interface_length;
+    rr[0] = - ( -1 * cell_SDdata[cell_id].reaction_rate_li) * cell_SDdata[cell_id].interface_length;
 
     //std::cout << "--a2--" << rr[0] << std::endl;
 
@@ -315,7 +331,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
     //std::cout << "--a2-1--" << rxixi[0]  << std::endl;
 
     for (unsigned int q = 0; q < n_q_points; ++q) {
-        rxic[0] += cell_SDdata[cell_id].interface_length /  dummy_area * (cell_SDdata[cell_id].computed_area /dummy_area)  * (- field[q][0] * cell_SDdata[cell_id].crk_n[0] - field[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); 
+        rxic[0] += cell_SDdata[cell_id].interface_length /  dummy_area * (cell_SDdata[cell_id].computed_area /dummy_area)  * (- diffu[q][0] * cell_SDdata[cell_id].crk_n[0] - diffu[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); 
     }
     //std::cout << "--a2-2--" << rxic[0] << std::endl;
 
@@ -325,6 +341,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
       for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
         int minus_node = this_dof_local_index[cell_SDdata[cell_id].lnode_minus[i]];
           //std::cout << "--a2-3--" << i << " " << q << " " << minus_node << " " << cell_SDdata[cell_id].lnode_minus[i] << std::endl;
+        Rcxi[cell_SDdata[cell_id].lnode_minus[i]] +=  fe_values.shape_value(minus_node, q)*((c_1_tilde[q]-c_1_tilde_conv[q])/ResidualEq->dt)*fe_values.JxW(q);
         for (unsigned int j = 0; j < dim; j++) {
           Rcxi[cell_SDdata[cell_id].lnode_minus[i]] += - coeff[q] * D_1 * c_1_tilde_grad[q][j] * fe_values.shape_grad(minus_node, q)[j] * fe_values.JxW(q);  
           //std::cout << "--a2-4--" << minus_node << " " << cell_SDdata[cell_id].lnode_minus[i]<< std::endl;
@@ -359,16 +376,17 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
     for (unsigned int q = 0; q < n_q_points; ++q) {
       for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
         int minus_node = this_dof_local_index[cell_SDdata[cell_id].lnode_minus[i]];
+          Rcc[cell_SDdata[cell_id].lnode_minus[i]] +=  fe_values.shape_value(minus_node, q)*((battery_fields->quad_fields[primiary_dof].value[q]-battery_fields->quad_fields[primiary_dof].value_conv[q])/ResidualEq->dt)*fe_values.JxW(q);
         for (unsigned int j = 0; j < dim; j++) {
-            Rcc[cell_SDdata[cell_id].lnode_minus[i]] += -fe_values.shape_grad(minus_node, q)[j]*field[q][j]*fe_values.JxW(q); // oscillation
+            Rcc[cell_SDdata[cell_id].lnode_minus[i]] += -fe_values.shape_grad(minus_node, q)[j]*diffu[q][j]*fe_values.JxW(q); // oscillation
         }
       }
     }
 
-    //std::cout << "--a4-- [0]" << Rcc[0] << std::endl;
-    //std::cout << "--a4-- [1]" << Rcc[1] << std::endl;
-    //std::cout << "--a4-- [2]" << Rcc[2] << std::endl;
-    //std::cout << "--a4-- [3]" << Rcc[3] << std::endl;
+    std::cout << "--a4-- [0]" << Rcc[0] << std::endl;
+    std::cout << "--a4-- [1]" << Rcc[1] << std::endl;
+    std::cout << "--a4-- [2]" << Rcc[2] << std::endl;
+    std::cout << "--a4-- [3]" << Rcc[3] << std::endl;
     //for (unsigned int i = 0; i < dofs_per_cell; ++i) {
       //R[i] = (Rcc[i] + Rcxi[i] - Kcxi(i,0) / Kxixi(0,0) * rr[0]) * (cell_SDdata[cell_id].computed_area /dummy_area) ; 
     //}
@@ -385,24 +403,26 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
       }
     }
 
-    cell_SDdata[cell_id].Kxic_phi_e = Kxic;
-    cell_SDdata[cell_id].rlocal_phi_e[0] = rr[0].val();
-    cell_SDdata[cell_id].Kxixi_inv_phi_e(0,0) = 1.0/Kxixi(0,0);
+    cell_SDdata[cell_id].Kxic_c_e = Kxic;
+    cell_SDdata[cell_id].rlocal_c_e[0] = rr[0].val();
+    cell_SDdata[cell_id].Kxixi_inv_c_e(0,0) = 1.0/Kxixi(0,0);
     //std::cout << "--a4-2-- " << std::endl;
   }
     //std::cout << "--a4-4-- " << std::endl;
-	
 }
-
-// should here a minus sign for the field?
 
 template <int dim>
-void PoissonEquation<dim>::set_field_and_source_term(dealii::Table<2,Sacado::Fad::DFad<double> >& field, dealii::Table<1,Sacado::Fad::DFad<double> >& source)
+void Transportation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react)
 {
-	field=battery_fields->quad_fields[primiary_dof].value_grad;
-	source=table_scaling<1,Sacado::Fad::DFad<double> > (source,0);
+	unsigned int n_q_points= react.size(0);
+	for (unsigned int q=0; q<n_q_points; ++q) {
+		react[q]=0;
+    for (unsigned int i=0; i<dim; ++i) diffu[q][i]=-battery_fields->quad_fields[primiary_dof].value_grad[q][i];
+		//for (unsigned int i=0; i<dim; ++i) diffu[q][i]=0.0;
+	}
 }
 
-template class PoissonEquation<1>;
-template class PoissonEquation<2>;
-template class PoissonEquation<3>;
+
+template class Transportation<1>;
+template class Transportation<2>;
+template class Transportation<3>;

@@ -383,10 +383,10 @@ void Transportation<dim>::r_get_residual_with_interface(const typename hp::DoFHa
       }
     }
 
-    std::cout << "--a4-- [0]" << Rcc[0] << std::endl;
-    std::cout << "--a4-- [1]" << Rcc[1] << std::endl;
-    std::cout << "--a4-- [2]" << Rcc[2] << std::endl;
-    std::cout << "--a4-- [3]" << Rcc[3] << std::endl;
+    //std::cout << "--a4-- [0]" << Rcc[0] << std::endl;
+    //std::cout << "--a4-- [1]" << Rcc[1] << std::endl;
+    //std::cout << "--a4-- [2]" << Rcc[2] << std::endl;
+    //std::cout << "--a4-- [3]" << Rcc[3] << std::endl;
     //for (unsigned int i = 0; i < dofs_per_cell; ++i) {
       //R[i] = (Rcc[i] + Rcxi[i] - Kcxi(i,0) / Kxixi(0,0) * rr[0]) * (cell_SDdata[cell_id].computed_area /dummy_area) ; 
     //}

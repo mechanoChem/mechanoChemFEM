@@ -33,7 +33,7 @@ void Lithium_cation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 	dealii::Table<2,Sacado::Fad::DFad<double> > i_phi_e(n_q_points, dim);
 	for(unsigned int q=0; q<n_q_points;q++){
 		for(unsigned int i=0; i<dim;i++){
-			i_phi_e[q][i]-sigma_e[q]*phi_e_grad[q][i]+2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
+			i_phi_e[q][i]=sigma_e[q]*phi_e_grad[q][i]+2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
 			diffu[q][i]=-D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
 		}
 	}
@@ -47,7 +47,7 @@ void Lithium_cation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 }
 
 template <int dim>
-void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react, dealii::Table<2, Sacado::Fad::DFad<double>> &phi_e_grad, dealii::Table<2, Sacado::Fad::DFad<double>> &c_li_plus_grad, dealii::Table<1, Sacado::Fad::DFad<double>> &c_li_plus)
+void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react, dealii::Table<2, Sacado::Fad::DFad<double>> &phi_e_grad, dealii::Table<2, Sacado::Fad::DFad<double>> &c_li_plus_grad, dealii::Table<1, Sacado::Fad::DFad<double>> &c_li_plus, dealii::Table<1, double> &c_li_plus_old)
 {	
 	double Rr=(*params_json)["ElectroChemo"]["Rr"];
 	double t_0=(*params_json)["ElectroChemo"]["t_0"];
@@ -62,14 +62,15 @@ void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,
 	//dealii::Table<1,Sacado::Fad::DFad<double>> c_li_plus=this->battery_fields->quad_fields[c_li_plus_index].value;
 	//dealii::Table<2,Sacado::Fad::DFad<double>> c_li_plus_grad=this->battery_fields->quad_fields[c_li_plus_index].value_grad;
 
-	dealii::Table<1,Sacado::Fad::DFad<double> > D_li_plus=this->electricChemoFormula->D_li_plus();
-	dealii::Table<1,Sacado::Fad::DFad<double>> sigma_e = this->electricChemoFormula->sigma_e();
+	dealii::Table<1,double> D_li_plus=this->electricChemoFormula->D_li_plus_interface(c_li_plus_old);
+	dealii::Table<1,double> sigma_e = this->electricChemoFormula->sigma_e_interface(c_li_plus_old);
 
 	dealii::Table<2,Sacado::Fad::DFad<double> > i_phi_e(n_q_points, dim);
 	for(unsigned int q=0; q<n_q_points;q++){
 		for(unsigned int i=0; i<dim;i++){
-			i_phi_e[q][i]-sigma_e[q]*phi_e_grad[q][i]+2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
-			diffu[q][i]=-D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
+			i_phi_e[q][i] = sigma_e[q]*phi_e_grad[q][i]+2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
+      diffu[q][i]=-D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
+      //std::cout << " i_phi_e[q][i] " <<  q << " i " << i << " " << i_phi_e[q][i] << std::endl;
 		}
 	}
 	// double M=(*params_json)["ElectroChemo"]["D_li_plus"];

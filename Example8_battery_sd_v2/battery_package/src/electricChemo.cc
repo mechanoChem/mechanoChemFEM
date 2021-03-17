@@ -79,6 +79,27 @@ dealii::Table<1,T > ElectricChemo<dim, T>::sigma_e(int type)
 }
 
 template <int dim, class T>
+dealii::Table<1,double > ElectricChemo<dim, T>::sigma_e_interface(dealii::Table<1,double> &C_li_plus_q, int type )
+{
+	double Temp=(*params_ElectricChemo_json)["ElectroChemo"]["T_0"];
+	int c_li_plus_index=battery_fields->active_fields_index["Lithium_cation"];
+
+	unsigned int n_q_points= C_li_plus_q.size(0);
+	double c_li_plus;
+	dealii::Table<1,double > _sigma_e(n_q_points);
+	
+	if(type==1) {
+		for(unsigned int q=0; q<n_q_points;q++){
+			c_li_plus=C_li_plus_q[q];
+			_sigma_e[q]=c_li_plus*std::pow(-10.5+0.074*Temp-6.96e-5*Temp*Temp+668*c_li_plus-17.8*c_li_plus*Temp+0.028*c_li_plus*Temp*Temp+4.94e5*c_li_plus*c_li_plus-886*c_li_plus*c_li_plus*Temp,2.0)*1.0e8;
+		}
+	}
+	else {std::cout<<"wrong type for Ke"<<std::endl; exit(-1);}
+	return _sigma_e;
+}
+
+
+template <int dim, class T>
 dealii::Table<1,T > ElectricChemo<dim, T>::D_li_plus(int type)
 {
 	double Temp=(*params_ElectricChemo_json)["ElectroChemo"]["T_0"];
@@ -100,6 +121,25 @@ dealii::Table<1,T > ElectricChemo<dim, T>::D_li_plus(int type)
 }
 
 
+template <int dim, class T>
+dealii::Table<1,double > ElectricChemo<dim, T>::D_li_plus_interface(dealii::Table<1,double> &C_li_plus_q, int type)
+{
+	double Temp=(*params_ElectricChemo_json)["ElectroChemo"]["T_0"];
+	
+	int c_li_plus_index=battery_fields->active_fields_index["Lithium_cation"];
+	unsigned int n_q_points= C_li_plus_q.size(0);
+	
+	dealii::Table<1,double > _D_li_plus(n_q_points);
+	double c_li_plus;
+	if(type==1) {
+		for(unsigned int q=0; q<n_q_points;q++){
+			c_li_plus=C_li_plus_q[q];
+			_D_li_plus[q]=std::pow(10,(-4.43-54/(Temp-229-5e3*c_li_plus)-2.2e2*c_li_plus))*1.0e8;
+		}
+	}
+	else {std::cout<<"wrong type for D_l"<<std::endl; exit(-1);}
+	return _D_li_plus;
+}
 
 
 

@@ -37,7 +37,7 @@ void Electrolyte_potential<dim>::set_field_and_source_term(dealii::Table<2,Sacad
 }
 
 template <int dim>
-void Electrolyte_potential<dim>::set_field_and_source_term_interface(dealii::Table<2,Sacado::Fad::DFad<double> >& field, dealii::Table<1,Sacado::Fad::DFad<double> >& source, dealii::Table<2, Sacado::Fad::DFad<double>> &phi_e_grad, dealii::Table<2, Sacado::Fad::DFad<double>> &c_li_plus_grad, dealii::Table<1, Sacado::Fad::DFad<double>> &c_li_plus)
+void Electrolyte_potential<dim>::set_field_and_source_term_interface(dealii::Table<2,Sacado::Fad::DFad<double> >& field, dealii::Table<1,Sacado::Fad::DFad<double> >& source, dealii::Table<2, Sacado::Fad::DFad<double>> &phi_e_grad, dealii::Table<2, Sacado::Fad::DFad<double>> &c_li_plus_grad, dealii::Table<1, Sacado::Fad::DFad<double>> &c_li_plus, dealii::Table<1, double> &c_li_plus_old)
 {
 	double Rr=(*params_json)["ElectroChemo"]["Rr"];
 	double t_0=(*params_json)["ElectroChemo"]["t_0"];
@@ -45,7 +45,7 @@ void Electrolyte_potential<dim>::set_field_and_source_term_interface(dealii::Tab
 	double Temp=(*params_json)["ElectroChemo"]["T_0"];
 	unsigned int n_q_points= source.size(0);
 	
-	dealii::Table<1,Sacado::Fad::DFad<double>>sigma_e = this->electricChemoFormula->sigma_e();
+	dealii::Table<1,double>sigma_e = this->electricChemoFormula->sigma_e_interface(c_li_plus_old);
 	int phi_e_index=this->battery_fields->active_fields_index["Electrolyte_potential"];
 	int c_li_plus_index=this->battery_fields->active_fields_index["Lithium_cation"];
 	//dealii::Table<2,Sacado::Fad::DFad<double>> phi_e_grad=this->battery_fields->quad_fields[phi_e_index].value_grad;
@@ -53,8 +53,12 @@ void Electrolyte_potential<dim>::set_field_and_source_term_interface(dealii::Tab
 	//dealii::Table<2,Sacado::Fad::DFad<double>> c_li_plus_grad=this->battery_fields->quad_fields[c_li_plus_index].value_grad;
 	
 	for(unsigned int q=0; q<n_q_points;q++){
+    //std::cout << "sigma_e " << q << " "  << sigma_e[q] << std::endl;
+    //std::cout << "c_li_plus " << q << " "  << c_li_plus[q] << " homo " << this->battery_fields->quad_fields[c_li_plus_index].value[q]<< std::endl;
 		for(unsigned int i=0; i<dim;i++){
 			field[q][i]=-sigma_e[q]*phi_e_grad[q][i]+2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i]; 
+      //std::cout << "phi_e_grad " << q << " i " << i << " "  << phi_e_grad[q][i] << " homo " << this->battery_fields->quad_fields[phi_e_index].value_grad[q][i] << std::endl;
+      //std::cout << "c_li_plus_grad " << q << " i " << i << " "  << c_li_plus_grad[q][i] << " homo " << this->battery_fields->quad_fields[c_li_plus_index].value_grad[q][i] << std::endl;
 		}
 	}
 	table_scaling<1,Sacado::Fad::DFad<double> > (source,0);

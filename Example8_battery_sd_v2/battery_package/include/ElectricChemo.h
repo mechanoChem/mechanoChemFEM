@@ -28,6 +28,9 @@ public:
 	
 	dealii::Table<1,T > D_li_plus(int type=1);
 	dealii::Table<1,T > sigma_e(int type=1);
+
+	dealii::Table<1,double > sigma_e_interface(dealii::Table<1,double> &C_li_plus_q, int type=1);
+	dealii::Table<1,double > D_li_plus_interface(dealii::Table<1,double> &C_li_plus_q, int type=1);
 	
 	
 

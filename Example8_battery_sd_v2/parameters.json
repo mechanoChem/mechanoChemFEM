@@ -79,7 +79,7 @@
 		}
   },
 	"Nonlinear_solver":{
-		"max_iterations": 10,
+		"max_iterations": 20,
 		"absolute_norm_tolerance": 1e-6
 	}
 }

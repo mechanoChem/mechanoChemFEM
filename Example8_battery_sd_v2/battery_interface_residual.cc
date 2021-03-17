@@ -389,7 +389,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
 
     rr_Lithium[0] = - cell_SDdata[cell_id].reaction_rate_li * cell_SDdata[cell_id].interface_length;
-    rr_Lithium_cation[0] = - ( -1 * cell_SDdata[cell_id].reaction_rate_li) * cell_SDdata[cell_id].interface_length;
+    rr_Lithium_cation[0] = - ( -1.0 * cell_SDdata[cell_id].reaction_rate_li) * cell_SDdata[cell_id].interface_length;
     rr_Electrode_potential[0] = - cell_SDdata[cell_id].reaction_rate_potential * cell_SDdata[cell_id].interface_length;
     rr_Electrolyte_potential[0] = - (-1.0 * cell_SDdata[cell_id].reaction_rate_potential) * cell_SDdata[cell_id].interface_length;
 
@@ -398,8 +398,8 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     for (unsigned int q = 0; q < n_q_points; ++q) {
           rxixi_Lithium[0] += cell_SDdata[cell_id].interface_length / dummy_area * (cell_SDdata[cell_id].computed_area /dummy_area)  * ( c_1_tilde_grad_Lithium[q][0] * cell_SDdata[cell_id].crk_n[0] +  c_1_tilde_grad_Lithium[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); 
           rxixi_Lithium_cation[0] += cell_SDdata[cell_id].interface_length / dummy_area_opposite * (cell_SDdata[cell_id].computed_area /dummy_area_opposite)  * ( - c_1_tilde_grad_Lithium_cation[q][0] * cell_SDdata[cell_id].crk_n[0] -  c_1_tilde_grad_Lithium_cation[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); // crk_n direction is reversed
-          rxixi_Electrode_potential[0] += cell_SDdata[cell_id].interface_length / dummy_area * (cell_SDdata[cell_id].computed_area /dummy_area)  * ( - c_1_tilde_grad_Electrode_potential[q][0] * cell_SDdata[cell_id].crk_n[0] -  c_1_tilde_grad_Electrode_potential[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); // crk_n direction is reversed
-          rxixi_Electrolyte_potential[0] += cell_SDdata[cell_id].interface_length / dummy_area_opposite * (cell_SDdata[cell_id].computed_area /dummy_area_opposite)  * ( c_1_tilde_grad_Electrolyte_potential[q][0] * cell_SDdata[cell_id].crk_n[0] +  c_1_tilde_grad_Electrolyte_potential[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); 
+          rxixi_Electrode_potential[0] += cell_SDdata[cell_id].interface_length / dummy_area * (cell_SDdata[cell_id].computed_area /dummy_area)  * (  c_1_tilde_grad_Electrode_potential[q][0] * cell_SDdata[cell_id].crk_n[0] +  c_1_tilde_grad_Electrode_potential[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); // crk_n direction is reversed
+          rxixi_Electrolyte_potential[0] += cell_SDdata[cell_id].interface_length / dummy_area_opposite * (cell_SDdata[cell_id].computed_area /dummy_area_opposite)  * (- c_1_tilde_grad_Electrolyte_potential[q][0] * cell_SDdata[cell_id].crk_n[0] - c_1_tilde_grad_Electrolyte_potential[q][1] * cell_SDdata[cell_id].crk_n[1]) * fe_values.JxW(q); 
      }
 
     //std::cout << "--a2-1--" << rxixi[0]  << std::endl;
@@ -416,6 +416,9 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     rr_Lithium_cation[0] += rxixi_Lithium_cation[0] + rxic_Lithium_cation[0];
     rr_Electrode_potential[0] += rxixi_Electrode_potential[0] + rxic_Electrode_potential[0];
     rr_Electrolyte_potential[0] += rxixi_Electrolyte_potential[0] + rxic_Electrolyte_potential[0];
+
+    //std::cout << "--rxic a3-- [0]" << rxic_Lithium_cation[0] << std::endl;
+    //std::cout << "--rr a3-- [0]" << rr_Lithium_cation[0] << std::endl;
 
 
 
@@ -438,15 +441,18 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       }
     }
 
+    dealii::Table<2,Sacado::Fad::DFad<double> > diffu_Lithium_cation_tilde(n_q_points, dim);
+    dealii::Table<1,Sacado::Fad::DFad<double> > react_Lithium_cation_tilde(n_q_points);
+    //lithium_cation.set_diffusion_reaction_term_interface(diffu_Lithium_cation_tilde, react_Lithium_cation_tilde, c_1_tilde_grad_Electrolyte_potential, c_1_tilde_grad_Lithium_cation, c_1_tilde_Lithium_cation, battery_fields.quad_fields[DOF_Lithium_cation].value_conv);
+    lithium_cation.set_diffusion_reaction_term_interface(diffu_Lithium_cation_tilde, react_Lithium_cation_tilde, battery_fields.quad_fields[DOF_Electrolyte_potential].value_grad, battery_fields.quad_fields[DOF_Lithium_cation].value_grad, battery_fields.quad_fields[DOF_Lithium_cation].value, battery_fields.quad_fields[DOF_Lithium_cation].value_conv);
     // carefully rewrite the code this part to make sure everything is correct.
     for (unsigned int q = 0; q < n_q_points; ++q) {
-      double D_1 = 1.0;
       for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
         int minus_node = this_dof_local_index_Lithium_cation[cell_SDdata[cell_id].lnode_minus[i]];
           //std::cout << "--a2-3--" << i << " " << q << " " << minus_node << " " << cell_SDdata[cell_id].lnode_minus[i] << std::endl;
         Rcxi_Lithium_cation[cell_SDdata[cell_id].lnode_minus[i]] +=  fe_values.shape_value(minus_node, q)*((c_1_tilde_Lithium_cation[q]- c_1_tilde_conv_Lithium_cation[q])/this->current_dt)*fe_values.JxW(q);
         for (unsigned int j = 0; j < dim; j++) {
-          Rcxi_Lithium_cation[cell_SDdata[cell_id].lnode_minus[i]] += - coeff[q] * D_1 * c_1_tilde_grad_Lithium_cation[q][j] * fe_values.shape_grad(minus_node, q)[j] * fe_values.JxW(q);  
+          Rcxi_Lithium_cation[cell_SDdata[cell_id].lnode_minus[i]] += diffu_Lithium_cation_tilde[q][j] * fe_values.shape_grad(minus_node, q)[j] * fe_values.JxW(q);  
           //std::cout << "--a2-4--" << minus_node << " " << cell_SDdata[cell_id].lnode_minus[i]<< std::endl;
         }
       }
@@ -467,18 +473,32 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       }
     }
 
+	  dealii::Table<2,Sacado::Fad::DFad<double> > field_Electrolyte_potential_tilde(n_q_points,dim);
+	  dealii::Table<1,Sacado::Fad::DFad<double> > source_Electrolyte_potential_tilde(n_q_points);
+    //phi_e.set_field_and_source_term_interface(field_Electrolyte_potential_tilde, source_Electrolyte_potential_tilde, c_1_tilde_grad_Electrolyte_potential, c_1_tilde_grad_Lithium_cation, c_1_tilde_Lithium_cation, battery_fields.quad_fields[DOF_Lithium_cation].value_conv);
+    phi_e.set_field_and_source_term_interface(field_Electrolyte_potential_tilde, source_Electrolyte_potential_tilde, battery_fields.quad_fields[DOF_Electrolyte_potential].value_grad, battery_fields.quad_fields[DOF_Lithium_cation].value_grad, battery_fields.quad_fields[DOF_Lithium_cation].value, battery_fields.quad_fields[DOF_Lithium_cation].value_conv);
     for (unsigned int q = 0; q < n_q_points; ++q) {
-      double D_1 = 1.0;
       for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
         int minus_node = this_dof_local_index_Electrolyte_potential[cell_SDdata[cell_id].lnode_minus[i]];
           //std::cout << "--a2-3--" << i << " " << q << " " << minus_node << " " << cell_SDdata[cell_id].lnode_minus[i] << std::endl;
         for (unsigned int j = 0; j < dim; j++) {
-          Rcxi_Electrolyte_potential[cell_SDdata[cell_id].lnode_minus[i]] += - coeff[q] * D_1 * c_1_tilde_grad_Electrolyte_potential[q][j] * fe_values.shape_grad(minus_node, q)[j] * fe_values.JxW(q);  
+          Rcxi_Electrolyte_potential[cell_SDdata[cell_id].lnode_minus[i]] += field_Electrolyte_potential_tilde[q][j] * fe_values.shape_grad(minus_node, q)[j] * fe_values.JxW(q);  
           //std::cout << "--a2-4--" << minus_node << " " << cell_SDdata[cell_id].lnode_minus[i]<< std::endl;
+          //std::cout << "--a2-4--" << minus_node << " q " << q << " j " << j << " " << field_Electrolyte_potential_tilde[q][j]<< std::endl;
         }
       }
     }
     ////std::cout << "--a3--" << primiary_dof << " rr[0]" << rr[0] << std::endl;
+    //std::cout << "--Rcxi a3-- [0]" << Rcxi_Electrolyte_potential[0] << std::endl;
+    //std::cout << "--Rcxi a3-- [1]" << Rcxi_Electrolyte_potential[1] << std::endl;
+    //std::cout << "--Rcxi a3-- [2]" << Rcxi_Electrolyte_potential[2] << std::endl;
+    //std::cout << "--Rcxi a3-- [3]" << Rcxi_Electrolyte_potential[3] << std::endl;
+    //std::cout << "--Rcxi a3-- [0]" << Rcxi_Lithium_cation[0] << std::endl;
+    //std::cout << "--Rcxi a3-- [1]" << Rcxi_Lithium_cation[1] << std::endl;
+    //std::cout << "--Rcxi a3-- [2]" << Rcxi_Lithium_cation[2] << std::endl;
+    //std::cout << "--Rcxi a3-- [3]" << Rcxi_Lithium_cation[3] << std::endl;
+    //
+    //
 
     FullMatrix<double> Kxixi_Lithium;
     Kxixi_Lithium.reinit(1, 1);
@@ -600,6 +620,16 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       }
     }
 
+    //std::cout << "--Rcc a4-- [0]" << Rcc_Lithium_cation[0] << std::endl;
+    //std::cout << "--Rcc a4-- [1]" << Rcc_Lithium_cation[1] << std::endl;
+    //std::cout << "--Rcc a4-- [2]" << Rcc_Lithium_cation[2] << std::endl;
+    //std::cout << "--Rcc a4-- [3]" << Rcc_Lithium_cation[3] << std::endl;
+
+
+    //std::cout << "--Rcc a4-- [0]" << Rcc_Electrolyte_potential[0] << std::endl;
+    //std::cout << "--Rcc a4-- [1]" << Rcc_Electrolyte_potential[1] << std::endl;
+    //std::cout << "--Rcc a4-- [2]" << Rcc_Electrolyte_potential[2] << std::endl;
+    //std::cout << "--Rcc a4-- [3]" << Rcc_Electrolyte_potential[3] << std::endl;
     //std::cout << "--a4-- [0]" << Rcc_Lithium[0] << std::endl;
     //std::cout << "--a4-- [1]" << Rcc_Lithium[1] << std::endl;
     //std::cout << "--a4-- [2]" << Rcc_Lithium[2] << std::endl;
@@ -628,7 +658,10 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       }
 
       if (ck == DOF_Electrolyte_potential ) {
+        //std::cout << "R[i] " << R[i] << std::endl;
         R[i] = (Rcc_Electrolyte_potential[_i] + Rcxi_Electrolyte_potential[_i] - Kcxi_Electrolyte_potential(_i,0) / Kxixi_Electrolyte_potential(0,0) * rr_Electrolyte_potential[0]) * (cell_SDdata[cell_id].computed_area /dummy_area_opposite); 
+        //std::cout << "Rcc " << Rcc_Electrolyte_potential[_i] << " " << Rcxi_Electrolyte_potential[_i] << " " << Kcxi_Electrolyte_potential(_i,0) << " " << Kxixi_Electrolyte_potential(0,0) * rr_Electrolyte_potential[0] << std::endl;
+        //std::cout << "--a4-1-- " << i <<" " << R[i] << cell_SDdata[cell_id].computed_area /dummy_area_opposite<< std::endl;
       }
     }
 
@@ -655,14 +688,34 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 	if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
   //if(battery_fields.active_fields_index["Diffuse_interface"]>-1)   std::cout << "!!!!!!!!!! In diffusive interface !!!!!" << std::endl;
 
-  // the following should still work, as Lithium and Electrode_potential are not coupled
+  //// the following should still work, as Lithium and Electrode_potential are not coupled
   //if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
-
   //if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
 
-  // the following needs to be replaced.
+  //// the following needs to be replaced.
   //if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
   //if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual_with_interface(cell, fe_values, R, ULocal, ULocalConv, cell_SDdata);
+
+
+    //for (unsigned int i = 0; i < dofs_per_cell; ++i) {
+      //const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
+      //if (ck == DOF_Lithium ) {
+        //std::cout << "R_Lithium[i] " << R[i] << std::endl;
+      //}
+      //if (ck == DOF_Electrode_potential ) {
+        //std::cout << "R_Electrode_potential[i] " << R[i] << std::endl;
+      //}
+
+      //if (ck == DOF_Lithium_cation ) {
+        //std::cout << "R_Lithium_cation[i] " << R[i] << std::endl;
+      //}
+
+      //if (ck == DOF_Electrolyte_potential ) {
+        //std::cout << "R_Electrolyte_potential[i] " << R[i] << std::endl;
+      //}
+      //if (R[i].val() != R[i].val()) exit(-1);
+    //}
+
 
   // save previous iteration solution for SD
 	for (unsigned int i=0; i<dofs_per_cell; ++i){

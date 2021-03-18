@@ -107,21 +107,15 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
 
   // update reaction rate at the interface 
-	double tem=(*params_json)["ElectroChemo"]["jn_react"];
+	double reaction_rate=(*params_json)["ElectroChemo"]["jn_react"];
+	double F=(*params_json)["ElectroChemo"]["F"];
 	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
 	int Li_index=battery_fields.active_fields_index["Lithium"];
 	int Li_plus_index=battery_fields.active_fields_index["Lithium_cation"];
 	
-  if (cell->material_id()==interface_id){		
-		if(battery_fields.active_fields_index["Diffuse_interface"]>-1) diffuse_interface.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual(fe_values, R, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
-  }
-	else if (cell->material_id()==active_particle_id){
+	
+
+	if (cell->material_id()==active_particle_id){
 		if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
@@ -131,6 +125,33 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	}
+	
+	if(cell->material_id()==active_particle_id){
+		for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
+			if (cell->at_boundary(f) == false){
+				if(cell->neighbor(f)->material_id()==electrolyte_id  and cell->neighbor(f)->has_children() == false){
+				  FEFaceValues<dim> fe_face_values (fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
+					fe_face_values.reinit(cell,f);
+				  if(battery_fields.active_fields_index["Lithium"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium"], R, reaction_rate);                 
+				  if(battery_fields.active_fields_index["Electrode_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, reaction_rate*F);                                                                 
+				}
+			}
+		}
+	}
+	
+	if(cell->material_id()==electrolyte_id){
+		for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
+			if (cell->at_boundary(f) == false){
+				if(cell->neighbor(f)->material_id()==active_particle_id  and cell->neighbor(f)->has_children() == false){
+				  FEFaceValues<dim> fe_face_values (fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
+					fe_face_values.reinit(cell,f);
+				  if(battery_fields.active_fields_index["Lithium_cation"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium_cation"], R, -reaction_rate);   
+				  if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrolyte_potential"], R, -reaction_rate*F);                                                                 
+					                                      
+				}
+			}
+		}
 	}
 	
 	

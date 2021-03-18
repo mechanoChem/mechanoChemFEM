@@ -31,6 +31,7 @@ void Lithium_cation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 	dealii::Table<2,Sacado::Fad::DFad<double>> c_li_plus_grad=this->battery_fields->quad_fields[c_li_plus_index].value_grad;
 
 	dealii::Table<1,double > D_li_plus(n_q_points);
+	//dealii::Table<1,Sacado::Fad::DFad<double> > D_li_plus(n_q_points);
 	dealii::Table<1,Sacado::Fad::DFad<double>>sigma_e(n_q_points);
 
 	dealii::Table<2,Sacado::Fad::DFad<double> > i_phi_e(n_q_points, dim);
@@ -39,7 +40,7 @@ void Lithium_cation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 		D_li_plus[q]=this->electricChemoFormula->D_li_plus(c_li_plus_prev_val, Temp_s).val()/1000;
 		sigma_e[q]=this->electricChemoFormula->sigma_e(c_li_plus_prev_val, Temp_s).val();
 		for(unsigned int i=0; i<dim;i++){
-			i_phi_e[q][i]-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
+			i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
 			diffu[q][i]=-D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
 		}
 	}

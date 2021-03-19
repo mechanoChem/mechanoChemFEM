@@ -9,11 +9,15 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   unsigned int n_q_points= fe_values.n_quadrature_points;
 
   //std::cout << "compute residual at the interface " << cell_id << std::endl;
+  //
+	double reaction_rate=(*params_json)["ElectroChemo"]["jn_react"];
+	double F=(*params_json)["ElectroChemo"]["F"];
 
-  //cell_SDdata[cell_id].reaction_rate_potential = 0.0000001;
-  //cell_SDdata[cell_id].reaction_rate_li = 0.0001;
-  cell_SDdata[cell_id].reaction_rate_potential = 0.0;
-  cell_SDdata[cell_id].reaction_rate_li = 0.0;
+  cell_SDdata[cell_id].reaction_rate_potential = reaction_rate*F;
+  cell_SDdata[cell_id].reaction_rate_li = reaction_rate;
+  //cell_SDdata[cell_id].reaction_rate_potential = 0.0;
+  //cell_SDdata[cell_id].reaction_rate_li = 0.0;
+  std::cout << " reaction rate: " << cell_SDdata[cell_id].reaction_rate_li << " potential " << cell_SDdata[cell_id].reaction_rate_potential << std::endl;
 
   // update reaction rate at the interface 
 	double tem=(*params_json)["ElectroChemo"]["jn_react"];
@@ -420,8 +424,8 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //std::cout << "--rxic a3-- [0]" << rxic_Lithium_cation[0] << std::endl;
     //std::cout << "--rr a3-- [0]" << rr_Lithium_cation[0] << std::endl;
     //
-    std::cout << "--rxic a3-- " << rxic_Electrode_potential[0] << std::endl;
-    std::cout << "--rr a3-- " << rr_Electrode_potential[0] << std::endl;
+    //std::cout << "--rxic a3-- " << rxic_Electrode_potential[0] << std::endl;
+    //std::cout << "--rr a3-- " << rr_Electrode_potential[0] << std::endl;
 
 
 
@@ -473,7 +477,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         for (unsigned int j = 0; j < dim; j++) {
           Rcxi_Electrode_potential[cell_SDdata[cell_id].lnode_plus[i]] += field_Electrode_potential_tilde[q][j] * fe_values.shape_grad(plus_node, q)[j] * fe_values.JxW(q);  
           //std::cout << "--a2-4--" << plus_node << " " << cell_SDdata[cell_id].lnode_plus[i]<< std::endl;
-          std::cout << "--a2-4-field: " << q << " " << field_Electrode_potential_tilde[q][j] << " tidle " << c_1_tilde_grad_Electrode_potential[q][j]  << std::endl;
+          //std::cout << "--a2-4-field: " << q << " " << field_Electrode_potential_tilde[q][j] << " tidle " << c_1_tilde_grad_Electrode_potential[q][j]  << std::endl;
       
         }
       }
@@ -503,10 +507,10 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //std::cout << "--Rcxi a3-- [1]" << Rcxi_Lithium_cation[1] << std::endl;
     //std::cout << "--Rcxi a3-- [2]" << Rcxi_Lithium_cation[2] << std::endl;
     //std::cout << "--Rcxi a3-- [3]" << Rcxi_Lithium_cation[3] << std::endl;
-    std::cout << "--Rcxi a3-- [0]" << Rcxi_Electrode_potential[0] << std::endl;
-    std::cout << "--Rcxi a3-- [1]" << Rcxi_Electrode_potential[1] << std::endl;
-    std::cout << "--Rcxi a3-- [2]" << Rcxi_Electrode_potential[2] << std::endl;
-    std::cout << "--Rcxi a3-- [3]" << Rcxi_Electrode_potential[3] << std::endl;
+    //std::cout << "--Rcxi a3-- [0]" << Rcxi_Electrode_potential[0] << std::endl;
+    //std::cout << "--Rcxi a3-- [1]" << Rcxi_Electrode_potential[1] << std::endl;
+    //std::cout << "--Rcxi a3-- [2]" << Rcxi_Electrode_potential[2] << std::endl;
+    //std::cout << "--Rcxi a3-- [3]" << Rcxi_Electrode_potential[3] << std::endl;
     //
     //
 
@@ -635,10 +639,10 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //std::cout << "--Rcc a4-- [2]" << Rcc_Lithium_cation[2] << std::endl;
     //std::cout << "--Rcc a4-- [3]" << Rcc_Lithium_cation[3] << std::endl;
 
-    std::cout << "--Rcc a4-- [0]" << Rcc_Electrode_potential[0] << std::endl;
-    std::cout << "--Rcc a4-- [1]" << Rcc_Electrode_potential[1] << std::endl;
-    std::cout << "--Rcc a4-- [2]" << Rcc_Electrode_potential[2] << std::endl;
-    std::cout << "--Rcc a4-- [3]" << Rcc_Electrode_potential[3] << std::endl;
+    //std::cout << "--Rcc a4-- [0]" << Rcc_Electrode_potential[0] << std::endl;
+    //std::cout << "--Rcc a4-- [1]" << Rcc_Electrode_potential[1] << std::endl;
+    //std::cout << "--Rcc a4-- [2]" << Rcc_Electrode_potential[2] << std::endl;
+    //std::cout << "--Rcc a4-- [3]" << Rcc_Electrode_potential[3] << std::endl;
 
     //std::cout << "--Rcc a4-- [0]" << Rcc_Electrolyte_potential[0] << std::endl;
     //std::cout << "--Rcc a4-- [1]" << Rcc_Electrolyte_potential[1] << std::endl;
@@ -717,7 +721,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         //std::cout << "R_Lithium[i] " << R[i] << std::endl;
       }
       if (ck == DOF_Electrode_potential ) {
-        std::cout << "R_Electrode_potential[i] " << R[i] << std::endl;
+        //std::cout << "R_Electrode_potential[i] " << R[i] << std::endl;
       }
 
       if (ck == DOF_Lithium_cation ) {
@@ -730,10 +734,10 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       if (R[i].val() != R[i].val()) exit(-1);
     }
 
-    std::cout <<  " Xi[Lithium] " << ULocal_xi[dofs_per_cell+ ind_Lithium] << std::endl;
-    std::cout <<  " Xi[Lithium_cation] " << ULocal_xi[dofs_per_cell+ ind_Lithium_cation] << std::endl;
-    std::cout <<  " Xi[Electrode_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrode_potential] << std::endl;
-    std::cout <<  " Xi[Electrolyte_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrolyte_potential] << std::endl;
+    //std::cout <<  " Xi[Lithium] " << ULocal_xi[dofs_per_cell+ ind_Lithium] << std::endl;
+    //std::cout <<  " Xi[Lithium_cation] " << ULocal_xi[dofs_per_cell+ ind_Lithium_cation] << std::endl;
+    //std::cout <<  " Xi[Electrode_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrode_potential] << std::endl;
+    //std::cout <<  " Xi[Electrolyte_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrolyte_potential] << std::endl;
 
   // save previous iteration solution for SD
 	for (unsigned int i=0; i<dofs_per_cell; ++i){

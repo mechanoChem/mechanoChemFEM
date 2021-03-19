@@ -18,6 +18,18 @@ void battery<dim>::apply_boundary_condition()
 	//VectorTools:: interpolate_boundary_values (this->dof_handler, 1, ZeroFunction<dim> (totalDOF),*constraints, All_component);
 	//int interface_index=battery_fields.active_fields_index["Diffuse_interface"];
 
+
+  // for benchmark test
+	int totalDOF=this->totalDOF(this->primary_variables);
+  std::vector<bool> All_component (totalDOF, false);
+	if(battery_fields.active_fields_index["Electrode_potential"]>-1) All_component[battery_fields.active_fields_index["Electrode_potential"]]=true;
+	if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) All_component[battery_fields.active_fields_index["Electrolyte_potential"]]=true;
+	
+	VectorTools:: interpolate_boundary_values (this->dof_handler, 1, ZeroFunction<dim> (totalDOF),*constraints, All_component);
+	
+	if(battery_fields.active_fields_index["Lithium_cation"]>-1) All_component[battery_fields.active_fields_index["Lithium_cation"]]=true;
+	VectorTools:: interpolate_boundary_values (this->dof_handler, 3, ZeroFunction<dim> (totalDOF),*constraints, All_component);
+	int interface_index=battery_fields.active_fields_index["Diffuse_interface"];
 	constraints->close ();
 }
 template <int dim>
@@ -38,19 +50,27 @@ void battery<dim>::setMultDomain()
   for (;cell!=endc; ++cell){
 		if (cell->subdomain_id() == this->this_mpi_process){
 			cell->set_material_id(electrolyte_id);
+      // for rectangle
+			Point<dim> center=cell->center();
 			int inside_vertex=0;
-      for (unsigned int vertex = 0; vertex < GeometryInfo<dim>::vertices_per_cell; ++vertex){
-				Point<dim> vertrx_point=cell->vertex(vertex);
-				for (unsigned int ori_index=0;ori_index<origin_list.size();ori_index++){
-					Point<dim> origin(origin_list[ori_index][0],origin_list[ori_index][1]);
-					if(vertrx_point.distance(origin)<r-1.0e-15) {
-						inside_vertex++;
-						break;
-					}
-				}
-			}
-			if(inside_vertex==GeometryInfo<dim>::vertices_per_cell) cell->set_material_id(active_particle_id);
-			else if (inside_vertex>0) cell->set_material_id( interface_id); 
+			if(center[0]<=3.1 and center[0]>2.9 ) cell->set_material_id(interface_id);
+			if(center[0]<=2.9) cell->set_material_id(active_particle_id);
+      //------------------------------------ for circle -------------
+			//int inside_vertex=0;
+      //for (unsigned int vertex = 0; vertex < GeometryInfo<dim>::vertices_per_cell; ++vertex){
+				//Point<dim> vertrx_point=cell->vertex(vertex);
+				//for (unsigned int ori_index=0;ori_index<origin_list.size();ori_index++){
+					//Point<dim> origin(origin_list[ori_index][0],origin_list[ori_index][1]);
+					//if(vertrx_point.distance(origin)<r-1.0e-15) {
+						//inside_vertex++;
+						//break;
+					//}
+				//}
+			//}
+			//if(inside_vertex==GeometryInfo<dim>::vertices_per_cell) cell->set_material_id(active_particle_id);
+			//else if (inside_vertex>0) cell->set_material_id( interface_id); 
+      //------------------------------- circle---------------------
+
 		}
 	}
 	this->set_active_fe_indices (this->FE_support, this->dof_handler);
@@ -97,6 +117,7 @@ void battery<dim>::apply_initial_condition()
 				else if(ck==battery_fields.active_fields_index["Electrolyte_potential"]) this->solution_prev(local_dof_indices[i])=phi_e_0;
 				
 				if (cell->material_id()==interface_id){
+          //std::cout << "---------- in interface ---------------" << std::endl;
 					int vertex_id=i / (dofs_per_cell/GeometryInfo<dim>::vertices_per_cell);
 					Point<dim> vertrx_point=cell->vertex(vertex_id);
 					bool inside_flag=false;
@@ -107,6 +128,7 @@ void battery<dim>::apply_initial_condition()
 						if(vertrx_point.distance(origin)<=r) {inside_flag=true; break;}
 					}
 					if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(r-distance)+iso_value;
+					if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=vertrx_point[0]-3.0+iso_value;
 					if (inside_flag){
 						if (ck==battery_fields.active_fields_index["Lithium_cation"] or ck==battery_fields.active_fields_index["Electrolyte_potential"]){
 							this->solution_prev(local_dof_indices[i])=0;
@@ -134,6 +156,19 @@ void battery<dim>::apply_initial_condition()
     //std::vector<bool> All_component (totalDOF, true);	
 	//ectorTools:: interpolate_boundary_values (this->dof_handler, 1, ZeroFunction<dim> (totalDOF),*constraints, All_component);
 	//int interface_index=battery_fields.active_fields_index["Diffuse_interface"];
+
+  // for benchmark test
+	int totalDOF=this->totalDOF(this->primary_variables);
+  std::vector<bool> All_component (totalDOF, false);
+	if(battery_fields.active_fields_index["Electrode_potential"]>-1) All_component[battery_fields.active_fields_index["Electrode_potential"]]=true;
+	if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) All_component[battery_fields.active_fields_index["Electrolyte_potential"]]=true;
+	
+	VectorTools:: interpolate_boundary_values (this->dof_handler, 1, ZeroFunction<dim> (totalDOF),*constraints, All_component);
+	
+	if(battery_fields.active_fields_index["Lithium_cation"]>-1) All_component[battery_fields.active_fields_index["Lithium_cation"]]=true;
+	VectorTools:: interpolate_boundary_values (this->dof_handler, 3, ZeroFunction<dim> (totalDOF),*constraints, All_component);
+	int interface_index=battery_fields.active_fields_index["Diffuse_interface"];
+
 
   {
     // remove the minus or plus side of node, not to solve

@@ -347,7 +347,7 @@ void battery<dim>::identify_diffuse_interface()
           }
         }
         double elem_length = cell_SDdata[cell_id].edge1_node.distance(cell_SDdata[cell_id].edge2_node);
-        //std::cout << "elem_length " << elem_length << " " << cell_SDdata[cell_id].edge1_node << " "<< cell_SDdata[cell_id].edge2_node << std::endl;
+        std::cout << "elem_length " << elem_length << " " << cell_SDdata[cell_id].edge1_node << " "<< cell_SDdata[cell_id].edge2_node << std::endl;
         cell_SDdata[cell_id].interface_length = elem_length;
 
         double dx = cell_SDdata[cell_id].edge1_node[0] - cell_SDdata[cell_id].edge2_node[0];
@@ -466,23 +466,24 @@ void battery<dim>::identify_diffuse_interface()
         for (; cell_1d!=endc_1d; ++cell_1d)
         {
             fe_values_1d.reinit (cell_1d);
-            for (unsigned int i = 0; i < 2; ++i) {
-                for (unsigned q=0; q< quadrature_formula.size(); ++q)
-                {
-                    //std::cout << " q " << q << std::endl;
-                    vol += fe_values_1d.JxW(q);
-
-                    cell_SDdata[cell_id].shape_value_1d(i, q) = fe_values_1d.shape_value(i, q);
-                    cell_SDdata[cell_id].jxw_1d(q) = fe_values_1d.JxW(q);
-                    //r_local[i] += fe_values_1d.shape_value(i, q) * dRc * fe_values_1d.JxW(q);
-                } // q_point
+            for (unsigned q=0; q< quadrature_formula.size(); ++q)
+            {
+              //std::cout << " q " << q << std::endl;
+              vol += fe_values_1d.JxW(q);
+              for (unsigned int i = 0; i < 2; ++i) {
+                cell_SDdata[cell_id].shape_value_1d(i, q) = fe_values_1d.shape_value(i, q);
+                cell_SDdata[cell_id].jxw_1d(q) = fe_values_1d.JxW(q);
+                //r_local[i] += fe_values_1d.shape_value(i, q) * dRc * fe_values_1d.JxW(q);
+              } // q_point
             }
-        }
-        //std::cout <<  " total elem # = " << triangulation_1d.n_active_cells() << " length: " << elem_length << " vol " << vol<< std::endl;
-      }
-			//}
-		}		
-	}
+        } // cell_1d
+        std::cout <<  " total elem # = " << triangulation_1d.n_active_cells() << " length: " << elem_length << " vol " << vol<< std::endl;
+        for (auto p0: cell_SDdata[cell_id].lnode_plus) std::cout << " plus node: " << p0 << std::endl;
+        for (auto p0: cell_SDdata[cell_id].lnode_minus) std::cout << " minus node: " << p0 << std::endl;
+        std::cout << " crk_n: " << cell_SDdata[cell_id].crk_n[0] << "\t" << cell_SDdata[cell_id].crk_n[1] << std::endl;
+      } // interface id
+		}		// this process
+	} // cell
 
   {
     typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();

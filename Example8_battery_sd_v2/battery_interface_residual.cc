@@ -8,7 +8,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   unsigned int dofs_per_cell= fe_values.dofs_per_cell;
   unsigned int n_q_points= fe_values.n_quadrature_points;
 
-  //std::cout << "compute residual at the interface " << cell_id << std::endl;
+  std::cout << "compute residual at the interface " << cell_id << std::endl;
   //
 	double reaction_rate=(*params_json)["ElectroChemo"]["jn_react"];
 	double F=(*params_json)["ElectroChemo"]["F"];
@@ -125,6 +125,11 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     }
     //std::cout << "--size-1--" <<  dC_k1_Lithium.size() << std::endl;
   }
+
+    std::cout <<  " Xi_old[Lithium] " << cell_SDdata[cell_id].xi_old(0) << std::endl;
+    std::cout <<  " Xi_old[Lithium_cation] " << cell_SDdata[cell_id].xi_old_c_e(0) << std::endl;
+    std::cout <<  " Xi_old[Electrode_potential] " << cell_SDdata[cell_id].xi_old_phi_s(0) << std::endl;
+    std::cout <<  " Xi_old[Electrolyte_potential] " << cell_SDdata[cell_id].xi_old_phi_e(0) << std::endl;
 
   //Vector<double> dxi_k1;
   Vector<double> dxi_k1_Lithium;
@@ -718,26 +723,26 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     for (unsigned int i = 0; i < dofs_per_cell; ++i) {
       const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
       if (ck == DOF_Lithium ) {
-        //std::cout << "R_Lithium[i] " << R[i] << std::endl;
+        std::cout << "R_Lithium[i] " << R[i] << std::endl;
       }
       if (ck == DOF_Electrode_potential ) {
-        //std::cout << "R_Electrode_potential[i] " << R[i] << std::endl;
+        std::cout << "R_Electrode_potential[i] " << R[i] << std::endl;
       }
 
       if (ck == DOF_Lithium_cation ) {
-        //std::cout << "R_Lithium_cation[i] " << R[i] << std::endl;
+        std::cout << "R_Lithium_cation[i] " << R[i] << std::endl;
       }
 
       if (ck == DOF_Electrolyte_potential ) {
-        //std::cout << "R_Electrolyte_potential[i] " << R[i] << std::endl;
+        std::cout << "R_Electrolyte_potential[i] " << R[i] << std::endl;
       }
       if (R[i].val() != R[i].val()) exit(-1);
     }
 
-    //std::cout <<  " Xi[Lithium] " << ULocal_xi[dofs_per_cell+ ind_Lithium] << std::endl;
-    //std::cout <<  " Xi[Lithium_cation] " << ULocal_xi[dofs_per_cell+ ind_Lithium_cation] << std::endl;
-    //std::cout <<  " Xi[Electrode_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrode_potential] << std::endl;
-    //std::cout <<  " Xi[Electrolyte_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrolyte_potential] << std::endl;
+    std::cout <<  " Xi[Lithium] " << ULocal_xi[dofs_per_cell+ ind_Lithium] << std::endl;
+    std::cout <<  " Xi[Lithium_cation] " << ULocal_xi[dofs_per_cell+ ind_Lithium_cation] << std::endl;
+    std::cout <<  " Xi[Electrode_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrode_potential] << std::endl;
+    std::cout <<  " Xi[Electrolyte_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrolyte_potential] << std::endl;
 
   // save previous iteration solution for SD
 	for (unsigned int i=0; i<dofs_per_cell; ++i){

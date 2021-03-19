@@ -55,6 +55,7 @@ void battery<dim>::setMultDomain()
 			int inside_vertex=0;
 			if(center[0]<=3.1 and center[0]>2.9 ) cell->set_material_id(interface_id);
 			if(center[0]<=2.9) cell->set_material_id(active_particle_id);
+      std::cout << "cell_id "<< int(cell->active_cell_index()) << " center " << center[0] << "\t" << center[1] << " mat_id "<< int(cell->material_id()) << std::endl;
       //------------------------------------ for circle -------------
 			//int inside_vertex=0;
       //for (unsigned int vertex = 0; vertex < GeometryInfo<dim>::vertices_per_cell; ++vertex){
@@ -128,7 +129,9 @@ void battery<dim>::apply_initial_condition()
 						if(vertrx_point.distance(origin)<=r) {inside_flag=true; break;}
 					}
 					if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(r-distance)+iso_value;
-					if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=vertrx_point[0]-3.0+iso_value;
+
+					if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=3.0-vertrx_point[0]+iso_value;
+          if (vertrx_point[0] <= 2.9 ) inside_flag = true;
 					if (inside_flag){
 						if (ck==battery_fields.active_fields_index["Lithium_cation"] or ck==battery_fields.active_fields_index["Electrolyte_potential"]){
 							this->solution_prev(local_dof_indices[i])=0;
@@ -146,7 +149,7 @@ void battery<dim>::apply_initial_condition()
 	this->solution_prev.compress(VectorOperation::insert);
 	this->solution=this->solution_prev;		
 
-    identify_diffuse_interface();
+  identify_diffuse_interface();
 
 	constraints->clear ();
 	
@@ -192,6 +195,13 @@ void battery<dim>::apply_initial_condition()
               //std::cout << "Lithium " << i0*dofs_per_node + battery_fields.active_fields_index["Lithium"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              // initialize the xi_old to be the same value as the neighbor node
+              cell_SDdata[cell_id].xi_old(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]);
+              std::cout << "xi_old Lithium " << cell_SDdata[cell_id].xi_old(0) << " plus[0] " << cell_SDdata[cell_id].lnode_plus[0] << " i0 " << cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"] << std::endl;
+              std::cout << this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]) << std::endl;
+              std::cout << this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[1]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]) << std::endl;
+              std::cout << this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_minus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]) << std::endl;
+              std::cout << this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_minus[1]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]) << std::endl;
             }
             if(battery_fields.active_fields_index["Electrode_potential"]>-1)
             {
@@ -199,6 +209,7 @@ void battery<dim>::apply_initial_condition()
               //std::cout << "Electrode_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              cell_SDdata[cell_id].xi_old_phi_s(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]]);
             }
 
           }
@@ -211,6 +222,7 @@ void battery<dim>::apply_initial_condition()
               //std::cout << "Lithium_cation " << i0*dofs_per_node + battery_fields.active_fields_index["Lithium_cation"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              cell_SDdata[cell_id].xi_old_c_e(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_minus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium_cation"]]);
             }
             if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) 
             {
@@ -218,6 +230,7 @@ void battery<dim>::apply_initial_condition()
               //std::cout << "Electrolyte_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              cell_SDdata[cell_id].xi_old_phi_e(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_minus[0]*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]]);
             }
           }
 

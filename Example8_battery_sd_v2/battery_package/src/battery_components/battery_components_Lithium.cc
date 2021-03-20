@@ -22,6 +22,7 @@ void Lithium<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad
 	int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];
 	
 	int phaesField_index=this->battery_fields->active_fields_index["Lithium_phaseField"];
+  std::cout << "M " << M << std::endl;
 	if(phaesField_index==-1) diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[this->primiary_dof].value_grad,-M);
 	else{
 		diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[phaesField_index].value_grad,-M);

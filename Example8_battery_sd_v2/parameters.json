@@ -32,7 +32,7 @@
 		"D_li_neg":0.5,
 		"D_li_pos":0.1,
 		"D_li_plus":0.005,
-		"jn_react":-0.0000,
+		"jn_react":-0.0001,
 		"sigma_s_neg":1.5e2,
 		"sigma_s_pos":0.5e0,
 		"C_li_0_neg":0.02562,
@@ -79,7 +79,7 @@
 		}
   },
 	"Nonlinear_solver":{
-		"max_iterations": 10,
+		"max_iterations": 20,
 		"absolute_norm_tolerance": 3e-6
 	}
 }

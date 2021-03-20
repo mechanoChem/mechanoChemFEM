@@ -18,6 +18,7 @@ void Electrode_potential<dim>::set_field_and_source_term(dealii::Table<2,Sacado:
 	double sigma=(*params_json)["ElectroChemo"]["sigma_s_neg"];
 	
 	field=table_scaling<2,Sacado::Fad::DFad<double> > (this->battery_fields->quad_fields[this->primiary_dof].value_grad,-sigma);
+    //std::cout << "Electrode potential field " << field[0][0] << std::endl;
 }
 
 

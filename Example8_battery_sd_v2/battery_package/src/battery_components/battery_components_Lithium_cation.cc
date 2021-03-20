@@ -74,8 +74,10 @@ void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,
 
 	dealii::Table<2,Sacado::Fad::DFad<double> > i_phi_e(n_q_points, dim);
 	for(unsigned int q=0; q<n_q_points;q++){
+    std::cout << "----q---- "  << q << " sigma_e[q] " << sigma_e[q] << " D_li_plus[q] " << D_li_plus[q] << std::endl;
 		for(unsigned int i=0; i<dim;i++){
-			i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
+			//i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
+			i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/0.001*c_li_plus_grad[q][i];
 			diffu[q][i]=-D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
       //std::cout << " i_phi_e[q][i] " <<  q << " i " << i << " " << i_phi_e[q][i] << std::endl;
 		}

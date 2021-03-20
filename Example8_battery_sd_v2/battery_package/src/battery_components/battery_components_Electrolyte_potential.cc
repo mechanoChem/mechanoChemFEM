@@ -40,6 +40,7 @@ void Electrolyte_potential<dim>::set_field_and_source_term(dealii::Table<2,Sacad
 	}
 	table_scaling<1,Sacado::Fad::DFad<double> > (source,0);
 
+  //std::cout << " electrolyte set field and source bulk " << field[0][0] << field[1][0] << std::endl;
   //std::cout << " ---------- in electrolyte set field and source " << std::endl;
 }
 
@@ -60,16 +61,20 @@ void Electrolyte_potential<dim>::set_field_and_source_term_interface(dealii::Tab
 	//dealii::Table<2,Sacado::Fad::DFad<double>> c_li_plus_grad=this->battery_fields->quad_fields[c_li_plus_index].value_grad;
 	
 	for(unsigned int q=0; q<n_q_points;q++){
-    //std::cout << "sigma_e " << q << " "  << sigma_e[q] << std::endl;
-    //std::cout << "c_li_plus " << q << " "  << c_li_plus[q] << " homo " << this->battery_fields->quad_fields[c_li_plus_index].value[q]<< std::endl;
+      //std::cout << "c_li_plus_old  " << q << "   "  << c_li_plus_old[q]          << " \tsig_e " << sigma_e[q] << std::endl;
+      ////std::cout << "sigma_e " << q << " "  << sigma_e[q] << std::endl;
+      //std::cout << "c_li_plus      " << q << "   "  << c_li_plus[q].val()        << " \thomo  " << this->battery_fields->quad_fields[c_li_plus_index].value[q].val()<< std::endl;
 		for(unsigned int i=0; i<dim;i++){
-			field[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i]; 
-      //std::cout << "phi_e_grad " << q << " i " << i << " "  << phi_e_grad[q][i] << " homo " << this->battery_fields->quad_fields[phi_e_index].value_grad[q][i] << std::endl;
-      //std::cout << "c_li_plus_grad " << q << " i " << i << " "  << c_li_plus_grad[q][i] << " homo " << this->battery_fields->quad_fields[c_li_plus_index].value_grad[q][i] << std::endl;
+			//field[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i]; 
+			field[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/0.001*c_li_plus_grad[q][i]; 
+
+      //std::cout << "phi_e_grad     " << q << " i " << phi_e_grad[q][i].val()     << " \thomo  " << this->battery_fields->quad_fields[phi_e_index].value_grad[q][i].val() << std::endl;
+      //std::cout << "c_li_plus_grad " << q << " i " << c_li_plus_grad[q][i].val() << " \thomo  " << this->battery_fields->quad_fields[c_li_plus_index].value_grad[q][i].val() << std::endl;
 		}
 	}
 	table_scaling<1,Sacado::Fad::DFad<double> > (source,0);
 
+  //std::cout << " electrolyte set field and source interface " << field[0][0] << field[1][0] << std::endl;
   //std::cout << " ---------- in electrolyte set field and source " << std::endl;
 }
 

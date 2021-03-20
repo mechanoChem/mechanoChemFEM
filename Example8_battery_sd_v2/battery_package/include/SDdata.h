@@ -2,6 +2,8 @@
 #define SDdata_h
 #include <deal.II/lac/full_matrix.h>
 #include <deal.II/lac/vector.h>
+#include <deal.II/base/table.h>
+
 
 // create a data structure to store the strong discontinuity related information
 //
@@ -57,6 +59,8 @@ struct SDdata {
   double interface_length = 0.0;
   double computed_area = 0.0;
 
-	Vector<double> ULocal_k;  // create a larger vector to store previous step values
+  Vector<double> ULocal_k;  // create a larger vector to store previous step values
+  Vector<double> C_Li_plus_old;  // enhanced c Li plus at the interface
+  Vector<double> C_Li_plus_new;  // 
 };
 #endif

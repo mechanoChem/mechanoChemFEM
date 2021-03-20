@@ -90,7 +90,8 @@ void battery<dim>::apply_initial_condition()
     	for (unsigned int i=0; i<dofs_per_cell; ++i) {
       	int ck = fe_values.get_fe().system_to_component_index(i).first;
 				if (ck==battery_fields.active_fields_index["Lithium"]){ 
-					this->solution_prev(local_dof_indices[i])=C_li_0+0.04*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+					//this->solution_prev(local_dof_indices[i])=C_li_0+0.04*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+					this->solution_prev(local_dof_indices[i])=C_li_0;
 				}
 				else if(ck==battery_fields.active_fields_index["Lithium_cation"]) this->solution_prev(local_dof_indices[i])=C_li_plus_0;
 				else if(ck==battery_fields.active_fields_index["Electrode_potential"]) this->solution_prev(local_dof_indices[i])=phi_s_0;

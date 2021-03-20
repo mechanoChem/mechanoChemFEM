@@ -121,6 +121,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	}
 	
 	apply_Neumann_boundary_condition();
+  std::cout << "!!!!!!!!!!*****************!!!!!!!" << std::endl;
 }
 
 template <int dim>
@@ -145,6 +146,11 @@ void battery<dim>::run()
       cell_SDdata[i].xi_conv_c_e = cell_SDdata[i].xi_old_c_e;
       cell_SDdata[i].xi_conv_phi_s = cell_SDdata[i].xi_old_phi_s;
       cell_SDdata[i].xi_conv_phi_e = cell_SDdata[i].xi_old_phi_e;
+      cell_SDdata[i].C_Li_plus_old = cell_SDdata[i].C_Li_plus_new;
+      // WARNING: should not use the following, as many cell_SDdata are not initialized.
+      //std::cout << "C_Li_plus_old[0]" << cell_SDdata[i].C_Li_plus_old[0] << std::endl;
+      //for (int q=0; q<4; q++) cell_SDdata[i].C_Li_plus_old[q] = cell_SDdata[i].C_Li_plus_new[q];
+      //std::cout << "C_Li_plus_old[3]" << cell_SDdata[i].C_Li_plus_old[3] << std::endl;
     }
 		
 	  t_solve = clock() - t_solve;
@@ -232,6 +238,9 @@ void battery<dim>::identify_diffuse_interface()
         cell_SDdata[cell_id].Kcxi_c_e.reinit(4,1);
         cell_SDdata[cell_id].Kxic_c_e.reinit(1,4);
         cell_SDdata[cell_id].Kxixi_inv_c_e.reinit(1,1);
+
+        cell_SDdata[cell_id].C_Li_plus_old.reinit(4); // size of gps
+        cell_SDdata[cell_id].C_Li_plus_new.reinit(4);
 
         cell_SDdata[cell_id].rlocal_phi_s.reinit(1);
         cell_SDdata[cell_id].rlocal_phi_s(0) = 0.0;

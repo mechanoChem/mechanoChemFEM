@@ -104,7 +104,13 @@ template <int dim>
 void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
   int cell_id = cell->active_cell_index();
+	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
 	battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
+	Point<dim> center=cell->center();
+	int domainflag=-1;
+	if (center[0]>separator_line){
+		domainflag=1;
+	}
 
   // update reaction rate at the interface 
 	double reaction_rate=(*params_json)["ElectroChemo"]["jn_react"];
@@ -112,6 +118,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
 	int Li_index=battery_fields.active_fields_index["Lithium"];
 	int Li_plus_index=battery_fields.active_fields_index["Lithium_cation"];
+	double Temp=(*params_json)["ElectroChemo"]["T_0"];
 	
 	
 
@@ -131,10 +138,44 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 		for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
 			if (cell->at_boundary(f) == false){
 				if(cell->neighbor(f)->material_id()==electrolyte_id  and cell->neighbor(f)->has_children() == false){
+				  const unsigned int activeMaterial_dofs_per_cell = this->fe_system[active_particle_id]->dofs_per_cell;
+				  const unsigned int electrolyte_dofs_per_cell = this->fe_system[electrolyte_id]->dofs_per_cell;
+					
+					dealii::Vector<double> localized_U(this->solution);
 				  FEFaceValues<dim> fe_face_values (fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
 					fe_face_values.reinit(cell,f);
-				  if(battery_fields.active_fields_index["Lithium"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium"], R, reaction_rate);                 
-				  if(battery_fields.active_fields_index["Electrode_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, reaction_rate*F);                                                                 
+					
+					hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points  | update_JxW_values | update_gradients);
+					hp_fe_values.reinit (cell->neighbor(f));
+					const FEValues<dim> &electrolyte_fe_values = hp_fe_values.get_present_fe_values();
+				  FEFaceValues<dim> electrolyte_fe_face_values (*(this->fe_system)[electrolyte_id], *this->common_face_quadrature, update_values | update_quadrature_points | update_JxW_values | update_normal_vectors | update_gradients); 
+					electrolyte_fe_face_values.reinit(cell->neighbor(f), cell->neighbor_of_neighbor(f));
+					std::vector<types::global_dof_index> activeMaterial_neighbor_dof_indices (electrolyte_dofs_per_cell);
+					cell->neighbor(f)->get_dof_indices (activeMaterial_neighbor_dof_indices);
+					
+					Table<1, Sacado::Fad::DFad<double> > ULocal_electrolyte(electrolyte_dofs_per_cell);
+				  for (unsigned int i=0; i<electrolyte_dofs_per_cell; ++i){
+						if (std::abs(localized_U(activeMaterial_neighbor_dof_indices[i]))<1.0e-16) ULocal_electrolyte[i]=0.0;
+						else{ULocal_electrolyte[i]=localized_U(activeMaterial_neighbor_dof_indices[i]);}
+				  }
+					
+					const unsigned int n_face_quadrature_points = fe_face_values.n_quadrature_points;
+					dealii::Table<1,Sacado::Fad::DFad<double> > c_li(n_face_quadrature_points), c_li_plus(n_face_quadrature_points),phi_s(n_face_quadrature_points), phi_e(n_face_quadrature_points);
+					dealii::Table<1,Sacado::Fad::DFad<double> > I_interface(n_face_quadrature_points), jn(n_face_quadrature_points);
+					dealii::Table<2,Sacado::Fad::DFad<double> > Phis_grad(n_face_quadrature_points,dim);
+					
+					evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(electrolyte_fe_values, electrolyte_fe_face_values, battery_fields.active_fields_index["Lithium_cation"], ULocal_electrolyte, c_li_plus);
+					evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(electrolyte_fe_values, electrolyte_fe_face_values, battery_fields.active_fields_index["Electrolyte_potential"], ULocal_electrolyte, phi_e);
+					evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium"], ULocal, c_li);
+					evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], ULocal, phi_s);
+					
+					for(unsigned int q=0;q<n_face_quadrature_points;q++){
+						jn[q]=electricChemoFormula.formula_jn(Temp, c_li[q], c_li_plus[q], phi_s[q], phi_e[q], domainflag);
+						I_interface[q]=jn[q]*F;
+					}
+					
+				  if(battery_fields.active_fields_index["Lithium"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium"], R, jn);                 
+				  if(battery_fields.active_fields_index["Electrode_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, I_interface);                                                                 
 				}
 			}
 		}
@@ -144,18 +185,65 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 		for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
 			if (cell->at_boundary(f) == false){
 				if(cell->neighbor(f)->material_id()==active_particle_id  and cell->neighbor(f)->has_children() == false){
-				  FEFaceValues<dim> fe_face_values (fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
+				  const unsigned int activeMaterial_dofs_per_cell = this->fe_system[active_particle_id]->dofs_per_cell;
+				  const unsigned int electrolyte_dofs_per_cell = this->fe_system[electrolyte_id]->dofs_per_cell;
+					
+					dealii::Vector<double> localized_U(this->solution);
+					
+					FEFaceValues<dim> fe_face_values (fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
 					fe_face_values.reinit(cell,f);
-				  if(battery_fields.active_fields_index["Lithium_cation"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium_cation"], R, -reaction_rate);   
-				  if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrolyte_potential"], R, -reaction_rate*F);                                                                 
+					
+					hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points  | update_JxW_values | update_gradients);
+					hp_fe_values.reinit (cell->neighbor(f));
+					const FEValues<dim> &particle_fe_values = hp_fe_values.get_present_fe_values();
+				  FEFaceValues<dim> particle_fe_face_values (*(this->fe_system)[active_particle_id], *this->common_face_quadrature, update_values | update_quadrature_points | update_JxW_values | update_normal_vectors | update_gradients); 
+					particle_fe_face_values.reinit(cell->neighbor(f), cell->neighbor_of_neighbor(f));
+					std::vector<types::global_dof_index> electrolyte_neighbor_dof_indices (activeMaterial_dofs_per_cell);
+					cell->neighbor(f)->get_dof_indices (electrolyte_neighbor_dof_indices);
+					
+					Table<1, Sacado::Fad::DFad<double> > ULocal_particle(activeMaterial_dofs_per_cell);
+				  for (unsigned int i=0; i<activeMaterial_dofs_per_cell; ++i){
+						if (std::abs(localized_U(electrolyte_neighbor_dof_indices[i]))<1.0e-16) ULocal_particle[i]=0.0;
+						else{ULocal_particle[i]=localized_U(electrolyte_neighbor_dof_indices[i]);}
+				  }
+					
+					const unsigned int n_face_quadrature_points = fe_face_values.n_quadrature_points;
+					dealii::Table<1,Sacado::Fad::DFad<double> > c_li(n_face_quadrature_points), c_li_plus(n_face_quadrature_points),phi_s(n_face_quadrature_points), phi_e(n_face_quadrature_points);
+					dealii::Table<1,Sacado::Fad::DFad<double> > I_interface(n_face_quadrature_points), jn(n_face_quadrature_points);
+					dealii::Table<2,Sacado::Fad::DFad<double> > Phis_grad(n_face_quadrature_points,dim);
+					
+					evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium_cation"], ULocal, c_li_plus);
+					evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, fe_face_values, battery_fields.active_fields_index["Electrolyte_potential"], ULocal, phi_e);
+					evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(particle_fe_values, particle_fe_face_values, battery_fields.active_fields_index["Lithium"], ULocal_particle, c_li);
+					evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(particle_fe_values, particle_fe_face_values, battery_fields.active_fields_index["Electrode_potential"], ULocal_particle, phi_s);
+					
+					for(unsigned int q=0;q<n_face_quadrature_points;q++){
+						jn[q]=-electricChemoFormula.formula_jn(Temp, c_li[q], c_li_plus[q], phi_s[q], phi_e[q], domainflag);
+						I_interface[q]=jn[q]*F;
+					}
+				  if(battery_fields.active_fields_index["Lithium_cation"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium_cation"], R, jn);   
+				  if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrolyte_potential"], R, I_interface);                                                                 
 					                                      
 				}
 			}
 		}
 	}
 	
-	
-	apply_Neumann_boundary_condition();
+	//BC
+	for (unsigned int faceID=0; faceID<2*dim; faceID++){
+		if(cell->face(faceID)->boundary_id()==dim+1){
+			double current_IpA=(*params_json)["ElectroChemo"]["applied_current"];
+      if(this->current_increment<=0){current_IpA=current_IpA/50; }
+      else if(this->current_increment<=1){current_IpA=1*current_IpA/10; }
+      else if(this->current_increment<=2){current_IpA=2*current_IpA/10; }
+      else if(this->current_increment<=3){current_IpA=4*current_IpA/10; }
+      else if(this->current_increment<=4){current_IpA=8*current_IpA/10; }
+			
+		  FEFaceValues<dim> fe_face_values(fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
+			fe_face_values.reinit(cell,faceID);
+			this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, current_IpA);
+		}
+	}
 }
 
 template <int dim>

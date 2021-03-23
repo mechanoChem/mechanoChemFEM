@@ -37,19 +37,13 @@ void Lithium_cation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 	dealii::Table<2,Sacado::Fad::DFad<double> > i_phi_e(n_q_points, dim);
 	for(unsigned int q=0; q<n_q_points;q++){
 		Sacado::Fad::DFad<double> c_li_plus_prev_val=c_li_plus_prev[q];
-		D_li_plus[q]=this->electricChemoFormula->D_li_plus(c_li_plus_prev_val, Temp_s).val()/1000;
+		D_li_plus[q]=this->electricChemoFormula->D_li_plus(c_li_plus_prev_val, Temp_s).val();
 		sigma_e[q]=this->electricChemoFormula->sigma_e(c_li_plus_prev_val, Temp_s).val();
 		for(unsigned int i=0; i<dim;i++){
 			i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
 			diffu[q][i]=-D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
 		}
-	}
-	// double M=(*params_json)["ElectroChemo"]["D_li_plus"];
-	// double jn_react=(*params_json)["ElectroChemo"]["jn_react"];
-	// double eps_0=1.0e-5;
-	// int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];
-	// diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[this->primiary_dof].value_grad,-M);
-	
+	}	
 }
 
 template class Lithium_cation<1>;

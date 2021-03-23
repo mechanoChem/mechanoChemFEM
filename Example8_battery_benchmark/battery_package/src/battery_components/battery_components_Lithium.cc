@@ -16,7 +16,16 @@ template <int dim>
 void Lithium<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react)
 {
 	
-	double M=(*params_json)["ElectroChemo"]["D_li_neg"];
+	double M;
+	Point<dim> center=this->battery_fields->cell_center;
+	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	if (center[0]<separator_line){
+		M=(*params_json)["ElectroChemo"]["D_li_neg"];
+	}
+	else{
+		M=(*params_json)["ElectroChemo"]["D_li_pos"];
+	}
+	
 	double jn_react=(*params_json)["ElectroChemo"]["jn_react"];
 	double eps_0=1.0e-5;
 	int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];

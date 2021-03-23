@@ -15,10 +15,10 @@
 		"face_quadrature": 2
 	},
   "Geometry": {
-      "num_elem_x": 60,
+      "num_elem_x": 90,
       "num_elem_y": 20,
       "num_elem_z": 0,
-      "x_max": 6,
+      "x_max": 9,
       "x_min": 0,
       "y_max": 2,
       "y_min": 0,
@@ -26,6 +26,7 @@
       "z_min": 0
   },
 	"ElectroChemo":{
+		"applied_current":3,
 		"particle_R":0.8,
 		"interface_bandwitdh":0.05,
 		"flip_time":1000,
@@ -33,17 +34,21 @@
 		"D_li_pos":0.1,
 		"D_li_plus":0.005,
 		"jn_react":-0.0001,
-		"sigma_s_neg":1.5e2,
-		"sigma_s_pos":0.5e0,
-		"C_li_0_neg":0.02562,
-		"C_li_0_pos":0.825,
+		"sigma_s_neg":1.5e8,
+		"sigma_s_pos":0.5e8,
+		"c_li_max_neg":28.7e-3,
+		"c_li_max_pos":37.5e-3,
+		"c_li_100_neg":0.915,
+		"c_li_100_pos":0.022,
+		"c_li_0_neg":0.02,
+		"c_li_0_pos":0.98,
 		"C_li_plus_0":1.0e-3,
 		"phi_s_0_neg":1,
 		"phi_s_0_pos":1,
 		"phi_e_0":1,
 		"T_0":298,
 		"iso_value":0.5,
-		"separator_line":3
+		"separator_line":5
 	},
 	"Lithium_phaseField":{
 		"kappa":0.0005,
@@ -79,7 +84,7 @@
 		}
   },
 	"Nonlinear_solver":{
-		"max_iterations": 10,
+		"max_iterations": 50,
 		"absolute_norm_tolerance": 3e-6
 	}
 }

@@ -44,8 +44,8 @@ struct SDdata {
 
   // Reaction rate flow into the plus side (active particle) is positive. Thus it is flow out relative to the electrolyte. The reaction rate would be negative
   // If particles flow output of the plus side (active particle), the value will be negative, and the value would be positive for the electrolyte.
-  double reaction_rate_li = 0.0;
-  double reaction_rate_potential = 0.0;
+  Sacado::Fad::DFad<double> reaction_rate_li = 0.0;
+  Sacado::Fad::DFad<double> reaction_rate_potential = 0.0;
 
   // reaction rate in the opposite_flux_dof will have a negative sign.
   int opposite_flux_dof_li = -1;

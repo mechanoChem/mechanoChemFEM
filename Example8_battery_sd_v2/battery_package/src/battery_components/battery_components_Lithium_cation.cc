@@ -70,6 +70,9 @@ void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,
 	//dealii::Table<2,Sacado::Fad::DFad<double>> c_li_plus_grad=this->battery_fields->quad_fields[c_li_plus_index].value_grad;
 
 	dealii::Table<1,double> D_li_plus=this->electricChemoFormula->D_li_plus_interface(c_li_plus_old);
+	for(unsigned int q=0; q<n_q_points;q++){
+    D_li_plus[q] = D_li_plus[q] / 1000;
+  }
 	dealii::Table<1,double> sigma_e = this->electricChemoFormula->sigma_e_interface(c_li_plus_old);
 
 	dealii::Table<2,Sacado::Fad::DFad<double> > i_phi_e(n_q_points, dim);

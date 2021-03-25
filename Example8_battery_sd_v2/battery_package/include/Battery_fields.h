@@ -25,7 +25,7 @@ class Battery_fields
 		
 		nlohmann::json* params_json;
 		const typename hp::DoFHandler<dim>::active_cell_iterator *current_cell;
-		int pos_electrode_domain_id=0, separator_domain_id=1, neg_electrode_domain_id=2;
+		Point<dim> cell_center;
 		int current_domain_id=0;
 		ConditionalOStream pcout;
 };

@@ -55,6 +55,7 @@ void Battery_fields<dim>::update_fields(const typename hp::DoFHandler<dim>::acti
 	//const typename hp::DoFHandler<dim>::active_cell_iterator current=cell;
 	//const Point<dim> face_center = (*current_cell)->center();
 	current_domain_id=cell->material_id();
+	cell_center=cell->center();
 	unsigned int n_q_points= fe_values.n_quadrature_points;
 	TableIndices<1> tableIndex1(n_q_points);
 	TableIndices<2> tableIndex2(n_q_points,n_q_points);

@@ -16,13 +16,22 @@ template <int dim>
 void Lithium<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react)
 {
 	
-	double M=(*params_json)["ElectroChemo"]["D_li_neg"];
+	double M;
+	Point<dim> center=this->battery_fields->cell_center;
+	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	if (center[0]<separator_line){
+		M=(*params_json)["ElectroChemo"]["D_li_neg"];
+	}
+	else{
+		M=(*params_json)["ElectroChemo"]["D_li_pos"];
+	}
+
 	double jn_react=(*params_json)["ElectroChemo"]["jn_react"];
 	double eps_0=1.0e-5;
 	int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];
 	
 	int phaesField_index=this->battery_fields->active_fields_index["Lithium_phaseField"];
-  std::cout << "M " << M << std::endl;
+  //std::cout << "M " << M << std::endl;
 	if(phaesField_index==-1) diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[this->primiary_dof].value_grad,-M);
 	else{
 		diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[phaesField_index].value_grad,-M);
@@ -33,7 +42,16 @@ void Lithium<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad
 template <int dim>
 void Lithium<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react, dealii::Table<2, Sacado::Fad::DFad<double>> &grad)
 {
-	double M=(*params_json)["ElectroChemo"]["D_li_neg"];
+	double M;
+	Point<dim> center=this->battery_fields->cell_center;
+	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	if (center[0]<separator_line){
+		M=(*params_json)["ElectroChemo"]["D_li_neg"];
+	}
+	else{
+		M=(*params_json)["ElectroChemo"]["D_li_pos"];
+	}
+
 	double jn_react=(*params_json)["ElectroChemo"]["jn_react"];
 	double eps_0=1.0e-5;
 	int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];

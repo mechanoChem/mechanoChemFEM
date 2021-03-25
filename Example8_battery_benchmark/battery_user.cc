@@ -88,6 +88,9 @@ void battery<dim>::apply_initial_condition()
 	double C_li_100_pos=(*params_json)["ElectroChemo"]["c_li_100_pos"];
 	
 	double C_li_plus_0=(*params_json)["ElectroChemo"]["C_li_plus_0"];
+	double phi_s_0_neg=(*params_json)["ElectroChemo"]["phi_s_0_neg"];
+	double phi_s_0_pos=(*params_json)["ElectroChemo"]["phi_s_0_pos"];
+	double phi_e_0=(*params_json)["ElectroChemo"]["phi_e_0"];
 
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
 	double iso_value=(*params_json)["ElectroChemo"]["iso_value"];

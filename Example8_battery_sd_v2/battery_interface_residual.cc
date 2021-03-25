@@ -4,20 +4,29 @@
 template <int dim>
 void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
+	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	Point<dim> center=cell->center();
+	int domainflag=-1;
+	if (center[0]>separator_line){
+		domainflag=1;
+	}
+
+  // update reaction rate at the interface 
+	double Temp=(*params_json)["ElectroChemo"]["T_0"];
+
   int cell_id = cell->active_cell_index();
   unsigned int dofs_per_cell= fe_values.dofs_per_cell;
   unsigned int n_q_points= fe_values.n_quadrature_points;
+
 
   std::cout << "compute residual at the interface " << cell_id << std::endl;
   //
 	double reaction_rate=(*params_json)["ElectroChemo"]["jn_react"];
 	double F=(*params_json)["ElectroChemo"]["F"];
 
-  cell_SDdata[cell_id].reaction_rate_potential = reaction_rate*F;
-  cell_SDdata[cell_id].reaction_rate_li = reaction_rate;
   //cell_SDdata[cell_id].reaction_rate_potential = 0.0;
   //cell_SDdata[cell_id].reaction_rate_li = 0.0;
-  std::cout << " reaction rate: " << cell_SDdata[cell_id].reaction_rate_li << " potential " << cell_SDdata[cell_id].reaction_rate_potential << std::endl;
+  std::cout << " reaction rate (before) : " << cell_SDdata[cell_id].reaction_rate_li << " potential " << cell_SDdata[cell_id].reaction_rate_potential << std::endl;
 
   // update reaction rate at the interface 
 	double tem=(*params_json)["ElectroChemo"]["jn_react"];
@@ -162,7 +171,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   //{ // for electrode
     cell_SDdata[cell_id].Kxic.vmult(dxi_k1_Lithium, dC_k1_Lithium);
     cell_SDdata[cell_id].rlocal -= dxi_k1_Lithium;
-    cell_SDdata[cell_id].rlocal[0] += cell_SDdata[cell_id].reaction_rate_li * cell_SDdata[cell_id].interface_length;
+    cell_SDdata[cell_id].rlocal[0] += cell_SDdata[cell_id].reaction_rate_li.val() * cell_SDdata[cell_id].interface_length;
     cell_SDdata[cell_id].Kxixi_inv.vmult(dxi_k1_Lithium, cell_SDdata[cell_id].rlocal);
     xi_0_Lithium[0] = cell_SDdata[cell_id].xi_old(0) + dxi_k1_Lithium(0);  
     cell_SDdata[cell_id].xi_old(0) = xi_0_Lithium[0].val();
@@ -173,7 +182,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     ////std::cout << "--a0-1--" << std::endl;
     cell_SDdata[cell_id].Kxic_c_e.vmult(dxi_k1_Lithium_cation, dC_k1_Lithium_cation);
     cell_SDdata[cell_id].rlocal_c_e -= dxi_k1_Lithium_cation;
-    cell_SDdata[cell_id].rlocal_c_e[0] += (-1 *cell_SDdata[cell_id].reaction_rate_li) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
+    cell_SDdata[cell_id].rlocal_c_e[0] += (-1 *cell_SDdata[cell_id].reaction_rate_li.val()) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
     cell_SDdata[cell_id].Kxixi_inv_c_e.vmult(dxi_k1_Lithium_cation, cell_SDdata[cell_id].rlocal_c_e);
     xi_0_Lithium_cation[0] = cell_SDdata[cell_id].xi_old_c_e(0) + dxi_k1_Lithium_cation(0);  
     cell_SDdata[cell_id].xi_old_c_e(0) = xi_0_Lithium_cation[0].val();
@@ -182,7 +191,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
     cell_SDdata[cell_id].Kxic_phi_s.vmult(dxi_k1_Electrode_potential, dC_k1_Electrode_potential);
     cell_SDdata[cell_id].rlocal_phi_s -= dxi_k1_Electrode_potential;
-    cell_SDdata[cell_id].rlocal_phi_s[0] += cell_SDdata[cell_id].reaction_rate_potential * cell_SDdata[cell_id].interface_length;
+    cell_SDdata[cell_id].rlocal_phi_s[0] += cell_SDdata[cell_id].reaction_rate_potential.val() * cell_SDdata[cell_id].interface_length;
     cell_SDdata[cell_id].Kxixi_inv_phi_s.vmult(dxi_k1_Electrode_potential, cell_SDdata[cell_id].rlocal_phi_s);
     xi_0_Electrode_potential[0] = cell_SDdata[cell_id].xi_old_phi_s(0) + dxi_k1_Electrode_potential(0);  
     cell_SDdata[cell_id].xi_old_phi_s(0) = xi_0_Electrode_potential[0].val();
@@ -192,7 +201,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //std::cout << "--a0-1--" << std::endl;
     cell_SDdata[cell_id].Kxic_phi_e.vmult(dxi_k1_Electrolyte_potential, dC_k1_Electrolyte_potential);
     cell_SDdata[cell_id].rlocal_phi_e -= dxi_k1_Electrolyte_potential;
-    cell_SDdata[cell_id].rlocal_phi_e[0] += (-1 * cell_SDdata[cell_id].reaction_rate_potential) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
+    cell_SDdata[cell_id].rlocal_phi_e[0] += (-1 * cell_SDdata[cell_id].reaction_rate_potential.val()) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
     cell_SDdata[cell_id].Kxixi_inv_phi_e.vmult(dxi_k1_Electrolyte_potential, cell_SDdata[cell_id].rlocal_phi_e);
     xi_0_Electrolyte_potential[0] = cell_SDdata[cell_id].xi_old_phi_e(0) + dxi_k1_Electrolyte_potential(0);  
     cell_SDdata[cell_id].xi_old_phi_e(0) = xi_0_Electrolyte_potential[0].val();
@@ -352,6 +361,46 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
       Ms_list_opposite[cell_SDdata[cell_id].lnode_minus[i]] = 1.0;
     }
+
+    Sacado::Fad::DFad<double> c_li_ave=0.0, c_li_plus_ave=0.0, phi_s_ave=0.0, phi_e_ave=0.0;
+
+    int _count_plus = 0;
+    for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_plus.size(); ++i) {
+      int plus_node_c_li = this_dof_local_index_Lithium[cell_SDdata[cell_id].lnode_plus[i]]; 
+      int plus_node_phi_s = this_dof_local_index_Electrode_potential[cell_SDdata[cell_id].lnode_plus[i]];
+      c_li_ave += ULocal_xi[plus_node_c_li];
+      phi_s_ave += ULocal_xi[plus_node_phi_s];
+      std::cout << " i " << i << " c_li " << ULocal_xi[plus_node_c_li].val() << " phi_s " << ULocal_xi[plus_node_phi_s].val() << std::endl;
+      _count_plus += 1;
+    }
+    c_li_ave = c_li_ave /_count_plus;
+    phi_s_ave = phi_s_ave /_count_plus;
+
+    int _count_minus = 0;
+    for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
+      int minus_node_c_li_plus = this_dof_local_index_Lithium_cation[cell_SDdata[cell_id].lnode_minus[i]]; 
+      int minus_node_phi_e = this_dof_local_index_Electrolyte_potential[cell_SDdata[cell_id].lnode_minus[i]];
+      c_li_plus_ave += ULocal_xi[minus_node_c_li_plus];
+      phi_e_ave += ULocal_xi[minus_node_phi_e];
+      std::cout << " i " << i << " c_li_plus " << ULocal_xi[minus_node_c_li_plus].val() << " phi_e " << ULocal_xi[minus_node_phi_e].val() << std::endl;
+      _count_minus += 1;
+    }
+    c_li_plus_ave = c_li_plus_ave /_count_minus;
+    phi_e_ave = phi_e_ave /_count_minus;
+
+    std::cout 
+      << " c_li_ave " << c_li_ave 
+      << " phi_s_ave " << phi_s_ave 
+      << " c_li_plus_ave " << c_li_plus_ave 
+      << " phi_e_ave " << phi_e_ave 
+      << std::endl;
+
+    Sacado::Fad::DFad<double> jn = 0.0; 
+		jn = electricChemoFormula.formula_jn(Temp, c_li_ave, c_li_plus_ave, phi_s_ave, phi_e_ave, domainflag);
+    cell_SDdata[cell_id].reaction_rate_potential = jn*F;
+    cell_SDdata[cell_id].reaction_rate_li = jn;
+
+
 
     double dummy_area = 0.0;
     double dummy_area_opposite = 0.0;

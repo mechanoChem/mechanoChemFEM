@@ -1,0 +1,82 @@
+#parameters file
+#	Lithium Displacement
+
+subsection Problem
+set print_parameter = true
+
+set primary_variables_list=Lithium, component_is_scalar
+set FE_support_list= 1
+
+#set primary_variables_list=Lithium, component_is_scalar,  Displacement, component_is_vector
+#set FE_support_list= 1,1
+
+#set primary_variables_list=Lithium, component_is_scalar, Lithium_phaseField, component_is_scalar, Displacement, component_is_vector
+#set FE_support_list= 1,1,1
+
+set dt = 1
+set totalTime = 0
+set current_increment = 0
+set off_output_index=0
+set current_time = 0
+set resuming_from_snapshot = false
+
+set output_directory = output/
+set snapshot_directory = snapshot/
+set save_snapshot = true
+
+#FEM
+set volume_quadrature = 3 
+set face_quadrature = 2 
+
+end
+
+subsection Geometry
+set x_min = 0
+set y_min = 0
+set z_min = 0
+set x_max = 5 
+set y_max = 5
+set z_max = 2 #no need to 2D
+
+set num_elem_x=4
+set num_elem_y=4
+set num_elem_z=4 #no need to 2D
+end
+
+subsection parameters_Lithium
+set lithium_diffusivity=1 
+set lithium_ini=1
+end
+
+subsection parameters_Lithium_phaseField
+set kappa =1
+set c_alpha=0.9
+set c_beta=0.1
+set omega=1
+end
+
+subsection parameters_Mechanics
+set youngs_modulus =  5.0e3
+set poisson_ratio =  0.45
+set lithium_a = 0
+set lithium_b = 1
+end
+						
+#
+# parameters reserved for deal.ii first level code:
+#nonLinear_method : classicNewton
+#solver_method (direct) : PETScsuperLU, PETScMUMPS
+#solver_method (iterative) : PETScGMRES PETScBoomerAMG
+#relative_norm_tolerance, absolute_norm_tolerance, max_iterations
+#
+subsection Nonlinear_solver
+		set nonLinear_method = classicNewton
+		set relative_norm_tolerance = 1.0e-10
+		set absolute_norm_tolerance = 1.0e-10
+		set max_iterations = 10
+end
+						
+subsection Linear_solver
+		set solver_method = PETScsuperLU
+		set system_matrix_symmetricFlag = false # default is false
+end

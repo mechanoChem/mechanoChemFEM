@@ -2,9 +2,7 @@
 	"test":1,
 	"Problem":{
 		"print_parameter": true,
-    "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential"],
-		"external_mesh": true,
-		"mesh": "../battery_package/mesh/benchmark_mesh.inp",
+    "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential","Diffuse_interface"],
     "current_increment": 0,
     "current_time": 0,
     "dt": 20,
@@ -12,30 +10,30 @@
 		"snapshot_directory": "snapshot/",
 		"save_snapshot":true,
 		"save_output":true,
-    "totalTime": 200,
+    "totalTime": 140,
     "volume_quadrature": 2,
 		"face_quadrature": 2
 	},
   "Geometry": {
-      "num_elem_x": 90,
-      "num_elem_y": 20,
+      "num_elem_x": 29,
+      "num_elem_y": 1,
       "num_elem_z": 0,
-      "x_max": 15,
-      "x_min": -15,
-      "y_max": 56,
+      "x_max": 9,
+      "x_min": 0,
+      "y_max": 2,
       "y_min": 0,
       "z_max": 0,
       "z_min": 0
   },
 	"ElectroChemo":{
-		"applied_current":30,
-		"particle_R":10,
+		"applied_current":3,
+		"particle_R":0.8,
 		"interface_bandwitdh":0.05,
 		"flip_time":1000,
 		"D_li_neg":0.5,
 		"D_li_pos":0.1,
 		"D_li_plus":0.005,
-		"jn_react":-0.0001,
+		"jn_react":-0.0000,
 		"sigma_s_neg":1.5e8,
 		"sigma_s_pos":0.5e8,
 		"c_li_max_neg":28.7e-3,
@@ -50,10 +48,7 @@
 		"phi_e_0":1,
 		"T_0":298,
 		"iso_value":0.5,
-		"separator_line":28,
-		"neg_electrode_line":18,
-		"pos_electrode_line":38,
-		"orientation":1
+		"separator_line":5
 	},
 	"Lithium_phaseField":{
 		"kappa":0.0005,
@@ -89,7 +84,7 @@
 		}
   },
 	"Nonlinear_solver":{
-		"max_iterations": 50,
+		"max_iterations": 20,
 		"absolute_norm_tolerance": 3e-6
 	}
 }

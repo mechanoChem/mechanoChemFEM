@@ -137,7 +137,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 			this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, current_IpA);
 		}
 	}
-  std::cout << "!!!!!!!!!!*****************!!!!!!!" << std::endl;
+  //std::cout << "!!!!!!!!!!*****************!!!!!!!" << std::endl;
 }
 
 template <int dim>

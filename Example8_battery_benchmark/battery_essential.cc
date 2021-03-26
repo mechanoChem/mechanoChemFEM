@@ -172,6 +172,14 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 					for(unsigned int q=0;q<n_face_quadrature_points;q++){
 						jn[q]=electricChemoFormula.formula_jn(Temp, c_li[q], c_li_plus[q], phi_s[q], phi_e[q], domainflag);
 						I_interface[q]=jn[q]*F;
+            std::cout << " electrode: \tq " << q 
+              << " \tjn[q] " << jn[q].val() 
+              << " \tI_interface " << I_interface[q].val()  
+              << " \tc_li " << c_li[q].val()  
+              << " \tc_li_plus " << c_li_plus[q].val()  
+              << " \tphi_s " << phi_s[q].val()  
+              << " \tphi_e " << phi_e[q].val()  
+              << std::endl;
 					}
 					
 				  if(battery_fields.active_fields_index["Lithium"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium"], R, jn);                 
@@ -220,6 +228,15 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 					for(unsigned int q=0;q<n_face_quadrature_points;q++){
 						jn[q]=-electricChemoFormula.formula_jn(Temp, c_li[q], c_li_plus[q], phi_s[q], phi_e[q], domainflag);
 						I_interface[q]=jn[q]*F;
+
+            std::cout << " electrolyte: \tq " << q 
+              << " \tjn[q] " << jn[q].val() 
+              << " \tI_interface " << I_interface[q].val()  
+              << " \tc_li " << c_li[q].val()  
+              << " \tc_li_plus " << c_li_plus[q].val()  
+              << " \tphi_s " << phi_s[q].val()  
+              << " \tphi_e " << phi_e[q].val()  
+              << std::endl;
 					}
 				  if(battery_fields.active_fields_index["Lithium_cation"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium_cation"], R, jn);   
 				  if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrolyte_potential"], R, I_interface);                                                                 

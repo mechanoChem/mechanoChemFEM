@@ -120,7 +120,7 @@ void battery<dim>::apply_initial_condition()
     	for (unsigned int i=0; i<dofs_per_cell; ++i) {
       	int ck = fe_values.get_fe().system_to_component_index(i).first;
 				if (ck==battery_fields.active_fields_index["Lithium"]){ 
-          //this->solution_prev(local_dof_indices[i])=C_li_0+0.04*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+          //this->solution_prev(local_dof_indices[i])=C_li_0+0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
           this->solution_prev(local_dof_indices[i])=C_li_0;
 				}
 				else if(ck==battery_fields.active_fields_index["Lithium_cation"]) this->solution_prev(local_dof_indices[i])=C_li_plus_0;
@@ -199,19 +199,34 @@ void battery<dim>::apply_initial_condition()
 
 
   {
+    bool is_one_node_Electrolyte_potential_fixed = false;
     // remove the minus or plus side of node, not to solve
     typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc = this->dof_handler.end();
     for (; cell != endc; ++cell) {
       if (cell->subdomain_id() == this->this_mpi_process) {
         int cell_id = cell->active_cell_index();
+			  Point<dim> center=cell->center();
+
+        const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
+        std::vector<unsigned int> local_dof_indices(dofs_per_cell);
+        cell->get_dof_indices(local_dof_indices);
+        const unsigned int dofs_per_node = dofs_per_cell / 4;
+
+        if (center[0] >= 4.0 and center[0] < 5.0  ) // for the new 3 layer geometry, special case
+        {
+          if (not is_one_node_Electrolyte_potential_fixed)
+          {
+            // add Dirichlet constraint to make some of the potential to be zero.
+            int i0 = 0; // first node of one cell in the region 4 < x < 5
+            auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]];
+            //std::cout << "Electrolyte_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
+            constraints->add_line(globalDOF);
+            constraints->set_inhomogeneity(globalDOF, 0.0);
+            is_one_node_Electrolyte_potential_fixed = true;
+          }
+        }
+
         if (cell_SDdata[cell_id].is_interface_element) {
-
-			    Point<dim> center=cell->center();
-          const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
-          std::vector<unsigned int> local_dof_indices(dofs_per_cell);
-          cell->get_dof_indices(local_dof_indices);
-          const unsigned int dofs_per_node = dofs_per_cell / 4;
-
 
           cell_SDdata[cell_id].reaction_rate_potential = 0.0;
           cell_SDdata[cell_id].reaction_rate_li = 0.0;
@@ -241,18 +256,6 @@ void battery<dim>::apply_initial_condition()
               constraints->set_inhomogeneity(globalDOF, 0.0);
               cell_SDdata[cell_id].xi_old_phi_s(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]]);
               cell_SDdata[cell_id].xi_conv_phi_s(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]]);
-            }
-
-            if (center[0] < 3.5) // for the new 3 layer geometry, special case
-            {
-              if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) 
-              {
-                // add Dirichlet constraint to make some of the potential to be zero.
-                auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]];
-                //std::cout << "Electrolyte_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
-                constraints->add_line(globalDOF);
-                constraints->set_inhomogeneity(globalDOF, 0.0);
-              }
             }
 
           }

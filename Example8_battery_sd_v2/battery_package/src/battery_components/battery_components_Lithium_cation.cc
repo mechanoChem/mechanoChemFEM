@@ -37,7 +37,7 @@ void Lithium_cation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 	dealii::Table<2,Sacado::Fad::DFad<double> > i_phi_e(n_q_points, dim);
 	for(unsigned int q=0; q<n_q_points;q++){
 		Sacado::Fad::DFad<double> c_li_plus_prev_val=c_li_plus_prev[q];
-		D_li_plus[q]=this->electricChemoFormula->D_li_plus(c_li_plus_prev_val, Temp_s).val()/1000;
+		D_li_plus[q]=this->electricChemoFormula->D_li_plus(c_li_plus_prev_val, Temp_s).val();
 		sigma_e[q]=this->electricChemoFormula->sigma_e(c_li_plus_prev_val, Temp_s).val();
 		for(unsigned int i=0; i<dim;i++){
 			i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
@@ -70,9 +70,6 @@ void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,
 	//dealii::Table<2,Sacado::Fad::DFad<double>> c_li_plus_grad=this->battery_fields->quad_fields[c_li_plus_index].value_grad;
 
 	dealii::Table<1,double> D_li_plus=this->electricChemoFormula->D_li_plus_interface(c_li_plus_old);
-	for(unsigned int q=0; q<n_q_points;q++){
-    D_li_plus[q] = D_li_plus[q] / 1000;
-  }
 	dealii::Table<1,double> sigma_e = this->electricChemoFormula->sigma_e_interface(c_li_plus_old);
 
 	dealii::Table<2,Sacado::Fad::DFad<double> > i_phi_e(n_q_points, dim);

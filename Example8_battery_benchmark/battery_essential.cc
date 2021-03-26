@@ -45,6 +45,17 @@ battery<dim>::battery(std::string parameter_file_Dir)
 
 template <int dim>
 battery<dim>::~battery(){}
+
+template <int dim>
+void battery<dim>::make_grid()
+{
+	std::string mesh_directory=(*params_json)["Problem"]["mesh"];
+	this->pcout << "reading external  mesh:"<<mesh_directory<<std::endl;
+  GridIn<dim> gridin;
+  gridin.attach_triangulation(this->triangulation);
+  std::ifstream f(mesh_directory);
+  gridin.read_abaqus(f);
+}
 template <int dim>
 void battery<dim>::define_battery_fields()
 {
@@ -105,10 +116,11 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 {	
   int cell_id = cell->active_cell_index();
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
 	battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
 	Point<dim> center=cell->center();
 	int domainflag=-1;
-	if (center[0]>separator_line){
+	if (center[orientation]>separator_line){
 		domainflag=1;
 	}
 
@@ -181,7 +193,8 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
               << " \tphi_e " << phi_e[q].val()  
               << std::endl;
 					}
-					
+					//std::cout<<"jn="<<jn[0].val()<<" c_li="<<c_li[0].val()<<" c_li_plus="<<c_li_plus[0].val()<<" electrode_domainflag"<<domainflag<<std::endl;
+
 				  if(battery_fields.active_fields_index["Lithium"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium"], R, jn);                 
 				  if(battery_fields.active_fields_index["Electrode_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, I_interface);                                                                 
 				}
@@ -238,6 +251,8 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
               << " \tphi_e " << phi_e[q].val()  
               << std::endl;
 					}
+					//std::cout<<"jn="<<jn[0].val()<<" c_li="<<c_li[0].val()<<" c_li_plus="<<c_li_plus[0].val()<<" electrolyte_domainflag"<<domainflag<<std::endl;
+					
 				  if(battery_fields.active_fields_index["Lithium_cation"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Lithium_cation"], R, jn);   
 				  if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrolyte_potential"], R, I_interface);                                                                 
 					                                      
@@ -248,14 +263,14 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	
 	//BC
 	for (unsigned int faceID=0; faceID<2*dim; faceID++){
-		if(cell->face(faceID)->boundary_id()==1 or cell->face(faceID)->boundary_id()==dim+1 ){
+		if(cell->face(faceID)->boundary_id()==1+orientation or cell->face(faceID)->boundary_id()==dim+1+orientation ){
 			double current_IpA=(*params_json)["ElectroChemo"]["applied_current"];
       if(this->current_increment<=0){current_IpA=current_IpA/50; }
       else if(this->current_increment<=1){current_IpA=1*current_IpA/10; }
       else if(this->current_increment<=2){current_IpA=2*current_IpA/10; }
       else if(this->current_increment<=3){current_IpA=4*current_IpA/10; }
       else if(this->current_increment<=4){current_IpA=8*current_IpA/10; }
-			if (cell->face(faceID)->boundary_id()==1) current_IpA=-current_IpA;
+			if (cell->face(faceID)->boundary_id()==1+orientation) current_IpA=-current_IpA;
 		  FEFaceValues<dim> fe_face_values(fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
 			fe_face_values.reinit(cell,faceID);
 			this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, current_IpA);

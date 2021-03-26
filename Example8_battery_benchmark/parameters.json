@@ -3,6 +3,8 @@
 	"Problem":{
 		"print_parameter": true,
     "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential"],
+		"external_mesh": true,
+		"mesh": "../battery_package/mesh/benchmark_mesh.inp",
     "current_increment": 0,
     "current_time": 0,
     "dt": 20,
@@ -10,24 +12,24 @@
 		"snapshot_directory": "snapshot/",
 		"save_snapshot":true,
 		"save_output":true,
-    "totalTime": 400,
-    "volume_quadrature": 2,
+    "totalTime": 200,
+    "volume_quadrature": 3,
 		"face_quadrature": 2
 	},
   "Geometry": {
       "num_elem_x": 90,
       "num_elem_y": 10,
       "num_elem_z": 0,
-      "x_max": 9,
-      "x_min": 0,
-      "y_max": 2,
+      "x_max": 15,
+      "x_min": -15,
+      "y_max": 56,
       "y_min": 0,
       "z_max": 0,
       "z_min": 0
   },
 	"ElectroChemo":{
-		"applied_current":3,
-		"particle_R":0.8,
+		"applied_current":30,
+		"particle_R":10,
 		"interface_bandwitdh":0.05,
 		"flip_time":1000,
 		"D_li_neg":0.5,
@@ -48,7 +50,10 @@
 		"phi_e_0":1,
 		"T_0":298,
 		"iso_value":0.5,
-		"separator_line":5
+		"separator_line":28,
+		"neg_electrode_line":18,
+		"pos_electrode_line":38,
+		"orientation":1
 	},
 	"Lithium_phaseField":{
 		"kappa":0.0005,

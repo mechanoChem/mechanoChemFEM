@@ -13,7 +13,7 @@
 		"save_snapshot":true,
 		"save_output":true,
     "totalTime": 200,
-    "volume_quadrature": 2,
+    "volume_quadrature": 3,
 		"face_quadrature": 2
 	},
   "Geometry": {

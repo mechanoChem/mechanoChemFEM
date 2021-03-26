@@ -18,6 +18,7 @@ class battery: public mechanoChemFEM<dim>
 		void apply_boundary_condition();
 		void apply_initial_condition();
 		void setMultDomain();
+		void make_grid();
 		void apply_Neumann_boundary_condition();
 		void declare_parameters();
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);

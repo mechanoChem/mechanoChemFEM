@@ -14,16 +14,13 @@ void battery<dim>::apply_boundary_condition()
 	DoFTools::make_hanging_node_constraints (this->dof_handler, *constraints);
 
 	int totalDOF=this->totalDOF(this->primary_variables);
-	  std::vector<bool> All_component (totalDOF, false);
-	// if(battery_fields.active_fields_index["Electrode_potential"]>-1) All_component[battery_fields.active_fields_index["Electrode_potential"]]=true;
-	// if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) All_component[battery_fields.active_fields_index["Electrolyte_potential"]]=true;
-	//
-	// VectorTools:: interpolate_boundary_values (this->dof_handler, 1, ZeroFunction<dim> (totalDOF),*constraints, All_component);
+	std::vector<bool> All_component (totalDOF, false);
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
 	std::vector<types::global_dof_index> local_face_dof_indices (this->fe_system[electrolyte_id]->dofs_per_face);
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
-		if (cell->center()[0]>separator_line) continue;
+		if (cell->center()[orientation]>separator_line) continue;
 		if(cell->material_id()==electrolyte_id){
 			for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
 				if (cell->at_boundary(f) == false){
@@ -38,9 +35,6 @@ void battery<dim>::apply_boundary_condition()
 			}
 		}
 	}
-	// if(battery_fields.active_fields_index["Lithium_cation"]>-1) All_component[battery_fields.active_fields_index["Lithium_cation"]]=true;
-	// VectorTools:: interpolate_boundary_values (this->dof_handler, 3, ZeroFunction<dim> (totalDOF),*constraints, All_component);
-
 	constraints->close ();
 }
 template <int dim>
@@ -54,17 +48,32 @@ void battery<dim>::setup_diffuse_interface(){}
 template <int dim>
 void battery<dim>::setMultDomain()
 {
-	std::vector<std::vector<double>> origin_list={{1.5,1},{4.5,1}};
-	double r=(*params_json)["ElectroChemo"]["particle_R"];
 	
+	std::vector<std::vector<double>> origin_list={{1.5,1},{4.5,1}};
+	std::vector<std::vector<double>> origin_list_benchmark={{0,0},{0,18},{0,38},{0,56}};
+	double r=(*params_json)["ElectroChemo"]["particle_R"];
+	double neg_electrode_line=(*params_json)["ElectroChemo"]["neg_electrode_line"];
+	double pos_electrode_line=(*params_json)["ElectroChemo"]["pos_electrode_line"];
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+	this->pcout<<"setMultDomain"<<std::endl;
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
 		if (cell->subdomain_id() == this->this_mpi_process){
 			cell->set_material_id(electrolyte_id);
 			Point<dim> center=cell->center();
-			int inside_vertex=0;
-			if(center[0]<3) cell->set_material_id(active_particle_id);
-			if(center[0]>6) cell->set_material_id(active_particle_id);
+			if (center[orientation]>neg_electrode_line and center[orientation]<pos_electrode_line) continue;
+			for(unsigned int ori_index=0;ori_index<origin_list_benchmark.size();ori_index++){
+				Point<dim> origin(origin_list_benchmark[ori_index][0],origin_list_benchmark[ori_index][1]);
+				if(center.distance(origin)<r-1.0e-15) {
+					cell->set_material_id(active_particle_id);
+					break;
+				}
+			}
+			
+			
+			// int inside_vertex=0;
+			// if(center[0]<3) cell->set_material_id(active_particle_id);
+			// if(center[0]>6) cell->set_material_id(active_particle_id);
 		}
 	}
 	this->set_active_fe_indices (this->FE_support, this->dof_handler);
@@ -88,15 +97,16 @@ void battery<dim>::apply_initial_condition()
 	double C_li_100_pos=(*params_json)["ElectroChemo"]["c_li_100_pos"];
 	
 	double C_li_plus_0=(*params_json)["ElectroChemo"]["C_li_plus_0"];
-
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+	
 	double iso_value=(*params_json)["ElectroChemo"]["iso_value"];
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
 		if (cell->subdomain_id() == this->this_mpi_process){
 			double C_li_0=C_li_100_neg*C_li_max_neg;
 			Point<dim> center=cell->center();
-			if (center[0]>separator_line){
+			if (center[orientation]>separator_line){
 				C_li_0=C_li_100_pos*C_li_max_pos;
 			}
     	hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points);
@@ -110,8 +120,8 @@ void battery<dim>::apply_initial_condition()
 				if (ck==battery_fields.active_fields_index["Lithium"]) this->solution_prev(local_dof_indices[i])=C_li_0;//+0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
 				else if(ck==battery_fields.active_fields_index["Lithium_cation"]) this->solution_prev(local_dof_indices[i])=C_li_plus_0;
 				else if(ck==battery_fields.active_fields_index["Electrode_potential"]){
-					if(center[0]>separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_pos,1).val();
-					if(center[0]<separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_neg,-1).val();
+					if(center[orientation]>separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_pos,1).val();
+					if(center[orientation]<separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_neg,-1).val();
 				}
 					
 				else if(ck==battery_fields.active_fields_index["Electrolyte_potential"]) this->solution_prev(local_dof_indices[i])=0;

@@ -45,6 +45,17 @@ battery<dim>::battery(std::string parameter_file_Dir)
 
 template <int dim>
 battery<dim>::~battery(){}
+
+template <int dim>
+void battery<dim>::make_grid()
+{
+	std::string mesh_directory=(*params_json)["Problem"]["mesh"];
+	this->pcout << "reading external  mesh:"<<mesh_directory<<std::endl;
+  GridIn<dim> gridin;
+  gridin.attach_triangulation(this->triangulation);
+  std::ifstream f(mesh_directory);
+  gridin.read_abaqus(f);
+}
 template <int dim>
 void battery<dim>::define_battery_fields()
 {
@@ -103,6 +114,10 @@ void battery<dim>::output_w_domain(){
 template <int dim>
 void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
+  int cell_id = cell->active_cell_index();
+	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+
   if (cell->material_id()==interface_id){		
     get_residual_at_diffuse_interface(cell, fe_values, R, ULocal, ULocalConv);
   }
@@ -121,23 +136,21 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	}
 	
 	//apply_Neumann_boundary_condition();
-
 	//BC
 	for (unsigned int faceID=0; faceID<2*dim; faceID++){
-		if(cell->face(faceID)->boundary_id()==1 or cell->face(faceID)->boundary_id()==dim+1 ){
+		if(cell->face(faceID)->boundary_id()==1+orientation or cell->face(faceID)->boundary_id()==dim+1+orientation ){
 			double current_IpA=(*params_json)["ElectroChemo"]["applied_current"];
       if(this->current_increment<=0){current_IpA=current_IpA/50; }
       else if(this->current_increment<=1){current_IpA=1*current_IpA/10; }
       else if(this->current_increment<=2){current_IpA=2*current_IpA/10; }
       else if(this->current_increment<=3){current_IpA=4*current_IpA/10; }
       else if(this->current_increment<=4){current_IpA=8*current_IpA/10; }
-			if (cell->face(faceID)->boundary_id()==1) current_IpA=-current_IpA;
+			if (cell->face(faceID)->boundary_id()==1+orientation) current_IpA=-current_IpA;
 		  FEFaceValues<dim> fe_face_values(fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
 			fe_face_values.reinit(cell,faceID);
 			this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, current_IpA);
 		}
 	}
-  //std::cout << "!!!!!!!!!!*****************!!!!!!!" << std::endl;
 }
 
 template <int dim>

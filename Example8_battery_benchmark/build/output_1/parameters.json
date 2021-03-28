@@ -2,7 +2,7 @@
 	"test":1,
 	"Problem":{
 		"print_parameter": true,
-    "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential","Displacement"],
+    "battery_variables":["Lithium","Lithium_cation","Lithium_phaseField","Electrode_potential","Electrolyte_potential","Displacement"],
 		"external_mesh": true,
 		"mesh": "../battery_package/mesh/benchmark_mesh.inp",
     "current_increment": 0,
@@ -56,7 +56,7 @@
 		"orientation":1
 	},
 	"Lithium_phaseField":{
-		"kappa":5,
+		"kappa":0.5,
 		"c_alpha":0.02,
 		"c_beta":0.001,
 		"omega":0.25

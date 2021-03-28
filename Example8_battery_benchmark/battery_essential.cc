@@ -123,7 +123,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	if (center[orientation]>separator_line){
 		domainflag=1;
 	}
-
+	//std::cout<<"domain="<<domainflag<<std::endl;
   // update reaction rate at the interface 
 	double reaction_rate=(*params_json)["ElectroChemo"]["jn_react"];
 	double F=(*params_json)["ElectroChemo"]["F"];
@@ -137,6 +137,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	if (cell->material_id()==active_particle_id){
 		if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
+		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	}
@@ -145,7 +146,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 		if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	}
-	
+	//std::cout<<"111"<<std::endl;
 	if(cell->material_id()==active_particle_id){
 		for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
 			if (cell->at_boundary(f) == false){
@@ -248,7 +249,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	for (unsigned int faceID=0; faceID<2*dim; faceID++){
 		if(cell->face(faceID)->boundary_id()==1+orientation or cell->face(faceID)->boundary_id()==dim+1+orientation ){
 			double current_IpA=(*params_json)["ElectroChemo"]["applied_current"];
-      if(this->current_increment<=0){current_IpA=current_IpA/50; }
+      if(this->current_increment<=0){current_IpA=0; }
       else if(this->current_increment<=1){current_IpA=1*current_IpA/10; }
       else if(this->current_increment<=2){current_IpA=2*current_IpA/10; }
       else if(this->current_increment<=3){current_IpA=4*current_IpA/10; }

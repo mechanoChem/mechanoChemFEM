@@ -306,6 +306,7 @@ void battery<dim>::identify_diffuse_interface()
         for (unsigned int i=0; i<local_diffuse_interface.size(); ++i) {
           if (local_diffuse_interface[i] >= iso_value){
             cell_SDdata[cell_id].lnode_plus.push_back(i);
+            cell_SDdata[cell_id].one_plus_node = cell->vertex(i);
             if (std::abs(local_diffuse_interface[i] - iso_value) < 1e-12)
             {
               count_equal_c += 1;

@@ -17,6 +17,11 @@ void battery<dim>::apply_boundary_condition()
 	std::vector<bool> All_component (totalDOF, false);
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
 	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+	if(battery_fields.active_fields_index["Displacement"]>-1) {
+		for(unsigned int i=0;i<dim;i++) All_component[battery_fields.active_fields_index["Displacement"]+i]=true;
+	}
+	VectorTools:: interpolate_boundary_values (this->dof_handler, 1+orientation, ZeroFunction<dim> (totalDOF),*constraints, All_component);
+
 	std::vector<types::global_dof_index> local_face_dof_indices (this->fe_system[electrolyte_id]->dofs_per_face);
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
@@ -58,7 +63,7 @@ void battery<dim>::setMultDomain()
 	this->pcout<<"setMultDomain"<<std::endl;
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
-		if (cell->subdomain_id() == this->this_mpi_process){
+		if (true){
 			cell->set_material_id(electrolyte_id);
 			Point<dim> center=cell->center();
 			if (center[orientation]>neg_electrode_line and center[orientation]<pos_electrode_line) continue;

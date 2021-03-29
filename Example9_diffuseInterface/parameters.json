@@ -31,10 +31,10 @@
 		"sigma_s_pos" : 0.5e8
 	},
 	"Lithium_phaseField":{
-		"kappa":0.0005,
+		"kappa":5,
 		"c_alpha":0.2,
 		"c_beta":0.8,
-		"omega":0.25
+		"omega":2.5
 	},
 	"Mechanics":{
 		"youngs_modulus":1.0e4,

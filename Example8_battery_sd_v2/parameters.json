@@ -12,7 +12,7 @@
 		"snapshot_directory": "snapshot/",
 		"save_snapshot":true,
 		"save_output":true,
-    "totalTime": 20,
+    "totalTime": 3600,
     "volume_quadrature": 2,
 		"face_quadrature": 2
 	},
@@ -56,17 +56,17 @@
 		"orientation":1
 	},
 	"Lithium_phaseField":{
-		"kappa":0.0005,
-		"c_alpha":0.2,
-		"c_beta":0.8,
+		"kappa":5,
+		"c_alpha":0.02,
+		"c_beta":0.001,
 		"omega":0.25
 	},
 	"Mechanics":{
 		"youngs_modulus_particle":77,
 		"youngs_modulus_electrolyte":20,
 		"poisson_ratio":0.3,
-		"lithium_a":0.5,
-		"lithium_b":1.5,
+		"lithium_a":0.01,
+		"lithium_b":0.5,
     "Feiga_11" : 1,
     "Feiga_22" : 1,
     "Feiga_33" : 1,
@@ -89,7 +89,7 @@
 		}
   },
 	"Nonlinear_solver":{
-		"max_iterations": 20,
+		"max_iterations": 50,
 		"absolute_norm_tolerance": 3e-6
 	}
 }

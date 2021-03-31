@@ -171,9 +171,10 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
   //if (primiary_dof != cell_SDdata[cell_id].opposite_flux_dof_li)
   //{ // for electrode
+    cell_SDdata[cell_id].rlocal[0] = 0.0;
     cell_SDdata[cell_id].Kxic.vmult(dxi_k1_Lithium, dC_k1_Lithium);
     cell_SDdata[cell_id].rlocal -= dxi_k1_Lithium;
-    cell_SDdata[cell_id].rlocal[0] += cell_SDdata[cell_id].reaction_rate_li.val() * cell_SDdata[cell_id].interface_length;
+    //cell_SDdata[cell_id].rlocal[0] += cell_SDdata[cell_id].reaction_rate_li.val() * cell_SDdata[cell_id].interface_length;
     cell_SDdata[cell_id].Kxixi_inv.vmult(dxi_k1_Lithium, cell_SDdata[cell_id].rlocal);
     xi_0_Lithium[0] = cell_SDdata[cell_id].xi_old(0) + dxi_k1_Lithium(0);  
     cell_SDdata[cell_id].xi_old(0) = xi_0_Lithium[0].val();
@@ -182,18 +183,20 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   //else
   //{// for electrolyte
     ////std::cout << "--a0-1--" << std::endl;
+    cell_SDdata[cell_id].rlocal_c_e[0] = 0.0;
     cell_SDdata[cell_id].Kxic_c_e.vmult(dxi_k1_Lithium_cation, dC_k1_Lithium_cation);
     cell_SDdata[cell_id].rlocal_c_e -= dxi_k1_Lithium_cation;
-    cell_SDdata[cell_id].rlocal_c_e[0] += (-1 *cell_SDdata[cell_id].reaction_rate_li.val()) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
+    //cell_SDdata[cell_id].rlocal_c_e[0] += (-1 *cell_SDdata[cell_id].reaction_rate_li.val()) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
     cell_SDdata[cell_id].Kxixi_inv_c_e.vmult(dxi_k1_Lithium_cation, cell_SDdata[cell_id].rlocal_c_e);
     xi_0_Lithium_cation[0] = cell_SDdata[cell_id].xi_old_c_e(0) + dxi_k1_Lithium_cation(0);  
     cell_SDdata[cell_id].xi_old_c_e(0) = xi_0_Lithium_cation[0].val();
   //}
 
 
+    cell_SDdata[cell_id].rlocal_phi_s[0] = 0.0;
     cell_SDdata[cell_id].Kxic_phi_s.vmult(dxi_k1_Electrode_potential, dC_k1_Electrode_potential);
     cell_SDdata[cell_id].rlocal_phi_s -= dxi_k1_Electrode_potential;
-    cell_SDdata[cell_id].rlocal_phi_s[0] += cell_SDdata[cell_id].reaction_rate_potential.val() * cell_SDdata[cell_id].interface_length;
+    //cell_SDdata[cell_id].rlocal_phi_s[0] += cell_SDdata[cell_id].reaction_rate_potential.val() * cell_SDdata[cell_id].interface_length;
     cell_SDdata[cell_id].Kxixi_inv_phi_s.vmult(dxi_k1_Electrode_potential, cell_SDdata[cell_id].rlocal_phi_s);
     xi_0_Electrode_potential[0] = cell_SDdata[cell_id].xi_old_phi_s(0) + dxi_k1_Electrode_potential(0);  
     cell_SDdata[cell_id].xi_old_phi_s(0) = xi_0_Electrode_potential[0].val();
@@ -201,9 +204,10 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //std::cout << "xi_0_Electrode_potential[0] " << xi_0_Electrode_potential[0] << std::endl;
 
     //std::cout << "--a0-1--" << std::endl;
+    cell_SDdata[cell_id].rlocal_phi_e[0] = 0.0;
     cell_SDdata[cell_id].Kxic_phi_e.vmult(dxi_k1_Electrolyte_potential, dC_k1_Electrolyte_potential);
     cell_SDdata[cell_id].rlocal_phi_e -= dxi_k1_Electrolyte_potential;
-    cell_SDdata[cell_id].rlocal_phi_e[0] += (-1 * cell_SDdata[cell_id].reaction_rate_potential.val()) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
+    //cell_SDdata[cell_id].rlocal_phi_e[0] += (-1 * cell_SDdata[cell_id].reaction_rate_potential.val()) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
     cell_SDdata[cell_id].Kxixi_inv_phi_e.vmult(dxi_k1_Electrolyte_potential, cell_SDdata[cell_id].rlocal_phi_e);
     xi_0_Electrolyte_potential[0] = cell_SDdata[cell_id].xi_old_phi_e(0) + dxi_k1_Electrolyte_potential(0);  
     cell_SDdata[cell_id].xi_old_phi_e(0) = xi_0_Electrolyte_potential[0].val();

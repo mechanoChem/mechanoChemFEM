@@ -329,8 +329,8 @@ void battery<dim>::apply_initial_condition()
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
               // initialize the xi_old to be the same value as the neighbor node
-              cell_SDdata[cell_id].xi_old(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]);
-              cell_SDdata[cell_id].xi_conv(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]);
+              //cell_SDdata[cell_id].xi_old(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]);
+              //cell_SDdata[cell_id].xi_conv(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]);
               //std::cout << "xi_old Lithium " << cell_SDdata[cell_id].xi_old(0) << " plus[0] " << cell_SDdata[cell_id].lnode_plus[0] << " i0 " << cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"] << std::endl;
               //std::cout << this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]) << std::endl;
               //std::cout << this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[1]*dofs_per_node + battery_fields.active_fields_index["Lithium"]]) << std::endl;
@@ -343,11 +343,28 @@ void battery<dim>::apply_initial_condition()
               //std::cout << "Electrode_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
-              cell_SDdata[cell_id].xi_old_phi_s(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]]);
-              cell_SDdata[cell_id].xi_conv_phi_s(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]]);
+              //cell_SDdata[cell_id].xi_old_phi_s(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]]);
+              //cell_SDdata[cell_id].xi_conv_phi_s(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_plus[0]*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]]);
             }
 
           }
+
+          int _count_plus = 0;
+          cell_SDdata[cell_id].xi_old(0) = 0.0;
+          cell_SDdata[cell_id].xi_conv(0) = 0.0;
+          cell_SDdata[cell_id].xi_old_phi_s(0) = 0.0;
+          cell_SDdata[cell_id].xi_conv_phi_s(0) = 0.0;
+          for (auto i0 : cell_SDdata[cell_id].lnode_plus)
+          {
+              // initialize the xi_old to be the same value as the neighbor node
+              cell_SDdata[cell_id].xi_old(0) += this->solution_prev(local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Lithium"]]);
+              cell_SDdata[cell_id].xi_old_phi_s(0) += this->solution_prev(local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]]);
+            _count_plus += 1;
+          }
+          cell_SDdata[cell_id].xi_old(0) = cell_SDdata[cell_id].xi_old(0)/ _count_plus;
+          cell_SDdata[cell_id].xi_old_phi_s(0) = cell_SDdata[cell_id].xi_old_phi_s(0)/ _count_plus;
+          cell_SDdata[cell_id].xi_conv(0) = cell_SDdata[cell_id].xi_old(0);
+          cell_SDdata[cell_id].xi_conv_phi_s(0) = cell_SDdata[cell_id].xi_old_phi_s(0);
 
           for (auto i0 : cell_SDdata[cell_id].lnode_plus)
           {
@@ -371,6 +388,23 @@ void battery<dim>::apply_initial_condition()
               cell_SDdata[cell_id].xi_conv_phi_e(0) = this->solution_prev(local_dof_indices[cell_SDdata[cell_id].lnode_minus[0]*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]]);
             }
           }
+
+          int _count_minus = 0;
+          cell_SDdata[cell_id].xi_old_c_e(0) = 0.0;
+          cell_SDdata[cell_id].xi_conv_c_e(0) = 0.0;
+          cell_SDdata[cell_id].xi_old_phi_e(0) = 0.0;
+          cell_SDdata[cell_id].xi_conv_phi_e(0) = 0.0;
+          for (auto i0 : cell_SDdata[cell_id].lnode_minus)
+          {
+              // initialize the xi_old to be the same value as the neighbor node
+              cell_SDdata[cell_id].xi_old_c_e(0) += this->solution_prev(local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Lithium_cation"]]);
+              cell_SDdata[cell_id].xi_old_phi_e(0) += this->solution_prev(local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]]);
+            _count_minus += 1;
+          }
+          cell_SDdata[cell_id].xi_old_c_e(0) = cell_SDdata[cell_id].xi_old_c_e(0)/ _count_minus;
+          cell_SDdata[cell_id].xi_old_phi_e(0) = cell_SDdata[cell_id].xi_old_phi_e(0)/ _count_minus;
+          cell_SDdata[cell_id].xi_conv_c_e(0) = cell_SDdata[cell_id].xi_old_c_e(0);
+          cell_SDdata[cell_id].xi_conv_phi_e(0) = cell_SDdata[cell_id].xi_old_phi_e(0);
 
         }
       }

@@ -278,16 +278,19 @@ void battery<dim>::run()
 		PetscPrintf(this->mpi_communicator,"current increment=%d, current time= %f",this->current_increment, this->current_time);
 		PetscPrintf(this->mpi_communicator,"************\n");
 		this->solve_ibvp();
-		
-	  t_solve = clock() - t_solve;
+
+			  t_solve = clock() - t_solve;
 		this->pcout<<"It took me "<< ((float)t_solve)/CLOCKS_PER_SEC<<" seconds for this solve"<<std::endl<<std::endl;
+		// std::string snapfile="snapshot_phase_2/snapshot-"+std::to_string(this->current_increment+this->off_output_index)+".dat";
+		// 	  this->FEMdata_out.resume_vector_from_snapshot(this->solution,snapfile);
+		// 	  this->solution_prev=this->solution;
 		
-		// this->FEMdata_out.clear_data_vectors();
-		// Vector<double> localized_U(this->solution_prev);
-		// this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);
-		// std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
-		// this->FEMdata_out.write_vtk(this->solution_prev, output_path);
-    this->output_results();
+		this->FEMdata_out.clear_data_vectors();
+		Vector<double> localized_U(this->solution_prev);
+		this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);
+		std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
+		this->FEMdata_out.write_vtk(this->solution_prev, output_path);
+    //this->output_results();
 	}
 	this->pcout<<"Finish running!!"<<std::endl;
 }

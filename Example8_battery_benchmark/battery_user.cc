@@ -150,14 +150,22 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 	const unsigned int n_q_points = computed_quantities.size();	
 	double youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_particle"];
 	double poissonRatio=(*params_json)["Mechanics"]["poisson_ratio"];
+	double neg_electrode_line=(*params_json)["ElectroChemo"]["neg_electrode_line"];
+	double pos_electrode_line=(*params_json)["ElectroChemo"]["pos_electrode_line"];
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+	
 	
 	Residual<double,dim> ResidualEq;
 	int lithium_index=this->battery_fields->active_fields_index["Lithium"];
+	int Electrode_potential_index=this->battery_fields->active_fields_index["Electrode_potential"];
 	int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];
 	int u_index=this->battery_fields->active_fields_index["Displacement"];
 	double eps_0=1.0e-5;
 	
-	if(input_data.solution_values[0][interface_index]<0.5) youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_electrolyte"];
+	Point<dim> points=input_data.evaluation_points[0];
+	if(input_data.solution_values[0][Electrode_potential_index]<1.0e-5){
+			youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_electrolyte"];
+	} 
 	
 	ResidualEq.setLameParametersByYoungsModulusPoissonRatio(youngsModulus, poissonRatio);	
 	double C_a=(*params_json)["Mechanics"]["lithium_a"];
@@ -189,7 +197,7 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 			  Fe[0][i][j] = (i==j) + input_data.solution_gradients[q][i+u_index][j];
 			}
 		}
-		if(input_data.solution_values[q][interface_index]>=0.5){
+		if(input_data.solution_values[q][Electrode_potential_index]>0){
 			double C_q=input_data.solution_values[q][lithium_index];
 			dealii::Table<2,double > Feig(dim,dim);
 			dealii::Table<2,double> invFeig(dim,dim);
@@ -205,6 +213,7 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 			}
 		}
 		ResidualEq.evaluateNeoHookeanStress(P_stress, Fe);
+		//std::cout<<"P_stress[0][0][0]"<<P_stress[0][0][0]<<" P_stress[0][1][1]"<<P_stress[0][1][1]<<" P_stress[0][0][1]"<<P_stress[0][0][1]<<std::endl;
 		computed_quantities[q][0]=std::sqrt(std::pow(P_stress[0][0][0],2)+std::pow(P_stress[0][1][1],2)-P_stress[0][0][0]*P_stress[0][1][1]+3*P_stress[0][0][1]*P_stress[0][0][1] );
 	}	
 }

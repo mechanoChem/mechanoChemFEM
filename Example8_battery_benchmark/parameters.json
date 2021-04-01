@@ -2,7 +2,7 @@
 	"test":1,
 	"Problem":{
 		"print_parameter": true,
-    "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential","Displacement"],
+    "battery_variables":["Lithium","Lithium_phaseField","Lithium_cation","Electrode_potential","Electrolyte_potential","Displacement"],
 		"external_mesh": true,
 		"mesh": "../battery_package/mesh/benchmark_mesh.inp",
 		"resuming_from_snapshot":false,

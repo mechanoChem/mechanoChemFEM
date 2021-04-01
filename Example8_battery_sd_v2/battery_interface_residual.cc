@@ -423,39 +423,78 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
     // for updating the reaction rate, will need to carefully revise this to use the interface quantity
     Sacado::Fad::DFad<double> c_li_ave=0.0, c_li_plus_ave=0.0, phi_s_ave=0.0, phi_e_ave=0.0;
-    int _count_plus = 0;
-    for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_plus.size(); ++i) {
-      int plus_node_c_li = this_dof_local_index_Lithium[cell_SDdata[cell_id].lnode_plus[i]]; 
-      int plus_node_phi_s = this_dof_local_index_Electrode_potential[cell_SDdata[cell_id].lnode_plus[i]];
-      c_li_ave += ULocal_xi[plus_node_c_li];
-      phi_s_ave += ULocal_xi[plus_node_phi_s];
-      //std::cout << " i " << i << " c_li " << ULocal_xi[plus_node_c_li].val() << " phi_s " << ULocal_xi[plus_node_phi_s].val() << std::endl;
-      _count_plus += 1;
-    }
-    c_li_ave = c_li_ave /_count_plus;
-    phi_s_ave = phi_s_ave /_count_plus;
+    {
+      int _count_plus = 0;
+      for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_plus.size(); ++i) {
+        int plus_node_c_li = this_dof_local_index_Lithium[cell_SDdata[cell_id].lnode_plus[i]]; 
+        int plus_node_phi_s = this_dof_local_index_Electrode_potential[cell_SDdata[cell_id].lnode_plus[i]];
+        c_li_ave += ULocal_xi[plus_node_c_li];
+        phi_s_ave += ULocal_xi[plus_node_phi_s];
+        //std::cout << " i " << i << " c_li " << ULocal_xi[plus_node_c_li].val() << " phi_s " << ULocal_xi[plus_node_phi_s].val() << std::endl;
+        _count_plus += 1;
+      }
+      c_li_ave = c_li_ave /_count_plus;
+      phi_s_ave = phi_s_ave /_count_plus;
 
-    int _count_minus = 0;
-    for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
-      int minus_node_c_li_plus = this_dof_local_index_Lithium_cation[cell_SDdata[cell_id].lnode_minus[i]]; 
-      int minus_node_phi_e = this_dof_local_index_Electrolyte_potential[cell_SDdata[cell_id].lnode_minus[i]];
-      c_li_plus_ave += ULocal_xi[minus_node_c_li_plus];
-      phi_e_ave += ULocal_xi[minus_node_phi_e];
-      //std::cout << " i " << i << " c_li_plus " << ULocal_xi[minus_node_c_li_plus].val() << " phi_e " << ULocal_xi[minus_node_phi_e].val() << std::endl;
-      _count_minus += 1;
+      int _count_minus = 0;
+      for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
+        int minus_node_c_li_plus = this_dof_local_index_Lithium_cation[cell_SDdata[cell_id].lnode_minus[i]]; 
+        int minus_node_phi_e = this_dof_local_index_Electrolyte_potential[cell_SDdata[cell_id].lnode_minus[i]];
+        c_li_plus_ave += ULocal_xi[minus_node_c_li_plus];
+        phi_e_ave += ULocal_xi[minus_node_phi_e];
+        //std::cout << " i " << i << " c_li_plus " << ULocal_xi[minus_node_c_li_plus].val() << " phi_e " << ULocal_xi[minus_node_phi_e].val() << std::endl;
+        _count_minus += 1;
+      }
+      c_li_plus_ave = c_li_plus_ave /_count_minus;
+      phi_e_ave = phi_e_ave /_count_minus;
     }
-    c_li_plus_ave = c_li_plus_ave /_count_minus;
-    phi_e_ave = phi_e_ave /_count_minus;
+    // for updating the reaction rate, use the interface quantity
+    Sacado::Fad::DFad<double> c_li_tld=0.0, c_li_plus_tld=0.0, phi_s_tld=0.0, phi_e_tld=0.0;
+    {
+      int _count_plus = 0;
+      for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_plus.size(); ++i) {
+        int q = cell_SDdata[cell_id].lnode_plus[i];
+        int plus_node_c_li = this_dof_local_index_Lithium[cell_SDdata[cell_id].lnode_plus[i]]; 
+        int plus_node_phi_s = this_dof_local_index_Electrode_potential[cell_SDdata[cell_id].lnode_plus[i]];
+
+        c_li_tld += battery_fields.quad_fields[DOF_Lithium].value[q] + c_1_tilde_Lithium[q];
+        phi_s_tld += battery_fields.quad_fields[DOF_Electrode_potential].value[q] + c_1_tilde_Electrode_potential[q];
+        //std::cout << " i " << i << " c_li " << ULocal_xi[plus_node_c_li].val() << " phi_s " << ULocal_xi[plus_node_phi_s].val() << std::endl;
+        _count_plus += 1;
+      }
+      c_li_tld = c_li_tld /_count_plus;
+      phi_s_tld = phi_s_tld /_count_plus;
+
+      int _count_minus = 0;
+      for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
+        int q = cell_SDdata[cell_id].lnode_minus[i];
+        int minus_node_c_li_plus = this_dof_local_index_Lithium_cation[cell_SDdata[cell_id].lnode_minus[i]]; 
+        int minus_node_phi_e = this_dof_local_index_Electrolyte_potential[cell_SDdata[cell_id].lnode_minus[i]];
+        c_li_plus_tld += battery_fields.quad_fields[DOF_Lithium_cation].value[q] + c_1_tilde_Lithium_cation[q];
+        phi_e_tld += battery_fields.quad_fields[DOF_Electrolyte_potential].value[q] + c_1_tilde_Electrolyte_potential[q];
+        //std::cout << " i " << i << " c_li_plus " << ULocal_xi[minus_node_c_li_plus].val() << " phi_e " << ULocal_xi[minus_node_phi_e].val() << std::endl;
+        _count_minus += 1;
+      }
+      c_li_plus_tld = c_li_plus_tld /_count_minus;
+      phi_e_tld = phi_e_tld /_count_minus;
+    }
 
     //std::cout 
-      //<< " c_li_ave " << c_li_ave.val()
-      //<< " phi_s_ave " << phi_s_ave.val()
-      //<< " c_li_plus_ave " << c_li_plus_ave.val()
-      //<< " phi_e_ave " << phi_e_ave.val()
+      //<< "\tc_li_ave      \t" << c_li_ave.val()
+      //<< "\tphi_s_ave     \t" << phi_s_ave.val()
+      //<< "\tc_li_plus_ave \t" << c_li_plus_ave.val()
+      //<< "\tphi_e_ave     \t" << phi_e_ave.val()
+      //<< std::endl;
+    //std::cout 
+      //<< "\tc_li_tld      \t" << c_li_tld.val()
+      //<< "\tphi_s_tld     \t" << phi_s_tld.val()
+      //<< "\tc_li_plus_tld \t" << c_li_plus_tld.val()
+      //<< "\tphi_e_tld     \t" << phi_e_tld.val()
       //<< std::endl;
 
     Sacado::Fad::DFad<double> jn = 0.0; 
-		jn = electricChemoFormula.formula_jn(Temp, c_li_ave, c_li_plus_ave, phi_s_ave, phi_e_ave, domainflag);
+		//jn = electricChemoFormula.formula_jn(Temp, c_li_ave, c_li_plus_ave, phi_s_ave, phi_e_ave, domainflag);
+		jn = electricChemoFormula.formula_jn(Temp, c_li_tld, c_li_plus_tld, phi_s_tld, phi_e_tld, domainflag);
     cell_SDdata[cell_id].reaction_rate_potential = jn*F;
     cell_SDdata[cell_id].reaction_rate_li = jn;
     //std::cout << "*reaction rate (new) : " << cell_SDdata[cell_id].reaction_rate_li.val() << " potential (rate) " << cell_SDdata[cell_id].reaction_rate_potential.val() << std::endl;

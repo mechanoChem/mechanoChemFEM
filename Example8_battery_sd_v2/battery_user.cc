@@ -288,6 +288,7 @@ void battery<dim>::apply_initial_condition()
 
 
   {
+   hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points);
     bool is_one_node_Electrolyte_potential_fixed = false;
     // remove the minus or plus side of node, not to solve
     typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc = this->dof_handler.end();
@@ -295,6 +296,8 @@ void battery<dim>::apply_initial_condition()
       if (cell->subdomain_id() == this->this_mpi_process) {
         int cell_id = cell->active_cell_index();
         Point<dim> center=cell->center();
+    	  hp_fe_values.reinit (cell);
+    	  const FEValues<dim> &fe_values = hp_fe_values.get_present_fe_values();
 
         const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
         std::vector<unsigned int> local_dof_indices(dofs_per_cell);
@@ -305,17 +308,58 @@ void battery<dim>::apply_initial_condition()
         {
           if (not is_one_node_Electrolyte_potential_fixed)
           {
-            // add Dirichlet constraint to make some of the potential to be zero.
-            int i0 = 0; // first node of one cell in the region 4 < x < 5
-            auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]];
-            //std::cout << "Electrolyte_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
-            constraints->add_line(globalDOF);
-            constraints->set_inhomogeneity(globalDOF, 0.0);
-            is_one_node_Electrolyte_potential_fixed = true;
+            for (unsigned int i=0; i<dofs_per_cell; ++i) {
+              const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
+              if (ck==battery_fields.active_fields_index["Electrolyte_potential"])
+              {
+                auto globalDOF = local_dof_indices[i];
+                constraints->add_line(globalDOF);
+                constraints->set_inhomogeneity(globalDOF, 0.0);
+                is_one_node_Electrolyte_potential_fixed = true;
+                //std::cout << " i " << i << " ck " << ck << " phi_e " << battery_fields.active_fields_index["Electrolyte_potential"] << std::endl;
+                break;
+              }
+            }
+
+            //// add Dirichlet constraint to make some of the potential to be zero.
+            //int i0 = 0; // first node of one cell in the region 4 < x < 5
+            //auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]];
+            ////std::cout << "Electrolyte_potential " << i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"] << " i0 " << i0 << " dofs_per_node " << dofs_per_node << " globalDOF " << globalDOF << std::endl;
+            //constraints->add_line(globalDOF);
+            //constraints->set_inhomogeneity(globalDOF, 0.0);
+            //is_one_node_Electrolyte_potential_fixed = true;
           }
         }
 
+        int _v_id = -1;
+	      int DOF_Displacement = battery_fields.active_fields_index["Displacement"];
+        for (unsigned int i=0; i<dofs_per_cell; ++i) {
+          const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
+          //std::cout << " ck " << ck << std::endl;
+          if (ck==DOF_Displacement) _v_id += 1;
+          if (ck==DOF_Displacement or ck== DOF_Displacement+1)
+          {
+            Point<dim> vertex_point=cell->vertex(_v_id);
+            if (vertex_point[1] == 0.0)
+            {
+              auto globalDOF = local_dof_indices[i];
+
+              constraints->add_line(globalDOF);
+              constraints->set_inhomogeneity(globalDOF, 0.0);
+
+              //std::cout 
+                //<< " dofs_per_cell " << dofs_per_cell
+                //<< " dofs_per_node " << dofs_per_node
+                //<< " vertex_point " << vertex_point 
+                //<< " dof " << globalDOF << " " << i << " (wrong) " << _v_id*dofs_per_node + battery_fields.active_fields_index["Displacement"]
+                //<< std::endl;
+            }
+          }
+        }	
+
+
         if (cell_SDdata[cell_id].is_interface_element) {
+          // for interface element, the following globalDOF is working fine, as each dof is defined.
 
           cell_SDdata[cell_id].reaction_rate_potential = 0.0;
           cell_SDdata[cell_id].reaction_rate_li = 0.0;
@@ -411,6 +455,12 @@ void battery<dim>::apply_initial_condition()
     }
   }
 
+	//int totalDOF=this->totalDOF(this->primary_variables);
+	//std::vector<bool> All_component (totalDOF, false);
+	//if(battery_fields.active_fields_index["Displacement"]>-1) {
+		//for(unsigned int i=0;i<dim;i++) All_component[battery_fields.active_fields_index["Displacement"]+i]=true;
+	//}
+	//VectorTools:: interpolate_boundary_values (this->dof_handler, 1+orientation, ZeroFunction<dim> (totalDOF),*constraints, All_component);
 
 
   constraints->close ();
@@ -431,14 +481,22 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 	const unsigned int n_q_points = computed_quantities.size();	
 	double youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_particle"];
 	double poissonRatio=(*params_json)["Mechanics"]["poisson_ratio"];
+	double neg_electrode_line=(*params_json)["ElectroChemo"]["neg_electrode_line"];
+	double pos_electrode_line=(*params_json)["ElectroChemo"]["pos_electrode_line"];
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+	
 	
 	Residual<double,dim> ResidualEq;
 	int lithium_index=this->battery_fields->active_fields_index["Lithium"];
+	int Electrode_potential_index=this->battery_fields->active_fields_index["Electrode_potential"];
 	int interface_index=this->battery_fields->active_fields_index["Diffuse_interface"];
 	int u_index=this->battery_fields->active_fields_index["Displacement"];
 	double eps_0=1.0e-5;
 	
-	if(input_data.solution_values[0][interface_index]<0.5) youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_electrolyte"];
+	Point<dim> points=input_data.evaluation_points[0];
+	if(input_data.solution_values[0][Electrode_potential_index]<1.0e-5){
+			youngsModulus=(*params_json)["Mechanics"]["youngs_modulus_electrolyte"];
+	} 
 	
 	ResidualEq.setLameParametersByYoungsModulusPoissonRatio(youngsModulus, poissonRatio);	
 	double C_a=(*params_json)["Mechanics"]["lithium_a"];
@@ -470,7 +528,7 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 			  Fe[0][i][j] = (i==j) + input_data.solution_gradients[q][i+u_index][j];
 			}
 		}
-		if(input_data.solution_values[q][interface_index]>=0.5){
+		if(input_data.solution_values[q][Electrode_potential_index]>0){
 			double C_q=input_data.solution_values[q][lithium_index];
 			dealii::Table<2,double > Feig(dim,dim);
 			dealii::Table<2,double> invFeig(dim,dim);
@@ -486,6 +544,7 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 			}
 		}
 		ResidualEq.evaluateNeoHookeanStress(P_stress, Fe);
+		//std::cout<<"P_stress[0][0][0]"<<P_stress[0][0][0]<<" P_stress[0][1][1]"<<P_stress[0][1][1]<<" P_stress[0][0][1]"<<P_stress[0][0][1]<<std::endl;
 		computed_quantities[q][0]=std::sqrt(std::pow(P_stress[0][0][0],2)+std::pow(P_stress[0][1][1],2)-P_stress[0][0][0]*P_stress[0][1][1]+3*P_stress[0][0][1]*P_stress[0][0][1] );
 	}	
 }

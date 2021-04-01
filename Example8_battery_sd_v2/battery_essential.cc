@@ -135,6 +135,14 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	  if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	}
 	
+
+  double flux_sign = 1;
+	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
+  if (this->current_time >= fliptime)
+  {
+    flux_sign = -1;
+  }
+
 	//apply_Neumann_boundary_condition();
 	//BC
 	for (unsigned int faceID=0; faceID<2*dim; faceID++){
@@ -148,7 +156,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 			if (cell->face(faceID)->boundary_id()==1+orientation) current_IpA=-current_IpA;
 		  FEFaceValues<dim> fe_face_values(fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
 			fe_face_values.reinit(cell,faceID);
-			this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, current_IpA);
+			this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, battery_fields.active_fields_index["Electrode_potential"], R, current_IpA * flux_sign);
 		}
 	}
 }
@@ -184,12 +192,16 @@ void battery<dim>::run()
 		
 	  t_solve = clock() - t_solve;
 		this->pcout<<"It took me "<< ((float)t_solve)/CLOCKS_PER_SEC<<" seconds for this solve"<<std::endl<<std::endl;
+
+		// std::string snapfile="snapshot_phase_2/snapshot-"+std::to_string(this->current_increment+this->off_output_index)+".dat";
+		// 	  this->FEMdata_out.resume_vector_from_snapshot(this->solution,snapfile);
+		// 	  this->solution_prev=this->solution;
 		
-		// this->FEMdata_out.clear_data_vectors();
-		// Vector<double> localized_U(this->solution_prev);
-		// this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);
-		// std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
-		// this->FEMdata_out.write_vtk(this->solution_prev, output_path);
+     //this->FEMdata_out.clear_data_vectors();
+     //Vector<double> localized_U(this->solution_prev);
+     //this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);
+     //std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
+     //this->FEMdata_out.write_vtk(this->solution_prev, output_path);
     this->output_results();
 	}
 	this->pcout<<"Finish running!!"<<std::endl;
@@ -386,7 +398,7 @@ void battery<dim>::identify_diffuse_interface()
           }
         }
         double elem_length = cell_SDdata[cell_id].edge1_node.distance(cell_SDdata[cell_id].edge2_node);
-        std::cout << "elem_length " << elem_length << " " << cell_SDdata[cell_id].edge1_node << " "<< cell_SDdata[cell_id].edge2_node << std::endl;
+        //std::cout << "elem_length " << elem_length << " " << cell_SDdata[cell_id].edge1_node << " "<< cell_SDdata[cell_id].edge2_node << std::endl;
         cell_SDdata[cell_id].interface_length = elem_length;
 
         double dx = cell_SDdata[cell_id].edge1_node[0] - cell_SDdata[cell_id].edge2_node[0];
@@ -516,10 +528,10 @@ void battery<dim>::identify_diffuse_interface()
               } // q_point
             }
         } // cell_1d
-        std::cout <<  " total elem # = " << triangulation_1d.n_active_cells() << " length: " << elem_length << " vol " << vol<< std::endl;
-        for (auto p0: cell_SDdata[cell_id].lnode_plus) std::cout << " plus node: " << p0 << std::endl;
-        for (auto p0: cell_SDdata[cell_id].lnode_minus) std::cout << " minus node: " << p0 << std::endl;
-        std::cout << " crk_n: " << cell_SDdata[cell_id].crk_n[0] << "\t" << cell_SDdata[cell_id].crk_n[1] << std::endl;
+        //std::cout <<  " total elem # = " << triangulation_1d.n_active_cells() << " length: " << elem_length << " vol " << vol<< std::endl;
+        //for (auto p0: cell_SDdata[cell_id].lnode_plus) std::cout << " plus node: " << p0 << std::endl;
+        //for (auto p0: cell_SDdata[cell_id].lnode_minus) std::cout << " minus node: " << p0 << std::endl;
+        //std::cout << " crk_n: " << cell_SDdata[cell_id].crk_n[0] << "\t" << cell_SDdata[cell_id].crk_n[1] << std::endl;
       } // interface id
 		}		// this process
 	} // cell

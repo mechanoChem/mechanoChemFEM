@@ -50,7 +50,7 @@ void Displacement<dim>::set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& 
 		if(mat_id==0){
 			for(unsigned int q=0; q<n_q_points;q++){
 				Sacado::Fad::DFad<double> C_q=this->battery_fields->quad_fields[lithium_index].value[q];
-				//std::cout<<"tem"<<(C_q.val()-C_a)/(C_b-C_a) <<std::endl;
+        //std::cout<<"tem"<<(C_q.val()-C_a)/(C_b-C_a) <<std::endl;
 				dealii::Table<2,Sacado::Fad::DFad<double> > Feig(dim,dim);
 				dealii::Table<2,Sacado::Fad::DFad<double>> invFeig(dim,dim);
 				Feig=table_scaling<2,Sacado::Fad::DFad<double>,Sacado::Fad::DFad<double> > (Feigba, (C_q-C_a)/(C_b-C_a) );   

@@ -256,7 +256,7 @@ template <class T, int dim>
   /**
    * evalute the stress for the quad log mode, with plasticity
    */
-  void evaluateQuadLogStress(dealii::Table<3, T >& P_FpinvT, const dealii::Table<3, T > &F, const dealii::Table<3, T >& Cpinv_conv, const dealii::Table<1,T> &alpha_conv, dealii::Table<3, T >& Cpinv, dealii::Table<1,T> &alpha);
+  void evaluateQuadLogStress(dealii::Table<3, T >& P_FpinvT, const dealii::Table<3, T > &F, const dealii::Table<3, double >& Cpinv_conv, const dealii::Table<1,double> &alpha_conv, dealii::Table<3, T >& Cpinv, dealii::Table<1,T> &alpha, double tau_y, int currentIteration);
 };
 
 #endif

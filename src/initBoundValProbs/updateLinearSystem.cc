@@ -55,7 +55,7 @@ void mechanoChemFEM<dim>::updateLinearSystem()
 	  local_matrix(i,j)= R[i].dx(j);
       	}
       	//R
-      	local_rhs(i) = -R[i].val(); 
+      	local_rhs(i) = -R[i].val();
       }
       this->distribute_local_to_global(local_matrix, local_rhs, local_dof_indices);
     }

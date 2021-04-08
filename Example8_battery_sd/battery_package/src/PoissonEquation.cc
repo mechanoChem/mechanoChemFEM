@@ -106,7 +106,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
   dxi_k1.reinit(1);
   Table<1, Sacado::Fad::DFad<double>> xi_0(1);  // define sacado xi_0 for stiffness calculation.
   if (primiary_dof != cell_SDdata[cell_id].opposite_flux_dof_potential)
-  {
+  { // for electrode
     cell_SDdata[cell_id].Kxic_phi_s.vmult(dxi_k1, dC_k1);
     cell_SDdata[cell_id].rlocal_phi_s -= dxi_k1;
     cell_SDdata[cell_id].rlocal_phi_s[0] += cell_SDdata[cell_id].reaction_rate_potential * cell_SDdata[cell_id].interface_length;
@@ -116,11 +116,11 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
     //std::cout << "--a0-0--"  << std::endl;
   }
   else
-  {
+  { // for electrolyte
     //std::cout << "--a0-1--" << std::endl;
     cell_SDdata[cell_id].Kxic_phi_e.vmult(dxi_k1, dC_k1);
     cell_SDdata[cell_id].rlocal_phi_e -= dxi_k1;
-    cell_SDdata[cell_id].rlocal_phi_e[0] += cell_SDdata[cell_id].reaction_rate_potential * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
+    cell_SDdata[cell_id].rlocal_phi_e[0] += (-1 * cell_SDdata[cell_id].reaction_rate_potential) * cell_SDdata[cell_id].interface_length; // reaction rate li direction should not change
     cell_SDdata[cell_id].Kxixi_inv_phi_e.vmult(dxi_k1, cell_SDdata[cell_id].rlocal_phi_e);
     xi_0[0] = cell_SDdata[cell_id].xi_old_phi_e(0) + dxi_k1(0);  
     cell_SDdata[cell_id].xi_old_phi_e(0) = xi_0[0].val();
@@ -164,7 +164,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
   }
     
   if (primiary_dof != cell_SDdata[cell_id].opposite_flux_dof_potential)
-  {
+  { // for electrode
     std::vector<double> Ms_list;
     for (unsigned int q = 0; q < n_q_points; ++q) {
       Ms_list.push_back(0.0);
@@ -278,7 +278,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
 
   }
   else
-  {
+  { // for electrolyte
     std::vector<double> Ms_list;
     for (unsigned int q = 0; q < n_q_points; ++q) {
       Ms_list.push_back(0.0);
@@ -305,7 +305,7 @@ void PoissonEquation<dim>::r_get_residual_with_interface(const typename hp::DoFH
       c_1_tilde[q] = Ms * ULocal_xi[dofs_per_cell];
       c_1_tilde_conv[q] = Ms * cell_SDdata[cell_id].xi_conv_phi_e[0];
     }
-    rr[0] = - cell_SDdata[cell_id].reaction_rate_potential * cell_SDdata[cell_id].interface_length;
+    rr[0] = - (-1.0 * cell_SDdata[cell_id].reaction_rate_potential) * cell_SDdata[cell_id].interface_length;
 
     //std::cout << "--a2--" << rr[0] << std::endl;
 

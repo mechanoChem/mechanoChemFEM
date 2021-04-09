@@ -19,7 +19,8 @@ void Lithium<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad
 	double M;
 	Point<dim> center=this->battery_fields->cell_center;
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
-	if (center[0]<separator_line){
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+	if (center[orientation]<separator_line){
 		M=(*params_json)["ElectroChemo"]["D_li_neg"];
 	}
 	else{
@@ -45,7 +46,8 @@ void Lithium<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,Sacado:
 	double M;
 	Point<dim> center=this->battery_fields->cell_center;
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
-	if (center[0]<separator_line){
+	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+	if (center[orientation]<separator_line){
 		M=(*params_json)["ElectroChemo"]["D_li_neg"];
 	}
 	else{

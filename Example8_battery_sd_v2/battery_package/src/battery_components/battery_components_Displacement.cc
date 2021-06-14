@@ -33,18 +33,18 @@ void Displacement<dim>::set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& 
 		double C_b=(*params_json)["Mechanics"]["lithium_b"];
 		dealii::Table<2,Sacado::Fad::DFad<double>> Feiga(dim,dim);
 		dealii::Table<2,Sacado::Fad::DFad<double>> Feigba(dim,dim);
-		Feiga[0][0]=(*params_json)["Mechanics"]["Feiga_11"];
-		Feigba[0][0]=(*params_json)["Mechanics"]["Feigb_11"];
-		Feigba[0][0]-=(*params_json)["Mechanics"]["Feiga_11"].get<double>();
+		Feiga[0][0]=(*params_json)["Mechanics"]["Feiga_11"]; // = 1
+		Feigba[0][0]=(*params_json)["Mechanics"]["Feigb_11"]; // 0.9
+		Feigba[0][0]-=(*params_json)["Mechanics"]["Feiga_11"].get<double>(); // -0.1
 		if(dim>=2){
-			Feiga[1][1]=(*params_json)["Mechanics"]["Feiga_22"];
-			Feigba[1][1]=(*params_json)["Mechanics"]["Feigb_22"];
-			Feigba[1][1]-=(*params_json)["Mechanics"]["Feiga_22"].get<double>();
+			Feiga[1][1]=(*params_json)["Mechanics"]["Feiga_22"]; // = 1
+			Feigba[1][1]=(*params_json)["Mechanics"]["Feigb_22"]; // 0.9
+			Feigba[1][1]-=(*params_json)["Mechanics"]["Feiga_22"].get<double>(); // -0.1
 		}
 		if(dim==3){
-			Feiga[2][2]=(*params_json)["Mechanics"]["Feiga_33"];
-			Feigba[2][2]=(*params_json)["Mechanics"]["Feigb_33"];
-			Feigba[2][2]-=(*params_json)["Mechanics"]["Feiga_33"].get<double>();
+			Feiga[2][2]=(*params_json)["Mechanics"]["Feiga_33"]; // = 1
+			Feigba[2][2]=(*params_json)["Mechanics"]["Feigb_33"]; // 0.9
+			Feigba[2][2]-=(*params_json)["Mechanics"]["Feiga_33"].get<double>(); // -0.1
 		}
 		double eps_0=1.0e-5;
 		if(mat_id==0){
@@ -53,8 +53,8 @@ void Displacement<dim>::set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& 
 				//std::cout<<"tem"<<(C_q.val()-C_a)/(C_b-C_a) <<std::endl;
 				dealii::Table<2,Sacado::Fad::DFad<double> > Feig(dim,dim);
 				dealii::Table<2,Sacado::Fad::DFad<double>> invFeig(dim,dim);
-				Feig=table_scaling<2,Sacado::Fad::DFad<double>,Sacado::Fad::DFad<double> > (Feigba, (C_q-C_a)/(C_b-C_a) );   
-				Feig=table_add<2,Sacado::Fad::DFad<double>,Sacado::Fad::DFad<double> > (Feig, Feiga);
+				Feig=table_scaling<2,Sacado::Fad::DFad<double>,Sacado::Fad::DFad<double> > (Feigba, (C_q-C_a)/(C_b-C_a) );  // scale * (-0.1) 
+				Feig=table_add<2,Sacado::Fad::DFad<double>,Sacado::Fad::DFad<double> > (Feig, Feiga); // + 2nd order identity
 				getInverse<Sacado::Fad::DFad<double>,dim> (Feig,invFeig);
 					for (unsigned int i=0; i<dim; ++i){
 						for (unsigned int j=0; j<dim; ++j){

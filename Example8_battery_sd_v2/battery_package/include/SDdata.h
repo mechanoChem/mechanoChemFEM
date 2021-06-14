@@ -15,6 +15,18 @@ struct SDdata {
   int lnode_1;
   int lnode_2;
   bool is_interface_element = false;
+  bool is_fractured = false;
+
+  double max_Tn = 0.0;
+  double max_Tm = 0.0;
+
+  // for weak discontinuity information
+  FullMatrix<double> Kuu_wd, Kxiu_wd, Kuxi_wd, Kxixi_inv_u_wd;
+  Vector<double> rlocal_u_wd, xi_old_u_wd, xi_conv_u_wd;
+
+  // for strong discontinuity information
+  FullMatrix<double> Kuu_sd, Kxiu_sd, Kuxi_sd, Kxixi_inv_u_sd;
+  Vector<double> rlocal_u_sd, xi_old_u_sd, xi_conv_u_sd;
 
   FullMatrix<double> Kcc, Kxic, Kcxi, Kxixi_inv;
   Vector<double> rlocal, xi_old, xi_conv;

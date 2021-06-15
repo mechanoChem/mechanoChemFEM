@@ -73,8 +73,8 @@
     "Feigb_11" : 0.9,
     "Feigb_22" : 0.9,
     "Feigb_33" : 0.9,
-    "MaximumStressN" : 0.1,
-    "MaximumStressM" : 0.1,
+    "MaximumStressN" : 0.5,
+    "MaximumStressM" : 0.5,
     "LinearSoftenModulusN" : -5,
     "LinearSoftenModulusM" : -5
 	},

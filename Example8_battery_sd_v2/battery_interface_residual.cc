@@ -978,8 +978,8 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         if (cell_SDdata[cell_id].is_fractured)
         {
           //- (-1/h_e) = 1/h_e
-          rr_u[0] += (1.0/h_e) * n_spatial[i] * N_reference[j] * P[q][i][j] * fe_values.JxW(q); 
-          rr_u[1] += (1.0/h_e) * m_spatial[i] * N_reference[j] * P[q][i][j] * fe_values.JxW(q); 
+          rr_u[0] -= (1.0/h_e) * n_spatial[i] * N_reference[j] * P[q][i][j] * fe_values.JxW(q); 
+          rr_u[1] -= (1.0/h_e) * m_spatial[i] * N_reference[j] * P[q][i][j] * fe_values.JxW(q); 
         }
       }
     }
@@ -1013,8 +1013,8 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         //rr_u[1] -= M_reference[i] * T_gamma[i] * cell_SDdata[cell_id].interface_length;
       //}
       // for constant jump mode, this could be [1 0; 0 1], not [N; M].
-      rr_u[0] -= T_gamma[0] * cell_SDdata[cell_id].interface_length;
-      rr_u[1] -= T_gamma[1] * cell_SDdata[cell_id].interface_length;
+      rr_u[0] += T_gamma[0] * cell_SDdata[cell_id].interface_length;
+      rr_u[1] += T_gamma[1] * cell_SDdata[cell_id].interface_length;
     }
   }
 

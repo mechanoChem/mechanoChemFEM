@@ -12,6 +12,12 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 		domainflag=1;
 	}
 
+  bool disable_wd = false;
+  if ( int((*params_json)["Mechanics"]["EnableWeak"]) == 0 )
+  {
+    disable_wd = true;
+  }
+
   // update reaction rate at the interface 
 	double Temp=(*params_json)["ElectroChemo"]["T_0"];
 
@@ -100,6 +106,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   int ind_Electrolyte_potential = 3;
   int ind_Displacement_sd_1 = 4;
   int ind_Displacement_sd_2 = 5;
+  int ind_Displacement_wd = 6;
   int ind_Diffuse_interface = 999;
 
   std::vector<double> N_reference;
@@ -177,7 +184,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   dxi_k1_Lithium_cation.reinit(1);
   dxi_k1_Electrode_potential.reinit(1);
   dxi_k1_Electrolyte_potential.reinit(1);
-  dxi_k1_Displacement_sd.reinit(2);
+  dxi_k1_Displacement_sd.reinit(3);
   dxi_k1_Diffuse_interface.reinit(1);
 
   //Table<1, Sacado::Fad::DFad<double>> xi_0(1);  // define sacado xi_0 for stiffness calculation.
@@ -186,7 +193,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   Table<1, Sacado::Fad::DFad<double>> xi_0_Lithium_cation(1);
   Table<1, Sacado::Fad::DFad<double>> xi_0_Electrode_potential(1);
   Table<1, Sacado::Fad::DFad<double>> xi_0_Electrolyte_potential(1);
-  Table<1, Sacado::Fad::DFad<double>> xi_0_Displacement_sd(2);
+  Table<1, Sacado::Fad::DFad<double>> xi_0_Displacement_sd(3);
   Table<1, Sacado::Fad::DFad<double>> xi_0_Diffuse_interface(1);
 
   //if (primiary_dof != cell_SDdata[cell_id].opposite_flux_dof_li)
@@ -242,19 +249,40 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     // Kxic * delta c^{k+1}
     dxi_k1_Displacement_sd[0] += cell_SDdata[cell_id].Kxiu_sd(0,i) * dC_k1_Displacement[i];
     dxi_k1_Displacement_sd[1] += cell_SDdata[cell_id].Kxiu_sd(1,i) * dC_k1_Displacement[i];
+    dxi_k1_Displacement_sd[2] += cell_SDdata[cell_id].Kxiu_sd(2,i) * dC_k1_Displacement[i];
   }
   cell_SDdata[cell_id].rlocal_u_sd[0] -= dxi_k1_Displacement_sd[0] ;
   cell_SDdata[cell_id].rlocal_u_sd[1] -= dxi_k1_Displacement_sd[1] ;
+  cell_SDdata[cell_id].rlocal_u_sd[2] -= dxi_k1_Displacement_sd[2] ;
 
-  dxi_k1_Displacement_sd[0] = cell_SDdata[cell_id].Kxixi_inv_u_sd(0,0) * cell_SDdata[cell_id].rlocal_u_sd(0) + cell_SDdata[cell_id].Kxixi_inv_u_sd(0,1) * cell_SDdata[cell_id].rlocal_u_sd(1);
-  dxi_k1_Displacement_sd[1] = cell_SDdata[cell_id].Kxixi_inv_u_sd(1,0) * cell_SDdata[cell_id].rlocal_u_sd(0) + cell_SDdata[cell_id].Kxixi_inv_u_sd(1,1) * cell_SDdata[cell_id].rlocal_u_sd(1);
+  if (cell_SDdata[cell_id].is_fractured)
+  {
+    dxi_k1_Displacement_sd[0] = cell_SDdata[cell_id].Kxixi_inv_u_sd(0,0) * cell_SDdata[cell_id].rlocal_u_sd(0) + cell_SDdata[cell_id].Kxixi_inv_u_sd(0,1) * cell_SDdata[cell_id].rlocal_u_sd(1) + cell_SDdata[cell_id].Kxixi_inv_u_sd(0,2) * cell_SDdata[cell_id].rlocal_u_sd(2);
+    dxi_k1_Displacement_sd[1] = cell_SDdata[cell_id].Kxixi_inv_u_sd(1,0) * cell_SDdata[cell_id].rlocal_u_sd(0) + cell_SDdata[cell_id].Kxixi_inv_u_sd(1,1) * cell_SDdata[cell_id].rlocal_u_sd(1) + cell_SDdata[cell_id].Kxixi_inv_u_sd(1,2) * cell_SDdata[cell_id].rlocal_u_sd(2);
+    dxi_k1_Displacement_sd[2] = cell_SDdata[cell_id].Kxixi_inv_u_sd(2,0) * cell_SDdata[cell_id].rlocal_u_sd(0) + cell_SDdata[cell_id].Kxixi_inv_u_sd(2,1) * cell_SDdata[cell_id].rlocal_u_sd(1) + cell_SDdata[cell_id].Kxixi_inv_u_sd(2,2) * cell_SDdata[cell_id].rlocal_u_sd(2);
+  }
+  else
+  {
+    dxi_k1_Displacement_sd[0] = cell_SDdata[cell_id].Kxixi_inv_u_sd(0,0) * cell_SDdata[cell_id].rlocal_u_sd(0) + cell_SDdata[cell_id].Kxixi_inv_u_sd(0,1) * cell_SDdata[cell_id].rlocal_u_sd(1);
+    dxi_k1_Displacement_sd[1] = cell_SDdata[cell_id].Kxixi_inv_u_sd(1,0) * cell_SDdata[cell_id].rlocal_u_sd(0) + cell_SDdata[cell_id].Kxixi_inv_u_sd(1,1) * cell_SDdata[cell_id].rlocal_u_sd(1);
+    dxi_k1_Displacement_sd[2] = cell_SDdata[cell_id].Kxixi_inv_u_sd(2,2) * cell_SDdata[cell_id].rlocal_u_sd(2);
+  }
+
+
   xi_0_Displacement_sd[0] = cell_SDdata[cell_id].xi_old_u_sd(0) + dxi_k1_Displacement_sd(0);  
   xi_0_Displacement_sd[1] = cell_SDdata[cell_id].xi_old_u_sd(1) + dxi_k1_Displacement_sd(1);  
+  xi_0_Displacement_sd[2] = cell_SDdata[cell_id].xi_old_u_sd(2) + dxi_k1_Displacement_sd(2);  
 
   cell_SDdata[cell_id].xi_old_u_sd(0) = xi_0_Displacement_sd[0].val();
   cell_SDdata[cell_id].xi_old_u_sd(1) = xi_0_Displacement_sd[1].val();
+  cell_SDdata[cell_id].xi_old_u_sd(2) = xi_0_Displacement_sd[2].val();
 
-  const unsigned int total_local_xi_dof = 6;
+  if(disable_wd)
+  {
+    xi_0_Displacement_sd[2] = 0.0;
+  }
+
+  const unsigned int total_local_xi_dof = 7;
   Table<1, Sacado::Fad::DFad<double> > ULocal_xi(dofs_per_cell + total_local_xi_dof);
   for (unsigned int i = 0; i < dofs_per_cell; ++i) {
     ULocal_xi[i]=ULocal[i].val();
@@ -265,6 +293,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   ULocal_xi[dofs_per_cell + ind_Electrolyte_potential] = xi_0_Electrolyte_potential[0].val();
   ULocal_xi[dofs_per_cell + ind_Displacement_sd_1] = xi_0_Displacement_sd[0].val();
   ULocal_xi[dofs_per_cell + ind_Displacement_sd_2] = xi_0_Displacement_sd[1].val();
+  ULocal_xi[dofs_per_cell + ind_Displacement_wd] = xi_0_Displacement_sd[2].val();
   for (unsigned int i = 0; i < dofs_per_cell + total_local_xi_dof; ++i) {
     ULocal_xi[i].diff (i, dofs_per_cell + total_local_xi_dof);
   }
@@ -342,22 +371,33 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
   Table<1, Sacado::Fad::DFad<double>> Ruu_Displacement_sd(4*dim);
   Table<1, Sacado::Fad::DFad<double>> Ruxi_Displacement_sd(4*dim);
-  Table<1, Sacado::Fad::DFad<double>> rxiu_Displacement_sd(2);
-  Table<1, Sacado::Fad::DFad<double>> rr_u(2);
-  Table<1, Sacado::Fad::DFad<double>> rxixi_Displacement_sd(2);
-  Table<1, Sacado::Fad::DFad<double>> rr_Displacement_sd(2);
+  Table<1, Sacado::Fad::DFad<double>> rxiu_Displacement_sd(3);
+  Table<1, Sacado::Fad::DFad<double>> rr_u(3);
+  Table<1, Sacado::Fad::DFad<double>> rxixi_Displacement_sd(3);
+  Table<1, Sacado::Fad::DFad<double>> rr_Displacement_sd(3);
   rxiu_Displacement_sd[0] = 0.0;
   rxiu_Displacement_sd[1] = 0.0;
+  rxiu_Displacement_sd[2] = 0.0;
   rxixi_Displacement_sd[0] = 0.0;
   rxixi_Displacement_sd[1] = 0.0;
+  rxixi_Displacement_sd[2] = 0.0;
   rr_Displacement_sd[0] = 0.0;
   rr_Displacement_sd[1] = 0.0;
+  rr_Displacement_sd[2] = 0.0;
   rr_u[0] = 0.0;
   rr_u[1] = 0.0;
+  rr_u[2] = 0.0;
   for (unsigned int i = 0; i < 4*dim; ++i) {
     Ruu_Displacement_sd[i] = 0.0;
     Ruxi_Displacement_sd[i] = 0.0;
   }
+
+  double element_edge_length = 0.0;
+  element_edge_length = cell->vertex(0).distance(cell->vertex(1));
+  double m_plus = cell_SDdata[cell_id].computed_area;
+  double m_minus = cell_SDdata[cell_id].area_elem - cell_SDdata[cell_id].computed_area;
+  double l_minus = element_edge_length;
+  double l_plus = - element_edge_length * m_plus / m_minus;
 
 
   dealii::Table<2, Sacado::Fad::DFad<double>> c_1_tilde_grad_Lithium(n_q_points, dim);
@@ -408,8 +448,11 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     }
   }
 
+  dealii::Table<3, Sacado::Fad::DFad<double>> F_tilde_wd(n_q_points, dim, dim);
   dealii::Table<3, Sacado::Fad::DFad<double>> F_tilde_sd(n_q_points, dim, dim);
   dealii::Table<2, Sacado::Fad::DFad<double>> F_hat_sd(dim, dim);
+  dealii::Table<2, Sacado::Fad::DFad<double>> F_hat_sd_wd(dim, dim);
+  dealii::Table<2, Sacado::Fad::DFad<double>> F_const_wd(dim, dim);
   dealii::Table<2, Sacado::Fad::DFad<double>> T_at_gp(n_q_points, dim);
   dealii::Table<1, Sacado::Fad::DFad<double>> TN_at_gp(n_q_points);
   dealii::Table<1, Sacado::Fad::DFad<double>> TM_at_gp(n_q_points);
@@ -420,8 +463,11 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   for (unsigned int q = 0; q < n_q_points; ++q) {
     for (unsigned int j = 0; j < dim; j++) {
       for (unsigned int k = 0; k < dim; k++) {
+        F_tilde_wd[q][j][k] = 0.0;
         F_tilde_sd[q][j][k] = 0.0;
         F_hat_sd[j][k] = 0.0;
+        F_hat_sd_wd[j][k] = 0.0;
+        F_const_wd[j][k] = 0.0;
         T_at_gp[q][j] = 0.0;
         TN_at_gp[q] = 0.0;
         TM_at_gp[q] = 0.0;
@@ -617,7 +663,53 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //std::cout << "*reaction rate (new) : " << cell_SDdata[cell_id].reaction_rate_li.val() << " potential (rate) " << cell_SDdata[cell_id].reaction_rate_potential.val() << std::endl;
 
 
+  for (unsigned int q = 0; q < n_q_points; ++q) {
+    for (unsigned int c = 0; c < dim; c++) {
+      for (unsigned int d = 0; d < dim; d++) {
+        F_hat_sd_wd[c][d] += (defMap.F[q][c][d] + F_tilde_sd[q][c][d])* fe_values.JxW(q);
+      }
+    }
+  }
 
+  for (unsigned int c = 0; c < dim; c++) {
+    for (unsigned int d = 0; d < dim; d++) {
+      F_hat_sd_wd[c][d] = F_hat_sd_wd[c][d] / cell_SDdata[cell_id].area_elem;
+    }
+  }
+
+  for (unsigned int c = 0; c < dim; c++) {
+    for (unsigned int d = 0; d < dim; d++) {
+      F_const_wd[c][d] = N_reference[c] * N_reference[d] + M_reference[c] * M_reference[d] ; // won't work, not linear independent
+    }
+  }
+
+  for (unsigned int q = 0; q < n_q_points; ++q) {
+      for (unsigned int i = 0; i < dim; i++) {
+        for (unsigned int j = 0; j < dim; j++) {
+          // plus side
+          if (Ms_list[q] > 0.0){
+            F_tilde_wd[q][i][j] = F_hat_sd_wd[i][j] / l_plus;
+ 
+          }
+          else
+          {
+            F_tilde_wd[q][i][j] = F_hat_sd_wd[i][j] / l_minus;
+          }
+        }
+      }
+  }
+
+
+    if (disable_wd)
+    {
+      for (unsigned int q = 0; q < n_q_points; ++q) {
+        for (unsigned int i = 0; i < dim; i++) {
+          for (unsigned int j = 0; j < dim; j++) {
+            F_tilde_wd[q][i][j] = 0.0 * F_tilde_wd[q][i][j];
+          }
+        }
+      }
+    }
 
 
 
@@ -812,6 +904,11 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       double mu = displacement.ResidualEq->mu; 
       double lambda = displacement.ResidualEq->lambda; 
 
+      //double E10 = this->MechMatData["Young's modulus"] * this->MatData["RightMatScale"];
+      //double nu = this->MechMatData["Poisson's ratio"];
+      //double mu10 = E10/2.0/(1.0+nu);
+      //double lambda10 = (E10*nu)/(1.0+nu)/(1.0-2.0*nu);
+
 		  dealii::Table<3,Sacado::Fad::DFad<double> > Fe(n_q_points,dim,dim);
 		  double C_a=(*displacement.params_json)["Mechanics"]["lithium_a"];
 		  double C_b=(*displacement.params_json)["Mechanics"]["lithium_b"];
@@ -844,9 +941,9 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         for (unsigned int i = 0; i < dim; ++i) {
           for (unsigned int j = 0; j < dim; ++j) {
             for (unsigned int k = 0; k < dim; ++k) {
-              //Fe[q][i][j] += (defMap.F[q][i][k] + F_tilde_sd[q][i][k]) * invFeig[k][j];
+              //Fe[q][i][j] += (defMap.F[q][i][k] + F_tilde_sd[q][i][k] + + ULocal_xi[dofs_per_cell+ ind_Displacement_wd] * F_tilde_wd[q][i][k]) * invFeig[k][j];
             }
-            Fe[q][i][j] = (defMap.F[q][i][j] + F_tilde_sd[q][i][j]); //  no swelling
+            Fe[q][i][j] = (defMap.F[q][i][j] + F_tilde_sd[q][i][j] + ULocal_xi[dofs_per_cell+ ind_Displacement_wd] * F_tilde_wd[q][i][j]); //  no swelling
             //Fe[q][i][j] = defMap.F[q][i][j]; //  no swelling
           }
         }
@@ -887,7 +984,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
             P[q][i][j] = 0.0;
             for (unsigned int k = 0; k < dim; ++k) {
               // option: F or with F_tidle, which one to use
-              P[q][i][j] += (defMap.F[q][i][k] + F_tilde_sd[q][i][k]) * S[k][j];
+              P[q][i][j] += (defMap.F[q][i][k] + F_tilde_sd[q][i][k] + ULocal_xi[dofs_per_cell+ ind_Displacement_wd] * F_tilde_wd[q][i][k] ) * S[k][j];
               //P[q][i][j] += defMap.F[q][i][k] * S[k][j];
 
             }
@@ -985,6 +1082,14 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     }
   }
 
+  for (unsigned int q = 0; q < n_q_points; ++q) {
+    for (unsigned int i = 0; i < dim; i++) {
+      for (unsigned int j = 0; j < dim; j++) {
+        rr_u[2] += F_tilde_wd[q][i][j] * P[q][i][j] * fe_values.JxW(q); 
+      }
+    }
+  }
+
 
   // compute T_gamma
 
@@ -1020,22 +1125,51 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
   FullMatrix<double> Kxixi_Displacement_sd;
   FullMatrix<double> Kxixi_Displacement_sd_inv;
-  Kxixi_Displacement_sd.reinit(2, 2);
-  Kxixi_Displacement_sd_inv.reinit(2, 2);
+  Kxixi_Displacement_sd.reinit(3, 3);
+  Kxixi_Displacement_sd_inv.reinit(3, 3);
   FullMatrix<double> Kxiu_Displacement_sd;
-  Kxiu_Displacement_sd.reinit(2, 4*dim);
+  Kxiu_Displacement_sd.reinit(3, 4*dim);
   FullMatrix<double> Kuxi_Displacement_sd;
-  Kuxi_Displacement_sd.reinit(4*dim, 2);
+  Kuxi_Displacement_sd.reinit(4*dim, 3);
 
   if (cell_SDdata[cell_id].is_fractured)
   {
     Kxixi_Displacement_sd(0, 0) = -rr_u[0].dx(dofs_per_cell+ ind_Displacement_sd_1);
     Kxixi_Displacement_sd(0, 1) = -rr_u[0].dx(dofs_per_cell+ ind_Displacement_sd_2);
+    Kxixi_Displacement_sd(0, 2) = -rr_u[0].dx(dofs_per_cell+ ind_Displacement_wd);
     Kxixi_Displacement_sd(1, 0) = -rr_u[1].dx(dofs_per_cell+ ind_Displacement_sd_1);
     Kxixi_Displacement_sd(1, 1) = -rr_u[1].dx(dofs_per_cell+ ind_Displacement_sd_2);
+    Kxixi_Displacement_sd(1, 2) = -rr_u[1].dx(dofs_per_cell+ ind_Displacement_wd);
+    Kxixi_Displacement_sd(2, 0) = -rr_u[2].dx(dofs_per_cell+ ind_Displacement_sd_1);
+    Kxixi_Displacement_sd(2, 1) = -rr_u[2].dx(dofs_per_cell+ ind_Displacement_sd_2);
+    Kxixi_Displacement_sd(2, 2) = -rr_u[2].dx(dofs_per_cell+ ind_Displacement_wd);
 
     // because rr_u[1] is not enabled
     Kxixi_Displacement_sd(1, 1) =  Kxixi_Displacement_sd(0, 0);
+
+    if (disable_wd)
+    {
+      Kxixi_Displacement_sd(2, 2) = 1.0;
+    }
+
+    Kxixi_Displacement_sd_inv.invert(Kxixi_Displacement_sd);
+  }
+  else
+  {
+    Kxixi_Displacement_sd(0, 0) = 1;
+    Kxixi_Displacement_sd(0, 1) = 0;
+    Kxixi_Displacement_sd(0, 2) = 0;
+    Kxixi_Displacement_sd(1, 0) = 0;
+    Kxixi_Displacement_sd(1, 1) = 1;
+    Kxixi_Displacement_sd(1, 2) = 0;
+    Kxixi_Displacement_sd(2, 0) = 0;
+    Kxixi_Displacement_sd(2, 1) = 0;
+    Kxixi_Displacement_sd(2, 2) = -rr_u[2].dx(dofs_per_cell+ ind_Displacement_wd);
+    if (disable_wd)
+    {
+      Kxixi_Displacement_sd(2, 2) = 1.0;
+    }
+
     Kxixi_Displacement_sd_inv.invert(Kxixi_Displacement_sd);
   }
 
@@ -1046,8 +1180,10 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     {
       Kxiu_Displacement_sd(0, _i) = - rr_u[0].dx(this_dof_local_index_Displacement[i]);
       Kxiu_Displacement_sd(1, _i) = - rr_u[1].dx(this_dof_local_index_Displacement[i]);
+      Kxiu_Displacement_sd(2, _i) = - rr_u[2].dx(this_dof_local_index_Displacement[i]);
       Kuxi_Displacement_sd(_i, 0) = - Ruu_Displacement_sd[_i].dx(dofs_per_cell + ind_Displacement_sd_1);
       Kuxi_Displacement_sd(_i, 1) = - Ruu_Displacement_sd[_i].dx(dofs_per_cell + ind_Displacement_sd_2);
+      Kuxi_Displacement_sd(_i, 2) = - Ruu_Displacement_sd[_i].dx(dofs_per_cell + ind_Displacement_wd);
       _i += 1;
     }
   }
@@ -1246,8 +1382,16 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         R[i] = Ruu_Displacement_sd[_ii];
         Sacado::Fad::DFad<double> _tmp = 0;
         //std::cout << " ii " << _ii << std::endl;
-        if (cell_SDdata[cell_id].is_fractured){
+        //if (cell_SDdata[cell_id].is_fractured)
+        {
+          if (disable_wd)
+          {
            _tmp = Kuxi_Displacement_sd(_ii,0) * Kxixi_Displacement_sd_inv(0,0) * rr_u[0] + Kuxi_Displacement_sd(_ii, 1) * Kxixi_Displacement_sd_inv(1,1) * rr_u[1]; 
+          }
+          else
+          {
+           _tmp = Kuxi_Displacement_sd(_ii,0) * Kxixi_Displacement_sd_inv(0,0) * rr_u[0] + Kuxi_Displacement_sd(_ii, 1) * Kxixi_Displacement_sd_inv(1,1) * rr_u[1] + Kuxi_Displacement_sd(_ii, 2) * Kxixi_Displacement_sd_inv(2,2) * rr_u[2]; 
+          }
         }
         R[i] = R[i] - _tmp;
 
@@ -1276,8 +1420,9 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     cell_SDdata[cell_id].Kxiu_sd = Kxiu_Displacement_sd;
     cell_SDdata[cell_id].rlocal_u_sd[0] = rr_u[0].val();
     cell_SDdata[cell_id].rlocal_u_sd[1] = rr_u[1].val();
-    for (unsigned int j = 0; j < dim; j++) {
-    for (unsigned int k = 0; k < dim; k++) {
+    cell_SDdata[cell_id].rlocal_u_sd[2] = rr_u[2].val();
+    for (unsigned int j = 0; j < 3; j++) {
+    for (unsigned int k = 0; k < 3; k++) {
       cell_SDdata[cell_id].Kxixi_inv_u_sd(j,k) = Kxixi_Displacement_sd_inv(j,k);
     }
     }

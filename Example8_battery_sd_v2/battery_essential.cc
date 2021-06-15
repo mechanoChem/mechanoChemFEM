@@ -305,16 +305,16 @@ void battery<dim>::identify_diffuse_interface()
         cell_SDdata[cell_id].Kxic_phi_e.reinit(1,4);
         cell_SDdata[cell_id].Kxixi_inv_phi_e.reinit(1,1);
 
-        cell_SDdata[cell_id].rlocal_u_sd.reinit(2);
+        cell_SDdata[cell_id].rlocal_u_sd.reinit(3);
         cell_SDdata[cell_id].rlocal_u_sd = 0.0;
-        cell_SDdata[cell_id].xi_old_u_sd.reinit(2);
+        cell_SDdata[cell_id].xi_old_u_sd.reinit(3);
         cell_SDdata[cell_id].xi_old_u_sd = 0.0;
-        cell_SDdata[cell_id].xi_conv_u_sd.reinit(2);
+        cell_SDdata[cell_id].xi_conv_u_sd.reinit(3);
         cell_SDdata[cell_id].xi_conv_u_sd = 0.0;
         cell_SDdata[cell_id].Kuu_sd.reinit(4*dim,4*dim);
-        cell_SDdata[cell_id].Kuxi_sd.reinit(4*dim,2);
-        cell_SDdata[cell_id].Kxiu_sd.reinit(2,4*dim);
-        cell_SDdata[cell_id].Kxixi_inv_u_sd.reinit(2,2);
+        cell_SDdata[cell_id].Kuxi_sd.reinit(4*dim,3);
+        cell_SDdata[cell_id].Kxiu_sd.reinit(3,4*dim);
+        cell_SDdata[cell_id].Kxixi_inv_u_sd.reinit(3,3);
 
         cell_SDdata[cell_id].ULocal_k.reinit(40);
 

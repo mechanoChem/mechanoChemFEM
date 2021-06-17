@@ -25,6 +25,7 @@ class battery: public mechanoChemFEM<dim>
 		void define_battery_fields();
 		void get_residual_at_diffuse_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		void output_w_domain();
+		void output_results();
 		void run();
 		
 		
@@ -49,6 +50,7 @@ class battery: public mechanoChemFEM<dim>
 		double iso_value = 0.5;
 		int active_particle_id=0, electrolyte_id=1, interface_id=2;
 
+	  Vector<float> crack_id; 
 
 		PETScWrappers::MPI::Vector solution_k;
 };

@@ -162,8 +162,36 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 }
 
 template <int dim>
+void battery<dim>::output_results()
+{
+	Vector<float> material_id(this->triangulation.n_active_cells()); 
+  typename hp::DoFHandler<dim>::active_cell_iterator elem = this->dof_handler.begin_active(), endc = this->dof_handler.end();             
+  unsigned int j = 0;                                                                                                      
+  for (;elem!=endc; ++elem){                                                                                                
+		material_id(j++) = elem->material_id();
+	}
+
+	//write vtk and snapshot for solution
+	if(this->save_output){ 
+		std::string output_path = this->output_directory+"output-new-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
+		this->FEMdata_out.clear_data_vectors();
+	  this->FEMdata_out.data_out.add_data_vector(material_id, "mat_id");
+	  this->FEMdata_out.data_out.add_data_vector(crack_id, "crack_id");
+		if(this->current_increment%this->skip_output==0) this->FEMdata_out.write_vtk(this->solution_prev, output_path);	
+
+	}
+	if(this->save_snapshot){
+		std::string snapshot_path = this->snapshot_directory+"snapshot-"+std::to_string(this->current_increment+this->off_output_index)+".dat";
+		this->FEMdata_out.create_vector_snapshot(this->solution, snapshot_path);
+	}
+}
+
+
+
+template <int dim>
 void battery<dim>::run()
 {
+  crack_id.reinit(this->triangulation.n_active_cells());
 	output_w_domain();
 
 	this->pcout<<std::endl<<std::endl;

@@ -67,7 +67,7 @@
 		"poisson_ratio":0.3,
 		"lithium_a":0.01,
 		"lithium_b":0.3,
-		"EnableWeak":0,
+		"EnableWeak":1,
     "Feiga_11" : 1,
     "Feiga_22" : 1,
     "Feiga_33" : 1,

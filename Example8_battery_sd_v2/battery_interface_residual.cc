@@ -910,22 +910,18 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       //double lambda10 = (E10*nu)/(1.0+nu)/(1.0-2.0*nu);
 
 		  dealii::Table<3,Sacado::Fad::DFad<double> > Fe(n_q_points,dim,dim);
-		  double C_a=(*displacement.params_json)["Mechanics"]["lithium_a"];
-		  double C_b=(*displacement.params_json)["Mechanics"]["lithium_b"];
-		  dealii::Table<2,Sacado::Fad::DFad<double>> Feiga(dim,dim);
-		  dealii::Table<2,Sacado::Fad::DFad<double>> Feigba(dim,dim);
-		  Feiga[0][0]=(*displacement.params_json)["Mechanics"]["Feiga_11"]; // = 1
-		  Feigba[0][0]=(*displacement.params_json)["Mechanics"]["Feigb_11"]; // 0.9
-		  Feigba[0][0]=Feigba[0][0] - Feiga[0][0]; // -0.1
-		  if(dim>=2){
-		  	Feiga[1][1]=(*displacement.params_json)["Mechanics"]["Feiga_22"]; // = 1
-		  	Feigba[1][1]=(*displacement.params_json)["Mechanics"]["Feigb_22"]; // 0.9
-		  	Feigba[1][1]=Feigba[1][1] - Feiga[1][1]; // -0.1
-		  }
-		  if(dim==3){
-		  	Feiga[2][2]=(*displacement.params_json)["Mechanics"]["Feiga_33"]; // = 1
-		  	Feigba[2][2]=(*displacement.params_json)["Mechanics"]["Feigb_33"]; // 0.9
-		  	Feigba[2][2]=Feigba[2][2] - Feiga[2][2]; // -0.1
+
+      double swell_ratio = (*params_json)["Mechanics"]["SwellRatio"];
+      double C_li_100_neg=(*params_json)["ElectroChemo"]["c_li_100_neg"];
+      double C_li_100_pos=(*params_json)["ElectroChemo"]["c_li_100_pos"];
+      double C_li_max_neg=(*params_json)["ElectroChemo"]["c_li_max_neg"];
+      double C_li_max_pos=(*params_json)["ElectroChemo"]["c_li_max_pos"];
+
+      double C_0 = 0.0;
+		  C_0=C_li_100_neg * C_li_max_pos;
+		  Point<dim> center=(* battery_fields.current_cell)->center();
+		  if (center[orientation]>separator_line){
+		  	C_0=C_li_100_pos * C_li_max_pos;
 		  }
 
       for (unsigned int q = 0; q < n_q_points; ++q) {
@@ -934,8 +930,14 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
 				dealii::Table<2,Sacado::Fad::DFad<double> > Feig(dim,dim);
 				dealii::Table<2,Sacado::Fad::DFad<double>> invFeig(dim,dim);
-				Feig=table_scaling<2,Sacado::Fad::DFad<double>,Sacado::Fad::DFad<double> > (Feigba, (c_li_tld-C_a)/(C_b-C_a) );  // scale * (-0.1) 
-				Feig=table_add<2,Sacado::Fad::DFad<double>,Sacado::Fad::DFad<double> > (Feig, Feiga); // + 2nd order identity
+        Feig[0][0]=(c_li_tld - C_0) * swell_ratio + 1.0; 
+        if(dim>=2){
+          Feig[1][1]=(c_li_tld - C_0) * swell_ratio + 1.0; 
+        }
+        if(dim==3){
+          Feig[2][2]=(c_li_tld - C_0) * swell_ratio + 1.0; 
+        }
+
 				getInverse<Sacado::Fad::DFad<double>,dim> (Feig,invFeig);
         // Fe = F inv(Fg)
         for (unsigned int i = 0; i < dim; ++i) {
@@ -1436,6 +1438,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       std::cout << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << std::endl;
       cell_SDdata[cell_id].is_fractured = true;
       cell_SDdata[cell_id].max_Tn = TN_at_gp[q].val();
+      this->crack_id[cell_id] = cell_id ;
     }
   }
   //if (cell_SDdata[cell_id].is_fractured)  OutData.Data["crack_id"].push_back(cell_id);
@@ -1488,15 +1491,15 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //std::cout <<  " Xi[Electrode_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrode_potential].val() << std::endl;
     //std::cout <<  " Xi[Electrolyte_potential] " << ULocal_xi[dofs_per_cell+ ind_Electrolyte_potential].val() << std::endl;
 
-  if (cell_SDdata[cell_id].is_fractured)
-    std::cout << "cell_id " << cell_id 
-      << " xi_u_0 " << xi_0_Displacement_sd[0].val() 
-      << " xi_u_1 " << xi_0_Displacement_sd[1].val() 
-      << " TN[0] " << TN_at_gp[0].val() 
-      << " 1 " << TN_at_gp[1].val()
-      << " 2 " << TN_at_gp[2].val()
-      << " 3 " << TN_at_gp[3].val()
-      << std::endl;
+  //if (cell_SDdata[cell_id].is_fractured)
+    //std::cout << "cell_id " << cell_id 
+      //<< " xi_u_0 " << xi_0_Displacement_sd[0].val() 
+      //<< " xi_u_1 " << xi_0_Displacement_sd[1].val() 
+      //<< " TN[0] " << TN_at_gp[0].val() 
+      //<< " 1 " << TN_at_gp[1].val()
+      //<< " 2 " << TN_at_gp[2].val()
+      //<< " 3 " << TN_at_gp[3].val()
+      //<< std::endl;
 
   // save previous iteration solution for SD
 	for (unsigned int i=0; i<dofs_per_cell; ++i){

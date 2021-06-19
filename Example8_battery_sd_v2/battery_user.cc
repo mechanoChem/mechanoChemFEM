@@ -340,10 +340,20 @@ void battery<dim>::apply_initial_condition()
           if (ck==DOF_Displacement or ck== DOF_Displacement+1)
           {
             Point<dim> vertex_point=cell->vertex(_v_id);
-            //if (vertex_point[1] == 0.0 or vertex_point[1] == 56.0 or vertex_point[0] == -15.0 or vertex_point[0] == 15.0)
-            if (ck== DOF_Displacement+1 and (vertex_point[1] == 0.0 or vertex_point[1] == 56.0) // fix y displacement
+            // 1
+            //if (vertex_point[1] == 0.0 or vertex_point[1] == 56.0 or vertex_point[0] == -15.0 or vertex_point[0] == 15.0) // fix x & y at all edges
+            // 2
+            //if (ck== DOF_Displacement+1 and (vertex_point[1] == 0.0 ) // fix y displacement
+                //or 
+                //ck== DOF_Displacement and (vertex_point[0] == -15.0 )) // fix x displacement
+            // 3
+            //if ( (ck== DOF_Displacement+1 and (vertex_point[1] == 0.0 or vertex_point[1] == 56.0)) // fix y displacement
+                //or 
+                // (ck== DOF_Displacement and (vertex_point[0] == -15.0 or vertex_point[0] == 15.0))) // fix x displacement
+            // 4
+            if ((ck== DOF_Displacement+1 and (vertex_point[1] == 0.0 or vertex_point[1] == 56.0)) // fix y displacement
                 or 
-                ck== DOF_Displacement and (vertex_point[0] == -15.0 or vertex_point[0] == 15.0)) // fix x displacement
+               (vertex_point[0] == -15.0 or vertex_point[0] == 15.0)) // fix x displacement
             {
               auto globalDOF = local_dof_indices[i];
 

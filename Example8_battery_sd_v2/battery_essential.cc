@@ -177,6 +177,10 @@ void battery<dim>::output_results()
 		this->FEMdata_out.clear_data_vectors();
 	  this->FEMdata_out.data_out.add_data_vector(material_id, "mat_id");
 	  this->FEMdata_out.data_out.add_data_vector(crack_id, "crack_id");
+	  this->FEMdata_out.data_out.add_data_vector(jump_n, "jump_n");
+	  this->FEMdata_out.data_out.add_data_vector(jump_m, "jump_m");
+	  this->FEMdata_out.data_out.add_data_vector(jump_w, "jump_w");
+	  this->FEMdata_out.data_out.add_data_vector(T_n, "T_n");
 		if(this->current_increment%this->skip_output==0) this->FEMdata_out.write_vtk(this->solution_prev, output_path);	
 
 	}
@@ -192,6 +196,12 @@ template <int dim>
 void battery<dim>::run()
 {
   crack_id.reinit(this->triangulation.n_active_cells());
+  jump_n.reinit(this->triangulation.n_active_cells());
+  jump_m.reinit(this->triangulation.n_active_cells());
+  jump_w.reinit(this->triangulation.n_active_cells());
+  T_n.reinit(this->triangulation.n_active_cells());
+  is_new_step.resize(this->triangulation.n_active_cells());
+
 	output_w_domain();
 
 	this->pcout<<std::endl<<std::endl;
@@ -204,6 +214,15 @@ void battery<dim>::run()
 		PetscPrintf(this->mpi_communicator,"current increment=%d, current time= %f",this->current_increment, this->current_time);
 		PetscPrintf(this->mpi_communicator,"************\n");
 		this->solve_ibvp();
+
+    {
+      typename hp::DoFHandler<dim>::active_cell_iterator elem = this->dof_handler.begin_active(), endc = this->dof_handler.end();             
+      unsigned int j = 0;                                                                                                      
+      for (;elem!=endc; ++elem){                                                                                                
+        int cell_id = elem->active_cell_index();
+        is_new_step[cell_id] = true;
+	    }
+    }
 
     // update history variables
     for (unsigned i = 0; i < cell_SDdata.size(); ++i) {

@@ -75,8 +75,8 @@
     "Feigb_22" : 0.9,
     "Feigb_33" : 0.9,
     "SwellRatio" : -1.0,
-    "MaximumStressN" : 0.4,
-    "MaximumStressM" : 0.4,
+    "MaximumStressN" : 100,
+    "MaximumStressM" : 100,
     "LinearSoftenModulusN" : -5,
     "LinearSoftenModulusM" : -5
 	},

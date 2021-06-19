@@ -51,6 +51,11 @@ class battery: public mechanoChemFEM<dim>
 		int active_particle_id=0, electrolyte_id=1, interface_id=2;
 
 	  Vector<float> crack_id; 
+	  Vector<float> jump_n; 
+	  Vector<float> jump_m; 
+	  Vector<float> jump_w; 
+	  Vector<float> T_n; 
+    std::vector<bool> is_new_step;
 
 		PETScWrappers::MPI::Vector solution_k;
 };

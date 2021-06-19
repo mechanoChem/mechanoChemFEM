@@ -927,15 +927,16 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       for (unsigned int q = 0; q < n_q_points; ++q) {
         Sacado::Fad::DFad<double> c_li_tld = 0.0;
         c_li_tld = battery_fields.quad_fields[DOF_Lithium].value[q] + c_1_tilde_Lithium[q];
+        //std::cout << " c_li_tld  = " << c_li_tld.val() << " " << Ms_list[q] << " " << Ms_list_opposite[q] << std::endl;
 
 				dealii::Table<2,Sacado::Fad::DFad<double> > Feig(dim,dim);
 				dealii::Table<2,Sacado::Fad::DFad<double>> invFeig(dim,dim);
-        Feig[0][0]=(c_li_tld - C_0) * swell_ratio + 1.0; 
+        Feig[0][0]=(c_li_tld - C_0) * swell_ratio * Ms_list[q] + 1.0; 
         if(dim>=2){
-          Feig[1][1]=(c_li_tld - C_0) * swell_ratio + 1.0; 
+          Feig[1][1]=(c_li_tld - C_0) * swell_ratio * Ms_list[q] + 1.0; 
         }
         if(dim==3){
-          Feig[2][2]=(c_li_tld - C_0) * swell_ratio + 1.0; 
+          Feig[2][2]=(c_li_tld - C_0) * swell_ratio * Ms_list[q] + 1.0; 
         }
 
 				getInverse<Sacado::Fad::DFad<double>,dim> (Feig,invFeig);
@@ -943,9 +944,9 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         for (unsigned int i = 0; i < dim; ++i) {
           for (unsigned int j = 0; j < dim; ++j) {
             for (unsigned int k = 0; k < dim; ++k) {
-              //Fe[q][i][j] += (defMap.F[q][i][k] + F_tilde_sd[q][i][k] + + ULocal_xi[dofs_per_cell+ ind_Displacement_wd] * F_tilde_wd[q][i][k]) * invFeig[k][j];
+              Fe[q][i][j] += (defMap.F[q][i][k] + F_tilde_sd[q][i][k] + ULocal_xi[dofs_per_cell+ ind_Displacement_wd] * F_tilde_wd[q][i][k]) * invFeig[k][j];
             }
-            Fe[q][i][j] = (defMap.F[q][i][j] + F_tilde_sd[q][i][j] + ULocal_xi[dofs_per_cell+ ind_Displacement_wd] * F_tilde_wd[q][i][j]); //  no swelling
+            //Fe[q][i][j] = (defMap.F[q][i][j] + F_tilde_sd[q][i][j] + ULocal_xi[dofs_per_cell+ ind_Displacement_wd] * F_tilde_wd[q][i][j]); //  no swelling
             //Fe[q][i][j] = defMap.F[q][i][j]; //  no swelling
           }
         }
@@ -1101,11 +1102,38 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //T_gamma[0] = this->MatData["MaximumStressN"] + this->MatData["LinearSoftenModulusN"] * J_jump[0];
     //T_gamma[0] = this->MatData["MaximumStressN"] + this->MatData["LinearSoftenModulusN"] * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1]; // this is actually correct, jump is always non-negative
     //T_gamma[0] = cell_SDdata[cell_id].max_Tn + this->MatData["LinearSoftenModulusN"] * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1]; // this is actually correct, jump is always non-negative
-    T_gamma[0] = cell_SDdata[cell_id].max_Tn + (*displacement.params_json)["Mechanics"]["LinearSoftenModulusN"] * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1]; // this is actually correct, jump is always non-negative
-    if (T_gamma[0] < 0.0)
+
+    if (ULocal_xi[dofs_per_cell + ind_Displacement_sd_1] < 0.0)
     {
-      T_gamma[0] = 0.0 * T_gamma[0];
+      // regularized stiffness
+      T_gamma[0] = (cell_SDdata[cell_id].max_Tn + 1e11 * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1]) * cell_SDdata[cell_id].interface_length; 
+      this->T_n[cell_id] = (cell_SDdata[cell_id].max_Tn + 1e11 * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1]).val();
     }
+    else
+    {
+      T_gamma[0] = (cell_SDdata[cell_id].max_Tn + (*displacement.params_json)["Mechanics"]["LinearSoftenModulusN"] * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1] ) * cell_SDdata[cell_id].interface_length; // this is actually correct, jump is always non-negative
+      this->T_n[cell_id] = (cell_SDdata[cell_id].max_Tn + (*displacement.params_json)["Mechanics"]["LinearSoftenModulusN"] * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1] ).val();
+      if (T_gamma[0] < 0.0)
+      {
+        //std::cout << " T_gamma[0] " << T_gamma[0] << std::endl;
+        T_gamma[0] = 1.0e-6 * T_gamma[0];
+        this->T_n[cell_id] = 0.0;
+      }
+    }
+    //std::cout << " xi " << ULocal_xi[dofs_per_cell + ind_Displacement_sd_1].val() 
+      //<< " T_gamma[0] " << T_gamma[0].val() 
+      //<< " P000 " << P[0][0][0].val() 
+      //<< " P011 " << P[0][1][1].val() 
+      //<< " P100 " << P[1][0][0].val() 
+      //<< " P111 " << P[1][1][1].val() 
+      //<< " P200 " << P[2][0][0].val() 
+      //<< " P211 " << P[2][1][1].val() 
+      //<< " P300 " << P[3][0][0].val() 
+      //<< " P311 " << P[3][1][1].val()
+      //<< std::endl;
+
+
+
     //T_gamma[1] = this->MatData["MaximumStressM"] + this->MatData["LinearSoftenModulusM"] * J_jump[1];
     T_gamma[1] = 0.0 * ULocal_xi[dofs_per_cell + ind_Displacement_sd_2];
     if (T_gamma[1] < 0.0)
@@ -1429,13 +1457,21 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     }
     }
 
+      this->jump_n[cell_id] = ULocal_xi[dofs_per_cell + ind_Displacement_sd_1].val() ;
+      this->jump_m[cell_id] = ULocal_xi[dofs_per_cell + ind_Displacement_sd_2].val() ;
+      this->jump_w[cell_id] = ULocal_xi[dofs_per_cell + ind_Displacement_wd].val() ;
+
   for (unsigned int q = 0; q < n_q_points; ++q) {
-      //std::cout << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << std::endl;
-    //if (TN_at_gp[q] > this->MatData["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured)
-    if (TN_at_gp[q] > (*displacement.params_json)["Mechanics"]["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured)
+    if (not cell_SDdata[cell_id].is_fractured)
     {
-      std::cout << "-------------------- crack detected ---------------------------" << std::endl;
-      std::cout << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << std::endl;
+      if (TN_at_gp[q] > this->T_n[cell_id])  this->T_n[cell_id] = TN_at_gp[q].val();
+    }
+      //std::cout << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << " is_new " << this->is_new_step[cell_id] << std::endl;
+    //if (TN_at_gp[q] > this->MatData["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured)
+    if (TN_at_gp[q] > (*displacement.params_json)["Mechanics"]["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured and this->is_new_step[cell_id])
+    {
+      std::cout << "-------------------- crack detected ---------------------------"
+        << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << std::endl;
       cell_SDdata[cell_id].is_fractured = true;
       cell_SDdata[cell_id].max_Tn = TN_at_gp[q].val();
       this->crack_id[cell_id] = cell_id ;
@@ -1505,6 +1541,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 	for (unsigned int i=0; i<dofs_per_cell; ++i){
     cell_SDdata[cell_id].ULocal_k[i] = ULocal[i].val(); 
 	}
+  if (this->is_new_step[cell_id]) this->is_new_step[cell_id] = false;
 }
 
 template class battery<1>;

@@ -172,6 +172,8 @@ void nodalField<dim>::evaluate_vector_field(const DataPostprocessorInputs::Vecto
 	double C_b=(*params_json)["Mechanics"]["lithium_b"];
 	dealii::Table<2,double> Feiga(dim,dim);
 	dealii::Table<2,double> Feigba(dim,dim);
+
+  // need to be updated with better projection, and also different swelling
 	Feiga[0][0]=(*params_json)["Mechanics"]["Feiga_11"];
 	Feigba[0][0]=(*params_json)["Mechanics"]["Feigb_11"];
 	Feigba[0][0]-=(*params_json)["Mechanics"]["Feiga_11"].get<double>();

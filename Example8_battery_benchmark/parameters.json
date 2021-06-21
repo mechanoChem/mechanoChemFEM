@@ -74,7 +74,8 @@
     "Feiga_33" : 1,
     "Feigb_11" : 0.9,
     "Feigb_22" : 0.9,
-    "Feigb_33" : 0.9
+    "Feigb_33" : 0.9,
+    "SwellRatio" : -0.3
 	},
   "boundary_conditions": {
 		"u_x" : {

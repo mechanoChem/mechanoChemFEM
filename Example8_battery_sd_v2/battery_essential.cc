@@ -126,13 +126,21 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 		if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	  if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	  if(battery_fields.active_fields_index["Displacement"]>-1) 
+    {
+      displacement.set_cell_id(cell_id);
+      displacement.r_get_residual(fe_values, R, ULocal, ULocalConv, pressure);
+    }
 	}
 	else if (cell->material_id()==electrolyte_id){
 	  battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
 	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual(fe_values, R, ULocal, ULocalConv);
-	  if(battery_fields.active_fields_index["Displacement"]>-1) displacement.r_get_residual(fe_values, R, ULocal, ULocalConv);
+	  if(battery_fields.active_fields_index["Displacement"]>-1)
+    {
+      displacement.set_cell_id(cell_id);
+      displacement.r_get_residual(fe_values, R, ULocal, ULocalConv, pressure);
+    }
 	}
 	
 
@@ -200,6 +208,8 @@ void battery<dim>::run()
   jump_m.reinit(this->triangulation.n_active_cells());
   jump_w.reinit(this->triangulation.n_active_cells());
   T_n.reinit(this->triangulation.n_active_cells());
+  pressure.resize(this->triangulation.n_active_cells());
+  pressure_old.resize(this->triangulation.n_active_cells());
   is_new_step.resize(this->triangulation.n_active_cells());
 
 	output_w_domain();
@@ -250,6 +260,8 @@ void battery<dim>::run()
      //std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment+this->off_output_index)+".vtk";
      //this->FEMdata_out.write_vtk(this->solution_prev, output_path);
     this->output_results();
+
+    pressure_old = pressure;
 	}
 	this->pcout<<"Finish running!!"<<std::endl;
 }

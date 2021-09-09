@@ -50,12 +50,14 @@ class battery: public mechanoChemFEM<dim>
 		double iso_value = 0.5;
 		int active_particle_id=0, electrolyte_id=1, interface_id=2;
 
-	  Vector<float> crack_id; 
-	  Vector<float> jump_n; 
-	  Vector<float> jump_m; 
-	  Vector<float> jump_w; 
-	  Vector<float> T_n; 
+	  Vector<double> crack_id;  // has to be double for output purpose
+	  Vector<double> jump_n; 
+	  Vector<double> jump_m; 
+	  Vector<double> jump_w; 
+	  Vector<double> T_n; 
     std::vector<bool> is_new_step;
+    std::vector<std::vector<double>> pressure; 
+    std::vector<std::vector<double>> pressure_old; 
 
 		PETScWrappers::MPI::Vector solution_k;
 };

@@ -46,7 +46,13 @@ void Mechanics<dim>::set_primiary_dof(int _primiary_dof)
 }
 
 template <int dim>
-void Mechanics<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
+void Mechanics<dim>::set_cell_id(int _cell_id)
+{
+	cell_id=_cell_id;
+}
+
+template <int dim>
+void Mechanics<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv, std::vector<std::vector<double>> &pressure)
 {
 //evaluate primary fields	
 	ResidualEq->setLameParametersByYoungsModulusPoissonRatio(youngsModulus, poissonRatio);
@@ -56,6 +62,28 @@ void Mechanics<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1, Sac
 	getDeformationMap<Sacado::Fad::DFad<double>, dim>(fe_values, primiary_dof, ULocal, defMap);
 	dealii::Table<3, Sacado::Fad::DFad<double> > P(n_q_points,dim,dim);
 	set_stress(defMap.F, P);
+  
+  // compute pressure
+	dealii::Table<2, Sacado::Fad::DFad<double> > sigma(dim,dim);
+
+  pressure[cell_id].resize(n_q_points);
+  for (unsigned int q = 0; q < n_q_points; ++q){
+		for(unsigned int i=0;i<dim;i++){
+			for (unsigned int j=0; j<dim; ++j){
+        sigma[i][j] = 0.0;
+				for (unsigned int k=0; k<dim; ++k){
+					sigma[i][j]+=P[q][i][k]*defMap.F[q][j][k]/defMap.detF[q];
+				} // k
+			} // j
+		} //i
+    double _pressure = 0.0;
+		for(unsigned int i=0;i<dim;i++){
+      _pressure += 1.0/3.0 * sigma[i][i].val();
+    }
+    pressure[cell_id][q] = _pressure;
+    //std::cout << "pressure: " << _pressure << " q " << q << std::endl;
+	} // q
+
 	  
 	//chemo
 	ResidualEq->residualForMechanics(fe_values, primiary_dof, R, P);

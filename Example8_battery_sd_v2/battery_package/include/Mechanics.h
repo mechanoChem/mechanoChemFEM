@@ -22,8 +22,10 @@ class Mechanics
 		void set_up_fields(Battery_fields<dim>& _battery_fields, ElectricChemo<dim,Sacado::Fad::DFad<double>>& _electricChemoFormula, Residual<Sacado::Fad::DFad<double>,dim>& ResidualEq, int _primiary_dof);
 		void set_primiary_dof(int _primiary_dof);
 		virtual void set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& F, dealii::Table<3,Sacado::Fad::DFad<double> >& P);
-		void r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
+		void r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv, std::vector<std::vector<double>> &pressure);
+    void set_cell_id(int _cell_id);
 		int primiary_dof;	
+    int cell_id;
 		
 		Battery_fields<dim>* battery_fields; 
 		ElectricChemo<dim, Sacado::Fad::DFad<double>>* electricChemoFormula;

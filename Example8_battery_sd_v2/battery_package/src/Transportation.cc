@@ -39,6 +39,11 @@ void Transportation<dim>::set_up_fields(Battery_fields<dim>& _battery_fields, El
 	primiary_dof=_primiary_dof;
 }
 
+template <int dim>
+void Transportation<dim>::set_cell_id(int _cell_id)
+{
+	cell_id=_cell_id;
+}
 
 template <int dim>
 void Transportation<dim>::set_primiary_dof(int _primiary_dof)
@@ -47,7 +52,7 @@ void Transportation<dim>::set_primiary_dof(int _primiary_dof)
 }
 
 template <int dim>
-void Transportation<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
+void Transportation<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv, std::vector<std::vector<double>> &pressure)
 {
 //evaluate primary fields
 	unsigned int n_q_points= fe_values.n_quadrature_points;
@@ -55,21 +60,25 @@ void Transportation<dim>::r_get_residual(const FEValues<dim>& fe_values, Table<1
 	dealii::Table<2,Sacado::Fad::DFad<double> > diffu(n_q_points, dim);
 	diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[this->primiary_dof].value_grad,0);
 	react=table_scaling<1,Sacado::Fad::DFad<double>,double >(react,0);
-	set_diffusion_reaction_term(diffu,react);
+	set_diffusion_reaction_term(diffu,react, pressure[cell_id]);
 		
 	//call residual functions
 	ResidualEq->residualForDiff_ReacEq(fe_values,primiary_dof, R,battery_fields->quad_fields[primiary_dof].value, battery_fields->quad_fields[primiary_dof].value_conv, diffu,react);
 }
 
 template <int dim>
-void Transportation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react)
+void Transportation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react, std::vector<double> &pressure_cell)
 {
-	unsigned int n_q_points= react.size(0);
-	for (unsigned int q=0; q<n_q_points; ++q) {
-		react[q]=0;
+  // overwritten at each battery component
+  // The following works only for diffuse_interface field
+  //std::cout << "You should not come here. This function supposes to be overwritten. Exit..." << std::endl;
+  //exit(0);
+  unsigned int n_q_points= react.size(0);
+  for (unsigned int q=0; q<n_q_points; ++q) {
+    react[q]=0;
     for (unsigned int i=0; i<dim; ++i) diffu[q][i]=-battery_fields->quad_fields[primiary_dof].value_grad[q][i];
-		//for (unsigned int i=0; i<dim; ++i) diffu[q][i]=0.0;
-	}
+    //for (unsigned int i=0; i<dim; ++i) diffu[q][i]=0.0;
+  }
 }
 
 

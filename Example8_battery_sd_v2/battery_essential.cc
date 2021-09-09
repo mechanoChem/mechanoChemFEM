@@ -123,7 +123,11 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
   }
 	else if (cell->material_id()==active_particle_id){
 	  battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
-		if(battery_fields.active_fields_index["Lithium"]>-1) lithium.r_get_residual(fe_values, R, ULocal, ULocalConv);
+		if(battery_fields.active_fields_index["Lithium"]>-1) 
+    { 
+      lithium.set_cell_id(cell_id);
+      lithium.r_get_residual(fe_values, R, ULocal, ULocalConv, pressure_old);
+    }
 		if(battery_fields.active_fields_index["Lithium_phaseField"]>-1) lithium_mu.r_get_residual(fe_values, R, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Electrode_potential"]>-1) phi_s.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	  if(battery_fields.active_fields_index["Displacement"]>-1) 
@@ -134,7 +138,12 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	}
 	else if (cell->material_id()==electrolyte_id){
 	  battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
-	  if(battery_fields.active_fields_index["Lithium_cation"]>-1) lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv);
+
+	  if(battery_fields.active_fields_index["Lithium_cation"]>-1)
+    {
+      lithium_cation.set_cell_id(cell_id);
+      lithium_cation.r_get_residual(fe_values, R, ULocal, ULocalConv, pressure_old);
+    }
 		if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) phi_e.r_get_residual(fe_values, R, ULocal, ULocalConv);
 	  if(battery_fields.active_fields_index["Displacement"]>-1)
     {

@@ -59,14 +59,18 @@ void Lithium_cation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 }
 
 template <int dim>
-void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react, dealii::Table<2, Sacado::Fad::DFad<double>> &phi_e_grad, dealii::Table<2, Sacado::Fad::DFad<double>> &c_li_plus_grad, dealii::Table<1, Sacado::Fad::DFad<double>> &c_li_plus, dealii::Table<1, double> &c_li_plus_old)
+void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,Sacado::Fad::DFad<double> >& diffu, dealii::Table<1,Sacado::Fad::DFad<double> >& react, dealii::Table<2, Sacado::Fad::DFad<double>> &phi_e_grad, dealii::Table<2, Sacado::Fad::DFad<double>> &c_li_plus_grad, dealii::Table<1, Sacado::Fad::DFad<double>> &c_li_plus, dealii::Table<1, double> &c_li_plus_old, std::vector<double> &pressure_cell)
 {	
 	double Rr=(*params_json)["ElectroChemo"]["Rr"];
 	double t_0=(*params_json)["ElectroChemo"]["t_0"];
 	double F=(*params_json)["ElectroChemo"]["F"];
 	double Temp=(*params_json)["ElectroChemo"]["T_0"];
 
+  double k_b = 1.38e-23; // J/K
+  double V=(*params_json)["ElectroChemo"]["V_li_plus"];// Si-Si: 0.543nm*3=1.6e-28m^3, e-20 to offset GPa
 	unsigned int n_q_points= diffu.size(0);
+  if (pressure_cell.size() == 0) pressure_cell.resize(n_q_points);
+
 	int phi_e_index=this->battery_fields->active_fields_index["Electrolyte_potential"];
 	int c_li_plus_index=this->battery_fields->active_fields_index["Lithium_cation"];
 
@@ -83,7 +87,8 @@ void Lithium_cation<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,
 		for(unsigned int i=0; i<dim;i++){
 			//i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
 			i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/0.001*c_li_plus_grad[q][i];
-			diffu[q][i]=-D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
+			diffu[q][i]=-exp(pressure_cell[q]*V/k_b/Temp)*D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
+        //std::cout << exp(pressure_cell[q]*V/k_b/Temp) << std::endl;
       //std::cout << " i_phi_e[q][i] " <<  q << " i " << i << " " << i_phi_e[q][i] << std::endl;
 		}
 	}

@@ -726,10 +726,10 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     dealii::Table<2,Sacado::Fad::DFad<double> > diffu_Lithium_cation_tilde(n_q_points, dim);
     dealii::Table<1,Sacado::Fad::DFad<double> > react_Lithium_cation_tilde(n_q_points);
     //lithium_cation.set_diffusion_reaction_term_interface(diffu_Lithium_cation_tilde, react_Lithium_cation_tilde, c_1_tilde_grad_Electrolyte_potential, c_1_tilde_grad_Lithium_cation, c_1_tilde_Lithium_cation, battery_fields.quad_fields[DOF_Lithium_cation].value_conv);
-    lithium_cation.set_diffusion_reaction_term_interface(diffu_Lithium_cation_tilde, react_Lithium_cation_tilde, c_1_tilde_grad_Electrolyte_potential, c_1_tilde_grad_Lithium_cation, c_1_tilde_Lithium_cation, C_Li_plus_old);
+    lithium_cation.set_diffusion_reaction_term_interface(diffu_Lithium_cation_tilde, react_Lithium_cation_tilde, c_1_tilde_grad_Electrolyte_potential, c_1_tilde_grad_Lithium_cation, c_1_tilde_Lithium_cation, C_Li_plus_old, pressure_old[cell_id]);
     // carefully rewrite the code this part to make sure everything is correct.
     //lithium_cation.set_diffusion_reaction_term(diffu_Lithium_cation, react_Lithium_cation);
-    lithium_cation.set_diffusion_reaction_term_interface(diffu_Lithium_cation, react_Lithium_cation, battery_fields.quad_fields[DOF_Electrolyte_potential].value_grad, battery_fields.quad_fields[DOF_Lithium_cation].value_grad, battery_fields.quad_fields[DOF_Lithium_cation].value, C_Li_plus_old);
+    lithium_cation.set_diffusion_reaction_term_interface(diffu_Lithium_cation, react_Lithium_cation, battery_fields.quad_fields[DOF_Electrolyte_potential].value_grad, battery_fields.quad_fields[DOF_Lithium_cation].value_grad, battery_fields.quad_fields[DOF_Lithium_cation].value, C_Li_plus_old, pressure_old[cell_id]);
     //phi_e.set_field_and_source_term(field_Electrolyte_potential, source_Electrolyte_potential);
 
 
@@ -741,8 +741,8 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
     dealii::Table<2,Sacado::Fad::DFad<double> > diffu_Lithium_tilde(n_q_points, dim);
     dealii::Table<1,Sacado::Fad::DFad<double> > react_Lithium_tilde(n_q_points);
-    lithium.set_diffusion_reaction_term_interface(diffu_Lithium, react_Lithium, battery_fields.quad_fields[DOF_Lithium].value_grad);
-    lithium.set_diffusion_reaction_term_interface(diffu_Lithium_tilde, react_Lithium_tilde, c_1_tilde_grad_Lithium);
+    lithium.set_diffusion_reaction_term_interface(diffu_Lithium, react_Lithium, battery_fields.quad_fields[DOF_Lithium].value_grad, pressure_old[cell_id]);
+    lithium.set_diffusion_reaction_term_interface(diffu_Lithium_tilde, react_Lithium_tilde, c_1_tilde_grad_Lithium, pressure_old[cell_id]);
 
 
     rr_Lithium[0] = - cell_SDdata[cell_id].reaction_rate_li * cell_SDdata[cell_id].interface_length;
@@ -996,6 +996,27 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         }
       } // q
     } // code block {}
+
+	dealii::Table<2, Sacado::Fad::DFad<double> > sigma(dim,dim);
+  pressure[cell_id].resize(n_q_points);
+  for (unsigned int q = 0; q < n_q_points; ++q){
+		for(unsigned int i=0;i<dim;i++){
+			for (unsigned int j=0; j<dim; ++j){
+        sigma[i][j] = 0.0;
+				for (unsigned int k=0; k<dim; ++k){
+          //sigma[i][j]+=P[q][i][k]*defMap.F[q][j][k]/defMap.detF[q]; // may need to use the next line
+          sigma[i][j]+=P[q][i][k]*(defMap.F[q][j][k] + F_tilde_sd[q][j][k] + ULocal_xi[dofs_per_cell+ ind_Displacement_wd] * F_tilde_wd[q][j][k])/defMap.detF[q]; // 
+				} // k
+			} // j
+		} //i
+    double _pressure = 0.0;
+		for(unsigned int i=0;i<dim;i++){
+      _pressure += 1.0/3.0 * sigma[i][i].val();
+    }
+    pressure[cell_id][q] = _pressure;
+    //std::cout << "pressure: " << _pressure << " q " << q << std::endl;
+  }
+
     //std::cout << " residual P at the interface " << std::endl;
 
   {

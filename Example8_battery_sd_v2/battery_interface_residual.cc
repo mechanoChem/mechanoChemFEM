@@ -658,6 +658,14 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     Sacado::Fad::DFad<double> jn = 0.0; 
 		//jn = electricChemoFormula.formula_jn(Temp, c_li_ave, c_li_plus_ave, phi_s_ave, phi_e_ave, domainflag);
 		jn = electricChemoFormula.formula_jn(Temp, c_li_tld, c_li_plus_tld, phi_s_tld, phi_e_tld, domainflag);
+    // 
+    double u_sd_0_max = 0.1; // a value needs to be specified
+    jn = jn * 1.0 / (1.0 + exp(150.0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5*u_sd_0_max )));
+    if (1.0 / (1.0 + exp(150 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - u_sd_0_max ))) < 0.95)
+    {
+      std::cout << " f(d) " << 1.0 / (1.0 + exp(150 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - u_sd_0_max ))) << std::endl;
+    }
+    //if (cell_SDdata[cell_id].xi_conv_u_sd[0] > 0) std::cout << "jump_n: " << cell_SDdata[cell_id].xi_conv_u_sd[0] << std::endl;
     cell_SDdata[cell_id].reaction_rate_potential = jn*F;
     cell_SDdata[cell_id].reaction_rate_li = jn;
     //std::cout << "*reaction rate (new) : " << cell_SDdata[cell_id].reaction_rate_li.val() << " potential (rate) " << cell_SDdata[cell_id].reaction_rate_potential.val() << std::endl;

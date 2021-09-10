@@ -250,6 +250,8 @@ void battery<dim>::run()
       cell_SDdata[i].xi_conv_phi_s = cell_SDdata[i].xi_old_phi_s;
       cell_SDdata[i].xi_conv_phi_e = cell_SDdata[i].xi_old_phi_e;
       cell_SDdata[i].C_Li_plus_old = cell_SDdata[i].C_Li_plus_new;
+
+      cell_SDdata[i].xi_conv_u_sd = cell_SDdata[i].xi_old_u_sd;
       // WARNING: should not use the following, as many cell_SDdata are not initialized.
       //std::cout << "C_Li_plus_old[0]" << cell_SDdata[i].C_Li_plus_old[0] << std::endl;
       //for (int q=0; q<4; q++) cell_SDdata[i].C_Li_plus_old[q] = cell_SDdata[i].C_Li_plus_new[q];

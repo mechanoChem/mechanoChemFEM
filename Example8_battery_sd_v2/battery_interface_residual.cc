@@ -39,6 +39,9 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   // update reaction rate at the interface 
 	double tem=(*params_json)["ElectroChemo"]["jn_react"];
 	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
+	double cod_max=(*params_json)["ElectroChemo"]["cod_max"];
+	double cod_coef_C0=(*params_json)["ElectroChemo"]["cod_coef_C0"];
+
 	int Li_index=battery_fields.active_fields_index["Lithium"];
 	int Li_plus_index=battery_fields.active_fields_index["Lithium_cation"];
 
@@ -659,12 +662,15 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 		//jn = electricChemoFormula.formula_jn(Temp, c_li_ave, c_li_plus_ave, phi_s_ave, phi_e_ave, domainflag);
 		jn = electricChemoFormula.formula_jn(Temp, c_li_tld, c_li_plus_tld, phi_s_tld, phi_e_tld, domainflag);
     // 
-    double u_sd_0_max = 0.1; // a value needs to be specified
-    jn = jn * 1.0 / (1.0 + exp(150.0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5*u_sd_0_max )));
-    if (1.0 / (1.0 + exp(150 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - u_sd_0_max ))) < 0.95)
-    {
-      std::cout << " f(d) " << 1.0 / (1.0 + exp(150 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - u_sd_0_max ))) << std::endl;
-    }
+
+	  //double cod_coef_C0=(*params_json)["ElectroChemo"]["cod_coef_C0"];
+    //double u_sd_0_max = 0.1; // a value needs to be specified --> cod_max: crack opening displacement
+    jn = jn * 1.0 / (1.0 + exp(cod_coef_C0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5* cod_max )));
+
+    //if (1.0 / (1.0 + exp(150 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - u_sd_0_max ))) < 0.95)
+    //{
+      //std::cout << " f(d) " << 1.0 / (1.0 + exp(150 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - u_sd_0_max ))) << std::endl;
+    //}
     //if (cell_SDdata[cell_id].xi_conv_u_sd[0] > 0) std::cout << "jump_n: " << cell_SDdata[cell_id].xi_conv_u_sd[0] << std::endl;
     cell_SDdata[cell_id].reaction_rate_potential = jn*F;
     cell_SDdata[cell_id].reaction_rate_li = jn;

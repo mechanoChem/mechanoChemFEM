@@ -38,6 +38,8 @@
 		"V_li_neg":1e-20,
 		"V_li_pos":1e-20,
 		"V_li_plus":1e-20,
+    "cod_max":0.1,
+    "cod_coef_C0":150,
 		"jn_react":-0.0001,
 		"sigma_s_neg":1.5e8,
 		"sigma_s_pos":0.5e8,

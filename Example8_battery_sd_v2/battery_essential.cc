@@ -46,16 +46,16 @@ battery<dim>::battery(std::string parameter_file_Dir)
 template <int dim>
 battery<dim>::~battery(){}
 
-template <int dim>
-void battery<dim>::make_grid()
-{
-	std::string mesh_directory=(*params_json)["Problem"]["mesh"];
-	this->pcout << "reading external  mesh:"<<mesh_directory<<std::endl;
-  GridIn<dim> gridin;
-  gridin.attach_triangulation(this->triangulation);
-  std::ifstream f(mesh_directory);
-  gridin.read_abaqus(f);
-}
+//template <int dim>
+//void battery<dim>::make_grid()
+//{
+	//std::string mesh_directory=(*params_json)["Problem"]["mesh"];
+	//this->pcout << "reading external  mesh:"<<mesh_directory<<std::endl;
+  //GridIn<dim> gridin;
+  //gridin.attach_triangulation(this->triangulation);
+  //std::ifstream f(mesh_directory);
+  //gridin.read_abaqus(f);
+//}
 template <int dim>
 void battery<dim>::define_battery_fields()
 {

@@ -4,7 +4,6 @@
 		"print_parameter": true,
     "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential","Diffuse_interface","Displacement"],
 		"external_mesh": true,
-		"mesh": "../battery_package/mesh/benchmark_mesh.inp",
     "current_increment": 0,
     "current_time": 0,
     "dt": 20,
@@ -17,9 +16,9 @@
 		"face_quadrature": 2
 	},
   "Geometry": {
-      "num_elem_x": 29,
-      "num_elem_y": 1,
-      "num_elem_z": 0,
+      "num_elem_x": 30,
+      "num_elem_y": 56,
+      "num_elem_z": 1,
       "x_max": 15,
       "x_min": -15,
       "y_max": 56,
@@ -58,6 +57,7 @@
 		"separator_line":28,
 		"neg_electrode_line":18,
 		"pos_electrode_line":38,
+    "Origin list" : {"value": [[0,4,8],[3,8,8],[0,14,8], [0,42,8],[-3,46,8],[0,52,8]],"unit":"-"},
 		"orientation":1
 	},
 	"Lithium_phaseField":{

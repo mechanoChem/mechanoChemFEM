@@ -9,6 +9,7 @@ zhenlin wang 2019
 template <int dim>
 void battery<dim>::apply_boundary_condition()
 {
+  std::cout << "apply BCs" << std::endl;
 	constraints->clear ();
 	
 	DoFTools::make_hanging_node_constraints (this->dof_handler, *constraints);
@@ -45,73 +46,141 @@ void battery<dim>::setMultDomain()
 {
 	std::vector<std::vector<double>> origin_list={{1.5,1},{4.5,1}};
 	std::vector<std::vector<double>> origin_list_benchmark={{0,0},{0,18},{0,38},{0,56}};
-	double r=(*params_json)["ElectroChemo"]["particle_R"];
-	double neg_electrode_line=(*params_json)["ElectroChemo"]["neg_electrode_line"];
-	double pos_electrode_line=(*params_json)["ElectroChemo"]["pos_electrode_line"];
-	int orientation=(*params_json)["ElectroChemo"]["orientation"];
-	this->pcout<<"setMultDomain"<<std::endl;
-  {
-    typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
-    for (;cell!=endc; ++cell){
-	  	if (cell->subdomain_id() == this->this_mpi_process){
-	  		cell->set_material_id(electrolyte_id);
-	  		Point<dim> center=cell->center();
-	  		if (center[orientation]>neg_electrode_line and center[orientation]<pos_electrode_line) continue;
-	  		for(unsigned int ori_index=0;ori_index<origin_list_benchmark.size();ori_index++){
-	  			Point<dim> origin(origin_list_benchmark[ori_index][0],origin_list_benchmark[ori_index][1]);
-	  			if(center.distance(origin)<r-1.0e-15) {
-	  				cell->set_material_id(active_particle_id);
-	  				break;
-	  			}
-	  		}
-      }
-    }
-  }
+  std::vector<std::vector<double>> origin_list_json;
+  (*params_json)["ElectroChemo"]["Origin list" ]["value"].get_to(origin_list_json);
+  //for (auto i0 : origin_list_json)
+    //for (auto j0 : i0)
+      //std::cout << " j0 " << j0 << std::endl;
 
-  {
-    // create a layer of interface element
-    typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
-    for (;cell!=endc; ++cell){
-	  	if (cell->subdomain_id() == this->this_mpi_process){
-		    if(cell->material_id()==active_particle_id){
-		    	for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
-		    		if (cell->at_boundary(f) == false){
-		    			if(cell->neighbor(f)->material_id()==electrolyte_id  and cell->neighbor(f)->has_children() == false){
-	  	  			  cell->set_material_id(interface_id);
-		    			}
-		    		}
-		    	}
-		    }
-      }
-    }
-  }
 
-  {
-    // fix a few missing interface element
-    typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
-    for (;cell!=endc; ++cell){
-	  	if (cell->subdomain_id() == this->this_mpi_process){
-		    if(cell->material_id()==active_particle_id){
-	  		  Point<dim> center=cell->center();
-          int _neighbor_count = 0;
-		    	for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
-		    		if (cell->at_boundary(f) == false){
-		    			if(cell->neighbor(f)->material_id()==interface_id  and cell->neighbor(f)->has_children() == false){
-                _neighbor_count += 1;
-		    			}
-		    		}
-		    	}
-          if (_neighbor_count == 2)
+  double iso_value=(*params_json)["ElectroChemo"]["iso_value"];
+  // assign values to the diffuse interface 
+  typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
+  for (;cell!=endc; ++cell){
+    if (cell->subdomain_id() == this->this_mpi_process){
+
+      bool all_greater = true;
+      bool all_smaller = true;
+			Point<dim> center=cell->center();
+      for (unsigned int i = 0; i < GeometryInfo<dim>::vertices_per_cell; ++i) {
+        unsigned int vertex_id = i;
+
+        // assign value based on multiple particle locations
+        double distance = 1.0e12;
+        double dh = 1.0e12;
+        int origin_index = -1;
+        for (unsigned int o1=0;o1<origin_list_json.size();o1++){
+          Point<dim> origin(origin_list_json[o1][0],origin_list_json[o1][1]);
+          double radius = origin_list_json[o1][2];
+          if (origin.distance(cell->vertex(vertex_id)) > radius)
           {
-            // bottom connection corner
-            if (center[orientation] >4 and  center[orientation] < 12) cell->set_material_id(interface_id);
-            // top connection corner
-            if (center[orientation] >42 and  center[orientation] < 50) cell->set_material_id(interface_id);
+            if (dh > origin.distance(cell->vertex(vertex_id)) - radius)
+            {
+              distance = origin.distance(cell->vertex(vertex_id));
+              origin_index = o1;
+              dh = origin.distance(cell->vertex(vertex_id)) - radius;
+            }
           }
-		    }
-      }
-    }
+          else
+          {
+            distance = origin.distance(cell->vertex(vertex_id));
+            origin_index = o1;
+            break;
+          }
+        }
+        double val = iso_value + origin_list_json[origin_index][2] - distance;
+        //std::cout <<  " val = " <<  val << std::endl;
+
+        if (val >= iso_value)
+        {
+          all_smaller = false;
+        }
+        if (val < iso_value)
+        {
+          all_greater = false;
+        }
+      }  // per_cell
+      //std::cout 
+        //<< " all_smaller " << all_smaller 
+        //<< " all_greater " << all_greater 
+        //<< " not and not " << ((not all_greater) and (not all_smaller))
+        //<< std::endl;
+      if (all_smaller) cell->set_material_id(electrolyte_id);
+      if (all_greater) cell->set_material_id(active_particle_id);
+      if ((not all_greater) and (not all_smaller)) cell->set_material_id(interface_id);
+
+
+    } // this_mpi_process
   }
+
+
+	this->pcout<<"setMultDomain"<<std::endl;
+	//double r=(*params_json)["ElectroChemo"]["particle_R"];
+	//double neg_electrode_line=(*params_json)["ElectroChemo"]["neg_electrode_line"];
+	//double pos_electrode_line=(*params_json)["ElectroChemo"]["pos_electrode_line"];
+	//int orientation=(*params_json)["ElectroChemo"]["orientation"];
+  //{
+    //typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
+    //for (;cell!=endc; ++cell){
+			//if (cell->subdomain_id() == this->this_mpi_process){
+				//cell->set_material_id(electrolyte_id);
+				//Point<dim> center=cell->center();
+				//if (center[orientation]>neg_electrode_line and center[orientation]<pos_electrode_line) continue;
+				//for(unsigned int ori_index=0;ori_index<origin_list_benchmark.size();ori_index++){
+					//Point<dim> origin(origin_list_benchmark[ori_index][0],origin_list_benchmark[ori_index][1]);
+					//if(center.distance(origin)<r-1.0e-15) {
+						//cell->set_material_id(active_particle_id);
+						//break;
+					//}
+				//}
+      //}
+    //}
+  //}
+
+  //{
+    //// create a layer of interface element
+    //typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
+    //for (;cell!=endc; ++cell){
+			//if (cell->subdomain_id() == this->this_mpi_process){
+				//if(cell->material_id()==active_particle_id){
+					//for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
+						//if (cell->at_boundary(f) == false){
+							//if(cell->neighbor(f)->material_id()==electrolyte_id  and cell->neighbor(f)->has_children() == false){
+								//cell->set_material_id(interface_id);
+							//}
+						//}
+					//}
+				//}
+      //}
+    //}
+  //}
+
+  //{
+    //// fix a few missing interface element
+    //typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
+    //for (;cell!=endc; ++cell){
+			//if (cell->subdomain_id() == this->this_mpi_process){
+				//if(cell->material_id()==active_particle_id){
+					//Point<dim> center=cell->center();
+          //int _neighbor_count = 0;
+					//for (unsigned int f=0; f<GeometryInfo<dim>::faces_per_cell; ++f){
+						//if (cell->at_boundary(f) == false){
+							//if(cell->neighbor(f)->material_id()==interface_id  and cell->neighbor(f)->has_children() == false){
+                //_neighbor_count += 1;
+							//}
+						//}
+					//}
+          //if (_neighbor_count == 2)
+          //{
+            //// bottom connection corner
+            //if (center[orientation] >4 and  center[orientation] < 12) cell->set_material_id(interface_id);
+            //// top connection corner
+            //if (center[orientation] >42 and  center[orientation] < 50) cell->set_material_id(interface_id);
+          //}
+				//}
+      //}
+    //}
+  //}
 
 			//int inside_vertex=0;
 			//if(center[0]<3) cell->set_material_id(active_particle_id);
@@ -141,13 +210,18 @@ void battery<dim>::setMultDomain()
       ////------------------------------- circle---------------------
 
 	this->set_active_fe_indices (this->FE_support, this->dof_handler);
+
 }
 
 template <int dim>
 void battery<dim>::apply_initial_condition()
 {
+	this->pcout<<"apply init"<<std::endl;
   std::vector<std::vector<double>> origin_list={{1.5,1},{4.5,1}};
 	std::vector<std::vector<double>> origin_list_benchmark={{0,0},{0,18},{0,38},{0,56}};
+  std::vector<std::vector<double>> origin_list_json;
+  (*params_json)["ElectroChemo"]["Origin list" ]["value"].get_to(origin_list_json);
+
   double r=(*params_json)["ElectroChemo"]["particle_R"];
   double bandwitdh=(*params_json)["ElectroChemo"]["interface_bandwitdh"];
   
@@ -166,9 +240,7 @@ void battery<dim>::apply_initial_condition()
     if (cell->subdomain_id() == this->this_mpi_process){
 			double C_li_0=C_li_100_neg*C_li_max_neg;
 			Point<dim> center=cell->center();
-			if (center[orientation]>separator_line){
-				C_li_0=C_li_100_pos*C_li_max_pos;
-			}
+			if (center[orientation]>separator_line){ C_li_0=C_li_100_pos*C_li_max_pos;}
     	hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points);
     	hp_fe_values.reinit (cell);
     	const FEValues<dim> &fe_values = hp_fe_values.get_present_fe_values();
@@ -187,41 +259,73 @@ void battery<dim>::apply_initial_condition()
 				  	
 				  else if(ck==battery_fields.active_fields_index["Electrolyte_potential"]) this->solution_prev(local_dof_indices[i])=0;
         }
-        else
+        else // deal with the interface
         {
+
+
+          //std::cout << " ck " << ck << std::endl;
           bool is_horizontal_element = false;
-          {
-            for (int i=0; i <GeometryInfo<dim>::vertices_per_cell; i++)
-            {
-              Point<dim> vertex_point=cell->vertex(i);
-              if (vertex_point[orientation] == 18 or vertex_point[orientation] == 38 )
-              {
-                is_horizontal_element = true;
-                break;
-              }
-            }
-          }
+          //{
+            //for (int i=0; i <GeometryInfo<dim>::vertices_per_cell; i++)
+            //{
+              //Point<dim> vertex_point=cell->vertex(i);
+              //if (vertex_point[orientation] == 18 or vertex_point[orientation] == 38 )
+              //{
+                //is_horizontal_element = true;
+                //break;
+              //}
+            //}
+          //}
 
           //std::cout << "---------- in interface ---------------" << std::endl;
           int vertex_id=i / (dofs_per_cell/GeometryInfo<dim>::vertices_per_cell);
           Point<dim> vertex_point=cell->vertex(vertex_id);
           bool inside_flag=false;
           double distance=1.0e16;
-          for (unsigned int ori_index=0;ori_index<origin_list_benchmark.size();ori_index++){
-            Point<dim> origin(origin_list_benchmark[ori_index][0],origin_list_benchmark[ori_index][1]);
-            if(vertex_point.distance(origin)<distance) distance=vertex_point.distance(origin);
-            //std::cout 
-              //<< " i " << i 
-              //<< " center " << center 
-              //<< " ori_ind "<< ori_index 
-              //<< " origin " << origin 
-              //<< " distance " << distance 
-              //<< std::endl;
-            if(abs(vertex_point.distance(origin) -r) < 1.0e-5) {inside_flag=false; break;}
-            if(vertex_point.distance(origin) < r - 1.0e-5) {inside_flag=true; break;}
-          }
 
-          if(abs(distance -r) < 1.0e-5) {inside_flag=false;}
+
+            // assign value based on multiple particle locations
+            double dh = 1.0e12;
+            int origin_index = -1;
+            for (unsigned int o1=0;o1<origin_list_json.size();o1++){
+              Point<dim> origin(origin_list_json[o1][0],origin_list_json[o1][1]);
+              double radius = origin_list_json[o1][2];
+              if (origin.distance(cell->vertex(vertex_id)) > radius)
+              {
+                if (dh > origin.distance(cell->vertex(vertex_id)) - radius)
+                {
+                  distance = origin.distance(cell->vertex(vertex_id));
+                  origin_index = o1;
+                  dh = origin.distance(cell->vertex(vertex_id)) - radius;
+                }
+              }
+              else
+              {
+                distance = origin.distance(cell->vertex(vertex_id));
+                origin_index = o1;
+                break;
+              }
+            }
+            double val = iso_value + origin_list_json[origin_index][2] - distance;
+            //std::cout <<  " val = " <<  val << std::endl;
+            if (val >= iso_value){inside_flag=true;}
+            if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=val;
+
+
+          //for (unsigned int ori_index=0;ori_index<origin_list_benchmark.size();ori_index++){
+            //Point<dim> origin(origin_list_benchmark[ori_index][0],origin_list_benchmark[ori_index][1]);
+            //if(vertex_point.distance(origin)<distance) distance=vertex_point.distance(origin);
+            ////std::cout 
+              ////<< " i " << i 
+              ////<< " center " << center 
+              ////<< " ori_ind "<< ori_index 
+              ////<< " origin " << origin 
+              ////<< " distance " << distance 
+              ////<< std::endl;
+            //if(abs(vertex_point.distance(origin) -r) < 1.0e-5) {inside_flag=false; break;}
+            //if(vertex_point.distance(origin) < r - 1.0e-5) {inside_flag=true; break;}
+          //}
+          //if(abs(distance -r) < 1.0e-5) {inside_flag=false;}
           //std::cout << " " << abs(distance -r) << std::endl;
 
 
@@ -235,34 +339,35 @@ void battery<dim>::apply_initial_condition()
               //<< std::endl;
           //}
           // the isosurface should be very close to the edge. thus distance is chose to be the size of part of the element length dh
-          double dh = 0.3;
-          //std::cout << "----***---- distance " << distance << std::endl;
-          if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(r-dh-distance)+iso_value;
-          if (is_horizontal_element)
-          {
-            // not on the circle
-            if (abs(distance - r) > 1.0e-5)
-            {
-              if (vertex_point[orientation] <= 18)
-              {
-                if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(18-dh-vertex_point[orientation])+iso_value;
-              }
-              if (vertex_point[orientation] >= 38)
-              {
-                if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(vertex_point[orientation]-38 -dh)+iso_value;
-              }
+          //double dh = 0.3;
+          ////std::cout << "----***---- distance " << distance << std::endl;
+          //if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(r-dh-distance)+iso_value;
+          //if (is_horizontal_element)
+          //{
+            //// not on the circle
+            //if (abs(distance - r) > 1.0e-5)
+            //{
+              //if (vertex_point[orientation] <= 18)
+              //{
+                //if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(18-dh-vertex_point[orientation])+iso_value;
+              //}
+              //if (vertex_point[orientation] >= 38)
+              //{
+                //if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])=(vertex_point[orientation]-38 -dh)+iso_value;
+              //}
 
-              if (vertex_point[orientation] == 18 or vertex_point[orientation] == 38 )
-              {
-                inside_flag = false;
-              }
-              else
-              {
-                inside_flag = true;
-              }
+              //if (vertex_point[orientation] == 18 or vertex_point[orientation] == 38 )
+              //{
+                //inside_flag = false;
+              //}
+              //else
+              //{
+                //inside_flag = true;
+              //}
                 
-            }
-          }
+            //}
+          //}
+
           if (inside_flag){
             if (ck==battery_fields.active_fields_index["Lithium_cation"] or ck==battery_fields.active_fields_index["Electrolyte_potential"]){
               this->solution_prev(local_dof_indices[i])=0;
@@ -329,7 +434,7 @@ void battery<dim>::apply_initial_condition()
             //constraints->set_inhomogeneity(globalDOF, 0.0);
             //is_one_node_Electrolyte_potential_fixed = true;
           }
-        }
+      }
 
         int _v_id = -1;
 	      int DOF_Displacement = battery_fields.active_fields_index["Displacement"];
@@ -477,6 +582,7 @@ void battery<dim>::apply_initial_condition()
 
 
   constraints->close ();
+	this->pcout<<"end of apply init"<<std::endl;
 
 
 }

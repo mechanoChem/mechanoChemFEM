@@ -27,7 +27,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
 
   //if (center[0] < 5) std::cout << "\n--------------" << std::endl;
-  std::cout << "compute residual at the interface " << cell_id  << " center: " << center << std::endl;
+  //std::cout << "compute residual at the interface " << cell_id  << " center: " << center << std::endl;
   //
 	double reaction_rate=(*params_json)["ElectroChemo"]["jn_react"];
 	double F=(*params_json)["ElectroChemo"]["F"];
@@ -567,7 +567,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
       cell_SDdata[cell_id].C_Li_plus_new[q] = battery_fields.quad_fields[DOF_Lithium_cation].value[q].val() + c_1_tilde_Lithium_cation[q].val();
 
-      std::cout <<  "C_Li_plus_new tilde " << cell_SDdata[cell_id].C_Li_plus_new[q] << std::endl;
+      //std::cout <<  "C_Li_plus_new tilde " << cell_SDdata[cell_id].C_Li_plus_new[q] << std::endl;
       //std::cout <<  "Phi_e new tilde " << battery_fields.quad_fields[DOF_Electrolyte_potential].value[q].val() + Ms * ULocal_xi[dofs_per_cell+ ind_Electrolyte_potential].val() << std::endl;
       //
       for (unsigned i = 0; i < cell_SDdata[cell_id].lnode_minus.size(); ++i) {
@@ -645,24 +645,24 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       phi_e_tld = phi_e_tld /_count_minus;
     }
 
-    std::cout 
-      << "\tc_li_ave      \t" << c_li_ave.val()
-      << "\tphi_s_ave     \t" << phi_s_ave.val()
-      << "\tc_li_plus_ave \t" << c_li_plus_ave.val()
-      << "\tphi_e_ave     \t" << phi_e_ave.val()
-      << std::endl;
-    std::cout 
-      << "\tc_li_tld      \t" << c_li_tld.val()
-      << "\tphi_s_tld     \t" << phi_s_tld.val()
-      << "\tc_li_plus_tld \t" << c_li_plus_tld.val()
-      << "\tphi_e_tld     \t" << phi_e_tld.val()
-      << std::endl;
+    //std::cout 
+      //<< "\tc_li_ave      \t" << c_li_ave.val()
+      //<< "\tphi_s_ave     \t" << phi_s_ave.val()
+      //<< "\tc_li_plus_ave \t" << c_li_plus_ave.val()
+      //<< "\tphi_e_ave     \t" << phi_e_ave.val()
+      //<< std::endl;
+    //std::cout 
+      //<< "\tc_li_tld      \t" << c_li_tld.val()
+      //<< "\tphi_s_tld     \t" << phi_s_tld.val()
+      //<< "\tc_li_plus_tld \t" << c_li_plus_tld.val()
+      //<< "\tphi_e_tld     \t" << phi_e_tld.val()
+      //<< std::endl;
 
     Sacado::Fad::DFad<double> jn = 0.0; 
 		//jn = electricChemoFormula.formula_jn(Temp, c_li_ave, c_li_plus_ave, phi_s_ave, phi_e_ave, domainflag);
 		jn = electricChemoFormula.formula_jn(Temp, c_li_tld, c_li_plus_tld, phi_s_tld, phi_e_tld, domainflag);
 
-    std::cout << " jn " << jn << std::endl;
+    //std::cout << " jn " << jn << std::endl;
 
 	  //double cod_coef_C0=(*params_json)["ElectroChemo"]["cod_coef_C0"];
     //double u_sd_0_max = 0.1; // a value needs to be specified --> cod_max: crack opening displacement
@@ -676,7 +676,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //if (cell_SDdata[cell_id].xi_conv_u_sd[0] > 0) std::cout << "jump_n: " << cell_SDdata[cell_id].xi_conv_u_sd[0] << std::endl;
     cell_SDdata[cell_id].reaction_rate_potential = jn*F;
     cell_SDdata[cell_id].reaction_rate_li = jn;
-    std::cout << "*reaction rate (new) : " << cell_SDdata[cell_id].reaction_rate_li.val() << " potential (rate) " << cell_SDdata[cell_id].reaction_rate_potential.val() << std::endl;
+    //std::cout << "*reaction rate (new) : " << cell_SDdata[cell_id].reaction_rate_li.val() << " potential (rate) " << cell_SDdata[cell_id].reaction_rate_potential.val() << std::endl;
 
 
   for (unsigned int q = 0; q < n_q_points; ++q) {
@@ -1436,12 +1436,12 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       }
 
       if (ck == DOF_Electrolyte_potential ) {
-        std::cout << "R[i] " << R[i] << std::endl;
+        //std::cout << "R[i] " << R[i] << std::endl;
         //R[i] = (Rcc_Electrolyte_potential[_i] + Rcxi_Electrolyte_potential[_i] - Kcxi_Electrolyte_potential(_i,0) / Kxixi_Electrolyte_potential(0,0) * rr_Electrolyte_potential[0]) * (cell_SDdata[cell_id].computed_area /dummy_area_opposite); 
         R[i] = (Rcc_Electrolyte_potential[_i] + Rcxi_Electrolyte_potential[_i] - Kcxi_Electrolyte_potential(_i,0) / Kxixi_Electrolyte_potential(0,0) * rr_Electrolyte_potential[0]) ; 
-       std::cout << "R[i] (Electrolyte_potential) " << R[i] << std::endl;
-        std::cout << "Rcc " << Rcc_Electrolyte_potential[_i] << " " << Rcxi_Electrolyte_potential[_i] << " " << Kcxi_Electrolyte_potential(_i,0) << " " << Kxixi_Electrolyte_potential(0,0) * rr_Electrolyte_potential[0] << std::endl;
-        std::cout << "--a4-1-- " << i <<" " << R[i] << cell_SDdata[cell_id].computed_area /dummy_area_opposite<< std::endl;
+       //std::cout << "R[i] (Electrolyte_potential) " << R[i] << std::endl;
+        //std::cout << "Rcc " << Rcc_Electrolyte_potential[_i] << " " << Rcxi_Electrolyte_potential[_i] << " " << Kcxi_Electrolyte_potential(_i,0) << " " << Kxixi_Electrolyte_potential(0,0) * rr_Electrolyte_potential[0] << std::endl;
+        //std::cout << "--a4-1-- " << i <<" " << R[i] << cell_SDdata[cell_id].computed_area /dummy_area_opposite<< std::endl;
       }
 
      if ( ck >= DOF_Displacement and ck < DOF_Displacement + dim){
@@ -1547,13 +1547,14 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       }
 
       if (ck == DOF_Electrolyte_potential ) {
-        std::cout << "R_Electrolyte_potential[i] " << R[i] << std::endl;
+        //std::cout << "R_Electrolyte_potential[i] " << R[i] << std::endl;
       }
       if (ck >= DOF_Displacement and ck < DOF_Displacement + dim) {
         //std::cout << "R_Displacement[i] " << R[i] << " " << dofs_per_cell << std::endl;
       }
       if (R[i].val() != R[i].val()) 
       {
+        std::cout << "compute residual at the interface " << cell_id  << " center: " << center << std::endl;
         std::cout << " i " << i << " R[i] " << R[i] << std::endl;
         exit(-1);
       }

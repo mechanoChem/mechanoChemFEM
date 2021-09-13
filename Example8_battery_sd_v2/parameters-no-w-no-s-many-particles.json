@@ -16,8 +16,8 @@
 		"face_quadrature": 2
 	},
   "Geometry": {
-      "num_elem_x": 15,
-      "num_elem_y": 28,
+      "num_elem_x": 100,
+      "num_elem_y": 200,
       "num_elem_z": 1,
       "x_max": 15,
       "x_min": -15,
@@ -57,7 +57,7 @@
 		"separator_line":28,
 		"neg_electrode_line":18,
 		"pos_electrode_line":38,
-    "Origin list" : {"value": [[0,4,8.5],[3.3,7.3,6.5],[0,52,10]],"unit":"-"},
+    "Origin list" : {"value": [[-5,2,6],[4.8,4.3,5],[-9,12.5,6.5],[10.5,11,6],[1,17.5,6],[-9,51.5,5.5], [0,40,4],[6,50.5,6],[-9,43.5,6],[10,39.5,8],[-11.5,35,4]],"unit":"-"},
 		"orientation":1
 	},
 	"Lithium_phaseField":{

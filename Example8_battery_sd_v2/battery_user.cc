@@ -409,7 +409,7 @@ void battery<dim>::apply_initial_condition()
         cell->get_dof_indices(local_dof_indices);
         const unsigned int dofs_per_node = dofs_per_cell / 4;
 
-        if (center[orientation] >= 27 and center[orientation] < 29  ) // for the new 3 layer geometry, special case
+        if (center[orientation] >= 25 and center[orientation] < 31  ) // for the new 3 layer geometry, special case
         {
           if (not is_one_node_Electrolyte_potential_fixed)
           {
@@ -421,7 +421,7 @@ void battery<dim>::apply_initial_condition()
                 constraints->add_line(globalDOF);
                 constraints->set_inhomogeneity(globalDOF, 0.0);
                 is_one_node_Electrolyte_potential_fixed = true;
-                //std::cout << " i " << i << " ck " << ck << " phi_e " << battery_fields.active_fields_index["Electrolyte_potential"] << std::endl;
+                std::cout << " i " << i << " ck " << ck << " phi_e " << battery_fields.active_fields_index["Electrolyte_potential"] << std::endl;
                 break;
               }
             }

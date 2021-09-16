@@ -480,6 +480,7 @@ void battery<dim>::identify_diffuse_interface()
         }
         double elem_length = cell_SDdata[cell_id].edge1_node.distance(cell_SDdata[cell_id].edge2_node);
         //std::cout << "elem_length " << elem_length << " " << cell_SDdata[cell_id].edge1_node << " "<< cell_SDdata[cell_id].edge2_node << std::endl;
+        //if (elem_length < 0.1) elem_length = 0.1;
         cell_SDdata[cell_id].interface_length = elem_length;
 
         double dx = cell_SDdata[cell_id].edge1_node[0] - cell_SDdata[cell_id].edge2_node[0];

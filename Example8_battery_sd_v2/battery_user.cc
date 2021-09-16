@@ -368,15 +368,27 @@ void battery<dim>::apply_initial_condition()
             //}
           //}
 
+
           if (inside_flag){
             if (ck==battery_fields.active_fields_index["Lithium_cation"] or ck==battery_fields.active_fields_index["Electrolyte_potential"]){
               this->solution_prev(local_dof_indices[i])=0;
+              //std::cout << " center " << center << " i " << i << " Lithium_cation &  Electrolyte_potential = 0 " << std::endl;
             }
+
+				    if (ck==battery_fields.active_fields_index["Lithium"]) this->solution_prev(local_dof_indices[i])=C_li_0;//+0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+				    if(ck==battery_fields.active_fields_index["Electrode_potential"]){
+				  	  if(center[orientation]>separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_pos,1).val();
+				  	  if(center[orientation]<separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_neg,-1).val();
+				    }
+
           }
           else{
             if (ck==battery_fields.active_fields_index["Lithium"] or ck==battery_fields.active_fields_index["Electrode_potential"]){
               this->solution_prev(local_dof_indices[i])=0;
+              //std::cout << " center " << center << " i " << i << " Lithium &  Electrode_potential = 0 " << std::endl;
             }
+				    if(ck==battery_fields.active_fields_index["Lithium_cation"]) this->solution_prev(local_dof_indices[i])=C_li_plus_0;
+				    if(ck==battery_fields.active_fields_index["Electrolyte_potential"]) this->solution_prev(local_dof_indices[i])=0;
           }
         } //interface
       }
@@ -409,7 +421,7 @@ void battery<dim>::apply_initial_condition()
         cell->get_dof_indices(local_dof_indices);
         const unsigned int dofs_per_node = dofs_per_cell / 4;
 
-        if (center[orientation] >= 25 and center[orientation] < 31  ) // for the new 3 layer geometry, special case
+        if (center[orientation] >= 26 and center[orientation] < 30  ) // for the new 3 layer geometry, special case
         {
           if (not is_one_node_Electrolyte_potential_fixed)
           {
@@ -421,7 +433,7 @@ void battery<dim>::apply_initial_condition()
                 constraints->add_line(globalDOF);
                 constraints->set_inhomogeneity(globalDOF, 0.0);
                 is_one_node_Electrolyte_potential_fixed = true;
-                std::cout << " i " << i << " ck " << ck << " phi_e " << battery_fields.active_fields_index["Electrolyte_potential"] << std::endl;
+                //std::cout << " i " << i << " ck " << ck << " phi_e " << battery_fields.active_fields_index["Electrolyte_potential"] << std::endl;
                 break;
               }
             }
@@ -436,6 +448,60 @@ void battery<dim>::apply_initial_condition()
           }
       }
 
+      //---------------debug-------------------
+      //-------------- fix all displacement
+      for (unsigned int i=0; i<dofs_per_cell; ++i) {
+        const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
+        //std::cout << cell_id << " ck " << ck << std::endl;
+        if (ck==battery_fields.active_fields_index["Diffuse_interface"])
+        {
+          auto globalDOF = local_dof_indices[i];
+          constraints->add_line(globalDOF);
+          constraints->set_inhomogeneity(globalDOF, 0.0);
+          //std::cout << " fix " << ck << std::endl;
+        }
+
+        //if (ck==battery_fields.active_fields_index["Electrolyte_potential"])
+        //{
+          //auto globalDOF = local_dof_indices[i];
+          //constraints->add_line(globalDOF);
+          //constraints->set_inhomogeneity(globalDOF, 0.0);
+          //std::cout << " fix " << ck << std::endl;
+        //}
+        //if (ck==battery_fields.active_fields_index["Electrode_potential"])
+        //{
+          //auto globalDOF = local_dof_indices[i];
+          //constraints->add_line(globalDOF);
+          //constraints->set_inhomogeneity(globalDOF, 0.0);
+          //std::cout << " fix " << ck << std::endl;
+        //}
+        //if (ck==battery_fields.active_fields_index["Lithium"])
+        //{
+          //auto globalDOF = local_dof_indices[i];
+          //constraints->add_line(globalDOF);
+          //constraints->set_inhomogeneity(globalDOF, 0.0);
+          //std::cout << " fix " << ck << std::endl;
+        //}
+        //if (ck==battery_fields.active_fields_index["Lithium_cation"])
+        //{
+          //auto globalDOF = local_dof_indices[i];
+          //constraints->add_line(globalDOF);
+          //constraints->set_inhomogeneity(globalDOF, 0.0);
+          //std::cout << " fix " << ck << std::endl;
+        //}
+				//int DOF_Displacement = battery_fields.active_fields_index["Displacement"];
+        //if (ck==DOF_Displacement or ck== DOF_Displacement+1)
+        //{
+          //auto globalDOF = local_dof_indices[i];
+          //constraints->add_line(globalDOF);
+          //constraints->set_inhomogeneity(globalDOF, 0.0);
+          //std::cout << " fix " << ck << std::endl;
+        //}
+      }
+      //---------------debug-------------------
+
+
+
         int _v_id = -1;
 	      int DOF_Displacement = battery_fields.active_fields_index["Displacement"];
         for (unsigned int i=0; i<dofs_per_cell; ++i) {
@@ -444,6 +510,7 @@ void battery<dim>::apply_initial_condition()
           if (ck==DOF_Displacement) _v_id += 1;
           if (ck==DOF_Displacement or ck== DOF_Displacement+1)
           {
+
             Point<dim> vertex_point=cell->vertex(_v_id);
             // 1
             //if (vertex_point[1] == 0.0 or vertex_point[1] == 56.0 or vertex_point[0] == -15.0 or vertex_point[0] == 15.0) // fix x & y at all edges

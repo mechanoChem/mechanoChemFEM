@@ -46,16 +46,47 @@ battery<dim>::battery(std::string parameter_file_Dir)
 template <int dim>
 battery<dim>::~battery(){}
 
-//template <int dim>
-//void battery<dim>::make_grid()
-//{
-	//std::string mesh_directory=(*params_json)["Problem"]["mesh"];
-	//this->pcout << "reading external  mesh:"<<mesh_directory<<std::endl;
-  //GridIn<dim> gridin;
-  //gridin.attach_triangulation(this->triangulation);
-  //std::ifstream f(mesh_directory);
-  //gridin.read_abaqus(f);
-//}
+template <int dim>
+void battery<dim>::make_grid()
+{
+  try
+  {
+    std::string mesh_directory=(*params_json)["Problem"]["mesh"];
+    this->pcout << "reading external  mesh:"<<mesh_directory<<std::endl;
+    GridIn<dim> gridin;
+    gridin.attach_triangulation(this->triangulation);
+    std::ifstream f(mesh_directory);
+    gridin.read_abaqus(f);
+    this->pcout << "reading external mesh (done):"<<mesh_directory<<std::endl;
+  }
+  catch (...)
+  {
+    double X_0,Y_0,Z_0,X_end,Y_end,Z_end;
+    int element_div_x, element_div_y,element_div_z;
+    
+    X_0=(*params_json)["Geometry"]["x_min"];
+    Y_0=(*params_json)["Geometry"]["y_min"];
+    Z_0=(*params_json)["Geometry"]["z_min"];
+    
+    X_end=(*params_json)["Geometry"]["x_max"];
+    Y_end=(*params_json)["Geometry"]["y_max"];
+    Z_end=(*params_json)["Geometry"]["z_max"];;
+    
+    element_div_x=(*params_json)["Geometry"]["num_elem_x"].get<int>();
+    element_div_y=(*params_json)["Geometry"]["num_elem_y"].get<int>();
+    element_div_z=(*params_json)["Geometry"]["num_elem_z"].get<int>();
+    
+    bool colorize = false;
+    std::vector< std::vector< double > > step_sizes;
+    step_sizes.resize(dim);
+    
+    for (unsigned int j = 0; j < element_div_x; ++j) step_sizes[0].push_back((X_end-X_0)/element_div_x); 
+    for (unsigned int j = 0; j < element_div_y; ++j) step_sizes[1].push_back((Y_end-Y_0)/element_div_y);
+    if(dim==3)	for (unsigned int j = 0; j < element_div_z; ++j) step_sizes[2].push_back((Z_end-Z_0)/element_div_z);
+    if(dim==2) GridGenerator::subdivided_hyper_rectangle (this->triangulation, step_sizes, Point<dim>(X_0,Y_0), Point<dim>(X_end,Y_end), colorize);
+    else GridGenerator::subdivided_hyper_rectangle (this->triangulation, step_sizes, Point<dim>(X_0,Y_0,Z_0), Point<dim>(X_end,Y_end,Z_end), colorize);
+  }
+}
 template <int dim>
 void battery<dim>::define_battery_fields()
 {

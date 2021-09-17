@@ -399,6 +399,7 @@ void battery<dim>::apply_initial_condition()
 
 
   { // one more update to fix the edge effect for neg pos line
+    //std::cout << " one more update for neg pos line " << std::endl;
     typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
     for (;cell!=endc; ++cell){
       if (cell->subdomain_id() == this->this_mpi_process){
@@ -472,11 +473,13 @@ void battery<dim>::apply_initial_condition()
   }
 
 
-
   this->solution_prev.compress(VectorOperation::insert);
   this->solution=this->solution_prev;		
 
+  //this->output_results();
+  std::cout << " identify diffuse interface (start) " << std::endl;
   identify_diffuse_interface();
+  std::cout << " identify diffuse interface (end) " << std::endl;
 
   constraints->clear ();
   
@@ -502,6 +505,8 @@ void battery<dim>::apply_initial_condition()
         Point<dim> center=cell->center();
     	  hp_fe_values.reinit (cell);
     	  const FEValues<dim> &fe_values = hp_fe_values.get_present_fe_values();
+
+        //std::cout << " cell_id " << cell_id << std::endl;
 
         const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
         std::vector<unsigned int> local_dof_indices(dofs_per_cell);

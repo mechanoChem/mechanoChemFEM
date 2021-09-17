@@ -668,12 +668,12 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
    if (jn.val() != jn.val()) 
    {
     std::cout 
-      << " jn " << jn
+      << " jn " << jn.val()
       << " Temp " << Temp
-      << " c_li_tld " << c_li_tld
-      << " c_li_plus_tld " << c_li_plus_tld
-      << " phi_s_tld " << phi_s_tld
-      << " phi_e_tld " << phi_e_tld
+      << " c_li_tld " << c_li_tld.val()
+      << " c_li_plus_tld " << c_li_plus_tld.val()
+      << " phi_s_tld " << phi_s_tld.val()
+      << " phi_e_tld " << phi_e_tld.val()
       << " domainflag " << domainflag
       << std::endl;
    }

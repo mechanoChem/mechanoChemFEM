@@ -1,0 +1,57 @@
+#parameters file
+
+subsection Problem
+set print_parameter = true
+set primary_variables_list= c1, component_is_scalar , c2, component_is_scalar
+set FE_support_list= 1,1
+
+set dt = 0.00001
+set totalTime = 0.50
+set current_increment = 0
+set off_output_index=0
+set current_time = 0
+set resuming_from_snapshot = false
+
+set output_directory = output/
+set snapshot_directory = snapshot/
+
+#FEM
+set volume_quadrature = 3 
+set face_quadrature = 2 
+
+end
+
+subsection Geometry
+set R = 0.5
+set n_refine = 2
+end
+
+subsection Concentration
+set kappa = 2.0e-5
+set M=20
+end
+						
+#
+# parameters reserved for deal.ii first level code:
+#nonLinear_method : classicNewton
+#solver_method (direct) : PETScsuperLU, PETScMUMPS
+#solver_method (iterative) : PETScGMRES PETScBoomerAMG
+#relative_norm_tolerance, absolute_norm_tolerance, max_iterations
+#
+subsection Nonlinear_solver
+		set nonLinear_method = classicNewton
+		set relative_norm_tolerance = 1.0e-12
+		set absolute_norm_tolerance = 1.0e-12
+		set max_iterations = 8
+end
+						
+subsection Linear_solver
+		set solver_method = PETScsuperLU
+		set system_matrix_symmetricFlag = false # default is false
+end
+
+
+
+
+		
+

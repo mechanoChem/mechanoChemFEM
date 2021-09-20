@@ -30,81 +30,81 @@
 #include "mechanoChemPrimitive.h"
 
 template <int dim, class matrixType, class vectorType>
-class solveClass : public mechanoChemPrimitive
+  class solveClass : public mechanoChemPrimitive
 {
-public:
+ public:
 
-	/**
-	*constructor with abstract classhpFEM<dim>
-	*/
-	solveClass();
+  /**
+   *constructor with abstract classhpFEM<dim>
+   */
+  solveClass();
   ~solveClass();
-	/**
-	*declare_parameters_solve
-	*/	
-	void declare_parameters_solveClass();
+  /**
+   *declare_parameters_solve
+   */	
+  void declare_parameters_solveClass();
 	
-	/**
-	*set up size and partition of system_matrix and system_rhs
-	*/
-	void setupLinearSystem(int n_total_dofs, int n_local_dofs, int max_couplings_between_dofs);
+  /**
+   *set up size and partition of system_matrix and system_rhs
+   */
+  void setupLinearSystem(int n_total_dofs, int n_local_dofs, int max_couplings_between_dofs);
 	
-	/**
-	*set system_matrix=0 and system_rhs=0
-	*/
-	void reinitLinearSystem();
+  /**
+   *set system_matrix=0 and system_rhs=0
+   */
+  void reinitLinearSystem();
 
-	/**
-	*linear Solve
-	*/
-	void linearSolve(vectorType& U);
+  /**
+   *linear Solve
+   */
+  void linearSolve(vectorType& U);
 	
-	/**
-	*nonlinear Solve
-	*/
-	bool nonlinearSolve(vectorType& U, bool converge_flag=false);
+  /**
+   *nonlinear Solve
+   */
+  int nonlinearSolve(vectorType& U, bool converge_flag=false);
 	
-	/**
-	*nonlinear Solve with access of incremental solution dU
-	*/
-  bool nonlinearSolve(vectorType& U,vectorType& dU, bool converge_flag=false);
+  /**
+   *nonlinear Solve with access of incremental solution dU
+   */
+  int nonlinearSolve(vectorType& U,vectorType& dU, bool converge_flag=false);
 	
-	/**
-	*solve Ax=b with dealii matrix and vector type by default_direct solver
-	*/
-	void solveLinearSystem_default_direct(dealii::Vector<double>& dU);
-	/**
-	*solve Ax=b with PETSc matrix and vector type by default_direct solver
-	*/
+  /**
+   *solve Ax=b with dealii matrix and vector type by default_direct solver
+   */
+  void solveLinearSystem_default_direct(dealii::Vector<double>& dU);
+  /**
+   *solve Ax=b with PETSc matrix and vector type by default_direct solver
+   */
   void solveLinearSystem_default_direct(PETScWrappers::MPI::Vector& dU);
-	/**
-	*solve Ax=b with PETSc matrix and vector type by customer solver
-	*/
-	virtual void solveLinearSystem(PETScWrappers::MPI::Vector& dU);
+  /**
+   *solve Ax=b with PETSc matrix and vector type by customer solver
+   */
+  virtual void solveLinearSystem(PETScWrappers::MPI::Vector& dU);
 	
-	/**
-	*wrapper for dealii::constraints.distribute_local_to_global
-	*/
-	void distribute_local_to_global(dealii::FullMatrix<double>& local_matrix, dealii::Vector<double>& local_rhs, std::vector<types::global_dof_index> local_dof_indices);
-	/**
-	*do PETScWrappers::VectorBase::compress(VectorOperation::add) for system_matrix and system_rhs;
-	*/
-	void LinearSystemCompressAdd();
+  /**
+   *wrapper for dealii::constraints.distribute_local_to_global
+   */
+  void distribute_local_to_global(dealii::FullMatrix<double>& local_matrix, dealii::Vector<double>& local_rhs, std::vector<types::global_dof_index> local_dof_indices);
+  /**
+   *do PETScWrappers::VectorBase::compress(VectorOperation::add) for system_matrix and system_rhs;
+   */
+  void LinearSystemCompressAdd();
 	
-	virtual void updateLinearSystem();
+  virtual void updateLinearSystem();
 	
-	/**
-	*do PETScWrappers::VectorBase::compress(VectorOperation::add) for system_matrix and system_rhs;
-	*/
-	virtual void apply_dU_constrain(vectorType& dU);
+  /**
+   *do PETScWrappers::VectorBase::compress(VectorOperation::add) for system_matrix and system_rhs;
+   */
+  virtual void apply_dU_constrain(vectorType& dU);
 	
-	dealii::ParameterHandler* params_solve;
+  dealii::ParameterHandler* params_solve;
 	
   matrixType system_matrix;
   vectorType system_rhs;
-	ConstraintMatrix constraints_solver;
+  ConstraintMatrix constraints_solver;
 	
-	MPI_Comm mpi_communicator;
+  MPI_Comm mpi_communicator;
 	
 
 };

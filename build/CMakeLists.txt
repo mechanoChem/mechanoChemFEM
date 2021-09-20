@@ -60,7 +60,7 @@ set(CMAKE_STATIC_LIBRARY_PREFIX "")
 #SET (sacado_INC $ENV{SACADO_DIR}/include)
 #SET (sacado_LIB $ENV{SACADO_DIR}/lib/libsacado.a)
 
-#INCLUDE_DIRECTORIES(${sacado_INC})
+INCLUDE_DIRECTORIES($ENV{TRILINOS_DIR}/include)
 #TARGET_LINK_LIBRARIES(main mechanoChemFEM)
 ##---------------------------------------------------------------------------------------------------------------------
 

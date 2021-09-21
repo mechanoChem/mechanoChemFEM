@@ -19,6 +19,8 @@ struct SDdata {
 
   double max_Tn = 0.0;
   double max_Tm = 0.0;
+  double Tn_old = 0.0;
+  double Tn_new = 0.0;
 
   // for weak discontinuity information
   FullMatrix<double> Kuu_wd, Kxiu_wd, Kuxi_wd, Kxixi_inv_u_wd;

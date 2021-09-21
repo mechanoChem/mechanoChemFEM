@@ -54,6 +54,10 @@ class battery: public mechanoChemFEM<dim>
 	  Vector<double> jump_n; 
 	  Vector<double> jump_m; 
 	  Vector<double> jump_w; 
+	  Vector<double> pressure_gp0; 
+	  Vector<double> pressure_gp1; 
+	  Vector<double> pressure_gp2; 
+	  Vector<double> pressure_gp3; 
 	  Vector<double> T_n; 
     std::vector<bool> is_new_step;
     std::vector<std::vector<double>> pressure; 

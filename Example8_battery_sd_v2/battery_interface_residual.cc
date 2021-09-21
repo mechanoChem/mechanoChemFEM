@@ -4,6 +4,7 @@
 template <int dim>
 void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
+
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
 	int orientation=(*params_json)["ElectroChemo"]["orientation"];
 	Point<dim> center=cell->center();
@@ -683,9 +684,20 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 	  //double cod_coef_C0=(*params_json)["ElectroChemo"]["cod_coef_C0"];
     //double u_sd_0_max = 0.1; // a value needs to be specified --> cod_max: crack opening displacement
 
+    double k_b = 1.38e-23; // J/K
+    //double T_room = 300; // K
+    double V=(*params_json)["ElectroChemo"]["V_reaction_jn"];// 
+
     jn = jn * 1.0 / (1.0 + exp(cod_coef_C0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5* cod_max )));
+    jn = jn * exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp);
 
     //jn = 0.00001;
+    if (abs(exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp)) < 0.1 or abs(exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp)) > 5.0)  
+    {
+      std::cout << " jn(p): " << exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp) << std::endl;
+      std::cout << " f(d): " << 1.0 / (1.0 + exp(cod_coef_C0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5* cod_max ))) << std::endl;
+    }
+
 
     //if (1.0 / (1.0 + exp(150 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - u_sd_0_max ))) < 0.95)
     //{
@@ -1184,6 +1196,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
         this->T_n[cell_id] = 0.0;
       }
     }
+    cell_SDdata[cell_id].Tn_new = T_gamma[0].val();
     //std::cout << " xi " << ULocal_xi[dofs_per_cell + ind_Displacement_sd_1].val() 
       //<< " T_gamma[0] " << T_gamma[0].val() 
       //<< " P000 " << P[0][0][0].val() 
@@ -1531,6 +1544,8 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     {
       if (TN_at_gp[q] > this->T_n[cell_id])  this->T_n[cell_id] = TN_at_gp[q].val();
     }
+
+    if (TN_at_gp[q].val() > cell_SDdata[cell_id].Tn_new) cell_SDdata[cell_id].Tn_new = TN_at_gp[q].val();
       //std::cout << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << " is_new " << this->is_new_step[cell_id] << std::endl;
     //if (TN_at_gp[q] > this->MatData["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured)
     if (TN_at_gp[q] > (*displacement.params_json)["Mechanics"]["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured and this->is_new_step[cell_id])
@@ -1622,6 +1637,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     cell_SDdata[cell_id].ULocal_k[i] = ULocal[i].val(); 
 	}
   if (this->is_new_step[cell_id]) this->is_new_step[cell_id] = false;
+  //std::cout << "-interface- center " << center << " pressure "  << pressure[cell_id][0] << std::endl;
 }
 
 template class battery<1>;

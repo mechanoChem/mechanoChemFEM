@@ -146,6 +146,7 @@ template <int dim>
 void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
   int cell_id = cell->active_cell_index();
+	Point<dim> center=cell->center();
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
 	int orientation=(*params_json)["ElectroChemo"]["orientation"];
 
@@ -165,6 +166,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
     {
       displacement.set_cell_id(cell_id);
       displacement.r_get_residual(fe_values, R, ULocal, ULocalConv, pressure);
+      //std::cout << "-particle- center " << center << " pressure "  << pressure[cell_id][0] << std::endl;
     }
 	}
 	else if (cell->material_id()==electrolyte_id){
@@ -180,8 +182,13 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
     {
       displacement.set_cell_id(cell_id);
       displacement.r_get_residual(fe_values, R, ULocal, ULocalConv, pressure);
+      //std::cout << "-electrolyte- center " << center << " pressure "  << pressure[cell_id][0] << std::endl;
     }
 	}
+  pressure_gp0[cell_id] = pressure[cell_id][0];
+  pressure_gp1[cell_id] = pressure[cell_id][1];
+  pressure_gp2[cell_id] = pressure[cell_id][2];
+  pressure_gp3[cell_id] = pressure[cell_id][3];
 	
 
   double flux_sign = 1;
@@ -229,6 +236,10 @@ void battery<dim>::output_results()
 	  this->FEMdata_out.data_out.add_data_vector(jump_m, "jump_m");
 	  this->FEMdata_out.data_out.add_data_vector(jump_w, "jump_w");
 	  this->FEMdata_out.data_out.add_data_vector(T_n, "T_n");
+	  this->FEMdata_out.data_out.add_data_vector(pressure_gp0, "p_gp0");
+	  this->FEMdata_out.data_out.add_data_vector(pressure_gp1, "p_gp1");
+	  this->FEMdata_out.data_out.add_data_vector(pressure_gp2, "p_gp2");
+	  this->FEMdata_out.data_out.add_data_vector(pressure_gp3, "p_gp3");
 		if(this->current_increment%this->skip_output==0) this->FEMdata_out.write_vtk(this->solution_prev, output_path);	
 
 	}
@@ -247,6 +258,10 @@ void battery<dim>::run()
   jump_n.reinit(this->triangulation.n_active_cells());
   jump_m.reinit(this->triangulation.n_active_cells());
   jump_w.reinit(this->triangulation.n_active_cells());
+  pressure_gp0.reinit(this->triangulation.n_active_cells());
+  pressure_gp1.reinit(this->triangulation.n_active_cells());
+  pressure_gp2.reinit(this->triangulation.n_active_cells());
+  pressure_gp3.reinit(this->triangulation.n_active_cells());
   T_n.reinit(this->triangulation.n_active_cells());
   pressure.resize(this->triangulation.n_active_cells());
   pressure_old.resize(this->triangulation.n_active_cells());
@@ -283,6 +298,8 @@ void battery<dim>::run()
       cell_SDdata[i].C_Li_plus_old = cell_SDdata[i].C_Li_plus_new;
 
       cell_SDdata[i].xi_conv_u_sd = cell_SDdata[i].xi_old_u_sd;
+
+      cell_SDdata[i].Tn_old = cell_SDdata[i].Tn_new;
       // WARNING: should not use the following, as many cell_SDdata are not initialized.
       //std::cout << "C_Li_plus_old[0]" << cell_SDdata[i].C_Li_plus_old[0] << std::endl;
       //for (int q=0; q<4; q++) cell_SDdata[i].C_Li_plus_old[q] = cell_SDdata[i].C_Li_plus_new[q];

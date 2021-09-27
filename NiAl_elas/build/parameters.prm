@@ -1,0 +1,61 @@
+#parameters file
+
+subsection Problem
+set print_parameter = true
+
+set dt = 0.2
+set totalTime = 100000
+set current_increment = 0
+set off_output_index=0
+set current_time = 0
+set resuming_from_snapshot = false
+set save_snapshot = false
+
+set output_directory = output36/
+set snapshot_directory = output36/
+
+#FEM
+set volume_quadrature = 3 
+set face_quadrature = 2 
+
+end
+
+subsection Geometry
+set X_0 = -10
+set Y_0 = -10
+set Z_0 = -10
+set X_end = 10
+set Y_end = 10
+set Z_end = 10
+
+set element_div_x=15
+set element_div_y=15
+set element_div_z=15
+end
+
+subsection mesh_refinement
+set n_init_global_refine=0
+set n_init_local_refine=6
+set max_refine_level=5
+end
+
+subsection parameters
+#Chemistry
+set mobility = 0.05
+set kinetic_coeff = 1.0
+set sqrt_kappa1 = 0.035
+set sqrt_kappa2 = 0.070
+set c_avg = 0.10
+end
+
+subsection Nonlinear_solver
+		set nonLinear_method = classicNewton
+		set relative_norm_tolerance = 1.0e-10
+		set absolute_norm_tolerance = 1.0e-10
+		set max_iterations = 8
+end
+						
+subsection Linear_solver
+		set solver_method = PETScsuperLU
+		set system_matrix_symmetricFlag = false # default is false
+end

@@ -104,7 +104,7 @@ void Lithium<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,Sacado:
       for (unsigned int i=0; i<dim; i++)
       {
         diffu[q][i] = grad[q][i] * (-M) * exp(pressure_cell[q]*V/k_b/Temp);
-        if (abs(exp(pressure_cell[q]*V/k_b/Temp) ) < 0.1 or abs(exp(pressure_cell[q]*V/k_b/Temp) ) > 5.0)  std::cout << " electrode: " << exp(pressure_cell[q]*V/k_b/Temp) << std::endl;
+        //if (abs(exp(pressure_cell[q]*V/k_b/Temp) ) < 0.1 or abs(exp(pressure_cell[q]*V/k_b/Temp) ) > 5.0)  std::cout << " electrode: " << exp(pressure_cell[q]*V/k_b/Temp) << std::endl;
       }
     }
     //diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(grad,-M);

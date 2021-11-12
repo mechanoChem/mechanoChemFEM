@@ -46,7 +46,7 @@ void Lithium_cation<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fa
 		for(unsigned int i=0; i<dim;i++){
 			i_phi_e[q][i]=-sigma_e[q]*phi_e_grad[q][i]-2*Rr*Temp/F*sigma_e[q]*(1-t_0)/c_li_plus[q]*c_li_plus_grad[q][i];
 			diffu[q][i]=- exp(pressure_cell[q]*V/k_b/Temp)*D_li_plus[q]*c_li_plus_grad[q][i]+t_0/F*i_phi_e[q][i];
-      if (abs(exp(pressure_cell[q]*V/k_b/Temp) ) < 0.1 or abs(exp(pressure_cell[q]*V/k_b/Temp) ) > 5.0)  std::cout << " electrolyte " << exp(pressure_cell[q]*V/k_b/Temp) << std::endl;
+      //if (abs(exp(pressure_cell[q]*V/k_b/Temp) ) < 0.1 or abs(exp(pressure_cell[q]*V/k_b/Temp) ) > 5.0)  std::cout << " electrolyte " << exp(pressure_cell[q]*V/k_b/Temp) << std::endl;
 		}
 	}
 	// double M=(*params_json)["ElectroChemo"]["D_li_plus"];

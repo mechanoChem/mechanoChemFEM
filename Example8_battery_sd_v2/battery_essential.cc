@@ -189,6 +189,7 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
   pressure_gp1[cell_id] = pressure[cell_id][1];
   pressure_gp2[cell_id] = pressure[cell_id][2];
   pressure_gp3[cell_id] = pressure[cell_id][3];
+  jn[cell_id] = cell_SDdata[cell_id].reaction_rate_li.val();
 	
 
   double flux_sign = 1;
@@ -236,6 +237,7 @@ void battery<dim>::output_results()
 	  this->FEMdata_out.data_out.add_data_vector(jump_m, "jump_m");
 	  this->FEMdata_out.data_out.add_data_vector(jump_w, "jump_w");
 	  this->FEMdata_out.data_out.add_data_vector(T_n, "T_n");
+	  this->FEMdata_out.data_out.add_data_vector(jn, "jn");
 	  this->FEMdata_out.data_out.add_data_vector(pressure_gp0, "p_gp0");
 	  this->FEMdata_out.data_out.add_data_vector(pressure_gp1, "p_gp1");
 	  this->FEMdata_out.data_out.add_data_vector(pressure_gp2, "p_gp2");
@@ -258,6 +260,7 @@ void battery<dim>::run()
   jump_n.reinit(this->triangulation.n_active_cells());
   jump_m.reinit(this->triangulation.n_active_cells());
   jump_w.reinit(this->triangulation.n_active_cells());
+  jn.reinit(this->triangulation.n_active_cells());
   pressure_gp0.reinit(this->triangulation.n_active_cells());
   pressure_gp1.reinit(this->triangulation.n_active_cells());
   pressure_gp2.reinit(this->triangulation.n_active_cells());

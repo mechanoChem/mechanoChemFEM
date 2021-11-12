@@ -690,12 +690,13 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
 
     jn = jn * 1.0 / (1.0 + exp(cod_coef_C0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5* cod_max )));
     jn = jn * exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp);
+    //std::cout << " center: " << center << " coef " << exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp) << " jn " << jn.val() << std::endl;
 
     //jn = 0.00001;
     if (abs(exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp)) < 0.1 or abs(exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp)) > 5.0)  
     {
-      std::cout << " jn(p): " << exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp) << std::endl;
-      std::cout << " f(d): " << 1.0 / (1.0 + exp(cod_coef_C0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5* cod_max ))) << std::endl;
+      //std::cout << " jn(p): " << exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp) << std::endl;
+      //std::cout << " f(d): " << 1.0 / (1.0 + exp(cod_coef_C0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5* cod_max ))) << std::endl;
     }
 
 

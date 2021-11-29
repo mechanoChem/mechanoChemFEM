@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+#SBATCH -p compute
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=128
+#SBATCH -t 24:00:00
+#SBATCH -J LCO_phasefield
+#SBATCH -A TG-MCH200011
+#SBATCH -o output-%j.e
+#SBATCH -e errors-%j.e
+#SBATCH --export=ALL
+
+mpirun ./main -pc_type lu -pc_factor_mat_solver_package superlu_dist

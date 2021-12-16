@@ -25,8 +25,8 @@ ENDIF()
 # Can you add it as to your .bashrc or .profile, etc
 # export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem/v0.7
 
-SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/include)
-SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/lib/mechanoChemFEM.a)
+SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.7/include)
+SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.7/lib/mechanoChemFEM.a)
 
 
 FILE (GLOB TARGET_SRC "../*.cc" "../battery_package/src/*.cc" "../battery_package/src/battery_components/*.cc")

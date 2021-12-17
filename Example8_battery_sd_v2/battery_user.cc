@@ -47,6 +47,7 @@ void battery<dim>::setup_diffuse_interface(){}
 template <int dim>
 void battery<dim>::setMultDomain()
 {
+
     std::cout << " setMultDomain, domain id might be changed!!!" << std::endl;
   std::vector<std::vector<double>> origin_list_json;
   (*params_json)["ElectroChemo"]["Origin list" ]["value"].get_to(origin_list_json);
@@ -59,6 +60,9 @@ void battery<dim>::setMultDomain()
   int orientation=(*params_json)["ElectroChemo"]["orientation"];
 
   double iso_value=(*params_json)["ElectroChemo"]["iso_value"];
+
+  // local refinement mesh
+
   // assign values to the diffuse interface 
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
@@ -151,7 +155,7 @@ void battery<dim>::setMultDomain()
       //if (cell->material_id() == 2) std::cout << " mat_id " << cell->material_id() << " center " << center << std::endl;
 
       unsigned int li_metal_id = 3;
-      if (center[orientation] < 19.999) cell->set_material_id(li_metal_id);
+      if (center[orientation] < neg_electrode_line) cell->set_material_id(li_metal_id);
 
     } // this_mpi_process
   }
@@ -187,17 +191,19 @@ void battery<dim>::setMultDomain()
           }
         }
 
-        typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
-        for (;cell!=endc; ++cell){
-          if (cell->subdomain_id() == this->this_mpi_process){
-            int cell_id = cell->active_cell_index();
-            int mat_id = cell->material_id();
-            int new_mat_id = cell_mat_map[cell_id];
-            cell->set_material_id(new_mat_id);
-            if (mat_id != new_mat_id)
-                std::cout << " old mat id " << mat_id << " new mat id " << new_mat_id << std::endl;
-          }
-        }
+        //if (ifile) {
+            typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
+            for (;cell!=endc; ++cell){
+              if (cell->subdomain_id() == this->this_mpi_process){
+                int cell_id = cell->active_cell_index();
+                int mat_id = cell->material_id();
+                int new_mat_id = cell_mat_map[cell_id];
+                cell->set_material_id(new_mat_id);
+                if (mat_id != new_mat_id)
+                    std::cout << " old mat id " << mat_id << " new mat id " << new_mat_id << std::endl;
+              }
+            }
+        //}
   }
 
   //{

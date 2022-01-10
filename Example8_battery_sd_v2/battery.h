@@ -24,6 +24,8 @@ class battery: public mechanoChemFEM<dim>
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		void define_battery_fields();
 		void get_residual_at_diffuse_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
+		void get_residual_at_li_metal_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
+		void get_residual_at_additive_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		void output_w_domain();
 		void output_results();
 		void run();
@@ -48,7 +50,7 @@ class battery: public mechanoChemFEM<dim>
 		
 		nodalField<dim> computedNodalField;
 		double iso_value = 0.5;
-		int active_particle_id=0, electrolyte_id=1, interface_id=2;
+		int  electrolyte_id=0, active_particle_id=1, interface_id=2, li_metal_id=3, additive_id=4, li_metal_interface_id=5, additive_interface_id=6;
 
 	  Vector<double> crack_id;  // has to be double for output purpose
 	  Vector<double> jump_n; 

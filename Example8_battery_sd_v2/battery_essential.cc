@@ -90,35 +90,84 @@ void battery<dim>::make_grid()
 template <int dim>
 void battery<dim>::define_battery_fields()
 {
-	std::vector<std::string> battery_fileds=(*params_json)["Problem"]["battery_variables"];
+	std::vector<std::string> battery_fields=(*params_json)["Problem"]["battery_variables"];
 	
-	std::vector<std::string> battery_fileds_s;
-	std::vector<int> FE_support_list_v(battery_fileds.size()*3);
-	if (battery_fileds[0]!="None"){
-		for(unsigned int i=0;i<battery_fileds.size();i++){
-			battery_fileds_s.push_back(battery_fileds[i]);
-			if(battery_fileds[i]=="Displacement") battery_fileds_s.push_back("component_is_vector");
-			else battery_fileds_s.push_back("component_is_scalar");
+	std::vector<std::string> battery_fields_s;
+	std::vector<int> FE_support_list_v(battery_fields.size()*7); // 7 different material blocks
+	if (battery_fields[0]!="None"){
+		for(unsigned int i=0;i<battery_fields.size();i++){
+			battery_fields_s.push_back(battery_fields[i]);
+			if(battery_fields[i]=="Displacement") battery_fields_s.push_back("component_is_vector");
+			else battery_fields_s.push_back("component_is_scalar");
+
+		  //int  electrolyte_id=0, active_particle_id=1, interface_id=2, li_metal_id=3, additive_id=4, li_metal_interface_id=5, additive_interface_id=6;
+     //"battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential","Diffuse_interface","Displacement"],
+
 		  // define all at interface 
-			FE_support_list_v[i+2*battery_fileds.size()]=1;
-			if(battery_fileds[i]=="Lithium" or battery_fileds[i]=="Lithium_phaseField" or battery_fileds[i]=="Electrode_potential"){
-				FE_support_list_v[i]=1;
-				FE_support_list_v[i+battery_fileds.size()]=0;
+			//FE_support_list_v[i+2*battery_fields.size()]=1;
+
+			if(battery_fields[i]=="Lithium" or battery_fields[i]=="Lithium_phaseField"){
+				//FE_support_list_v[i]=1;
+				//FE_support_list_v[i+battery_fields.size()]=0;
+
+				FE_support_list_v[i+battery_fields.size()*electrolyte_id]=0;
+				FE_support_list_v[i+battery_fields.size()*active_particle_id]=1;
+				FE_support_list_v[i+battery_fields.size()*interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*li_metal_id]=1;
+				FE_support_list_v[i+battery_fields.size()*additive_id]=0;
+				FE_support_list_v[i+battery_fields.size()*li_metal_interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*additive_interface_id]=1;
 			}
-			else if(battery_fileds[i]=="Lithium_cation" or battery_fileds[i]=="Electrolyte_potential"){
-				FE_support_list_v[i]=0;
-				FE_support_list_v[i+battery_fileds.size()]=1;
+      else if(battery_fields[i]=="Electrode_potential"){
+				//FE_support_list_v[i]=1;
+				//FE_support_list_v[i+battery_fields.size()]=0;
+
+				FE_support_list_v[i+battery_fields.size()*electrolyte_id]=0;
+				FE_support_list_v[i+battery_fields.size()*active_particle_id]=1;
+				FE_support_list_v[i+battery_fields.size()*interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*li_metal_id]=0;
+				FE_support_list_v[i+battery_fields.size()*additive_id]=1;
+				FE_support_list_v[i+battery_fields.size()*li_metal_interface_id]=1; // change it to 0
+				FE_support_list_v[i+battery_fields.size()*additive_interface_id]=1;
 			}
-			else if(battery_fileds[i]=="Displacement"){
-				FE_support_list_v[i]=1;
-				FE_support_list_v[i+battery_fileds.size()]=1;
+			else if(battery_fields[i]=="Lithium_cation" or battery_fields[i]=="Electrolyte_potential"){
+				//FE_support_list_v[i]=0;
+				//FE_support_list_v[i+battery_fields.size()]=1;
+
+				FE_support_list_v[i+battery_fields.size()*electrolyte_id]=1;
+				FE_support_list_v[i+battery_fields.size()*active_particle_id]=0;
+				FE_support_list_v[i+battery_fields.size()*interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*li_metal_id]=0;
+				FE_support_list_v[i+battery_fields.size()*additive_id]=0;
+				FE_support_list_v[i+battery_fields.size()*li_metal_interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*additive_interface_id]=1; // change it to 0
 			}
-			//turn on all fileds everywhere
+			else if(battery_fields[i]=="Displacement"){
+				FE_support_list_v[i+battery_fields.size()*electrolyte_id]=1;
+				FE_support_list_v[i+battery_fields.size()*active_particle_id]=1;
+				FE_support_list_v[i+battery_fields.size()*interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*li_metal_id]=1;
+				FE_support_list_v[i+battery_fields.size()*additive_id]=1;
+				FE_support_list_v[i+battery_fields.size()*li_metal_interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*additive_interface_id]=1;
+			}
+      else if(battery_fields[i]=="Diffuse_interface"){
+				//FE_support_list_v[i]=1;
+				//FE_support_list_v[i+battery_fields.size()]=0;
+				FE_support_list_v[i+battery_fields.size()*electrolyte_id]=0;
+				FE_support_list_v[i+battery_fields.size()*active_particle_id]=0;
+				FE_support_list_v[i+battery_fields.size()*interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*li_metal_id]=0;
+				FE_support_list_v[i+battery_fields.size()*additive_id]=0;
+				FE_support_list_v[i+battery_fields.size()*li_metal_interface_id]=1;
+				FE_support_list_v[i+battery_fields.size()*additive_interface_id]=1;
+			}
+			//turn on all fields everywhere
 			//FE_support_list_v[i]=1;
-			//FE_support_list_v[i+battery_fileds.size()]=1;
-			//FE_support_list_v[i+2*battery_fileds.size()]=1;
+			//FE_support_list_v[i+battery_fields.size()]=1;
+			//FE_support_list_v[i+2*battery_fields.size()]=1;
 		}
-		(*params_json)["Problem"]["primary_variables_list"]=battery_fileds_s;
+		(*params_json)["Problem"]["primary_variables_list"]=battery_fields_s;
 		(*params_json)["Problem"]["FE_support_list"]=FE_support_list_v;
 	}
 }
@@ -149,10 +198,31 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 	Point<dim> center=cell->center();
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
 	int orientation=(*params_json)["ElectroChemo"]["orientation"];
+  std::cout << " cell_id " << cell_id << " mat_id " << cell->material_id() << std::endl;
 
   if (cell->material_id()==interface_id){		
     get_residual_at_diffuse_interface(cell, fe_values, R, ULocal, ULocalConv);
   }
+  else if (cell->material_id()==li_metal_interface_id){		
+    get_residual_at_li_metal_interface(cell, fe_values, R, ULocal, ULocalConv);
+  }
+  else if (cell->material_id()==additive_interface_id){		
+    get_residual_at_additive_interface(cell, fe_values, R, ULocal, ULocalConv);
+  }
+	else if (cell->material_id()==li_metal_id){
+	  battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
+		if(battery_fields.active_fields_index["Lithium"]>-1) 
+    { 
+      lithium.set_cell_id(cell_id);
+      lithium.r_get_residual(fe_values, R, ULocal, ULocalConv, pressure_old);
+    }
+	  if(battery_fields.active_fields_index["Displacement"]>-1) 
+    {
+      displacement.set_cell_id(cell_id);
+      displacement.r_get_residual(fe_values, R, ULocal, ULocalConv, pressure);
+      //std::cout << "-particle- center " << center << " pressure "  << pressure[cell_id][0] << std::endl;
+    }
+	}
 	else if (cell->material_id()==active_particle_id){
 	  battery_fields.update_fields(cell, fe_values, ULocal, ULocalConv);
 		if(battery_fields.active_fields_index["Lithium"]>-1) 
@@ -338,7 +408,6 @@ void battery<dim>::identify_diffuse_interface()
 	if(battery_fields.active_fields_index["Lithium_cation"]>-1) opposite_flux_dof_li=battery_fields.active_fields_index["Lithium_cation"];
 	if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) opposite_flux_dof_potential=battery_fields.active_fields_index["Electrolyte_potential"];
 
-	
   std::cout << "---------- primary dof for diffusive interface ------ " << primary_dof  << " opposite dof " << opposite_flux_dof_li << " "<< opposite_flux_dof_potential << std::endl;
 
   hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points  | update_JxW_values | update_gradients);	
@@ -349,13 +418,14 @@ void battery<dim>::identify_diffuse_interface()
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
 		if (cell->subdomain_id() == this->this_mpi_process){
-      if (cell->material_id()==interface_id)
+      if (cell->material_id()==interface_id or cell->material_id()==li_metal_interface_id or cell->material_id()==additive_interface_id)
       {	
+        unsigned int this_interface_id = cell->material_id();
 				hp_fe_values.reinit (cell);
 	    	const FEValues<dim> &fe_values = hp_fe_values.get_present_fe_values();
 
 	      int cell_id = cell->active_cell_index();
-        //std::cout <<  " cell_id " << cell_id << " cell_SDdata.size() " << cell_SDdata.size() << " interface_id " << interface_id << std::endl;
+        std::cout <<  " cell_id " << cell_id << " cell_SDdata.size() " << cell_SDdata.size() << " mat_id " << cell->material_id() << std::endl;
 	      cell_SDdata[cell_id].cell_id = cell_id;
 	      cell_SDdata[cell_id].opposite_flux_dof_li = opposite_flux_dof_li;
 	      cell_SDdata[cell_id].opposite_flux_dof_potential = opposite_flux_dof_potential;
@@ -466,21 +536,23 @@ void battery<dim>::identify_diffuse_interface()
           };
           //std::cout << " --- ** -- " << i << std::endl;
         }
+        std::cout << " interface 1 " << std::endl;
 
-        std::vector<types::global_dof_index> local_face_dof_indices(this->fe_system[interface_id]->dofs_per_face);
+        std::vector<types::global_dof_index> local_face_dof_indices(this->fe_system[this_interface_id]->dofs_per_face);
         int count = 0;
         for (unsigned int f = 0; f < GeometryInfo<dim>::faces_per_cell; ++f) {
-          cell->face(f)->get_dof_indices(local_face_dof_indices, interface_id);
+          cell->face(f)->get_dof_indices(local_face_dof_indices, this_interface_id);
           double c_1 = 0.0;
           double c_2 = 0.0;
           std::vector<double> local_local_diffuse_interface_face;
           for (unsigned int i = 0; i < local_face_dof_indices.size(); ++i) {
-            const unsigned int ck = this->fe_system[interface_id]->face_system_to_component_index(i).first - primary_dof;
+            const unsigned int ck = this->fe_system[this_interface_id]->face_system_to_component_index(i).first - primary_dof;
             if (ck == 0) local_local_diffuse_interface_face.push_back(localized_U(local_face_dof_indices[i]));
           }
 
           c_1 = local_local_diffuse_interface_face[0];
           c_2 = local_local_diffuse_interface_face[1];
+        std::cout << " interface 1-a " << std::endl;
           //std::cout << " count " << count << " c_1 " << c_1 << " c_2 " << c_2 
             //<< " larger " << count_larger_c 
             //<< " smaller " << count_smaller_c 
@@ -506,6 +578,8 @@ void battery<dim>::identify_diffuse_interface()
               if (std::abs(c_2 - iso_value) < 1e-12) c_2 = iso_value + iso_value * 0.001;
             }
           }
+
+        std::cout << " interface 1-b " << std::endl;
 
           if (c_1 == iso_value and c_2 == iso_value){
             // for the case where the edge of element is aligned with the contour. 
@@ -533,6 +607,8 @@ void battery<dim>::identify_diffuse_interface()
         //std::cout << "elem_length " << elem_length << " " << cell_SDdata[cell_id].edge1_node << " "<< cell_SDdata[cell_id].edge2_node << std::endl;
         if (elem_length < 0.05) elem_length = 0.05;
         cell_SDdata[cell_id].interface_length = elem_length;
+
+        std::cout << " interface 2 " << std::endl;
 
         double dx = cell_SDdata[cell_id].edge1_node[0] - cell_SDdata[cell_id].edge2_node[0];
         double dy = cell_SDdata[cell_id].edge1_node[1] - cell_SDdata[cell_id].edge2_node[1];
@@ -583,6 +659,7 @@ void battery<dim>::identify_diffuse_interface()
           if (abs(area) < 1.e-12) area = 1.0e-10;
           cell_SDdata[cell_id].computed_area = cell_SDdata[cell_id].area_elem - area;
         }
+        std::cout << " interface 3 " << std::endl;
 
         if ( cell_SDdata[cell_id].lnode_plus.size() == 2)
         {
@@ -625,6 +702,7 @@ void battery<dim>::identify_diffuse_interface()
 
         //
         //
+        std::cout << " interface 4 " << std::endl;
 
         Triangulation<1> triangulation_1d;
         GridGenerator::hyper_cube	(	triangulation_1d, 0.,  elem_length);
@@ -668,6 +746,8 @@ void battery<dim>::identify_diffuse_interface()
       } // interface id
 		}		// this process
 	} // cell
+
+        std::cout << " interface 5 " << std::endl;
 
   {
     typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();

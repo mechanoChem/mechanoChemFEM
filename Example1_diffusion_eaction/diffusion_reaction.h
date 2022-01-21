@@ -79,8 +79,8 @@ void diffusion_reaction<dim>::get_residual(const typename hp::DoFHandler<dim>::a
 	dealii::Table<1,Sacado::Fad::DFad<double> > reaction_1(n_q_points), reaction_2(n_q_points);
 	dealii::Table<2,Sacado::Fad::DFad<double> > j_c_1(n_q_points, dim),j_c_2(n_q_points, dim);
 	
-	j_c_1=table_scaling<Sacado::Fad::DFad<double>, dim>(c_1_grad,-D_1);//-D_1*c_1_grad
-	j_c_2=table_scaling<Sacado::Fad::DFad<double>, dim>(c_2_grad,-D_2);//-D_2*c_2_grad
+	j_c_1=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double>>(c_1_grad,-D_1);//-D_1*c_1_grad
+	j_c_2=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double>>(c_2_grad,-D_2);//-D_2*c_2_grad
 	
 	for(unsigned int q=0; q<n_q_points;q++){
 		reaction_1[q]=R_10+R_11*c_1[q]+R_12*c_2[q]+R_13*c_1[q]*c_1[q]*c_2[q];

@@ -29,8 +29,12 @@ ENDIF()
 #SET(inc_DIR "/home/wzhenlin/workspace/dataDrivenIdentifyGovenEq/FEMcode/include")
 
 #path on my mac
-SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.6/include)
-SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.6/lib/mechanoChemFEM.a)
+SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.7/include)
+SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.7/lib/mechanoChemFEM.a)
+
+SET (sacado_INC $ENV{TRILINOS_DIR}/include) 
+SET (sacado_LIB $ENV{TRILINOS_DIR}/lib/libsacado.so) 
+INCLUDE_DIRECTORIES(${sacado_INC}) 
 
 
 FILE (GLOB TARGET_SRC "../*.cc")

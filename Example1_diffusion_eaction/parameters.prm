@@ -6,7 +6,7 @@ set print_parameter = true
 set primary_variables_list= c1, component_is_scalar , c2, component_is_scalar
 set FE_support_list= 1,1
 set dt = 1
-set totalTime = 1
+set totalTime = 4
 set current_increment = 0
 set off_output_index=0
 set current_time = 0
@@ -24,16 +24,16 @@ set face_quadrature = 2
 end
 
 subsection Geometry
-set X_0 = 0
-set Y_0 = 0
-set Z_0 = 0
-set X_end = 10
-set Y_end = 10
-set Z_end = 2.0 #no need to 2D
+set x_min = 0
+set y_min = 0
+set z_min = 0
+set x_max = 10
+set y_max = 10
+set z_max = 2.0 #no need to 2D
 
-set element_div_x=5
-set element_div_y=5
-set element_div_z=5 #no need to 2D
+set num_elem_x=200
+set num_elem_y=200
+set num_elem_z=5 #no need to 2D
 end
 
 subsection Concentration

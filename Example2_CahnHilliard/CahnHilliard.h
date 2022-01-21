@@ -65,8 +65,8 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 	dealii::Table<1,Sacado::Fad::DFad<double> > rhs_mu(n_q_points);
 	dealii::Table<2,Sacado::Fad::DFad<double> > j_c_1(n_q_points, dim), kappa_c_1_grad(n_q_points, dim);
 	
-	j_c_1=table_scaling<Sacado::Fad::DFad<double>, dim>(mu_grad,-M);//-D_1*c_1_grad
-	kappa_c_1_grad=table_scaling<Sacado::Fad::DFad<double>, dim>(c_1_grad,kappa);
+	j_c_1=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(mu_grad,-M);//-D_1*c_1_grad
+	kappa_c_1_grad=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(c_1_grad,kappa);
 	
 	for(unsigned int q=0; q<n_q_points;q++) rhs_mu[q]=2*omega*(c_1[q]-c_alpha)*(c_1[q]-c_beta)*(2*c_1[q]-c_alpha-c_beta)-mu[q];
 	

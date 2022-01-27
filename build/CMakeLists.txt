@@ -20,7 +20,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)
 ##---------------------------------------------------------------------------------------------------------------------
 #usually DEAL_II_DIR for explicitly deal.II path; deal.II_DIR and DEAL_II_DIR could be preloaded enviromental variable
 
-#SET(ENV{DEAL_II_DIR} "/nfs/mcfs_comp/home/rudraa/software/dealii-8.4.1/installWithTrilinos")
 FIND_PACKAGE(deal.II 8.0 QUIET
   HINTS ${deal.II_DIR} ${DEAL_II_DIR} ../ ../../ $ENV{DEAL_II_DIR}
   )
@@ -55,36 +54,6 @@ PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
-#export SACADO_DIR=/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install
-#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem/v0.51
-#SET (sacado_INC $ENV{SACADO_DIR}/include)
-#SET (sacado_LIB $ENV{SACADO_DIR}/lib/libsacado.a)
-
 INCLUDE_DIRECTORIES($ENV{TRILINOS_DIR}/include)
-#TARGET_LINK_LIBRARIES(main mechanoChemFEM)
-##---------------------------------------------------------------------------------------------------------------------
-
-
-
-##Set dirdctory for openIGA, please give a full path and make sure the directory is valid 
-##---------------------------------------------------------------------------------------------------------------------
-#install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.6/lib)
-#export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
 install(TARGETS mechanoChemFEM DESTINATION $ENV{mechanoChemFEM_DIR}/v0.61/lib)
 FILE(COPY ../include DESTINATION $ENV{mechanoChemFEM_DIR}/v0.61/)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

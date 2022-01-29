@@ -1,0 +1,112 @@
+{
+	"test":1,
+	"Problem":{
+		"print_parameter": true,
+    "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential","Diffuse_interface","Displacement"],
+		"external_mesh": true,
+    "current_increment": 0,
+    "current_time": 0,
+    "dt": 2,
+    "output_directory": "output/",
+		"snapshot_directory": "snapshot/",
+		"save_snapshot":true,
+		"save_output":true,
+    "resuming_from_snapshot":false,
+    "off_output_index":0,
+    "resume_at_time":0.0,
+    "snapshot_file":"",
+    "sd_data_file":"",
+    "totalTime": 36000,
+    "volume_quadrature": 2,
+		"face_quadrature": 2
+	},
+  "Geometry": {
+      "num_elem_x": 90,
+      "num_elem_y": 180,
+      "num_elem_z": 1,
+      "x_max": 15,
+      "x_min": -15,
+      "y_max": 56,
+      "y_min": 0,
+      "z_max": 0,
+      "z_min": 0
+  },
+	"ElectroChemo":{
+		"applied_current":30,
+		"particle_R":10,
+		"interface_bandwitdh":0.05,
+		"flip_time":36000,
+		"D_li_neg":0.5,
+		"D_li_pos":0.5,
+		"D_li_plus":0.005,
+		"V_li_neg":0e-21,
+		"V_li_pos":0e-21,
+		"V_li_plus":0e-21,
+    "V_reaction_jn":0e-21,
+    "cod_max":0.1,
+    "cod_coef_C0":150,
+		"jn_react":-0.0001,
+		"sigma_s_neg":1.5e3,
+		"sigma_s_pos":0.5e3,
+		"c_li_max_neg":28.7e-3,
+		"c_li_max_pos":37.5e-3,
+		"c_li_100_neg":0.915,
+		"c_li_100_pos":0.022,
+		"c_li_0_neg":0.02,
+		"c_li_0_pos":0.98,
+		"C_li_plus_0":1.0e-3,
+		"phi_s_0_neg":1,
+		"phi_s_0_pos":1,
+		"phi_e_0":1,
+		"T_0":298,
+		"iso_value":0.5,
+		"separator_line":28,
+		"neg_electrode_line":24,
+		"pos_electrode_line":32,
+    "Origin list" : {"value": [[-6,5,4],[4.8,4.3,5],[-8,12.5,5],[9,11,4.5],[1,17.5,6],[-7,51.5,5.5], [0,40,5],[-9,43.5,5],[8,39.5,5],[-10,38,3.5]],"unit":"-"},
+		"orientation":1
+	},
+	"Lithium_phaseField":{
+		"kappa":0.5,
+		"c_alpha":0.02,
+		"c_beta":0.001,
+		"omega":0.25
+	},
+	"Mechanics":{
+		"youngs_modulus_particle":77,
+		"youngs_modulus_electrolyte":20,
+		"poisson_ratio":0.3,
+		"lithium_a":0.01,
+		"lithium_b":0.3,
+		"EnableWeak":0,
+    "Feiga_11" : 1,
+    "Feiga_22" : 1,
+    "Feiga_33" : 1,
+    "Feigb_11" : 0.9,
+    "Feigb_22" : 0.9,
+    "Feigb_33" : 0.9,
+    "SwellRatio" : -1.5,
+    "MaximumStressN" : 1.0,
+    "MaximumStressM" : 1.0,
+    "LinearSoftenModulusN" : -1,
+    "LinearSoftenModulusM" : -1
+	},
+  "boundary_conditions": {
+		"u_x" : {
+	    "x_min" : {
+				"type" : "Dirichlet",
+				"value" :0.0
+	    	}
+		},
+		"u_y" : {
+	    "y_min" : {
+				"type" : "Dirichlet",
+				"value" : 0.0
+	    }
+		}
+  },
+	"Nonlinear_solver":{
+		"max_iterations": 200,
+		"absolute_norm_tolerance": 5e-6
+	}
+}

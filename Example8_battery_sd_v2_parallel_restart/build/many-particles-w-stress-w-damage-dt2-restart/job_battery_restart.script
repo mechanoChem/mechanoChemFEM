@@ -1,0 +1,12 @@
+#!/bin/bash
+#SBATCH --job-name="pde"
+#SBATCH --output="pde.%j.out"
+#SBATCH --partition=shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=8
+#SBATCH --mem=16G
+#SBATCH --account=mia326
+#SBATCH --export=ALL
+#SBATCH -t 47:59:59
+
+mpirun -np 8 ../main parameters-restart.json

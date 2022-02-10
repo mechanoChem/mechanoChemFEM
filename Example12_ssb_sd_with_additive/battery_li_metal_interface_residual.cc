@@ -1185,17 +1185,17 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
     {
       // regularized stiffness
       T_gamma[0] = (cell_SDdata[cell_id].max_Tn + 1e11 * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1]) * cell_SDdata[cell_id].interface_length; 
-      this->T_n[cell_id] = (cell_SDdata[cell_id].max_Tn + 1e11 * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1]).val();
+      cell_SDdata[cell_id].T_n = (cell_SDdata[cell_id].max_Tn + 1e11 * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1]).val();
     }
     else
     {
       T_gamma[0] = (cell_SDdata[cell_id].max_Tn + (*displacement.params_json)["Mechanics"]["LinearSoftenModulusN"] * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1] ) * cell_SDdata[cell_id].interface_length; // this is actually correct, jump is always non-negative
-      this->T_n[cell_id] = (cell_SDdata[cell_id].max_Tn + (*displacement.params_json)["Mechanics"]["LinearSoftenModulusN"] * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1] ).val();
+      cell_SDdata[cell_id].T_n = (cell_SDdata[cell_id].max_Tn + (*displacement.params_json)["Mechanics"]["LinearSoftenModulusN"] * ULocal_xi[dofs_per_cell + ind_Displacement_sd_1] ).val();
       if (T_gamma[0] < 0.0)
       {
         //std::cout << " T_gamma[0] " << T_gamma[0] << std::endl;
         T_gamma[0] = 1.0e-6 * T_gamma[0];
-        this->T_n[cell_id] = 0.0;
+        cell_SDdata[cell_id].T_n = 0.0;
       }
     }
     cell_SDdata[cell_id].Tn_new = T_gamma[0].val();
@@ -1544,7 +1544,7 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
   for (unsigned int q = 0; q < n_q_points; ++q) {
     if (not cell_SDdata[cell_id].is_fractured)
     {
-      if (TN_at_gp[q] > this->T_n[cell_id])  this->T_n[cell_id] = TN_at_gp[q].val();
+      if (TN_at_gp[q] > cell_SDdata[cell_id].T_n)  cell_SDdata[cell_id].T_n = TN_at_gp[q].val();
     }
 
     if (TN_at_gp[q].val() > cell_SDdata[cell_id].Tn_new) cell_SDdata[cell_id].Tn_new = TN_at_gp[q].val();
@@ -1552,17 +1552,16 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
     //if (TN_at_gp[q] > this->MatData["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured)
     double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
     if (center[orientation]>separator_line){ // only positive line will fracture.
-    	if (TN_at_gp[q] > (*displacement.params_json)["Mechanics"]["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured and this->is_new_step[cell_id])
+    	if (TN_at_gp[q]/10000.0 > (*displacement.params_json)["Mechanics"]["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured and this->is_new_step[cell_id])
     	{
     	  std::cout << "-------------------- crack detected ---------------------------"
     	    << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << std::endl;
     	  cell_SDdata[cell_id].is_fractured = true;
     	  cell_SDdata[cell_id].max_Tn = TN_at_gp[q].val();
-    	  this->crack_id[cell_id] = cell_id ;
+        cell_SDdata[cell_id].crack_id = cell_id;
     	}
     }
   }
-  //if (cell_SDdata[cell_id].is_fractured)  OutData.Data["crack_id"].push_back(cell_id);
 
 
 

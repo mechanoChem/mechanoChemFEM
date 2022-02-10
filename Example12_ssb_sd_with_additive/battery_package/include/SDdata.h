@@ -76,5 +76,8 @@ struct SDdata {
   Vector<double> ULocal_k;  // create a larger vector to store previous step values
   Vector<double> C_Li_plus_old;  // enhanced c Li plus at the interface
   Vector<double> C_Li_plus_new;  // 
+
+  int crack_id = -1;
+  double T_n = 0.0;
 };
 #endif

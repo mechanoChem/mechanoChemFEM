@@ -23,6 +23,19 @@ void read_std_vector(istream& fi, std::vector<T> &std_vector0)
   fi.read(reinterpret_cast<char*>(&std_vector0[0]), std_vector0.size()*sizeof(T));
 }
 
+// not working 
+//template <class T>
+//void write_std_vector_vector(ostream& fo, std::vector< std::vector<T> > &std_vector0)
+//{
+  //fo.write(reinterpret_cast<char*>(&std_vector0[0][0]), std_vector0.size()*std_vector0[0].size()*sizeof(T));
+//}
+
+//template <class T>
+//void read_std_vector_vector(istream& fi, std::vector< std::vector<T> > &std_vector0)
+//{
+  //fi.read(reinterpret_cast<char*>(&std_vector0[0][0]), std_vector0.size()*std_vector0[0].size()*sizeof(T));
+//}
+
 void write_vector(ostream& fo, Vector<double> &vector0)
 {
   fo.write(reinterpret_cast<char*>(&vector0(0)), vector0.size()* sizeof(double));
@@ -87,7 +100,7 @@ template <int dim>
 void battery<dim>::save_sd_data()
 {
     std::ofstream fout(this->snapshot_directory+"restart-"+std::to_string(this->current_increment)+".dat" + std::to_string(this->this_mpi_process), std::ios::out | std::ios::binary);
-    for (int count = 0; count < cell_SDdata.size(); count++)
+    for (unsigned int count = 0; count < cell_SDdata.size(); count++)
     {
       if (cell_SDdata[count].is_interface_element)
       {
@@ -112,6 +125,15 @@ void battery<dim>::save_sd_data()
          write_vector(fout, cell_SDdata[count].rlocal_u_wd);
          write_vector(fout, cell_SDdata[count].xi_old_u_wd);
          write_vector(fout, cell_SDdata[count].xi_conv_u_wd);
+
+         write_full_matrix(fout, cell_SDdata[count].Kuu_sd);
+         write_full_matrix(fout, cell_SDdata[count].Kxiu_sd);
+         write_full_matrix(fout, cell_SDdata[count].Kuxi_sd);
+         write_full_matrix(fout, cell_SDdata[count].Kxixi_inv_u_sd);
+
+         write_vector(fout, cell_SDdata[count].rlocal_u_sd);
+         write_vector(fout, cell_SDdata[count].xi_old_u_sd);
+         write_vector(fout, cell_SDdata[count].xi_conv_u_sd);
 
          write_full_matrix(fout, cell_SDdata[count].Kcc);
          write_full_matrix(fout, cell_SDdata[count].Kxic);
@@ -175,7 +197,18 @@ void battery<dim>::save_sd_data()
          write_vector(fout, cell_SDdata[count].ULocal_k);
          write_vector(fout, cell_SDdata[count].C_Li_plus_old);
          write_vector(fout, cell_SDdata[count].C_Li_plus_new);
+
+         write_int(fout, cell_SDdata[count].crack_id);
+         write_double(fout, cell_SDdata[count].T_n);
       }
+    }
+    for (unsigned int count = 0;count < pressure.size(); count++)
+    {
+      write_std_vector<double>(fout, pressure[count]);
+    }
+    for (unsigned int count = 0;count < pressure_old.size(); count++)
+    {
+      write_std_vector<double>(fout, pressure_old[count]);
     }
 
     fout.close();
@@ -198,7 +231,7 @@ void battery<dim>::load_sd_data()
     if(fin.good())
     {
     
-      for (int count = 0;count < cell_SDdata.size(); count++)
+      for (unsigned int count = 0;count < cell_SDdata.size(); count++)
       {
         if (cell_SDdata[count].is_interface_element)
         {
@@ -264,6 +297,15 @@ void battery<dim>::load_sd_data()
          read_vector(fin, cell_SDdata[count].xi_old_u_wd);
          read_vector(fin, cell_SDdata[count].xi_conv_u_wd);
 
+         read_full_matrix(fin, cell_SDdata[count].Kuu_sd);
+         read_full_matrix(fin, cell_SDdata[count].Kxiu_sd);
+         read_full_matrix(fin, cell_SDdata[count].Kuxi_sd);
+         read_full_matrix(fin, cell_SDdata[count].Kxixi_inv_u_sd);
+
+         read_vector(fin, cell_SDdata[count].rlocal_u_sd);
+         read_vector(fin, cell_SDdata[count].xi_old_u_sd);
+         read_vector(fin, cell_SDdata[count].xi_conv_u_sd);
+
          read_full_matrix(fin, cell_SDdata[count].Kcc);
          read_full_matrix(fin, cell_SDdata[count].Kxic);
          read_full_matrix(fin, cell_SDdata[count].Kcxi);
@@ -326,10 +368,21 @@ void battery<dim>::load_sd_data()
          read_vector(fin, cell_SDdata[count].ULocal_k);
          read_vector(fin, cell_SDdata[count].C_Li_plus_old);
          read_vector(fin, cell_SDdata[count].C_Li_plus_new);
+
+         read_int(fin, cell_SDdata[count].crack_id);
+         read_double(fin, cell_SDdata[count].T_n);
         }
       }
-      this->pcout << "finish the loading of SDdata!" << std::endl;
-      //exit(0);
+      for (unsigned int count = 0;count < pressure.size(); count++)
+      {
+        read_std_vector<double>(fin, pressure[count]);
+      }
+      for (unsigned int count = 0;count < pressure_old.size(); count++)
+      {
+        read_std_vector<double>(fin, pressure_old[count]);
+    }
+      this->pcout << "finish the loading of SDdata!"  << std::endl;
+      //std::cout << "finish the loading of SDdata!" << " pressure " << pressure[0][0] << " pressure_old " << pressure_old[0][0] << std::endl;
     }
 }
 

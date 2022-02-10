@@ -113,6 +113,15 @@ void battery<dim>::save_sd_data()
          write_vector(fout, cell_SDdata[count].xi_old_u_wd);
          write_vector(fout, cell_SDdata[count].xi_conv_u_wd);
 
+         write_full_matrix(fout, cell_SDdata[count].Kuu_sd);
+         write_full_matrix(fout, cell_SDdata[count].Kxiu_sd);
+         write_full_matrix(fout, cell_SDdata[count].Kuxi_sd);
+         write_full_matrix(fout, cell_SDdata[count].Kxixi_inv_u_sd);
+
+         write_vector(fout, cell_SDdata[count].rlocal_u_sd);
+         write_vector(fout, cell_SDdata[count].xi_old_u_sd);
+         write_vector(fout, cell_SDdata[count].xi_conv_u_sd);
+
          write_full_matrix(fout, cell_SDdata[count].Kcc);
          write_full_matrix(fout, cell_SDdata[count].Kxic);
          write_full_matrix(fout, cell_SDdata[count].Kcxi);
@@ -263,6 +272,15 @@ void battery<dim>::load_sd_data()
          read_vector(fin, cell_SDdata[count].rlocal_u_wd);
          read_vector(fin, cell_SDdata[count].xi_old_u_wd);
          read_vector(fin, cell_SDdata[count].xi_conv_u_wd);
+
+         read_full_matrix(fin, cell_SDdata[count].Kuu_sd);
+         read_full_matrix(fin, cell_SDdata[count].Kxiu_sd);
+         read_full_matrix(fin, cell_SDdata[count].Kuxi_sd);
+         read_full_matrix(fin, cell_SDdata[count].Kxixi_inv_u_sd);
+
+         read_vector(fin, cell_SDdata[count].rlocal_u_sd);
+         read_vector(fin, cell_SDdata[count].xi_old_u_sd);
+         read_vector(fin, cell_SDdata[count].xi_conv_u_sd);
 
          read_full_matrix(fin, cell_SDdata[count].Kcc);
          read_full_matrix(fin, cell_SDdata[count].Kxic);

@@ -8,6 +8,371 @@ zhenlin wang 2019
 #include <iostream>
 #include <fstream>
 
+
+template <int dim>
+void battery<dim>::identify_diffuse_interface()
+{
+  int primary_dof = -1;
+  int opposite_flux_dof_li = -1;
+  int opposite_flux_dof_potential = -1;
+	if(battery_fields.active_fields_index["Diffuse_interface"]>-1) primary_dof=battery_fields.active_fields_index["Diffuse_interface"];
+	if(battery_fields.active_fields_index["Lithium_cation"]>-1) opposite_flux_dof_li=battery_fields.active_fields_index["Lithium_cation"];
+	if(battery_fields.active_fields_index["Electrolyte_potential"]>-1) opposite_flux_dof_potential=battery_fields.active_fields_index["Electrolyte_potential"];
+
+  //std::cout << "---------- primary dof for diffusive interface ------ " << primary_dof  << " opposite dof " << opposite_flux_dof_li << " "<< opposite_flux_dof_potential << std::endl;
+  double iso_value=(*params_json)["ElectroChemo"]["iso_value"];
+
+  hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points  | update_JxW_values | update_gradients);	
+
+  Vector<double> localized_U(this->solution_prev);
+  int total_cell_num = this->triangulation.n_active_cells();
+  cell_SDdata.resize(total_cell_num);
+  //std::cout << " total_cell_num " << total_cell_num << std::endl;
+  typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
+  for (;cell!=endc; ++cell){
+		if (cell->subdomain_id() == this->this_mpi_process){
+      if (cell->material_id()==interface_id or cell->material_id()==li_metal_interface_id or cell->material_id()==additive_interface_id)
+      {	
+        unsigned int this_interface_id = cell->material_id();
+				hp_fe_values.reinit (cell);
+	    	const FEValues<dim> &fe_values = hp_fe_values.get_present_fe_values();
+
+	      int cell_id = cell->active_cell_index();
+        //std::cout <<  " cell_id " << cell_id << " cell_SDdata.size() " << cell_SDdata.size() << " interface_id " << interface_id << " mpi " <<this->this_mpi_process << std::endl;
+	      cell_SDdata[cell_id].cell_id = cell_id;
+	      cell_SDdata[cell_id].opposite_flux_dof_li = opposite_flux_dof_li;
+	      cell_SDdata[cell_id].opposite_flux_dof_potential = opposite_flux_dof_potential;
+
+	      const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
+
+	      std::vector<unsigned int> local_dof_indices (dofs_per_cell);
+	      cell->get_dof_indices (local_dof_indices);
+	      std::vector<double> local_diffuse_interface;
+				
+	      for (unsigned int i=0; i<dofs_per_cell; ++i) {
+	        unsigned int ck = fe_values.get_fe().system_to_component_index(i).first - primary_dof;
+	        if (ck == 0) {
+            //std::cout 
+              //<< "---------- primary dof for diffusive interface ------ i = " << i 
+              //<< " val = " << localized_U(local_dof_indices[i])
+              //<< std::endl;
+	          local_diffuse_interface.push_back(localized_U(local_dof_indices[i]));
+	        }
+	      }
+				
+        cell_SDdata[cell_id].is_interface_element = true;
+
+        cell_SDdata[cell_id].rlocal.reinit(1);
+        cell_SDdata[cell_id].rlocal(0) = 0.0;
+        cell_SDdata[cell_id].xi_old.reinit(1);
+        cell_SDdata[cell_id].xi_old(0) = 0.0;
+        cell_SDdata[cell_id].xi_conv.reinit(1);
+        cell_SDdata[cell_id].xi_conv(0) = 0.0;
+        cell_SDdata[cell_id].Kcc.reinit(4,4);
+        cell_SDdata[cell_id].Kcxi.reinit(4,1);
+        cell_SDdata[cell_id].Kxic.reinit(1,4);
+        cell_SDdata[cell_id].Kxixi_inv.reinit(1,1);
+
+        cell_SDdata[cell_id].rlocal_c_e.reinit(1);
+        cell_SDdata[cell_id].rlocal_c_e(0) = 0.0;
+        cell_SDdata[cell_id].xi_old_c_e.reinit(1);
+        cell_SDdata[cell_id].xi_old_c_e(0) = 0.0;
+        cell_SDdata[cell_id].xi_conv_c_e.reinit(1);
+        cell_SDdata[cell_id].xi_conv_c_e(0) = 0.0;
+        cell_SDdata[cell_id].Kcc_c_e.reinit(4,4);
+        cell_SDdata[cell_id].Kcxi_c_e.reinit(4,1);
+        cell_SDdata[cell_id].Kxic_c_e.reinit(1,4);
+        cell_SDdata[cell_id].Kxixi_inv_c_e.reinit(1,1);
+
+        cell_SDdata[cell_id].C_Li_plus_old.reinit(4); // size of gps
+        cell_SDdata[cell_id].C_Li_plus_new.reinit(4);
+
+        cell_SDdata[cell_id].rlocal_phi_s.reinit(1);
+        cell_SDdata[cell_id].rlocal_phi_s(0) = 0.0;
+        cell_SDdata[cell_id].xi_old_phi_s.reinit(1);
+        cell_SDdata[cell_id].xi_old_phi_s(0) = 0.0;
+        cell_SDdata[cell_id].xi_conv_phi_s.reinit(1);
+        cell_SDdata[cell_id].xi_conv_phi_s(0) = 0.0;
+        cell_SDdata[cell_id].Kcc_phi_s.reinit(4,4);
+        cell_SDdata[cell_id].Kcxi_phi_s.reinit(4,1);
+        cell_SDdata[cell_id].Kxic_phi_s.reinit(1,4);
+        cell_SDdata[cell_id].Kxixi_inv_phi_s.reinit(1,1);
+
+        cell_SDdata[cell_id].rlocal_phi_e.reinit(1);
+        cell_SDdata[cell_id].rlocal_phi_e(0) = 0.0;
+        cell_SDdata[cell_id].xi_old_phi_e.reinit(1);
+        cell_SDdata[cell_id].xi_old_phi_e(0) = 0.0;
+        cell_SDdata[cell_id].xi_conv_phi_e.reinit(1);
+        cell_SDdata[cell_id].xi_conv_phi_e(0) = 0.0;
+        cell_SDdata[cell_id].Kcc_phi_e.reinit(4,4);
+        cell_SDdata[cell_id].Kcxi_phi_e.reinit(4,1);
+        cell_SDdata[cell_id].Kxic_phi_e.reinit(1,4);
+        cell_SDdata[cell_id].Kxixi_inv_phi_e.reinit(1,1);
+
+        cell_SDdata[cell_id].rlocal_u_sd.reinit(3);
+        cell_SDdata[cell_id].rlocal_u_sd = 0.0;
+        cell_SDdata[cell_id].xi_old_u_sd.reinit(3);
+        cell_SDdata[cell_id].xi_old_u_sd = 0.0;
+        cell_SDdata[cell_id].xi_conv_u_sd.reinit(3);
+        cell_SDdata[cell_id].xi_conv_u_sd = 0.0;
+        cell_SDdata[cell_id].Kuu_sd.reinit(4*dim,4*dim);
+        cell_SDdata[cell_id].Kuxi_sd.reinit(4*dim,3);
+        cell_SDdata[cell_id].Kxiu_sd.reinit(3,4*dim);
+        cell_SDdata[cell_id].Kxixi_inv_u_sd.reinit(3,3);
+
+        cell_SDdata[cell_id].ULocal_k.reinit(40);
+
+        unsigned int n_q_points = fe_values.n_quadrature_points;
+        for (unsigned int q = 0; q < n_q_points; ++q) {
+          cell_SDdata[cell_id].area_elem += fe_values.JxW(q);
+        }
+
+        unsigned int count_larger_c = 0, count_smaller_c = 0, count_equal_c = 0;
+
+        // get the side of the local and global node number
+        for (unsigned int i=0; i<local_diffuse_interface.size(); ++i) {
+          if (local_diffuse_interface[i] >= iso_value){
+            cell_SDdata[cell_id].lnode_plus.push_back(i);
+            cell_SDdata[cell_id].one_plus_node = cell->vertex(i);
+            if (std::abs(local_diffuse_interface[i] - iso_value) < 1e-12)
+            {
+              count_equal_c += 1;
+            }
+            else
+            {
+              count_larger_c += 1;
+            }
+          };
+          if (local_diffuse_interface[i] < iso_value){
+            cell_SDdata[cell_id].lnode_minus.push_back(i);
+            //std::cout << " interface " << cell_id << " lnode_minus " << i << std::endl;
+            count_smaller_c += 1;
+          };
+          //std::cout << " --- ** -- " << i << std::endl;
+        }
+
+        std::vector<types::global_dof_index> local_face_dof_indices(this->fe_system[this_interface_id]->dofs_per_face);
+        int count = 0;
+        for (unsigned int f = 0; f < GeometryInfo<dim>::faces_per_cell; ++f) {
+          cell->face(f)->get_dof_indices(local_face_dof_indices, this_interface_id);
+          double c_1 = 0.0;
+          double c_2 = 0.0;
+          std::vector<double> local_local_diffuse_interface_face;
+          for (unsigned int i = 0; i < local_face_dof_indices.size(); ++i) {
+            const unsigned int ck = this->fe_system[this_interface_id]->face_system_to_component_index(i).first - primary_dof;
+            if (ck == 0) local_local_diffuse_interface_face.push_back(localized_U(local_face_dof_indices[i]));
+          }
+
+          c_1 = local_local_diffuse_interface_face[0];
+          c_2 = local_local_diffuse_interface_face[1];
+          //std::cout << " count " << count << " c_1 " << c_1 << " c_2 " << c_2 
+            //<< " larger " << count_larger_c 
+            //<< " smaller " << count_smaller_c 
+            //<< " equal " << count_equal_c 
+            //<< std::endl;
+          // slightly perturb the iso_value to avoid node cut
+          if (count_larger_c == 0 and count_equal_c > 0)
+          {
+            if (std::abs(c_1 - iso_value) < 1e-12) c_1 = iso_value + iso_value * 0.001;
+            if (std::abs(c_2 - iso_value) < 1e-12) c_2 = iso_value + iso_value * 0.001;
+          }
+          else if (count_smaller_c == 0 and count_equal_c > 0)
+          {
+            if (std::abs(c_1 - iso_value) < 1e-12) c_1 = iso_value - iso_value * 0.001;
+            if (std::abs(c_2 - iso_value) < 1e-12) c_2 = iso_value - iso_value * 0.001;
+          }
+          else
+          {
+            if (count_equal_c > 0)
+            {
+              // all set to larger value
+              if (std::abs(c_1 - iso_value) < 1e-12) c_1 = iso_value + iso_value * 0.001;
+              if (std::abs(c_2 - iso_value) < 1e-12) c_2 = iso_value + iso_value * 0.001;
+            }
+          }
+
+          if (c_1 == iso_value and c_2 == iso_value){
+            // for the case where the edge of element is aligned with the contour. 
+            cell_SDdata[cell_id].edge1_node = cell->face(f)->vertex(0) ;
+            cell_SDdata[cell_id].edge2_node = cell->face(f)->vertex(1) ;
+          }
+          else if ((c_1 >= iso_value and c_2 < iso_value) || (c_1 <= iso_value and c_2 > iso_value)){
+            // Without equal sign between c_2 vs iso_value can prevent assigning the same node with c=iso_value to both edge1_node and edge2_node
+            if (count == 0){
+              cell_SDdata[cell_id].edge1_node1 = cell->face(f)->vertex(0) ;
+              cell_SDdata[cell_id].edge1_node2 = cell->face(f)->vertex(1) ;
+              cell_SDdata[cell_id].edge1_local_s = (c_1 - iso_value)/(c_1 - c_2);
+              cell_SDdata[cell_id].edge1_node =  cell_SDdata[cell_id].edge1_node1 - cell_SDdata[cell_id].edge1_local_s * (cell_SDdata[cell_id].edge1_node1 - cell_SDdata[cell_id].edge1_node2);
+            }
+            else if (count == 1){
+              cell_SDdata[cell_id].edge2_node1 = cell->face(f)->vertex(0) ;
+              cell_SDdata[cell_id].edge2_node2 = cell->face(f)->vertex(1) ;
+              cell_SDdata[cell_id].edge2_local_s = (c_1 - iso_value)/(c_1 - c_2);
+              cell_SDdata[cell_id].edge2_node =  cell_SDdata[cell_id].edge2_node1 - cell_SDdata[cell_id].edge2_local_s * (cell_SDdata[cell_id].edge2_node1 - cell_SDdata[cell_id].edge2_node2);
+            }
+            count++;
+          }
+        }
+        double elem_length = cell_SDdata[cell_id].edge1_node.distance(cell_SDdata[cell_id].edge2_node);
+        //std::cout << "elem_length " << elem_length << " " << cell_SDdata[cell_id].edge1_node << " "<< cell_SDdata[cell_id].edge2_node << std::endl;
+        if (elem_length < 0.05) elem_length = 0.05;
+        cell_SDdata[cell_id].interface_length = elem_length;
+
+        double dx = cell_SDdata[cell_id].edge1_node[0] - cell_SDdata[cell_id].edge2_node[0];
+        double dy = cell_SDdata[cell_id].edge1_node[1] - cell_SDdata[cell_id].edge2_node[1];
+        double mid_x = 0.5*(cell_SDdata[cell_id].edge1_node[0] + cell_SDdata[cell_id].edge2_node[0]);
+        double mid_y = 0.5*(cell_SDdata[cell_id].edge1_node[1] + cell_SDdata[cell_id].edge2_node[1]);
+        //std::cout << "----- p1 ---- " << cell_SDdata[cell_id].edge1_node <<  " p2 " << cell_SDdata[cell_id].edge2_node << " dx " << dx <<  " dy " << dy  << std::endl;
+        // two possible normal directions
+        //std::cout << "----- normal ---- " << -dy <<  " " << dx << " or " << dy <<  " " << -dx  <<  " plus_node " << cell_SDdata[cell_id].one_plus_node<< std::endl;
+
+        // correct outward normal for the plus region
+        if ( (-dy * (cell_SDdata[cell_id].one_plus_node[0]-mid_x) + dx * (cell_SDdata[cell_id].one_plus_node[1] -mid_y)) < 0)
+        {
+            cell_SDdata[cell_id].crk_n[0] = -dy / sqrt(dy*dy+dx*dx);
+            cell_SDdata[cell_id].crk_n[1] = dx / sqrt(dy*dy+dx*dx);
+        }
+        else
+        {
+            cell_SDdata[cell_id].crk_n[0] = dy / sqrt(dy*dy+dx*dx);
+            cell_SDdata[cell_id].crk_n[1] = -dx / sqrt(dy*dy+dx*dx);
+        }
+        //std::cout << "----- final normal ---- " << cell_SDdata[cell_id].crk_n[0] <<  " " << cell_SDdata[cell_id].crk_n[1]  << " length :" << elem_length << std::endl;
+
+        /// update the area_elem for the actual sizes
+        /// should not do the following. As the crack length is smaller if the cutting region is changed. This is reflected in the local residual function.
+        if ( cell_SDdata[cell_id].lnode_plus.size() == 1)
+        {
+          // https://www.mathopenref.com/coordtrianglearea.html
+          Point<dim, double> A = cell->vertex(cell_SDdata[cell_id].lnode_plus[0]);
+          Point<dim, double> B = cell_SDdata[cell_id].edge1_node;
+          Point<dim, double> C = cell_SDdata[cell_id].edge2_node;
+          double area = 0.5 * std::abs(A[0]*(B[1]-C[1]) + B[0]*(C[1]-A[1]) +  C[0]*(A[1]-B[1]));
+          //std::cout << "----- plus node size :" << cell_SDdata[cell_id].lnode_plus.size() << " new area " << area << " old area: " << cell_SDdata[cell_id].area_elem << std::endl;
+          //std::cout << " A " << A << std::endl;
+          //std::cout << " B " << B << std::endl;
+          //std::cout << " C " << C << std::endl;
+          if (abs(area) < 1.e-12) area = 1.0e-10;
+          cell_SDdata[cell_id].computed_area = area;
+        }
+
+        if ( cell_SDdata[cell_id].lnode_plus.size() == 3)
+        {
+          // https://www.mathopenref.com/coordtrianglearea.html
+          Point<dim, double> A = cell->vertex(cell_SDdata[cell_id].lnode_minus[0]);
+          Point<dim, double> B = cell_SDdata[cell_id].edge1_node;
+          Point<dim, double> C = cell_SDdata[cell_id].edge2_node;
+          double area = 0.5 * std::abs(A[0]*(B[1]-C[1]) + B[0]*(C[1]-A[1]) +  C[0]*(A[1]-B[1]));
+          //std::cout << "----- plus node size :" << cell_SDdata[cell_id].lnode_plus.size() << " new area " << cell_SDdata[cell_id].area_elem - area << " old area: " << cell_SDdata[cell_id].area_elem << std::endl;
+          if (abs(area) < 1.e-12) area = 1.0e-10;
+          cell_SDdata[cell_id].computed_area = cell_SDdata[cell_id].area_elem - area;
+        }
+
+        if ( cell_SDdata[cell_id].lnode_plus.size() == 2)
+        {
+          // https://www.mathopenref.com/coordtrianglearea.html
+          double area_1 =0, area_2 =0, area_3 =0, area_4 = 0;
+          {
+            Point<dim, double> A = cell->vertex(cell_SDdata[cell_id].lnode_plus[0]);
+            Point<dim, double> B = cell_SDdata[cell_id].edge1_node;
+            Point<dim, double> C = cell_SDdata[cell_id].edge2_node;
+            area_1 = 0.5 * std::abs(A[0]*(B[1]-C[1]) + B[0]*(C[1]-A[1]) +  C[0]*(A[1]-B[1]));
+            if (abs(area_1) < 1.e-12) area_1 = 1.0e-10;
+          }
+
+          {
+            Point<dim, double> A = cell->vertex(cell_SDdata[cell_id].lnode_plus[1]);
+            Point<dim, double> B = cell_SDdata[cell_id].edge1_node;
+            Point<dim, double> C = cell_SDdata[cell_id].edge2_node;
+            area_2 = 0.5 * std::abs(A[0]*(B[1]-C[1]) + B[0]*(C[1]-A[1]) +  C[0]*(A[1]-B[1]));
+            if (abs(area_2) < 1.e-12) area_2 = 1.0e-10;
+          }
+
+          {
+            Point<dim, double> A = cell->vertex(cell_SDdata[cell_id].lnode_plus[1]);
+            Point<dim, double> B = cell->vertex(cell_SDdata[cell_id].lnode_plus[0]);
+            Point<dim, double> C = cell_SDdata[cell_id].edge2_node;
+            area_3 = 0.5 * std::abs(A[0]*(B[1]-C[1]) + B[0]*(C[1]-A[1]) +  C[0]*(A[1]-B[1]));
+            if (abs(area_3) < 1.e-12) area_3 = 1.0e-10;
+          }
+          {
+            Point<dim, double> A = cell->vertex(cell_SDdata[cell_id].lnode_plus[1]);
+            Point<dim, double> B = cell->vertex(cell_SDdata[cell_id].lnode_plus[0]);
+            Point<dim, double> C = cell_SDdata[cell_id].edge1_node;
+            area_4 = 0.5 * std::abs(A[0]*(B[1]-C[1]) + B[0]*(C[1]-A[1]) +  C[0]*(A[1]-B[1]));
+            if (abs(area_4) < 1.e-12) area_4 = 1.0e-10;
+          }
+          double area = 0.5 * (area_1 + area_2 + area_3 + area_4 );
+          //std::cout << "----- plus node size :" << cell_SDdata[cell_id].lnode_plus.size() << " new area " << area << " old area: " << cell_SDdata[cell_id].area_elem << std::endl;
+          cell_SDdata[cell_id].computed_area = area;
+        }
+
+        //
+        //
+
+        Triangulation<1> triangulation_1d;
+        GridGenerator::hyper_cube	(	triangulation_1d, 0.,  elem_length);
+        DoFHandler<1>      dof_handler(triangulation_1d);
+        int problem_dof = 1;
+        int poly_order = 1;
+        int quad_order = 2;
+        FESystem<1> fe (FE_Q<1>(poly_order), problem_dof);
+        dof_handler.distribute_dofs (fe);
+
+        QGauss<1>  quadrature_formula(quad_order);
+        FEValues<1> fe_values_1d (fe, quadrature_formula,
+                                 update_values   | update_gradients |
+                                 update_quadrature_points | update_JxW_values);
+
+        typename DoFHandler<1>::active_cell_iterator cell_1d = dof_handler.begin_active(),
+                                                       endc_1d = dof_handler.end();
+
+        double vol = 0.0;
+        cell_SDdata[cell_id].shape_value_1d.reinit(2,quadrature_formula.size());
+        cell_SDdata[cell_id].jxw_1d.reinit(quadrature_formula.size());
+
+        for (; cell_1d!=endc_1d; ++cell_1d)
+        {
+            fe_values_1d.reinit (cell_1d);
+            for (unsigned q=0; q< quadrature_formula.size(); ++q)
+            {
+              //std::cout << " q " << q << std::endl;
+              vol += fe_values_1d.JxW(q);
+              for (unsigned int i = 0; i < 2; ++i) {
+                cell_SDdata[cell_id].shape_value_1d(i, q) = fe_values_1d.shape_value(i, q);
+                cell_SDdata[cell_id].jxw_1d(q) = fe_values_1d.JxW(q);
+                //r_local[i] += fe_values_1d.shape_value(i, q) * dRc * fe_values_1d.JxW(q);
+              } // q_point
+            }
+        } // cell_1d
+        //std::cout <<  " total elem # = " << triangulation_1d.n_active_cells() << " length: " << elem_length << " vol " << vol<< std::endl;
+        //for (auto p0: cell_SDdata[cell_id].lnode_plus) std::cout << " plus node: " << p0 << std::endl;
+        //for (auto p0: cell_SDdata[cell_id].lnode_minus) std::cout << " minus node: " << p0 << std::endl;
+        //std::cout << " crk_n: " << cell_SDdata[cell_id].crk_n[0] << "\t" << cell_SDdata[cell_id].crk_n[1] << std::endl;
+      } // interface id
+		}		// this process
+	} // cell
+
+  {
+    typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
+    for (;cell!=endc; ++cell){
+	  	if (cell->subdomain_id() == this->this_mpi_process){
+        int cell_id = cell->active_cell_index();
+        if  (cell_SDdata[cell_id].is_interface_element)
+        {
+          Point<dim> cell_center=cell->center();
+          //std::cout 
+            //<< " cell_id = " << cell_id << " center = " 
+            //<< cell_center << " has interface!  R = " 
+            //<< std::sqrt((cell_center(0)-2)*(cell_center(0)-2) + (cell_center(1)-2)*(cell_center(1)-2))
+            //<< std::endl;
+        }
+      }
+    }
+  }
+}
+
+
 //set Dirichlet BC
 template <int dim>
 void battery<dim>::apply_boundary_condition()

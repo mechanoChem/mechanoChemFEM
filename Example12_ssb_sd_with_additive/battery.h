@@ -69,6 +69,7 @@ class battery: public mechanoChemFEM<dim>
     std::vector<std::vector<double>> pressure_old; 
 
 		PETScWrappers::MPI::Vector solution_k;
+    int N_GPs = 4; // # of GPs has to be 4 due to the SDs.
 };
 
 #endif

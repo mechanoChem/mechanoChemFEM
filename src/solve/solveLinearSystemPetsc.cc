@@ -24,7 +24,7 @@ void solveClass<dim, matrixType, vectorType>::solveLinearSystem_default_direct(P
 		solveLinearSystem(dU);		
 	}
 	
-	PETScWrappers::Vector localized_dU(dU);
+  dealii::Vector<double> localized_dU(dU);
 	FEMbase->constraints.distribute (localized_dU);
 	dU=localized_dU;
 	params->leave_subsection();	

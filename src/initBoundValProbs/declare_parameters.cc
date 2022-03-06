@@ -46,7 +46,7 @@ void mechanoChemFEM<dim>::declare_parameters_mechanoChemFEM()
 template <int dim>
 void mechanoChemFEM<dim>::load_parameters()
 {
-	params->read_input ("parameters.prm");
+	params->parse_input ("parameters.prm");
 	
 	params->enter_subsection("Problem");
 	bool printParameter=params->get_bool("print_parameter");

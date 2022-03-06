@@ -10,7 +10,7 @@ void mechanoChemFEM<dim>::pre_run()
 {
 	FEMdata_out.set_output_name(primary_variables);	
 	declare_parameters_mechanoChemFEM();
-	params->read_input ("parameters.prm");
+	params->parse_input ("parameters.prm");
 	params->enter_subsection("Problem");
 	bool printParameter=params->get_bool("print_parameter");
 	output_directory=params->get("output_directory");

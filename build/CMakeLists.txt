@@ -55,7 +55,7 @@ PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
-SET (sacado_INC "/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install/include")
+SET (sacado_INC "/opt/free/deal.ii/9.1.1/trilinos-release-12-10-1/include")
 #SET (sacado_LIB "/home/wzhenlin/app/trilinos-11.8.1-Source/install/lib/libsacado.a")
 
 INCLUDE_DIRECTORIES(${sacado_INC})
@@ -66,8 +66,9 @@ TARGET_LINK_LIBRARIES(main dealMultiPhysics)
 
 ##Set dirdctory for openIGA, please give a full path and make sure the directory is valid 
 ##---------------------------------------------------------------------------------------------------------------------
-install(TARGETS dealMultiPhysics DESTINATION /gpfs/gpfs0/groups/garikipati/greght/mechanoChemFEM_lib/lib)
-FILE(COPY ../include DESTINATION /gpfs/gpfs0/groups/garikipati/greght/mechanoChemFEM_lib)
+install(TARGETS dealMultiPhysics DESTINATION /home/xiaoxuan/Documents/1-Research/0-Projects/P210001-Collab/Edwin/3-Code/Danny/mechanoChemFEM_lib/lib)
+FILE(COPY ../include DESTINATION /home/xiaoxuan/Documents/1-Research/0-Projects/P210001-Collab/Edwin/3-Code/Danny/mechanoChemFEM_lib)
+
 
 
 

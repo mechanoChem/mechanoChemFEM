@@ -18,8 +18,9 @@ IF(NOT ${deal.II_FOUND})
     )
 ENDIF()
 
-SET(dealiiBase_inc_DIR "/gpfs/gpfs0/groups/garikipati/greght/mechanoChemFEM_lib/include")
-SET(dealiiBase_lib "/gpfs/gpfs0/groups/garikipati/greght/mechanoChemFEM_lib/lib/dealMultiPhysics.a")
+SET(dealiiBase_inc_DIR "/home/xiaoxuan/Documents/1-Research/0-Projects/P210001-Collab/Edwin/3-Code/Danny/mechanoChemFEM_lib/include")
+
+SET(dealiiBase_lib "/home/xiaoxuan/Documents/1-Research/0-Projects/P210001-Collab/Edwin/3-Code/Danny/mechanoChemFEM_lib/lib/dealMultiPhysics.a")
 
 
 FILE (GLOB TARGET_SRC "../*.cc")

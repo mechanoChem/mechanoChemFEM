@@ -446,9 +446,9 @@ void precipitate_PF<dim>::refine_grid_once(){
   else{
     max_refine_level = 5;
   }
-  //*/
+  */
 
-  PETScWrappers::Vector localized_U(this->solution);
+  dealii::Vector<double> localized_U(this->solution);
   Vector<float> estimated_error_per_cell (hpFEM<dim>::triangulation.n_active_cells());
   KellyErrorEstimator<dim>::estimate (hpFEM<dim>::dof_handler,
 				      QGauss<dim-1>(3),
@@ -464,7 +464,7 @@ void precipitate_PF<dim>::refine_grid_once(){
     }
   }
 
-  SolutionTransfer<dim,PETScWrappers::Vector,hp::DoFHandler<dim> > solution_trans(hpFEM<dim>::dof_handler);
+  SolutionTransfer<dim,dealii::Vector<double>,hp::DoFHandler<dim> > solution_trans(hpFEM<dim>::dof_handler);
   hpFEM<dim>::triangulation.prepare_coarsening_and_refinement();
 
   solution_trans.prepare_for_coarsening_and_refinement(localized_U);
@@ -474,7 +474,7 @@ void precipitate_PF<dim>::refine_grid_once(){
   this->setup_linear_system();
   this->setup_constraints();
 
-  PETScWrappers::Vector localized_Unew(this->solution);
+  dealii::Vector<double> localized_Unew(this->solution);
   solution_trans.interpolate(localized_U,localized_Unew);
   this->solution = localized_Unew;
   hpFEM<dim>::constraints.distribute (this->solution);

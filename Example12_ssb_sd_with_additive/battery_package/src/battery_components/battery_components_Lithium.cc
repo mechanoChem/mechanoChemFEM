@@ -59,6 +59,7 @@ void Lithium<dim>::set_diffusion_reaction_term(dealii::Table<2,Sacado::Fad::DFad
     //diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[this->primiary_dof].value_grad,-M);
   }
 	else{
+    // TODO: add phase field formulation for computing diffu
 		diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[phaesField_index].value_grad,-M);
 	}
   //std::cout << " ---------- in lithium set diffusion reaction " << std::endl;
@@ -110,6 +111,7 @@ void Lithium<dim>::set_diffusion_reaction_term_interface(dealii::Table<2,Sacado:
     //diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(grad,-M);
   }
 	else{
+    // TODO: add phase field formulation for computing diffu
 		diffu=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[phaesField_index].value_grad,-M);
     std::cout << " ---------- in lithium set diffusion reaction interface, phaseField_index is not tested ----- " << std::endl;
     exit(0);
@@ -148,6 +150,8 @@ void Lithium_phaseField<dim>::set_field_and_source_term(dealii::Table<2,Sacado::
 	field=table_scaling<2,Sacado::Fad::DFad<double>,double >(this->battery_fields->quad_fields[Lithium_index].value_grad,kappa);
 	unsigned int n_q_points= source.size(0);
 	dealii::Table<1,Sacado::Fad::DFad<double> > C_li(this->battery_fields->quad_fields[Lithium_index].value);
+
+  // TODO: add phase field formulation for computing source
 	for (unsigned int q=0;q<n_q_points;q++){
 		source[q]=2*omega*(C_li[q]-C_alpha)*(C_li[q]-C_beta)*(2*C_li[q]-C_alpha-C_beta)-this->battery_fields->quad_fields[this->primiary_dof].value[q];
 	}

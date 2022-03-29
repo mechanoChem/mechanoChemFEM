@@ -26,6 +26,8 @@ struct SDdata {
   FullMatrix<double> Kuu_wd, Kxiu_wd, Kuxi_wd, Kxixi_inv_u_wd;
   Vector<double> rlocal_u_wd, xi_old_u_wd, xi_conv_u_wd;
 
+  // TODO: add additional phase field parameters for strong discontinuity part
+
   // for strong discontinuity information
   FullMatrix<double> Kuu_sd, Kxiu_sd, Kuxi_sd, Kxixi_inv_u_sd;
   Vector<double> rlocal_u_sd, xi_old_u_sd, xi_conv_u_sd;

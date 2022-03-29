@@ -4,6 +4,7 @@
 template <int dim>
 void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
+  // TODO: add the interface treatment for the additional phase field in SE-active particle interface
 
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
 	int orientation=(*params_json)["ElectroChemo"]["orientation"];

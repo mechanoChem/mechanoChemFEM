@@ -103,6 +103,7 @@ void Displacement<dim>::set_stress(dealii::Table<3,Sacado::Fad::DFad<double> >& 
 	if (center[orientation]>separator_line){
 		C_0=C_li_100_pos * C_li_max_pos;
 	}
+    // TODO: update the stress calculation, convert the LFP formation to large deformation formulation.
 
     if(mat_id==active_particle_id or mat_id == li_metal_id){
       for(unsigned int q=0; q<n_q_points;q++){

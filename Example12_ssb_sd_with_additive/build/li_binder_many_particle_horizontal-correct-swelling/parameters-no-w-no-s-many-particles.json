@@ -2,7 +2,8 @@
 	"test":1,
 	"Problem":{
 		"print_parameter": true,
-    "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential","Diffuse_interface","Displacement"],
+    "battery_variables":["Lithium","Lithium_cation","Electrode_potential",
+      "Electrolyte_potential"," Diffuse_interface","Displacement"],
 		"external_mesh": true,
     "current_increment": 0,
     "current_time": 0,

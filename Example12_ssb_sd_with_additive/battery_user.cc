@@ -521,8 +521,8 @@ void battery<dim>::setMultDomain()
       if ((not all_greater) and (not all_smaller)) cell->set_material_id(interface_id);
       //if (cell->material_id() == 2) std::cout << " mat_id " << cell->material_id() << " center " << center << std::endl;
 
-      //if (center[orientation] < neg_electrode_line) cell->set_material_id(li_metal_id); // disable li metal id 2022-05-19
-      //if (on_neg_line) cell->set_material_id(li_metal_interface_id);// disable li metal id 2022-05-19
+      if (center[orientation] < neg_electrode_line) cell->set_material_id(li_metal_id);
+      if (on_neg_line) cell->set_material_id(li_metal_interface_id);
 
     } // this_mpi_process
   }
@@ -582,22 +582,6 @@ void battery<dim>::setMultDomain()
         } // ifile
   }
 
-
-  {
-  // int  electrolyte_id=0,  additive_id=4, additive_interface_id=6;
-  // active_particle_id=1, interface_id=2, 
-  // li_metal_id=3,  li_metal_interface_id=5, 
-  // todo
-  // loop over all element
-  // check the cell center, 
-  // if the cell center is on the left of the separator line
-  // {
-  //    if mat_id = active_particle_id (cathode id)
-  //       change cell mat id to li_metal_id
-  //    if mat_id = interface_id (cathode id)
-  //       change cell mat id to li_metal_interface_id
-  // }
-  }
 
 
 	this->pcout<<"setMultDomain"<<std::endl;

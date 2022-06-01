@@ -153,6 +153,7 @@ T ElectricChemo<dim, T>::formula_Usc(T x, int domainflag)
 		//value=-0.132+1.41*std::exp(-3.52*x);
 	}
 	//positive electrode
+	// TODO: update the follow open circuit potential curve for LFP
 	else if(domainflag==1){
 	 double	b1= -0.0922859116552415, b2= -7.8680409125385697, b3= 50.072175799512607, b4= -122.28161948058685, b5= 82.985110649682696;
 	 double b6= 140.2938943391359, b7= -374.73497214300698, b8= 403.2463575744942, b9= -221.19151490076541, b10= 49.3392659530526530;

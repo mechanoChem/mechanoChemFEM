@@ -12,8 +12,6 @@ set off_output_index=0
 set current_time = 0
 set resuming_from_snapshot = false
 
-#set mesh = /Users/wzhenlin/GitLab/researchCode/brainMorph/mesh/testMesh.msh
-#set mesh = /home/wzhenlin/workspace/brainMorph/mesh/STA21_hex.msh
 set output_directory = output/
 set snapshot_directory = snapshot/
 
@@ -31,8 +29,8 @@ set x_max = 1
 set y_max = 1
 set z_max = 2.0 #no need to 2D
 
-set num_elem_x=300
-set num_elem_y=300
+set num_elem_x=100
+set num_elem_y=100
 set num_elem_z=5 #no need to 2D
 end
 

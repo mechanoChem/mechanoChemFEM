@@ -590,9 +590,8 @@ void battery<dim>::setMultDomain()
       for (;cell!=endc; ++cell){
 
           {
-              int cell_id = cell->active_cell_index();
               int mat_id = cell->material_id();
-              int new_mat_id = cell_mat_map[cell_id];
+       	 Point<dim> center=cell->center();
               
               if (center[orientation] < separator_line)
               {

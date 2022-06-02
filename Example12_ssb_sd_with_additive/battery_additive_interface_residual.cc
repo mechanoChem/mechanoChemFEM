@@ -740,18 +740,29 @@ void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHand
 
 		  dealii::Table<3,Sacado::Fad::DFad<double> > Fe(n_q_points,dim,dim);
 
-      double swell_ratio = (*params_json)["Mechanics"]["SwellRatioCathode"];
+      double swell_ratio = 0.0;
+		  if (center[orientation]>separator_line){
+        swell_ratio = (*params_json)["Mechanics"]["SwellRatioCathode"];
+      }
+      else
+      {
+        swell_ratio = (*params_json)["Mechanics"]["SwellRatioAnode"];
+      }
+
       double C_li_100_neg=(*params_json)["ElectroChemo"]["c_li_100_neg"];
       double C_li_100_pos=(*params_json)["ElectroChemo"]["c_li_100_pos"];
       double C_li_max_neg=(*params_json)["ElectroChemo"]["c_li_max_neg"];
       double C_li_max_pos=(*params_json)["ElectroChemo"]["c_li_max_pos"];
 
       double C_0 = 0.0;
-		  C_0=C_li_100_neg * C_li_max_pos;
 		  Point<dim> center=(* battery_fields.current_cell)->center();
 		  if (center[orientation]>separator_line){
 		  	C_0=C_li_100_pos * C_li_max_pos;
 		  }
+      else
+      {
+		    C_0=C_li_100_neg * C_li_max_neg;
+      }
 
       for (unsigned int q = 0; q < n_q_points; ++q) {
         Sacado::Fad::DFad<double> c_li_tld = 0.0;

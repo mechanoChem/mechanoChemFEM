@@ -440,7 +440,7 @@ void battery<dim>::setMultDomain()
       bool all_smaller = true;
       bool on_neg_line = false;
       bool on_pos_line = false;
-            Point<dim> center=cell->center();
+      Point<dim> center=cell->center();
 
       for (unsigned int i = 0; i < GeometryInfo<dim>::vertices_per_cell; ++i) {
         unsigned int vertex_id = i;
@@ -584,15 +584,12 @@ void battery<dim>::setMultDomain()
 
 
   {
-
       double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
       typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
       for (;cell!=endc; ++cell){
-
           {
               int mat_id = cell->material_id();
-       	 Point<dim> center=cell->center();
-              
+       	      Point<dim> center=cell->center();
               if (center[orientation] < separator_line)
               {
                   if (mat_id == active_particle_id) cell->set_material_id(li_metal_id);
@@ -812,6 +809,8 @@ void battery<dim>::apply_initial_condition()
         }
         else if (cell->material_id()==li_metal_interface_id)
         {
+          if (anode_opt == 0) //li metal
+          {
             int vertex_id=i / (dofs_per_cell/GeometryInfo<dim>::vertices_per_cell);
 
             double val = - iso_value +  cell->vertex(vertex_id)[orientation] - neg_electrode_line;
@@ -840,6 +839,69 @@ void battery<dim>::apply_initial_condition()
               if (ck==battery_fields.active_fields_index["Lithium_cation"]) this->solution_prev(local_dof_indices[i])=C_li_plus_0;
               if (ck==battery_fields.active_fields_index["Electrolyte_potential"]) this->solution_prev(local_dof_indices[i])=1e-8;
             }
+          }
+          else if (anode_opt == 1) // graphite
+          {
+            //std::cout << "---------- in interface ---------------" << std::endl;
+            int vertex_id=i / (dofs_per_cell/GeometryInfo<dim>::vertices_per_cell);
+            Point<dim> vertex_point=cell->vertex(vertex_id);
+
+            // assign value based on multiple particle locations
+            double Val = 1.0e12;
+            for (unsigned int o1=0;o1<origin_list_json.size();o1++){
+              double x0 = origin_list_json[o1][0];
+              double y0 = origin_list_json[o1][1];
+              double a = origin_list_json[o1][2];
+              double b = origin_list_json[o1][3];
+              double alpha = origin_list_json[o1][4]/180.0*3.14159265359;
+
+              double cosa=cos(alpha);
+              double sina=sin(alpha);
+              double _x = cell->vertex(vertex_id)[0];
+              double _y = cell->vertex(vertex_id)[1];
+              double _val=0.5*(((_x-x0)*cosa + (_y-y0)*sina)*((_x-x0)*cosa + (_y-y0)*sina)/a/a + ((_x-x0)*sina - (_y-y0)*cosa)*((_x-x0)*sina - (_y-y0)*cosa)/b/b);
+              if (_val < Val) Val = _val;
+            }
+            double val = Val;
+
+            // the -1.0 here is used to reuse the original implementation.
+            val = -1.0 * val;
+            if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i]) = val;
+
+            bool inside_particle_flag=false;
+
+            if (val >= iso_value){inside_particle_flag=true;}
+
+            if (inside_particle_flag){
+              if (ck==battery_fields.active_fields_index["Lithium_cation"] or ck==battery_fields.active_fields_index["Electrolyte_potential"]){
+                this->solution_prev(local_dof_indices[i])=0;
+                //std::cout << " center " << center << " i " << i << " Lithium_cation &  Electrolyte_potential = 0 " << std::endl;
+              }
+
+              if (ck==battery_fields.active_fields_index["Lithium"]) this->solution_prev(local_dof_indices[i])=C_li_0;//+0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+              if (ck==battery_fields.active_fields_index["Electrode_potential"]){
+                //if(center[orientation]>separator_line)
+                this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_neg,-1).val();
+                //if(center[orientation]<separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_neg,-1).val();
+              }
+            }
+            else{
+              if (ck==battery_fields.active_fields_index["Lithium"] or ck==battery_fields.active_fields_index["Electrode_potential"]){
+                this->solution_prev(local_dof_indices[i])=0;
+                //std::cout << " center " << center << " i " << i << " Lithium &  Electrode_potential = 0 " << std::endl;
+              }
+              if (ck==battery_fields.active_fields_index["Lithium_cation"]) this->solution_prev(local_dof_indices[i])=C_li_plus_0;
+              if (ck==battery_fields.active_fields_index["Electrolyte_potential"]) this->solution_prev(local_dof_indices[i])=1e-8;
+            }
+
+          }
+          else
+          {
+            std::cout << " anode option = " << anode_opt << " is not known! " << std::endl;
+            exit(0);
+          }
+
+
           //if (ck==battery_fields.active_fields_index["Lithium"] and this->this_mpi_process == 1) std::cout << this->this_mpi_process << " x_metal " << cell->vertex(vertex_id)[orientation] << " flag " << inside_li_metal_flag << " y= "<< cell->vertex(vertex_id)[1] << " val " << this->solution_prev(local_dof_indices[i]) << std::endl;
 
         }
@@ -875,7 +937,9 @@ void battery<dim>::apply_initial_condition()
           if (val < iso_value){inside_additive_flag=true;}
           // inside and outside are all the same for the electrode potential
           if (ck==battery_fields.active_fields_index["Electrode_potential"]){
-            this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_pos,1).val();
+
+            if(center[orientation]>separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_pos,1).val();
+            if(center[orientation]<=separator_line) this->solution_prev(local_dof_indices[i])=electricChemoFormula.formula_Usc(C_li_100_neg,-1).val();
           }
           if (inside_additive_flag){ // additive
             if (ck==battery_fields.active_fields_index["Lithium"]) this->solution_prev(local_dof_indices[i])=0.0;
@@ -884,7 +948,7 @@ void battery<dim>::apply_initial_condition()
             if (ck==battery_fields.active_fields_index["Lithium"]) this->solution_prev(local_dof_indices[i])=C_li_0;//+0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
           }
         }
-        else if (cell->material_id()==interface_id) // deal with the interface
+        else if (cell->material_id()==interface_id) // deal with the interface for cathode
         {
           //std::cout << "---------- in interface ---------------" << std::endl;
           int vertex_id=i / (dofs_per_cell/GeometryInfo<dim>::vertices_per_cell);

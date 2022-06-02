@@ -1,0 +1,123 @@
+{
+	"test":1,
+	"Problem":{
+		"print_parameter": true,
+    "battery_variables":["Lithium","Lithium_cation","Electrode_potential","Electrolyte_potential","Diffuse_interface","Displacement"],
+		"external_mesh": true,
+    "current_increment": 0,
+    "current_time": 0,
+    "dt": 2,
+    "output_directory": "output/",
+		"snapshot_directory": "snapshot/",
+		"save_snapshot":true,
+		"save_output":true,
+    "totalTime": 36000,
+    "volume_quadrature": 2,
+		"face_quadrature": 2
+	},
+  "Geometry": {
+      "num_elem_x": 200,
+      "num_elem_y": 100,
+      "num_elem_z": 1,
+      "x_min": 0,
+      "y_min": 0,
+      "x_max": 200,
+      "y_max": 100,
+      "z_max": 0,
+      "z_min": 1
+  },
+	"ElectroChemo":{
+		"applied_current":30,
+		"particle_R":10,
+		"interface_bandwitdh":0.05,
+		"flip_time":30000,
+		"D_li_neg":0.5,
+		"D_li_pos":0.5,
+		"D_li_plus":0.005,
+		"V_li_neg":1e-21,
+		"V_li_pos":1e-21,
+		"V_li_plus":1e-21,
+    "V_reaction_jn":1e-21,
+    "cod_max":0.1,
+    "cod_coef_C0":150,
+		"jn_react":-0.0001,
+		"sigma_s_neg":1.5e8,
+		"sigma_s_pos":0.5e8,
+		"c_li_max_neg":28.7e-3,
+		"c_li_max_pos":37.5e-3,
+		"c_li_100_neg":0.915,
+		"c_li_100_pos":0.022,
+		"c_li_0_neg":0.02,
+		"c_li_0_pos":0.98,
+		"C_li_plus_0":1.0e-3,
+		"phi_s_0_neg":1,
+		"phi_s_0_pos":1,
+		"phi_e_0":1,
+		"T_0":298,
+		"iso_value":-0.5,
+		"separator_line":99.5,
+		"neg_electrode_line":98.5,
+		"pos_electrode_line":100.5,
+    "Origin list" : {"value": 
+	[
+[27.84655153539257,78.68128470570477,9.339464036029712,17.570919063666388,89.98989868164062],
+[72.76761200928604,77.6734327544094,10.444953348288758,15.39338802007099,90.00209045410156],
+[172.07902973939798,69.77123823322233,10.180653202151912,16.9494521701643,89.99121856689453],
+[137.40396556198104,69.5618604887844,9.55321650205275,19.588561582900322,0.00861833430826664],
+[21.70006694318561,46.06962538993889,6.281620808484857,12.288770295976198,90.00444793701172],
+[50.42149010926379,48.705243505973726,8.727721443945544,18.17076636142418,0.003880982054397464],
+[166.54374200678382,33.32318701286227,10.58751442254226,18.368058573166717,89.99299621582031],
+[70.51739856724497,19.945168774356887,7.359516238826874,15.592756427702357,89.97850799560547],
+[127.76547903692172,26.016056677217506,9.362057180167094,16.94678813568044,0.02487616240978241],
+[28.258155107780993,18.323602609388722,10.17523931863045,19.58222936411373,89.981201171875]]
+	,"unit":"-"},
+    "orientation":0
+	},
+	"Lithium_phaseField":{
+		"kappa":0.5,
+		"c_alpha":0.02,
+		"c_beta":0.001,
+		"omega":0.25
+	},
+	"Mechanics":{
+		"youngs_modulus_particle":77,
+		"youngs_modulus_electrolyte":20,
+		"poisson_ratio":0.3,
+		"lithium_a":0.01,
+		"lithium_b":0.3,
+		"EnableWeak":0,
+    "Feiga_11" : 1,
+    "Feiga_22" : 1,
+    "Feiga_33" : 1,
+    "Feigb_11" : 0.9,
+    "Feigb_22" : 0.9,
+    "Feigb_33" : 0.9,
+    "electrolyte_id" : 0,
+    "active_particle_id" : 1,
+    "li_metal_id" : 3,
+    "SwellRatioAnode" : 0.1,
+    "SwellRatioCathode" : -1.5,
+    "MaximumStressN" : 1.0,
+    "MaximumStressM" : 1.0,
+    "LinearSoftenModulusN" : -1,
+    "LinearSoftenModulusM" : -1
+	},
+  "boundary_conditions": {
+		"u_x" : {
+	    "x_min" : {
+				"type" : "Dirichlet",
+				"value" :0.0
+	    	}
+		},
+		"u_y" : {
+	    "y_min" : {
+				"type" : "Dirichlet",
+				"value" : 0.0
+	    }
+		}
+  },
+	"Nonlinear_solver":{
+		"max_iterations": 200,
+		"absolute_norm_tolerance": 1e-5
+	}
+}

@@ -53,6 +53,9 @@ class battery: public mechanoChemFEM<dim>
 		
 		nodalField<dim> computedNodalField;
 		int  electrolyte_id=0, active_particle_id=1, interface_id=2, li_metal_id=3, additive_id=4, li_metal_interface_id=5, additive_interface_id=6;
+    //int anode_opt = 0; // li metal
+    int anode_opt = 1; // graphite
+    int cathode_opt = 0; // lco
 
 	  Vector<double> crack_id;  // has to be double for output purpose
 	  Vector<double> jump_n; 

@@ -278,11 +278,13 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
   crack_id[cell_id] = cell_SDdata[cell_id].crack_id;
   T_n[cell_id] = cell_SDdata[cell_id].T_n;
 
-  double flux_sign = 1;
+  // the flux sign will be updated based on flip time
+  double flux_sign = (*params_json)["ElectroChemo"]["flux_sign"];
 	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
   if (this->current_time >= fliptime)
   {
-    flux_sign = -1;
+    flux_sign = flux_sign * -1.0;
+    (*params_json)["ElectroChemo"]["flux_sign"] = flux_sign;
   }
 
 	//apply_Neumann_boundary_condition();
@@ -369,6 +371,23 @@ void battery<dim>::output_results()
 	}
 }
 
+template <int dim>
+void battery<dim>::solve_ibvp()
+{
+	bool to_flip=(*params_json)["ElectroChemo"]["to_flip"];
+	bool is_converged = this->nonlinearSolve(this->solution);
+  //std::cout << " is converged " << is_converged << std::endl;
+  if (not is_converged)
+  {
+    to_flip = true;
+    (*params_json)["ElectroChemo"]["to_flip"] = true;
+  }
+	//update
+  if (not to_flip)
+  {
+	  this->solution_prev=this->solution;
+  }
+}
 
 
 template <int dim>
@@ -437,7 +456,11 @@ void battery<dim>::run()
 	clock_t t_solve;	
   double input_dt_from_param = this->current_dt;
 	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
+	bool to_flip=(*params_json)["ElectroChemo"]["to_flip"];
   this->current_dt = std::min(1.0, input_dt_from_param);
+  //(*params_json)["ElectroChemo"]["flip_time"] = 10.0;
+	//double new_fliptime=(*params_json)["ElectroChemo"]["flip_time"];
+  //std::cout << "fliptime " << fliptime << " new " << new_fliptime << " and " << (*params_json)["ElectroChemo"]["flip_time"] << std::endl;
 
   for (; this->current_time<=this->total_time; ){
 	  t_solve = clock();
@@ -482,6 +505,12 @@ void battery<dim>::run()
     }
 
 		this->solve_ibvp();
+    if (to_flip)
+    {
+      (*params_json)["ElectroChemo"]["flip_time"] = this->current_time;
+      (*params_json)["ElectroChemo"]["to_flip"] = false;
+      std::cout << " flip discharge/charge sign at: " << this->current_time << " (s) " << std::endl;
+    }
 
     // update history variables
     for (unsigned i = 0; i < cell_SDdata.size(); ++i) {

@@ -40,7 +40,6 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
 
   // update reaction rate at the interface 
 	double tem=(*params_json)["ElectroChemo"]["jn_react"];
-	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
 	double cod_max=(*params_json)["ElectroChemo"]["cod_max"];
 	double cod_coef_C0=(*params_json)["ElectroChemo"]["cod_coef_C0"];
 
@@ -1603,20 +1602,20 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
       {
         std::cout << "compute residual at the li metal interface " << cell_id  << " center: " << center << std::endl;
         std::cout << " i " << i << " R[i] " << R[i] << std::endl;
-    for (unsigned int q = 0; q < n_q_points; ++q) {
-    std::cout << "-------q-------" << q << std::endl;
-    std::cout << "diffu_lithium [0] " << diffu_Lithium[q][0] << " tilde " << diffu_Lithium_tilde[q][0] << std::endl;
-    std::cout << "diffu_lithium [1] " << diffu_Lithium[q][1] << " tilde " << diffu_Lithium_tilde[q][1] << std::endl;
-    std::cout << "grad_lithium [0]  " << battery_fields.quad_fields[DOF_Lithium].value_grad[q][0] << " tilde " << c_1_tilde_grad_Lithium[q][0] << std::endl;
-    std::cout << "grad_lithium [1]  " << battery_fields.quad_fields[DOF_Lithium].value_grad[q][1] << " tilde " << c_1_tilde_grad_Lithium[q][1] << std::endl;
-    std::cout << "diffu_Lithium_cation [0] " << diffu_Lithium_cation[q][0] << " tilde " << diffu_Lithium_cation_tilde[q][0] << std::endl;
-    std::cout << "diffu_Lithium_cation [1] " << diffu_Lithium_cation[q][1] << " tilde " << diffu_Lithium_cation_tilde[q][1] << std::endl;
-    std::cout << "field_Electrolyte_potential [0] " << field_Electrolyte_potential[q][0] << " tilde " << field_Electrolyte_potential_tilde[q][0] << std::endl;
-    std::cout << "field_Electrolyte_potential [1] " << field_Electrolyte_potential[q][1] << " tilde " << field_Electrolyte_potential_tilde[q][1] << std::endl;
+    //for (unsigned int q = 0; q < n_q_points; ++q) {
+    //std::cout << "-------q-------" << q << std::endl;
+    //std::cout << "diffu_lithium [0] " << diffu_Lithium[q][0] << " tilde " << diffu_Lithium_tilde[q][0] << std::endl;
+    //std::cout << "diffu_lithium [1] " << diffu_Lithium[q][1] << " tilde " << diffu_Lithium_tilde[q][1] << std::endl;
+    //std::cout << "grad_lithium [0]  " << battery_fields.quad_fields[DOF_Lithium].value_grad[q][0] << " tilde " << c_1_tilde_grad_Lithium[q][0] << std::endl;
+    //std::cout << "grad_lithium [1]  " << battery_fields.quad_fields[DOF_Lithium].value_grad[q][1] << " tilde " << c_1_tilde_grad_Lithium[q][1] << std::endl;
+    //std::cout << "diffu_Lithium_cation [0] " << diffu_Lithium_cation[q][0] << " tilde " << diffu_Lithium_cation_tilde[q][0] << std::endl;
+    //std::cout << "diffu_Lithium_cation [1] " << diffu_Lithium_cation[q][1] << " tilde " << diffu_Lithium_cation_tilde[q][1] << std::endl;
+    //std::cout << "field_Electrolyte_potential [0] " << field_Electrolyte_potential[q][0] << " tilde " << field_Electrolyte_potential_tilde[q][0] << std::endl;
+    //std::cout << "field_Electrolyte_potential [1] " << field_Electrolyte_potential[q][1] << " tilde " << field_Electrolyte_potential_tilde[q][1] << std::endl;
 
-    }
+    //}
 
-        exit(-1);
+        //exit(-1);
       }
     }
     //std::cout << " residual done at the interface " << std::endl;

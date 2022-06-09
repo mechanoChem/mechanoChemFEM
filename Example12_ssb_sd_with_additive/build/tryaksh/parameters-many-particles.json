@@ -31,6 +31,8 @@
 		"particle_R":10,
 		"interface_bandwitdh":0.05,
 		"flip_time":30000,
+		"flux_sign":1,
+		"to_flip":false,
 		"D_li_neg":0.5,
 		"D_li_pos":0.5,
 		"D_li_plus":0.005,

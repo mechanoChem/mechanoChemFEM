@@ -32,6 +32,7 @@ class battery: public mechanoChemFEM<dim>
 		void run();
     void save_sd_data();
     void load_sd_data();
+		void solve_ibvp();
 		
 		
 		ParameterHandler* params;		

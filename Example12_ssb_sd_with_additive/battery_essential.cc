@@ -376,17 +376,23 @@ void battery<dim>::solve_ibvp()
 {
 	bool to_flip=(*params_json)["ElectroChemo"]["to_flip"];
 	bool is_converged = this->nonlinearSolve(this->solution);
-  //std::cout << " is converged " << is_converged << std::endl;
+  std::cout << " is converged? = " << is_converged << std::endl;
   if (not is_converged)
   {
     to_flip = true;
     (*params_json)["ElectroChemo"]["to_flip"] = true;
   }
+  else
+  {
+    (*params_json)["ElectroChemo"]["to_flip"] = false;
+  }
+
 	//update
   if (not to_flip)
   {
 	  this->solution_prev=this->solution;
   }
+
 }
 
 
@@ -508,7 +514,6 @@ void battery<dim>::run()
     if (to_flip)
     {
       (*params_json)["ElectroChemo"]["flip_time"] = this->current_time;
-      (*params_json)["ElectroChemo"]["to_flip"] = false;
       std::cout << " flip discharge/charge sign at: " << this->current_time << " (s) " << std::endl;
     }
 

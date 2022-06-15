@@ -280,12 +280,13 @@ void battery<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_
 
   // the flux sign will be updated based on flip time
   double flux_sign = (*params_json)["ElectroChemo"]["flux_sign"];
-	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
-  if (this->current_time >= fliptime)
-  {
-    flux_sign = flux_sign * -1.0;
-    (*params_json)["ElectroChemo"]["flux_sign"] = flux_sign;
-  }
+  double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
+  //if (this->current_time >= fliptime)
+  //{
+    //flux_sign = flux_sign * -1.0;
+    //(*params_json)["ElectroChemo"]["flux_sign"] = flux_sign;
+  //}
+  if (cell_id == 0) std::cout << " flux_sign " << flux_sign << " fliptime " << fliptime << std::endl;
 
 	//apply_Neumann_boundary_condition();
 	//BC
@@ -377,20 +378,34 @@ void battery<dim>::solve_ibvp()
 	bool to_flip=(*params_json)["ElectroChemo"]["to_flip"];
 	bool is_converged = this->nonlinearSolve(this->solution);
   std::cout << " is converged? = " << is_converged << std::endl;
+  this->solution_k = this->solution_prev;
   if (not is_converged)
   {
     to_flip = true;
     (*params_json)["ElectroChemo"]["to_flip"] = true;
+
+    double flux_sign = (*params_json)["ElectroChemo"]["flux_sign"];
+    flux_sign = flux_sign * -1.0;
+    (*params_json)["ElectroChemo"]["flux_sign"] = flux_sign;
   }
   else
   {
     (*params_json)["ElectroChemo"]["to_flip"] = false;
   }
 
+  std::cout << " to flip = " << (*params_json)["ElectroChemo"]["to_flip"] << std::endl;
+
 	//update
   if (not to_flip)
   {
 	  this->solution_prev=this->solution;
+    std::cout << " solution updated " << std::endl;
+  }
+  else
+  {
+    this->solution_prev=this->solution_k;
+    this->solution=this->solution_prev;
+    std::cout << " solution NOT updated " << std::endl;
   }
 
 }
@@ -461,14 +476,15 @@ void battery<dim>::run()
 
 	clock_t t_solve;	
   double input_dt_from_param = this->current_dt;
-	double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
-	bool to_flip=(*params_json)["ElectroChemo"]["to_flip"];
   this->current_dt = std::min(1.0, input_dt_from_param);
   //(*params_json)["ElectroChemo"]["flip_time"] = 10.0;
 	//double new_fliptime=(*params_json)["ElectroChemo"]["flip_time"];
   //std::cout << "fliptime " << fliptime << " new " << new_fliptime << " and " << (*params_json)["ElectroChemo"]["flip_time"] << std::endl;
 
   for (; this->current_time<=this->total_time; ){
+
+	  double fliptime=(*params_json)["ElectroChemo"]["flip_time"];
+
 	  t_solve = clock();
 
     // To use a small time step for the first 10s or the fliptime+10s.
@@ -511,27 +527,31 @@ void battery<dim>::run()
     }
 
 		this->solve_ibvp();
+	  bool to_flip=(*params_json)["ElectroChemo"]["to_flip"]; // has to be here. to_flip will be updated in solve_ibvp()
     if (to_flip)
     {
       (*params_json)["ElectroChemo"]["flip_time"] = this->current_time;
       std::cout << " flip discharge/charge sign at: " << this->current_time << " (s) " << std::endl;
     }
+    else
+    {
+      // update history variables
+      for (unsigned i = 0; i < cell_SDdata.size(); ++i) {
+        cell_SDdata[i].xi_conv = cell_SDdata[i].xi_old;
+        cell_SDdata[i].xi_conv_c_e = cell_SDdata[i].xi_old_c_e;
+        cell_SDdata[i].xi_conv_phi_s = cell_SDdata[i].xi_old_phi_s;
+        cell_SDdata[i].xi_conv_phi_e = cell_SDdata[i].xi_old_phi_e;
+        cell_SDdata[i].C_Li_plus_old = cell_SDdata[i].C_Li_plus_new;
 
-    // update history variables
-    for (unsigned i = 0; i < cell_SDdata.size(); ++i) {
-      cell_SDdata[i].xi_conv = cell_SDdata[i].xi_old;
-      cell_SDdata[i].xi_conv_c_e = cell_SDdata[i].xi_old_c_e;
-      cell_SDdata[i].xi_conv_phi_s = cell_SDdata[i].xi_old_phi_s;
-      cell_SDdata[i].xi_conv_phi_e = cell_SDdata[i].xi_old_phi_e;
-      cell_SDdata[i].C_Li_plus_old = cell_SDdata[i].C_Li_plus_new;
+        cell_SDdata[i].xi_conv_u_sd = cell_SDdata[i].xi_old_u_sd;
 
-      cell_SDdata[i].xi_conv_u_sd = cell_SDdata[i].xi_old_u_sd;
-
-      cell_SDdata[i].Tn_old = cell_SDdata[i].Tn_new;
-      // WARNING: should not use the following, as many cell_SDdata are not initialized.
-      //std::cout << "C_Li_plus_old[0]" << cell_SDdata[i].C_Li_plus_old[0] << std::endl;
-      //for (int q=0; q<4; q++) cell_SDdata[i].C_Li_plus_old[q] = cell_SDdata[i].C_Li_plus_new[q];
-      //std::cout << "C_Li_plus_old[3]" << cell_SDdata[i].C_Li_plus_old[3] << std::endl;
+        cell_SDdata[i].Tn_old = cell_SDdata[i].Tn_new;
+        // WARNING: should not use the following, as many cell_SDdata are not initialized.
+        //std::cout << "C_Li_plus_old[0]" << cell_SDdata[i].C_Li_plus_old[0] << std::endl;
+        //for (int q=0; q<4; q++) cell_SDdata[i].C_Li_plus_old[q] = cell_SDdata[i].C_Li_plus_new[q];
+        //std::cout << "C_Li_plus_old[3]" << cell_SDdata[i].C_Li_plus_old[3] << std::endl;
+      }
+      std::cout << " SD updated! " << std::endl;
     }
 		
 	  t_solve = clock() - t_solve;
@@ -548,7 +568,7 @@ void battery<dim>::run()
      //this->FEMdata_out.write_vtk(this->solution_prev, output_path);
     this->output_results();
 
-    pressure_old = pressure;
+    if (not to_flip) pressure_old = pressure;
 
 	}
 	this->pcout<<"Finish running!!"<<std::endl;

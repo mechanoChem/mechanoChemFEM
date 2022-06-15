@@ -671,18 +671,18 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       //<< " domain " <<   domainflag << std::endl;
 
 
-   if (jn.val() != jn.val()) 
-   {
-    std::cout 
-      << " jn " << jn.val()
-      << " Temp " << Temp
-      << " c_li_tld " << c_li_tld.val()
-      << " c_li_plus_tld " << c_li_plus_tld.val()
-      << " phi_s_tld " << phi_s_tld.val()
-      << " phi_e_tld " << phi_e_tld.val()
-      << " domainflag " << domainflag
-      << std::endl;
-   }
+   //if (jn.val() != jn.val()) 
+   //{
+    //std::cout 
+      //<< " jn " << jn.val()
+      //<< " Temp " << Temp
+      //<< " c_li_tld " << c_li_tld.val()
+      //<< " c_li_plus_tld " << c_li_plus_tld.val()
+      //<< " phi_s_tld " << phi_s_tld.val()
+      //<< " phi_e_tld " << phi_e_tld.val()
+      //<< " domainflag " << domainflag
+      //<< std::endl;
+   //}
 
     //std::cout << " jn " << jn << std::endl;
 
@@ -1605,8 +1605,8 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
       }
       if (R[i].val() != R[i].val()) 
       {
-        std::cout << "compute residual at the active SE interface " << cell_id  << " center: " << center << std::endl;
-        std::cout << " i " << i << " R[i] " << R[i] << std::endl;
+        //std::cout << "compute residual at the active SE interface " << cell_id  << " center: " << center << std::endl;
+        //std::cout << " i " << i << " R[i] " << R[i] << std::endl;
     //for (unsigned int q = 0; q < n_q_points; ++q) {
     //std::cout << "-------q-------" << q << std::endl;
     //std::cout << "diffu_lithium [0] " << diffu_Lithium[q][0] << " tilde " << diffu_Lithium_tilde[q][0] << std::endl;

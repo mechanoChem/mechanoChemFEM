@@ -11,6 +11,11 @@
 		"snapshot_directory": "snapshot/",
 		"save_snapshot":true,
 		"save_output":true,
+    "resuming_from_snapshot":false,
+    "off_output_index":14,
+    "resume_at_time":18.0,
+    "snapshot_file":"saved_data/snapshot/snapshot-14.dat",
+    "sd_data_file":"saved_data/snapshot/restart-14.dat",
     "totalTime": 36000,
     "volume_quadrature": 2,
 		"face_quadrature": 2
@@ -31,7 +36,7 @@
 		"particle_R":10,
 		"interface_bandwitdh":0.05,
 		"flip_time":30000,
-		"flux_sign":-1,
+		"flux_sign":1,
 		"to_flip":false,
 		"D_li_neg":0.5,
 		"D_li_pos":0.5,
@@ -49,8 +54,8 @@
 		"c_li_max_pos":37.5e-3,
 		"c_li_100_neg":0.915,
 		"c_li_100_pos":0.022,
-		"c_li_0_neg":0.02,
-		"c_li_0_pos":0.995,
+		"c_li_0_neg":0.01,
+		"c_li_0_pos":0.98,
 		"C_li_plus_0":1.0e-3,
 		"phi_s_0_neg":1,
 		"phi_s_0_pos":1,
@@ -119,7 +124,7 @@
 		}
   },
 	"Nonlinear_solver":{
-		"max_iterations": 100,
+		"max_iterations": 200,
 		"absolute_norm_tolerance": 1e-5
 	}
 }

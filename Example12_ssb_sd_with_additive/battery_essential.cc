@@ -464,6 +464,10 @@ void battery<dim>::run()
       T_n[count] = cell_SDdata[count].T_n;
     }
 	}
+  else
+  {
+    this->off_output_index = 0;
+  }
 
 
   std::cout << "before output w..." << std::endl;
@@ -566,9 +570,19 @@ void battery<dim>::run()
      //this->FEMdata_out.data_out.add_data_vector (localized_U, computedNodalField);
      //std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment)+".vtk";
      //this->FEMdata_out.write_vtk(this->solution_prev, output_path);
-    this->output_results();
 
-    if (not to_flip) pressure_old = pressure;
+    if (not to_flip)
+    {
+      this->output_results();
+      pressure_old = pressure;
+      std::cout << " pressure updated " << std::endl;
+    }
+    else
+    {
+      (*params_json)["Problem"]["sd_data_file"] = this->snapshot_directory+"restart-"+std::to_string(this->current_increment +this->off_output_index - 2)+".dat";
+      std::cout << " load sd data from " <<  (*params_json)["Problem"]["sd_data_file"] << std::endl;
+      load_sd_data();
+    }
 
 	}
 	this->pcout<<"Finish running!!"<<std::endl;

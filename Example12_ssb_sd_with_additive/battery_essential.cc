@@ -579,13 +579,30 @@ void battery<dim>::run()
     }
     else
     {
-      (*params_json)["Problem"]["sd_data_file"] = this->snapshot_directory+"restart-"+std::to_string(this->current_increment +this->off_output_index - 2)+".dat";
-      std::cout << " load sd data from " <<  (*params_json)["Problem"]["sd_data_file"] << std::endl;
-      load_sd_data();
-    }
+      int resume_non_conv_back_at = 7;
+      (*params_json)["Problem"]["sd_data_file"] = this->snapshot_directory+"restart-"+std::to_string(this->current_increment +this->off_output_index - resume_non_conv_back_at)+".dat";
 
-	}
-	this->pcout<<"Finish running!!"<<std::endl;
+      std::cout << "restart from " << this->current_increment << " " <<  this->off_output_index << " " <<  resume_non_conv_back_at << " " << this->current_increment +this->off_output_index - resume_non_conv_back_at << std::endl;
+
+      std::cout << " load sd data from " <<  (*params_json)["Problem"]["sd_data_file"] << std::endl;
+      (*params_json)["Problem"]["snapshot_file"] = this->snapshot_directory+"snapshot-"+std::to_string(this->current_increment+this->off_output_index - resume_non_conv_back_at)+".dat";
+
+      this->current_increment = this->current_increment - resume_non_conv_back_at + 2;
+
+      std::string snapfile=(*params_json)["Problem"]["snapshot_file"];
+	  this->pcout<<"resuming from snapshot " << snapfile <<std::endl;
+	  this->FEMdata_out.resume_vector_from_snapshot(this->solution,snapfile);
+	  this->solution_prev=this->solution;
+      load_sd_data();
+      for (unsigned int count = 0; count < cell_SDdata.size(); count++)
+      {
+        jn[count] = cell_SDdata[count].reaction_rate_li.val();
+        crack_id[count] = cell_SDdata[count].crack_id;
+        T_n[count] = cell_SDdata[count].T_n;
+      }
+    } // not to_flip
+  } // time loop
+  this->pcout<<"Finish running!!"<<std::endl;
 }
 
 template class battery<1>;

@@ -99,7 +99,7 @@ void read_double(istream& fi, double &double0)
 template <int dim>
 void battery<dim>::save_sd_data()
 {
-    std::ofstream fout(this->snapshot_directory+"restart-"+std::to_string(this->current_increment)+".dat" + std::to_string(this->this_mpi_process), std::ios::out | std::ios::binary);
+    std::ofstream fout(this->snapshot_directory+"restart-"+std::to_string(this->current_increment +this->off_output_index)+".dat" + std::to_string(this->this_mpi_process), std::ios::out | std::ios::binary);
     for (unsigned int count = 0; count < cell_SDdata.size(); count++)
     {
       if (cell_SDdata[count].is_interface_element)

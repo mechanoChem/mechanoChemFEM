@@ -1,0 +1,31 @@
+#!/bin/bash
+#SBATCH --job-name=mint_job
+#SBATCH --cpus-per-task=1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --mem-per-cpu=8000m
+#SBATCH --time=240:59:00
+#SBATCH --account=krishna0
+#SBATCH --partition=standard
+########SBATCH --error=%x-%j.error
+#######SBATCH --output=/home/%u/%x-%j.log
+
+module load gcc/8.2.0 cmake/3.13.2 openmpi/4.0.4
+
+export CC=mpicc; export CXX=mpicxx; export FC=mpif90; export FF=mpif77
+
+#export root=$HOME/mylib
+export root=/gpfs/accounts/krishna_root/krishna0/software
+
+export DEAL_II_DIR=$root/dealii/9.2.0/deal.II-v9.2.0
+export mechanoChemFEM_DIR=$root/dealii/9.2.0/mechanoChemFEM/
+export TRILINOS_DIR=$root/dealii/9.2.0/12-18-1-release-gcc-10-2-0
+export LD_LIBRARY_PATH=$root/dealii/9.2.0/petsc-3.13.1/lib:$LD_LIBRARY_PATH
+
+export MPI_DIR=/sw/arcts/centos7/stacks/gcc/8.2.0/openmpi/4.0.4/
+export MPI_INCLUDE_PATH=$MPI_DIR/include
+export LD_LIBRARY_PATH=$MPI_DIR/lib:$LD_LIBRARY_PATH
+
+
+# input is not working
+../main

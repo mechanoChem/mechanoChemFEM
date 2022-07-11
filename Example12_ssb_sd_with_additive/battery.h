@@ -68,9 +68,12 @@ class battery: public mechanoChemFEM<dim>
 	  Vector<double> pressure_gp3; 
 	  Vector<double> jn; 
 	  Vector<double> T_n; 
+    std::vector<double> sim_time_info;
     std::vector<bool> is_new_step;
     std::vector<std::vector<double>> pressure; 
     std::vector<std::vector<double>> pressure_old; 
+    int anode_point_dof_index = -1;
+    int cathode_point_dof_index = -1;
 
 		PETScWrappers::MPI::Vector solution_k;
     int N_GPs = 4; // # of GPs has to be 4 due to the SDs.

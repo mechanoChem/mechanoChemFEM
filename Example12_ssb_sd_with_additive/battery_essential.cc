@@ -367,6 +367,7 @@ void battery<dim>::output_results()
 	}
 	if(this->save_snapshot){
 		std::string snapshot_path = this->snapshot_directory+"snapshot-"+std::to_string(this->current_increment+this->off_output_index)+".dat";
+    this->pcout << " save to " << snapshot_path << std::endl;
 		this->FEMdata_out.create_vector_snapshot(this->solution, snapshot_path);
     save_sd_data();
 	}
@@ -399,13 +400,13 @@ void battery<dim>::solve_ibvp()
   if (not to_flip)
   {
 	  this->solution_prev=this->solution;
-    std::cout << " solution updated " << std::endl;
+    this->pcout << " solution updated " << std::endl;
   }
   else
   {
     this->solution_prev=this->solution_k;
     this->solution=this->solution_prev;
-    std::cout << " solution NOT updated " << std::endl;
+    this->pcout << " solution NOT updated " << std::endl;
   }
 
 }
@@ -427,6 +428,11 @@ void battery<dim>::run()
   pressure.resize(this->triangulation.n_active_cells()); // pressure needs to be loaded from restart files
   pressure_old.resize(this->triangulation.n_active_cells()); // pressure_old needs to be loaded from restart files
   is_new_step.resize(this->triangulation.n_active_cells());
+  double total_time  = (*params_json)["Problem"]["totalTime"];
+  double dt = (*params_json)["Problem"]["dt"];
+  int max_total_timesteps = int(2.0*total_time/dt);// set a factor of 2 to avoid data overflow
+  std::cout << " max_total_timesteps " << max_total_timesteps << std::endl;
+  sim_time_info.resize(max_total_timesteps); 
 
   for (unsigned int count = 0; count < pressure.size(); count++)
   {
@@ -508,6 +514,8 @@ void battery<dim>::run()
     this->current_time+=this->current_dt;
     this->current_increment++;
 
+    sim_time_info[this->current_increment] = this->current_time;
+    this->pcout << " saved incr and time info: " << this->current_increment << " " << this->current_time << std::endl;
     // for parallel computing purpose
     jn.reinit(this->triangulation.n_active_cells());
     pressure_gp0.reinit(this->triangulation.n_active_cells());
@@ -518,7 +526,7 @@ void battery<dim>::run()
     T_n.reinit(this->triangulation.n_active_cells());
 
 		PetscPrintf(this->mpi_communicator,"************");
-		PetscPrintf(this->mpi_communicator,"current increment=%d, current time= %f",this->current_increment, this->current_time);
+		PetscPrintf(this->mpi_communicator,"current increment=%d, current time=%f, dt=%f",this->current_increment, this->current_time, this->current_dt);
 		PetscPrintf(this->mpi_communicator,"************\n");
 
     {
@@ -532,12 +540,7 @@ void battery<dim>::run()
 
 		this->solve_ibvp();
 	  bool to_flip=(*params_json)["ElectroChemo"]["to_flip"]; // has to be here. to_flip will be updated in solve_ibvp()
-    if (to_flip)
-    {
-      (*params_json)["ElectroChemo"]["flip_time"] = this->current_time;
-      std::cout << " flip discharge/charge sign at: " << this->current_time << " (s) " << std::endl;
-    }
-    else
+    if (not to_flip)
     {
       // update history variables
       for (unsigned i = 0; i < cell_SDdata.size(); ++i) {
@@ -555,7 +558,7 @@ void battery<dim>::run()
         //for (int q=0; q<4; q++) cell_SDdata[i].C_Li_plus_old[q] = cell_SDdata[i].C_Li_plus_new[q];
         //std::cout << "C_Li_plus_old[3]" << cell_SDdata[i].C_Li_plus_old[3] << std::endl;
       }
-      std::cout << " SD updated! " << std::endl;
+      this->pcout << " SD updated! " << std::endl;
     }
 		
 	  t_solve = clock() - t_solve;
@@ -575,24 +578,29 @@ void battery<dim>::run()
     {
       this->output_results();
       pressure_old = pressure;
-      std::cout << " pressure updated " << std::endl;
+      this->pcout << " pressure updated " << std::endl;
     }
     else
     {
       int resume_non_conv_back_at = 7;
       (*params_json)["Problem"]["sd_data_file"] = this->snapshot_directory+"restart-"+std::to_string(this->current_increment +this->off_output_index - resume_non_conv_back_at)+".dat";
 
-      std::cout << "restart from " << this->current_increment << " " <<  this->off_output_index << " " <<  resume_non_conv_back_at << " " << this->current_increment +this->off_output_index - resume_non_conv_back_at << std::endl;
+      //std::cout << "restart from incr=" << this->current_increment << " off-output-index=" <<  this->off_output_index << " non-conv-at= " <<  resume_non_conv_back_at << " new-index= " << this->current_increment +this->off_output_index - resume_non_conv_back_at << std::endl;
 
-      std::cout << " load sd data from " <<  (*params_json)["Problem"]["sd_data_file"] << std::endl;
+      this->pcout << " load sd data from " <<  (*params_json)["Problem"]["sd_data_file"] << std::endl;
       (*params_json)["Problem"]["snapshot_file"] = this->snapshot_directory+"snapshot-"+std::to_string(this->current_increment+this->off_output_index - resume_non_conv_back_at)+".dat";
 
-      this->current_increment = this->current_increment - resume_non_conv_back_at + 2;
+      this->current_increment = this->current_increment - resume_non_conv_back_at;
+      this->current_time = sim_time_info[this->current_increment];
+      this->pcout << " this->current_increment is set to " <<  this->current_increment <<  " this->current_time is set to " << this->current_time << std::endl;
+
+      (*params_json)["ElectroChemo"]["flip_time"] = this->current_time;
+      std::cout << " flip discharge/charge sign at (revert back to): " << this->current_time << " (s) " << std::endl;
 
       std::string snapfile=(*params_json)["Problem"]["snapshot_file"];
-	  this->pcout<<"resuming from snapshot " << snapfile <<std::endl;
-	  this->FEMdata_out.resume_vector_from_snapshot(this->solution,snapfile);
-	  this->solution_prev=this->solution;
+	    this->pcout<<"resuming from snapshot " << snapfile <<std::endl;
+	    this->FEMdata_out.resume_vector_from_snapshot(this->solution,snapfile);
+	    this->solution_prev=this->solution;
       load_sd_data();
       for (unsigned int count = 0; count < cell_SDdata.size(); count++)
       {

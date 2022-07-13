@@ -299,7 +299,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
   for(unsigned int q=0; q<n_q_points;q++) 
   {
     rhs_mu[q]= 
-      - D_3/100 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
+      - D_3/10 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
       + D_2 * (4*c_1[q]*c_1[q]*c_1[q] - 6*c_1[q]*c_1[q] + 2*c_1[q] - 57.5646*std::pow(10, -50.0*c_1[q]) + 5.75646*std::pow(10,-49)*std::pow(10,50.0*c_1[q]))
       -mu[q];
   }
@@ -341,7 +341,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 
 	for (unsigned int i0=0; i0<dofs_per_cell; ++i0){
     int cell_id = cell->active_cell_index();
-    if (cell_id == 0)     std::cout << " R[i0] " << i0 << " "  << R[i0] << std::endl;
+    if (cell_id == -1)     std::cout << " R[i0] " << i0 << " "  << R[i0] << std::endl;
     if (R[i0] != R[i0])
     {
       std::cout << " R[i0] " << R[i0] << std::endl;

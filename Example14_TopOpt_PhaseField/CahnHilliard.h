@@ -75,7 +75,7 @@ void CahnHilliard<dim>::apply_initial_condition()
       int vertex_id = 0;
       for (unsigned int i=0; i<dofs_per_cell; ++i) {
         int ck = fe_values.get_fe().system_to_component_index(i).first;
-        if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = 0.35 + 0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+        if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = 0.35 + 0.0001*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
         //if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = exp(-5.0 * cell->vertex(vertex_id)[0]) * exp(-5.0 * (1.0-cell->vertex(vertex_id)[1]));
         //if (ck==c_dof and this->solution_prev(local_dof_indices[i]) <0.01) this->solution_prev(local_dof_indices[i]) = 0.01;
         if (ck==mu_dof) this->solution_prev(local_dof_indices[i]) = 0.0;
@@ -299,7 +299,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
   for(unsigned int q=0; q<n_q_points;q++) 
   {
     rhs_mu[q]= 
-      - D_3/1000 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
+      - D_3/100 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
       + D_2 * (4*c_1[q]*c_1[q]*c_1[q] - 6*c_1[q]*c_1[q] + 2*c_1[q] - 57.5646*std::pow(10, -50.0*c_1[q]) + 5.75646*std::pow(10,-49)*std::pow(10,50.0*c_1[q]))
       -mu[q];
   }

@@ -56,11 +56,11 @@ set gamma_E = 1.247e4
 
 set D_1 = 1.0
 set D_2 = 4.267e3
-set D_3 = 0 #5.322e7
+set D_3 = 5.322e7
 set D_4 = 1000
 set D_5 = 0
 
-set enable_coupling = 0 #1
+set enable_coupling = 1
 
 end
 						

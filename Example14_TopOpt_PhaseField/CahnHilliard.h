@@ -19,21 +19,24 @@ CahnHilliard<dim>::CahnHilliard()
 	constraints=this->constraints_mechanoChemFEM;
 	//This let you use one params to get all parameters pre-defined in the mechanoChemFEM
 	params=this->params_mechanoChemFEM;
-	params->enter_subsection("Concentration");
-	params->declare_entry("c_ini","0",Patterns::Double() );
-
-	params->declare_entry("omega","0",Patterns::Double() );
-	params->declare_entry("c_alpha","0",Patterns::Double() );
-	params->declare_entry("c_beta","0",Patterns::Double() );
-	params->declare_entry("kappa","0",Patterns::Double() );
-	params->declare_entry("M","0",Patterns::Double() );
-	params->declare_entry("phi_0","0",Patterns::Double() );
-	params->declare_entry("zeta_0","0",Patterns::Double() );
-	params->declare_entry("flux_0","0",Patterns::Double() );
-	params->declare_entry("m_ratio_0","1.0",Patterns::Double() );
-	params->declare_entry("youngsModulus","0",Patterns::Double() );
-	params->declare_entry("poissonRatio","0",Patterns::Double() );
-
+	params->enter_subsection("Parameters");
+	params->declare_entry("L_0","0",Patterns::Double() );
+	params->declare_entry("T_0","0",Patterns::Double() );
+	params->declare_entry("E_0","0",Patterns::Double() );
+	params->declare_entry("nu_0","0",Patterns::Double() );
+	params->declare_entry("h_0","0",Patterns::Double() );
+	params->declare_entry("f_0","0",Patterns::Double() );
+	params->declare_entry("M_0","0",Patterns::Double() );
+	params->declare_entry("d_1","0",Patterns::Double() );
+	params->declare_entry("d_2","0",Patterns::Double() );
+	params->declare_entry("lambda_bar","0",Patterns::Double() );
+	params->declare_entry("gamma_bar","0",Patterns::Double() );
+	params->declare_entry("gamma_E","0",Patterns::Double() );
+	params->declare_entry("D_1","0",Patterns::Double() );
+	params->declare_entry("D_2","0",Patterns::Double() );
+	params->declare_entry("D_3","0",Patterns::Double() );
+	params->declare_entry("D_4","0",Patterns::Double() );
+	params->declare_entry("D_5","0",Patterns::Double() );
 	params->leave_subsection();		
 	
 	//Declear the parameters before load it
@@ -67,7 +70,7 @@ void CahnHilliard<dim>::apply_initial_condition()
       int vertex_id = 0;
       for (unsigned int i=0; i<dofs_per_cell; ++i) {
         int ck = fe_values.get_fe().system_to_component_index(i).first;
-        if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = 0.5 + 0.04*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+        if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = 0.35 + 0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
         //if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = exp(-5.0 * cell->vertex(vertex_id)[0]) * exp(-5.0 * (1.0-cell->vertex(vertex_id)[1]));
         //if (ck==c_dof and this->solution_prev(local_dof_indices[i]) <0.01) this->solution_prev(local_dof_indices[i]) = 0.01;
         if (ck==mu_dof) this->solution_prev(local_dof_indices[i]) = 0.0;
@@ -85,6 +88,11 @@ void CahnHilliard<dim>::apply_initial_condition()
 
   // TODO : add proper elasticity constraint here
   {
+	  params->enter_subsection("Geometry");
+	  double x_min=params->get_double("x_min");
+	  double x_max=params->get_double("x_max");
+	  params->leave_subsection();
+
     hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points);
     typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc = this->dof_handler.end();
     for (; cell != endc; ++cell) {
@@ -97,17 +105,18 @@ void CahnHilliard<dim>::apply_initial_condition()
         const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
         std::vector<unsigned int> local_dof_indices(dofs_per_cell);
         cell->get_dof_indices(local_dof_indices);
-        //-------------- fix all displacement
+
+        int _vertex_id = -1;
         for (unsigned int i=0; i<dofs_per_cell; ++i) {
           const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
+          if (ck == 0) _vertex_id += 1;
           //std::cout << cell_id << " ck " << ck << std::endl;
-          if (ck==u_dof or ck==u_dof+1)
+          if ( (ck==u_dof or ck==u_dof+1) and (std::abs(cell->vertex(_vertex_id)[0] - x_min) < 1e-4))
           {
             auto globalDOF = local_dof_indices[i];
             constraints->add_line(globalDOF);
             constraints->set_inhomogeneity(globalDOF, 0.0);
           }
-
         }
 
       }
@@ -122,28 +131,48 @@ template <int dim>
 void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {
 	//evaluate primary fields
-	params->enter_subsection("Concentration");
-	double M=params->get_double("M");
-	double omega=params->get_double("omega");
-	double c_alpha=params->get_double("c_alpha");
-	double c_beta=params->get_double("c_beta");
-	double kappa=params->get_double("kappa");
-	double phi_0=params->get_double("phi_0");
-	double zeta_0=params->get_double("zeta_0");
-	double flux_0=params->get_double("flux_0");
-	double M_ratio=params->get_double("m_ratio_0");
-	double youngsModulus=params->get_double("youngsModulus");
-	double poissonRatio=params->get_double("poissonRatio");
-	params->leave_subsection();
-	unsigned int n_q_points= fe_values.n_quadrature_points;
+	params->enter_subsection("Parameters");
 
-	//mechanics
-	deformationMap<Sacado::Fad::DFad<double>, dim> defMap(n_q_points); 
-	getDeformationMap<Sacado::Fad::DFad<double>, dim>(fe_values, u_dof, ULocal, defMap);
+	double L_0=params->get_double("L_0");
+	double T_0=params->get_double("T_0");
+	double E_0=params->get_double("E_0");
+	double nu_0=params->get_double("nu_0");
+	double h_0=params->get_double("h_0");
+	double f_0=params->get_double("f_0");
+	double M_0=params->get_double("M_0");
+	double d_1=params->get_double("d_1");
+	double d_2=params->get_double("d_2");
+
+	double lambda_bar=params->get_double("lambda_bar");
+	double gamma_bar=params->get_double("gamma_bar");
+	double gamma_E=params->get_double("gamma_E");
+
+	double D_1=params->get_double("D_1");
+	double D_2=params->get_double("D_2");
+	double D_3=params->get_double("D_3");
+	double D_4=params->get_double("D_4");
+	double D_5=params->get_double("D_5");
+
+	params->leave_subsection();
+
+
+	params->enter_subsection("Geometry");
+	double x_min=params->get_double("x_min");
+	double x_max=params->get_double("x_max");
+	double y_min=params->get_double("y_min");
+	double y_max=params->get_double("y_max");
+	params->leave_subsection();
+
+	unsigned int n_q_points= fe_values.n_quadrature_points;
+  const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
+
+	////mechanics
+	//deformationMap<Sacado::Fad::DFad<double>, dim> defMap(n_q_points); 
+	//getDeformationMap<Sacado::Fad::DFad<double>, dim>(fe_values, u_dof, ULocal, defMap);
 		
-	dealii::Table<1,double>  c_1_conv(n_q_points);
 	dealii::Table<1,Sacado::Fad::DFad<double> > c_1(n_q_points), mu(n_q_points);
-	dealii::Table<2,Sacado::Fad::DFad<double> >  c_1_grad(n_q_points, dim), mu_grad(n_q_points, dim);
+	dealii::Table<2,Sacado::Fad::DFad<double> > c_1_grad(n_q_points, dim), mu_grad(n_q_points, dim);
+	dealii::Table<1,double>  c_1_conv(n_q_points);
 	dealii::Table<2,double>  c_1_grad_conv(n_q_points, dim);
 	
 	evaluateScalarFunction<double,dim>(fe_values, c_dof, ULocalConv, c_1_conv);
@@ -154,71 +183,134 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 	
 	evaluateScalarFunction<Sacado::Fad::DFad<double>,dim>(fe_values, mu_dof, ULocal, mu);	
 	evaluateScalarFunctionGradient<Sacado::Fad::DFad<double>,dim>(fe_values, mu_dof, ULocal, mu_grad);
-
 	
 	//evaluate diffusion and reaction term
 	dealii::Table<1,Sacado::Fad::DFad<double> > rhs_mu(n_q_points);
 	dealii::Table<2,Sacado::Fad::DFad<double> > j_c_1(n_q_points, dim), kappa_c_1_grad(n_q_points, dim);
-	
-	kappa_c_1_grad=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(c_1_grad,kappa);
-
 
   //scalar M
-  j_c_1=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(mu_grad,-M);//-D_1*c_1_grad
-	
-  for(unsigned int q=0; q<n_q_points;q++) 
-    rhs_mu[q]=
-      //omega=A, B=3.5*A
-      omega*(log(c_1[q]/(1.0-c_1[q]))) + 2.5 *omega*(1.0-2.0*c_1[q])-mu[q];
-	
+  j_c_1=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(mu_grad,-M_0);//-D_1*c_1_grad
 	//call residual functions
 	this->ResidualEq.residualForDiffusionEq(fe_values, c_dof, R, c_1, c_1_conv, j_c_1);
+  //std::cout << "done with rho" << std::endl;
+
+
+  // mechanics
+  Sacado::Fad::DFad<double>  phi_e[n_q_points] = {0.0};
+
+  for (unsigned int q = 0; q < n_q_points; ++q) {
+    phi_e[q] = 0.0;
+
+    Sacado::Fad::DFad<double> rho = c_1[q];
+    //Sacado::Fad::DFad<double> g_rho_fcn = std::pow(1.0/(1.0 + std::exp(-10.0*(rho - 0.5))), 3.0);
+    Sacado::Fad::DFad<double> g_rho_fcn = 1.0/(1.0 + std::exp(-10.0*(rho - 0.5))); // without power 3
+  //std::cout << "done with g_rho" << std::endl;
+
+    Sacado::Fad::DFad<double> grad_u[dim][dim] = {0.0};
+    Sacado::Fad::DFad<double> strain[dim][dim] = {0.0};
+    Sacado::Fad::DFad<double> stress[dim][dim] = {0.0};
+    for (unsigned int c = 0; c < dim; c++) {
+      for (unsigned int d = 0; d < dim; d++) {
+        strain[c][d] = 0.0;
+      }
+    }
+  //std::cout << "done with strain 1" << std::endl;
+    for (unsigned int i = 0; i < dofs_per_cell; ++i) {
+      //std::cout << " ULocal[i] " << i << " " << ULocal[i] << std::endl;
+      const unsigned int c = fe_values.get_fe().system_to_component_index(i).first;
+      // u_u[c] += solution_loc[i] * fe_values.shape_value_component(i, q, c); // N(3x8)@q=N(c,i)@q
+
+      if ( c >= u_dof and c < u_dof +dim){
+        for (unsigned int d = 0; d < dim; d++) {
+          grad_u[c-u_dof][d] += ULocal[i] * fe_values.shape_grad_component(i, q, c-u_dof)[d];  // B(3x3x8)@q=B(c,d,i)@q
+        }
+      }
+    }
+
+    for (unsigned int c = 0; c < dim; c++)
+      for (unsigned int d = 0; d < dim; d++) strain[c][d] = 0.5 * (grad_u[c][d] + grad_u[d][c]);  
+  //std::cout << "done with strain" << std::endl;
+
+    // E_0 is replaced with 1.0
+    //double mu = E_0/2.0/(1.0+nu_0);
+    //double lambda = (E_0*nu_0)/(1.0+nu_0)/(1.0-2.0*nu_0);
+    double mu = 1.0/2.0/(1.0+nu_0);
+    double lambda = (1.0*nu_0)/(1.0+nu_0)/(1.0-2.0*nu_0);
+
+    // compute stress
+    Sacado::Fad::DFad<double> tr_e = 0.0;
+    for (unsigned int c = 0; c < dim; c++) tr_e += strain[c][c];
+
+    for (unsigned int c = 0; c < dim; c++) {
+      for (unsigned int d = 0; d < dim; d++) {
+        stress[c][d] = g_rho_fcn * 2.0 * mu * strain[c][d]; // check if the g_rho_fcn is correct.
+        if (c == d) stress[c][d] += g_rho_fcn * lambda * tr_e;
+      }
+    }
+  //std::cout << "done with stress" << std::endl;
+
+    for (unsigned int c = 0; c < dim; c++) {
+      for (unsigned int d = 0; d < dim; d++) {
+        phi_e[q] += stress[c][d] * strain[c][d];
+      }
+    }
+
+  //std::cout << "done with phi_e" << std::endl;
+    for (unsigned i = 0; i < dofs_per_cell; ++i) {
+      const unsigned int c = fe_values.get_fe().system_to_component_index(i).first;
+      if ( c >= u_dof and c < u_dof + dim){
+        for (unsigned int d = 0; d < dim; d++) R[i] -= D_4 * stress[c-u_dof][d] * fe_values.shape_grad_component(i, q, c-u_dof)[d] * fe_values.JxW(q);
+      }
+    }
+
+  } // q for mechanics
+  //std::cout << "done with mechanics" << std::endl;
+
+	//kappa_c_1_grad=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(c_1_grad,kappa);
+	kappa_c_1_grad=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(c_1_grad,L_0*L_0); // dimensionless parameters
+  for(unsigned int q=0; q<n_q_points;q++) 
+  {
+    rhs_mu[q]= 
+      D_3 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
+      + D_2 * (4*c_1[q]*c_1[q]*c_1[q] - 6*c_1[q]*c_1[q] + 2*c_1[q] - 57.5646*std::pow(10, -50*c_1[q]) + 5.75646*std::pow(10,-49)*std::pow(10,50*c_1[q]))
+      -mu[q];
+  }
 	this->ResidualEq.residualForPoissonEq(fe_values, mu_dof, R, kappa_c_1_grad, rhs_mu);
 
-  //if (cell->active_cell_index() == 0) std::cout << " kappa " << kappa << " M " << M  << " omega "<< omega << std::endl;
-  //
+  //std::cout << "done with mu" << std::endl;
 
-  double c_ini = 1.0;
-  // mechanics
-	dealii::Table<3, Sacado::Fad::DFad<double> > P(n_q_points,dim,dim), Fe(n_q_points,dim,dim);
-	
-	for(unsigned int q=0; q<n_q_points;q++){
-		for (unsigned int i=0; i<dim; ++i){
-			for (unsigned int j=0; j<dim; ++j){
-	  		Fe[q][i][j]=defMap.F[q][i][j]/std::pow((c_1[q]/c_ini), 1.0/3.0); //Isotropic growth
-			}
-		}
-	}
-  this->ResidualEq.setLameParametersByYoungsModulusPoissonRatio(youngsModulus, poissonRatio);
-	this->ResidualEq.evaluateNeoHookeanStress(P, Fe);// NeoHookean model, Saint_Venant_Kirchhoff is also available 
-  this->ResidualEq.residualForMechanics(fe_values, u_dof, R, P);	
+	//apply Neumann boundary condition
+  for (unsigned int faceID=0; faceID<2*dim; faceID++){
+    if(cell->face(faceID)->at_boundary()==true ){
+      if( std::abs(cell->face(faceID)->center()[0] - x_max) <= 1e-4 )
+      {
+        if( cell->face(faceID)->center()[1] >= (y_max - d_1 - d_2) and cell->face(faceID)->center()[1] <= (y_max - d_1) )
+        {
+          FEFaceValues<dim> fe_face_values(fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
+          fe_face_values.reinit(cell,faceID);
 
+          unsigned int dofs_per_cell= fe_values.dofs_per_cell;
+	        unsigned int n_face_q_points=fe_face_values.n_quadrature_points;
+	        unsigned int ck;
+          for (unsigned int i=0; i<dofs_per_cell; ++i) {
+            ck = fe_values.get_fe().system_to_component_index(i).first;
+	        	if(ck>=u_dof && ck<u_dof + dim){
+	        		for (unsigned int q=0; q<n_face_q_points; ++q){
+                if (ck == u_dof + 1)
+                {
+                  // check if the y traction is done correctly or not
+	        			  R[i] += fe_face_values.shape_value(i, q)* (-1.0) *fe_face_values.JxW(q); // traction in the y direction.
+                } // y direction traction
+	        		} // loop of q
+	        	} // ck condition
+	        }	 // loop of dofs_per_cell
+        } // at y d_1
+      } // at x_max
+    } // at boundary
+  }
 
-	//apply_Neumann_boundary_condition();
-  //
-  //std::vector<types::global_dof_index> local_face_dof_indices(fe_values.get_fe().dofs_per_face);
-  //std::vector<types::global_dof_index> local_dof_indices;
-  //local_dof_indices.resize(dofs_per_cell);
-  //cell->get_dof_indices(local_dof_indices);
+  //std::cout << "done with BCs" << std::endl;
 
-	//disable BC
-	//for (unsigned int faceID=0; faceID<2*dim; faceID++){
-		//if(cell->face(faceID)->at_boundary()==true ){
-			////if(cell->face(faceID)->center()[0] <= 0.001 and cell->face(faceID)->center()[1] >= 0.97)
-			//if(cell->face(faceID)->center()[0] <= 0.001)
-      //{
-        ////std::cout << " c_1[q] " << c_1[0].val() << " " << c_1[1].val() << " " << c_1[2].val() << " " << c_1[3].val() << std::endl;
-        //if (c_1[0] > 0.35 and c_1[0] < 0.65)
-        //{
-					//FEFaceValues<dim> fe_face_values(fe_values.get_fe(), *(this->common_face_quadrature), update_values | update_quadrature_points | update_JxW_values);
-					//fe_face_values.reinit(cell,faceID);
-					//this->ResidualEq.residualForNeummanBC(fe_values, fe_face_values, c_dof , R, flux_0);
-        //}
-			//}
-    //}
-	//}
-
-  const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
 	for (unsigned int i0=0; i0<dofs_per_cell; ++i0){
     if (R[i0] != R[i0])
     {

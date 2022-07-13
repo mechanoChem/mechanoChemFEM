@@ -28,26 +28,38 @@ subsection Geometry
 set x_min = 0
 set y_min = 0
 set z_min = 0
-set x_max = 1
-set y_max = 1
+set x_max = 2.0
+set y_max = 1.0
 set z_max = 2.0 #no need to 2D
 
-set num_elem_x=100
-set num_elem_y=100
+set num_elem_x=320
+set num_elem_y=160
 set num_elem_z=5 #no need to 2D
 end
 
-subsection Concentration
-set omega = 1.0
-set c_alpha = 0.1
-set c_beta = 0.9
-set kappa = 0.01
-set M=0.0001
-set phi_0 = -0.0
-set zeta_0 = 0.0
-set flux_0 = -0.002
-set youngsModulus = 1.0
-set poissonRatio = 0.3
+subsection Parameters
+set L_0 = 1.0 # m
+set T_0 = 4.267e3 # characteristic time
+set E_0 = 200e9 # Pa=N/m^2 J/m^3 but not J/m=Nm/m=N (mistake?)
+set nu_0 = 0.333333
+set h_0 = 200e6 # Pa
+set f_0 = 0 # N/m^3
+set M_0 = 1 # m^2/s
+
+set d_1 = 0.45 # loading info
+set d_2 = 0.10 # loading info
+
+set lambda_bar = 6.0
+set gamma_bar = 1.0
+set gamma_E = 1.247e4
+
+set D_1 = 1
+set D_2 = 4.267e3
+set D_3 = 5.322e7
+set D_4 = 1000
+set D_5 = 0
+
+
 end
 						
 #

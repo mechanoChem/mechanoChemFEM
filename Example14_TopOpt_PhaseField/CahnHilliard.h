@@ -29,6 +29,8 @@ CahnHilliard<dim>::CahnHilliard()
 	params->declare_entry("M_0","0",Patterns::Double() );
 	params->declare_entry("d_1","0",Patterns::Double() );
 	params->declare_entry("d_2","0",Patterns::Double() );
+  params->declare_entry("h_bar_y","0",Patterns::Double() );
+
 	params->declare_entry("lambda_bar","0",Patterns::Double() );
 	params->declare_entry("gamma_bar","0",Patterns::Double() );
 	params->declare_entry("gamma_E","0",Patterns::Double() );
@@ -37,6 +39,9 @@ CahnHilliard<dim>::CahnHilliard()
 	params->declare_entry("D_3","0",Patterns::Double() );
 	params->declare_entry("D_4","0",Patterns::Double() );
 	params->declare_entry("D_5","0",Patterns::Double() );
+
+  params->declare_entry("enable_coupling","0",Patterns::Integer());
+
 	params->leave_subsection();		
 	
 	//Declear the parameters before load it
@@ -112,6 +117,7 @@ void CahnHilliard<dim>::apply_initial_condition()
           if (ck == 0) _vertex_id += 1;
           //std::cout << cell_id << " ck " << ck << std::endl;
           if ( (ck==u_dof or ck==u_dof+1) and (std::abs(cell->vertex(_vertex_id)[0] - x_min) < 1e-3))
+          //if (ck==u_dof or ck==u_dof+1)
           {
             //std::cout << " i (fix x y) " << i << " center " << cell->vertex(_vertex_id) << std::endl;
             auto globalDOF = local_dof_indices[i];
@@ -119,13 +125,13 @@ void CahnHilliard<dim>::apply_initial_condition()
             constraints->set_inhomogeneity(globalDOF, 0.0);
           }
 
-          //if (ck==c_dof or ck==mu_dof) 
-          //{// fix mu and c
-            ////std::cout << " i (fix x y) " << i << " center " << cell->vertex(_vertex_id) << std::endl;
-            //auto globalDOF = local_dof_indices[i];
-            //constraints->add_line(globalDOF);
-            //constraints->set_inhomogeneity(globalDOF, 0.0);
-          //}
+          // if (ck==c_dof or ck==mu_dof) 
+          // {// fix mu and c
+          //   //std::cout << " i (fix x y) " << i << " center " << cell->vertex(_vertex_id) << std::endl;
+          //   auto globalDOF = local_dof_indices[i];
+          //   constraints->add_line(globalDOF);
+          //   constraints->set_inhomogeneity(globalDOF, 0.0);
+          // }
         }
 
       }
@@ -152,6 +158,9 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 	double d_1=params->get_double("d_1");
 	double d_2=params->get_double("d_2");
 
+  double h_bar_y=params->get_double("h_bar_y");
+
+
 	double lambda_bar=params->get_double("lambda_bar");
 	double gamma_bar=params->get_double("gamma_bar");
 	double gamma_E=params->get_double("gamma_E");
@@ -161,6 +170,8 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 	double D_3=params->get_double("D_3");
 	double D_4=params->get_double("D_4");
 	double D_5=params->get_double("D_5");
+
+	int enable_coupling =params->get_double("enable_coupling");
 
 	params->leave_subsection();
 
@@ -198,9 +209,10 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 	dealii::Table<2,Sacado::Fad::DFad<double> > j_c_1(n_q_points, dim), kappa_c_1_grad(n_q_points, dim);
 
   //scalar M
-  j_c_1=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(mu_grad,-M_0);//-D_1*c_1_grad
+  j_c_1=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(mu_grad,-M_0); 
+
 	//call residual functions
-	this->ResidualEq.residualForDiffusionEq(fe_values, c_dof, R, c_1, c_1_conv, j_c_1);
+	this->ResidualEq.residualForDiffusionEq(fe_values, c_dof, R, c_1, c_1_conv, j_c_1); // D_1=1 is implicitly used here.
   //std::cout << "done with rho" << std::endl;
 
 
@@ -213,6 +225,8 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     Sacado::Fad::DFad<double> rho = c_1[q];
     //Sacado::Fad::DFad<double> g_rho_fcn = std::pow(1.0/(1.0 + std::exp(-10.0*(rho - 0.5))), 3.0);
     Sacado::Fad::DFad<double> g_rho_fcn = 1.0/(1.0 + std::exp(-10.0*(rho - 0.5))); // without power 3
+    if (not enable_coupling) g_rho_fcn = 1.0;
+
     //std::cout << "done with g_rho " << g_rho_fcn<< std::endl;
 
     Sacado::Fad::DFad<double> grad_u[dim][dim] = {0.0};
@@ -285,8 +299,8 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
   for(unsigned int q=0; q<n_q_points;q++) 
   {
     rhs_mu[q]= 
-      D_3 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
-      + D_2 * (4*c_1[q]*c_1[q]*c_1[q] - 6*c_1[q]*c_1[q] + 2*c_1[q] - 57.5646*std::pow(10, -50*c_1[q]) + 5.75646*std::pow(10,-49)*std::pow(10,50*c_1[q]))
+      // D_3 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
+      + D_2 * (4*c_1[q]*c_1[q]*c_1[q] - 6*c_1[q]*c_1[q] + 2*c_1[q] - 57.5646*std::pow(10, -50.0*c_1[q]) + 5.75646*std::pow(10,-49)*std::pow(10,50.0*c_1[q]))
       -mu[q];
   }
 	this->ResidualEq.residualForPoissonEq(fe_values, mu_dof, R, kappa_c_1_grad, rhs_mu);
@@ -313,7 +327,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
                 if (ck == u_dof + 1)
                 {
                   // check if the y traction is done correctly or not
-                  R[i] += fe_face_values.shape_value(i, q)* (-1.0) *fe_face_values.JxW(q); // traction in the y direction.
+                  R[i] += fe_face_values.shape_value(i, q)* h_bar_y *fe_face_values.JxW(q); // traction in the y direction.
                 } // y direction traction
               } // loop of q
             } // ck condition
@@ -326,7 +340,8 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
   //std::cout << "done with BCs" << std::endl;
 
 	for (unsigned int i0=0; i0<dofs_per_cell; ++i0){
-      //std::cout << " R[i0] " << i0 << " "  << R[i0] << std::endl;
+    int cell_id = cell->active_cell_index();
+    if (cell_id == 0)     std::cout << " R[i0] " << i0 << " "  << R[i0] << std::endl;
     if (R[i0] != R[i0])
     {
       std::cout << " R[i0] " << R[i0] << std::endl;

@@ -139,7 +139,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 		
 	dealii::Table<1,double>  c_1_conv(n_q_points);
 	dealii::Table<1,Sacado::Fad::DFad<double> > c_1(n_q_points), mu(n_q_points), phi(n_q_points), zeta(n_q_points);
-	dealii::Table<2,Sacado::Fad::DFad<double> >  c_1_grad(n_q_points, dim), mu_grad(n_q_points, dim), phi_grad(n_q_points, dim), zeta_grad(n_q_points, dim);
+	dealii::Table<2,Sacado::Fad::DFad<double> > c_1_grad(n_q_points, dim), mu_grad(n_q_points, dim), phi_grad(n_q_points, dim), zeta_grad(n_q_points, dim);
 	dealii::Table<2,double>  c_1_grad_conv(n_q_points, dim);
 	
 	evaluateScalarFunction<double,dim>(fe_values, c_dof, ULocalConv, c_1_conv);
@@ -162,7 +162,6 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 	dealii::Table<2,Sacado::Fad::DFad<double> > j_c_1(n_q_points, dim), kappa_c_1_grad(n_q_points, dim);
 	
 	kappa_c_1_grad=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(c_1_grad,kappa);
-
 
   //scalar M
   //j_c_1=table_scaling<dim, Sacado::Fad::DFad<double>, Sacado::Fad::DFad<double> >(mu_grad,-M);//-D_1*c_1_grad

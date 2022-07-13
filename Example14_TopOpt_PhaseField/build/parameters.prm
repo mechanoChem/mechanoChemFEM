@@ -6,7 +6,7 @@ set print_parameter = true
 set primary_variables_list= c1, component_is_scalar, mu1, component_is_scalar, u, component_is_vector
 set FE_support_list= 1,1,1
 
-set dt = 0.04
+set dt = 1e-6
 set totalTime = 500
 set current_increment = 0
 set off_output_index=0
@@ -32,8 +32,8 @@ set x_max = 2.0
 set y_max = 1.0
 set z_max = 2.0 #no need to 2D
 
-set num_elem_x=320
-set num_elem_y=160
+set num_elem_x=160
+set num_elem_y=80
 set num_elem_z=5 #no need to 2D
 end
 
@@ -71,8 +71,8 @@ end
 #
 subsection Nonlinear_solver
 		set nonLinear_method = classicNewton
-		set relative_norm_tolerance = 1.0e-12
-		set absolute_norm_tolerance = 1.0e-12
+		set relative_norm_tolerance = 1.0e-10
+		set absolute_norm_tolerance = 1.0e-10
 		set max_iterations = 10
 end
 						

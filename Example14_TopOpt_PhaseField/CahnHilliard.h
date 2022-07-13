@@ -111,12 +111,21 @@ void CahnHilliard<dim>::apply_initial_condition()
           const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
           if (ck == 0) _vertex_id += 1;
           //std::cout << cell_id << " ck " << ck << std::endl;
-          if ( (ck==u_dof or ck==u_dof+1) and (std::abs(cell->vertex(_vertex_id)[0] - x_min) < 1e-4))
+          if ( (ck==u_dof or ck==u_dof+1) and (std::abs(cell->vertex(_vertex_id)[0] - x_min) < 1e-3))
           {
+            //std::cout << " i (fix x y) " << i << " center " << cell->vertex(_vertex_id) << std::endl;
             auto globalDOF = local_dof_indices[i];
             constraints->add_line(globalDOF);
             constraints->set_inhomogeneity(globalDOF, 0.0);
           }
+
+          //if (ck==c_dof or ck==mu_dof) 
+          //{// fix mu and c
+            ////std::cout << " i (fix x y) " << i << " center " << cell->vertex(_vertex_id) << std::endl;
+            //auto globalDOF = local_dof_indices[i];
+            //constraints->add_line(globalDOF);
+            //constraints->set_inhomogeneity(globalDOF, 0.0);
+          //}
         }
 
       }
@@ -204,11 +213,12 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     Sacado::Fad::DFad<double> rho = c_1[q];
     //Sacado::Fad::DFad<double> g_rho_fcn = std::pow(1.0/(1.0 + std::exp(-10.0*(rho - 0.5))), 3.0);
     Sacado::Fad::DFad<double> g_rho_fcn = 1.0/(1.0 + std::exp(-10.0*(rho - 0.5))); // without power 3
-  //std::cout << "done with g_rho" << std::endl;
+    //std::cout << "done with g_rho " << g_rho_fcn<< std::endl;
 
     Sacado::Fad::DFad<double> grad_u[dim][dim] = {0.0};
     Sacado::Fad::DFad<double> strain[dim][dim] = {0.0};
     Sacado::Fad::DFad<double> stress[dim][dim] = {0.0};
+
     for (unsigned int c = 0; c < dim; c++) {
       for (unsigned int d = 0; d < dim; d++) {
         strain[c][d] = 0.0;
@@ -218,18 +228,18 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     for (unsigned int i = 0; i < dofs_per_cell; ++i) {
       //std::cout << " ULocal[i] " << i << " " << ULocal[i] << std::endl;
       const unsigned int c = fe_values.get_fe().system_to_component_index(i).first;
-      // u_u[c] += solution_loc[i] * fe_values.shape_value_component(i, q, c); // N(3x8)@q=N(c,i)@q
 
-      if ( c >= u_dof and c < u_dof +dim){
+      if ( c >= u_dof and c <u_dof+dim){
         for (unsigned int d = 0; d < dim; d++) {
-          grad_u[c-u_dof][d] += ULocal[i] * fe_values.shape_grad_component(i, q, c-u_dof)[d];  // B(3x3x8)@q=B(c,d,i)@q
+          grad_u[c-u_dof][d] += ULocal[i] * fe_values.shape_grad_component(i, q, c)[d];  // B(3x3x8)@q=B(c,d,i)@q
+          //std::cout << " grad_u " << grad_u[0][0] << " "<< fe_values.shape_grad_component(i, q, c)[d] << std::endl;
         }
       }
     }
 
     for (unsigned int c = 0; c < dim; c++)
       for (unsigned int d = 0; d < dim; d++) strain[c][d] = 0.5 * (grad_u[c][d] + grad_u[d][c]);  
-  //std::cout << "done with strain" << std::endl;
+    //std::cout << "done with strain " << strain[0][0] << std::endl;
 
     // E_0 is replaced with 1.0
     //double mu = E_0/2.0/(1.0+nu_0);
@@ -247,7 +257,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
         if (c == d) stress[c][d] += g_rho_fcn * lambda * tr_e;
       }
     }
-  //std::cout << "done with stress" << std::endl;
+  //std::cout << "done with stress " << stress[0][0] << std::endl;
 
     for (unsigned int c = 0; c < dim; c++) {
       for (unsigned int d = 0; d < dim; d++) {
@@ -259,7 +269,11 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     for (unsigned i = 0; i < dofs_per_cell; ++i) {
       const unsigned int c = fe_values.get_fe().system_to_component_index(i).first;
       if ( c >= u_dof and c < u_dof + dim){
-        for (unsigned int d = 0; d < dim; d++) R[i] -= D_4 * stress[c-u_dof][d] * fe_values.shape_grad_component(i, q, c-u_dof)[d] * fe_values.JxW(q);
+        for (unsigned int d = 0; d < dim; d++)
+        {
+          R[i] -= D_4 * stress[c-u_dof][d] * fe_values.shape_grad_component(i, q, c)[d] * fe_values.JxW(q);
+          //std::cout << "done with R[i] " << i << " " << R[i] << std::endl;
+        }
       }
     }
 
@@ -290,20 +304,20 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
           fe_face_values.reinit(cell,faceID);
 
           unsigned int dofs_per_cell= fe_values.dofs_per_cell;
-	        unsigned int n_face_q_points=fe_face_values.n_quadrature_points;
-	        unsigned int ck;
+          unsigned int n_face_q_points=fe_face_values.n_quadrature_points;
+          unsigned int ck;
           for (unsigned int i=0; i<dofs_per_cell; ++i) {
             ck = fe_values.get_fe().system_to_component_index(i).first;
-	        	if(ck>=u_dof && ck<u_dof + dim){
-	        		for (unsigned int q=0; q<n_face_q_points; ++q){
+            if(ck>=u_dof && ck<u_dof + dim){
+              for (unsigned int q=0; q<n_face_q_points; ++q){
                 if (ck == u_dof + 1)
                 {
                   // check if the y traction is done correctly or not
-	        			  R[i] += fe_face_values.shape_value(i, q)* (-1.0) *fe_face_values.JxW(q); // traction in the y direction.
+                  R[i] += fe_face_values.shape_value(i, q)* (-1.0) *fe_face_values.JxW(q); // traction in the y direction.
                 } // y direction traction
-	        		} // loop of q
-	        	} // ck condition
-	        }	 // loop of dofs_per_cell
+              } // loop of q
+            } // ck condition
+          }	 // loop of dofs_per_cell
         } // at y d_1
       } // at x_max
     } // at boundary
@@ -312,6 +326,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
   //std::cout << "done with BCs" << std::endl;
 
 	for (unsigned int i0=0; i0<dofs_per_cell; ++i0){
+      //std::cout << " R[i0] " << i0 << " "  << R[i0] << std::endl;
     if (R[i0] != R[i0])
     {
       std::cout << " R[i0] " << R[i0] << std::endl;

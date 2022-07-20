@@ -80,26 +80,24 @@ void CahnHilliard<dim>::apply_initial_condition()
   }//cell
 
 	
-	this->solution_prev.compress(VectorOperation::insert);
+	this->solution_prev.compress(VectorOperation::insert); // potentially for parallel computing purpose. 
 	this->solution=this->solution_prev;
 
 	constraints->clear ();
 	DoFTools::make_hanging_node_constraints (this->dof_handler, *constraints);
 
-  {
+  { // add constraints. 
     hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points);
     typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc = this->dof_handler.end();
     for (; cell != endc; ++cell) {
-      if (cell->subdomain_id() == this->this_mpi_process) {
+      if (cell->subdomain_id() == this->this_mpi_process) { // parallel computing. 
         //int cell_id = cell->active_cell_index();
-        Point<dim> center=cell->center();
         hp_fe_values.reinit (cell);
         const FEValues<dim> &fe_values = hp_fe_values.get_present_fe_values();
 
         const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
         std::vector<unsigned int> local_dof_indices(dofs_per_cell);
         cell->get_dof_indices(local_dof_indices);
-        //-------------- fix all displacement
         for (unsigned int i=0; i<dofs_per_cell; ++i) {
           const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
           //std::cout << cell_id << " ck " << ck << std::endl;

@@ -13,6 +13,8 @@ class CahnHilliard: public mechanoChemFEM<dim>
 
 	  int c_dof=0, mu_dof=1, u_dof=2;
     double total_phi_e = 0.0;
+    double total_phi_i = 0.0;
+    double total_phi_b = 0.0;
 };
 template <int dim>
 CahnHilliard<dim>::CahnHilliard()
@@ -147,7 +149,12 @@ template <int dim>
 void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {
   int cell_id = cell->active_cell_index();
-  if (cell_id = 0) this->total_phi_e = 0.0;
+  if (cell_id == 0) 
+  {
+    this->total_phi_e = 0.0;
+    this->total_phi_i = 0.0;
+    this->total_phi_b = 0.0;
+  }
 	//evaluate primary fields
 	params->enter_subsection("Parameters");
 
@@ -221,9 +228,13 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 
   // mechanics
   Sacado::Fad::DFad<double>  phi_e[n_q_points] = {0.0};
+  Sacado::Fad::DFad<double>  phi_b[n_q_points] = {0.0};
+  Sacado::Fad::DFad<double>  phi_i[n_q_points] = {0.0};
 
   for (unsigned int q = 0; q < n_q_points; ++q) {
     phi_e[q] = 0.0;
+    phi_b[q] = 0.0;
+    phi_i[q] = 0.0;
 
     Sacado::Fad::DFad<double> rho = c_1[q];
     //Sacado::Fad::DFad<double> g_rho_fcn = std::pow(1.0/(1.0 + std::exp(-10.0*(rho - 0.5))), 3.0);
@@ -281,7 +292,6 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
         phi_e[q] += stress[c][d] * strain[c][d];
       }
     }
-    this->total_phi_e += phi_e[q].val();
 
   //std::cout << "done with phi_e" << std::endl;
     for (unsigned i = 0; i < dofs_per_cell; ++i) {
@@ -304,10 +314,19 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
   {
     rhs_mu[q]= 
       - D_3 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
-      - D_2 * (4*c_1[q]*c_1[q]*c_1[q] - 6*c_1[q]*c_1[q] + 2*c_1[q] - 57.5646*std::pow(10, -50.0*c_1[q]) + 5.75646*std::pow(10,-49)*std::pow(10,50.0*c_1[q]))
+      + D_2 * (4*c_1[q]*c_1[q]*c_1[q] - 6*c_1[q]*c_1[q] + 2*c_1[q] - 57.5646*std::pow(10, -50.0*c_1[q]) + 5.75646*std::pow(10,-49)*std::pow(10,50.0*c_1[q]))
       -mu[q];
   }
 	this->ResidualEq.residualForPoissonEq(fe_values, mu_dof, R, kappa_c_1_grad, rhs_mu);
+
+  for(unsigned int q=0; q<n_q_points;q++) 
+  {
+    phi_b[q] = c_1[q]*c_1[q]*(1.0-c_1[q])*(1.0-c_1[q]) + 0.5*(std::pow(10, -50.0*c_1[q]) + std::pow(10, 50*(c_1[q]-1)));
+    phi_i[q] = lambda_bar * 0.00625 * 0.00625 * 0.5 * (c_1_grad[q][0]*c_1_grad[q][0] + c_1_grad[q][1]*c_1_grad[q][1]);
+    this->total_phi_e += gamma_bar * gamma_E * phi_e[q].val() * fe_values.JxW(q);
+    this->total_phi_b += phi_b[q].val() * fe_values.JxW(q);
+    this->total_phi_i += phi_i[q].val() * fe_values.JxW(q);
+  }
 
   //std::cout << "done with mu" << std::endl;
 
@@ -353,7 +372,13 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     }
   }
 
-  if (cell_id == 160*80-1) std::cout << " total_phi_e " << total_phi_e << std::endl;
+  //std::cout << cell_id << std::endl;
+  if (cell_id == 12799) 
+    std::cout 
+      << " total_phi_e " << this->total_phi_e 
+      << " total_phi_b " << this->total_phi_b
+      << " total_phi_i " << this->total_phi_i 
+      << std::endl;
 	
 }
 

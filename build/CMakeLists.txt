@@ -15,6 +15,8 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.8)
 
+set(CMAKE_CXX_STANDARD 14)
+
 
 #Include deal.II
 ##---------------------------------------------------------------------------------------------------------------------
@@ -55,12 +57,14 @@ PROJECT(${TARGET})
 DEAL_II_INVOKE_AUTOPILOT()
 set(CMAKE_STATIC_LIBRARY_PREFIX "")
 
+
+
 #export SACADO_DIR=/gpfs/gpfs0/groups/garikipati/Software/trilinos-11.8.1-Source/install
 #export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem/v0.51
-#SET (sacado_INC $ENV{SACADO_DIR}/include)
-#SET (sacado_LIB $ENV{SACADO_DIR}/lib/libsacado.a)
 
-#INCLUDE_DIRECTORIES(${sacado_INC})
+SET (sacado_INC $ENV{TRILINOS_DIR}/include)
+SET (sacado_LIB $ENV{TRILINOS_DIR}/lib/libkokkoscore.so $ENV{TRILINOS_DIR}/lib/libsacado.so)
+INCLUDE_DIRECTORIES(${sacado_INC})
 #TARGET_LINK_LIBRARIES(main mechanoChemFEM)
 ##---------------------------------------------------------------------------------------------------------------------
 
@@ -69,22 +73,7 @@ set(CMAKE_STATIC_LIBRARY_PREFIX "")
 ##Set dirdctory for openIGA, please give a full path and make sure the directory is valid 
 ##---------------------------------------------------------------------------------------------------------------------
 #install(TARGETS mechanoChemFEM DESTINATION /gpfs/gpfs0/groups/garikipati/Software/mechanoChemFEM_v0.7/lib)
-set(mechanoChemFEM_DIR /Users/wzhenlin/numerics/mechanochem)
-install(TARGETS mechanoChemFEM DESTINATION ${mechanoChemFEM_DIR}/v0.7/lib)
-FILE(COPY ../include DESTINATION ${mechanoChemFEM_DIR}/v0.7/)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#set(mechanoChemFEM_DIR /Users/wzhenlin/numerics/mechanochem)
+install(TARGETS mechanoChemFEM DESTINATION $ENV{mechanoChemFEM_DIR}/v0.7/lib)
+FILE(COPY ../include DESTINATION $ENV{mechanoChemFEM_DIR}/v0.7/)
 

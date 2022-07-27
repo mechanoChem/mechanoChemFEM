@@ -227,9 +227,9 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
 
 
   // mechanics
-  Sacado::Fad::DFad<double>  phi_e[n_q_points] = {0.0};
-  Sacado::Fad::DFad<double>  phi_b[n_q_points] = {0.0};
-  Sacado::Fad::DFad<double>  phi_i[n_q_points] = {0.0};
+  Sacado::Fad::DFad<double>  phi_e[n_q_points];
+  Sacado::Fad::DFad<double>  phi_b[n_q_points];
+  Sacado::Fad::DFad<double>  phi_i[n_q_points];
 
   for (unsigned int q = 0; q < n_q_points; ++q) {
     phi_e[q] = 0.0;

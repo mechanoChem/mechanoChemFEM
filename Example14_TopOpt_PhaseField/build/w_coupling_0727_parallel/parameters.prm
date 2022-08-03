@@ -6,7 +6,7 @@ set print_parameter = true
 set primary_variables_list= c1, component_is_scalar, mu1, component_is_scalar, u, component_is_vector
 set FE_support_list= 1,1,1
 
-set dt = 1e-10
+set dt = 1e-9
 set totalTime = 500
 set current_increment = 0
 set off_output_index=0

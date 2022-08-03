@@ -66,7 +66,8 @@ void CahnHilliard<dim>::apply_initial_condition()
 
   typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc=this->dof_handler.end();
   for (;cell!=endc; ++cell){
-    if (cell->subdomain_id() == this->this_mpi_process){
+    if (cell->subdomain_id() == this->this_mpi_process)
+    {
       Point<dim> center=cell->center();
       hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points);
       hp_fe_values.reinit (cell);
@@ -104,7 +105,8 @@ void CahnHilliard<dim>::apply_initial_condition()
     hp::FEValues<dim> hp_fe_values (this->fe_collection, this->q_collection, update_values | update_quadrature_points);
     typename hp::DoFHandler<dim>::active_cell_iterator cell = this->dof_handler.begin_active(), endc = this->dof_handler.end();
     for (; cell != endc; ++cell) {
-      if (cell->subdomain_id() == this->this_mpi_process) {
+      if (cell->subdomain_id() == this->this_mpi_process) 
+      {
         //int cell_id = cell->active_cell_index();
         Point<dim> center=cell->center();
         hp_fe_values.reinit (cell);
@@ -239,7 +241,11 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     Sacado::Fad::DFad<double> rho = c_1[q];
     //Sacado::Fad::DFad<double> g_rho_fcn = std::pow(1.0/(1.0 + std::exp(-10.0*(rho - 0.5))), 3.0);
     Sacado::Fad::DFad<double> g_rho_fcn = 1.0/(1.0 + std::exp(-10.0*(rho - 0.5))); // without power 3
-    if (not enable_coupling) g_rho_fcn = 1.0;
+    if (not enable_coupling) 
+    {
+      g_rho_fcn = 1.0;
+      D_3 = 0.0;
+    }
 
     //std::cout << "done with g_rho " << g_rho_fcn<< std::endl;
 
@@ -316,6 +322,8 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
       - D_3 * ( 1484.13*std::exp(10*c_1[q])/(148.413+std::exp(10*c_1[q]))/(148.413+std::exp(10*c_1[q]))*phi_e[q] ) // elastic part
       + D_2 * (4*c_1[q]*c_1[q]*c_1[q] - 6*c_1[q]*c_1[q] + 2*c_1[q] - 57.5646*std::pow(10, -50.0*c_1[q]) + 5.75646*std::pow(10,-49)*std::pow(10,50.0*c_1[q]))
       -mu[q];
+
+    //if (rhs_mu[q] != rhs_mu[q]) std::cout << " rhs_mu[q] " << q << " " << rhs_mu[q] << " c_1 " << c_1[q] << " phi_e[q] " << phi_e[q] << std::endl;
   }
 	this->ResidualEq.residualForPoissonEq(fe_values, mu_dof, R, kappa_c_1_grad, rhs_mu);
 
@@ -329,6 +337,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
   }
 
   //std::cout << "done with mu" << std::endl;
+  int load_steps = 1;
 
 	//apply Neumann boundary condition
   for (unsigned int faceID=0; faceID<2*dim; faceID++){
@@ -350,7 +359,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
                 if (ck == u_dof + 1)
                 {
                   // check if the y traction is done correctly or not
-                  R[i] += fe_face_values.shape_value(i, q)* h_bar_y *fe_face_values.JxW(q); // traction in the y direction.
+                  R[i] += fe_face_values.shape_value(i, q)* h_bar_y * 1.0 / load_steps * std::min(this->current_increment, load_steps) * fe_face_values.JxW(q); // traction in the y direction.
                 } // y direction traction
               } // loop of q
             } // ck condition
@@ -360,14 +369,18 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     } // at boundary
   }
 
+  if (cell_id == 0) std::cout << " load factor " <<  std::min(this->current_increment, load_steps) << std::endl;
+
   //std::cout << "done with BCs" << std::endl;
 
 	for (unsigned int i0=0; i0<dofs_per_cell; ++i0){
     int cell_id = cell->active_cell_index();
+    Point<dim> center=cell->center();
     if (cell_id == -1)     std::cout << " R[i0] " << i0 << " "  << R[i0] << std::endl;
+    //std::cout << i0 << " R[i0] " << R[i0] << " cell_id " << cell_id << " center " << center  << std::endl;
     if (R[i0] != R[i0])
     {
-      std::cout << " R[i0] " << R[i0] << std::endl;
+      std::cout << " R[i0] " << R[i0] << " cell_id " << cell_id << " center " << center  << std::endl;
       exit(0);
     }
   }

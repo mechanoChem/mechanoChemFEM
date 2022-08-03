@@ -1,6 +1,4 @@
 #include "CahnHilliard.h"
-
-
 #define DIMS 2
 using namespace dealii;
 
@@ -10,7 +8,7 @@ int main(int argc, char **argv){
 		Utilities::MPI::MPI_InitFinalize mpi_initialization(argc, argv,1);
 		deallog.depth_console (0);
 		CahnHilliard<DIMS> problem;	
-    problem.run ();
+        problem.run();
   }
   catch (std::exception &exc){
     std::cerr << std::endl << std::endl

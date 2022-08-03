@@ -45,4 +45,5 @@ DEAL_II_INVOKE_AUTOPILOT()
 
 #export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
 INCLUDE_DIRECTORIES(${mechanoChemFEM_INC} )
-TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB} ${sacado_LIB})
+#TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB} ${sacado_LIB})
+TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB})

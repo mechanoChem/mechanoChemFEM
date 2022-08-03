@@ -9,12 +9,17 @@ class CahnHilliard: public mechanoChemFEM<dim>
 		void get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv);
 		ParameterHandler* params;		
 		void apply_initial_condition();
+		void output_results();
 		ConstraintMatrix* constraints;
 
 	  int c_dof=0, mu_dof=1, u_dof=2;
     double total_phi_e = 0.0;
     double total_phi_i = 0.0;
     double total_phi_b = 0.0;
+
+	  Vector<double> cell_phi_e; 
+	  Vector<double> cell_phi_i; 
+	  Vector<double> cell_phi_b; 
 };
 template <int dim>
 CahnHilliard<dim>::CahnHilliard()
@@ -54,6 +59,10 @@ CahnHilliard<dim>::CahnHilliard()
 	this->define_primary_fields();
 	//Set up the ibvp.
 	this->init_ibvp();
+
+  cell_phi_e.reinit(this->triangulation.n_active_cells());
+  cell_phi_i.reinit(this->triangulation.n_active_cells());
+  cell_phi_b.reinit(this->triangulation.n_active_cells());
 }
 
 
@@ -151,12 +160,16 @@ template <int dim>
 void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {
   int cell_id = cell->active_cell_index();
-  if (cell_id == 0) 
-  {
-    this->total_phi_e = 0.0;
-    this->total_phi_i = 0.0;
-    this->total_phi_b = 0.0;
-  }
+  this->cell_phi_e[cell_id] = 0.0;
+  this->cell_phi_i[cell_id] = 0.0;
+  this->cell_phi_b[cell_id] = 0.0;
+
+  //if (cell_id == 0) 
+  //{
+    //this->total_phi_e = 0.0;
+    //this->total_phi_i = 0.0;
+    //this->total_phi_b = 0.0;
+  //}
 	//evaluate primary fields
 	params->enter_subsection("Parameters");
 
@@ -331,12 +344,13 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
   {
     phi_b[q] = c_1[q]*c_1[q]*(1.0-c_1[q])*(1.0-c_1[q]) + 0.5*(std::pow(10, -50.0*c_1[q]) + std::pow(10, 50*(c_1[q]-1)));
     phi_i[q] = lambda_bar * 0.00625 * 0.00625 * 0.5 * (c_1_grad[q][0]*c_1_grad[q][0] + c_1_grad[q][1]*c_1_grad[q][1]);
-    this->total_phi_e += gamma_bar * gamma_E * phi_e[q].val() * fe_values.JxW(q);
-    this->total_phi_b += phi_b[q].val() * fe_values.JxW(q);
-    this->total_phi_i += phi_i[q].val() * fe_values.JxW(q);
+    this->cell_phi_e[cell_id] += gamma_bar * gamma_E * phi_e[q].val() * fe_values.JxW(q);
+    this->cell_phi_b[cell_id] += phi_b[q].val() * fe_values.JxW(q);
+    this->cell_phi_i[cell_id] += phi_i[q].val() * fe_values.JxW(q);
   }
 
   //std::cout << "done with mu" << std::endl;
+  // discretize the mechanical loading to "# of load_steps".
   int load_steps = 1;
 
 	//apply Neumann boundary condition
@@ -369,7 +383,7 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     } // at boundary
   }
 
-  if (cell_id == 0) std::cout << " load factor " <<  std::min(this->current_increment, load_steps) << std::endl;
+  //if (cell_id == 0) std::cout << " load factor " <<  std::min(this->current_increment, load_steps)*1.0/load_steps << std::endl;
 
   //std::cout << "done with BCs" << std::endl;
 
@@ -385,15 +399,64 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
     }
   }
 
-  //std::cout << cell_id << std::endl;
-  if (cell_id == 12799) 
-    std::cout 
-      << " total_phi_e " << this->total_phi_e 
-      << " total_phi_b " << this->total_phi_b
-      << " total_phi_i " << this->total_phi_i 
-      << std::endl;
+  ////std::cout << cell_id << std::endl;
+  //if (cell_id == 12799) 
+    //std::cout 
+      //<< " total_phi_e " << this->total_phi_e 
+      //<< " total_phi_b " << this->total_phi_b
+      //<< " total_phi_i " << this->total_phi_i 
+      //<< std::endl;
 	
 }
+
+template <int dim>
+void CahnHilliard<dim>::output_results()
+{
+	Vector<float> subdomain_id(this->triangulation.n_active_cells()); 
+  typename hp::DoFHandler<dim>::active_cell_iterator elem = this->dof_handler.begin_active(), endc = this->dof_handler.end();             
+  unsigned int _j = 0;                                                                                                      
+  for (;elem!=endc; ++elem){                                                                                                
+		    subdomain_id(_j++) = elem->subdomain_id();
+	}
+  //std::cout << " after elem id " << std::endl;
+	Vector<double> _cell_phi_e(this->triangulation.n_active_cells()); 
+	Vector<double> _cell_phi_i(this->triangulation.n_active_cells()); 
+	Vector<double> _cell_phi_b(this->triangulation.n_active_cells()); 
+
+  Utilities::MPI::sum(cell_phi_e, MPI_COMM_WORLD, _cell_phi_e);
+  Utilities::MPI::sum(cell_phi_i, MPI_COMM_WORLD, _cell_phi_i);
+  Utilities::MPI::sum(cell_phi_b, MPI_COMM_WORLD, _cell_phi_b);
+
+  total_phi_e = _cell_phi_e.l1_norm();
+  total_phi_i = _cell_phi_i.l1_norm();
+  total_phi_b = _cell_phi_b.l1_norm();
+
+	//write vtk and snapshot for solution
+	if(this->save_output){ 
+		std::string output_path = this->output_directory+"output-"+std::to_string(this->current_increment)+".vtk";
+		this->FEMdata_out.clear_data_vectors();
+    this->FEMdata_out.data_out.add_data_vector(subdomain_id, "sub_id");
+
+	  this->FEMdata_out.data_out.add_data_vector(_cell_phi_e, "phi_e");
+	  this->FEMdata_out.data_out.add_data_vector(_cell_phi_i, "phi_i");
+	  this->FEMdata_out.data_out.add_data_vector(_cell_phi_b, "phi_b");
+
+		if(this->current_increment%this->skip_output==0) this->FEMdata_out.write_vtk(this->solution_prev, output_path);	
+
+	}
+	if(this->save_snapshot){
+		std::string snapshot_path = this->snapshot_directory+"snapshot-"+std::to_string(this->current_increment+this->off_output_index)+".dat";
+    this->pcout << " save to " << snapshot_path << std::endl;
+		this->FEMdata_out.create_vector_snapshot(this->solution, snapshot_path);
+	}
+
+  this->pcout 
+    << " total_phi_e " << this->total_phi_e 
+    << " total_phi_b " << this->total_phi_b
+    << " total_phi_i " << this->total_phi_i 
+    << std::endl;
+}
+
 
 template <int dim>
 void InitialConditions<dim>::vector_value (const Point<dim>   &p, Vector<double>   &values) const{

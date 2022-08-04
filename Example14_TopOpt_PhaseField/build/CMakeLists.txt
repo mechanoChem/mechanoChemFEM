@@ -33,7 +33,7 @@ SET(mechanoChemFEM_INC $ENV{mechanoChemFEM_DIR}/v0.7/include)
 SET(mechanoChemFEM_LIB $ENV{mechanoChemFEM_DIR}/v0.7/lib/mechanoChemFEM.a)
 
 SET (sacado_INC $ENV{TRILINOS_DIR}/include) 
-SET (sacado_LIB $ENV{TRILINOS_DIR}/lib/libsacado.so) 
+SET (sacado_LIB $ENV{TRILINOS_DIR}/lib/libkokkoscore.so $ENV{TRILINOS_DIR}/lib/libsacado.so)
 INCLUDE_DIRECTORIES(${sacado_INC}) 
 
 
@@ -45,7 +45,5 @@ DEAL_II_INVOKE_AUTOPILOT()
 
 #export mechanoChemFEM_DIR=/Users/wzhenlin/numerics/mechanochem
 INCLUDE_DIRECTORIES(${mechanoChemFEM_INC} )
+#TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB} ${sacado_LIB})
 TARGET_LINK_LIBRARIES(${TARGET} ${mechanoChemFEM_LIB})
-
-
-

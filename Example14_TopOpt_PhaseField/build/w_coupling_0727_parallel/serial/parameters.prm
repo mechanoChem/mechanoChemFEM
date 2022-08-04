@@ -1,0 +1,94 @@
+#parameters file
+
+subsection Problem
+set print_parameter = true
+# c1 is rho, mu1 is the chemical potential, u is the displacement field  
+set primary_variables_list= c1, component_is_scalar, mu1, component_is_scalar, u, component_is_vector
+set FE_support_list= 1,1,1
+
+set dt = 1e-9
+set totalTime = 500
+set current_increment = 0
+set off_output_index=0
+set current_time = 0
+set resuming_from_snapshot = false
+
+#set mesh = /Users/wzhenlin/GitLab/researchCode/brainMorph/mesh/testMesh.msh
+#set mesh = /home/wzhenlin/workspace/brainMorph/mesh/STA21_hex.msh
+set output_directory = output/
+set snapshot_directory = snapshot/
+
+#FEM
+set volume_quadrature = 3 
+set face_quadrature = 2 
+
+end
+
+subsection Geometry
+set x_min = 0
+set y_min = 0
+set z_min = 0
+set x_max = 2.0
+set y_max = 1.0
+set z_max = 2.0 #no need to 2D
+
+set num_elem_x=160
+set num_elem_y=80
+set num_elem_z=5 #no need to 2D
+end
+
+subsection Parameters
+set L_0 = 1.0 # m
+set T_0 = 4.267e3 # characteristic time
+set E_0 = 200e9 # Pa=N/m^2 J/m^3 but not J/m=Nm/m=N (mistake?)
+set nu_0 = 0.333333
+set h_0 = 200e6 # Pa
+set f_0 = 0 # N/m^3
+set M_0 = 1 # m^2/s
+set h_bar_y = -1 # scaled value
+
+set d_1 = 0.45 # loading info
+set d_2 = 0.10 # loading info
+
+set lambda_bar = 6.0
+set gamma_bar = 1.0
+#set gamma_E = 1.247e4
+# *4.4 
+set gamma_E = 5.4868e4
+
+set D_1 = 1.0
+set D_2 = 4.267e3
+#set D_3 = 5.322e7
+# *4.4
+set D_3 = 2.342e8
+set D_4 = 1000
+set D_5 = 0
+
+set enable_coupling = 1
+
+end
+						
+#
+# parameters reserved for deal.ii first level code:
+#nonLinear_method : classicNewton
+#solver_method (direct) : PETScsuperLU, PETScMUMPS
+#solver_method (iterative) : PETScGMRES PETScBoomerAMG
+#relative_norm_tolerance, absolute_norm_tolerance, max_iterations
+#
+subsection Nonlinear_solver
+		set nonLinear_method = classicNewton
+		set relative_norm_tolerance = 1.0e-10
+		set absolute_norm_tolerance = 1.0e-10
+		set max_iterations = 10
+end
+						
+subsection Linear_solver
+		set solver_method = PETScsuperLU
+		set system_matrix_symmetricFlag = false # default is false
+end
+
+
+
+
+		
+

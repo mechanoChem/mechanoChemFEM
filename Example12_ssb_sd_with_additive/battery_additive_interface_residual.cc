@@ -1,14 +1,16 @@
 #include "battery.h"
-
-
 template <int dim>
 void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
   // TODO: add the interface treatment for the additional phase field in additive-active particle interface
+  int mat_id = cell->material_id();
+  int cell_id = cell->active_cell_index();
+  unsigned int dofs_per_cell= fe_values.dofs_per_cell;
+  unsigned int n_q_points= fe_values.n_quadrature_points;
+	Point<dim> center=cell->center();
 
 	double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
 	int orientation=(*params_json)["ElectroChemo"]["orientation"];
-	Point<dim> center=cell->center();
 	int domainflag=6;
 
   //std::cout << " center: " << center << std::endl;
@@ -21,12 +23,6 @@ void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHand
 
   // update reaction rate at the interface 
 	double Temp=(*params_json)["ElectroChemo"]["T_0"];
-
-  int cell_id = cell->active_cell_index();
-  unsigned int dofs_per_cell= fe_values.dofs_per_cell;
-  unsigned int n_q_points= fe_values.n_quadrature_points;
-
-
   //if (center[0] < 5) std::cout << "\n--------------" << std::endl;
   //std::cout << "compute residual at the interface " << cell_id  << " center: " << center << std::endl;
   //
@@ -38,7 +34,7 @@ void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHand
   //std::cout << "*reaction rate (before) : " << cell_SDdata[cell_id].reaction_rate_li.val() << " potential (rate) " << cell_SDdata[cell_id].reaction_rate_potential.val() << std::endl;
 
   // update reaction rate at the interface 
-	double tem=(*params_json)["ElectroChemo"]["jn_react"];
+	//double tem=(*params_json)["ElectroChemo"]["jn_react"];
 	double cod_max=(*params_json)["ElectroChemo"]["cod_max"];
 	double cod_coef_C0=(*params_json)["ElectroChemo"]["cod_coef_C0"];
 
@@ -183,6 +179,7 @@ void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHand
     //cell_SDdata[cell_id].rlocal[0] += cell_SDdata[cell_id].reaction_rate_li.val() * cell_SDdata[cell_id].interface_length;
     cell_SDdata[cell_id].Kxixi_inv.vmult(dxi_k1_Lithium, cell_SDdata[cell_id].rlocal);
     xi_0_Lithium[0] = cell_SDdata[cell_id].xi_old(0) + dxi_k1_Lithium(0);  
+    //if (center[0]<100) std::cout << " cell_id (Add) " << cell_id << " center " << center << " xi_0 " << xi_0_Lithium[0].val() << std::endl;
     cell_SDdata[cell_id].xi_old(0) = xi_0_Lithium[0].val();
     //std::cout << "--a0-0--"  << std::endl;
   //}
@@ -543,8 +540,10 @@ void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHand
     //double T_room = 300; // K
     double V=(*params_json)["ElectroChemo"]["V_reaction_jn"];// 
 
-    jn = jn * 1.0 / (1.0 + exp(cod_coef_C0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5* cod_max )));
-    jn = jn * exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp);
+    //jn = jn * 1.0 / (1.0 + exp(cod_coef_C0 * (cell_SDdata[cell_id].xi_conv_u_sd[0] - 0.5* cod_max )));
+    //jn = jn * exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp);
+    jn = 0.0;
+
     //std::cout << " center: " << center << " coef " << exp(cell_SDdata[cell_id].Tn_old*V/k_b/Temp) << " jn " << jn.val() << std::endl;
 
     //jn = 0.00001;
@@ -1171,15 +1170,15 @@ void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHand
         //std::cout << "R[i] " << R[i] << std::endl;
         //R[i] = (Rcc_Lithium[_i] + Rcxi_Lithium[_i] - Kcxi_Lithium(_i,0) / Kxixi_Lithium(0,0) * rr_Lithium[0]) * (cell_SDdata[cell_id].computed_area /dummy_area) ; 
         R[i] = (Rcc_Lithium[_i] + Rcxi_Lithium[_i] - Kcxi_Lithium(_i,0) / Kxixi_Lithium(0,0) * rr_Lithium[0])  ; 
-        //std::cout << "R[i] (Lithium) " << R[i] << " i " << i << " _i " << _i << std::endl;
+        //if (center[0] < 100) std::cout << cell_id << " " << center  << " R[i] (Lithium) Add " << R[i] << std::endl;
         //std::cout << "Rcc " << Rcc_Lithium[_i] << " " << Rcxi_Lithium[_i] << " " << Kcxi_Lithium(_i,0) << " Kxixi " << Kxixi_Lithium(0,0) << " rr " << rr_Lithium[0] << std::endl;
         //std::cout << "--a4-1-- " << i <<" " << R[i] << cell_SDdata[cell_id].computed_area /dummy_area<< std::endl;
-        R[i] = ULocal_xi[i] - ULocal_xi[i].val();
+        //R[i] = ULocal_xi[i] - ULocal_xi[i].val();
       }
       if (ck == DOF_Electrode_potential ) {
         //R[i] = (Rcc_Electrode_potential[_i] + Rcxi_Electrode_potential[_i] - Kcxi_Electrode_potential(_i,0) / Kxixi_Electrode_potential(0,0) * rr_Electrode_potential[0]) * (cell_SDdata[cell_id].computed_area /dummy_area) ; 
-        //R[i] = (Rcc_Electrode_potential[_i] + Rcxi_Electrode_potential[_i] - Kcxi_Electrode_potential(_i,0) / Kxixi_Electrode_potential(0,0) * rr_Electrode_potential[0]) ; 
-        R[i] = Rcc_Electrode_potential[_i] ; 
+        R[i] = (Rcc_Electrode_potential[_i] + Rcxi_Electrode_potential[_i] - Kcxi_Electrode_potential(_i,0) / Kxixi_Electrode_potential(0,0) * rr_Electrode_potential[0]) ; 
+        //R[i] = Rcc_Electrode_potential[_i] ; 
 
        //std::cout << "R[i] (Electrode_potential) " << R[i] << std::endl;
       }
@@ -1269,8 +1268,15 @@ void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHand
 
     for (unsigned int i = 0; i < dofs_per_cell; ++i) {
       const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
+      //if (cell_id == 14435 or cell_id == 14436 or cell_id == 14635 or cell_id == 14636 or cell_id == 14634 or cell_id == 14637 or cell_id == 14434 or cell_id == 14437)
+        //{
+          //std::cout << i << " additive " << cell_id << " R_Lithium[i] " << R[i] << " mat_id " << mat_id << std::endl;
+        //}
       if (ck == DOF_Lithium ) {
-        //std::cout << "R_Lithium[i] " << R[i] << std::endl;
+        if (cell_id == 14435 or cell_id == 14436 or cell_id == 14635 or cell_id == 14636 or cell_id == 14634 or cell_id == 14637 or cell_id == 14434 or cell_id == 14437)
+        {
+          //std::cout << " additive " << cell_id << " R_Lithium[i] " << R[i] << " mat_id " << mat_id << std::endl;
+        }
       }
       if (ck == DOF_Electrode_potential ) {
         //std::cout << "R_Electrode_potential[i] " << R[i] << std::endl;

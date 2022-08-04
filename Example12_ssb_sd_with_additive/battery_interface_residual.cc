@@ -1587,7 +1587,7 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     for (unsigned int i = 0; i < dofs_per_cell; ++i) {
       const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
       if (ck == DOF_Lithium ) {
-        //std::cout << "R_Lithium[i] " << R[i] << std::endl;
+        //std::cout << " interface "<< " R_Lithium[i] " << R[i] << std::endl;
       }
       if (ck == DOF_Electrode_potential ) {
         //std::cout << "R_Electrode_potential[i] " << R[i] << std::endl;

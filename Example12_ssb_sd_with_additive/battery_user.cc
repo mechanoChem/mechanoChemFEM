@@ -580,6 +580,10 @@ void battery<dim>::setMultDomain()
             }
           }
         } // ifile
+        else
+        {
+          std::cout << " dealii_updated_mat_id.csv NOT found! No material id update!" << std::endl;
+        }
   }
 
 
@@ -1062,7 +1066,7 @@ void battery<dim>::apply_initial_condition()
 
         {
           int _v_id = -1;
-            int DOF_Electrolyte_potential = battery_fields.active_fields_index["Electrolyte_potential"];
+          int DOF_Electrolyte_potential = battery_fields.active_fields_index["Electrolyte_potential"];
           if (not is_one_node_Electrolyte_potential_fixed)
           {
             for (unsigned int i=0; i<dofs_per_cell; ++i) {
@@ -1091,10 +1095,10 @@ void battery<dim>::apply_initial_condition()
                  //if ( (vertex_point[orientation] >= separator_line-dh and vertex_point[orientation] < separator_line+dh) )
                 //if (abs(vertex_point[1] - Y_0) < 1e-5 and abs(vertex_point[0] - X_0) < 1e-5)
                 {
-                  std::cout << "electrolyte potential fixed:  vertex_point " << vertex_point << " ck " << ck << " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " _v_id " << _v_id << std::endl;
                   auto globalDOF = local_dof_indices[i];
                   constraints->add_line(globalDOF);
                   constraints->set_inhomogeneity(globalDOF, 0.0);
+                  std::cout << "electrolyte potential fixed:  vertex_point " << vertex_point << " ck " << ck << " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " _v_id " << _v_id << std::endl;
                   //is_one_node_Electrolyte_potential_fixed = true;
 
                   //break;
@@ -1109,77 +1113,87 @@ void battery<dim>::apply_initial_condition()
 
       //---------------debug-------------------
       //-------------- fix all displacement
-      for (unsigned int i=0; i<dofs_per_cell; ++i) {
-        const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
-        //std::cout << cell_id << " ck " << ck << std::endl;
-        if (ck==battery_fields.active_fields_index["Diffuse_interface"])
-        {
-          auto globalDOF = local_dof_indices[i];
-          constraints->add_line(globalDOF);
-          constraints->set_inhomogeneity(globalDOF, 0.0);
-          //std::cout << " fix " << ck << std::endl;
-        }
-
-        //if (cell_SDdata[cell_id].is_interface_element and mat_id == additive_interface_id) {
-        //}
-
-        auto globalDOF = local_dof_indices[i];
-        if (globalDOF == 31930)
-        {
-          std::cout << i << " globalDOF " << local_dof_indices[i] << " is interface " << cell_SDdata[cell_id].is_interface_element << " cell_id " << cell_id << " center " << center << " mat_id " << mat_id << std::endl;
-        }
-
-        //if (ck==battery_fields.active_fields_index["Electrolyte_potential"])
-        //{
-          //auto globalDOF = local_dof_indices[i];
-          //constraints->add_line(globalDOF);
-          //constraints->set_inhomogeneity(globalDOF, 0.0);
-          //std::cout << " fix " << ck << std::endl;
-        //}
-        //if (ck==battery_fields.active_fields_index["Electrode_potential"])
-        //{
-          //auto globalDOF = local_dof_indices[i];
-          //constraints->add_line(globalDOF);
-          //constraints->set_inhomogeneity(globalDOF, 0.0);
-          //std::cout << " fix " << ck << std::endl;
-        //}
-        //if (ck==battery_fields.active_fields_index["Lithium"])
-        //{
-          //auto globalDOF = local_dof_indices[i];
-          //constraints->add_line(globalDOF);
-          //constraints->set_inhomogeneity(globalDOF, 0.0);
-          //std::cout << " fix " << ck << std::endl;
-        //}
-        //if (ck==battery_fields.active_fields_index["Lithium_cation"])
-        //{
-          //auto globalDOF = local_dof_indices[i];
-          //constraints->add_line(globalDOF);
-          //constraints->set_inhomogeneity(globalDOF, 0.0);
-          //std::cout << " fix " << ck << std::endl;
-        //}
-                //int DOF_Displacement = battery_fields.active_fields_index["Displacement"];
-        //if (ck==DOF_Displacement or ck== DOF_Displacement+1)
-        //{
-          //auto globalDOF = local_dof_indices[i];
-          //constraints->add_line(globalDOF);
-          //constraints->set_inhomogeneity(globalDOF, 0.0);
-          //std::cout << " fix " << ck << std::endl;
-        //}
-      }
-      //---------------debug-------------------
-
-
+      {
         int _v_id = -1;
-          int DOF_Displacement = battery_fields.active_fields_index["Displacement"];
+        for (unsigned int i=0; i<dofs_per_cell; ++i) {
+          const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
+          //std::cout << cell_id << " ck " << ck << std::endl;
+          if (ck==battery_fields.active_fields_index["Diffuse_interface"])
+          {
+            _v_id += 1;
+            auto globalDOF = local_dof_indices[i];
+            constraints->add_line(globalDOF);
+            constraints->set_inhomogeneity(globalDOF, 0.0);
+            Point<dim> vertex_point=cell->vertex(_v_id);
+            //std::cout << " fix " << ck << std::endl;
+            //std::cout << "diffuse interface:  vertex_point " << vertex_point << " ck " << ck  << " _v_id " << _v_id << " cell_id " << cell_id << " mat_id " << mat_id << std::endl;
+          }
+
+          //if (cell_SDdata[cell_id].is_interface_element and mat_id == additive_interface_id) {
+          //}
+
+          //auto globalDOF = local_dof_indices[i];
+          //if (globalDOF == 31930)
+          //{
+            //std::cout << i << " globalDOF " << local_dof_indices[i] << " is interface " << cell_SDdata[cell_id].is_interface_element << " cell_id " << cell_id << " center " << center << " mat_id " << mat_id << std::endl;
+          //}
+
+          //if (ck==battery_fields.active_fields_index["Electrolyte_potential"])
+          //{
+            //auto globalDOF = local_dof_indices[i];
+            //constraints->add_line(globalDOF);
+            //constraints->set_inhomogeneity(globalDOF, 0.0);
+            //std::cout << " fix " << ck << std::endl;
+          //}
+          //if (ck==battery_fields.active_fields_index["Electrode_potential"])
+          //{
+            //auto globalDOF = local_dof_indices[i];
+            //constraints->add_line(globalDOF);
+            //constraints->set_inhomogeneity(globalDOF, 0.0);
+            //std::cout << " fix " << ck << std::endl;
+          //}
+          //if (ck==battery_fields.active_fields_index["Lithium"])
+          //{
+            //auto globalDOF = local_dof_indices[i];
+            //constraints->add_line(globalDOF);
+            //constraints->set_inhomogeneity(globalDOF, 0.0);
+            //std::cout << " fix " << ck << std::endl;
+            //Point<dim> vertex_point=cell->vertex(_v_id);
+            //std::cout << "test lithium:  vertex_point " << vertex_point << " ck " << ck  << " _v_id " << _v_id << " cell_id " << cell_id << " mat_id " << mat_id << std::endl;
+          //}
+          //if (ck==battery_fields.active_fields_index["Lithium_cation"])
+          //{
+            //auto globalDOF = local_dof_indices[i];
+            //constraints->add_line(globalDOF);
+            //constraints->set_inhomogeneity(globalDOF, 0.0);
+            //std::cout << " fix " << ck << std::endl;
+          //}
+          //int DOF_Displacement = battery_fields.active_fields_index["Displacement"];
+          ////if (ck==DOF_Displacement or ck== DOF_Displacement+1)
+          //{
+            //auto globalDOF = local_dof_indices[i];
+            ////constraints->add_line(globalDOF);
+            ////constraints->set_inhomogeneity(globalDOF, 0.0);
+            ////std::cout << " fix " << ck << std::endl;
+            //Point<dim> vertex_point=cell->vertex(_v_id);
+            //std::cout << "test displacement:  vertex_point " << vertex_point << " ck " << ck  << " _v_id " << _v_id << " cell_id " << cell_id << " mat_id " << mat_id << std::endl;
+          //}
+        }
+        //---------------debug-------------------
+      }
+
+
+      {
+        int DOF_Displacement = battery_fields.active_fields_index["Displacement"];
+        int __v_id = -1;
         for (unsigned int i=0; i<dofs_per_cell; ++i) {
           const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
           //std::cout << " ck " << ck << std::endl;
-          if (ck==DOF_Displacement) _v_id += 1;
-          //if (ck==DOF_Displacement or ck== DOF_Displacement+1) std::cout << " cell_id " << cell_id << " ck " << ck << " _v_id " << _v_id << " vertex " << cell->vertex(_v_id) << std::endl;
+          if (ck==DOF_Displacement) __v_id += 1;
           if (ck==DOF_Displacement or ck== DOF_Displacement+1)
           {
 
-            Point<dim> vertex_point=cell->vertex(_v_id);
+            Point<dim> vertex_point=cell->vertex(__v_id);
             //std::cout
               //<< " v[0] " << vertex_point[0]
               //<< " v[1] " << vertex_point[1]
@@ -1200,18 +1214,21 @@ void battery<dim>::apply_initial_condition()
                 // (ck== DOF_Displacement and (vertex_point[0] == -15.0 or vertex_point[0] == 15.0))) // fix x displacement
             // 4
             //if (vertex_point[1] == Y_0 or vertex_point[1] == Y_end or vertex_point[0] == X_0 or vertex_point[0] == X_end) // fix x & y at all edges
+            //
+          //std::cout << "test displacement:  vertex_point " << vertex_point << " ck " << ck  << " __v_id " << __v_id << " cell_id " << cell_id << " mat_id " << mat_id << std::endl;
 
             if ((ck== DOF_Displacement+1 and (abs(vertex_point[1] - Y_0) < 1e-5 or abs(vertex_point[1] - Y_end) < 1e-5)) // fix y displacement
                 or
                (ck== DOF_Displacement and ( abs(vertex_point[0] - X_0) < 1e-5 or abs(vertex_point[0] - X_end) < 1e-5))) // fix x displacement
             {
-              //std::cout << " vertex_point " << vertex_point << " ck " << ck << " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " _v_id " << _v_id << std::endl;
               auto globalDOF = local_dof_indices[i];
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              //std::cout << " displacement fixed vertex_point " << vertex_point << " ck " << ck << " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " __v_id " << __v_id << std::endl;
             }
           }
         }
+      }
 
 
         if (cell_SDdata[cell_id].is_interface_element and (mat_id == li_metal_interface_id or mat_id == interface_id)) {
@@ -1222,17 +1239,21 @@ void battery<dim>::apply_initial_condition()
 
           for (auto i0 : cell_SDdata[cell_id].lnode_minus) // minus node list: lithium and phi_s is fixed = 0
           {
+            Point<dim> vertex_point=cell->vertex(i0);
             if(battery_fields.active_fields_index["Lithium"]>-1)
             {
+
               auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Lithium"]];
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              //std::cout << " (lithium metal or interface) lithium fixed vertex_point " << vertex_point << " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " i0 " << i0 << std::endl;
             }
             if(battery_fields.active_fields_index["Electrode_potential"]>-1)
             {
               auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrode_potential"]];
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              //std::cout << " electrode potential fixed vertex_point " << vertex_point << " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " i0 " << i0 << std::endl;
             }
           }
           // plus node list: assign correct value of Lithium and electrode potential
@@ -1255,11 +1276,13 @@ void battery<dim>::apply_initial_condition()
 
           for (auto i0 : cell_SDdata[cell_id].lnode_plus) // plus node list: Lithium cation and phi_e is fixed
           {
+            Point<dim> vertex_point=cell->vertex(i0);
             if(battery_fields.active_fields_index["Lithium_cation"]>-1)
             {
               auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Lithium_cation"]];
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              //std::cout << " lithium ion fixed vertex_point " << vertex_point <<  " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " i0 " << i0 << std::endl;
             }
 
             if(battery_fields.active_fields_index["Electrolyte_potential"]>-1)
@@ -1267,6 +1290,7 @@ void battery<dim>::apply_initial_condition()
               auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Electrolyte_potential"]];
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              //std::cout << " electrolyte potential fixed vertex_point " << vertex_point << " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " i0 " << i0 << std::endl;
             }
           }
 
@@ -1299,7 +1323,7 @@ void battery<dim>::apply_initial_condition()
           cell_SDdata[cell_id].xi_conv(0) = 0.0;
           cell_SDdata[cell_id].xi_old_phi_s(0) = 0.0;
           cell_SDdata[cell_id].xi_conv_phi_s(0) = 0.0;
-          for (auto i0 : cell_SDdata[cell_id].lnode_minus)
+          for (auto i0 : cell_SDdata[cell_id].lnode_plus)
           {
               // initialize the xi_old to be the same value as the neighbor node
               cell_SDdata[cell_id].xi_old(0) += localized_U(local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Lithium"]]);
@@ -1314,11 +1338,14 @@ void battery<dim>::apply_initial_condition()
 
           for (auto i0 : cell_SDdata[cell_id].lnode_minus)
           {
+            Point<dim> vertex_point=cell->vertex(i0);
             if(battery_fields.active_fields_index["Lithium"]>-1)
             {
               auto globalDOF = local_dof_indices[i0*dofs_per_node + battery_fields.active_fields_index["Lithium"]];
               constraints->add_line(globalDOF);
               constraints->set_inhomogeneity(globalDOF, 0.0);
+              Point<dim> cell_center=cell->center();
+              //std::cout << " (additive_interface_id) lithium fixed vertex_point " << vertex_point << " X_0 " << X_0 << " X_end " << X_end << " Y_0 " << Y_0 << " Y_end " << Y_end << " i0 " << i0 << " cell_id " << cell_id << " center " << cell_center << std::endl;
             }
           }
 

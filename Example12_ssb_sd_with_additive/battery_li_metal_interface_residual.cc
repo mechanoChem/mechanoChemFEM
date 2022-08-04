@@ -1,6 +1,4 @@
 #include "battery.h"
-
-
 template <int dim>
 void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHandler<dim>::active_cell_iterator &cell, const FEValues<dim>& fe_values, Table<1, Sacado::Fad::DFad<double> >& R, Table<1, Sacado::Fad::DFad<double>>& ULocal, Table<1, double >& ULocalConv)
 {	
@@ -39,7 +37,7 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
   //std::cout << "*reaction rate (before) : " << cell_SDdata[cell_id].reaction_rate_li.val() << " potential (rate) " << cell_SDdata[cell_id].reaction_rate_potential.val() << std::endl;
 
   // update reaction rate at the interface 
-	double tem=(*params_json)["ElectroChemo"]["jn_react"];
+	//double tem=(*params_json)["ElectroChemo"]["jn_react"];
 	double cod_max=(*params_json)["ElectroChemo"]["cod_max"];
 	double cod_coef_C0=(*params_json)["ElectroChemo"]["cod_coef_C0"];
 
@@ -208,6 +206,7 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
     //cell_SDdata[cell_id].rlocal[0] += cell_SDdata[cell_id].reaction_rate_li.val() * cell_SDdata[cell_id].interface_length;
     cell_SDdata[cell_id].Kxixi_inv.vmult(dxi_k1_Lithium, cell_SDdata[cell_id].rlocal);
     xi_0_Lithium[0] = cell_SDdata[cell_id].xi_old(0) + dxi_k1_Lithium(0);  
+    //if (center[0]<100) std::cout << " cell_id (SE-) " << cell_id << " center " << center << " xi_0 " << xi_0_Lithium[0].val() << std::endl;
     cell_SDdata[cell_id].xi_old(0) = xi_0_Lithium[0].val();
     //std::cout << "--a0-0--"  << std::endl;
   //}
@@ -1460,7 +1459,7 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
         //std::cout << "R[i] " << R[i] << std::endl;
         //R[i] = (Rcc_Lithium[_i] + Rcxi_Lithium[_i] - Kcxi_Lithium(_i,0) / Kxixi_Lithium(0,0) * rr_Lithium[0]) * (cell_SDdata[cell_id].computed_area /dummy_area) ; 
         R[i] = (Rcc_Lithium[_i] + Rcxi_Lithium[_i] - Kcxi_Lithium(_i,0) / Kxixi_Lithium(0,0) * rr_Lithium[0])  ; 
-        //std::cout << "R[i] (Lithium) " << R[i] << std::endl;
+        //if (center[0] < 100) std::cout << cell_id << " " << center << " R[i] (Lithium) SE- " << R[i] << std::endl;
         //std::cout << "Rcc " << Rcc_Lithium[_i] << " " << Rcxi_Lithium[_i] << " " << Kcxi_Lithium(_i,0) << " Kxixi " << Kxixi_Lithium(0,0) << " rr " << rr_Lithium[0] << std::endl;
         //std::cout << "--a4-1-- " << i <<" " << R[i] << cell_SDdata[cell_id].computed_area /dummy_area<< std::endl;
       }
@@ -1582,7 +1581,7 @@ void battery<dim>::get_residual_at_li_metal_interface(const typename hp::DoFHand
     for (unsigned int i = 0; i < dofs_per_cell; ++i) {
       const unsigned int ck = fe_values.get_fe().system_to_component_index(i).first;
       if (ck == DOF_Lithium ) {
-        //std::cout << "R_Lithium[i] " << R[i] << std::endl;
+        //std::cout << " li metal interface "<< " R_Lithium[i] " << R[i] << std::endl;
       }
       if (ck == DOF_Electrode_potential ) {
         //std::cout << "R_Electrode_potential[i] " << R[i] << std::endl;

@@ -95,7 +95,7 @@ void CahnHilliard<dim>::apply_initial_condition()
       int vertex_id = 0;
       for (unsigned int i=0; i<dofs_per_cell; ++i) {
         int ck = fe_values.get_fe().system_to_component_index(i).first;
-        if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = 0.35 + 0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+        if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = 0.35 + 0.0001*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
         //if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = exp(-5.0 * cell->vertex(vertex_id)[0]) * exp(-5.0 * (1.0-cell->vertex(vertex_id)[1]));
         //if (ck==c_dof and this->solution_prev(local_dof_indices[i]) <0.01) this->solution_prev(local_dof_indices[i]) = 0.01;
         if (ck==mu_dof) this->solution_prev(local_dof_indices[i]) = 0.0;

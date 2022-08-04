@@ -1177,8 +1177,9 @@ void battery<dim>::get_residual_at_additive_interface(const typename hp::DoFHand
       }
       if (ck == DOF_Electrode_potential ) {
         //R[i] = (Rcc_Electrode_potential[_i] + Rcxi_Electrode_potential[_i] - Kcxi_Electrode_potential(_i,0) / Kxixi_Electrode_potential(0,0) * rr_Electrode_potential[0]) * (cell_SDdata[cell_id].computed_area /dummy_area) ; 
-        R[i] = (Rcc_Electrode_potential[_i] + Rcxi_Electrode_potential[_i] - Kcxi_Electrode_potential(_i,0) / Kxixi_Electrode_potential(0,0) * rr_Electrode_potential[0]) ; 
-        //R[i] = Rcc_Electrode_potential[_i] ; 
+        //R[i] = (Rcc_Electrode_potential[_i] + Rcxi_Electrode_potential[_i] - Kcxi_Electrode_potential(_i,0) / Kxixi_Electrode_potential(0,0) * rr_Electrode_potential[0]) ; 
+        // it is assumed that there is no discontinuity inside the electrode potential term
+        R[i] = Rcc_Electrode_potential[_i] ; 
 
        //std::cout << "R[i] (Electrode_potential) " << R[i] << std::endl;
       }

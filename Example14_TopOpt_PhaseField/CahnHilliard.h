@@ -20,6 +20,10 @@ class CahnHilliard: public mechanoChemFEM<dim>
 	  Vector<double> cell_phi_e; 
 	  Vector<double> cell_phi_i; 
 	  Vector<double> cell_phi_b; 
+
+	  Vector<double> cell_sig11; 
+	  Vector<double> cell_sig22; 
+	  Vector<double> cell_sig12; 
 };
 template <int dim>
 CahnHilliard<dim>::CahnHilliard()
@@ -63,6 +67,9 @@ CahnHilliard<dim>::CahnHilliard()
   cell_phi_e.reinit(this->triangulation.n_active_cells());
   cell_phi_i.reinit(this->triangulation.n_active_cells());
   cell_phi_b.reinit(this->triangulation.n_active_cells());
+  cell_sig11.reinit(this->triangulation.n_active_cells());
+  cell_sig22.reinit(this->triangulation.n_active_cells());
+  cell_sig12.reinit(this->triangulation.n_active_cells());
 }
 
 
@@ -88,7 +95,7 @@ void CahnHilliard<dim>::apply_initial_condition()
       int vertex_id = 0;
       for (unsigned int i=0; i<dofs_per_cell; ++i) {
         int ck = fe_values.get_fe().system_to_component_index(i).first;
-        if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = 0.35 + 0.00001*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
+        if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = 0.35 + 0.01*(static_cast <double> (rand())/(static_cast <double>(RAND_MAX))-0.5);
         //if (ck==c_dof) this->solution_prev(local_dof_indices[i]) = exp(-5.0 * cell->vertex(vertex_id)[0]) * exp(-5.0 * (1.0-cell->vertex(vertex_id)[1]));
         //if (ck==c_dof and this->solution_prev(local_dof_indices[i]) <0.01) this->solution_prev(local_dof_indices[i]) = 0.01;
         if (ck==mu_dof) this->solution_prev(local_dof_indices[i]) = 0.0;
@@ -304,6 +311,9 @@ void CahnHilliard<dim>::get_residual(const typename hp::DoFHandler<dim>::active_
         if (c == d) stress[c][d] += g_rho_fcn * lambda * tr_e;
       }
     }
+    this->cell_sig11[cell_id] = stress[0][0].val();
+    this->cell_sig22[cell_id] = stress[1][1].val();
+    this->cell_sig12[cell_id] = stress[0][1].val();
   //std::cout << "done with stress " << stress[0][0] << std::endl;
 
     for (unsigned int c = 0; c < dim; c++) {
@@ -423,9 +433,16 @@ void CahnHilliard<dim>::output_results()
 	Vector<double> _cell_phi_i(this->triangulation.n_active_cells()); 
 	Vector<double> _cell_phi_b(this->triangulation.n_active_cells()); 
 
+	Vector<double> _cell_sig11(this->triangulation.n_active_cells()); 
+	Vector<double> _cell_sig22(this->triangulation.n_active_cells()); 
+	Vector<double> _cell_sig12(this->triangulation.n_active_cells()); 
+
   Utilities::MPI::sum(cell_phi_e, MPI_COMM_WORLD, _cell_phi_e);
   Utilities::MPI::sum(cell_phi_i, MPI_COMM_WORLD, _cell_phi_i);
   Utilities::MPI::sum(cell_phi_b, MPI_COMM_WORLD, _cell_phi_b);
+  Utilities::MPI::sum(cell_sig11, MPI_COMM_WORLD, _cell_sig11);
+  Utilities::MPI::sum(cell_sig22, MPI_COMM_WORLD, _cell_sig22);
+  Utilities::MPI::sum(cell_sig12, MPI_COMM_WORLD, _cell_sig12);
 
   total_phi_e = _cell_phi_e.l1_norm();
   total_phi_i = _cell_phi_i.l1_norm();
@@ -440,6 +457,9 @@ void CahnHilliard<dim>::output_results()
 	  this->FEMdata_out.data_out.add_data_vector(_cell_phi_e, "phi_e");
 	  this->FEMdata_out.data_out.add_data_vector(_cell_phi_i, "phi_i");
 	  this->FEMdata_out.data_out.add_data_vector(_cell_phi_b, "phi_b");
+	  this->FEMdata_out.data_out.add_data_vector(_cell_sig11, "sig11");
+	  this->FEMdata_out.data_out.add_data_vector(_cell_sig22, "sig22");
+	  this->FEMdata_out.data_out.add_data_vector(_cell_sig12, "sig12");
 
 		if(this->current_increment%this->skip_output==0) this->FEMdata_out.write_vtk(this->solution_prev, output_path);	
 

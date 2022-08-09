@@ -32,7 +32,7 @@ class battery: public mechanoChemFEM<dim>
 		void run();
     void save_sd_data();
     void load_sd_data();
-		void solve_ibvp();
+		void solve_ibvp(double alpha=1.0);
 		
 		
 		ParameterHandler* params;		
@@ -73,6 +73,8 @@ class battery: public mechanoChemFEM<dim>
     std::vector<bool> is_new_step;
     std::vector<std::vector<double>> pressure; 
     std::vector<std::vector<double>> pressure_old; 
+    std::vector<int> element_to_fracture;
+    int next_fracture_element_id = -1;
     int anode_point_dof_index = -1;
     int cathode_point_dof_index = -1;
 

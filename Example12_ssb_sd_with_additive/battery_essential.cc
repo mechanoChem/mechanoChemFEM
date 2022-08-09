@@ -374,10 +374,10 @@ void battery<dim>::output_results()
 }
 
 template <int dim>
-void battery<dim>::solve_ibvp()
+void battery<dim>::solve_ibvp(double alpha)
 {
 	bool to_flip=(*params_json)["ElectroChemo"]["to_flip"];
-	bool is_converged = this->nonlinearSolve(this->solution);
+	bool is_converged = this->nonlinearSolve(this->solution, alpha);
   std::cout << " is converged? = " << is_converged << std::endl;
   this->solution_k = this->solution_prev;
   if (not is_converged)
@@ -513,7 +513,6 @@ void battery<dim>::run()
     }
     this->current_time+=this->current_dt;
     this->current_increment++;
-
     sim_time_info[this->current_increment] = this->current_time;
     this->pcout << " saved incr and time info: " << this->current_increment << " " << this->current_time << std::endl;
     // for parallel computing purpose
@@ -538,6 +537,8 @@ void battery<dim>::run()
 	    }
     }
 
+    element_to_fracture.resize(0);
+
 		this->solve_ibvp();
 	  bool to_flip=(*params_json)["ElectroChemo"]["to_flip"]; // has to be here. to_flip will be updated in solve_ibvp()
     if (not to_flip)
@@ -560,6 +561,60 @@ void battery<dim>::run()
       }
       this->pcout << " SD updated! " << std::endl;
     }
+
+    double old_dt = this->current_dt;
+    this->current_dt = 1.0e-3;
+    std::cout << " element_to_fracture size " << element_to_fracture.size() << std::endl;
+//    if (element_to_fracture.size() == 1) element_to_fracture.resize(0);
+    //element_to_fracture.erase(element_to_fracture.begin());
+    for (auto e_id : element_to_fracture)
+    {
+      this->current_time+=this->current_dt;
+      this->current_increment++;
+      sim_time_info[this->current_increment] = this->current_time;
+		  PetscPrintf(this->mpi_communicator,"************");
+		  PetscPrintf(this->mpi_communicator,"current increment=%d, current time=%f, dt=%f",this->current_increment, this->current_time, this->current_dt);
+		  PetscPrintf(this->mpi_communicator,"************\n");
+
+      std::cout << " next fracture e_id " << e_id << " dt " << this->current_dt << std::endl;
+      next_fracture_element_id = e_id;
+
+		  this->solve_ibvp(0.5);
+	    bool to_flip=(*params_json)["ElectroChemo"]["to_flip"]; // has to be here. to_flip will be updated in solve_ibvp()
+      if (not to_flip)
+      {
+        // update history variables
+        for (unsigned i = 0; i < cell_SDdata.size(); ++i) {
+          cell_SDdata[i].xi_conv = cell_SDdata[i].xi_old;
+          cell_SDdata[i].xi_conv_c_e = cell_SDdata[i].xi_old_c_e;
+          cell_SDdata[i].xi_conv_phi_s = cell_SDdata[i].xi_old_phi_s;
+          cell_SDdata[i].xi_conv_phi_e = cell_SDdata[i].xi_old_phi_e;
+          cell_SDdata[i].C_Li_plus_old = cell_SDdata[i].C_Li_plus_new;
+
+          cell_SDdata[i].xi_conv_u_sd = cell_SDdata[i].xi_old_u_sd;
+
+          cell_SDdata[i].Tn_old = cell_SDdata[i].Tn_new;
+          // WARNING: should not use the following, as many cell_SDdata are not initialized.
+          //std::cout << "C_Li_plus_old[0]" << cell_SDdata[i].C_Li_plus_old[0] << std::endl;
+          //for (int q=0; q<4; q++) cell_SDdata[i].C_Li_plus_old[q] = cell_SDdata[i].C_Li_plus_new[q];
+          //std::cout << "C_Li_plus_old[3]" << cell_SDdata[i].C_Li_plus_old[3] << std::endl;
+        }
+        this->pcout << " SD updated! " << std::endl;
+      }
+
+      if (not to_flip)
+      {
+        this->output_results();
+        pressure_old = pressure;
+        this->pcout << " pressure updated " << std::endl;
+      }
+    }
+
+    this->current_dt = old_dt;
+    next_fracture_element_id = -1;
+    element_to_fracture.resize(0);
+
+
 		
 	  t_solve = clock() - t_solve;
 		this->pcout<<"It took me "<< ((float)t_solve)/CLOCKS_PER_SEC<<" seconds for this solve"<<std::endl<<std::endl;

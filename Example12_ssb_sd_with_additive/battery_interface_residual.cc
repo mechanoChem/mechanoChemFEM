@@ -399,10 +399,17 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
   double element_edge_length = 0.0;
   element_edge_length = cell->vertex(0).distance(cell->vertex(1));
   double m_plus = cell_SDdata[cell_id].computed_area;
-  double m_minus = cell_SDdata[cell_id].area_elem - cell_SDdata[cell_id].computed_area;
+
+  if (m_plus < 0.02) m_plus = 0.02;
+  if (m_plus > 0.98) m_plus = 0.98;
+  cell_SDdata[cell_id].computed_area = m_plus;
+  //if (cell_SDdata[cell_id].interface_length <= 0.05)  cell_SDdata[cell_id].interface_length = 0.1;
+
+  double m_minus = cell_SDdata[cell_id].area_elem - m_plus;
   double l_minus = element_edge_length;
   double l_plus = - element_edge_length * m_plus / m_minus;
 
+  //std::cout << " cell_id: " << cell_id << " center: " << center << " m_plus: " << m_plus << " m_minus: " << m_minus << " l_minus: " << l_minus << " l_plus: " << l_plus << " interface len: "<< cell_SDdata[cell_id].interface_length << std::endl;
 
   dealii::Table<2, Sacado::Fad::DFad<double>> c_1_tilde_grad_Lithium(n_q_points, dim);
   dealii::Table<1, Sacado::Fad::DFad<double>> c_1_tilde_Lithium(n_q_points);
@@ -1556,14 +1563,35 @@ void battery<dim>::get_residual_at_diffuse_interface(const typename hp::DoFHandl
     //if (TN_at_gp[q] > this->MatData["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured)
     double separator_line=(*params_json)["ElectroChemo"]["separator_line"];
     if (center[orientation]>separator_line){ // only positive line will fracture.
-    	if (TN_at_gp[q] > (*displacement.params_json)["Mechanics"]["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured and this->is_new_step[cell_id])
+    	if (TN_at_gp[q] > (*displacement.params_json)["Mechanics"]["MaximumStressN"] and not cell_SDdata[cell_id].is_fractured and this->is_new_step[cell_id] and this->next_fracture_element_id == -1 )
+        // this->next_fracture_element_id == -1 make sure that it's step for dt>0, when crack loop over existing crack, it won't crack.
     	{
-    	  std::cout << "-------------------- crack detected ---------------------------"
-    	    << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << std::endl;
+        //if (this->element_to_fracture.size()==0)
+        //{
+          //// the first element to crack
+          //this->element_to_fracture.push_back(cell_id);
+          //std::cout << "----------------- crack detected (interface) ------------------------"
+            //<< " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << " cell_id " << cell_id << std::endl;
+          //cell_SDdata[cell_id].is_fractured = true;
+          //cell_SDdata[cell_id].max_Tn = TN_at_gp[q].val();
+          //cell_SDdata[cell_id].crack_id = cell_id;
+        //}
+        //else
+        //{
+          // save following element to the list
+          this->element_to_fracture.push_back(cell_id);
+    	    std::cout << "----------------- crack detected (interface) (add to next crack list) ------------------------" << cell_id << std::endl;
+        //}
+    	}
+
+      if (cell_id == this->next_fracture_element_id and this->element_to_fracture.size() > 0 and not cell_SDdata[cell_id].is_fractured) 
+      {
+    	  std::cout << "----------------- next crack (interface) ------------------------"
+    	    << " TN_at_gp[q] " << q << " " << TN_at_gp[q].val() << " TM_at_gp[q] " << TM_at_gp[q].val() << " loc = " << fe_values.quadrature_point(q) << " cell_id " << cell_id << std::endl;
     	  cell_SDdata[cell_id].is_fractured = true;
     	  cell_SDdata[cell_id].max_Tn = TN_at_gp[q].val();
         cell_SDdata[cell_id].crack_id = cell_id;
-    	}
+      }
     }
   }
 

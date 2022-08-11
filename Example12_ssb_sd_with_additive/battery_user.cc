@@ -760,6 +760,7 @@ void battery<dim>::apply_initial_condition()
       const unsigned int dofs_per_cell = cell->get_fe().dofs_per_cell;
       std::vector<unsigned int> local_dof_indices (dofs_per_cell);
       cell->get_dof_indices (local_dof_indices);
+      int cell_id = cell->active_cell_index();
 
 
       bool on_neg_line = false;
@@ -870,7 +871,10 @@ void battery<dim>::apply_initial_condition()
 
             // the -1.0 here is used to reuse the original implementation.
             val = -1.0 * val;
+            if (val < -0.5 and val >= -0.515) val = -0.515;
+            if (val < -0.485 and val > -0.50) val = -0.485;
             if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i]) = val;
+            //std::cout << " cell_id " << cell_id << " center " << center << " val " << val << std::endl;
 
             bool inside_particle_flag=false;
 
@@ -935,6 +939,8 @@ void battery<dim>::apply_initial_condition()
           double val = Val;
           val = -1.0 * val;
 
+          if (val < -0.5 and val >= -0.515) val = -0.515;
+          if (val < -0.485 and val > -0.50) val = -0.485;
           if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i])= val;// reverse the sign to make sure we can use the old code
 
           bool inside_additive_flag=false;
@@ -978,6 +984,8 @@ void battery<dim>::apply_initial_condition()
 
           // the -1.0 here is used to reuse the original implementation.
           val = -1.0 * val;
+          if (val < -0.5 and val >= -0.515) val = -0.515;
+          if (val < -0.485 and val > -0.50) val = -0.485;
           if (ck==battery_fields.active_fields_index["Diffuse_interface"]) this->solution_prev(local_dof_indices[i]) = val;
 
           bool inside_particle_flag=false;

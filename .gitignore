@@ -35,3 +35,5 @@ Makefile
 
 *.cc#
 snapshot*
+
+.vscode

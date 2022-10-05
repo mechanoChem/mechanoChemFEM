@@ -1,7 +1,7 @@
 #include "../../include/solveClass.h"
 
 template <int dim, class matrixType, class vectorType>
-bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool converge_flag)
+int solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool converge_flag)
 {	
 	vectorType U_initial_0;
 	if(!converge_flag) U_initial_0=U;
@@ -31,6 +31,7 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool
 	if(std::strcmp(nonLinearScheme.c_str(),"classicNewton")==0){
 		double initial_norm=0;
 		double current_norm=0;
+		double min_norm=1e10;
 	  double res=1.0;
 	  int currentIteration=0;
 		
@@ -38,26 +39,44 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool
 	    if (currentIteration>=maxIteration) {
 				PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n");
 				if(!converge_flag) U=U_initial_0;
-				return false;
-				break;
+					//return false;
+					return -1;
+					break;
 			}
 	    if (current_norm>1/std::pow(tol,2)){
 				PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n");
 				if(!converge_flag) U=U_initial_0;
-				return false;
-				break;
+					//return false;
+					return -1;
+					break;
 			}
+		if (std::log10(current_norm/min_norm) > 3){
+				PetscPrintf (mpi_communicator,"\nNorm is increasing. \n\n");
+				if(!converge_flag) U=U_initial_0;
+					//return false;
+					return -1;
+					break;
+      		}
+      	if (isnan(current_norm)){
+				PetscPrintf (mpi_communicator,"\nNorm is nan. \n\n");
+				if(!converge_flag) U=U_initial_0;
+					//return false;
+					return -1;
+					break;
+      		}
 	    
 			updateLinearSystem();
 			
 			current_norm=system_rhs.l2_norm();
 			initial_norm=std::max(initial_norm, current_norm);
+			min_norm=std::min(min_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
 	    if (res<tol || current_norm< abs_tol){
 				PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration);
-			  return true;
-			 break;
+			//return true;
+			return currentIteration;
+			break;
 		 }
 			
 			solveLinearSystem_default_direct(dU);
@@ -79,6 +98,7 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool
 		}
 		
 		double initial_norm=0;
+		double min_norm=1e10;
 		double current_norm=0;
 	  double res=1.0;
 	  int currentIteration=0;
@@ -87,27 +107,45 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool
 	    if (currentIteration>=maxIteration) {
 				PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n");
 				if(!converge_flag) U=U_initial_0;
-				return false;
-				 break;
+					//return false;
+					return -1;
+					break;
 			 }
 	    if (current_norm>1/std::pow(tol,2)){
 				PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n");
 				if(!converge_flag) U=U_initial_0;
-				return false;
-				 break;
+					//return false; 
+					return -1;
+					break;
+			}
+		if (std::log10(current_norm/min_norm) > 3){
+				PetscPrintf (mpi_communicator,"\nNorm is increasing. \n\n");
+				if(!converge_flag) U=U_initial_0;
+					//return false;
+					return -1;
+					break;
+			}
+		if (isnan(current_norm)){
+				PetscPrintf (mpi_communicator,"\nNorm is nan. \n\n");
+				if(!converge_flag) U=U_initial_0;
+					//return false;
+					return -1;
+					break;
 			}
 	    
 			updateLinearSystem();
 			
 			current_norm=system_rhs.l2_norm();
 			initial_norm=std::max(initial_norm, current_norm);
+			min_norm=std::min(min_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
 	    if (res<tol || current_norm< abs_tol){
 				PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration);
-				return true;
-				 break;
-			 }
+				//return true;
+				return currentIteration;
+				break;
+			}
 			solveLinearSystem_default_direct(dU);
 			
 			double alpha=1;
@@ -164,7 +202,7 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U, bool
 }
 
 template <int dim, class matrixType, class vectorType>
-bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vectorType& dU,bool converge_flag)
+int solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vectorType& dU,bool converge_flag)
 {	
 	vectorType U_initial_0;
 	if(!converge_flag) U_initial_0=U;
@@ -191,6 +229,7 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	if(std::strcmp(nonLinearScheme.c_str(),"classicNewton")==0){
 		double initial_norm=0;
 		double current_norm=0;
+		double min_norm=1e10;
 	  double res=1.0;
 	  int currentIteration=0;
 		
@@ -198,27 +237,45 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	    if (currentIteration>=maxIteration) {
 				PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n");
 				if(!converge_flag) U=U_initial_0;
-				return false;
-				break;
+					//return false;
+					return -1;
+					break;
 			}
 	    if (current_norm>1/std::pow(tol,2)){
 				PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n");
 				if(!converge_flag) U=U_initial_0;
-				return false;
-				break;
+					//return false;
+					return -1;
+					break;
 			}
+		if (std::log10(current_norm/min_norm) > 3){
+				PetscPrintf (mpi_communicator,"\nNorm is increasing. \n\n");
+					if(!converge_flag) U=U_initial_0;
+					//return false;
+					return -1;
+					break;
+      		}
+		if (isnan(current_norm)){
+				PetscPrintf (mpi_communicator,"\nNorm is nan. \n\n");
+					if(!converge_flag) U=U_initial_0;
+					//return false;
+					return -1;
+					break;
+      		}
 	    
 			updateLinearSystem();
 			
 			current_norm=system_rhs.l2_norm();
 			initial_norm=std::max(initial_norm, current_norm);
+			min_norm=std::min(min_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
 	    if (res<tol || current_norm< abs_tol){
 				PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration);
-			  return true;
-			 break;
-		 }
+				//return true;
+				return currentIteration;
+				break;
+			}
 			
 			solveLinearSystem_default_direct(dU);
 			
@@ -240,6 +297,7 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 		
 		double initial_norm=0;
 		double current_norm=0;
+		double min_norm=1e10;
 	  double res=1.0;
 	  int currentIteration=0;
 		
@@ -247,27 +305,45 @@ bool solveClass<dim, matrixType, vectorType>::nonlinearSolve(vectorType& U,vecto
 	    if (currentIteration>=maxIteration) {
 				PetscPrintf (mpi_communicator,"Maximum number of iterations reached without convergence. \n");
 				if(!converge_flag) U=U_initial_0;
-				return false;
-				 break;
+					//return false; 
+					return -1;
+					break;
 			 }
 	    if (current_norm>1/std::pow(tol,2)){
 				PetscPrintf (mpi_communicator,"\nNorm is too high. \n\n");
 				if(!converge_flag) U=U_initial_0;
-				return false;
-				 break;
+					//return false;
+					return -1;
+					break;
 			}
+		if (std::log10(current_norm/min_norm) > 3){
+				PetscPrintf (mpi_communicator,"\nNorm is increasing. \n\n");
+					if(!converge_flag) U=U_initial_0;
+					//return false;
+					return -1;
+					break;
+      		}
+		if (isnan(current_norm)){
+				PetscPrintf (mpi_communicator,"\nNorm is nan. \n\n");
+					if(!converge_flag) U=U_initial_0;
+					//return false;
+					return -1;
+					break;
+      		}
 	    
 			updateLinearSystem();
 			
 			current_norm=system_rhs.l2_norm();
 			initial_norm=std::max(initial_norm, current_norm);
+			min_norm=std::min(min_norm, current_norm);
 	    res=current_norm/initial_norm;
 	    PetscPrintf (mpi_communicator,"Iter:%2u. Residual norm: %10.2e. Relative norm: %10.2e \n", currentIteration, current_norm, res); 
 	    if (res<tol || current_norm< abs_tol){
 				PetscPrintf (mpi_communicator,"Residual converged in %u iterations.\n", currentIteration);
-				return true;
-				 break;
-			 }
+				//return true;
+				return currentIteration;
+				break;
+			}
 			solveLinearSystem_default_direct(dU);
 			
 			double alpha=1;

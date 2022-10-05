@@ -1,1 +1,1 @@
-/Users/wzhenlin/numerics/mechanochem/v0.7/lib/mechanoChemFEM.a
+/Users/wzhenlin/numerics/mechanochem/v0.71/lib/mechanoChemFEM.a
